@@ -197,6 +197,174 @@ function generateChapters(count: number, courseId: string) {
   })
 }
 
+export const mockParents = Array.from({ length: 30 }, (_, i) => ({
+  id: `par-${i + 1}`,
+  name: `ولي أمر ${i + 1}`,
+  email: `parent${i + 1}@email.com`,
+  phone: `+20 100 000 ${String(5000 + i).padStart(4, "0")}`,
+  avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=parent${i}`,
+  role: "parent" as const,
+  createdAt: new Date(2024, i % 12, (i % 28) + 1),
+  status: (["active", "active", "active", "inactive"] as const)[i % 4],
+  children: Array.from({ length: (i % 3) + 1 }, (_, j) => ({
+    id: `s-${((i * 3 + j) % 50) + 1}`,
+    name: `طالب ${((i * 3 + j) % 50) + 1}`,
+    grade: ["أولى ثانوي", "ثانية ثانوي", "ثالثة ثانوي"][j % 3],
+  })),
+  totalPaid: Math.floor(Math.random() * 5000) + 1000,
+  lastPayment: new Date(2025, 5 + (i % 3), (i % 28) + 1),
+}))
+
+export const mockCenterCodes = Array.from({ length: 40 }, (_, i) => {
+  const planIds = ["plan-1", "plan-2", "plan-3", "plan-4"]
+  const planNames = ["الباقة الشهرية", "الباقة الثلاثية", "الباقة السنوية", "باقة الكورس الواحد"]
+  const prices = [300, 765, 2700, 150]
+  return {
+    id: `code-${i + 1}`,
+    code: `TOS-${String(i + 1).padStart(5, "0")}`,
+    batchId: `batch-${Math.floor(i / 10) + 1}`,
+    planId: planIds[i % 4],
+    planName: planNames[i % 4],
+    courseId: i % 2 === 0 ? undefined : mockCourses[i % 8].id,
+    courseName: i % 2 === 0 ? undefined : mockCourses[i % 8].title,
+    status: (["new", "new", "new", "used", "expired"] as const)[i % 5],
+    usedBy: i % 5 === 3 ? `s-${i + 1}` : undefined,
+    usedAt: i % 5 === 3 ? new Date(2025, 5, (i % 28) + 1) : undefined,
+    expiresAt: new Date(2025, 11, 31),
+    qrCode: "#",
+    price: prices[i % 4],
+    createdAt: new Date(2025, 3 + Math.floor(i / 10), (i % 28) + 1),
+  }
+})
+
+export const mockWallet = {
+  balance: 28450,
+  totalDeposits: 150000,
+  totalWithdrawals: 121550,
+  pendingWithdrawals: 0,
+  currency: "EGP",
+  transactions: Array.from({ length: 30 }, (_, i) => ({
+    id: `txn-${i + 1}`,
+    type: (["deposit", "deposit", "withdrawal", "refund"] as const)[i % 4],
+    amount: Math.floor(Math.random() * 5000) + 100,
+    description: ["إيداع نقدي", "تحويل فوري", "سحب رصيد", "استرداد اشتراك"][i % 4],
+    status: (["completed", "completed", "completed", "pending", "failed"] as const)[i % 5],
+    createdAt: new Date(2025, 4 + Math.floor(i / 5), (i % 28) + 1),
+    paymentMethod: (["cash", "fawry", "bank"] as const)[i % 3],
+    reference: `REF-${String(i + 1).padStart(6, "0")}`,
+  })),
+}
+
+export const mockMessages = Array.from({ length: 25 }, (_, i) => ({
+  id: `msg-${i + 1}`,
+  senderId: i % 3 === 0 ? "t-1" : `s-${(i % 50) + 1}`,
+  senderName: i % 3 === 0 ? "أحمد محمد" : `طالب ${(i % 50) + 1}`,
+  senderAvatar: i % 3 === 0
+    ? "https://api.dicebear.com/7.x/avataaars/svg?seed=teacher"
+    : `https://api.dicebear.com/7.x/avataaars/svg?seed=student${i}`,
+  recipientId: i % 3 === 0 ? `s-${(i % 50) + 1}` : "t-1",
+  subject: ["استفسار عن الامتحان", "طلب تأجيل واجب", "استفسار عن الدرس", "مشكلة في الفيديو", "شكر وتقدير"][i % 5],
+  content: "نص الرسالة الكامل مع التفاصيل...",
+  read: i % 3 !== 0,
+  attachments: i % 4 === 0 ? ["ملف1.pdf"] : [],
+  createdAt: new Date(Date.now() - 1000 * 60 * 60 * (i * 3)),
+  isStarred: i % 5 === 0,
+  conversationId: `conv-${Math.floor(i / 3) + 1}`,
+}))
+
+export const mockAttendance = Array.from({ length: 50 }, (_, i) => ({
+  id: `att-${i + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  courseId: mockCourses[i % 8].id,
+  courseName: mockCourses[i % 8].title,
+  date: new Date(2025, 5 + Math.floor(i / 20), (i % 28) + 1),
+  status: (["present", "present", "present", "absent", "late", "excused"] as const)[i % 6],
+  checkIn: i % 6 !== 3 ? `${8 + Math.floor(Math.random() * 2)}:${String(Math.floor(Math.random() * 60)).padStart(2, "0")}` : undefined,
+  checkOut: i % 6 !== 3 ? `${10 + Math.floor(Math.random() * 2)}:${String(Math.floor(Math.random() * 60)).padStart(2, "0")}` : undefined,
+  notes: i % 5 === 0 ? "ملاحظات عن الحضور" : "",
+  recordedBy: "أحمد محمد",
+}))
+
+export const mockStaffPermissions = [
+  { id: "role-1", name: "مدير النظام", description: "صلاحية كاملة على جميع أجزاء النظام", isSystem: true, userCount: 1,
+    permissions: ["manage_system","manage_users","manage_students","manage_teachers","manage_courses","manage_exams","manage_payments","manage_subscriptions","manage_codes","manage_certificates","manage_content","view_reports","view_analytics"] },
+  { id: "role-2", name: "مشرف", description: "إدارة الطلاب والكورسات والتقارير", isSystem: false, userCount: 2,
+    permissions: ["manage_students","manage_courses","manage_exams","view_reports","view_analytics"] },
+  { id: "role-3", name: "محاسب", description: "إدارة المدفوعات والاشتراكات والتقارير المالية", isSystem: false, userCount: 1,
+    permissions: ["manage_payments","manage_subscriptions","manage_codes","view_reports"] },
+  { id: "role-4", name: "دعم فني", description: "التعامل مع الطلاب وأولياء الأمور والدعم", isSystem: false, userCount: 2,
+    permissions: ["manage_students","manage_parents","manage_content"] },
+  { id: "role-5", name: "مشرف محتوى", description: "إدارة المحتوى التعليمي وCMS", isSystem: false, userCount: 0,
+    permissions: ["manage_content","manage_cms","manage_courses"] },
+]
+
+export const mockFawrySimulation = Array.from({ length: 15 }, (_, i) => ({
+  id: `fawry-${i + 1}`,
+  referenceNumber: `FRY-${String(i + 1).padStart(8, "0")}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  amount: [300, 765, 2700, 1500, 1000][i % 5],
+  status: (["paid", "paid", "paid", "pending", "expired"] as const)[i % 5],
+  createdAt: new Date(2025, 5 + (i % 3), (i % 28) + 1),
+  paidAt: i % 5 !== 3 ? new Date(2025, 5 + (i % 3), (i % 28) + 2) : undefined,
+  paymentMethod: "fawry" as const,
+}))
+
+export const mockInvoices = Array.from({ length: 20 }, (_, i) => {
+  const planNames = ["الباقة الشهرية", "الباقة الثلاثية", "الباقة السنوية", "باقة الكورس الواحد"]
+  const prices = [300, 765, 2700, 150]
+  return {
+    id: `inv-${i + 1}`,
+    invoiceNumber: `INV-${String(i + 1).padStart(6, "0")}`,
+    studentId: `s-${(i % 50) + 1}`,
+    studentName: `طالب ${(i % 50) + 1}`,
+    items: [
+      { description: planNames[i % 4], amount: prices[i % 4] },
+      { description: "رسوم إدارية", amount: 50 },
+    ],
+    subtotal: prices[i % 4] + 50,
+    discount: i % 3 === 0 ? 100 : 0,
+    total: prices[i % 4] + 50 - (i % 3 === 0 ? 100 : 0),
+    status: (["paid", "paid", "paid", "pending", "cancelled"] as const)[i % 5],
+    issueDate: new Date(2025, 4 + (i % 3), (i % 28) + 1),
+    dueDate: new Date(2025, 5 + (i % 3), (i % 28) + 1),
+    paidAt: i % 5 !== 4 ? new Date(2025, 4 + (i % 3), (i % 28) + 3) : undefined,
+    paymentMethod: (["cash", "fawry", "code"] as const)[i % 3],
+  }
+})
+
+export const mockVideoLibrary = Array.from({ length: 30 }, (_, i) => ({
+  id: `vidlib-${i + 1}`,
+  title: `فيديو ${i + 1}: ${["شرح قاعدة النحو", "تحليل النص", "حل تمارين", "مراجعة", "اختبار تجريبي"][i % 5]}`,
+  description: "وصف الفيديو مع تفاصيل المحتوى",
+  thumbnail: `https://images.unsplash.com/photo-${[1611162617474, 1513475382585, 1434030216411][i % 3]}?w=640&q=85`,
+  duration: Math.floor(Math.random() * 45) + 5,
+  size: Math.floor(Math.random() * 500) + 50,
+  format: ["mp4", "mp4", "mp4", "avi", "mkv"][i % 5],
+  resolution: ["1080p", "1080p", "720p", "720p", "480p"][i % 5],
+  courseId: mockCourses[i % 8].id,
+  courseName: mockCourses[i % 8].title,
+  chapterId: "",
+  uploadDate: new Date(2025, 4 + Math.floor(i / 6), (i % 28) + 1),
+  views: Math.floor(Math.random() * 3000) + 100,
+  status: (["ready", "ready", "ready", "processing", "failed"] as const)[i % 5],
+}))
+
+export const mockAuditLogs = Array.from({ length: 50 }, (_, i) => ({
+  id: `audit-${i + 1}`,
+  userId: ["t-1", "stf-1", "stf-2", "stf-3"][i % 4],
+  userName: ["أحمد محمد", "محمد علي", "نورا حسن", "أحمد سامي"][i % 4],
+  action: ["create", "update", "delete", "login", "logout", "export", "approve", "reject"][i % 8],
+  resource: ["user", "course", "exam", "payment", "subscription", "certificate", "code", "setting"][i % 8],
+  resourceId: `res-${Math.floor(i / 2) + 1}`,
+  details: `تفاصيل العملية: ${["إضافة مستخدم جديد", "تعديل بيانات كورس", "حذف امتحان", "تسجيل دخول"][i % 4]}`,
+  ip: `192.168.1.${(i % 255) + 1}`,
+  device: ["Chrome/Windows", "Safari/macOS", "Chrome/Android", "Firefox/Windows"][i % 4],
+  timestamp: new Date(Date.now() - 1000 * 60 * 60 * i),
+  severity: (["info", "info", "info", "warning", "error"] as const)[i % 5],
+}))
+
 export const mockExams = Array.from({ length: 15 }, (_, i) => ({
   id: `exam-${i + 1}`,
   title: ["اختبار النحو الشهري", "اختبار البلاغة", "امتحان منتصف الترم", "اختبار النصوص", "امتحان التعبير", "اختبار الإملاء", "امتحان المراجعة الأولى", "امتحان المراجعة الثانية", "اختبار الفصل الأول", "اختبار الفصل الثاني", "امتحان تجريبي 1", "امتحان تجريبي 2", "امتحان نهاية الترم", "اختبار التقييم الأسبوعي", "اختبار التقييم الشهري"][i],
@@ -454,3 +622,98 @@ export function getStudentPerformance(studentId: string) {
     weeklyProgress: Array.from({ length: 7 }, (_, i) => ({ day: ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"][i], hours: Math.floor(Math.random() * 3) + 1 })),
   }
 }
+
+export const mockAchievements = [
+  { id: "ach-1", name: "البداية القوية", description: "أول 10 دروس مكتملة", icon: "🚀", xpReward: 100, criteria: { type: "lessons_completed", count: 10 }, unlockedBy: [] },
+  { id: "ach-2", name: "المثابر", description: "30 يوم متابعة متواصلة", icon: "🔥", xpReward: 300, criteria: { type: "streak", count: 30 }, unlockedBy: [] },
+  { id: "ach-3", name: "الامتياز", description: "الحصول على 100% في 3 امتحانات", icon: "💯", xpReward: 500, criteria: { type: "perfect_exams", count: 3 }, unlockedBy: [] },
+  { id: "ach-4", name: "النجم المتألق", description: "التواجد في قائمة الأوائل", icon: "⭐", xpReward: 200, criteria: { type: "leaderboard_top", count: 1 }, unlockedBy: [] },
+  { id: "ach-5", name: "جامع المعرفة", description: "إكمال 5 كورسات", icon: "📚", xpReward: 1000, criteria: { type: "courses_completed", count: 5 }, unlockedBy: [] },
+  { id: "ach-6", name: "المتصدر", description: "المركز الأول في Leaderboard", icon: "👑", xpReward: 2000, criteria: { type: "rank_one", count: 1 }, unlockedBy: [] },
+  { id: "ach-7", name: "المشارك", description: "المشاركة في 10 مناقشات", icon: "💬", xpReward: 150, criteria: { type: "discussions", count: 10 }, unlockedBy: [] },
+  { id: "ach-8", name: "الاسطورة", description: "الوصول للمستوى 20", icon: "🏆", xpReward: 5000, criteria: { type: "level", count: 20 }, unlockedBy: [] },
+]
+
+export const mockStudentXpData = Array.from({ length: 50 }, (_, i) => ({
+  studentId: `s-${i + 1}`,
+  studentName: `طالب ${i + 1}`,
+  totalXp: Math.floor(Math.random() * 8000) + 500,
+  level: Math.floor(Math.random() * 18) + 1,
+  streak: Math.floor(Math.random() * 40) + 1,
+  badges: Math.floor(Math.random() * 8) + 1,
+  achievements: Math.floor(Math.random() * 5),
+  rank: 0,
+  weeklyXp: Math.floor(Math.random() * 500) + 100,
+  monthlyXp: Math.floor(Math.random() * 2000) + 500,
+  lastActive: new Date(Date.now() - Math.random() * 86400000 * 3),
+})).sort((a, b) => b.totalXp - a.totalXp).map((s, i) => ({ ...s, rank: i + 1 }))
+
+export const mockGamificationConfig = {
+  xpPerLesson: 50,
+  xpPerExam: 100,
+  xpPerHomework: 30,
+  xpStreakBonus: 20,
+  levels: Array.from({ length: 25 }, (_, i) => ({
+    level: i + 1,
+    name: ["مبتدئ", "مستكشف", "مجتهد", "نشيط", "متميز", "خبير", "متقن", "بارع", "مبدع", "أسطورة",
+            "أسطورة فضية", "أسطورة ذهبية", "الماسة", "الياقوتة", "الزمردة", "السافاير", "التاج", "العرش", "الملك", "الإمبراطور",
+            "العظيم", "الجبار", "المهيب", "الأعظم", "الخرافي"][i],
+    xpRequired: (i + 1) * 200 * (i + 1),
+  })),
+  badgeCategories: [
+    { id: "cat-1", name: "أكاديمي", icon: "📖", badges: ["المتفوق", "المجتهد", "النجم", "العبقري"] },
+    { id: "cat-2", name: "حضور", icon: "📅", badges: ["المواظب", "المثابر", "المنضبط", "الملتزم"] },
+    { id: "cat-3", name: "مهارات", icon: "🎯", badges: ["المبدع", "المحلل", "الناقد", "المبتكر"] },
+    { id: "cat-4", name: "اجتماعي", icon: "🤝", badges: ["المتعاون", "القائد", "المساعد", "الصديق"] },
+    { id: "cat-5", name: "خاص", icon: "👑", badges: ["الأسطورة", "التاج", "الملك", "الإمبراطور"] },
+  ],
+}
+
+export const mockCmsPages = {
+  homepage: {
+    sections: [
+      { id: "sec-1", type: "hero", title: "نظام تشغيل المدرس الأول", subtitle: "منصة متكاملة للتعليم", cta: "ابدأ الآن", backgroundImage: "", order: 1, active: true },
+      { id: "sec-2", type: "features", title: "مميزات المنصة", subtitle: "كل ما تحتاجه في مكان واحد", columns: 3, active: true, order: 2 },
+      { id: "sec-3", type: "stats", title: "إحصائيات", active: true, order: 3 },
+      { id: "sec-4", type: "courses", title: "الكورسات", active: true, order: 4 },
+      { id: "sec-5", type: "testimonials", title: "آراء العملاء", active: true, order: 5 },
+      { id: "sec-6", type: "pricing", title: "الباقات", active: true, order: 6 },
+      { id: "sec-7", type: "faq", title: "الأسئلة الشائعة", active: true, order: 7 },
+      { id: "sec-8", type: "cta", title: "انضم إلينا", active: true, order: 8 },
+    ],
+  },
+  theme: {
+    primaryColor: "#6366F1",
+    fontFamily: "Cairo",
+    borderRadius: "rounded-xl",
+    animationStyle: "smooth",
+    layoutWidth: "boxed",
+    headerStyle: "glass",
+    footerStyle: "dark",
+  },
+  branding: {
+    logo: "/logo.png",
+    favicon: "/favicon.ico",
+    brandName: "TeacherOS",
+    brandSlogan: "نظام تشغيل المدرس",
+    socialLinks: { facebook: "#", twitter: "#", youtube: "#", whatsapp: "#", telegram: "#" },
+    contactEmail: "info@teacher-os.com",
+    contactPhone: "+20 100 000 0000",
+  },
+  seo: {
+    title: "TeacherOS — نظام تشغيل المدرس",
+    description: "أول نظام تشغيل متكامل لإدارة الكورسات والطلاب والامتحانات والاشتراكات",
+    keywords: "تعليم, كورسات أونلاين, منصة تعليمية, مدرس, إدارة طلاب",
+    ogImage: "/og-image.png",
+    twitterHandle: "@teacher_os",
+    googleAnalyticsId: "UA-XXXXXXXXX-X",
+    enableSitemap: true,
+    enableRobots: true,
+  },
+}
+
+export const mockBackupHistory = [
+  { id: "bck-1", fileName: "backup-2025-07-01.zip", size: "256 MB", createdAt: new Date("2025-07-01"), type: "full", status: "completed" },
+  { id: "bck-2", fileName: "backup-2025-06-15.zip", size: "248 MB", createdAt: new Date("2025-06-15"), type: "full", status: "completed" },
+  { id: "bck-3", fileName: "backup-2025-06-01.zip", size: "240 MB", createdAt: new Date("2025-06-01"), type: "incremental", status: "completed" },
+]

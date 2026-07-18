@@ -61,3 +61,10 @@ export function getInitials(name: string): string {
     .toUpperCase()
     .substring(0, 2)
 }
+
+export function formatDuration(minutes: number): string {
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  if (h > 0) return `${h} س ${m} دقيقة`
+  return `${m} دقيقة`
+}
