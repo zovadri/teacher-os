@@ -1,0 +1,42 @@
+"use client"
+
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { HiBell, HiMoon, HiSun, HiSearch } from "react-icons/hi"
+import { Avatar } from "@/components/ui/Avatar"
+import { useThemeStore } from "@/lib/store/useThemeStore"
+import { mockTeacher } from "@/lib/mock/data"
+
+export default function DashboardHeader({ title, subtitle }: { title?: string; subtitle?: string }) {
+  const { theme, toggleTheme } = useThemeStore()
+
+  return (
+    <header className="sticky top-0 z-20 bg-surface/80 backdrop-blur-xl border-b border-border">
+      <div className="flex items-center justify-between px-4 md:px-6 py-3">
+        <div>
+          {title && <h1 className="text-xl font-bold text-text">{title}</h1>}
+          {subtitle && <p className="text-sm text-text-secondary">{subtitle}</p>}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button className="p-2 rounded-lg hover:bg-surface-tertiary text-text-tertiary transition-colors">
+            <HiSearch className="w-5 h-5" />
+          </button>
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg hover:bg-surface-tertiary text-text-tertiary transition-colors"
+          >
+            {theme === "dark" ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}
+          </button>
+          <Link href="/dashboard/teacher/notifications" className="relative p-2 rounded-lg hover:bg-surface-tertiary text-text-tertiary transition-colors">
+            <HiBell className="w-5 h-5" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full" />
+          </Link>
+          <Link href="/dashboard/teacher/settings" className="mr-2">
+            <Avatar src={mockTeacher.avatar} name={mockTeacher.name} size="sm" />
+          </Link>
+        </div>
+      </div>
+    </header>
+  )
+}

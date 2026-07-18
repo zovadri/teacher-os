@@ -1,8 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/layout/ThemeProvider"
-import Navbar from "@/components/layout/Navbar"
-import Footer from "@/components/layout/Footer"
 
 export const metadata: Metadata = {
   title: "TeacherOS — نظام تشغيل المدرس",
@@ -28,9 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased" style={{ fontFamily: "'Cairo', 'Inter', system-ui, sans-serif" }}>
         <ThemeProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          {children}
         </ThemeProvider>
       </body>
     </html>
