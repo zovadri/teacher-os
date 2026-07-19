@@ -18,6 +18,23 @@ import DashboardHeader from "@/components/layout/DashboardHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { mockCmsPages } from "@/lib/mock/data"
+import { cn } from "@/lib/utils"
+
+const iconBgColors: Record<string, string> = {
+  primary: "bg-primary-100 dark:bg-primary-900/30",
+  success: "bg-success-100 dark:bg-success-900/30",
+  warning: "bg-warning-100 dark:bg-warning-900/30",
+  error: "bg-error-100 dark:bg-error-900/30",
+  info: "bg-info-100 dark:bg-info-900/30",
+}
+
+const iconTextColors: Record<string, string> = {
+  primary: "text-primary-600",
+  success: "text-success-600",
+  warning: "text-warning-600",
+  error: "text-error-600",
+  info: "text-info-600",
+}
 
 const cmsCards = [
   {
@@ -90,8 +107,8 @@ export default function CmsPage() {
               <Link href={item.href}>
                 <Card hover className="h-full flex flex-col">
                   <CardHeader>
-                    <div className={`w-12 h-12 rounded-2xl bg-${item.color}-100 dark:bg-${item.color}-900/30 flex items-center justify-center`}>
-                      <Icon className={`w-6 h-6 text-${item.color}-600`} />
+                    <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center", iconBgColors[item.color])}>
+                      <Icon className={cn("w-6 h-6", iconTextColors[item.color])} />
                     </div>
                   </CardHeader>
                   <CardContent className="flex-1">

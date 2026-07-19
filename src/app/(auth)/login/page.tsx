@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
+import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import {
   HiMail,
@@ -16,6 +17,7 @@ import {
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
 import { Card, CardContent } from "@/components/ui/Card"
+import { useAuthStore } from "@/lib/auth"
 
 const floatingElements = [
   { icon: HiStar, className: "top-20 right-[15%] text-warning/20 w-8 h-8", delay: 0 },
@@ -24,17 +26,57 @@ const floatingElements = [
   { icon: HiAcademicCap, className: "bottom-40 right-[20%] text-purple-500/20 w-7 h-7", delay: 0.9 },
 ]
 
-export default function LoginPage() {
+const roleRoutes: Record<string, string> = {
+  teacher: "/teacher",
+  student: "/student",
+  parent: "/parent",
+  staff: "/staff",
+}
+
+function LoginForm() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const login = useAuthStore((s) => s.login)
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [remember, setRemember] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [sessionExpired, setSessionExpired] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (searchParams?.get("expired") === "true") {
+      setSessionExpired(true)
+    }
+  }, [searchParams])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const user = useAuthStore.getState().user
+      if (user) router.replace(roleRoutes[user.role] || "/teacher")
+    }
+  }, [isAuthenticated, router])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
     setIsLoading(true)
-    setTimeout(() => setIsLoading(false), 1500)
+    try {
+      const success = await login(email, password)
+      if (success) {
+        const user = useAuthStore.getState().user
+        router.replace(user ? roleRoutes[user.role] : "/teacher")
+      } else {
+        setError("ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ ط£ظˆ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط± ط؛ظٹط± طµط­ظٹط­ط©")
+      }
+    } catch {
+      setError("ط­ط¯ط« ط®ط·ط£ ط£ط«ظ†ط§ط، طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„. ظٹط±ط¬ظ‰ ط§ظ„ظ…ط­ط§ظˆظ„ط© ظ…ط±ط© ط£ط®ط±ظ‰.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -62,7 +104,7 @@ export default function LoginPage() {
           <span className="font-semibold text-text">TeacherOS</span>
         </div>
         <Link href="/" className="text-sm text-text-secondary hover:text-primary transition-colors pointer-events-auto">
-          العودة للرئيسية
+          ط§ظ„ط¹ظˆط¯ط© ظ„ظ„ط±ط¦ظٹط³ظٹط©
         </Link>
       </div>
 
@@ -87,7 +129,7 @@ export default function LoginPage() {
             transition={{ delay: 0.25 }}
             className="text-2xl font-bold text-text"
           >
-            تسجيل الدخول إلى TeacherOS
+            طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„ ط¥ظ„ظ‰ TeacherOS
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -95,7 +137,7 @@ export default function LoginPage() {
             transition={{ delay: 0.3 }}
             className="text-text-secondary mt-2 text-sm"
           >
-            أدخل بيانات حسابك للوصول إلى لوحة التحكم وإدارة منصتك التعليمية
+            ط£ط¯ط®ظ„ ط¨ظٹط§ظ†ط§طھ ط­ط³ط§ط¨ظƒ ظ„ظ„ظˆطµظˆظ„ ط¥ظ„ظ‰ ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… ظˆط¥ط¯ط§ط±ط© ظ…ظ†طµطھظƒ ط§ظ„طھط¹ظ„ظٹظ…ظٹط©
           </motion.p>
         </div>
 
@@ -107,12 +149,22 @@ export default function LoginPage() {
           <Card className="p-8 shadow-xl border-border/50 backdrop-blur-sm bg-surface/95">
             <CardContent className="p-0">
               <form onSubmit={handleSubmit} className="space-y-5">
+                {sessionExpired && (
+                  <div className="p-3 rounded-xl bg-warning/10 border border-warning/20 text-sm text-warning">
+                    ط§ظ†طھظ‡طھ طµظ„ط§ط­ظٹط© ط§ظ„ط¬ظ„ط³ط©. ظٹط±ط¬ظ‰ طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„ ظ…ط±ط© ط£ط®ط±ظ‰.
+                  </div>
+                )}
+                {error && (
+                  <div className="p-3 rounded-xl bg-error/10 border border-error/20 text-sm text-error">
+                    {error}
+                  </div>
+                )}
                 <Input
-                  label="البريد الإلكتروني"
+                  label="ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="أدخل بريدك الإلكتروني"
+                  placeholder="ط£ط¯ط®ظ„ ط¨ط±ظٹط¯ظƒ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ"
                   leftIcon={<HiMail className="w-5 h-5" />}
                   required
                   dir="auto"
@@ -120,11 +172,11 @@ export default function LoginPage() {
 
                 <div className="relative">
                   <Input
-                    label="كلمة المرور"
+                    label="ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="أدخل كلمة المرور"
+                    placeholder="ط£ط¯ط®ظ„ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±"
                     leftIcon={<HiLockClosed className="w-5 h-5" />}
                     required
                   />
@@ -146,18 +198,18 @@ export default function LoginPage() {
                       onChange={(e) => setRemember(e.target.checked)}
                       className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer transition-colors"
                     />
-                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">تذكرني</span>
+                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">طھط°ظƒط±ظ†ظٹ</span>
                   </label>
                   <Link
                     href="/forgot-password"
                     className="text-sm text-primary hover:text-primary-dark transition-colors font-medium"
                   >
-                    نسيت كلمة المرور؟
+                    ظ†ط³ظٹطھ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±طں
                   </Link>
                 </div>
 
                 <Button type="submit" isLoading={isLoading} className="w-full shadow-md shadow-primary/20" size="lg">
-                  {isLoading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
+                  {isLoading ? "ط¬ط§ط±ظٹ طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„..." : "طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„"}
                 </Button>
               </form>
 
@@ -166,12 +218,12 @@ export default function LoginPage() {
                   <div className="w-full border-t border-border" />
                 </div>
                 <div className="relative flex justify-center">
-                  <span className="bg-surface px-4 text-sm text-text-tertiary">أو الدخول عبر</span>
+                  <span className="bg-surface px-4 text-sm text-text-tertiary">ط£ظˆ ط§ظ„ط¯ط®ظˆظ„ ط¹ط¨ط±</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <button className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-xl text-sm text-text-secondary hover:bg-surface-secondary hover:border-border transition-colors group">
+                <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-xl text-sm text-text-secondary hover:bg-surface-secondary hover:border-border transition-colors group">
                   <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -180,7 +232,7 @@ export default function LoginPage() {
                   </svg>
                   <span className="group-hover:text-text transition-colors">Google</span>
                 </button>
-                <button className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-xl text-sm text-text-secondary hover:bg-surface-secondary hover:border-border transition-colors group">
+                <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-xl text-sm text-text-secondary hover:bg-surface-secondary hover:border-border transition-colors group">
                   <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#1877F2">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>
@@ -190,9 +242,9 @@ export default function LoginPage() {
 
               <div className="mt-6 text-center space-y-3">
                 <p className="text-sm text-text-secondary">
-                  ليس لديك حساب؟{" "}
+                  ظ„ظٹط³ ظ„ط¯ظٹظƒ ط­ط³ط§ط¨طں{" "}
                   <Link href="/register" className="text-primary hover:text-primary-dark font-semibold transition-colors">
-                    سجل الآن
+                    ط³ط¬ظ„ ط§ظ„ط¢ظ†
                   </Link>
                 </p>
                 <div className="h-px bg-border/50 w-12 mx-auto" />
@@ -201,7 +253,7 @@ export default function LoginPage() {
                   className="inline-flex items-center gap-1.5 text-sm text-primary/70 hover:text-primary transition-colors font-medium"
                 >
                   <HiShieldCheck className="w-4 h-4" />
-                  بيانات تجربة
+                  ط¨ظٹط§ظ†ط§طھ طھط¬ط±ط¨ط©
                 </Link>
               </div>
             </CardContent>
@@ -214,9 +266,24 @@ export default function LoginPage() {
           transition={{ delay: 0.6 }}
           className="text-center mt-8 text-xs text-text-tertiary"
         >
-          &copy; {new Date().getFullYear()} TeacherOS. جميع الحقوق محفوظة.
+          &copy; {new Date().getFullYear()} TeacherOS. ط¬ظ…ظٹط¹ ط§ظ„ط­ظ‚ظˆظ‚ ظ…ط­ظپظˆط¸ط©.
         </motion.p>
       </motion.div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-surface-secondary">
+        <div className="text-center space-y-3">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-text-secondary text-sm">ط¬ط§ط±ظٹ ط§ظ„طھط­ظ…ظٹظ„...</p>
+        </div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }

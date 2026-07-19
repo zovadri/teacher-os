@@ -1,200 +1,439 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
+  HiOutlineQrcode,
+  HiOutlineKey,
+  HiOutlineUserAdd,
+  HiOutlineBriefcase,
   HiOutlineCheckCircle,
   HiOutlineXCircle,
   HiOutlineClock,
   HiOutlineExclamation,
-  HiOutlineCalendar,
-  HiOutlineFilter,
-  HiOutlineUserGroup,
-  HiOutlineUserAdd,
-  HiOutlineChartSquareBar,
+  HiOutlineSearch,
+  HiOutlineCamera,
+  HiOutlineLogin,
+  HiOutlineLogout,
+  HiOutlineCheck,
+  HiOutlineX,
+  HiOutlineUsers,
 } from "react-icons/hi"
+import { Toaster, toast } from "react-hot-toast"
+import { cn, det } from "@/lib/utils"
 import DashboardHeader from "@/components/layout/DashboardHeader"
-import { Badge } from "@/components/ui/Badge"
-import { Table } from "@/components/ui/Table"
-import { Modal } from "@/components/ui/Modal"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
-import { SearchInput } from "@/components/ui/SearchInput"
+import { Badge } from "@/components/ui/Badge"
 import Button from "@/components/ui/Button"
+import Input from "@/components/ui/Input"
 import Select from "@/components/ui/Select"
-import { mockAttendance, mockCourses } from "@/lib/mock/data"
-import { formatDate, cn } from "@/lib/utils"
+import { SearchInput } from "@/components/ui/SearchInput"
+import { EmptyState } from "@/components/ui/EmptyState"
+import { ErrorState } from "@/components/ui/ErrorState"
+import { Skeleton, StatsSkeleton } from "@/components/ui/Skeleton"
+import { mockAttendance, mockStudents, mockEmployees, mockCourses } from "@/lib/mock/data"
+import type { AttendanceStatus } from "@/lib/types"
 
-const statusConfig: Record<string, { label: string; variant: "success" | "error" | "warning" | "info"; color: string }> = {
-  present: { label: "حاضر", variant: "success", color: "bg-success/10 text-success border-success/20" },
-  absent: { label: "غائب", variant: "error", color: "bg-error/10 text-error border-error/20" },
-  late: { label: "متأخر", variant: "warning", color: "bg-warning/10 text-warning border-warning/20" },
-  excused: { label: "معذر", variant: "info", color: "bg-info/10 text-info border-info/20" },
+const modes = [
+  { id: "qr", label: "QR ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯", icon: HiOutlineQrcode },
+  { id: "code", label: "ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨", icon: HiOutlineKey },
+  { id: "manual", label: "ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط«â€ ط·آ¸ط¸آ¹", icon: HiOutlineUserAdd },
+  { id: "employee", label: "ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾", icon: HiOutlineBriefcase },
+] as const
+
+const statusColors: Record<AttendanceStatus, { label: string; variant: "success" | "error" | "warning" | "info"; color: string }> = {
+  present: { label: "ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ·ط¢آ¶ط·آ·ط¢آ±", variant: "success", color: "bg-emerald-100 text-emerald-700 border-emerald-200" },
+  absent: { label: "ط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ·ط¢آ¨", variant: "error", color: "bg-red-100 text-red-700 border-red-200" },
+  late: { label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ·ط¢آ®ط·آ·ط¢آ±", variant: "warning", color: "bg-amber-100 text-amber-700 border-amber-200" },
+  excused: { label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ°ط·آ·ط¢آ±", variant: "info", color: "bg-blue-100 text-blue-700 border-blue-200" },
 }
 
-export default function AttendancePage() {
-  const [search, setSearch] = useState("")
-  const [courseFilter, setCourseFilter] = useState("all")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0])
-  const [showRecordModal, setShowRecordModal] = useState(false)
+export default function AttendanceHubPage() {
+  const [activeMode, setActiveMode] = useState("qr")
+  const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false)
+  const [recordedIds, setRecordedIds] = useState<Set<string>>(new Set())
 
-  const filtered = useMemo(() => {
-    return mockAttendance.filter((a) => {
-      const matchSearch = a.studentName.includes(search)
-      const matchCourse = courseFilter === "all" || a.courseId === courseFilter
-      const matchStatus = statusFilter === "all" || a.status === statusFilter
-      const matchDate = !selectedDate || a.date.toISOString().split("T")[0] === selectedDate
-      return matchSearch && matchCourse && matchStatus && matchDate
-    })
-  }, [search, courseFilter, statusFilter, selectedDate])
+  const [codeInput, setCodeInput] = useState("")
+  const [codeResult, setCodeResult] = useState<typeof mockStudents[0] | null>(null)
 
-  const stats = useMemo(() => {
-    const today = filtered
-    const total = today.length
+  const [manualStudent, setManualStudent] = useState("")
+  const [manualStatus, setManualStatus] = useState<AttendanceStatus>("present")
+
+  const [employeeCheckIn, setEmployeeCheckIn] = useState<Record<string, boolean>>({})
+  const [employeeCheckOut, setEmployeeCheckOut] = useState<Record<string, boolean>>({})
+
+  const [scannedStudent, setScannedStudent] = useState<typeof mockStudents[0] | null>(null)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const todayStats = useMemo(() => {
+    const today = mockAttendance.filter(
+      (a) => a.date.toDateString() === new Date().toDateString()
+    )
+    if (today.length === 0) {
+      return { total: 0, present: 0, absent: 0, late: 0, excused: 0, rate: 0 }
+    }
     const present = today.filter((a) => a.status === "present").length
     const absent = today.filter((a) => a.status === "absent").length
     const late = today.filter((a) => a.status === "late").length
+    const excused = today.filter((a) => a.status === "excused").length
     return {
-      total,
+      total: today.length,
       present,
       absent,
       late,
-      presentRate: total > 0 ? Math.round((present / total) * 100) : 0,
+      excused,
+      rate: Math.round((present / today.length) * 100),
     }
-  }, [filtered])
+  }, [])
 
-  const weekDays = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"]
+  const handleQrDetect = () => {
+    const student = mockStudents[Math.floor(det() * mockStudents.length)]
+    if (recordedIds.has(student.id)) {
+      toast.error("ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸أ¢â‚¬طŒ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چ", { position: "top-left" })
+      return
+    }
+    setScannedStudent(student)
+    toast.success("ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ­ QR ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ­", { position: "top-left" })
+  }
+
+  const handleQrConfirm = () => {
+    if (!scannedStudent) return
+    if (recordedIds.has(scannedStudent.id)) {
+      toast.error("ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸أ¢â‚¬طŒ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چ", { position: "top-left" })
+      return
+    }
+    setRecordedIds((prev) => new Set(prev).add(scannedStudent.id))
+    setScannedStudent(null)
+    toast.success(`ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ± ${scannedStudent.name}`, { position: "top-left" })
+  }
+
+  const handleCodeSearch = () => {
+    if (!codeInput.trim()) {
+      toast.error("ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ¥ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨", { position: "top-left" })
+      return
+    }
+    const student = mockStudents.find(
+      (s) => s.id === codeInput.trim() || s.phone.includes(codeInput.trim())
+    )
+    if (!student) {
+      toast.error("ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ ط·آ¸ط¸آ¹ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ«ط·آ¸ط«â€ ط·آ·ط¢آ± ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯", { position: "top-left" })
+      setCodeResult(null)
+      return
+    }
+    if (recordedIds.has(student.id)) {
+      toast.error("ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸أ¢â‚¬طŒ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چ", { position: "top-left" })
+      setCodeResult(null)
+      return
+    }
+    setCodeResult(student)
+    toast.success("ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ«ط·آ¸ط«â€ ط·آ·ط¢آ± ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨", { position: "top-left" })
+  }
+
+  const handleCodeConfirm = () => {
+    if (!codeResult) return
+    setRecordedIds((prev) => new Set(prev).add(codeResult.id))
+    toast.success(`ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ± ${codeResult.name}`, { position: "top-left" })
+    setCodeInput("")
+    setCodeResult(null)
+  }
+
+  const handleManualRecord = () => {
+    if (!manualStudent) {
+      toast.error("ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨", { position: "top-left" })
+      return
+    }
+    if (recordedIds.has(manualStudent)) {
+      toast.error("ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸أ¢â‚¬طŒ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چ", { position: "top-left" })
+      return
+    }
+    setRecordedIds((prev) => new Set(prev).add(manualStudent))
+    const student = mockStudents.find((s) => s.id === manualStudent)
+    toast.success(`ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ${student?.name || "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨"} ط·آ¸ط¦â€™ط·آ¸أ¢â€ڑآ¬ ${statusColors[manualStatus].label}`, { position: "top-left" })
+    setManualStudent("")
+  }
+
+  const handleEmployeeCheckIn = (empId: string) => {
+    if (employeeCheckIn[empId]) {
+      toast.error("ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چ ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چ", { position: "top-left" })
+      return
+    }
+    setEmployeeCheckIn((prev) => ({ ...prev, [empId]: true }))
+    const emp = mockEmployees.find((e) => e.id === empId)
+    toast.success(`ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چ ${emp?.name || "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾"}`, { position: "top-left" })
+  }
+
+  const handleEmployeeCheckOut = (empId: string) => {
+    if (!employeeCheckIn[empId]) {
+      toast.error("ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ ط·آ¸ط¸آ¹ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬â€چ ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾ ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒ ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ¯", { position: "top-left" })
+      return
+    }
+    if (employeeCheckOut[empId]) {
+      toast.error("ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ·ط¢آ¬ ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چ", { position: "top-left" })
+      return
+    }
+    setEmployeeCheckOut((prev) => ({ ...prev, [empId]: true }))
+    const emp = mockEmployees.find((e) => e.id === empId)
+    toast.success(`ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ·ط¢آ¬ ${emp?.name || "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾"}`, { position: "top-left" })
+  }
+
+  if (hasError) {
+    return (
+      <div className="p-4 md:p-6">
+        <ErrorState
+          title="ط·آ·ط¢آ­ط·آ·ط¢آ¯ط·آ·ط¢آ« ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£ ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آµط·آ¸ط¸آ¾ط·آ·ط¢آ­ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±"
+          message="ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ·ط¢آ£ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ°"
+          onRetry={() => { setHasError(false); setIsLoading(true); setTimeout(() => setIsLoading(false), 1000) }}
+        />
+      </div>
+    )
+  }
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="الحضور والغياب" subtitle="تسجيل ومتابعة حضور الطلاب" />
+      <Toaster />
+      <DashboardHeader title="ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¸ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±" subtitle="ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ " />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="نسبة الحضور" value={`${stats.presentRate}%`} icon={HiOutlineChartSquareBar} color="primary" />
-        <StatsCard title="الحاضرون" value={stats.present} icon={HiOutlineCheckCircle} color="success" />
-        <StatsCard title="الغائبون" value={stats.absent} icon={HiOutlineXCircle} color="error" />
-        <StatsCard title="المتأخرون" value={stats.late} icon={HiOutlineClock} color="warning" />
+      {isLoading ? (
+        <StatsSkeleton count={4} />
+      ) : (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatsCard title="ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±" value={`${todayStats.rate}%`} icon={HiOutlineCheckCircle} color="primary" />
+          <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ·ط¢آ¶ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ " value={todayStats.present} icon={HiOutlineUsers} color="success" />
+          <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ·ط¢آ¨ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ " value={todayStats.absent} icon={HiOutlineXCircle} color="error" />
+          <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ " value={todayStats.late} icon={HiOutlineClock} color="warning" />
+        </div>
+      )}
+
+      <div className="flex gap-2 border-b border-border overflow-x-auto">
+        {modes.map((mode) => {
+          const Icon = mode.icon
+          return (
+            <button type="button"
+              key={mode.id}
+              onClick={() => setActiveMode(mode.id)}
+              className={cn(
+                "flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 -mb-px transition-all duration-200",
+                activeMode === mode.id
+                  ? "border-primary text-primary"
+                  : "border-transparent text-text-tertiary hover:text-text-secondary hover:border-border"
+              )}
+            >
+              <Icon className="w-4 h-4" />
+              {mode.label}
+            </button>
+          )
+        })}
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>الحضور اليومي</CardTitle>
-          <div className="flex items-center gap-2 text-sm text-text-tertiary">
-            <HiOutlineCalendar className="w-4 h-4" />
-            <span>{formatDate(new Date(selectedDate || Date.now()))}</span>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-1 mb-4">
-            {weekDays.map((day, i) => {
-              const dayAttendance = mockAttendance.filter(
-                (a) => new Date(a.date).getDay() === i
-              )
-              const presentCount = dayAttendance.filter((a) => a.status === "present").length
-              const rate = dayAttendance.length > 0 ? (presentCount / dayAttendance.length) * 100 : 0
-              return (
-                <div key={day} className="flex-1 text-center p-2 rounded-lg bg-surface-secondary border border-border">
-                  <p className="text-xs text-text-tertiary mb-1">{day}</p>
-                  <div className="h-16 flex items-end justify-center">
-                    <div
-                      className="w-full max-w-[20px] rounded-t-md bg-primary transition-all duration-500"
-                      style={{ height: `${rate}%`, minHeight: "4px" }}
-                    />
+      {activeMode === "qr" && (
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+          <Card>
+            <CardHeader>
+              <CardTitle>ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ­ QR ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯</CardTitle>
+              <Badge variant="primary">ط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§</Badge>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-border rounded-xl bg-surface-secondary">
+                <HiOutlineCamera className="w-16 h-16 text-text-tertiary mb-4" />
+                <p className="text-text-secondary text-sm mb-4">ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬طŒ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ­ط·آ¸ط«â€  QR ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨</p>
+                <button type="button" onClick={handleQrDetect} leftIcon={<HiOutlineQrcode className="w-4 h-4" />}>
+                  ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ­ QR
+                </Button>
+              </div>
+              {scannedStudent ? (
+                <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+                  <div className="flex items-center gap-3">
+                    <img src={scannedStudent.avatar} alt="" className="w-12 h-12 rounded-full bg-surface-tertiary" />
+                    <div>
+                      <p className="font-semibold text-text">{scannedStudent.name}</p>
+                      <p className="text-sm text-text-secondary">{scannedStudent.grade} - {scannedStudent.group}</p>
+                    </div>
                   </div>
-                  <p className="text-xs font-medium text-text mt-1">{Math.round(rate)}%</p>
+                  <div className="flex gap-3 mt-4">
+                    <button type="button" onClick={handleQrConfirm} variant="success" size="sm" leftIcon={<HiOutlineCheck className="w-4 h-4" />}>
+                      ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±
+                    </Button>
+                    <Button onClick={() => setScannedStudent(null)} variant="secondary" size="sm" leftIcon={<HiOutlineX className="w-4 h-4" />}>
+                      ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’
+                    </Button>
+                  </div>
                 </div>
-              )
-            })}
-          </div>
-        </CardContent>
-      </Card>
+              ) : (
+                <div className="text-center py-4 text-text-tertiary text-sm">ط·آ·ط¢آ§ط·آ·ط¢آ¶ط·آ·ط·â€؛ط·آ·ط¢آ· ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¢آ­ QR</div>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
 
-      <div className="flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
-        <div className="flex flex-1 flex-wrap gap-3 w-full">
-          <div className="w-full md:w-48">
-            <input
-              type="date"
-              value={selectedDate}
-              onChange={(e) => setSelectedDate(e.target.value)}
-              className="w-full bg-surface border border-border rounded-xl px-3.5 py-2.5 text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
-            />
-          </div>
-          <div className="flex-1 min-w-[200px]">
-            <SearchInput value={search} onChange={setSearch} placeholder="بحث باسم الطالب..." />
-          </div>
-          <select
-            value={courseFilter}
-            onChange={(e) => setCourseFilter(e.target.value)}
-            className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
-          >
-            <option value="all">جميع الكورسات</option>
-            {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
-          </select>
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
-          >
-            <option value="all">جميع الحالات</option>
-            <option value="present">حاضر</option>
-            <option value="absent">غائب</option>
-            <option value="late">متأخر</option>
-            <option value="excused">معذر</option>
-          </select>
-        </div>
-        <Button leftIcon={<HiOutlineUserAdd className="w-4 h-4" />} onClick={() => setShowRecordModal(true)}>
-          تسجيل حضور
-        </Button>
-      </div>
+      {activeMode === "code" && (
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+          <Card>
+            <CardHeader>
+              <CardTitle>ط·آ·ط¢آ¨ط·آ·ط¢آ­ط·آ·ط¢آ« ط·آ·ط¢آ¨ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex gap-3">
+                <div className="flex-1">
+                  <Input
+                    placeholder="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ·ط¢آ£ط·آ¸ط«â€  ط·آ·ط¢آ±ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¹آ¾ط·آ¸ط¸آ¾"
+                    value={codeInput}
+                    onChange={(e) => setCodeInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleCodeSearch()}
+                    leftIcon={<HiOutlineSearch className="w-4 h-4" />}
+                  />
+                </div>
+                <Button onClick={handleCodeSearch}>ط·آ·ط¢آ¨ط·آ·ط¢آ­ط·آ·ط¢آ«</Button>
+              </div>
+              {codeResult ? (
+                <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+                  <div className="flex items-center gap-3">
+                    <img src={codeResult.avatar} alt="" className="w-12 h-12 rounded-full bg-surface-tertiary" />
+                    <div className="flex-1">
+                      <p className="font-semibold text-text">{codeResult.name}</p>
+                      <p className="text-sm text-text-secondary">{codeResult.grade} - {codeResult.group}</p>
+                      <p className="text-xs text-text-tertiary mt-0.5">ط·آ·ط¢آ±ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬آ¦: {codeResult.phone}</p>
+                    </div>
+                    <Badge variant="success" size="sm">ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ«ط·آ¸ط«â€ ط·آ·ط¢آ±</Badge>
+                  </div>
+                  <div className="flex gap-3 mt-4">
+                    <button type="button" onClick={handleCodeConfirm} variant="success" size="sm" leftIcon={<HiOutlineCheck className="w-4 h-4" />}>
+                      ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±
+                    </Button>
+                    <Button onClick={() => { setCodeResult(null); setCodeInput("") }} variant="secondary" size="sm" leftIcon={<HiOutlineX className="w-4 h-4" />}>
+                      ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’
+                    </Button>
+                  </div>
+                </div>
+              ) : codeInput && (
+                <EmptyState
+                  icon={HiOutlineSearch}
+                  title="ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ­ط·آ·ط¢آ« ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨"
+                  description="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ·ط¢آ£ط·آ¸ط«â€  ط·آ·ط¢آ±ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¹آ¾ط·آ¸ط¸آ¾ ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ط·آ·ط¢آ­ط·آ·ط¢آ«"
+                />
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
 
-      <Table
-        columns={[
-          { key: "studentName", header: "اسم الطالب", render: (a) => (
-            <span className="text-sm font-medium text-text">{a.studentName}</span>
-          )},
-          { key: "courseName", header: "الكورس" },
-          { key: "date", header: "التاريخ", render: (a) => (
-            <span className="text-sm text-text-secondary">{formatDate(a.date)}</span>
-          )},
-          { key: "status", header: "الحالة", render: (a) => {
-            const config = statusConfig[a.status]
-            return (
-              <span className={cn("inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border", config.color)}>
-                {config.label}
-              </span>
-            )
-          }},
-          { key: "checkIn", header: "وقت الحضور", render: (a) => (
-            <span className="text-sm text-text-secondary" dir="ltr">{a.checkIn || "—"}</span>
-          )},
-          { key: "checkOut", header: "وقت الانصراف", render: (a) => (
-            <span className="text-sm text-text-secondary" dir="ltr">{a.checkOut || "—"}</span>
-          )},
-          { key: "notes", header: "ملاحظات", render: (a) => (
-            <span className="text-xs text-text-tertiary">{a.notes || "—"}</span>
-          )},
-        ]}
-        data={filtered}
-      />
+      {activeMode === "manual" && (
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+          <Card>
+            <CardHeader>
+              <CardTitle>ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ± ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط«â€ ط·آ¸ط¸آ¹</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Select
+                label="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨"
+                placeholder="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹..."
+                value={manualStudent}
+                onChange={(e) => setManualStudent(e.target.value)}
+                options={mockStudents.map((s) => ({ value: s.id, label: `${s.name} - ${s.grade}` }))}
+              />
+              <div>
+                <label className="block text-sm font-medium text-text mb-1.5">ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±</label>
+                <div className="flex gap-2">
+                  {(Object.entries(statusColors) as [AttendanceStatus, typeof statusColors[AttendanceStatus]][]).map(
+                    ([key, config]) => (
+                      <button type="button"
+                        key={key}
+                        onClick={() => setManualStatus(key)}
+                        className={cn(
+                          "flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition-all",
+                          manualStatus === key
+                            ? config.color
+                            : "border-border text-text-tertiary hover:bg-surface-secondary"
+                        )}
+                      >
+                        {config.label}
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+              <button type="button" onClick={handleManualRecord} size="lg" className="w-full" leftIcon={<HiOutlineCheckCircle className="w-4 h-4" />}>
+                ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
 
-      <Modal isOpen={showRecordModal} onClose={() => setShowRecordModal(false)} title="تسجيل حضور" subtitle="سجل حضور الطلاب للجلسة الحالية" size="lg">
-        <div className="space-y-4">
-          <Select
-            label="الكورس"
-            options={mockCourses.map((c) => ({ value: c.id, label: c.title }))}
-            placeholder="اختر الكورس"
-          />
-          <div className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary border border-border">
-            <span className="text-sm text-text">عدد الطلاب الحاضرين</span>
-            <input type="number" defaultValue={5} className="w-20 bg-surface border border-border rounded-lg px-3 py-1.5 text-sm text-text text-center" />
-          </div>
-          <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1">تأكيد الحضور</Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowRecordModal(false)}>إلغاء</Button>
-          </div>
-        </div>
-      </Modal>
+      {activeMode === "employee" && (
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+          <Card>
+            <CardHeader>
+              <CardTitle>ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ </CardTitle>
+              <Badge variant="info">ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چ/ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ·ط¢آ¬</Badge>
+            </CardHeader>
+            <CardContent>
+              {mockEmployees.length === 0 ? (
+                <EmptyState
+                  icon={HiOutlineBriefcase}
+                  title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ "
+                  description="ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ ط·آ¸ط¸آ¹ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ·ط¢آ£ط·آ¸ط¸آ¹ ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¸ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ¯"
+                />
+              ) : (
+                <div className="space-y-3">
+                  {mockEmployees.map((emp) => (
+                    <div
+                      key={emp.id}
+                      className={cn(
+                        "flex items-center justify-between p-4 rounded-xl border border-border transition-all",
+                        employeeCheckIn[emp.id] && !employeeCheckOut[emp.id] && "border-emerald-200 bg-emerald-50/50",
+                        employeeCheckOut[emp.id] && "border-gray-200 bg-gray-50/50 opacity-75"
+                      )}
+                    >
+                      <div className="flex items-center gap-3">
+                        <img src={emp.avatar} alt="" className="w-10 h-10 rounded-full bg-surface-tertiary" />
+                        <div>
+                          <p className="font-semibold text-text text-sm">{emp.name}</p>
+                          <p className="text-xs text-text-tertiary">{emp.jobTitle}</p>
+                          {employeeCheckIn[emp.id] && !employeeCheckOut[emp.id] && (
+                            <Badge variant="success" size="sm" dot>ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ</Badge>
+                          )}
+                          {employeeCheckOut[emp.id] && (
+                            <Badge variant="neutral" size="sm">ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط¸آ¾</Badge>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant={employeeCheckIn[emp.id] ? "secondary" : "success"}
+                          onClick={() => handleEmployeeCheckIn(emp.id)}
+                          disabled={employeeCheckOut[emp.id]}
+                          leftIcon={<HiOutlineLogin className="w-4 h-4" />}
+                        >
+                          ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چ
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant={employeeCheckOut[emp.id] ? "secondary" : "outline"}
+                          onClick={() => handleEmployeeCheckOut(emp.id)}
+                          disabled={!employeeCheckIn[emp.id] || employeeCheckOut[emp.id]}
+                          leftIcon={<HiOutlineLogout className="w-4 h-4" />}
+                        >
+                          ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ·ط¢آ¬
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
     </div>
   )
 }

@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 import {
   HiOutlinePlus,
   HiOutlineTrash,
@@ -62,6 +64,7 @@ const initialForm: FormData = {
 }
 
 export default function CreateExamPage() {
+  const router = useRouter()
   const [step, setStep] = useState(0)
   const [form, setForm] = useState<FormData>(initialForm)
   const [questions, setQuestions] = useState<Question[]>([])
@@ -121,6 +124,8 @@ export default function CreateExamPage() {
     setSubmitting(true)
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
+    toast.success("تم حفظ الامتحان بنجاح!")
+    router.push("/teacher/exams")
   }
 
   const steps = ["المعلومات الأساسية", "الأسئلة", "الإعدادات"]
@@ -264,10 +269,10 @@ export default function CreateExamPage() {
                     </Badge>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button onClick={() => setPreviewQuestion(previewQuestion === q.id ? null : q.id)} className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-tertiary transition-colors">
+                    <button type="button" onClick={() => setPreviewQuestion(previewQuestion === q.id ? null : q.id)} className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-tertiary transition-colors">
                       {previewQuestion === q.id ? <HiOutlineEyeOff size={16} /> : <HiOutlineEye size={16} />}
                     </button>
-                    <button onClick={() => removeQuestion(q.id)} className="p-1.5 rounded-lg hover:bg-surface-secondary text-error transition-colors">
+                    <button type="button" onClick={() => removeQuestion(q.id)} className="p-1.5 rounded-lg hover:bg-surface-secondary text-error transition-colors">
                       <HiOutlineTrash size={16} />
                     </button>
                   </div>
@@ -298,7 +303,7 @@ export default function CreateExamPage() {
                   {q.type === "true-false" && (
                     <div className="flex gap-3">
                       {[{ label: "صح", value: true }, { label: "خطأ", value: false }].map((opt) => (
-                        <button key={opt.label} onClick={() => updateQuestion(q.id, { correctAnswer: opt.value })}
+                        <button type="button" key={opt.label} onClick={() => updateQuestion(q.id, { correctAnswer: opt.value })}
                           className={`px-6 py-2.5 rounded-xl text-sm font-medium border transition-all ${q.correctAnswer === opt.value ? "bg-primary/10 border-primary text-primary" : "border-border hover:border-primary/30"}`}>
                           {opt.label}
                         </button>
@@ -375,9 +380,9 @@ export default function CreateExamPage() {
                       <p className="text-sm font-medium text-text">{opt.label}</p>
                       <p className="text-xs text-text-tertiary">{opt.desc}</p>
                     </div>
-                    <button onClick={() => update(opt.key as keyof FormData, !(form as any)[opt.key])}
-                      className={`relative w-11 h-6 rounded-full transition-colors ${(form as any)[opt.key] ? "bg-primary" : "bg-surface-tertiary"}`}>
-                      <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${(form as any)[opt.key] ? "translate-x-0.5" : "translate-x-[22px]"}`} />
+                    <button type="button" onClick={() => update(opt.key as keyof FormData, !(form as Record<string, boolean>)[opt.key])}
+                      className={`relative w-11 h-6 rounded-full transition-colors ${(form as Record<string, boolean>)[opt.key] ? "bg-primary" : "bg-surface-tertiary"}`}>
+                      <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${(form as Record<string, boolean>)[opt.key] ? "translate-x-0.5" : "translate-x-[22px]"}`} />
                     </button>
                   </div>
                 ))}

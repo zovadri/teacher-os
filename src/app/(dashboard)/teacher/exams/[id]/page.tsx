@@ -1,259 +1,186 @@
 "use client"
 
-import { useState, useMemo } from "react"
-import Link from "next/link"
-import { useParams } from "next/navigation"
+import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import {
-  HiOutlineClipboardCheck,
-  HiOutlinePencil,
-  HiOutlineTrash,
-  HiOutlineChartBar,
-  HiOutlineUsers,
-  HiOutlineClock,
-  HiOutlineAcademicCap,
-  HiOutlineStar,
-  HiOutlineQuestionMarkCircle,
+  HiOutlineDocumentReport, HiOutlineDownload, HiOutlineEye,
+  HiOutlineCalendar, HiOutlineAcademicCap, HiOutlineStar, HiOutlineClipboardCheck,
 } from "react-icons/hi"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import toast from "react-hot-toast"
 import DashboardHeader from "@/components/layout/DashboardHeader"
-import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import { Tabs, TabPanel } from "@/components/ui/Tabs"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
-import { Table } from "@/components/ui/Table"
-import { mockExams, mockStudents } from "@/lib/mock/data"
+import { Progress } from "@/components/ui/Progress"
+import Button from "@/components/ui/Button"
+import Select from "@/components/ui/Select"
+import { CardSkeleton, StatsSkeleton } from "@/components/ui/Skeleton"
+import { EmptyState } from "@/components/ui/EmptyState"
+import { ErrorState } from "@/components/ui/ErrorState"
+import { Breadcrumb } from "@/components/ui/Breadcrumb"
+import { formatDate, det } from "@/lib/utils"
+import type { WeeklyReport } from "@/lib/types"
 
-const statusBadge: Record<string, "success" | "error" | "neutral"> = {
-  active: "success",
-  closed: "error",
-  draft: "neutral",
-}
+const mockChildren = [
+  { id: "s-1", name: "ط·آ·ط¢آ£ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯", grade: "ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ«ط·آ·ط¢آ© ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ¸ط¸آ¹" },
+  { id: "s-2", name: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦", grade: "ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ·ط¢آ© ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ¸ط¸آ¹" },
+]
 
-const statusLabels: Record<string, string> = {
-  active: "نشط",
-  closed: "مغلق",
-  draft: "مسودة",
-}
+const generateWeeklyReports = (studentId: string): WeeklyReport[] => Array.from({ length: 4 }, (_, i) => ({
+  id: `wr-${studentId}-${i + 1}`,
+  studentId,
+  weekStart: new Date(2026, 5 + Math.floor(i / 2), (i % 2) * 7 + 1),
+  weekEnd: new Date(2026, 5 + Math.floor(i / 2), (i % 2) * 7 + 7),
+  attendanceRate: Math.floor(det() * 15 + 85),
+  completedHomework: Math.floor(det() * 3 + 5),
+  averageGrade: Math.floor(det() * 15 + 75),
+  behavior: ["ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ²", "ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹", "ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ·ط¢آ¯", "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ²"][i],
+  notes: ["ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬آ¦ ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¸ ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط·إ’", "ط·آ¸ط¸آ¹ط·آ·ط¢آ­ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¬ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ¯", "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¦â€™ط·آ·ط¢آ© ط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آµط·آ·ط¢آ©", "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ²ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±"][i],
+}))
 
-const difficultyLabels: Record<string, string> = {
-  easy: "سهل",
-  medium: "متوسط",
-  hard: "صعب",
-}
+export default function ParentReportsPage() {
+  const [selectedChild, setSelectedChild] = useState(mockChildren[0].id)
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
-const difficultyColors: Record<string, string> = {
-  easy: "text-success bg-success/10",
-  medium: "text-warning bg-warning/10",
-  hard: "text-error bg-error/10",
-}
+  const loadData = useCallback(() => {
+    setIsLoading(true)
+    setHasError(false)
+    setTimeout(() => setIsLoading(false), 1000)
+  }, [])
 
-export default function ExamDetailPage() {
-  const params = useParams()
-  const exam = mockExams.find((e) => e.id === params.id)
+  const reports = useMemo(() => generateWeeklyReports(selectedChild), [selectedChild])
+  const child = useMemo(() => mockChildren.find((c) => c.id === selectedChild), [selectedChild])
 
-  if (!exam) {
+  const aggregatedStats = useMemo(() => {
+    if (reports.length === 0) return { avgAttendance: 0, avgGrade: 0, totalHomework: 0 }
+    return {
+      avgAttendance: Math.round(reports.reduce((s, r) => s + r.attendanceRate, 0) / reports.length),
+      avgGrade: Math.round(reports.reduce((s, r) => s + r.averageGrade, 0) / reports.length),
+      totalHomework: reports.reduce((s, r) => s + r.completedHomework, 0),
+    }
+  }, [reports])
+
+  const handleViewFull = (reportId: string) => {
+    toast.success("ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ")
+  }
+
+  const handleDownloadPdf = (reportId: string) => {
+    toast.success("ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ¨ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط·â€؛ط·آ·ط¢آ© PDF")
+  }
+
+  if (hasError) {
     return (
-      <div className="p-4 md:p-6 text-center py-20">
-        <h2 className="text-xl font-bold text-text mb-2">الامتحان غير موجود</h2>
-        <p className="text-sm text-text-tertiary mb-4">لم يتم العثور على الامتحان المطلوب</p>
-        <Link href="/teacher/exams">
-          <button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">العودة للامتحانات</button>
-        </Link>
+      <div className="p-4 md:p-6 space-y-6">
+        <DashboardHeader title="ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط·إ’" subtitle="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸ط¸آ¹" />
+        <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
   }
 
-  const studentResults = useMemo(() =>
-    mockStudents.slice(0, 10).map((s) => ({
-      id: s.id,
-      name: s.name,
-      grade: Math.floor(Math.random() * 60) + 25,
-      time: `${Math.floor(Math.random() * 30) + 15} د`,
-      status: Math.random() > 0.25 ? "pass" as const : "fail" as const,
-    })), [])
-
-  const gradeDistribution = [
-    { range: "0-25", count: 8 },
-    { range: "26-50", count: 22 },
-    { range: "51-75", count: 45 },
-    { range: "76-100", count: 35 },
-  ]
-
-  const passData = [
-    { name: "ناجح", value: exam.analytics.passRate, fill: "#10B981" },
-    { name: "راسب", value: exam.analytics.failRate, fill: "#EF4444" },
-  ]
-
-  const tabs = [
-    { id: "questions", label: "الأسئلة", count: exam.questions.length },
-    { id: "results", label: "النتائج" },
-    { id: "analytics", label: "التحليلات" },
-  ]
-
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: exam.title }]} />
-      <DashboardHeader title={exam.title} subtitle={`${exam.duration} دقيقة · ${exam.totalGrade} درجة · ${exam.questions.length} سؤال`} />
+    <div className="p-4 md:p-6 space-y-6" dir="rtl">
+      <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "تفاصيل الامتحان" }]} />
+      <DashboardHeader title="ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط·إ’" subtitle="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸ط¸آ¹" />
 
-      <div className="bg-surface rounded-xl border border-border p-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-              <HiOutlineClipboardCheck className="text-primary" size={28} />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <h2 className="text-xl font-bold text-text">{exam.title}</h2>
-                <Badge variant={statusBadge[exam.status]}>{statusLabels[exam.status]}</Badge>
-              </div>
-              <div className="flex items-center gap-3 text-xs text-text-tertiary">
-                <span>المدة: {exam.duration} دقيقة</span>
-                <span>الدرجة: {exam.totalGrade}</span>
-                <span>الأسئلة: {exam.questions.length}</span>
-                <span>المحاولات: {exam.maxAttempts}</span>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-border text-sm text-text-secondary hover:bg-surface-secondary transition-colors">
-              <HiOutlinePencil size={16} /> تعديل
-            </button>
-            <button className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-border text-error text-sm hover:bg-error/5 transition-colors">
-              <HiOutlineTrash size={16} /> حذف
-            </button>
-          </div>
-        </div>
+      <div className="max-w-xs">
+        <Select
+          label="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ "
+          options={mockChildren.map((c) => ({ value: c.id, label: `${c.name} - ${c.grade}` }))}
+          value={selectedChild}
+          onChange={(e) => setSelectedChild(e.target.value)}
+        />
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="متوسط الدرجات" value={`${exam.analytics.averageGrade}%`} icon={HiOutlineChartBar} color="primary" />
-        <StatsCard title="نسبة النجاح" value={`${exam.analytics.passRate}%`} icon={HiOutlineAcademicCap} color="success" />
-        <StatsCard title="أعلى درجة" value={exam.analytics.highestGrade} icon={HiOutlineStar} color="warning" />
-        <StatsCard title="متوسط الوقت" value={`${exam.analytics.averageTime} د`} icon={HiOutlineClock} color="info" />
-      </div>
+      {isLoading ? (
+        <StatsSkeleton count={3} />
+      ) : (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <StatsCard title="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±" value={`${aggregatedStats.avgAttendance}%`} icon={HiOutlineCalendar} color="success" subtitle={child?.name} />
+          <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦" value={`${aggregatedStats.avgGrade}%`} icon={HiOutlineAcademicCap} color="primary" />
+          <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ²ط·آ·ط¢آ©" value={aggregatedStats.totalHomework} icon={HiOutlineClipboardCheck} color="info" />
+        </motion.div>
+      )}
 
-      <Tabs tabs={tabs} defaultTab="questions">
-        {(activeTab) => (
-          <>
-            <TabPanel id="questions" activeTab={activeTab}>
+      {isLoading ? (
+        <CardSkeleton count={2} />
+      ) : reports.length === 0 ? (
+        <EmptyState icon={HiOutlineDocumentReport} title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ±" description="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ¸ط«â€ ط·آ·ط¢آ¹ط·آ¸ط¸آ¹ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨" />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {reports.map((report) => (
+            <motion.div key={report.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
               <Card>
-                <CardHeader>
-                  <CardTitle>قائمة الأسئلة</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {exam.questions.map((q, i) => (
-                      <div key={q.id} className="p-4 rounded-xl bg-surface-secondary border border-border flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-3 flex-1 min-w-0">
-                          <span className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">{i + 1}</span>
-                          <div className="min-w-0">
-                            <p className="text-sm text-text truncate">{q.text}</p>
-                            <div className="flex items-center gap-2 text-xs text-text-tertiary mt-0.5">
-                              <Badge variant="neutral" size="sm">
-                                {q.type === "multiple-choice" ? "اختيار من متعدد" : q.type === "true-false" ? "صح وخطأ" : q.type === "fill-blank" ? "املأ الفراغ" : q.type === "essay" ? "مقالي" : q.type}
-                              </Badge>
-                              <span>{q.grade} درجة</span>
-                              <span>نسبة الصحة: {q.stats.correctRate}%</span>
-                            </div>
-                          </div>
-                        </div>
-                        <span className={`shrink-0 px-2.5 py-1 rounded-lg text-xs font-medium ${difficultyColors[q.difficulty]}`}>
-                          {difficultyLabels[q.difficulty]}
-                        </span>
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <HiOutlineCalendar className="w-4 h-4 text-primary" />
+                        <h3 className="font-semibold text-text">{formatDate(report.weekStart)} - {formatDate(report.weekEnd)}</h3>
                       </div>
-                    ))}
+                      <Badge variant="info" size="sm">ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ¸ط«â€ ط·آ·ط¢آ¹ط·آ¸ط¸آ¹</Badge>
+                    </div>
+                    <div className="flex gap-1">
+                      <button type="button" onClick={() => handleDownloadPdf(report.id)} className="p-2 rounded-lg hover:bg-surface-secondary text-text-tertiary hover:text-primary transition-colors" title="ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ PDF">
+                        <HiOutlineDownload className="w-4 h-4" />
+                      </button>
+                      <button type="button" onClick={() => handleViewFull(report.id)} className="p-2 rounded-lg hover:bg-surface-secondary text-text-tertiary hover:text-primary transition-colors" title="ط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ">
+                        <HiOutlineEye className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-            </TabPanel>
 
-            <TabPanel id="results" activeTab={activeTab}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>نتائج الطلاب</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Table
-                    columns={[
-                      { key: "name", header: "الطالب" },
-                      { key: "grade", header: "الدرجة", render: (r) => (
-                        <span className="font-medium">{r.grade} <span className="text-text-tertiary text-xs">/ {exam.totalGrade}</span></span>
-                      )},
-                      { key: "time", header: "الوقت" },
-                      { key: "status", header: "الحالة", render: (r) => (
-                        <Badge variant={r.status === "pass" ? "success" : "error"}>
-                          {r.status === "pass" ? "ناجح" : "راسب"}
-                        </Badge>
-                      )},
-                    ]}
-                    data={studentResults}
-                    onRowClick={(r) => {}}
-                  />
-                </CardContent>
-              </Card>
-            </TabPanel>
-
-            <TabPanel id="analytics" activeTab={activeTab}>
-              <div className="space-y-6">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <StatsCard title="متوسط الدرجات" value={`${exam.analytics.averageGrade}%`} icon={HiOutlineChartBar} color="primary" />
-                  <StatsCard title="نسبة النجاح" value={`${exam.analytics.passRate}%`} icon={HiOutlineAcademicCap} color="success" />
-                  <StatsCard title="أعلى درجة" value={exam.analytics.highestGrade} icon={HiOutlineStar} color="warning" />
-                  <StatsCard title="أدنى درجة" value={exam.analytics.lowestGrade} icon={HiOutlineQuestionMarkCircle} color="error" />
-                </div>
-
-                <div className="grid lg:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>توزيع الدرجات</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div dir="ltr" className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={gradeDistribution}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
-                            <XAxis dataKey="range" tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
-                            <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
-                            <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid #E2E8F0", borderRadius: "8px", fontSize: "13px" }} />
-                            <Bar dataKey="count" fill="#6366F1" radius={[4, 4, 0, 0]} />
-                          </BarChart>
-                        </ResponsiveContainer>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3 rounded-lg bg-surface-secondary">
+                      <div className="flex items-center gap-2 mb-1">
+                        <HiOutlineCalendar className="w-3.5 h-3.5 text-success" />
+                        <span className="text-xs text-text-tertiary">ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±</span>
                       </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>نتائج الامتحان</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        {[
-                          { label: "نسبة النجاح", value: exam.analytics.passRate, color: "bg-success" },
-                          { label: "نسبة الرسوب", value: exam.analytics.failRate, color: "bg-error" },
-                          { label: "معدل الحضور", value: 85, color: "bg-info" },
-                        ].map((item) => (
-                          <div key={item.label} className="space-y-1.5">
-                            <div className="flex justify-between text-sm">
-                              <span className="text-text-secondary">{item.label}</span>
-                              <span className="font-medium text-text">{item.value}%</span>
-                            </div>
-                            <div className="w-full h-2.5 bg-surface-tertiary rounded-full overflow-hidden">
-                              <div className={`h-full rounded-full ${item.color}`} style={{ width: `${item.value}%` }} />
-                            </div>
-                          </div>
-                        ))}
+                      <Progress value={report.attendanceRate} size="sm" variant="success" showLabel />
+                    </div>
+                    <div className="p-3 rounded-lg bg-surface-secondary">
+                      <div className="flex items-center gap-2 mb-1">
+                        <HiOutlineClipboardCheck className="w-3.5 h-3.5 text-primary" />
+                        <span className="text-xs text-text-tertiary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾</span>
                       </div>
-                    </CardContent>
-                  </Card>
+                      <p className="text-lg font-bold text-text">{report.completedHomework} ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¨</p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-surface-secondary">
+                      <div className="flex items-center gap-2 mb-1">
+                        <HiOutlineAcademicCap className="w-3.5 h-3.5 text-warning" />
+                        <span className="text-xs text-text-tertiary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬â€چ</span>
+                      </div>
+                      <p className="text-lg font-bold text-text">{report.averageGrade}%</p>
+                    </div>
+                    <div className="p-3 rounded-lg bg-surface-secondary">
+                      <div className="flex items-center gap-2 mb-1">
+                        <HiOutlineStar className="w-3.5 h-3.5 text-premium" />
+                        <span className="text-xs text-text-tertiary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ¸ط¦â€™</span>
+                      </div>
+                      <p className="text-lg font-bold text-text">{report.behavior}</p>
+                    </div>
+                  </div>
+
+                  {report.notes && (
+                    <div className="p-3 rounded-lg bg-info-50 dark:bg-info-900/20 border border-info-200 dark:border-info-800">
+                      <p className="text-sm text-text-secondary">{report.notes}</p>
+                    </div>
+                  )}
+
+                  <div className="flex gap-2 pt-1">
+                    <button type="button" variant="primary" size="sm" className="flex-1" leftIcon={<HiOutlineEye className="w-4 h-4" />} onClick={() => handleViewFull(report.id)}>
+                      ط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ
+                    </Button>
+                    <button type="button" variant="secondary" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={() => handleDownloadPdf(report.id)}>
+                      PDF
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </TabPanel>
-          </>
-        )}
-      </Tabs>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

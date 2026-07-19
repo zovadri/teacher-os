@@ -258,7 +258,7 @@ export default function HomePage() {
               { q: "كيف يتم تصحيح الامتحانات؟", a: "الأسئلة الموضوعية (اختيار من متعدد، صح وخطأ) يتم تصحيحها تلقائياً. الأسئلة المقالية يقوم المدرس بتصحيحها يدوياً." },
             ].map((faq, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                <button onClick={() => setFaqOpen(faqOpen === `faq-${i}` ? null : `faq-${i}`)} className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 transition-all flex items-center justify-between gap-4">
+                <button type="button" onClick={() => setFaqOpen(faqOpen === `faq-${i}` ? null : `faq-${i}`)} className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 transition-all flex items-center justify-between gap-4">
                   <span className="font-medium text-sm">{faq.q}</span>
                   <span className={`text-text-tertiary transition-transform ${faqOpen === `faq-${i}` ? "rotate-180" : ""}`}>▼</span>
                 </button>

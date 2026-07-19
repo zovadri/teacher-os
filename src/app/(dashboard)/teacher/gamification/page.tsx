@@ -23,6 +23,9 @@ import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
 import { mockStudentXpData, mockAchievements, mockGamificationConfig } from "@/lib/mock/data"
 import { cn, formatDate } from "@/lib/utils"
+import toast from "react-hot-toast"
+import Link from "next/link"
+import { EmptyState } from "@/components/ui/EmptyState"
 
 export default function GamificationPage() {
   const [xpPerLesson, setXpPerLesson] = useState(mockGamificationConfig.xpPerLesson)
@@ -69,138 +72,154 @@ export default function GamificationPage() {
         {(activeTab) => (
           <>
             {activeTab === "leaderboard" && (
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {top3.map((s, i) => (
-                    <motion.div
-                      key={s.studentId}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className={cn(
-                        "relative bg-surface border-2 rounded-xl p-6 text-center",
-                        i === 0 ? "border-yellow-400 shadow-lg shadow-yellow-400/10" : i === 1 ? "border-gray-300" : "border-amber-600"
-                      )}
-                    >
-                      {i === 0 && <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">👑</div>}
-                      <div className="flex justify-center mb-3 mt-2">
-                        <Avatar name={s.studentName} size="xl" />
-                      </div>
-                      <h3 className="font-bold text-text text-lg">{s.studentName}</h3>
-                      <div className="flex items-center justify-center gap-2 mt-2">
-                        <Badge variant="warning" size="sm">
-                          <HiOutlineStar className="w-3 h-3 ml-1" />
-                          {s.totalXp.toLocaleString("ar-EG")} XP
-                        </Badge>
-                        <Badge variant="primary" size="sm">مستوى {s.level}</Badge>
-                      </div>
-                      <div className="flex items-center justify-center gap-4 mt-3 text-xs text-text-tertiary">
-                        <span className="flex items-center gap-1"><HiOutlineFire className="w-3 h-3" />{s.streak} يوم</span>
-                        <span className="flex items-center gap-1"><HiOutlineBadgeCheck className="w-3 h-3" />{s.badges} شارة</span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+              mockStudentXpData.length === 0 ? (
+                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم يتم تسجيل أي نشاط ألعاب بعد" />
+              ) : (
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {top3.map((s, i) => (
+                      <motion.div
+                        key={s.studentId}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className={cn(
+                          "relative bg-surface border-2 rounded-xl p-6 text-center",
+                          i === 0 ? "border-yellow-400 shadow-lg shadow-yellow-400/10" : i === 1 ? "border-gray-300" : "border-amber-600"
+                        )}
+                      >
+                        {i === 0 && <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">👑</div>}
+                        <div className="flex justify-center mb-3 mt-2">
+                          <Avatar name={s.studentName} size="xl" />
+                        </div>
+                        <h3 className="font-bold text-text text-lg">{s.studentName}</h3>
+                        <div className="flex items-center justify-center gap-2 mt-2">
+                          <Badge variant="warning" size="sm">
+                            <HiOutlineStar className="w-3 h-3 ml-1" />
+                            {s.totalXp.toLocaleString("ar-EG")} XP
+                          </Badge>
+                          <Badge variant="primary" size="sm">مستوى {s.level}</Badge>
+                        </div>
+                        <div className="flex items-center justify-center gap-4 mt-3 text-xs text-text-tertiary">
+                          <span className="flex items-center gap-1"><HiOutlineFire className="w-3 h-3" />{s.streak} يوم</span>
+                          <span className="flex items-center gap-1"><HiOutlineBadgeCheck className="w-3 h-3" />{s.badges} شارة</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>جميع المتصدرين</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="border-b border-border">
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">الترتيب</th>
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">الطالب</th>
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">XP</th>
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">المستوى</th>
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">الشارات</th>
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">التسلسل</th>
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">XP أسبوعي</th>
-                            <th className="text-right px-3 py-3 font-semibold text-text-secondary">آخر نشاط</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {mockStudentXpData.map((s, i) => (
-                            <tr key={s.studentId} className={cn("border-b border-border last:border-0 hover:bg-surface-secondary transition-colors", i < 3 && "bg-primary-50/30 dark:bg-primary-900/10")}>
-                              <td className="px-3 py-3">
-                                <span className={cn(
-                                  "inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold",
-                                  i === 0 ? "bg-yellow-100 text-yellow-700" : i === 1 ? "bg-gray-200 text-gray-600" : i === 2 ? "bg-amber-100 text-amber-700" : "bg-surface-tertiary text-text-tertiary"
-                                )}>{s.rank}</span>
-                              </td>
-                              <td className="px-3 py-3">
-                                <div className="flex items-center gap-3">
-                                  <Avatar name={s.studentName} size="sm" />
-                                  <span className="font-medium text-text">{s.studentName}</span>
-                                </div>
-                              </td>
-                              <td className="px-3 py-3"><span className="font-bold text-text">{s.totalXp.toLocaleString("ar-EG")}</span></td>
-                              <td className="px-3 py-3"><Badge variant="primary" size="sm">مستوى {s.level}</Badge></td>
-                              <td className="px-3 py-3">{s.badges}</td>
-                              <td className="px-3 py-3">
-                                <div className="flex items-center gap-1">
-                                  <HiOutlineFire className={cn("w-4 h-4", s.streak >= 30 ? "text-warning" : "text-text-tertiary")} />
-                                  <span className={s.streak >= 30 ? "text-warning font-medium" : "text-text-secondary"}>{s.streak} يوم</span>
-                                </div>
-                              </td>
-                              <td className="px-3 py-3 text-text-secondary">{s.weeklyXp.toLocaleString("ar-EG")}</td>
-                              <td className="px-3 py-3 text-xs text-text-tertiary">{formatDate(s.lastActive)}</td>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>جميع المتصدرين</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="border-b border-border">
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">الترتيب</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">الطالب</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">XP</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">المستوى</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">الشارات</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">التسلسل</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">XP أسبوعي</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">آخر نشاط</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                          </thead>
+                          <tbody>
+                            {mockStudentXpData.map((s, i) => (
+                              <tr key={s.studentId} className={cn("border-b border-border last:border-0 hover:bg-surface-secondary transition-colors", i < 3 && "bg-primary-50/30 dark:bg-primary-900/10")}>
+                                <td className="px-3 py-3">
+                                  <span className={cn(
+                                    "inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold",
+                                    i === 0 ? "bg-yellow-100 text-yellow-700" : i === 1 ? "bg-gray-200 text-gray-600" : i === 2 ? "bg-amber-100 text-amber-700" : "bg-surface-tertiary text-text-tertiary"
+                                  )}>{s.rank}</span>
+                                </td>
+                                <td className="px-3 py-3">
+                                  <div className="flex items-center gap-3">
+                                    <Avatar name={s.studentName} size="sm" />
+                                    <span className="font-medium text-text">{s.studentName}</span>
+                                  </div>
+                                </td>
+                                <td className="px-3 py-3"><span className="font-bold text-text">{s.totalXp.toLocaleString("ar-EG")}</span></td>
+                                <td className="px-3 py-3"><Badge variant="primary" size="sm">مستوى {s.level}</Badge></td>
+                                <td className="px-3 py-3">{s.badges}</td>
+                                <td className="px-3 py-3">
+                                  <div className="flex items-center gap-1">
+                                    <HiOutlineFire className={cn("w-4 h-4", s.streak >= 30 ? "text-warning" : "text-text-tertiary")} />
+                                    <span className={s.streak >= 30 ? "text-warning font-medium" : "text-text-secondary"}>{s.streak} يوم</span>
+                                  </div>
+                                </td>
+                                <td className="px-3 py-3 text-text-secondary">{s.weeklyXp.toLocaleString("ar-EG")}</td>
+                                <td className="px-3 py-3 text-xs text-text-tertiary">{formatDate(s.lastActive)}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )
             )}
 
             {activeTab === "badges" && (
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {mockGamificationConfig.badgeCategories.map((cat) => (
-                    <Card key={cat.id}>
-                      <CardHeader>
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{cat.icon}</span>
-                          <CardTitle>{cat.name}</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="flex flex-wrap gap-2">
-                          {cat.badges.map((b) => (
-                            <Badge key={b} variant="premium" size="md">{b}</Badge>
-                          ))}
-                        </div>
-                        <p className="text-xs text-text-tertiary mt-3">{cat.badges.length} شارة</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>الإنجازات</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                      {mockAchievements.map((ach) => (
-                        <div key={ach.id} className="p-4 rounded-xl bg-surface-secondary border border-border hover:border-primary/30 transition-colors">
-                          <div className="text-3xl mb-2">{ach.icon}</div>
-                          <h4 className="font-semibold text-text text-sm">{ach.name}</h4>
-                          <p className="text-xs text-text-tertiary mt-1">{ach.description}</p>
-                          <div className="flex items-center justify-between mt-3">
-                            <Badge variant="warning" size="sm">+{ach.xpReward} XP</Badge>
-                            <span className="text-xs text-text-tertiary">{ach.criteria.type.replace("_", " ")}</span>
+              mockAchievements.length === 0 && mockGamificationConfig.badgeCategories.every((c) => c.badges.length === 0) ? (
+                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم يتم تسجيل أي نشاط ألعاب بعد" />
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex items-center gap-6 text-sm">
+                    <Link href="/teacher/gamification/badges" className="text-primary hover:underline font-medium">
+                      إدارة الشارات
+                    </Link>
+                    <Link href="/teacher/gamification/achievements" className="text-primary hover:underline font-medium">
+                      إدارة الإنجازات
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {mockGamificationConfig.badgeCategories.map((cat) => (
+                      <Card key={cat.id}>
+                        <CardHeader>
+                          <div className="flex items-center gap-3">
+                            <span className="text-2xl">{cat.icon}</span>
+                            <CardTitle>{cat.name}</CardTitle>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex flex-wrap gap-2">
+                            {cat.badges.map((b) => (
+                              <Badge key={b} variant="premium" size="md">{b}</Badge>
+                            ))}
+                          </div>
+                          <p className="text-xs text-text-tertiary mt-3">{cat.badges.length} شارة</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>الإنجازات</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {mockAchievements.map((ach) => (
+                          <div key={ach.id} className="p-4 rounded-xl bg-surface-secondary border border-border hover:border-primary/30 transition-colors">
+                            <div className="text-3xl mb-2">{ach.icon}</div>
+                            <h4 className="font-semibold text-text text-sm">{ach.name}</h4>
+                            <p className="text-xs text-text-tertiary mt-1">{ach.description}</p>
+                            <div className="flex items-center justify-between mt-3">
+                              <Badge variant="warning" size="sm">+{ach.xpReward} XP</Badge>
+                              <span className="text-xs text-text-tertiary">{ach.criteria.type.replace("_", " ")}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )
             )}
 
             {activeTab === "levels" && (
@@ -273,7 +292,7 @@ export default function GamificationPage() {
                     leftIcon={<HiOutlineFire className="w-4 h-4" />}
                   />
                   <div className="pt-2">
-                    <Button variant="primary">حفظ الإعدادات</Button>
+                    <Button variant="primary" onClick={() => toast.success("تم حفظ إعدادات XP بنجاح")}>حفظ الإعدادات</Button>
                   </div>
                 </CardContent>
               </Card>

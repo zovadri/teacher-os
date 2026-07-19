@@ -115,7 +115,7 @@ export default function StudentDashboard() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {enrolledCourses.map((course, i) => {
-                    const progress = Math.floor(Math.random() * 40) + 40
+                    const progress = [75, 45, 90, 30][i % 4]
                     return (
                       <Link key={course.id} href={`/student/courses/${course.id}`}>
                         <motion.div

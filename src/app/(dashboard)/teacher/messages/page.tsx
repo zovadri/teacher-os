@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import toast from "react-hot-toast"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   HiOutlineSearch,
@@ -9,6 +11,7 @@ import {
   HiOutlineReply,
   HiOutlinePaperAirplane,
   HiOutlineDotsVertical,
+  HiOutlineExternalLink,
   HiOutlineChevronRight,
   HiOutlinePlus,
   HiOutlinePaperClip,
@@ -24,12 +27,14 @@ import Select from "@/components/ui/Select"
 import Textarea from "@/components/ui/Textarea"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { mockMessages, mockStudents } from "@/lib/mock/data"
+import { EmptyState } from "@/components/ui/EmptyState"
 import { formatRelativeTime, cn } from "@/lib/utils"
 
 interface Conversation {
   id: string
   participantName: string
   participantAvatar: string
+  participantId: string
   lastMessage: string
   lastMessageDate: Date
   unread: boolean
@@ -51,6 +56,7 @@ function buildConversations(): Conversation[] {
       id: convId,
       participantName: last.senderName,
       participantAvatar: last.senderAvatar,
+      participantId: last.senderId,
       lastMessage: last.content,
       lastMessageDate: last.createdAt,
       unread: !last.read,
@@ -80,7 +86,7 @@ export default function MessagesPage() {
 
   return (
     <div className="p-4 md:p-6 h-[calc(100vh-4rem)]">
-      <DashboardHeader title="الرسائل" subtitle="التواصل مع الطلاب وأولياء الأمور" />
+      <DashboardHeader title="ط§ظ„ط±ط³ط§ط¦ظ„" subtitle="ط§ظ„طھظˆط§طµظ„ ظ…ط¹ ط§ظ„ط·ظ„ط§ط¨ ظˆط£ظˆظ„ظٹط§ط، ط§ظ„ط£ظ…ظˆط±" />
 
       <div className="flex gap-4 h-[calc(100%-5rem)] mt-4">
         <div className={cn(
@@ -90,45 +96,57 @@ export default function MessagesPage() {
           <div className="p-3 border-b border-border space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex-1">
-                <SearchInput value={search} onChange={setSearch} placeholder="بحث في المحادثات..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ظپظٹ ط§ظ„ظ…ط­ط§ط¯ط«ط§طھ..." />
               </div>
               <Button size="sm" variant="primary" onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                جديدة
+                ط¬ط¯ظٹط¯ط©
               </Button>
             </div>
           </div>
           <div className="flex-1 overflow-y-auto divide-y divide-border">
-            {filtered.map((conv) => (
-              <button
-                key={conv.id}
-                onClick={() => { setSelectedConvId(conv.id); setShowMobileList(false) }}
-                className={cn(
-                  "w-full text-right p-3 hover:bg-surface-secondary transition-colors",
-                  selectedConvId === conv.id && "bg-primary-50/50 dark:bg-primary-900/10"
-                )}
-              >
-                <div className="flex items-start gap-3">
-                  <div className="relative shrink-0">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 overflow-hidden">
-                      <img src={conv.participantAvatar} alt="" className="w-full h-full object-cover" />
+            {filtered.length === 0 ? (
+              <EmptyState
+                icon={HiOutlineMail}
+                title="لا يوجد رسائل"
+                description="لم يتم تبادل أي رسائل بعد"
+              />
+            ) : (
+              filtered.map((conv) => (
+                <button type="button"
+                  key={conv.id}
+                  onClick={() => { setSelectedConvId(conv.id); setShowMobileList(false) }}
+                  className={cn(
+                    "w-full text-right p-3 hover:bg-surface-secondary transition-colors",
+                    selectedConvId === conv.id && "bg-primary-50/50 dark:bg-primary-900/10"
+                  )}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="relative shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 overflow-hidden">
+                        <img src={conv.participantAvatar} alt="" className="w-full h-full object-cover" />
+                      </div>
+                      {conv.unread && <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary rounded-full border-2 border-surface" />}
                     </div>
-                    {conv.unread && <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary rounded-full border-2 border-surface" />}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className={cn("text-sm truncate", conv.unread ? "font-bold text-text" : "font-medium text-text")}>
-                        {conv.participantName}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <Link
+                          href={`/dashboard/teacher/students/${conv.participantId}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className={cn("text-sm truncate", conv.unread ? "font-bold text-text" : "font-medium text-text")}
+                        >
+                          {conv.participantName}
+                        </Link>
+                        <span className="text-xs text-text-tertiary shrink-0">{formatRelativeTime(conv.lastMessageDate)}</span>
+                      </div>
+                      <p className={cn("text-xs truncate mt-0.5", conv.unread ? "text-text" : "text-text-tertiary")}>
+                        {conv.lastMessage}
                       </p>
-                      <span className="text-xs text-text-tertiary shrink-0">{formatRelativeTime(conv.lastMessageDate)}</span>
                     </div>
-                    <p className={cn("text-xs truncate mt-0.5", conv.unread ? "text-text" : "text-text-tertiary")}>
-                      {conv.lastMessage}
-                    </p>
+                    {conv.isStarred && <HiOutlineStar className="w-3.5 h-3.5 text-warning shrink-0 mt-1" />}
                   </div>
-                  {conv.isStarred && <HiOutlineStar className="w-3.5 h-3.5 text-warning shrink-0 mt-1" />}
-                </div>
-              </button>
-            ))}
+                </button>
+              ))
+            )}
           </div>
         </div>
 
@@ -140,7 +158,7 @@ export default function MessagesPage() {
             <>
               <div className="flex items-center justify-between p-3 border-b border-border">
                 <div className="flex items-center gap-3">
-                  <button className="md:hidden p-1 text-text-tertiary" onClick={() => setShowMobileList(true)}>
+                  <button type="button" className="md:hidden p-1 text-text-tertiary" onClick={() => setShowMobileList(true)}>
                     <HiOutlineChevronRight className="w-5 h-5" />
                   </button>
                   <div className="w-9 h-9 rounded-full bg-primary/10 overflow-hidden">
@@ -148,14 +166,14 @@ export default function MessagesPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-text">{activeConversation.participantName}</p>
-                    <p className="text-xs text-text-tertiary">متصل الآن</p>
+                    <p className="text-xs text-text-tertiary">ظ…طھطµظ„ ط§ظ„ط¢ظ†</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  <button className="p-2 text-text-tertiary hover:text-warning rounded-lg hover:bg-surface-secondary transition-colors">
+                  <button type="button" onClick={() => toast.success("تم تحديث الحالة")} className="p-2 text-text-tertiary hover:text-warning rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlineStar className="w-4 h-4" />
                   </button>
-                  <button className="p-2 text-text-tertiary hover:text-error rounded-lg hover:bg-surface-secondary transition-colors">
+                  <button type="button" onClick={() => toast.success("تم حذف المحادثة")} className="p-2 text-text-tertiary hover:text-error rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlineTrash className="w-4 h-4" />
                   </button>
                 </div>
@@ -189,14 +207,14 @@ export default function MessagesPage() {
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
-                    placeholder="اكتب رسالتك..."
+                    placeholder="ط§ظƒطھط¨ ط±ط³ط§ظ„طھظƒ..."
                     className="flex-1 bg-surface-secondary border border-border rounded-xl px-4 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
                   />
-                  <button className="p-2.5 text-text-tertiary hover:text-primary rounded-lg hover:bg-surface-secondary transition-colors">
+                  <button type="button" className="p-2.5 text-text-tertiary hover:text-primary rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlinePaperClip className="w-5 h-5" />
                   </button>
-                  <Button size="md" variant="primary" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-                    إرسال
+                  <button type="button" size="md" variant="primary" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => toast.success("تم إرسال الرسالة")}>
+                    ط¥ط±ط³ط§ظ„
                   </Button>
                 </div>
               </div>
@@ -205,10 +223,10 @@ export default function MessagesPage() {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <HiOutlinePaperAirplane className="w-16 h-16 mx-auto text-text-tertiary mb-4" />
-                <h3 className="text-lg font-semibold text-text mb-2">اختر محادثة</h3>
-                <p className="text-sm text-text-secondary mb-6">اختر محادثة من القائمة لعرض الرسائل</p>
+                <h3 className="text-lg font-semibold text-text mb-2">ط§ط®طھط± ظ…ط­ط§ط¯ط«ط©</h3>
+                <p className="text-sm text-text-secondary mb-6">ط§ط®طھط± ظ…ط­ط§ط¯ط«ط© ظ…ظ† ط§ظ„ظ‚ط§ط¦ظ…ط© ظ„ط¹ط±ط¶ ط§ظ„ط±ط³ط§ط¦ظ„</p>
                 <Button onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                  بدء محادثة جديدة
+                  ط¨ط¯ط، ظ…ط­ط§ط¯ط«ط© ط¬ط¯ظٹط¯ط©
                 </Button>
               </div>
             </div>
@@ -216,24 +234,24 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="رسالة جديدة" subtitle="أرسل رسالة إلى طالب أو ولي أمر" size="lg">
+      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="ط±ط³ط§ظ„ط© ط¬ط¯ظٹط¯ط©" subtitle="ط£ط±ط³ظ„ ط±ط³ط§ظ„ط© ط¥ظ„ظ‰ ط·ط§ظ„ط¨ ط£ظˆ ظˆظ„ظٹ ط£ظ…ط±" size="lg">
         <div className="space-y-4">
           <Select
-            label="إلى"
+            label="ط¥ظ„ظ‰"
             options={mockStudents.slice(0, 20).map((s) => ({ value: s.id, label: s.name }))}
-            placeholder="اختر المستلم"
+            placeholder="ط§ط®طھط± ط§ظ„ظ…ط³طھظ„ظ…"
           />
-          <Input label="الموضوع" placeholder="عنوان الرسالة" />
-          <Textarea label="نص الرسالة" placeholder="اكتب رسالتك هنا..." rows={5} />
-          <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary border border-border cursor-pointer hover:bg-surface-tertiary transition-colors">
+          <Input label="ط§ظ„ظ…ظˆط¶ظˆط¹" placeholder="ط¹ظ†ظˆط§ظ† ط§ظ„ط±ط³ط§ظ„ط©" />
+          <Textarea label="ظ†طµ ط§ظ„ط±ط³ط§ظ„ط©" placeholder="ط§ظƒطھط¨ ط±ط³ط§ظ„طھظƒ ظ‡ظ†ط§..." rows={5} />
+          <div onClick={() => toast.success("قريباً...")} className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary border border-border cursor-pointer hover:bg-surface-tertiary transition-colors">
             <HiOutlinePaperClip className="w-4 h-4 text-text-tertiary" />
-            <span className="text-sm text-text-tertiary">إرفاق ملف</span>
+            <span className="text-sm text-text-tertiary">ط¥ط±ظپط§ظ‚ ظ…ظ„ظپ</span>
           </div>
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-              إرسال
+            <button type="button" variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => { toast.success("تم إرسال الرسالة"); setShowCompose(false) }}>
+              ط¥ط±ط³ط§ظ„
             </Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>إلغاء</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>ط¥ظ„ط؛ط§ط،</Button>
           </div>
         </div>
       </Modal>

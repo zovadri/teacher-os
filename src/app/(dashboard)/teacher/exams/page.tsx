@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 import { motion } from "framer-motion"
 import {
   HiOutlinePlus,
@@ -44,6 +46,7 @@ const stats = [
 const statuses = ["الكل", "active", "draft", "closed"]
 
 export default function ExamsPage() {
+  const router = useRouter()
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("الكل")
 
@@ -134,17 +137,17 @@ export default function ExamsPage() {
                     </div>
                     <div className="flex items-center justify-between pt-2 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="flex items-center gap-1">
-                        <button onClick={(e) => { e.preventDefault() }} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="عرض">
+                        <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/exams/${exam.id}`) }} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="عرض">
                           <HiOutlineEye size={16} />
                         </button>
-                        <button onClick={(e) => { e.preventDefault() }} className="p-1.5 text-text-tertiary hover:text-warning hover:bg-warning/5 rounded-lg transition-colors" title="تعديل">
+                        <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/exams/${exam.id}`) }} className="p-1.5 text-text-tertiary hover:text-warning hover:bg-warning/5 rounded-lg transition-colors" title="تعديل">
                           <HiOutlinePencil size={16} />
                         </button>
-                        <button onClick={(e) => { e.preventDefault() }} className="p-1.5 text-text-tertiary hover:text-info hover:bg-info/5 rounded-lg transition-colors" title="نسخ">
+                        <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("تم نسخ الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-info hover:bg-info/5 rounded-lg transition-colors" title="نسخ">
                           <HiOutlineDuplicate size={16} />
                         </button>
                       </div>
-                      <button onClick={(e) => { e.preventDefault() }} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="حذف">
+                      <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("تم حذف الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="حذف">
                         <HiOutlineTrash size={16} />
                       </button>
                     </div>

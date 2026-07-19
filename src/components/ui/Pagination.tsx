@@ -1,5 +1,6 @@
 "use client"
 
+import { memo } from "react"
 import { cn } from "@/lib/utils"
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi"
 
@@ -29,7 +30,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
 
   return (
     <div className={cn("flex items-center justify-center gap-1", className)}>
-      <button
+      <button type="button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className="p-2 rounded-lg hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
@@ -40,7 +41,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
         page === "..." ? (
           <span key={`dots-${idx}`} className="px-2 text-text-tertiary">...</span>
         ) : (
-          <button
+          <button type="button"
             key={page}
             onClick={() => onPageChange(page as number)}
             className={cn(
@@ -54,7 +55,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
           </button>
         )
       )}
-      <button
+      <button type="button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className="p-2 rounded-lg hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"

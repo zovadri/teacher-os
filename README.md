@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TeacherOS — نظام تشغيل المدرس
 
-## Getting Started
+**Enterprise Educational ERP** لمدرس واحد أو مركز تعليمي صغير.
 
-First, run the development server:
+نظام متكامل لإدارة الكورسات والطلاب والامتحانات والاشتراكات والمالية، بواجهة عربية بالكامل مع دعم RTL والوضع الليلي.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## المميزات الرئيسية
+
+| الوحدة | الوصف |
+|--------|-------|
+| لوحة التحكم | إحصائيات آنية، أنشطة حديثة، وصول سريع |
+| الكورسات | إنشاء وتحرير وإدارة الكورسات والدروس والفصول |
+| الطلاب | تسجيل الطلاب، كشوف الدرجات، بطاقات التعريف، النقل |
+| الامتحانات | إنشاء امتحانات، نسخ متعددة، تحليل الأسئلة، لوحة المتصدرين |
+| الحضور | تسجيل الحضور، مسح QR، تقارير |
+| الواجبات | إنشاء وتصحيح ومتابعة الواجبات |
+| المالية | إيرادات، مصروفات، أقساط، كوبونات، إيصالات، مسترجع |
+| المحادثات | رسائل، إشعارات، تواصل مع أولياء الأمور |
+| التقارير | تقارير تعلم، تقارير أولياء أمور، تصدير PDF/Excel |
+| الأرشفة | أرشفة الطلاب والكورسات والامتحانات |
+| إدارة المحتوى | الصفحة الرئيسية، المظهر، العلامة التجارية، SEO |
+| إعدادات متقدمة | صلاحيات، سجل التدقيق، نسخ احتياطي، بحث متقدم |
+
+## التقنيات المستخدمة
+
+| التقنية | الإصدار |
+|---------|---------|
+| Next.js | 16 |
+| TypeScript | 5.x |
+| Tailwind CSS | 4 |
+| Framer Motion | 11.x |
+| Zustand | 4.x (مع persist) |
+| Recharts | 2.x |
+| react-icons | 5.x (Heroicons) |
+| react-hot-toast | 2.x |
+
+## هيكل المشروع
+
+```
+src/
+├── app/
+│   ├── (auth)/          # تسجيل الدخول والتسجيل
+│   ├── (dashboard)/     # لوحات المعلم/الطالب/ولي الأمر/الموظف
+│   │   ├── teacher/     # 95 صفحة للمعلم
+│   │   ├── student/     # 26 صفحة للطالب
+│   │   ├── parent/      # 10 صفحات لولي الأمر
+│   │   └── staff/       # 3 صفحات للموظف
+│   └── (public)/        # صفحات عامة
+├── components/
+│   ├── ui/              # 26 مكون واجهة قابل لإعادة الاستخدام
+│   ├── layout/          # 9 مكونات تخطيط
+│   └── feature/         # مكونات خاصة بالميزات
+├── lib/
+│   ├── mock/            # 78 مجموعة بيانات وهمية
+│   ├── types/           # 82 نوع/واجهة TypeScript
+│   └── store/           # 5 متاجر Zustand
+└── styles/              # أنماط عامة
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## التثبيت
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# تنزيل المشروع
+git clone <repository-url>
+cd teacher-os
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# تثبيت الاعتماديات
+npx pnpm install
 
-## Learn More
+# تشغيل نسخة التطوير
+npx pnpm dev
 
-To learn more about Next.js, take a look at the following resources:
+# بناء نسخة الإنتاج
+npx pnpm build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## حسابات تجريبية
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| الدور | اسم المستخدم | كلمة المرور |
+|-------|-------------|-------------|
+| معلم | teacher@teacher-os.com | teacher123 |
+| طالب | student@teacher-os.com | student123 |
+| ولي أمر | parent@teacher-os.com | parent123 |
 
-## Deploy on Vercel
+## إحصائيات المشروع
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| المقياس | القيمة |
+|---------|--------|
+| إجمالي صفحات TypeScript | 224 |
+| إجمالي أسطر الكود | ~47,000+ |
+| وحدات الميزات | 30+ |
+| مكونات واجهة المستخدم | 26 |
+| أنواع TypeScript | 82 |
+| مجموعات بيانات وهمية | 78 |
+| متاجر الحالة | 5 |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## المسار المستقبلي
+
+- [ ] تكامل NestJS + PostgreSQL
+- [ ] رفع الملفات الفعلي
+- [ ] بوابات الدفع (Fawry, Vodafone Cash)
+- [ ] اختبارات وحدة وتكامل
+- [ ] CI/CD pipeline
+- [ ] توثيق API
+
+## الترخيص
+
+جميع الحقوق محفوظة © {current_year}

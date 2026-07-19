@@ -1,205 +1,229 @@
-"use client"
+﻿"use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
+import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
-import { HiOutlineAcademicCap, HiOutlineChartBar, HiOutlineClipboardCheck, HiOutlineStar, HiOutlineDownload, HiOutlineChevronLeft } from "react-icons/hi"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import {
+  HiOutlineCash,
+  HiOutlineArrowUp,
+  HiOutlineArrowDown,
+  HiOutlineRefresh,
+  HiOutlinePlus,
+  HiOutlineMinus,
+  HiOutlineTrendingUp,
+  HiOutlineChartBar,
+} from "react-icons/hi"
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts"
+import DashboardHeader from "@/components/layout/DashboardHeader"
+import { Badge } from "@/components/ui/Badge"
+import { Table } from "@/components/ui/Table"
+import { Modal } from "@/components/ui/Modal"
+import { StatsCard } from "@/components/ui/StatsCard"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
+import Button from "@/components/ui/Button"
+import Input from "@/components/ui/Input"
+import Select from "@/components/ui/Select"
+import { mockWallet } from "@/lib/mock/data"
+import { formatCurrency, formatDate, det } from "@/lib/utils"
+import { useThemeStore } from "@/lib/store/useThemeStore"
 
-const examResults = Array.from({ length: 12 }, (_, i) => ({
-  id: `r-${i + 1}`,
-  title: ["اختبار النحو الشامل", "امتحان البلاغة", "اختبار النصوص", "امتحان القواعد", "اختبار الإملاء", "امتحان التعبير"][i % 6],
-  course: ["النحو والصرف", "البلاغة والأدب", "النصوص الأدبية", "قواعد النحو المتقدم", "الإملاء والخط", "التعبير والإنشاء"][i % 6],
-  grade: Math.floor(Math.random() * 40) + 55,
-  totalGrade: 100,
-  date: new Date(2026, Math.floor(i / 2), (i % 20) + 1),
-  percentage: Math.floor(Math.random() * 30) + 65,
-  status: Math.random() > 0.15 ? "pass" : "fail",
+const typeConfig: Record<string, { label: string; variant: "success" | "error" | "warning" }> = {
+  deposit: { label: "ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹", variant: "success" },
+  withdrawal: { label: "ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨", variant: "error" },
+  refund: { label: "ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¯", variant: "warning" },
+}
+
+const statusBadge: Record<string, "success" | "warning" | "error"> = {
+  completed: "success",
+  pending: "warning",
+  failed: "error",
+}
+
+const methodLabels: Record<string, string> = {
+  cash: "ط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹",
+  fawry: "ط·آ¸ط¸آ¾ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸ط¸آ¹",
+  bank: "ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ¸ط¦â€™",
+}
+
+const chartData = Array.from({ length: 12 }, (_, i) => ({
+  month: ["ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ·ط¢آ±", "ط·آ¸ط¸آ¾ط·آ·ط¢آ¨ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ·ط¢آ±", "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ³", "ط·آ·ط¢آ¥ط·آ·ط¢آ¨ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ", "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸ط«â€ ", "ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ¸ط«â€ ", "ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸ط«â€ ", "ط·آ·ط¢آ£ط·آ·ط·â€؛ط·آ·ط¢آ³ط·آ·ط¢آ·ط·آ·ط¢آ³", "ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ·ط¢آ±", "ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ±", "ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ·ط¢آ±", "ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ·ط¢آ±"][i],
+  deposits: Math.floor(det() * 15000) + 8000,
+  withdrawals: Math.floor(det() * 10000) + 3000,
 }))
 
-const performanceData = [
-  { month: "يناير", grade: 72 },
-  { month: "فبراير", grade: 78 },
-  { month: "مارس", grade: 65 },
-  { month: "أبريل", grade: 85 },
-  { month: "مايو", grade: 82 },
-  { month: "يونيو", grade: 90 },
-]
+export default function WalletPage() {
+  const { theme } = useThemeStore()
+  const isDark = theme === "dark"
+  const textColor = isDark ? "#CBD5E1" : "#475569"
+  const gridColor = isDark ? "#334155" : "#E2E8F0"
+  const [showDepositModal, setShowDepositModal] = useState(false)
+  const [showWithdrawModal, setShowWithdrawModal] = useState(false)
 
-const certificates = [
-  { id: "cert-1", name: "شهادة إتمام النحو والصرف", date: "يونيو ٢٠٢٦", grade: "ممتاز", percentage: 92 },
-  { id: "cert-2", name: "شهادة إتمام البلاغة والأدب", date: "مايو ٢٠٢٦", grade: "جيد جداً", percentage: 85 },
-  { id: "cert-3", name: "شهادة إتمام النصوص الأدبية", date: "أبريل ٢٠٢٦", grade: "ممتاز", percentage: 95 },
-]
-
-export default function StudentResultsPage() {
-  const [mounted, setMounted] = useState(false)
-  const [sortBy, setSortBy] = useState<"date" | "grade">("date")
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
-
-  const passed = examResults.filter((r) => r.status === "pass").length
-  const avgGrade = Math.round(examResults.reduce((s, r) => s + r.percentage, 0) / examResults.length)
-  const bestGrade = Math.max(...examResults.map((r) => r.percentage))
-
-  const sorted = [...examResults].sort((a, b) =>
-    sortBy === "date" ? b.date.getTime() - a.date.getTime() : b.percentage - a.percentage
-  )
+  const wallet = mockWallet
 
   return (
-    <div className="min-h-screen bg-surface-secondary">
-      <div className="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+    <div className="p-4 md:p-6 space-y-6">
+      <DashboardHeader title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ¸ط¸آ¾ط·آ·ط¢آ¸ط·آ·ط¢آ©" subtitle="ط·آ·ط¢آ¥ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ·ط¢آ©" />
 
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold">النتائج والتقارير</h1>
-          <p className="text-text-secondary text-sm">تابع أداءك ونتائج امتحاناتك</p>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary-dark to-purple-700 p-6 md:p-8"
+      >
+        <div className="absolute top-0 left-0 w-full h-full opacity-10">
+          <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white" />
+          <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white" />
         </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { icon: HiOutlineClipboardCheck, label: "الامتحانات", value: examResults.length, color: "text-primary", bg: "bg-primary/10" },
-            { icon: HiOutlineAcademicCap, label: "الناجحة", value: passed, color: "text-success", bg: "bg-success/10" },
-            { icon: HiOutlineChartBar, label: "متوسط الدرجات", value: `${avgGrade}٪`, color: "text-warning", bg: "bg-warning/10" },
-            { icon: HiOutlineStar, label: "أعلى درجة", value: `${bestGrade}٪`, color: "text-error", bg: "bg-error/10" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="p-5 rounded-xl bg-surface border border-border"
+        <div className="relative z-10">
+          <p className="text-primary-100 text-sm mb-1">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹</p>
+          <p className="text-4xl md:text-5xl font-bold text-white mb-4">
+            {formatCurrency(wallet.balance)}
+          </p>
+          <div className="flex items-center gap-4">
+            <button type="button"`nvariant="secondary"
+              size="sm"
+              leftIcon={<HiOutlinePlus className="w-4 h-4" />}
+              onClick={() => setShowDepositModal(true)}
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30"
             >
-              <div className={`w-10 h-10 rounded-lg ${stat.bg} flex items-center justify-center mb-3`}>
-                <stat.icon className={stat.color} size={20} />
-              </div>
-              <p className="text-2xl font-bold mb-0.5">{stat.value}</p>
-              <p className="text-xs text-text-tertiary">{stat.label}</p>
-            </motion.div>
-          ))}
+              ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹
+            </Button>
+            <button type="button"`nvariant="secondary"
+              size="sm"
+              leftIcon={<HiOutlineMinus className="w-4 h-4" />}
+              onClick={() => setShowWithdrawModal(true)}
+              className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+            >
+              ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨
+            </Button>
+          </div>
         </div>
+      </motion.div>
 
-        {/* Performance Chart */}
-        <div className="p-6 rounded-xl bg-surface border border-border">
-          <h2 className="font-semibold mb-6">الأداء خلال الفصل الدراسي</h2>
-          <div className="h-64">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={formatCurrency(wallet.totalDeposits)} icon={HiOutlineArrowUp} color="success" />
+        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={formatCurrency(wallet.totalWithdrawals)} icon={HiOutlineArrowDown} color="error" />
+        <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©" value={formatCurrency(wallet.pendingWithdrawals)} icon={HiOutlineRefresh} color="warning" />
+        <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©" value={wallet.currency} icon={HiOutlineCash} color="primary" />
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>ط·آ·ط¢آ­ط·آ·ط¢آ±ط·آ¸ط¦â€™ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ©</CardTitle>
+          <Badge variant="primary" size="sm">
+            <HiOutlineTrendingUp className="w-3 h-3 ml-1" />
+            ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾
+          </Badge>
+        </CardHeader>
+        <CardContent>
+          <div dir="ltr" className="h-72">
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={performanceData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                <XAxis dataKey="month" stroke="var(--color-text-tertiary)" fontSize={12} />
-                <YAxis stroke="var(--color-text-tertiary)" fontSize={12} domain={[0, 100]} />
-                <Tooltip contentStyle={{ background: "var(--color-surface)", border: "1px solid var(--color-border)", borderRadius: "12px", color: "var(--color-text)" }} />
-                <Line type="monotone" dataKey="grade" stroke="var(--color-primary)" strokeWidth={2} dot={{ fill: "var(--color-primary)", strokeWidth: 2 }} />
-              </LineChart>
+              <AreaChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
+                <defs>
+                  <linearGradient id="depositGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#10B981" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
+                  </linearGradient>
+                  <linearGradient id="withdrawGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#EF4444" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#EF4444" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
+                <XAxis dataKey="month" tick={{ fill: textColor, fontSize: 11 }} axisLine={{ stroke: gridColor }} tickLine={false} />
+                <YAxis tick={{ fill: textColor, fontSize: 12 }} axisLine={false} tickLine={false} />
+                <Tooltip
+                  contentStyle={{
+                    background: isDark ? "#1E293B" : "#FFFFFF",
+                    border: `1px solid ${gridColor}`,
+                    borderRadius: "8px",
+                    color: isDark ? "#F8FAFC" : "#0F172A",
+                    fontSize: "13px",
+                  }}
+                  formatter={(value: number | null) => { if (value == null) return []; return [formatCurrency(Number(value)), ""] }}
+                />
+                <Area type="monotone" dataKey="deposits" stroke="#10B981" strokeWidth={2} fill="url(#depositGradient)" name="ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
+                <Area type="monotone" dataKey="withdrawals" stroke="#EF4444" strokeWidth={2} fill="url(#withdrawGradient)" name="ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
+              </AreaChart>
             </ResponsiveContainer>
           </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="grid lg:grid-cols-3 gap-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>ط·آ·ط¢آ¢ط·آ·ط¢آ®ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾</CardTitle>
+        </CardHeader>
+        <CardContent className="p-0">
+          <Table
+            columns={[
+              { key: "type", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ·ط¢آ¹", render: (t) => {
+                const config = typeConfig[t.type]
+                return <Badge variant={config.variant} size="sm">{config.label}</Badge>
+              }},
+              { key: "amount", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛", render: (t) => (
+                <span className={`font-medium ${t.type === "deposit" ? "text-success" : "text-error"}`}>
+                  {t.type === "deposit" ? "+" : "-"}{formatCurrency(t.amount)}
+                </span>
+              )},
+              { key: "description", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آµط·آ¸ط¸آ¾" },
+              { key: "paymentMethod", header: "ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹", render: (t) => (
+                <Badge variant="neutral" size="sm">{methodLabels[t.paymentMethod] || t.paymentMethod}</Badge>
+              )},
+              { key: "status", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©", render: (t) => (
+                <Badge variant={statusBadge[t.status]}>
+                  {t.status === "completed" ? "ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¦â€™ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ" : t.status === "pending" ? "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘" : "ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¢آ´ط·آ¸أ¢â‚¬â€چ"}
+                </Badge>
+              )},
+              { key: "createdAt", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ®", render: (t) => (
+                <span className="text-sm text-text-tertiary">{formatDate(t.createdAt)}</span>
+              )},
+            ]}
+            data={wallet.transactions}
+          />
+        </CardContent>
+      </Card>
 
-          {/* Exam Results Table */}
-          <div className="lg:col-span-2 p-6 rounded-xl bg-surface border border-border">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold">نتائج الامتحانات</h2>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-3 py-1.5 rounded-lg border border-border bg-surface text-xs focus:outline-none"
-              >
-                <option value="date">الأحدث</option>
-                <option value="grade">الأعلى درجة</option>
-              </select>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-right p-3 font-medium text-text-secondary">الامتحان</th>
-                    <th className="text-right p-3 font-medium text-text-secondary">الكورس</th>
-                    <th className="text-center p-3 font-medium text-text-secondary">الدرجة</th>
-                    <th className="text-center p-3 font-medium text-text-secondary">النسبة</th>
-                    <th className="text-center p-3 font-medium text-text-secondary">التاريخ</th>
-                    <th className="text-center p-3 font-medium text-text-secondary">الحالة</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sorted.slice(0, 8).map((r, i) => (
-                    <tr key={r.id} className="border-b border-border last:border-0 hover:bg-surface-secondary/50 transition-colors">
-                      <td className="p-3 font-medium">{r.title}</td>
-                      <td className="p-3 text-text-secondary text-xs">{r.course}</td>
-                      <td className="p-3 text-center font-medium">{r.grade}<span className="text-text-tertiary text-xs">/{r.totalGrade}</span></td>
-                      <td className="p-3 text-center">
-                        <span className={`font-medium ${r.percentage >= 80 ? "text-success" : r.percentage >= 50 ? "text-warning" : "text-error"}`}>
-                          {r.percentage}٪
-                        </span>
-                      </td>
-                      <td className="p-3 text-center text-text-secondary text-xs">{r.date.toLocaleDateString("ar-EG")}</td>
-                      <td className="p-3 text-center">
-                        <span className={`px-2 py-0.5 rounded-lg text-xs font-medium ${
-                          r.status === "pass" ? "bg-success/10 text-success" : "bg-error/10 text-error"
-                        }`}>
-                          {r.status === "pass" ? "ناجح" : "راسب"}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Certificates */}
-          <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-surface border border-border">
-              <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <HiOutlineStar className="text-primary" size={16} />
-                الشهادات
-              </h3>
-              <div className="space-y-3">
-                {certificates.map((cert) => (
-                  <div key={cert.id} className="p-4 rounded-xl bg-gradient-to-br from-primary/5 to-surface border border-primary/20">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <p className="text-sm font-medium">{cert.name}</p>
-                        <p className="text-xs text-text-tertiary">{cert.date}</p>
-                      </div>
-                      <span className="px-2 py-0.5 rounded-lg bg-success/10 text-success text-xs font-medium">{cert.grade}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-text-secondary">{cert.percentage}٪</span>
-                      <button className="flex items-center gap-1 text-xs text-primary hover:underline">
-                        <HiOutlineDownload size={14} /> تحميل
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-5 rounded-xl bg-surface border border-border">
-              <h3 className="font-semibold mb-3">نظرة عامة</h3>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">عدد الامتحانات</span>
-                  <span className="font-medium">{examResults.length}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">الناجحة</span>
-                  <span className="font-medium text-success">{passed}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">الراسبة</span>
-                  <span className="font-medium text-error">{examResults.length - passed}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">نسبة النجاح</span>
-                  <span className="font-medium">{Math.round((passed / examResults.length) * 100)}٪</span>
-                </div>
-              </div>
-            </div>
+      <Modal isOpen={showDepositModal} onClose={() => setShowDepositModal(false)} title="ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ ط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯" subtitle="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ ط·آ¸ط«â€ ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" size="md">
+        <div className="space-y-4">
+          <Input label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" type="number" placeholder="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" leftIcon={<HiOutlineCash className="w-4 h-4" />} />
+          <Select label="ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" options={[
+            { value: "cash", label: "ط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹" },
+            { value: "fawry", label: "ط·آ¸ط¸آ¾ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸ط¸آ¹" },
+            { value: "bank", label: "ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ¸ط¦â€™ط·آ¸ط¸آ¹" },
+          ]} placeholder="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" />
+          <Input label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ¹ (ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹)" placeholder="ط·آ·ط¢آ±ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ¹ ط·آ·ط¢آ£ط·آ¸ط«â€  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ" />
+          <div className="pt-4 flex gap-3">
+            <button type="button" variant="primary" size="lg" className="flex-1">ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowDepositModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
           </div>
         </div>
-      </div>
+      </Modal>
+
+      <Modal isOpen={showWithdrawModal} onClose={() => setShowWithdrawModal(false)} title="ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨ ط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯" subtitle="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬طŒ" size="md">
+        <div className="space-y-4">
+          <Input label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" type="number" placeholder="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" leftIcon={<HiOutlineCash className="w-4 h-4" />} />
+          <Select label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ©" options={[
+            { value: "bank", label: "ط·آ·ط¢آ­ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ¨ ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ¸ط¦â€™ط·آ¸ط¸آ¹" },
+            { value: "cash", label: "ط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ·ط¢آ´" },
+          ]} placeholder="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨" />
+          <Input label="ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ¸ط·آ·ط¢آ§ط·آ·ط¹آ¾ (ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹)" placeholder="ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ¸ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ©" />
+          <div className="p-3 rounded-xl bg-warning/10 border border-warning/20 text-sm text-warning">
+            ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹: {formatCurrency(wallet.balance)}
+          </div>
+          <div className="pt-4 flex gap-3">
+            <button type="button" variant="primary" size="lg" className="flex-1">ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowWithdrawModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }

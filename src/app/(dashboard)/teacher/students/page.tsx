@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import Link from "next/link"
 import { motion } from "framer-motion"
 import {
   HiOutlineSearch,
@@ -15,6 +16,7 @@ import {
   HiOutlineUsers,
   HiOutlineAcademicCap,
   HiOutlineStar,
+  HiOutlineUserAdd,
 } from "react-icons/hi"
 import DashboardHeader from "@/components/layout/DashboardHeader"
 import { Badge } from "@/components/ui/Badge"
@@ -23,8 +25,14 @@ import { Modal } from "@/components/ui/Modal"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Pagination } from "@/components/ui/Pagination"
 import { SearchInput } from "@/components/ui/SearchInput"
+import { BulkActions } from "@/components/student/BulkActions"
+import Button from "@/components/ui/Button"
+import Input from "@/components/ui/Input"
+import Select from "@/components/ui/Select"
 import { mockStudents } from "@/lib/mock/data"
-import { cn } from "@/lib/utils"
+import { EmptyState } from "@/components/ui/EmptyState"
+import { cn, generateId } from "@/lib/utils"
+import toast from "react-hot-toast"
 
 const statusBadge: Record<string, "success" | "warning" | "error" | "neutral"> = {
   active: "success",
@@ -60,17 +68,21 @@ export default function StudentsPage() {
   const [statusFilter, setStatusFilter] = useState("الكل")
   const [govFilter, setGovFilter] = useState("الكل")
   const [page, setPage] = useState(1)
+  const [students, setStudents] = useState(mockStudents)
   const [selectedStudent, setSelectedStudent] = useState<(typeof mockStudents)[0] | null>(null)
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [showCreateModal, setShowCreateModal] = useState(false)
+  const [createForm, setCreateForm] = useState({ name: "", email: "", phone: "", grade: "", parentName: "", parentPhone: "" })
 
   const stats = useMemo(() => ({
-    total: mockStudents.length,
-    active: mockStudents.filter((s) => s.status === "active").length,
-    expired: mockStudents.filter((s) => s.status === "expired").length,
-    inactive: mockStudents.filter((s) => s.status === "inactive").length,
-  }), [])
+    total: students.length,
+    active: students.filter((s) => s.status === "active").length,
+    expired: students.filter((s) => s.status === "expired").length,
+    inactive: students.filter((s) => s.status === "inactive").length,
+  }), [students])
 
   const filtered = useMemo(() => {
-    return mockStudents.filter((s) => {
+    return students.filter((s) => {
       const matchSearch = s.name.includes(search) || s.phone.includes(search)
       const matchGrade = gradeFilter === "الكل" || s.grade === gradeFilter
       const matchGroup = groupFilter === "الكل" || s.group === groupFilter
@@ -78,7 +90,7 @@ export default function StudentsPage() {
       const matchGov = govFilter === "الكل" || s.governorate === govFilter
       return matchSearch && matchGrade && matchGroup && matchStatus && matchGov
     })
-  }, [search, gradeFilter, groupFilter, statusFilter, govFilter])
+  }, [search, gradeFilter, groupFilter, statusFilter, govFilter, students])
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
@@ -94,9 +106,22 @@ export default function StudentsPage() {
         <StatsCard title="غير نشط" value={stats.inactive} icon={HiOutlineUserGroup} color="warning" />
       </div>
 
+      <BulkActions
+        selectedCount={selectedIds.size}
+        onClear={() => setSelectedIds(new Set())}
+        onMoveToGroup={(g) => { toast.success(`تم نقل ${selectedIds.size} طالب إلى المجموعة ${g}`); setSelectedIds(new Set()) }}
+        onChangeStatus={(s) => { toast.success(`تم تغيير حالة ${selectedIds.size} طالب`); setSelectedIds(new Set()) }}
+        onSendMessage={() => toast.success("تم إرسال الرسالة بنجاح")}
+        onPrint={() => toast.success("جاري تجهيز الطباعة")}
+        onExportExcel={() => toast.success("جاري تصدير البيانات")}
+      />
+
       <div className="flex flex-col md:flex-row gap-3">
-        <div className="flex-1">
+        <div className="flex-1 flex items-center gap-3">
           <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="بحث بالاسم أو رقم الهاتف..." />
+          <Button variant="primary" leftIcon={<HiOutlineUserAdd size={18} />} onClick={() => setShowCreateModal(true)}>
+            إضافة طالب جديد
+          </Button>
         </div>
         <div className="flex flex-wrap gap-3">
           <select value={gradeFilter} onChange={(e) => { setGradeFilter(e.target.value); setPage(1) }}
@@ -118,63 +143,150 @@ export default function StudentsPage() {
         </div>
       </div>
 
-      <Table
-        columns={[
-          { key: "name", header: "الطالب", render: (s) => (
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-primary/10 overflow-hidden shrink-0">
-                <img src={s.avatar} alt="" className="w-full h-full object-cover" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm font-medium text-text truncate">{s.name}</p>
-                <p className="text-xs text-text-tertiary truncate">{s.email}</p>
-              </div>
-            </div>
-          )},
-          { key: "phone", header: "رقم الهاتف", render: (s) => (
-            <div className="flex items-center gap-1.5 text-sm text-text-secondary" dir="ltr">
-              <HiOutlinePhone size={14} className="text-text-tertiary shrink-0" />
-              <span>{s.phone}</span>
-            </div>
-          )},
-          { key: "grade", header: "الصف" },
-          { key: "group", header: "المجموعة" },
-          { key: "status", header: "الحالة", render: (s) => (
-            <Badge variant={statusBadge[s.status] || "neutral"}>{statusLabels[s.status] || s.status}</Badge>
-          )},
-          { key: "subscription", header: "الاشتراك", render: (s) => (
-            <Badge variant={subscriptionBadge[s.subscription.status] || "neutral"} size="sm">
-              {s.subscription.status === "active" ? "نشط" : s.subscription.status === "expired" ? "منتهي" : "معلق"}
-            </Badge>
-          )},
-          { key: "xp", header: "النقاط/المستوى", render: (s) => (
-            <div className="flex items-center gap-1.5 text-sm">
-              <HiOutlineStar size={14} className="text-warning" />
-              <span className="font-medium text-text">{s.xp} XP</span>
-              <span className="text-text-tertiary">مستوى {s.level}</span>
-            </div>
-          )},
-          { key: "actions", header: "", render: (s) => (
-            <div className="flex items-center gap-1">
-              <button onClick={() => setSelectedStudent(s)} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="عرض">
-                <HiOutlineEye size={16} />
-              </button>
-              <button className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="تعديل">
-                <HiOutlinePencil size={16} />
-              </button>
-              <button className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="حذف">
-                <HiOutlineTrash size={16} />
-              </button>
-            </div>
-          )},
-        ]}
-        data={paginated}
-        onRowClick={(s) => setSelectedStudent(s)}
-      />
+      {filtered.length === 0 ? (
+        <EmptyState
+          icon={HiOutlineUsers}
+          title="لا يوجد طلاب"
+          description="لم يتم العثور على طلاب مطابقين لمعايير البحث"
+        />
+      ) : (
+        <>
+          <Table
+            columns={[
+              { key: "select", header: "", render: (s) => (
+                <div className="flex items-center justify-center" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.has(s.id)}
+                    onChange={() => {
+                      const next = new Set(selectedIds)
+                      if (next.has(s.id)) next.delete(s.id)
+                      else next.add(s.id)
+                      setSelectedIds(next)
+                    }}
+                    className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer"
+                  />
+                </div>
+              )},
+              { key: "name", header: "الطالب", render: (s) => (
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-primary/10 overflow-hidden shrink-0">
+                    <img src={s.avatar} alt="" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-text truncate">{s.name}</p>
+                    <p className="text-xs text-text-tertiary truncate">{s.email}</p>
+                  </div>
+                </div>
+              )},
+              { key: "phone", header: "رقم الهاتف", render: (s) => (
+                <div className="flex items-center gap-1.5 text-sm text-text-secondary" dir="ltr">
+                  <HiOutlinePhone size={14} className="text-text-tertiary shrink-0" />
+                  <span>{s.phone}</span>
+                </div>
+              )},
+              { key: "grade", header: "الصف" },
+              { key: "group", header: "المجموعة" },
+              { key: "status", header: "الحالة", render: (s) => (
+                <Badge variant={statusBadge[s.status] || "neutral"}>{statusLabels[s.status] || s.status}</Badge>
+              )},
+              { key: "subscription", header: "الاشتراك", render: (s) => (
+                <Badge variant={subscriptionBadge[s.subscription.status] || "neutral"} size="sm">
+                  {s.subscription.status === "active" ? "نشط" : s.subscription.status === "expired" ? "منتهي" : "معلق"}
+                </Badge>
+              )},
+              { key: "xp", header: "النقاط/المستوى", render: (s) => (
+                <div className="flex items-center gap-1.5 text-sm">
+                  <HiOutlineStar size={14} className="text-warning" />
+                  <span className="font-medium text-text">{s.xp} XP</span>
+                  <span className="text-text-tertiary">مستوى {s.level}</span>
+                </div>
+              )},
+              { key: "actions", header: "", render: (s) => (
+                <div className="flex items-center gap-1">
+                  <Link href={`/teacher/students/${s.id}`}>
+                    <button type="button" className="px-2.5 py-1.5 text-xs font-medium text-primary bg-primary/5 hover:bg-primary/10 rounded-lg transition-colors" title="عرض الملف">
+                      عرض الملف
+                    </button>
+                  </Link>
+                  <button type="button" onClick={() => setSelectedStudent(s)} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="عرض">
+                    <HiOutlineEye size={16} />
+                  </button>
+                  <button type="button" className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="تعديل">
+                    <HiOutlinePencil size={16} />
+                  </button>
+                  <button type="button" className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="حذف">
+                    <HiOutlineTrash size={16} />
+                  </button>
+                </div>
+              )},
+            ]}
+            data={paginated}
+            onRowClick={(s) => setSelectedStudent(s)}
+          />
 
-      {totalPages > 1 && (
-        <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+          {totalPages > 1 && (
+            <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
+          )}
+        </>
       )}
+
+      <Modal isOpen={showCreateModal} onClose={() => setShowCreateModal(false)} title="إضافة طالب جديد" id="createStudentModal">
+        <div className="space-y-4">
+          <Input label="اسم الطالب" value={createForm.name} onChange={(e) => setCreateForm({ ...createForm, name: e.target.value })} placeholder="أدخل اسم الطالب" />
+          <div className="grid grid-cols-2 gap-3">
+            <Input label="البريد الإلكتروني" value={createForm.email} onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })} placeholder="البريد الإلكتروني" />
+            <Input label="رقم الهاتف" value={createForm.phone} onChange={(e) => setCreateForm({ ...createForm, phone: e.target.value })} placeholder="رقم الهاتف" />
+          </div>
+          <Select
+            label="الصف الدراسي"
+            options={["أولى ثانوي", "ثانية ثانوي", "ثالثة ثانوي"].map((g) => ({ value: g, label: g }))}
+            value={createForm.grade}
+            onChange={(e) => setCreateForm({ ...createForm, grade: e.target.value })}
+            placeholder="اختر الصف"
+          />
+          <div className="grid grid-cols-2 gap-3">
+            <Input label="اسم ولي الأمر" value={createForm.parentName} onChange={(e) => setCreateForm({ ...createForm, parentName: e.target.value })} placeholder="اسم ولي الأمر" />
+            <Input label="رقم ولي الأمر" value={createForm.parentPhone} onChange={(e) => setCreateForm({ ...createForm, parentPhone: e.target.value })} placeholder="رقم ولي الأمر" />
+          </div>
+          <div className="flex gap-3 pt-2">
+            <Button variant="primary" className="flex-1" onClick={() => {
+              const newStudent = {
+                id: generateId(),
+                name: createForm.name,
+                email: createForm.email,
+                phone: createForm.phone,
+                parentPhone: createForm.parentPhone,
+                avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${generateId()}`,
+                grade: createForm.grade,
+                group: "",
+                school: "",
+                governorate: "",
+                city: "",
+                gender: "male" as const,
+                birthDate: new Date(),
+                status: "active" as const,
+                subscription: {
+                  status: "active" as const,
+                  planName: "",
+                  startDate: new Date(),
+                  endDate: new Date(),
+                },
+                xp: 0,
+                level: 1,
+                streak: 0,
+              }
+              setStudents((prev) => [newStudent, ...prev])
+              setShowCreateModal(false)
+              setCreateForm({ name: "", email: "", phone: "", grade: "", parentName: "", parentPhone: "" })
+              toast.success("تم إضافة الطالب بنجاح")
+            }}>
+              إضافة طالب جديد
+            </Button>
+            <Button variant="secondary" onClick={() => setShowCreateModal(false)}>إلغاء</Button>
+          </div>
+        </div>
+      </Modal>
 
       <Modal isOpen={!!selectedStudent} onClose={() => setSelectedStudent(null)} title="بيانات الطالب" size="lg">
         {selectedStudent && (
@@ -233,10 +345,10 @@ export default function StudentsPage() {
             </div>
 
             <div className="flex items-center gap-4 pt-2">
-              <button className="flex-1 px-4 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary-dark transition-colors">
+              <button type="button" className="flex-1 px-4 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary-dark transition-colors">
                 تعديل بيانات الطالب
               </button>
-              <button className="px-4 py-2.5 border border-border text-text-secondary text-sm font-medium rounded-xl hover:bg-surface-tertiary transition-colors">
+              <button type="button" className="px-4 py-2.5 border border-border text-text-secondary text-sm font-medium rounded-xl hover:bg-surface-tertiary transition-colors">
                 إرسال رسالة
               </button>
             </div>

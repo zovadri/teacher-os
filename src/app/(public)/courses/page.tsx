@@ -82,7 +82,7 @@ export default function CoursesPage() {
       <section className="sticky top-20 z-30 bg-surface/80 backdrop-blur border-b border-border">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
           <div className="flex flex-wrap items-center gap-4">
-            <button onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-surface-tertiary text-text-secondary hover:bg-primary/10 hover:text-primary transition-all">
+            <button type="button" onClick={() => setShowFilters(!showFilters)} className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-surface-tertiary text-text-secondary hover:bg-primary/10 hover:text-primary transition-all">
               <HiAdjustments size={14} /> {showFilters ? "إخفاء الفلتر" : "فلتر"}
             </button>
             <div className="flex items-center gap-2 text-sm text-text-tertiary mr-auto">
@@ -102,12 +102,12 @@ export default function CoursesPage() {
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-border">
               <HiFilter className="text-text-tertiary" size={16} />
               {grades.map((g) => (
-                <button key={g} onClick={() => setActiveGrade(g)} className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${activeGrade === g ? "bg-primary text-white" : "bg-surface-tertiary text-text-secondary hover:bg-primary/10"}`}>
+                <button type="button" key={g} onClick={() => setActiveGrade(g)} className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${activeGrade === g ? "bg-primary text-white" : "bg-surface-tertiary text-text-secondary hover:bg-primary/10"}`}>
                   {g}
                 </button>
               ))}
               {["published", "coming-soon"].map((s) => (
-                <button key={s} onClick={() => {}} className="px-3 py-1.5 text-xs font-medium rounded-lg bg-surface-tertiary text-text-secondary opacity-50 cursor-not-allowed">
+                <button type="button" key={s} onClick={() => {}} className="px-3 py-1.5 text-xs font-medium rounded-lg bg-surface-tertiary text-text-secondary opacity-50 cursor-not-allowed">
                   {s === "published" ? "المنشورة" : "القادمة"}
                 </button>
               ))}
@@ -171,7 +171,7 @@ export default function CoursesPage() {
             <div className="text-center py-20">
               <HiAcademicCap className="mx-auto text-text-tertiary mb-4" size={48} />
               <p className="text-text-secondary mb-2">لا توجد كورسات تطابق بحثك.</p>
-              <button onClick={() => { setSearchQuery(""); setActiveGrade("الكل") }} className="text-primary text-sm font-medium hover:underline">إعادة ضبط الفلتر</button>
+              <button type="button" onClick={() => { setSearchQuery(""); setActiveGrade("الكل") }} className="text-primary text-sm font-medium hover:underline">إعادة ضبط الفلتر</button>
             </div>
           )}
         </div>

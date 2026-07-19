@@ -47,7 +47,7 @@ export default function StaffManagePage() {
             <h1 className="text-2xl md:text-3xl font-bold">إدارة الموظفين</h1>
             <p className="text-text-secondary text-sm">إدارة صلاحيات وحسابات الموظفين</p>
           </div>
-          <button
+          <button type="button"
             onClick={() => setShowAddModal(true)}
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary-dark transition-all"
           >
@@ -117,10 +117,10 @@ export default function StaffManagePage() {
                       </td>
                       <td className="p-4 text-center">
                         <div className="flex items-center justify-center gap-1">
-                          <button className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-secondary hover:text-warning transition-colors">
+                          <button type="button" className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-secondary hover:text-warning transition-colors">
                             <HiOutlinePencil size={14} />
                           </button>
-                          <button className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-secondary hover:text-error transition-colors">
+                          <button type="button" className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-secondary hover:text-error transition-colors">
                             <HiOutlineTrash size={14} />
                           </button>
                         </div>
@@ -217,13 +217,13 @@ export default function StaffManagePage() {
                 </div>
               </div>
               <div className="flex gap-3 mt-6">
-                <button
+                <button type="button"
                   onClick={() => setShowAddModal(false)}
                   className="flex-1 py-2.5 rounded-xl border border-border text-sm font-medium hover:bg-surface-secondary transition-colors"
                 >
                   إلغاء
                 </button>
-                <button className="flex-1 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors">
+                <button type="button" className="flex-1 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors">
                   إضافة
                 </button>
               </div>

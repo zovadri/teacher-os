@@ -128,7 +128,7 @@ export default function ParentPaymentsPage() {
                     </td>
                     <td className="p-4 text-center text-text-secondary text-xs">{p.date.toLocaleDateString("ar-EG")}</td>
                     <td className="p-4 text-center">
-                      <button className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-secondary hover:text-primary transition-colors">
+                      <button type="button" className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-secondary hover:text-primary transition-colors">
                         <HiOutlineDownload size={16} />
                       </button>
                     </td>

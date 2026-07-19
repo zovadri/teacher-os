@@ -12,8 +12,9 @@ import {
   HiOutlineUsers,
   HiOutlineChevronDown,
 } from "react-icons/hi"
+import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import DashboardHeader from "@/components/layout/DashboardHeader"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/Card"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
 import Button from "@/components/ui/Button"
@@ -23,47 +24,49 @@ import Select from "@/components/ui/Select"
 import { SearchInput } from "@/components/ui/SearchInput"
 import { mockGamificationConfig, mockStudentXpData } from "@/lib/mock/data"
 import { cn } from "@/lib/utils"
+import toast from "react-hot-toast"
 
 const allBadges = mockGamificationConfig.badgeCategories.flatMap((cat) =>
-  cat.badges.map((name) => ({
+  cat.badges.map((name, bi) => ({
     id: `badge-${cat.id}-${name}`,
     name,
     category: cat.name,
     categoryIcon: cat.icon,
-    xpReward: Math.floor(Math.random() * 200) + 50,
-    criteria: ["إكمال 10 دروس", "الحصول على 95%", "المشاركة في 5 مناقشات", "تسلسل 20 يوم"][Math.floor(Math.random() * 4)],
-    studentsCount: Math.floor(Math.random() * 30) + 5,
-    icon: ["📖", "📅", "🎯", "🤝", "👑"][Math.floor(Math.random() * 5)],
+    xpReward: [150, 200, 100, 250, 80][bi % 5],
+    criteria: ["ط¥ظƒظ…ط§ظ„ 10 ط¯ط±ظˆط³", "ط§ظ„ط­طµظˆظ„ ط¹ظ„ظ‰ 95%", "ط§ظ„ظ…ط´ط§ط±ظƒط© ظپظٹ 5 ظ…ظ†ط§ظ‚ط´ط§طھ", "طھط³ظ„ط³ظ„ 20 ظٹظˆظ…"][bi % 4],
+    studentsCount: [15, 22, 30, 8, 18][bi % 5],
+    icon: ["ًں“–", "ًں“…", "ًںژ¯", "ًں¤‌", "ًں‘‘"][bi % 5],
   }))
 )
 
 const mockStudentsWhoEarned: Record<string, { id: string; name: string; date: string }[]> = {}
-allBadges.forEach((b) => {
-  mockStudentsWhoEarned[b.id] = mockStudentXpData.slice(0, Math.floor(Math.random() * 8) + 1).map((s) => ({
+allBadges.forEach((b, bi) => {
+  const count = [1, 3, 5, 7, 2][bi % 5]
+  mockStudentsWhoEarned[b.id] = mockStudentXpData.slice(0, count).map((s, si) => ({
     id: s.studentId,
     name: s.studentName,
-    date: new Date(Date.now() - Math.random() * 86400000 * 30).toLocaleDateString("ar-EG"),
+    date: new Date(Date.now() - si * 86400000 * 3).toLocaleDateString("ar-EG"),
   }))
 })
 
 const iconOptions = [
-  { value: "📖", label: "📖 كتاب" },
-  { value: "📅", label: "📅 تقويم" },
-  { value: "🎯", label: "🎯 هدف" },
-  { value: "🤝", label: "🤝 مصافحة" },
-  { value: "👑", label: "👑 تاج" },
-  { value: "🔥", label: "🔥 نار" },
-  { value: "⭐", label: "⭐ نجمة" },
-  { value: "💪", label: "💪 قوة" },
-  { value: "🏅", label: "🏅 وسام" },
-  { value: "🚀", label: "🚀 صاروخ" },
+  { value: "ًں“–", label: "ًں“– ظƒطھط§ط¨" },
+  { value: "ًں“…", label: "ًں“… طھظ‚ظˆظٹظ…" },
+  { value: "ًںژ¯", label: "ًںژ¯ ظ‡ط¯ظپ" },
+  { value: "ًں¤‌", label: "ًں¤‌ ظ…طµط§ظپط­ط©" },
+  { value: "ًں‘‘", label: "ًں‘‘ طھط§ط¬" },
+  { value: "ًں”¥", label: "ًں”¥ ظ†ط§ط±" },
+  { value: "â­گ", label: "â­گ ظ†ط¬ظ…ط©" },
+  { value: "ًں’ھ", label: "ًں’ھ ظ‚ظˆط©" },
+  { value: "ًںڈ…", label: "ًںڈ… ظˆط³ط§ظ…" },
+  { value: "ًںڑ€", label: "ًںڑ€ طµط§ط±ظˆط®" },
 ]
 
 export default function BadgesPage() {
   const [search, setSearch] = useState("")
   const [showCreate, setShowCreate] = useState(false)
   const [expandedBadge, setExpandedBadge] = useState<string | null>(null)
-  const [newBadge, setNewBadge] = useState({ name: "", icon: "🏅", category: "أكاديمي", xpReward: 100, criteria: "" })
+  const [newBadge, setNewBadge] = useState({ name: "", icon: "ًںڈ…", category: "ط£ظƒط§ط¯ظٹظ…ظٹ", xpReward: 100, criteria: "" })
 
   const stats = useMemo(() => ({
     total: allBadges.length,
@@ -78,18 +81,19 @@ export default function BadgesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة الشارات" subtitle="إنشاء وتعديل الشارات والمكافآت" />
+      <Breadcrumb items={[{ label: "الألعاب", href: "/teacher/gamification" }, { label: "الشارات" }]} />
+      <DashboardHeader title="ط¥ط¯ط§ط±ط© ط§ظ„ط´ط§ط±ط§طھ" subtitle="ط¥ظ†ط´ط§ط، ظˆطھط¹ط¯ظٹظ„ ط§ظ„ط´ط§ط±ط§طھ ظˆط§ظ„ظ…ظƒط§ظپط¢طھ" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
-        <StatsCard title="إجمالي الشارات" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />
-        <StatsCard title="التصنيفات" value={stats.categories} icon={HiOutlineCollection} color="info" />
-        <StatsCard title="تم إصدارها" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
+        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط´ط§ط±ط§طھ" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />
+        <StatsCard title="ط§ظ„طھطµظ†ظٹظپط§طھ" value={stats.categories} icon={HiOutlineCollection} color="info" />
+        <StatsCard title="طھظ… ط¥طµط¯ط§ط±ظ‡ط§" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
       </motion.div>
 
       <div className="flex items-center justify-between">
-        <SearchInput value={search} onChange={setSearch} placeholder="بحث عن شارة..." className="max-w-xs" />
-        <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreate(true)}>
-          إضافة شارة جديدة
+        <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ط´ط§ط±ط©..." className="max-w-xs" />
+        <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreate(true)}>
+          ط¥ط¶ط§ظپط© ط´ط§ط±ط© ط¬ط¯ظٹط¯ط©
         </Button>
       </div>
 
@@ -114,8 +118,8 @@ export default function BadgesPage() {
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
-                  <button className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
+                  <button type="button" onClick={() => toast.success("تم تعديل الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
+                  <button type="button" onClick={() => toast.success("تم حذف الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
                 </div>
               </div>
 
@@ -128,12 +132,12 @@ export default function BadgesPage() {
               </div>
 
               <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
-                <span className="text-xs text-text-secondary"><HiOutlineUsers className="w-3.5 h-3.5 inline ml-1" />{badge.studentsCount} طالب</span>
-                <button
+                <span className="text-xs text-text-secondary"><HiOutlineUsers className="w-3.5 h-3.5 inline ml-1" />{badge.studentsCount} ط·ط§ظ„ط¨</span>
+                <button type="button"
                   onClick={() => setExpandedBadge(expandedBadge === badge.id ? null : badge.id)}
                   className="flex items-center gap-1 text-xs text-primary hover:text-primary-dark transition-colors"
                 >
-                  عرض الحاصلين
+                  ط¹ط±ط¶ ط§ظ„ط­ط§طµظ„ظٹظ†
                   <HiOutlineChevronDown className={cn("w-3 h-3 transition-transform", expandedBadge === badge.id && "rotate-180")} />
                 </button>
               </div>
@@ -155,41 +159,41 @@ export default function BadgesPage() {
         ))}
       </div>
 
-      <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="إنشاء شارة جديدة" size="lg">
+      <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="ط¥ظ†ط´ط§ط، ط´ط§ط±ط© ط¬ط¯ظٹط¯ط©" size="lg">
         <div className="space-y-4">
           <Input
-            label="اسم الشارة"
+            label="ط§ط³ظ… ط§ظ„ط´ط§ط±ط©"
             value={newBadge.name}
             onChange={(e) => setNewBadge({ ...newBadge, name: e.target.value })}
-            placeholder="أدخل اسم الشارة"
+            placeholder="ط£ط¯ط®ظ„ ط§ط³ظ… ط§ظ„ط´ط§ط±ط©"
           />
           <Select
-            label="الأيقونة"
+            label="ط§ظ„ط£ظٹظ‚ظˆظ†ط©"
             options={iconOptions}
             value={newBadge.icon}
             onChange={(e) => setNewBadge({ ...newBadge, icon: e.target.value })}
           />
           <Select
-            label="التصنيف"
+            label="ط§ظ„طھطµظ†ظٹظپ"
             options={mockGamificationConfig.badgeCategories.map((c) => ({ value: c.name, label: `${c.icon} ${c.name}` }))}
             value={newBadge.category}
             onChange={(e) => setNewBadge({ ...newBadge, category: e.target.value })}
           />
           <Input
-            label="مكافأة XP"
+            label="ظ…ظƒط§ظپط£ط© XP"
             type="number"
             value={newBadge.xpReward}
             onChange={(e) => setNewBadge({ ...newBadge, xpReward: Number(e.target.value) })}
           />
           <Input
-            label="معيار الحصول"
+            label="ظ…ط¹ظٹط§ط± ط§ظ„ط­طµظˆظ„"
             value={newBadge.criteria}
             onChange={(e) => setNewBadge({ ...newBadge, criteria: e.target.value })}
-            placeholder="مثال: إكمال 10 دروس"
+            placeholder="ظ…ط«ط§ظ„: ط¥ظƒظ…ط§ظ„ 10 ط¯ط±ظˆط³"
           />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1">إنشاء الشارة</Button>
-            <Button variant="secondary" onClick={() => setShowCreate(false)}>إلغاء</Button>
+            <button type="button" variant="primary" className="flex-1" onClick={() => { setShowCreate(false); toast.success("تم إنشاء الشارة بنجاح") }}>ط¥ظ†ط´ط§ط، ط§ظ„ط´ط§ط±ط©</Button>
+            <Button variant="secondary" onClick={() => setShowCreate(false)}>ط¥ظ„ط؛ط§ط،</Button>
           </div>
         </div>
       </Modal>

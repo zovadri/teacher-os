@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
+import toast from "react-hot-toast"
+import Link from "next/link"
 import {
   HiOutlineCurrencyDollar,
   HiOutlineUserGroup,
@@ -20,6 +22,7 @@ import { Badge } from "@/components/ui/Badge"
 import { Table } from "@/components/ui/Table"
 import Button from "@/components/ui/Button"
 import { mockSubscriptionPlans, mockPayments, mockStudents } from "@/lib/mock/data"
+import { EmptyState } from "@/components/ui/EmptyState"
 import { formatCurrency } from "@/lib/utils"
 
 const paymentStatusBadge: Record<string, "success" | "warning" | "error" | "info"> = {
@@ -86,30 +89,59 @@ export default function SubscriptionsPage() {
           <>
             <TabPanel id="subscriptions" activeTab={active}>
               <Card>
-                <Table
-                  columns={[
-                    { key: "studentName", header: "الطالب" },
-                    { key: "planName", header: "الباقة" },
-                    { key: "startDate", header: "تاريخ البداية", render: (s) => (
-                      <span className="text-sm text-text-secondary">{s.startDate.toLocaleDateString("ar-EG")}</span>
-                    )},
-                    { key: "endDate", header: "تاريخ النهاية", render: (s) => (
-                      <span className="text-sm text-text-secondary">{s.endDate.toLocaleDateString("ar-EG")}</span>
-                    )},
-                    { key: "daysRemaining", header: "الأيام المتبقية", render: (s) => (
-                      <span className={`font-medium ${s.daysRemaining <= 7 ? "text-error" : "text-text"}`}>{s.daysRemaining} يوم</span>
-                    )},
-                    { key: "status", header: "الحالة", render: (s) => (
-                      <Badge variant={s.status === "active" ? "success" : s.status === "expired" ? "error" : "warning"}>
-                        {s.status === "active" ? "نشط" : s.status === "expired" ? "منتهي" : "معلق"}
-                      </Badge>
-                    )},
-                    { key: "amount", header: "المبلغ", render: (s) => (
-                      <span className="font-medium">{formatCurrency(s.amount)}</span>
-                    )},
-                  ]}
-                  data={subscriptionData}
-                />
+                {subscriptionData.length === 0 ? (
+                  <EmptyState
+                    icon={HiOutlineCreditCard}
+                    title="لا يوجد اشتراكات"
+                    description="لم يتم تسجيل أي اشتراكات بعد"
+                  />
+                ) : (
+                  <Table
+                    columns={[
+                      { key: "studentName", header: "الطالب", render: (s) => (
+                        <Link href={`/teacher/students/${s.id}`} className="text-primary hover:text-primary-dark transition-colors">{s.studentName}</Link>
+                      )},
+                      { key: "planName", header: "الباقة" },
+                      { key: "startDate", header: "تاريخ البداية", render: (s) => (
+                        <span className="text-sm text-text-secondary">{s.startDate.toLocaleDateString("ar-EG")}</span>
+                      )},
+                      { key: "endDate", header: "تاريخ النهاية", render: (s) => (
+                        <span className="text-sm text-text-secondary">{s.endDate.toLocaleDateString("ar-EG")}</span>
+                      )},
+                      { key: "daysRemaining", header: "الأيام المتبقية", render: (s) => (
+                        <span className={`font-medium ${s.daysRemaining <= 7 ? "text-error" : "text-text"}`}>{s.daysRemaining} يوم</span>
+                      )},
+                      { key: "status", header: "الحالة", render: (s) => (
+                        <Badge variant={s.status === "active" ? "success" : s.status === "expired" ? "error" : "warning"}>
+                          {s.status === "active" ? "نشط" : s.status === "expired" ? "منتهي" : "معلق"}
+                        </Badge>
+                      )},
+                      { key: "amount", header: "المبلغ", render: (s) => (
+                        <span className="font-medium">{formatCurrency(s.amount)}</span>
+                      )},
+                      { key: "actions", header: "الإجراءات", render: (s) => (
+                        <div className="flex items-center gap-2">
+                          {s.status === "active" ? (
+                            <Button type="button" size="sm" variant="danger" onClick={() => { toast.success("تم إلغاء الاشتراك بنجاح") }}>
+                              إلغاء
+                            </Button>
+                          ) : (
+                            <Button type="button" size="sm" variant="success" onClick={() => { toast.success("تم تفعيل الاشتراك بنجاح") }}>
+                              تفعيل
+                            </Button>
+                          )}
+                          <Button type="button" size="sm" variant="primary" onClick={() => { toast.success("تم ترقية الاشتراك بنجاح") }}>
+                            ترقية
+                          </Button>
+                          <Button type="button" size="sm" variant="info" onClick={() => { toast.success("تم تجديد الاشتراك بنجاح") }}>
+                            تجديد
+                          </Button>
+                        </div>
+                      )},
+                    ]}
+                    data={subscriptionData}
+                  />
+                )}
               </Card>
             </TabPanel>
 
@@ -117,7 +149,9 @@ export default function SubscriptionsPage() {
               <Card>
                 <Table
                   columns={[
-                    { key: "studentName", header: "الطالب" },
+                    { key: "studentName", header: "الطالب", render: (p) => (
+                      <Link href={`/teacher/students/${p.studentId}`} className="text-primary hover:text-primary-dark transition-colors">{p.studentName}</Link>
+                    )},
                     { key: "amount", header: "المبلغ", render: (p) => (
                       <span className="font-medium">{formatCurrency(p.amount)}</span>
                     )},
@@ -135,6 +169,9 @@ export default function SubscriptionsPage() {
                     )},
                     { key: "transactionId", header: "رقم المعاملة", render: (p) => (
                       <span className="text-xs font-mono text-text-tertiary" dir="ltr">{p.transactionId}</span>
+                    )},
+                    { key: "actions", header: "", render: (p) => (
+                      <Link href={`/teacher/subscriptions/payments/${p.id}`} className="text-primary hover:text-primary-dark transition-colors text-sm">عرض التفاصيل</Link>
                     )},
                   ]}
                   data={mockPayments.slice(0, 20)}

@@ -137,14 +137,14 @@ export default function BlogPostPage() {
 
               <div className="flex flex-wrap items-center justify-between gap-4 mt-6 p-6 rounded-xl border border-border bg-surface-secondary">
                 <div className="flex items-center gap-3">
-                  <button onClick={() => setLiked(!liked)} className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all text-sm ${liked ? "border-error/30 bg-error/10 text-error" : "border-border text-text-secondary hover:bg-surface-tertiary"}`}>
+                  <button type="button" onClick={() => setLiked(!liked)} className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all text-sm ${liked ? "border-error/30 bg-error/10 text-error" : "border-border text-text-secondary hover:bg-surface-tertiary"}`}>
                     <HiHeart size={18} /> {liked ? "أعجبني" : "إعجاب"}
                   </button>
-                  <button onClick={() => setBookmarked(!bookmarked)} className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all text-sm ${bookmarked ? "border-primary/30 bg-primary/10 text-primary" : "border-border text-text-secondary hover:bg-surface-tertiary"}`}>
+                  <button type="button" onClick={() => setBookmarked(!bookmarked)} className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all text-sm ${bookmarked ? "border-primary/30 bg-primary/10 text-primary" : "border-border text-text-secondary hover:bg-surface-tertiary"}`}>
                     <HiBookmark size={18} /> {bookmarked ? "تم الحفظ" : "حفظ"}
                   </button>
                 </div>
-                <button onClick={() => { navigator.clipboard?.writeText(window.location.href) }} className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm text-text-secondary hover:bg-surface-tertiary transition-all">
+                <button type="button" onClick={() => { navigator.clipboard?.writeText(window.location.href) }} className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm text-text-secondary hover:bg-surface-tertiary transition-all">
                   <HiShare size={18} /> مشاركة
                 </button>
               </div>

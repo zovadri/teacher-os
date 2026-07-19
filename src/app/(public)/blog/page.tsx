@@ -73,7 +73,7 @@ export default function BlogPage() {
           <div className="flex items-center gap-2 whitespace-nowrap">
             <HiTag className="text-text-tertiary ml-2 shrink-0" size={16} />
             {categories.map((cat) => (
-              <button key={cat} onClick={() => handleCategoryChange(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all ${activeCategory === cat ? "bg-primary text-white" : "bg-surface-tertiary text-text-secondary hover:bg-primary/10"}`}>
+              <button type="button" key={cat} onClick={() => handleCategoryChange(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all ${activeCategory === cat ? "bg-primary text-white" : "bg-surface-tertiary text-text-secondary hover:bg-primary/10"}`}>
                 {cat}
               </button>
             ))}
@@ -151,7 +151,7 @@ export default function BlogPage() {
             <div className="text-center py-20">
               <HiAcademicCap className="mx-auto text-text-tertiary mb-4" size={48} />
               <p className="text-text-secondary mb-2">لا توجد مقالات تطابق بحثك.</p>
-              <button onClick={() => { setSearchQuery(""); setActiveCategory("الكل") }} className="text-primary text-sm font-medium hover:underline">إعادة ضبط</button>
+              <button type="button" onClick={() => { setSearchQuery(""); setActiveCategory("الكل") }} className="text-primary text-sm font-medium hover:underline">إعادة ضبط</button>
             </div>
           )}
         </div>

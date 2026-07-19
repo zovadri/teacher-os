@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import toast from "react-hot-toast"
 import { motion } from "framer-motion"
 import {
   HiOutlineSearchCircle,
@@ -21,6 +22,7 @@ import Textarea from "@/components/ui/Textarea"
 import Button from "@/components/ui/Button"
 import { mockCmsPages } from "@/lib/mock/data"
 import { cn } from "@/lib/utils"
+import { Breadcrumb } from "@/components/ui/Breadcrumb"
 
 export default function SeoPage() {
   const [seo, setSeo] = useState(mockCmsPages.seo)
@@ -44,6 +46,7 @@ export default function SeoPage() {
   const handleSave = () => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
+    toast.success("تم حفظ إعدادات SEO بنجاح")
   }
 
   const handleReset = () => {
@@ -56,7 +59,8 @@ export default function SeoPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إعدادات SEO" subtitle="تحسين محركات البحث والبيانات الوصفية للموقع" />
+      <Breadcrumb items={[{ label: "ط¥ط¯ط§ط±ط© ط§ظ„ظ…ط­طھظˆظ‰", href: "/teacher/cms" }, { label: "طھط­ط³ظٹظ† ظ…ط­ط±ظƒط§طھ ط§ظ„ط¨ط­ط«" }]} />
+      <DashboardHeader title="ط¥ط¹ط¯ط§ط¯ط§طھ SEO" subtitle="طھط­ط³ظٹظ† ظ…ط­ط±ظƒط§طھ ط§ظ„ط¨ط­ط« ظˆط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ظˆطµظپظٹط© ظ„ظ„ظ…ظˆظ‚ط¹" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
@@ -64,19 +68,19 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineSearchCircle className="w-5 h-5 text-primary" />
-                <CardTitle>البيانات الوصفية</CardTitle>
+                <CardTitle>ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ظˆطµظپظٹط©</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
                 <Input
-                  label="عنوان الموقع (Meta Title)"
+                  label="ط¹ظ†ظˆط§ظ† ط§ظ„ظ…ظˆظ‚ط¹ (Meta Title)"
                   value={seo.title}
                   onChange={(e) => setSeo({ ...seo, title: e.target.value })}
                 />
                 <div className="flex items-center justify-between mt-1">
                   <span className={cn("text-xs", titleLength > 60 ? "text-error" : "text-text-tertiary")}>
-                    {titleLength}/60 حرف
+                    {titleLength}/60 ط­ط±ظپ
                   </span>
                   <div className="w-32 h-1 bg-surface-tertiary rounded-full overflow-hidden">
                     <div className={cn("h-full rounded-full transition-all", titleLength > 60 ? "bg-error" : titleLength > 50 ? "bg-warning" : "bg-success")} style={{ width: `${Math.min((titleLength / 60) * 100, 100)}%` }} />
@@ -86,14 +90,14 @@ export default function SeoPage() {
 
               <div>
                 <Textarea
-                  label="الوصف (Meta Description)"
+                  label="ط§ظ„ظˆطµظپ (Meta Description)"
                   value={seo.description}
                   onChange={(e) => setSeo({ ...seo, description: e.target.value })}
                   rows={3}
                 />
                 <div className="flex items-center justify-between mt-1">
                   <span className={cn("text-xs", descLength > 160 ? "text-error" : "text-text-tertiary")}>
-                    {descLength}/160 حرف
+                    {descLength}/160 ط­ط±ظپ
                   </span>
                   <div className="w-32 h-1 bg-surface-tertiary rounded-full overflow-hidden">
                     <div className={cn("h-full rounded-full transition-all", descLength > 160 ? "bg-error" : descLength > 140 ? "bg-warning" : "bg-success")} style={{ width: `${Math.min((descLength / 160) * 100, 100)}%` }} />
@@ -102,21 +106,21 @@ export default function SeoPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-text mb-2">الكلمات المفتاحية</label>
+                <label className="block text-sm font-medium text-text mb-2">ط§ظ„ظƒظ„ظ…ط§طھ ط§ظ„ظ…ظپطھط§ط­ظٹط©</label>
                 <div className="flex items-center gap-2 mb-2">
                   <Input
                     value={newKeyword}
                     onChange={(e) => setNewKeyword(e.target.value)}
-                    placeholder="أدخل كلمة مفتاحية..."
+                    placeholder="ط£ط¯ط®ظ„ ظƒظ„ظ…ط© ظ…ظپطھط§ط­ظٹط©..."
                     onKeyDown={(e) => e.key === "Enter" && addKeyword()}
                   />
-                  <Button variant="primary" size="md" onClick={addKeyword}>إضافة</Button>
+                  <Button variant="primary" size="md" onClick={addKeyword}>ط¥ط¶ط§ظپط©</Button>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {keywords.map((kw) => (
                     <span key={kw} className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300 text-xs font-medium">
                       {kw}
-                      <button onClick={() => removeKeyword(kw)} className="hover:text-error transition-colors">
+                      <button type="button" onClick={() => removeKeyword(kw)} className="hover:text-error transition-colors">
                         <HiOutlineX className="w-3 h-3" />
                       </button>
                     </span>
@@ -130,7 +134,7 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlinePhotograph className="w-5 h-5 text-primary" />
-                <CardTitle>صورة OG (Open Graph)</CardTitle>
+                <CardTitle>طµظˆط±ط© OG (Open Graph)</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -151,8 +155,8 @@ export default function SeoPage() {
                 ) : (
                   <div className="flex flex-col items-center gap-2">
                     <HiOutlineUpload className="w-8 h-8 text-text-tertiary" />
-                    <p className="text-sm text-text-tertiary">انقر لرفع صورة OG</p>
-                    <Badge variant="neutral" size="sm">1200×630 بكسل</Badge>
+                    <p className="text-sm text-text-tertiary">ط§ظ†ظ‚ط± ظ„ط±ظپط¹ طµظˆط±ط© OG</p>
+                    <Badge variant="neutral" size="sm">1200أ—630 ط¨ظƒط³ظ„</Badge>
                   </div>
                 )}
               </div>
@@ -163,12 +167,12 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineGlobe className="w-5 h-5 text-primary" />
-                <CardTitle>إعدادات إضافية</CardTitle>
+                <CardTitle>ط¥ط¹ط¯ط§ط¯ط§طھ ط¥ط¶ط§ظپظٹط©</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <Input
-                label="حساب Twitter/X"
+                label="ط­ط³ط§ط¨ Twitter/X"
                 value={seo.twitterHandle}
                 onChange={(e) => setSeo({ ...seo, twitterHandle: e.target.value })}
                 placeholder="@username"
@@ -182,8 +186,8 @@ export default function SeoPage() {
                 dir="ltr"
               />
               <div className="flex items-center justify-between py-2">
-                <span className="text-sm text-text-secondary">تفعيل Sitemap</span>
-                <button
+                <span className="text-sm text-text-secondary">طھظپط¹ظٹظ„ Sitemap</span>
+                <button type="button"
                   onClick={() => setSeo({ ...seo, enableSitemap: !seo.enableSitemap })}
                   className={cn(
                     "w-12 h-6 rounded-full transition-colors relative",
@@ -197,8 +201,8 @@ export default function SeoPage() {
                 </button>
               </div>
               <div className="flex items-center justify-between py-2">
-                <span className="text-sm text-text-secondary">تفعيل Robots.txt</span>
-                <button
+                <span className="text-sm text-text-secondary">طھظپط¹ظٹظ„ Robots.txt</span>
+                <button type="button"
                   onClick={() => setSeo({ ...seo, enableRobots: !seo.enableRobots })}
                   className={cn(
                     "w-12 h-6 rounded-full transition-colors relative",
@@ -220,60 +224,60 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineEye className="w-5 h-5 text-primary" />
-                <CardTitle>معاينة البحث</CardTitle>
-                <CardDescription>كيف سيظهر موقعك في نتائج البحث</CardDescription>
+                <CardTitle>ظ…ط¹ط§ظٹظ†ط© ط§ظ„ط¨ط­ط«</CardTitle>
+                <CardDescription>ظƒظٹظپ ط³ظٹط¸ظ‡ط± ظ…ظˆظ‚ط¹ظƒ ظپظٹ ظ†طھط§ط¦ط¬ ط§ظ„ط¨ط­ط«</CardDescription>
               </div>
             </CardHeader>
             <CardContent>
               <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
                 <p className="text-xs text-green-700 mb-1">{seo.title ? "teacher-os.com/" : ""}</p>
                 <h3 className="text-sm font-semibold text-blue-700 hover:underline cursor-pointer line-clamp-1">
-                  {seo.title || "عنوان الموقع"}
+                  {seo.title || "ط¹ظ†ظˆط§ظ† ط§ظ„ظ…ظˆظ‚ط¹"}
                 </h3>
                 <p className="text-xs text-text-secondary mt-1 line-clamp-2">
-                  {seo.description || "وصف الموقع"}
+                  {seo.description || "ظˆطµظپ ط§ظ„ظ…ظˆظ‚ط¹"}
                 </p>
                 {keywords.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {keywords.slice(0, 4).map((kw) => (
-                      <span key={kw} className="text-xs text-text-tertiary">· {kw}</span>
+                      <span key={kw} className="text-xs text-text-tertiary">آ· {kw}</span>
                     ))}
                   </div>
                 )}
               </div>
 
               <div className="mt-4 p-4 rounded-xl bg-surface-secondary border border-border">
-                <p className="text-xs font-medium text-text-secondary mb-2">ملخص SEO</p>
+                <p className="text-xs font-medium text-text-secondary mb-2">ظ…ظ„ط®طµ SEO</p>
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-text-tertiary">العنوان</span>
+                    <span className="text-text-tertiary">ط§ظ„ط¹ظ†ظˆط§ظ†</span>
                     <span className={cn("font-medium", titleLength > 60 ? "text-error" : "text-success")}>{titleLength}/60</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-text-tertiary">الوصف</span>
+                    <span className="text-text-tertiary">ط§ظ„ظˆطµظپ</span>
                     <span className={cn("font-medium", descLength > 160 ? "text-error" : "text-success")}>{descLength}/160</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-text-tertiary">الكلمات المفتاحية</span>
+                    <span className="text-text-tertiary">ط§ظ„ظƒظ„ظ…ط§طھ ط§ظ„ظ…ظپطھط§ط­ظٹط©</span>
                     <span className="font-medium text-text">{keywords.length}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-text-tertiary">Sitemap</span>
-                    <Badge variant={seo.enableSitemap ? "success" : "error"} size="sm">{seo.enableSitemap ? "مفعل" : "معطل"}</Badge>
+                    <Badge variant={seo.enableSitemap ? "success" : "error"} size="sm">{seo.enableSitemap ? "ظ…ظپط¹ظ„" : "ظ…ط¹ط·ظ„"}</Badge>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-text-tertiary">Robots.txt</span>
-                    <Badge variant={seo.enableRobots ? "success" : "error"} size="sm">{seo.enableRobots ? "مفعل" : "معطل"}</Badge>
+                    <Badge variant={seo.enableRobots ? "success" : "error"} size="sm">{seo.enableRobots ? "ظ…ظپط¹ظ„" : "ظ…ط¹ط·ظ„"}</Badge>
                   </div>
                 </div>
               </div>
             </CardContent>
             <CardFooter className="flex gap-3">
-              <Button variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
-                {saved ? "تم الحفظ!" : "حفظ"}
+              <button type="button" variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
+                {saved ? "طھظ… ط§ظ„ط­ظپط¸!" : "ط­ظپط¸"}
               </Button>
-              <Button variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
-                إعادة
+              <button type="button" variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
+                ط¥ط¹ط§ط¯ط©
               </Button>
             </CardFooter>
           </Card>

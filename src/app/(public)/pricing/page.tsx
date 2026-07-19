@@ -81,7 +81,7 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="flex items-center justify-center gap-4 mb-12">
             <span className={`text-sm font-medium transition-colors ${!isYearly ? "text-text" : "text-text-tertiary"}`}>شهري</span>
-            <button
+            <button type="button"
               onClick={() => setIsYearly(!isYearly)}
               className={`relative w-14 h-7 rounded-full transition-colors ${isYearly ? "bg-primary" : "bg-surface-tertiary"} border border-border`}
             >
@@ -193,7 +193,7 @@ export default function PricingPage() {
           <div className="space-y-3">
             {pricingFaq.map((faq, i) => (
               <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                <button
+                <button type="button"
                   onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)}
                   className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 transition-all flex items-center justify-between gap-4"
                 >

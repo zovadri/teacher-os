@@ -35,7 +35,7 @@ export default function CoursePreviewPage() {
   if (!course) {
     return (
       <div className="p-6">
-        <DashboardHeader title="الكورس غير موجود" />
+        <DashboardHeader title="ط§ظ„ظƒظˆط±ط³ ط؛ظٹط± ظ…ظˆط¬ظˆط¯" />
       </div>
     )
   }
@@ -58,19 +58,18 @@ export default function CoursePreviewPage() {
       <header className="sticky top-0 z-20 bg-surface border-b border-border">
         <div className="flex items-center justify-between px-4 md:px-6 py-3">
           <div className="flex items-center gap-3">
-            <button
+            <button type="button"
               onClick={() => router.push(`/teacher/courses/${course.id}`)}
               className="flex items-center gap-1 text-sm text-text-secondary hover:text-primary transition-colors"
             >
               <HiOutlineArrowRight className="w-4 h-4" />
-              <span>العودة إلى التحرير</span>
+              <span>ط§ظ„ط¹ظˆط¯ط© ط¥ظ„ظ‰ ط§ظ„طھط­ط±ظٹط±</span>
             </button>
           </div>
           <div className="flex items-center gap-3">
             <Badge variant="primary" size="sm">{course.grade}</Badge>
             <span className="text-sm font-medium text-text">{course.title}</span>
-            <button
-              className="md:hidden p-2 text-text-tertiary hover:text-text rounded-lg hover:bg-surface-secondary"
+            <button type="button" className="md:hidden p-2 text-text-tertiary hover:text-text rounded-lg hover:bg-surface-secondary"
               onClick={() => setShowSidebar(!showSidebar)}
             >
               {showSidebar ? <HiOutlineX className="w-5 h-5" /> : <HiOutlineMenu className="w-5 h-5" />}
@@ -94,7 +93,7 @@ export default function CoursePreviewPage() {
               </div>
               <div className="absolute bottom-3 right-3 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/60 text-white text-sm">
                 <HiOutlineClock className="w-4 h-4" />
-                <span>{course.chapters.reduce((s, ch) => s + ch.lessons.reduce((ls, l) => ls + l.duration, 0), 0)} دقيقة</span>
+                <span>{course.chapters.reduce((s, ch) => s + ch.lessons.reduce((ls, l) => ls + l.duration, 0), 0)} ط¯ظ‚ظٹظ‚ط©</span>
               </div>
             </div>
 
@@ -104,18 +103,18 @@ export default function CoursePreviewPage() {
               <div className="flex items-center gap-4 text-sm text-text-secondary">
                 <div className="flex items-center gap-1">
                   <HiOutlineCollection className="w-4 h-4" />
-                  <span>{course.chapters.length} فصول</span>
+                  <span>{course.chapters.length} ظپطµظˆظ„</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <HiOutlineDocumentText className="w-4 h-4" />
-                  <span>{totalLessons} درس</span>
+                  <span>{totalLessons} ط¯ط±ط³</span>
                 </div>
               </div>
             </div>
 
             <Card>
               <CardHeader>
-                <CardTitle>التقدم في الكورس</CardTitle>
+                <CardTitle>ط§ظ„طھظ‚ط¯ظ… ظپظٹ ط§ظ„ظƒظˆط±ط³</CardTitle>
                 <span className="text-sm text-text-secondary">{progress}%</span>
               </CardHeader>
               <CardContent>
@@ -124,10 +123,10 @@ export default function CoursePreviewPage() {
             </Card>
 
             <div className="space-y-3">
-              <h2 className="text-lg font-bold text-text">محتويات الكورس</h2>
+              <h2 className="text-lg font-bold text-text">ظ…ط­طھظˆظٹط§طھ ط§ظ„ظƒظˆط±ط³</h2>
               {course.chapters.map((chapter) => (
                 <Card key={chapter.id} className="overflow-hidden">
-                  <button
+                  <button type="button"
                     onClick={() => toggleChapter(chapter.id)}
                     className="w-full flex items-center justify-between p-4 hover:bg-surface-secondary transition-colors"
                   >
@@ -137,7 +136,7 @@ export default function CoursePreviewPage() {
                       </div>
                       <div className="text-right">
                         <p className="text-sm font-medium text-text">{chapter.title}</p>
-                        <p className="text-xs text-text-tertiary">{chapter.lessons.length} دروس</p>
+                        <p className="text-xs text-text-tertiary">{chapter.lessons.length} ط¯ط±ظˆط³</p>
                       </div>
                     </div>
                     {expandedChapters.has(chapter.id) ? (
@@ -155,7 +154,7 @@ export default function CoursePreviewPage() {
                         className="overflow-hidden border-t border-border"
                       >
                         {chapter.lessons.map((lesson) => (
-                          <button
+                          <button type="button"
                             key={lesson.id}
                             onClick={() => setCurrentLesson(lesson.id)}
                             className={cn(
@@ -170,10 +169,10 @@ export default function CoursePreviewPage() {
                             )}
                             <div className="min-w-0 flex-1">
                               <p className="text-sm text-text truncate">{lesson.title}</p>
-                              <p className="text-xs text-text-tertiary">{lesson.duration} دقيقة</p>
+                              <p className="text-xs text-text-tertiary">{lesson.duration} ط¯ظ‚ظٹظ‚ط©</p>
                             </div>
                             {lesson.isFree && (
-                              <Badge variant="success" size="sm">مجاني</Badge>
+                              <Badge variant="success" size="sm">ظ…ط¬ط§ظ†ظٹ</Badge>
                             )}
                           </button>
                         ))}
@@ -190,11 +189,11 @@ export default function CoursePreviewPage() {
           "w-80 shrink-0 bg-surface border-r border-border p-4 overflow-y-auto hidden md:block",
           showSidebar && "block fixed inset-0 z-10 pt-16"
         )}>
-          <h3 className="text-sm font-semibold text-text mb-4">محتويات الكورس</h3>
+          <h3 className="text-sm font-semibold text-text mb-4">ظ…ط­طھظˆظٹط§طھ ط§ظ„ظƒظˆط±ط³</h3>
           <div className="space-y-1">
             {course.chapters.map((chapter) => (
               <div key={chapter.id}>
-                <button
+                <button type="button"
                   onClick={() => toggleChapter(chapter.id)}
                   className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-surface-secondary transition-colors"
                 >
@@ -210,7 +209,7 @@ export default function CoursePreviewPage() {
                       className="overflow-hidden"
                     >
                       {chapter.lessons.map((lesson) => (
-                        <button
+                        <button type="button"
                           key={lesson.id}
                           onClick={() => setCurrentLesson(lesson.id)}
                           className={cn(
@@ -218,7 +217,7 @@ export default function CoursePreviewPage() {
                             currentLesson === lesson.id ? "text-primary" : "text-text-tertiary hover:text-text"
                           )}
                         >
-                          <span className="text-xs">{lesson.isLocked ? "🔒" : "▶"}</span>
+                          <span className="text-xs">{lesson.isLocked ? "ًں”’" : "â–¶"}</span>
                           <span className="text-xs truncate">{lesson.title}</span>
                         </button>
                       ))}

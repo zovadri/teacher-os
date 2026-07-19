@@ -2,7 +2,9 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { HiOutlineCheck, HiOutlineCamera, HiOutlineSave } from "react-icons/hi"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
+import { HiOutlineCheck, HiOutlineCamera, HiOutlineSave, HiOutlinePlus, HiOutlineTrash, HiOutlineArrowRight } from "react-icons/hi"
 import DashboardHeader from "@/components/layout/DashboardHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
@@ -44,6 +46,27 @@ const statusOptions = [
   { value: "coming-soon", label: "قريباً" },
 ]
 
+const lessonStatusOptions = [
+  { value: "available", label: "متاح" },
+  { value: "locked", label: "مقفل" },
+  { value: "coming-soon", label: "قريباً" },
+]
+
+interface LessonEntry {
+  id: string
+  title: string
+  duration: string
+  status: string
+  prerequisite: string
+  availableDate: string
+}
+
+interface ChapterEntry {
+  id: string
+  title: string
+  lessons: LessonEntry[]
+}
+
 interface FormData {
   title: string
   shortDescription: string
@@ -74,11 +97,26 @@ const initialForm: FormData = {
   requiresCode: false,
 }
 
+let lessonCounter = 0
+let chapterCounter = 0
+
+function createLesson(): LessonEntry {
+  lessonCounter += 1
+  return { id: `lesson-${lessonCounter}`, title: "", duration: "30", status: "available", prerequisite: "", availableDate: "" }
+}
+
+function createChapter(): ChapterEntry {
+  chapterCounter += 1
+  return { id: `chapter-${chapterCounter}`, title: "", lessons: [createLesson()] }
+}
+
 export default function CreateCoursePage() {
+  const router = useRouter()
   const [form, setForm] = useState<FormData>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [chapters, setChapters] = useState<ChapterEntry[]>([])
 
   const update = <K extends keyof FormData>(field: K, value: FormData[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -105,7 +143,36 @@ export default function CreateCoursePage() {
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
     setSubmitted(true)
+    toast.success("تم إنشاء الكورس بنجاح!")
   }
+
+  const addChapter = () => setChapters((prev) => [...prev, createChapter()])
+
+  const removeChapter = (id: string) => setChapters((prev) => prev.filter((c) => c.id !== id))
+
+  const updateChapter = (id: string, title: string) =>
+    setChapters((prev) => prev.map((c) => (c.id === id ? { ...c, title } : c)))
+
+  const addLesson = (chapterId: string) =>
+    setChapters((prev) => prev.map((c) => (c.id === chapterId ? { ...c, lessons: [...c.lessons, createLesson()] } : c)))
+
+  const removeLesson = (chapterId: string, lessonId: string) =>
+    setChapters((prev) =>
+      prev.map((c) => (c.id === chapterId ? { ...c, lessons: c.lessons.filter((l) => l.id !== lessonId) } : c))
+    )
+
+  const updateLesson = (chapterId: string, lessonId: string, data: Partial<LessonEntry>) =>
+    setChapters((prev) =>
+      prev.map((c) =>
+        c.id === chapterId
+          ? { ...c, lessons: c.lessons.map((l) => (l.id === lessonId ? { ...l, ...data } : l)) }
+          : c
+      )
+    )
+
+  const allLessonTitles = chapters.flatMap((c) =>
+    c.lessons.filter((l) => l.title.trim()).map((l) => ({ value: l.id, label: l.title }))
+  )
 
   if (submitted) {
     return (
@@ -117,8 +184,11 @@ export default function CreateCoursePage() {
           <h2 className="text-xl font-bold text-text mb-2">تم إنشاء الكورس بنجاح</h2>
           <p className="text-sm text-text-tertiary mb-6">تم حفظ الكورس &ldquo;{form.title}&rdquo; بنجاح</p>
           <div className="flex items-center gap-3">
-            <Button variant="outline" onClick={() => { setSubmitted(false); setForm(initialForm) }}>
+            <Button variant="primary" onClick={() => { setSubmitted(false); setForm(initialForm); setChapters([]) }}>
               إنشاء كورس آخر
+            </Button>
+            <Button variant="outline" onClick={() => router.push("/teacher/courses")} leftIcon={<HiOutlineArrowRight size={18} />}>
+              العودة إلى الكورسات
             </Button>
           </div>
         </div>
@@ -182,6 +252,110 @@ export default function CreateCoursePage() {
 
           <Card>
             <CardHeader>
+              <CardTitle>الفصول والدروس</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {chapters.length === 0 && (
+                <p className="text-sm text-text-tertiary text-center py-4">لم يتم إضافة أي فصول بعد. أضف فصلاً للبدء.</p>
+              )}
+              {chapters.map((chapter) => (
+                <div key={chapter.id} className="border border-border rounded-xl overflow-hidden">
+                  <div className="flex items-center gap-3 p-3 bg-surface-secondary">
+                    <Input
+                      value={chapter.title}
+                      onChange={(e) => updateChapter(chapter.id, e.target.value)}
+                      placeholder="عنوان الفصل"
+                      className="flex-1"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeChapter(chapter.id)}
+                      className="p-2 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"
+                    >
+                      <HiOutlineTrash size={16} />
+                    </button>
+                  </div>
+                  <div className="divide-y divide-border/50">
+                    {chapter.lessons.map((lesson) => (
+                      <div key={lesson.id} className="p-3 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <Input
+                            value={lesson.title}
+                            onChange={(e) => updateLesson(chapter.id, lesson.id, { title: e.target.value })}
+                            placeholder="عنوان الدرس"
+                            className="flex-1"
+                          />
+                          <Input
+                            label=""
+                            type="number"
+                            value={lesson.duration}
+                            onChange={(e) => updateLesson(chapter.id, lesson.id, { duration: e.target.value })}
+                            placeholder="المدة"
+                            className="w-20"
+                          />
+                          <span className="text-xs text-text-tertiary">د</span>
+                          <button
+                            type="button"
+                            onClick={() => removeLesson(chapter.id, lesson.id)}
+                            className="p-2 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"
+                          >
+                            <HiOutlineTrash size={14} />
+                          </button>
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          <Select
+                            label="الحالة"
+                            value={lesson.status}
+                            onChange={(e) => updateLesson(chapter.id, lesson.id, { status: e.target.value })}
+                            options={lessonStatusOptions}
+                          />
+                          {lesson.status === "locked" && (
+                            <Select
+                              label="المتطلب السابق"
+                              value={lesson.prerequisite}
+                              onChange={(e) => updateLesson(chapter.id, lesson.id, { prerequisite: e.target.value })}
+                              options={allLessonTitles.filter((l) => l.value !== lesson.id)}
+                              placeholder="اختر الدرس المطلوب"
+                            />
+                          )}
+                          {lesson.status === "coming-soon" && (
+                            <Input
+                              label="تاريخ الإتاحة"
+                              type="date"
+                              value={lesson.availableDate}
+                              onChange={(e) => updateLesson(chapter.id, lesson.id, { availableDate: e.target.value })}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="p-3 border-t border-border/50">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => addLesson(chapter.id)}
+                      leftIcon={<HiOutlinePlus size={14} />}
+                    >
+                      إضافة درس
+                    </Button>
+                  </div>
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="outline"
+                onClick={addChapter}
+                leftIcon={<HiOutlinePlus size={16} />}
+              >
+                إضافة فصل جديد
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
               <CardTitle>إعدادات الكورس</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -216,7 +390,7 @@ export default function CreateCoursePage() {
                 <Button type="submit" variant="primary" size="lg" isLoading={submitting} leftIcon={<HiOutlineSave size={18} />}>
                   {submitting ? "جاري الحفظ..." : "حفظ كمسودة"}
                 </Button>
-                <Button type="button" variant="success" size="lg" onClick={() => { update("status", "published"); handleSubmit as any }}>
+                <Button type="button" variant="success" size="lg" onClick={() => { update("status", "published"); handleSubmit() }}>
                   نشر الكورس
                 </Button>
               </div>

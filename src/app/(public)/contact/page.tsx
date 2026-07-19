@@ -153,7 +153,7 @@ export default function ContactPage() {
           <div className="space-y-3">
             {contactFaq.map((faq, i) => (
               <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                <button onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)} className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 transition-all flex items-center justify-between gap-4">
+                <button type="button" onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)} className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 transition-all flex items-center justify-between gap-4">
                   <span className="font-medium text-sm">{faq.question}</span>
                   <HiChevronDown size={16} className={`text-text-tertiary transition-transform shrink-0 ${faqOpen === faq.id ? "rotate-180" : ""}`} />
                 </button>

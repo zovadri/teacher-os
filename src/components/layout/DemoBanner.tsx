@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/lib/auth"
 import { HiX } from "react-icons/hi"
 
@@ -11,7 +12,15 @@ const roles = [
   { value: "staff", label: "موظف" },
 ] as const
 
+const roleRoutes: Record<string, string> = {
+  teacher: "/teacher",
+  student: "/student",
+  parent: "/parent",
+  staff: "/staff",
+}
+
 export default function DemoBanner() {
+  const router = useRouter()
   const [visible, setVisible] = useState(true)
   const loginAs = useAuthStore((s) => s.loginAs)
   if (!visible) return null
@@ -24,7 +33,13 @@ export default function DemoBanner() {
         </div>
         <div className="flex items-center gap-3">
           <select
-            onChange={(e) => loginAs(e.target.value as any)}
+            onChange={(e) => {
+              const role = e.target.value as string
+              if (role) {
+                loginAs(role as "teacher" | "student" | "parent" | "staff")
+                router.push(roleRoutes[role] || "/teacher")
+              }
+            }}
             className="bg-white/30 backdrop-blur-sm border border-amber-300/50 rounded-lg px-3 py-1 text-xs font-medium text-amber-900 focus:outline-none cursor-pointer"
           >
             <option value="">تجربة الأدوار المختلفة</option>
@@ -32,7 +47,7 @@ export default function DemoBanner() {
               <option key={r.value} value={r.value}>{r.label}</option>
             ))}
           </select>
-          <button onClick={() => setVisible(false)} className="p-1 rounded-lg hover:bg-amber-500/30 transition-colors">
+          <button type="button" onClick={() => setVisible(false)} className="p-1 rounded-lg hover:bg-amber-500/30 transition-colors">
             <HiX className="w-4 h-4" />
           </button>
         </div>

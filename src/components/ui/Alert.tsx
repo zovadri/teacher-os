@@ -28,7 +28,7 @@ export function Alert({ variant = "info", title, children, className, onClose }:
         <div className="text-sm opacity-90">{children}</div>
       </div>
       {onClose && (
-        <button onClick={onClose} className="shrink-0 p-0.5 rounded hover:bg-black/5">
+        <button type="button" onClick={onClose} className="shrink-0 p-0.5 rounded hover:bg-black/5">
           <HiXCircle className="w-4 h-4" />
         </button>
       )}

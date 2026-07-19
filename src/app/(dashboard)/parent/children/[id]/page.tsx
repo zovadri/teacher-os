@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -11,36 +11,69 @@ import {
 } from "react-icons/hi"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 
-const childData = {
-  id: "child-1", name: "أحمد علي", grade: "ثالثة ثانوي", school: "مدرسة النصر الثانوية",
-  governorate: "القاهرة", city: "مدينة نصر", gender: "ذكر",
-  studentId: "s-1", subscriptionStatus: "نشط",
-  subscriptionEnd: "2026-09-15", subscriptionPlan: "الباقة الثلاثية",
-  averageGrade: 87, coursesCount: 4, examsCompleted: 10, examsPassed: 8,
-  attendance: 95,
-  monthlyGrades: [
-    { month: "يناير", grade: 82 },
-    { month: "فبراير", grade: 88 },
-    { month: "مارس", grade: 85 },
-    { month: "أبريل", grade: 92 },
-    { month: "مايو", grade: 90 },
-    { month: "يونيو", grade: 87 },
-  ],
-  examResults: Array.from({ length: 8 }, (_, i) => ({
-    id: `er-${i + 1}`, title: ["اختبار النحو", "امتحان البلاغة", "اختبار النصوص", "امتحان القواعد", "اختبار الإملاء", "امتحان التعبير", "مراجعة ليلة الامتحان", "اختبار الفصل"][i],
-    grade: Math.floor(Math.random() * 40) + 55, totalGrade: 100,
-    date: new Date(2026, i, 15),
-  })),
-  courses: [
-    { id: "c1", name: "النحو والصرف", progress: 75 },
-    { id: "c2", name: "البلاغة والأدب", progress: 45 },
-    { id: "c3", name: "النصوص الأدبية", progress: 90 },
-    { id: "c4", name: "الإملاء والخط", progress: 30 },
-  ],
-}
+const allChildrenData = [
+  {
+    id: "child-1", name: "أحمد علي", grade: "ثالثة ثانوي", school: "مدرسة النصر الثانوية",
+    governorate: "القاهرة", city: "مدينة نصر", gender: "ذكر",
+    studentId: "s-1", subscriptionStatus: "نشط",
+    subscriptionEnd: "2026-09-15", subscriptionPlan: "الباقة الثلاثية",
+    averageGrade: 87, coursesCount: 4, examsCompleted: 10, examsPassed: 8,
+    attendance: 95,
+    monthlyGrades: [
+      { month: "يناير", grade: 82 },
+      { month: "فبراير", grade: 88 },
+      { month: "مارس", grade: 85 },
+      { month: "أبريل", grade: 92 },
+      { month: "مايو", grade: 90 },
+      { month: "يونيو", grade: 87 },
+    ],
+    examResults: [
+      { id: "er-1", title: "اختبار النحو", grade: 82, totalGrade: 100, date: new Date(2026, 0, 15) },
+      { id: "er-2", title: "امتحان البلاغة", grade: 75, totalGrade: 100, date: new Date(2026, 1, 15) },
+      { id: "er-3", title: "اختبار النصوص", grade: 91, totalGrade: 100, date: new Date(2026, 2, 15) },
+      { id: "er-4", title: "امتحان القواعد", grade: 68, totalGrade: 100, date: new Date(2026, 3, 15) },
+      { id: "er-5", title: "اختبار الإملاء", grade: 88, totalGrade: 100, date: new Date(2026, 4, 15) },
+      { id: "er-6", title: "امتحان التعبير", grade: 95, totalGrade: 100, date: new Date(2026, 5, 15) },
+      { id: "er-7", title: "مراجعة ليلة الامتحان", grade: 72, totalGrade: 100, date: new Date(2026, 6, 15) },
+      { id: "er-8", title: "اختبار الفصل", grade: 85, totalGrade: 100, date: new Date(2026, 7, 15) },
+    ],
+    courses: [
+      { id: "c1", name: "النحو والصرف", progress: 75 },
+      { id: "c2", name: "البلاغة والأدب", progress: 45 },
+      { id: "c3", name: "النصوص الأدبية", progress: 90 },
+      { id: "c4", name: "الإملاء والخط", progress: 30 },
+    ],
+  },
+  {
+    id: "child-2", name: "فاطمة علي", grade: "أولى ثانوي", school: "مدرسة النصر الثانوية",
+    governorate: "القاهرة", city: "مدينة نصر", gender: "أنثى",
+    studentId: "s-2", subscriptionStatus: "نشط",
+    subscriptionEnd: "2026-09-15", subscriptionPlan: "الباقة الثلاثية",
+    averageGrade: 92, coursesCount: 3, examsCompleted: 8, examsPassed: 8,
+    attendance: 98,
+    monthlyGrades: [
+      { month: "يناير", grade: 90 },
+      { month: "فبراير", grade: 93 },
+      { month: "مارس", grade: 88 },
+      { month: "أبريل", grade: 95 },
+      { month: "مايو", grade: 91 },
+      { month: "يونيو", grade: 94 },
+    ],
+    examResults: [
+      { id: "er2-1", title: "اختبار النحو", grade: 88, totalGrade: 100, date: new Date(2026, 0, 15) },
+      { id: "er2-2", title: "اختبار النصوص", grade: 95, totalGrade: 100, date: new Date(2026, 1, 15) },
+    ],
+    courses: [
+      { id: "c5", name: "قواعد اللغة", progress: 80 },
+      { id: "c6", name: "النصوص الأدبية", progress: 60 },
+      { id: "c7", name: "الإملاء", progress: 95 },
+    ],
+  },
+]
 
 export default function ParentChildDetailPage() {
   const params = useParams()
+  const childData = useMemo(() => allChildrenData.find((c) => c.id === params.id) || allChildrenData[0], [params.id])
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
   if (!mounted) return null

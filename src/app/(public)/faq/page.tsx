@@ -77,7 +77,7 @@ export default function FAQPage() {
           <div className="flex items-center gap-2 whitespace-nowrap">
             <HiTag className="text-text-tertiary ml-2 shrink-0" size={16} />
             {categories.map((cat) => (
-              <button key={cat} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all ${activeCategory === cat ? "bg-primary text-white" : "bg-surface-tertiary text-text-secondary hover:bg-primary/10"}`}>
+              <button type="button" key={cat} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all ${activeCategory === cat ? "bg-primary text-white" : "bg-surface-tertiary text-text-secondary hover:bg-primary/10"}`}>
                 {cat}
               </button>
             ))}
@@ -91,7 +91,7 @@ export default function FAQPage() {
             <div className="text-center py-20">
               <HiAcademicCap className="mx-auto text-text-tertiary mb-4" size={48} />
               <p className="text-text-secondary mb-2">لا توجد نتائج مطابقة لبحثك.</p>
-              <button onClick={() => { setSearchQuery(""); setActiveCategory("الكل") }} className="text-primary text-sm font-medium hover:underline">إعادة ضبط البحث</button>
+              <button type="button" onClick={() => { setSearchQuery(""); setActiveCategory("الكل") }} className="text-primary text-sm font-medium hover:underline">إعادة ضبط البحث</button>
             </div>
           ) : (
             <div className="space-y-10">
@@ -105,7 +105,7 @@ export default function FAQPage() {
                   <div className="space-y-3">
                     {items.map((faq, i) => (
                       <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }}>
-                        <button
+                        <button type="button"
                           onClick={() => toggleItem(faq.id)}
                           className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 hover:shadow-sm transition-all flex items-center justify-between gap-4"
                         >

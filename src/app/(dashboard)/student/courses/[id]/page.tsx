@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
@@ -10,65 +10,90 @@ import {
   HiOutlineDocumentText, HiOutlineFilm, HiOutlineClipboardCheck,
   HiOutlineChevronLeft, HiOutlineAcademicCap,
 } from "react-icons/hi"
+import { mockCourses } from "@/lib/mock/data"
 
-const courseData = {
-  id: "c-1",
-  title: "النحو والصرف",
-  subject: "لغة عربية",
-  grade: "ثالثة ثانوي",
-  teacher: "أحمد محمد",
-  description: "دورة شاملة في النحو والصرف للمرحلة الثانوية تهدف إلى تأسيس الطلاب في قواعد اللغة العربية وتطبيقاتها العملية.",
-  progress: 75,
-  totalLessons: 36,
-  completedLessons: 27,
-  totalDuration: "٢٤ ساعة",
-  chapters: [
-    {
-      id: "ch-1",
-      title: "المبتدأ والخبر",
-      status: "completed",
-      lessons: [
-        { id: "l1", title: "المبتدأ - تعريفه وأنواعه", duration: "٢٥ د", type: "video", completed: true },
-        { id: "l2", title: "الخبر - تعريفه وأنواعه", duration: "٣٠ د", type: "video", completed: true },
-        { id: "l3", title: "تطبيقات على المبتدأ والخبر", duration: "٢٠ د", type: "homework", completed: true },
-      ],
-    },
-    {
-      id: "ch-2",
-      title: "كان وأخواتها",
-      status: "in-progress",
-      lessons: [
-        { id: "l4", title: "كان وأخواتها - شرح القاعدة", duration: "٣٥ د", type: "video", completed: true },
-        { id: "l5", title: "إعراب كان وأخواتها", duration: "٢٨ د", type: "video", completed: false },
-        { id: "l6", title: "تدريبات على كان وأخواتها", duration: "٢٠ د", type: "exam", completed: false },
-        { id: "l7", title: "ملخص الفصل", duration: "١٠ د", type: "pdf", completed: false },
-      ],
-    },
-    {
-      id: "ch-3",
-      title: "إن وأخواتها",
-      status: "locked",
-      lessons: [
-        { id: "l8", title: "إن وأخواتها - مقدمة", duration: "٣٠ د", type: "video", completed: false },
-        { id: "l9", title: "إعراب إن وأخواتها", duration: "٣٠ د", type: "video", completed: false },
-      ],
-    },
-    {
-      id: "ch-4",
-      title: "الجملة الاسمية والجملة الفعلية",
-      status: "locked",
-      lessons: [
-        { id: "l10", title: "الجملة الاسمية", duration: "٢٥ د", type: "video", completed: false },
-        { id: "l11", title: "الجملة الفعلية", duration: "٢٥ د", type: "video", completed: false },
-      ],
-    },
-  ],
-  files: [
-    { id: "f1", name: "مذكرة النحو والصرف - الفصل الأول", type: "pdf", size: "١٢٫٥ م.ب" },
-    { id: "f2", name: "ملخص قواعد النحو", type: "pdf", size: "٨٫٢ م.ب" },
-    { id: "f3", name: "جدول الإعراب", type: "pdf", size: "٣٫١ م.ب" },
-  ],
-}
+const enrolledCourseData = [
+  {
+    id: "c-1",
+    title: "النحو والصرف",
+    subject: "لغة عربية",
+    grade: "ثالثة ثانوي",
+    teacher: "أحمد محمد",
+    description: "دورة شاملة في النحو والصرف للمرحلة الثانوية تهدف إلى تأسيس الطلاب في قواعد اللغة العربية وتطبيقاتها العملية.",
+    progress: 75,
+    totalLessons: 36,
+    completedLessons: 27,
+    totalDuration: "٢٤ ساعة",
+    chapters: [
+      {
+        id: "ch-1",
+        title: "المبتدأ والخبر",
+        status: "completed",
+        lessons: [
+          { id: "l1", title: "المبتدأ - تعريفه وأنواعه", duration: "٢٥ د", type: "video", completed: true },
+          { id: "l2", title: "الخبر - تعريفه وأنواعه", duration: "٣٠ د", type: "video", completed: true },
+          { id: "l3", title: "تطبيقات على المبتدأ والخبر", duration: "٢٠ د", type: "homework", completed: true },
+        ],
+      },
+      {
+        id: "ch-2",
+        title: "كان وأخواتها",
+        status: "in-progress",
+        lessons: [
+          { id: "l4", title: "كان وأخواتها - شرح القاعدة", duration: "٣٥ د", type: "video", completed: true },
+          { id: "l5", title: "إعراب كان وأخواتها", duration: "٢٨ د", type: "video", completed: false },
+          { id: "l6", title: "تدريبات على كان وأخواتها", duration: "٢٠ د", type: "exam", completed: false },
+          { id: "l7", title: "ملخص الفصل", duration: "١٠ د", type: "pdf", completed: false },
+        ],
+      },
+      {
+        id: "ch-3",
+        title: "إن وأخواتها",
+        status: "locked",
+        lessons: [
+          { id: "l8", title: "إن وأخواتها - مقدمة", duration: "٣٠ د", type: "video", completed: false },
+          { id: "l9", title: "إعراب إن وأخواتها", duration: "٣٠ د", type: "video", completed: false },
+        ],
+      },
+      {
+        id: "ch-4",
+        title: "الجملة الاسمية والجملة الفعلية",
+        status: "locked",
+        lessons: [
+          { id: "l10", title: "الجملة الاسمية", duration: "٢٥ د", type: "video", completed: false },
+          { id: "l11", title: "الجملة الفعلية", duration: "٢٥ د", type: "video", completed: false },
+        ],
+      },
+    ],
+    files: [
+      { id: "f1", name: "مذكرة النحو والصرف - الفصل الأول", type: "pdf", size: "١٢٫٥ م.ب" },
+      { id: "f2", name: "ملخص قواعد النحو", type: "pdf", size: "٨٫٢ م.ب" },
+      { id: "f3", name: "جدول الإعراب", type: "pdf", size: "٣٫١ م.ب" },
+    ],
+  },
+  {
+    id: "c-2",
+    title: "البلاغة والأدب",
+    subject: "لغة عربية",
+    grade: "ثالثة ثانوي",
+    teacher: "خالد أحمد",
+    description: "دراسة شاملة للبلاغة العربية والأدب من العصر الجاهلي إلى الحديث.",
+    progress: 45,
+    totalLessons: 24,
+    completedLessons: 11,
+    totalDuration: "١٨ ساعة",
+    chapters: [
+      { id: "ch-1", title: "علم البيان", status: "in-progress", lessons: [
+        { id: "l1", title: "التشبيه", duration: "٣٠ د", type: "video", completed: true },
+        { id: "l2", title: "الاستعارة", duration: "٢٥ د", type: "video", completed: false },
+      ]},
+      { id: "ch-2", title: "علم البديع", status: "locked", lessons: [
+        { id: "l3", title: "المحسنات اللفظية", duration: "٢٠ د", type: "video", completed: false },
+      ]},
+    ],
+    files: [],
+  },
+]
 
 const lessonIcons: Record<string, any> = {
   video: HiOutlineFilm,
@@ -79,6 +104,7 @@ const lessonIcons: Record<string, any> = {
 
 export default function StudentCourseDetailPage() {
   const params = useParams()
+  const courseData = useMemo(() => enrolledCourseData.find((c) => c.id === params.id) || enrolledCourseData[0], [params.id])
   const [mounted, setMounted] = useState(false)
   const [expandedChapter, setExpandedChapter] = useState<string | null>("ch-1")
   useEffect(() => setMounted(true), [])
@@ -135,7 +161,7 @@ export default function StudentCourseDetailPage() {
               const completedInChapter = chapter.lessons.filter((l) => l.completed).length
               return (
                 <div key={chapter.id} className="rounded-xl border border-border bg-surface overflow-hidden">
-                  <button
+                  <button type="button"
                     onClick={() => setExpandedChapter(isExpanded ? null : chapter.id)}
                     className="w-full text-right p-4 flex items-center justify-between gap-3 hover:bg-surface-secondary/50 transition-colors"
                   >

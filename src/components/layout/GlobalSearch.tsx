@@ -6,12 +6,37 @@ import { motion, AnimatePresence } from "framer-motion"
 import {
   HiOutlineSearch,
   HiOutlineUser,
+  HiOutlineUserGroup,
+  HiOutlineBriefcase,
   HiOutlineBookOpen,
+  HiOutlineClipboardCheck,
+  HiOutlinePencilAlt,
+  HiOutlineQuestionMarkCircle,
+  HiOutlineFilm,
+  HiOutlineCertificate,
+  HiOutlineCash,
+  HiOutlineUserAdd,
+  HiOutlineKey,
+  HiOutlineCollection,
   HiOutlineChat,
-  HiOutlineAcademicCap,
 } from "react-icons/hi"
 import { cn } from "@/lib/utils"
-import { mockStudents, mockCourses, mockMessages } from "@/lib/mock/data"
+import {
+  mockStudents,
+  mockParents,
+  mockStaffMembers,
+  mockCourses,
+  mockExams,
+  mockHomework,
+  mockQuestions,
+  mockVideoLibrary,
+  mockCertificates,
+  mockPayments,
+  mockEnrollments,
+  mockCenterCodes,
+  mockBundles,
+  mockMessages,
+} from "@/lib/mock/data"
 
 interface SearchResult {
   id: string
@@ -31,44 +56,110 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
   const router = useRouter()
   const [query, setQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [activeSection, setActiveSection] = useState<string>("")
   const inputRef = useRef<HTMLInputElement>(null)
 
   const results = useMemo(() => {
     if (!query.trim()) return [] as SearchResult[]
-    const q = query
+    const q = query.trim()
     const items: SearchResult[] = []
 
-    mockStudents.filter((s) => s.name.includes(q)).slice(0, 5).forEach((s) => {
+    ;(mockStudents || []).filter((s) => s.name?.includes(q)).slice(0, 3).forEach((s) => {
       items.push({
-        id: s.id,
-        label: s.name,
-        description: `${s.grade} · ${s.governorate}`,
-        icon: HiOutlineUser,
-        href: `/teacher/students?id=${s.id}`,
-        section: "الطلاب",
+        id: s.id, label: s.name, description: `${s.grade} · ${s.governorate}`,
+        icon: HiOutlineUser, href: `/teacher/students?id=${s.id}`, section: "الطلاب",
       })
     })
 
-    mockCourses.filter((c) => c.title.includes(q)).slice(0, 5).forEach((c) => {
+    ;(mockParents || []).filter((p) => p.name?.includes(q) || p.children?.some((c) => c.grade?.includes(q))).slice(0, 3).forEach((p) => {
       items.push({
-        id: c.id,
-        label: c.title,
-        description: c.shortDescription,
-        icon: HiOutlineBookOpen,
-        href: `/teacher/courses/${c.id}`,
-        section: "الكورسات",
+        id: p.id, label: p.name, description: `ولي أمر · ${p.children?.length || 0} أبناء`,
+        icon: HiOutlineUserGroup, href: `/teacher/parents?id=${p.id}`, section: "أولياء الأمور",
       })
     })
 
-    mockMessages.filter((m) => m.subject.includes(q)).slice(0, 5).forEach((m) => {
+    ;(mockStaffMembers || []).filter((s) => s.name?.includes(q)).slice(0, 3).forEach((s) => {
       items.push({
-        id: m.id,
-        label: m.subject,
-        description: `من ${m.senderName}`,
-        icon: HiOutlineChat,
-        href: `/teacher/messages?conv=${m.conversationId}`,
-        section: "الرسائل",
+        id: s.id, label: s.name, description: s.jobTitle,
+        icon: HiOutlineBriefcase, href: `/teacher/staff?id=${s.id}`, section: "الموظفون",
+      })
+    })
+
+    ;(mockCourses || []).filter((c) => c.title?.includes(q)).slice(0, 3).forEach((c) => {
+      items.push({
+        id: c.id, label: c.title, description: c.shortDescription,
+        icon: HiOutlineBookOpen, href: `/teacher/courses/${c.id}`, section: "الكورسات",
+      })
+    })
+
+    ;(mockExams || []).filter((e) => e.title?.includes(q)).slice(0, 3).forEach((e) => {
+      items.push({
+        id: e.id, label: e.title, description: `${e.duration} دقيقة`,
+        icon: HiOutlineClipboardCheck, href: `/teacher/exams/${e.id}`, section: "الامتحانات",
+      })
+    })
+
+    ;(mockHomework || []).filter((h) => h.title?.includes(q)).slice(0, 3).forEach((h) => {
+      items.push({
+        id: h.id, label: h.title, description: h.description,
+        icon: HiOutlinePencilAlt, href: `/teacher/homework/${h.id}`, section: "الواجبات",
+      })
+    })
+
+    ;(mockQuestions || []).filter((qs) => qs.text?.includes(q)).slice(0, 3).forEach((qs) => {
+      items.push({
+        id: qs.id, label: qs.text, description: qs.type,
+        icon: HiOutlineQuestionMarkCircle,
+        href: `/teacher/questions?search=${encodeURIComponent(q)}`,
+        section: "بنك الأسئلة",
+      })
+    })
+
+    ;(mockVideoLibrary || []).filter((v) => v.title?.includes(q)).slice(0, 3).forEach((v) => {
+      items.push({
+        id: v.id, label: v.title, description: v.courseName || "",
+        icon: HiOutlineFilm, href: "/teacher/videos", section: "الفيديوهات",
+      })
+    })
+
+    ;(mockCertificates || []).filter((c) => c.studentName?.includes(q)).slice(0, 3).forEach((c) => {
+      items.push({
+        id: c.id, label: c.studentName, description: c.courseName,
+        icon: HiOutlineCertificate, href: "/teacher/certificates", section: "الشهادات",
+      })
+    })
+
+    ;(mockPayments || []).filter((p) => p.studentName?.includes(q)).slice(0, 3).forEach((p) => {
+      items.push({
+        id: p.id, label: p.studentName, description: `${p.amount} جنيه · ${p.status}`,
+        icon: HiOutlineCash, href: "/teacher/subscriptions", section: "المدفوعات",
+      })
+    })
+
+    ;(mockEnrollments || []).filter((e) => e.studentName?.includes(q) || e.courseName?.includes(q)).slice(0, 3).forEach((e) => {
+      items.push({
+        id: e.id, label: e.studentName, description: e.courseName,
+        icon: HiOutlineUserAdd, href: "/teacher/enrollments", section: "التسجيلات",
+      })
+    })
+
+    ;(mockCenterCodes || []).filter((c) => c.code?.includes(q)).slice(0, 3).forEach((c) => {
+      items.push({
+        id: c.id, label: c.code, description: `${c.type || ""} · ${c.value || ""}`,
+        icon: HiOutlineKey, href: "/teacher/codes", section: "الأكواد",
+      })
+    })
+
+    ;(mockBundles || []).filter((b) => b.name?.includes(q)).slice(0, 3).forEach((b) => {
+      items.push({
+        id: b.id, label: b.name, description: b.description,
+        icon: HiOutlineCollection, href: "/teacher/enrollments/bundles", section: "الباقات",
+      })
+    })
+
+    ;(mockMessages || []).filter((m) => m.subject?.includes(q)).slice(0, 3).forEach((m) => {
+      items.push({
+        id: m.id, label: m.subject, description: `من ${m.senderName}`,
+        icon: HiOutlineChat, href: `/teacher/messages?conv=${m.conversationId}`, section: "الرسائل",
       })
     })
 
@@ -111,18 +202,23 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
     router.push(item.href)
   }, [onClose, router])
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    const items = flatResults.filter((r): r is SearchResult => r !== "separator")
-    if (e.key === "ArrowDown") {
-      e.preventDefault()
-      setSelectedIndex((prev) => Math.min(prev + 1, items.length - 1))
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault()
-      setSelectedIndex((prev) => Math.max(prev - 1, 0))
-    } else if (e.key === "Enter" && items[selectedIndex]) {
-      executeItem(items[selectedIndex])
-    }
-  }, [flatResults, selectedIndex, executeItem])
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const items = flatResults.filter((r): r is SearchResult => r !== "separator")
+      if (e.key === "ArrowDown") {
+        e.preventDefault()
+        setSelectedIndex((prev) => Math.min(prev + 1, items.length - 1))
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault()
+        setSelectedIndex((prev) => Math.max(prev - 1, 0))
+      } else if (e.key === "Enter" && items[selectedIndex]) {
+        executeItem(items[selectedIndex])
+      } else if (e.key === "Escape") {
+        onClose()
+      }
+    },
+    [flatResults, selectedIndex, executeItem, onClose],
+  )
 
   let currentFlatIndex = -1
 
@@ -151,7 +247,7 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="ابحث عن طالب، كورس، رسالة..."
+                placeholder="ابحث في النظام..."
                 className="w-full bg-transparent text-base text-text placeholder:text-text-tertiary focus:outline-none"
               />
             </div>
@@ -163,22 +259,23 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
               ) : query.trim() ? (
                 sections.map(([section, items]) => (
                   <div key={section}>
-                    <div className="px-3 py-2 text-xs font-semibold text-text-tertiary uppercase tracking-wider">
-                      {section}
+                    <div className="px-3 py-2 text-xs font-semibold text-text-tertiary uppercase tracking-wider flex items-center justify-between">
+                      <span>{section}</span>
+                      <span className="text-text-tertiary/70">{items.length} نتيجة</span>
                     </div>
                     {items.map((item) => {
                       currentFlatIndex++
                       const idx = currentFlatIndex
                       const Icon = item.icon
                       return (
-                        <button
-                          key={item.id}
+                        <button type="button"
+                          key={`${section}-${item.id}`}
                           onClick={() => executeItem(item)}
                           className={cn(
                             "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-right transition-colors",
                             idx === selectedIndex
                               ? "bg-primary/10 text-primary"
-                              : "text-text hover:bg-surface-secondary"
+                              : "text-text hover:bg-surface-secondary",
                           )}
                         >
                           <Icon className="w-5 h-5 shrink-0" />

@@ -6,12 +6,12 @@ import { useThemeStore } from "@/lib/store/useThemeStore"
 import { HiMenu, HiX, HiSun, HiMoon, HiSearch } from "react-icons/hi"
 
 const navLinks = [
-  { href: "/", label: "الرئيسية" },
-  { href: "/courses", label: "الكورسات" },
-  { href: "/pricing", label: "الباقات" },
-  { href: "/about", label: "عن المدرس" },
-  { href: "/blog", label: "المقالات" },
-  { href: "/contact", label: "اتصل بنا" },
+  { href: "/", label: "ط·آ§ط¸â€‍ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ط·آ©" },
+  { href: "/courses", label: "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" },
+  { href: "/pricing", label: "ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾" },
+  { href: "/about", label: "ط·آ¹ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³" },
+  { href: "/blog", label: "ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط¸â€‍ط·آ§ط·ع¾" },
+  { href: "/contact", label: "ط·آ§ط·ع¾ط·آµط¸â€‍ ط·آ¨ط¸â€ ط·آ§" },
 ]
 
 export default function Navbar() {
@@ -48,19 +48,19 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <button className="p-2 text-text-secondary hover:text-primary transition-colors rounded-lg hover:bg-surface-tertiary" aria-label="بحث">
+          <button type="button" className="p-2 text-text-secondary hover:text-primary transition-colors rounded-lg hover:bg-surface-tertiary" aria-label="ط·آ¨ط·آ­ط·آ«">
             <HiSearch size={20} />
           </button>
-          <button onClick={toggleTheme} className="p-2 text-text-secondary hover:text-primary transition-colors rounded-lg hover:bg-surface-tertiary" aria-label="الوضع">
+          <button type="button" onClick={toggleTheme} className="p-2 text-text-secondary hover:text-primary transition-colors rounded-lg hover:bg-surface-tertiary" aria-label="ط·آ§ط¸â€‍ط¸ث†ط·آ¶ط·آ¹">
             {theme === "dark" ? <HiSun size={20} /> : <HiMoon size={20} />}
           </button>
           <Link href="/login" className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-lg transition-colors">
-            تسجيل الدخول
+            ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¯ط·آ®ط¸ث†ط¸â€‍
           </Link>
           <Link href="/demo" className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-primary border border-primary hover:bg-primary/5 rounded-lg transition-colors">
-            النسخة التجريبية
+            ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ©
           </Link>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 text-text-secondary hover:text-primary transition-colors" aria-label="القائمة">
+          <button type="button" onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden p-2 text-text-secondary hover:text-primary transition-colors" aria-label="ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ©">
             {mobileOpen ? <HiX size={24} /> : <HiMenu size={24} />}
           </button>
         </div>
@@ -76,10 +76,10 @@ export default function Navbar() {
             ))}
             <hr className="border-border my-2" />
             <Link href="/login" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-center text-white bg-primary rounded-lg">
-              تسجيل الدخول
+              ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¯ط·آ®ط¸ث†ط¸â€‍
             </Link>
             <Link href="/demo" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-center text-primary border border-primary rounded-lg">
-              النسخة التجريبية
+              ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ©
             </Link>
           </div>
         </div>

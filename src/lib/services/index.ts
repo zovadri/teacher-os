@@ -1,0 +1,7 @@
+export { BaseService } from "./base.service"
+export { AuthService } from "./auth.service"
+export { CourseService } from "./course.service"
+export { StudentService } from "./student.service"
+export { ExamService } from "./exam.service"
+export { HomeworkService } from "./homework.service"
+export { PaymentService } from "./payment.service"

@@ -35,11 +35,11 @@ interface ParentMessage {
 }
 
 const mockParentMessages: ParentMessage[] = [
-  { id: "pm-1", senderName: "أحمد محمد", senderRole: "مدرس", subject: "متابعة تقدم ابنك", content: "أود إعلامكم بأن ابنكم أحمد يقوم بعمل ممتاز في الكورس. يرجى متابعة الواجبات الأسبوعية.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
-  { id: "pm-2", senderName: "أحمد محمد", senderRole: "مدرس", subject: "نتيجة امتحان النحو", content: "حصل ابنكم على 90% في امتحان النحو الشهري. أداء ممتاز ويحتاج لمراجعة بعض النقاط في البلاغة.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
-  { id: "pm-3", senderName: "أحمد محمد", senderRole: "مدرس", subject: "طلب تأجيل واجب", content: "تمت الموافقة على طلب تأجيل واجب النحو حتى نهاية الأسبوع.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
-  { id: "pm-4", senderName: "أحمد محمد", senderRole: "مدرس", subject: "استفسار عن الدرس", content: "نعم، درس البلاغة متاح للتسجيل. يمكن لابنك مشاهدته من صفحة الكورس.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), isTeacher: true },
-  { id: "pm-5", senderName: "أحمد محمد", senderRole: "مدرس", subject: "تحديث جدول الحصص", content: "تم تحديث جدول الحصص للأسبوع القادم. يرجى الاطلاع على المواعيد الجديدة.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
+  { id: "pm-1", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ظ…طھط§ط¨ط¹ط© طھظ‚ط¯ظ… ط§ط¨ظ†ظƒ", content: "ط£ظˆط¯ ط¥ط¹ظ„ط§ظ…ظƒظ… ط¨ط£ظ† ط§ط¨ظ†ظƒظ… ط£ط­ظ…ط¯ ظٹظ‚ظˆظ… ط¨ط¹ظ…ظ„ ظ…ظ…طھط§ط² ظپظٹ ط§ظ„ظƒظˆط±ط³. ظٹط±ط¬ظ‰ ظ…طھط§ط¨ط¹ط© ط§ظ„ظˆط§ط¬ط¨ط§طھ ط§ظ„ط£ط³ط¨ظˆط¹ظٹط©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
+  { id: "pm-2", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ظ†طھظٹط¬ط© ط§ظ…طھط­ط§ظ† ط§ظ„ظ†ط­ظˆ", content: "ط­طµظ„ ط§ط¨ظ†ظƒظ… ط¹ظ„ظ‰ 90% ظپظٹ ط§ظ…طھط­ط§ظ† ط§ظ„ظ†ط­ظˆ ط§ظ„ط´ظ‡ط±ظٹ. ط£ط¯ط§ط، ظ…ظ…طھط§ط² ظˆظٹط­طھط§ط¬ ظ„ظ…ط±ط§ط¬ط¹ط© ط¨ط¹ط¶ ط§ظ„ظ†ظ‚ط§ط· ظپظٹ ط§ظ„ط¨ظ„ط§ط؛ط©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
+  { id: "pm-3", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ط·ظ„ط¨ طھط£ط¬ظٹظ„ ظˆط§ط¬ط¨", content: "طھظ…طھ ط§ظ„ظ…ظˆط§ظپظ‚ط© ط¹ظ„ظ‰ ط·ظ„ط¨ طھط£ط¬ظٹظ„ ظˆط§ط¬ط¨ ط§ظ„ظ†ط­ظˆ ط­طھظ‰ ظ†ظ‡ط§ظٹط© ط§ظ„ط£ط³ط¨ظˆط¹.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
+  { id: "pm-4", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ط§ط³طھظپط³ط§ط± ط¹ظ† ط§ظ„ط¯ط±ط³", content: "ظ†ط¹ظ…طŒ ط¯ط±ط³ ط§ظ„ط¨ظ„ط§ط؛ط© ظ…طھط§ط­ ظ„ظ„طھط³ط¬ظٹظ„. ظٹظ…ظƒظ† ظ„ط§ط¨ظ†ظƒ ظ…ط´ط§ظ‡ط¯طھظ‡ ظ…ظ† طµظپط­ط© ط§ظ„ظƒظˆط±ط³.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), isTeacher: true },
+  { id: "pm-5", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "طھط­ط¯ظٹط« ط¬ط¯ظˆظ„ ط§ظ„ط­طµطµ", content: "طھظ… طھط­ط¯ظٹط« ط¬ط¯ظˆظ„ ط§ظ„ط­طµطµ ظ„ظ„ط£ط³ط¨ظˆط¹ ط§ظ„ظ‚ط§ط¯ظ…. ظٹط±ط¬ظ‰ ط§ظ„ط§ط·ظ„ط§ط¹ ط¹ظ„ظ‰ ط§ظ„ظ…ظˆط§ط¹ظٹط¯ ط§ظ„ط¬ط¯ظٹط¯ط©.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
 ]
 
 export default function ParentMessagesPage() {
@@ -57,7 +57,7 @@ export default function ParentMessagesPage() {
 
   return (
     <div className="p-4 md:p-6 h-[calc(100vh-4rem)]">
-      <DashboardHeader title="الرسائل" subtitle="التواصل مع المدرس" />
+      <DashboardHeader title="ط§ظ„ط±ط³ط§ط¦ظ„" subtitle="ط§ظ„طھظˆط§طµظ„ ظ…ط¹ ط§ظ„ظ…ط¯ط±ط³" />
 
       <div className="flex gap-4 h-[calc(100%-5rem)] mt-4">
         <div className={cn(
@@ -67,16 +67,16 @@ export default function ParentMessagesPage() {
           <div className="p-3 border-b border-border space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex-1">
-                <SearchInput value={search} onChange={setSearch} placeholder="بحث في الرسائل..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ظپظٹ ط§ظ„ط±ط³ط§ط¦ظ„..." />
               </div>
               <Button size="sm" variant="primary" onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                جديدة
+                ط¬ط¯ظٹط¯ط©
               </Button>
             </div>
           </div>
           <div className="flex-1 overflow-y-auto divide-y divide-border">
             {filtered.map((msg) => (
-              <button
+              <button type="button"
                 key={msg.id}
                 onClick={() => { setSelectedMessage(msg); setShowMobileList(false) }}
                 className={cn(
@@ -90,7 +90,7 @@ export default function ParentMessagesPage() {
                       {msg.isTeacher ? (
                         <HiOutlineUser className="w-5 h-5 text-primary" />
                       ) : (
-                        <span className="text-sm font-bold text-primary">و</span>
+                        <span className="text-sm font-bold text-primary">ظˆ</span>
                       )}
                     </div>
                     {!msg.read && <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary rounded-full border-2 border-surface" />}
@@ -121,7 +121,7 @@ export default function ParentMessagesPage() {
             <>
               <div className="flex items-center justify-between p-3 border-b border-border">
                 <div className="flex items-center gap-3">
-                  <button className="md:hidden p-1 text-text-tertiary" onClick={() => setShowMobileList(true)}>
+                  <button type="button" className="md:hidden p-1 text-text-tertiary" onClick={() => setShowMobileList(true)}>
                     <HiOutlineChevronRight className="w-5 h-5" />
                   </button>
                   <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
@@ -143,19 +143,19 @@ export default function ParentMessagesPage() {
                     <p className="text-sm text-text leading-relaxed">{selectedMessage.content}</p>
                   </div>
                   <div className="p-4 rounded-xl bg-primary-50/50 dark:bg-primary-900/10 border border-primary/20">
-                    <p className="text-sm text-text font-medium mb-2">الرد على الرسالة</p>
+                    <p className="text-sm text-text font-medium mb-2">ط§ظ„ط±ط¯ ط¹ظ„ظ‰ ط§ظ„ط±ط³ط§ظ„ط©</p>
                     <textarea
-                      placeholder="اكتب ردك هنا..."
+                      placeholder="ط§ظƒطھط¨ ط±ط¯ظƒ ظ‡ظ†ط§..."
                       rows={4}
                       className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
                     />
                     <div className="flex items-center justify-between mt-3">
-                      <button className="flex items-center gap-1 text-sm text-text-tertiary hover:text-primary transition-colors">
+                      <button type="button" className="flex items-center gap-1 text-sm text-text-tertiary hover:text-primary transition-colors">
                         <HiOutlinePaperClip className="w-4 h-4" />
-                        <span>إرفاق ملف</span>
+                        <span>ط¥ط±ظپط§ظ‚ ظ…ظ„ظپ</span>
                       </button>
-                      <Button size="sm" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-                        إرسال الرد
+                      <button type="button" size="sm" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
+                        ط¥ط±ط³ط§ظ„ ط§ظ„ط±ط¯
                       </Button>
                     </div>
                   </div>
@@ -166,11 +166,11 @@ export default function ParentMessagesPage() {
             <div className="flex-1 flex items-center justify-center">
               <EmptyState
                 icon={HiOutlineChat}
-                title="اختر رسالة"
-                description="اختر رسالة من القائمة لعرض محتواها"
+                title="ط§ط®طھط± ط±ط³ط§ظ„ط©"
+                description="ط§ط®طھط± ط±ط³ط§ظ„ط© ظ…ظ† ط§ظ„ظ‚ط§ط¦ظ…ط© ظ„ط¹ط±ط¶ ظ…ط­طھظˆط§ظ‡ط§"
                 action={
                   <Button onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                    إرسال رسالة جديدة
+                    ط¥ط±ط³ط§ظ„ ط±ط³ط§ظ„ط© ط¬ط¯ظٹط¯ط©
                   </Button>
                 }
               />
@@ -179,19 +179,19 @@ export default function ParentMessagesPage() {
         </div>
       </div>
 
-      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="رسالة جديدة إلى المدرس" subtitle="أرسل استفساراً أو طلباً إلى المدرس" size="lg">
+      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="ط±ط³ط§ظ„ط© ط¬ط¯ظٹط¯ط© ط¥ظ„ظ‰ ط§ظ„ظ…ط¯ط±ط³" subtitle="ط£ط±ط³ظ„ ط§ط³طھظپط³ط§ط±ط§ظ‹ ط£ظˆ ط·ظ„ط¨ط§ظ‹ ط¥ظ„ظ‰ ط§ظ„ظ…ط¯ط±ط³" size="lg">
         <div className="space-y-4">
-          <Input label="الموضوع" placeholder="عنوان الرسالة" />
-          <Textarea label="نص الرسالة" placeholder="اكتب رسالتك هنا..." rows={5} />
+          <Input label="ط§ظ„ظ…ظˆط¶ظˆط¹" placeholder="ط¹ظ†ظˆط§ظ† ط§ظ„ط±ط³ط§ظ„ط©" />
+          <Textarea label="ظ†طµ ط§ظ„ط±ط³ط§ظ„ط©" placeholder="ط§ظƒطھط¨ ط±ط³ط§ظ„طھظƒ ظ‡ظ†ط§..." rows={5} />
           <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary border border-border cursor-pointer hover:bg-surface-tertiary transition-colors">
             <HiOutlinePaperClip className="w-4 h-4 text-text-tertiary" />
-            <span className="text-sm text-text-tertiary">إرفاق ملف (اختياري)</span>
+            <span className="text-sm text-text-tertiary">ط¥ط±ظپط§ظ‚ ظ…ظ„ظپ (ط§ط®طھظٹط§ط±ظٹ)</span>
           </div>
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-              إرسال
+            <button type="button" variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
+              ط¥ط±ط³ط§ظ„
             </Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>إلغاء</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>ط¥ظ„ط؛ط§ط،</Button>
           </div>
         </div>
       </Modal>

@@ -16,7 +16,7 @@ import {
   HiOutlineBookOpen,
 } from "react-icons/hi"
 import DashboardHeader from "@/components/layout/DashboardHeader"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import Button from "@/components/ui/Button"
 import { Modal } from "@/components/ui/Modal"
@@ -26,15 +26,19 @@ import { EmptyState } from "@/components/ui/EmptyState"
 import { Alert } from "@/components/ui/Alert"
 import { mockCourses } from "@/lib/mock/data"
 import { cn, formatDate } from "@/lib/utils"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
+import { Breadcrumb } from "@/components/ui/Breadcrumb"
 
-const daysOfWeek = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"]
+const daysOfWeek = ["ط§ظ„ط³ط¨طھ", "ط§ظ„ط£ط­ط¯", "ط§ظ„ط¥ط«ظ†ظٹظ†", "ط§ظ„ط«ظ„ط§ط«ط§ط،", "ط§ظ„ط£ط±ط¨ط¹ط§ط،", "ط§ظ„ط®ظ…ظٹط³", "ط§ظ„ط¬ظ…ط¹ط©"]
 
 const mockScheduledLessons = [
-  { id: "sched-1", courseId: "c-1", courseName: "النحو والصرف", lessonName: "درس 1: المقدمة", date: new Date(2025, 6, 20), time: "10:00", duration: 45, notes: "مراجعة سريعة للدرس السابق", autoPublish: true },
-  { id: "sched-2", courseId: "c-1", courseName: "النحو والصرف", lessonName: "درس 2: الشرح", date: new Date(2025, 6, 22), time: "10:00", duration: 45, notes: "", autoPublish: false },
-  { id: "sched-3", courseId: "c-2", courseName: "البلاغة والأدب", lessonName: "درس 1: المقدمة", date: new Date(2025, 6, 21), time: "14:00", duration: 60, notes: "تجهيز العرض التقديمي", autoPublish: true },
-  { id: "sched-4", courseId: "c-6", courseName: "التعبير والإنشاء", lessonName: "درس 3: التطبيق", date: new Date(2025, 6, 23), time: "12:00", duration: 30, notes: "", autoPublish: true },
-  { id: "sched-5", courseId: "c-4", courseName: "قواعد النحو المتقدم", lessonName: "درس 1: مقدمة", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "اختبار قصير في نهاية الدرس", autoPublish: false },
+  { id: "sched-1", courseId: "c-1", courseName: "ط§ظ„ظ†ط­ظˆ ظˆط§ظ„طµط±ظپ", lessonName: "ط¯ط±ط³ 1: ط§ظ„ظ…ظ‚ط¯ظ…ط©", date: new Date(2025, 6, 20), time: "10:00", duration: 45, notes: "ظ…ط±ط§ط¬ط¹ط© ط³ط±ظٹط¹ط© ظ„ظ„ط¯ط±ط³ ط§ظ„ط³ط§ط¨ظ‚", autoPublish: true },
+  { id: "sched-2", courseId: "c-1", courseName: "ط§ظ„ظ†ط­ظˆ ظˆط§ظ„طµط±ظپ", lessonName: "ط¯ط±ط³ 2: ط§ظ„ط´ط±ط­", date: new Date(2025, 6, 22), time: "10:00", duration: 45, notes: "", autoPublish: false },
+  { id: "sched-3", courseId: "c-2", courseName: "ط§ظ„ط¨ظ„ط§ط؛ط© ظˆط§ظ„ط£ط¯ط¨", lessonName: "ط¯ط±ط³ 1: ط§ظ„ظ…ظ‚ط¯ظ…ط©", date: new Date(2025, 6, 21), time: "14:00", duration: 60, notes: "طھط¬ظ‡ظٹط² ط§ظ„ط¹ط±ط¶ ط§ظ„طھظ‚ط¯ظٹظ…ظٹ", autoPublish: true },
+  { id: "sched-4", courseId: "c-6", courseName: "ط§ظ„طھط¹ط¨ظٹط± ظˆط§ظ„ط¥ظ†ط´ط§ط،", lessonName: "ط¯ط±ط³ 3: ط§ظ„طھط·ط¨ظٹظ‚", date: new Date(2025, 6, 23), time: "12:00", duration: 30, notes: "", autoPublish: true },
+  { id: "sched-5", courseId: "c-4", courseName: "ظ‚ظˆط§ط¹ط¯ ط§ظ„ظ†ط­ظˆ ط§ظ„ظ…طھظ‚ط¯ظ…", lessonName: "ط¯ط±ط³ 1: ظ…ظ‚ط¯ظ…ط©", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "ط§ط®طھط¨ط§ط± ظ‚طµظٹط± ظپظٹ ظ†ظ‡ط§ظٹط© ط§ظ„ط¯ط±ط³", autoPublish: false },
 ]
 
 export default function SchedulePage() {
@@ -76,12 +80,14 @@ export default function SchedulePage() {
       notes: newLesson.notes,
       autoPublish: autoPublish,
     }])
+    toast.success("تمت إضافة الدرس إلى الجدولة بنجاح")
     setShowAddModal(false)
     setNewLesson({ courseId: "", lessonName: "", date: "", time: "", duration: 45, notes: "" })
   }
 
   const deleteLesson = (id: string) => {
     setSchedule((prev) => prev.filter((s) => s.id !== id))
+    toast.success("تم حذف الدرس من الجدولة")
   }
 
   const courseOptions = mockCourses.map((c) => ({ value: c.id, label: c.title }))
@@ -92,30 +98,31 @@ export default function SchedulePage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="جدولة الدروس" subtitle="تخطيط وجدولة الدروس للطلاب" />
+      <Breadcrumb items={[{ label: "ط§ظ„ظƒظˆط±ط³ط§طھ", href: "/teacher/courses" }, { label: "ط¬ط¯ظˆظ„ ط§ظ„ظƒظˆط±ط³ط§طھ" }]} />
+      <DashboardHeader title="ط¬ط¯ظˆظ„ط© ط§ظ„ط¯ط±ظˆط³" subtitle="طھط®ط·ظٹط· ظˆط¬ط¯ظˆظ„ط© ط§ظ„ط¯ط±ظˆط³ ظ„ظ„ط·ظ„ط§ط¨" />
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Badge variant="info" size="md">{schedule.length} درس مجدول</Badge>
-          <Badge variant="success" size="md">{upcomingLessons.length} قادم</Badge>
+          <Badge variant="info" size="md">{schedule.length} ط¯ط±ط³ ظ…ط¬ط¯ظˆظ„</Badge>
+          <Badge variant="success" size="md">{upcomingLessons.length} ظ‚ط§ط¯ظ…</Badge>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 p-1 bg-surface border border-border rounded-xl">
-            <button
+            <button type="button"
               onClick={() => setViewMode("list")}
               className={cn("px-3 py-1.5 text-xs rounded-lg transition-colors", viewMode === "list" ? "bg-primary text-white" : "text-text-secondary")}
             >
-              قائمة
+              ظ‚ط§ط¦ظ…ط©
             </button>
-            <button
+            <button type="button"
               onClick={() => setViewMode("grid")}
               className={cn("px-3 py-1.5 text-xs rounded-lg transition-colors", viewMode === "grid" ? "bg-primary text-white" : "text-text-secondary")}
             >
-              تقويم
+              طھظ‚ظˆظٹظ…
             </button>
           </div>
-          <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-            جدولة درس جديد
+          <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
+            ط¬ط¯ظˆظ„ط© ط¯ط±ط³ ط¬ط¯ظٹط¯
           </Button>
         </div>
       </div>
@@ -124,9 +131,9 @@ export default function SchedulePage() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between w-full">
-              <button onClick={prevMonth} className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-tertiary"><HiOutlineChevronRight className="w-5 h-5" /></button>
+              <button type="button" onClick={prevMonth} className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-tertiary"><HiOutlineChevronRight className="w-5 h-5" /></button>
               <CardTitle>{monthName}</CardTitle>
-              <button onClick={nextMonth} className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-tertiary"><HiOutlineChevronLeft className="w-5 h-5" /></button>
+              <button type="button" onClick={nextMonth} className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-tertiary"><HiOutlineChevronLeft className="w-5 h-5" /></button>
             </div>
           </CardHeader>
           <CardContent>
@@ -152,9 +159,9 @@ export default function SchedulePage() {
                     <span className={cn("text-xs font-medium px-1.5 py-0.5 rounded", isToday && "bg-primary text-white")}>{day}</span>
                     <div className="mt-1 space-y-0.5">
                       {lessons.slice(0, 2).map((l) => (
-                        <div key={l.id} className="text-[10px] px-1 py-0.5 rounded bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 truncate leading-tight">
+                        <Link key={l.id} href={`/teacher/courses/${l.courseId}`} className="text-[10px] px-1 py-0.5 rounded bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 truncate leading-tight block hover:opacity-80 transition-opacity">
                           {l.courseName}
-                        </div>
+                        </Link>
                       ))}
                       {lessons.length > 2 && (
                         <span className="text-[10px] text-text-tertiary px-1">+{lessons.length - 2}</span>
@@ -169,16 +176,16 @@ export default function SchedulePage() {
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>الدروس المجدولة</CardTitle>
-            <CardDescription>جميع الدروس حسب تاريخ الجدولة</CardDescription>
+            <CardTitle>ط§ظ„ط¯ط±ظˆط³ ط§ظ„ظ…ط¬ط¯ظˆظ„ط©</CardTitle>
+            <CardDescription>ط¬ظ…ظٹط¹ ط§ظ„ط¯ط±ظˆط³ ط­ط³ط¨ طھط§ط±ظٹط® ط§ظ„ط¬ط¯ظˆظ„ط©</CardDescription>
           </CardHeader>
           <CardContent>
             {sortedSchedule.length === 0 ? (
               <EmptyState
                 icon={HiOutlineCalendar}
-                title="لا توجد دروس مجدولة"
-                description="قم بجدولة أول درس الآن"
-                action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowAddModal(true)}>جدولة درس</Button>}
+                title="ظ„ط§ طھظˆط¬ط¯ ط¯ط±ظˆط³ ظ…ط¬ط¯ظˆظ„ط©"
+                description="ظ‚ظ… ط¨ط¬ط¯ظˆظ„ط© ط£ظˆظ„ ط¯ط±ط³ ط§ظ„ط¢ظ†"
+                action={<button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowAddModal(true)}>ط¬ط¯ظˆظ„ط© ط¯ط±ط³</Button>}
               />
             ) : (
               <div className="space-y-2">
@@ -197,18 +204,20 @@ export default function SchedulePage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <h4 className="font-semibold text-text text-sm">{s.lessonName}</h4>
-                        <Badge variant="info" size="sm">{s.courseName}</Badge>
+                        <Link href={`/teacher/courses/${s.courseId}`}>
+                          <Badge variant="info" size="sm" className="cursor-pointer hover:opacity-80 transition-opacity">{s.courseName}</Badge>
+                        </Link>
                       </div>
                       <div className="flex items-center gap-3 mt-1 text-xs text-text-tertiary">
                         <span className="flex items-center gap-1"><HiOutlineClock className="w-3 h-3" />{s.time}</span>
-                        <span>{s.duration} دقيقة</span>
-                        {s.notes && <span className="truncate max-w-[200px]">· {s.notes}</span>}
+                        <span>{s.duration} ط¯ظ‚ظٹظ‚ط©</span>
+                        {s.notes && <span className="truncate max-w-[200px]">آ· {s.notes}</span>}
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant={s.autoPublish ? "success" : "warning"} size="sm">{s.autoPublish ? "نشر تلقائي" : "يدوي"}</Badge>
-                      <button className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={14} /></button>
-                      <button onClick={() => deleteLesson(s.id)} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={14} /></button>
+                      <Badge variant={s.autoPublish ? "success" : "warning"} size="sm">{s.autoPublish ? "ظ†ط´ط± طھظ„ظ‚ط§ط¦ظٹ" : "ظٹط¯ظˆظٹ"}</Badge>
+                      <button type="button" className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={14} /></button>
+                      <button type="button" onClick={() => deleteLesson(s.id)} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={14} /></button>
                     </div>
                   </motion.div>
                 ))}
@@ -222,16 +231,16 @@ export default function SchedulePage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <HiOutlineEye className="w-5 h-5 text-primary" />
-            <CardTitle>النشر التلقائي</CardTitle>
+            <CardTitle>ط§ظ„ظ†ط´ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-text">النشر التلقائي عند حلول الموعد</p>
-              <p className="text-xs text-text-tertiary">عند تفعيله، سيتم نشر الدرس تلقائياً للطلاب في تاريخ وميعاد الجدولة</p>
+              <p className="text-sm font-medium text-text">ط§ظ„ظ†ط´ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ ط¹ظ†ط¯ ط­ظ„ظˆظ„ ط§ظ„ظ…ظˆط¹ط¯</p>
+              <p className="text-xs text-text-tertiary">ط¹ظ†ط¯ طھظپط¹ظٹظ„ظ‡طŒ ط³ظٹطھظ… ظ†ط´ط± ط§ظ„ط¯ط±ط³ طھظ„ظ‚ط§ط¦ظٹط§ظ‹ ظ„ظ„ط·ظ„ط§ط¨ ظپظٹ طھط§ط±ظٹط® ظˆظ…ظٹط¹ط§ط¯ ط§ظ„ط¬ط¯ظˆظ„ط©</p>
             </div>
-            <button
+            <button type="button"
               onClick={() => setAutoPublish(!autoPublish)}
               className={cn("w-12 h-6 rounded-full transition-colors relative", autoPublish ? "bg-primary" : "bg-surface-tertiary")}
             >
@@ -241,30 +250,30 @@ export default function SchedulePage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="جدولة درس جديد" size="lg">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¬ط¯ظˆظ„ط© ط¯ط±ط³ ط¬ط¯ظٹط¯" size="lg">
         <div className="space-y-4">
           <Select
-            label="اختر الكورس"
+            label="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³"
             options={courseOptions}
             value={newLesson.courseId}
             onChange={(e) => setNewLesson({ ...newLesson, courseId: e.target.value })}
-            placeholder="اختر الكورس"
+            placeholder="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³"
           />
           <Input
-            label="اسم الدرس"
+            label="ط§ط³ظ… ط§ظ„ط¯ط±ط³"
             value={newLesson.lessonName}
             onChange={(e) => setNewLesson({ ...newLesson, lessonName: e.target.value })}
-            placeholder="مثال: درس 4: التطبيقات"
+            placeholder="ظ…ط«ط§ظ„: ط¯ط±ط³ 4: ط§ظ„طھط·ط¨ظٹظ‚ط§طھ"
           />
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="التاريخ"
+              label="ط§ظ„طھط§ط±ظٹط®"
               type="date"
               value={newLesson.date}
               onChange={(e) => setNewLesson({ ...newLesson, date: e.target.value })}
             />
             <Input
-              label="الوقت"
+              label="ط§ظ„ظˆظ‚طھ"
               type="time"
               value={newLesson.time}
               onChange={(e) => setNewLesson({ ...newLesson, time: e.target.value })}
@@ -272,15 +281,15 @@ export default function SchedulePage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="المدة (دقيقة)"
+              label="ط§ظ„ظ…ط¯ط© (ط¯ظ‚ظٹظ‚ط©)"
               type="number"
               value={newLesson.duration}
               onChange={(e) => setNewLesson({ ...newLesson, duration: Number(e.target.value) })}
             />
             <div className="flex items-end pb-3">
               <div className="flex items-center gap-3">
-                <span className="text-sm text-text-secondary">نشر تلقائي</span>
-                <button
+                <span className="text-sm text-text-secondary">ظ†ط´ط± طھظ„ظ‚ط§ط¦ظٹ</span>
+                <button type="button"
                   onClick={() => setAutoPublish(!autoPublish)}
                   className={cn("w-10 h-5 rounded-full transition-colors relative", autoPublish ? "bg-primary" : "bg-surface-tertiary")}
                 >
@@ -290,17 +299,17 @@ export default function SchedulePage() {
             </div>
           </div>
           <Input
-            label="ملاحظات (اختياري)"
+            label="ظ…ظ„ط§ط­ط¸ط§طھ (ط§ط®طھظٹط§ط±ظٹ)"
             value={newLesson.notes}
             onChange={(e) => setNewLesson({ ...newLesson, notes: e.target.value })}
-            placeholder="ملاحظات للدرس..."
+            placeholder="ظ…ظ„ط§ط­ط¸ط§طھ ظ„ظ„ط¯ط±ط³..."
           />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1" leftIcon={<HiOutlineCheck className="w-4 h-4" />} onClick={addLesson}>
-              إضافة إلى الجدول
+            <button type="button" variant="primary" className="flex-1" leftIcon={<HiOutlineCheck className="w-4 h-4" />} onClick={addLesson}>
+              ط¥ط¶ط§ظپط© ط¥ظ„ظ‰ ط§ظ„ط¬ط¯ظˆظ„
             </Button>
-            <Button variant="secondary" leftIcon={<HiOutlineX className="w-4 h-4" />} onClick={() => setShowAddModal(false)}>
-              إلغاء
+            <button type="button" variant="secondary" leftIcon={<HiOutlineX className="w-4 h-4" />} onClick={() => setShowAddModal(false)}>
+              ط¥ظ„ط؛ط§ط،
             </Button>
           </div>
         </div>

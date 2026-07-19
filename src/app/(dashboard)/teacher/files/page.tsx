@@ -29,14 +29,16 @@ import Select from "@/components/ui/Select"
 import Textarea from "@/components/ui/Textarea"
 import { mockVideoLibrary, mockCourses } from "@/lib/mock/data"
 import { formatDate, cn } from "@/lib/utils"
+import toast from "react-hot-toast"
+import Link from "next/link"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" }> = {
-  ready: { label: "جاهز", variant: "success" },
-  processing: { label: "قيد المعالجة", variant: "warning" },
-  failed: { label: "فاشل", variant: "error" },
+  ready: { label: "ط¬ط§ظ‡ط²", variant: "success" },
+  processing: { label: "ظ‚ظٹط¯ ط§ظ„ظ…ط¹ط§ظ„ط¬ط©", variant: "warning" },
+  failed: { label: "ظپط§ط´ظ„", variant: "error" },
 }
 
-const formatDuration = (mins: number) => `${mins}:${String(Math.floor(Math.random() * 60)).padStart(2, "0")}`
+const formatDuration = (mins: number) => `${mins}:${String((mins * 7 + 13) % 60).padStart(2, "0")}`
 
 export default function FilesPage() {
   const [search, setSearch] = useState("")
@@ -64,26 +66,26 @@ export default function FilesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="مكتبة الملفات" subtitle="إدارة الفيديوهات والملفات التعليمية" />
+      <DashboardHeader title="ظ…ظƒطھط¨ط© ط§ظ„ظ…ظ„ظپط§طھ" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھ ظˆط§ظ„ظ…ظ„ظپط§طھ ط§ظ„طھط¹ظ„ظٹظ…ظٹط©" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="إجمالي الفيديوهات" value={stats.total} icon={HiOutlineFilm} color="primary" />
-        <StatsCard title="جاهزة" value={stats.ready} icon={HiOutlineCheckCircle} color="success" />
-        <StatsCard title="قيد المعالجة" value={stats.processing} icon={HiOutlineServer} color="warning" />
-        <StatsCard title="إجمالي المشاهدات" value={stats.totalViews.toLocaleString("ar-EG")} icon={HiOutlineEye} color="info" />
+        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھ" value={stats.total} icon={HiOutlineFilm} color="primary" />
+        <StatsCard title="ط¬ط§ظ‡ط²ط©" value={stats.ready} icon={HiOutlineCheckCircle} color="success" />
+        <StatsCard title="ظ‚ظٹط¯ ط§ظ„ظ…ط¹ط§ظ„ط¬ط©" value={stats.processing} icon={HiOutlineServer} color="warning" />
+        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ط´ط§ظ‡ط¯ط§طھ" value={stats.totalViews.toLocaleString("ar-EG")} icon={HiOutlineEye} color="info" />
       </div>
 
       <div className="flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
         <div className="flex flex-1 flex-wrap gap-3 w-full">
           <div className="flex-1 min-w-[200px]">
-            <SearchInput value={search} onChange={setSearch} placeholder="بحث في الفيديوهات..." />
+            <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ظپظٹ ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھ..." />
           </div>
           <select
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
             className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
           >
-            <option value="all">جميع الكورسات</option>
+            <option value="all">ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ</option>
             {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
           </select>
           <select
@@ -91,29 +93,29 @@ export default function FilesPage() {
             onChange={(e) => setStatusFilter(e.target.value)}
             className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
           >
-            <option value="all">جميع الحالات</option>
-            <option value="ready">جاهز</option>
-            <option value="processing">قيد المعالجة</option>
-            <option value="failed">فاشل</option>
+            <option value="all">ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ</option>
+            <option value="ready">ط¬ط§ظ‡ط²</option>
+            <option value="processing">ظ‚ظٹط¯ ط§ظ„ظ…ط¹ط§ظ„ط¬ط©</option>
+            <option value="failed">ظپط§ط´ظ„</option>
           </select>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center bg-surface border border-border rounded-xl p-1">
-            <button
+            <button type="button"
               onClick={() => setViewMode("grid")}
               className={cn("p-1.5 rounded-lg transition-colors", viewMode === "grid" ? "bg-primary text-white" : "text-text-tertiary hover:text-text")}
             >
               <HiOutlineViewGrid className="w-4 h-4" />
             </button>
-            <button
+            <button type="button"
               onClick={() => setViewMode("list")}
               className={cn("p-1.5 rounded-lg transition-colors", viewMode === "list" ? "bg-primary text-white" : "text-text-tertiary hover:text-text")}
             >
               <HiOutlineViewList className="w-4 h-4" />
             </button>
           </div>
-          <Button leftIcon={<HiOutlineUpload className="w-4 h-4" />} onClick={() => setShowUploadModal(true)}>
-            رفع فيديو
+          <button type="button" leftIcon={<HiOutlineUpload className="w-4 h-4" />} onClick={() => setShowUploadModal(true)}>
+            ط±ظپط¹ ظپظٹط¯ظٹظˆ
           </Button>
         </div>
       </div>
@@ -136,7 +138,7 @@ export default function FilesPage() {
                 </div>
                 <div className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-1 rounded-lg bg-black/60 text-white text-xs">
                   <HiOutlineClock className="w-3 h-3" />
-                  <span>{video.duration} دقيقة</span>
+                  <span>{video.duration} ط¯ظ‚ظٹظ‚ط©</span>
                 </div>
                 <div className="absolute top-2 left-2">
                   <Badge variant={statusConfig[video.status].variant} size="sm">
@@ -146,7 +148,7 @@ export default function FilesPage() {
               </div>
               <div className="p-3">
                 <h3 className="text-sm font-medium text-text truncate mb-1">{video.title}</h3>
-                <p className="text-xs text-text-tertiary truncate mb-2">{video.courseName}</p>
+                <Link href={`/teacher/courses/${video.courseId}`} className="text-xs text-text-tertiary truncate mb-2 hover:text-primary transition-colors block">{video.courseName}</Link>
                 <div className="flex items-center justify-between text-xs text-text-tertiary">
                   <span>{formatDate(video.uploadDate)}</span>
                   <div className="flex items-center gap-1">
@@ -167,9 +169,9 @@ export default function FilesPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-text truncate">{video.title}</p>
-                <p className="text-xs text-text-tertiary truncate">{video.courseName} · {video.resolution} · {video.format}</p>
+                <p className="text-xs text-text-tertiary truncate"><Link href={`/teacher/courses/${video.courseId}`} className="hover:text-primary transition-colors">{video.courseName}</Link> آ· {video.resolution} آ· {video.format}</p>
               </div>
-              <div className="text-xs text-text-tertiary shrink-0">{video.duration} د</div>
+              <div className="text-xs text-text-tertiary shrink-0">{video.duration} ط¯</div>
               <Badge variant={statusConfig[video.status].variant} size="sm">{statusConfig[video.status].label}</Badge>
               <div className="flex items-center gap-1 text-xs text-text-tertiary shrink-0">
                 <HiOutlineEye className="w-3 h-3" />
@@ -180,26 +182,26 @@ export default function FilesPage() {
         </div>
       )}
 
-      <Modal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} title="رفع فيديو جديد" subtitle="أدخل بيانات الفيديو واختر الملف" size="lg">
+      <Modal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} title="ط±ظپط¹ ظپظٹط¯ظٹظˆ ط¬ط¯ظٹط¯" subtitle="ط£ط¯ط®ظ„ ط¨ظٹط§ظ†ط§طھ ط§ظ„ظپظٹط¯ظٹظˆ ظˆط§ط®طھط± ط§ظ„ظ…ظ„ظپ" size="lg">
         <div className="space-y-4">
-          <Input label="عنوان الفيديو" placeholder="أدخل عنوان الفيديو" />
-          <Textarea label="الوصف" placeholder="وصف الفيديو مع تفاصيل المحتوى" rows={3} />
-          <Select label="الكورس" options={mockCourses.map((c) => ({ value: c.id, label: c.title }))} placeholder="اختر الكورس" />
-          <Select label="الفصل" options={[
-            { value: "ch-1", label: "المقدمة" },
-            { value: "ch-2", label: "الأساسيات" },
-            { value: "ch-3", label: "المستوى المتقدم" },
-          ]} placeholder="اختر الفصل (اختياري)" />
+          <Input label="ط¹ظ†ظˆط§ظ† ط§ظ„ظپظٹط¯ظٹظˆ" placeholder="ط£ط¯ط®ظ„ ط¹ظ†ظˆط§ظ† ط§ظ„ظپظٹط¯ظٹظˆ" />
+          <Textarea label="ط§ظ„ظˆطµظپ" placeholder="ظˆطµظپ ط§ظ„ظپظٹط¯ظٹظˆ ظ…ط¹ طھظپط§طµظٹظ„ ط§ظ„ظ…ط­طھظˆظ‰" rows={3} />
+          <Select label="ط§ظ„ظƒظˆط±ط³" options={mockCourses.map((c) => ({ value: c.id, label: c.title }))} placeholder="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³" />
+          <Select label="ط§ظ„ظپطµظ„" options={[
+            { value: "ch-1", label: "ط§ظ„ظ…ظ‚ط¯ظ…ط©" },
+            { value: "ch-2", label: "ط§ظ„ط£ط³ط§ط³ظٹط§طھ" },
+            { value: "ch-3", label: "ط§ظ„ظ…ط³طھظˆظ‰ ط§ظ„ظ…طھظ‚ط¯ظ…" },
+          ]} placeholder="ط§ط®طھط± ط§ظ„ظپطµظ„ (ط§ط®طھظٹط§ط±ظٹ)" />
           <div className="flex items-center justify-center p-8 rounded-xl border-2 border-dashed border-border bg-surface-secondary cursor-pointer hover:border-primary/50 transition-colors">
             <div className="text-center">
               <HiOutlineUpload className="w-8 h-8 mx-auto text-text-tertiary mb-2" />
-              <p className="text-sm text-text-secondary">اسحب وأفلت الفيديو هنا أو اضغط للاختيار</p>
-              <p className="text-xs text-text-tertiary mt-1">MP4, AVI, MKV - حد أقصى 500MB</p>
+              <p className="text-sm text-text-secondary">ط§ط³ط­ط¨ ظˆط£ظپظ„طھ ط§ظ„ظپظٹط¯ظٹظˆ ظ‡ظ†ط§ ط£ظˆ ط§ط¶ط؛ط· ظ„ظ„ط§ط®طھظٹط§ط±</p>
+              <p className="text-xs text-text-tertiary mt-1">MP4, AVI, MKV - ط­ط¯ ط£ظ‚طµظ‰ 500MB</p>
             </div>
           </div>
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1">رفع الفيديو</Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowUploadModal(false)}>إلغاء</Button>
+            <button type="button" variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("جاري رفع الفيديو..."); setShowUploadModal(false); }}>ط±ظپط¹ ط§ظ„ظپظٹط¯ظٹظˆ</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowUploadModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
           </div>
         </div>
       </Modal>

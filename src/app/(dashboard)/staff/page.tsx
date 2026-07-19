@@ -123,8 +123,8 @@ export default function StaffDashboard() {
                   <div className="text-left">
                     <p className="text-sm font-bold">{pa.amount} ج.م</p>
                     <div className="flex gap-1 mt-1">
-                      <button className="px-2 py-0.5 rounded bg-success/10 text-success text-[10px] hover:bg-success/20">قبول</button>
-                      <button className="px-2 py-0.5 rounded bg-error/10 text-error text-[10px] hover:bg-error/20">رفض</button>
+                      <button type="button" className="px-2 py-0.5 rounded bg-success/10 text-success text-[10px] hover:bg-success/20">قبول</button>
+                      <button type="button" className="px-2 py-0.5 rounded bg-error/10 text-error text-[10px] hover:bg-error/20">رفض</button>
                     </div>
                   </div>
                 </div>

@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import toast from "react-hot-toast"
+import Link from "next/link"
 import {
   HiOutlineQuestionMarkCircle,
   HiOutlineChevronDown,
@@ -72,6 +74,7 @@ export default function SupportPage() {
     await new Promise((r) => setTimeout(r, 2000))
     setSubmitting(false)
     setSubmitted(true)
+    toast.success("تم إرسال طلب الدعم بنجاح")
   }
 
   if (submitted) {
@@ -87,7 +90,7 @@ export default function SupportPage() {
             <p className="text-sm text-text-tertiary text-center max-w-md mb-6">
               شكراً لتواصلك معنا. تم استلام طلبك وسيتم الرد عليك في أقرب وقت ممكن عبر البريد الإلكتروني.
             </p>
-            <Button variant="primary" onClick={() => { setSubmitted(false); setForm({ subject: "", category: "", priority: "medium", message: "" }) }}>
+            <Button variant="primary" onClick={() => { setSubmitted(false); setForm({ subject: "", category: "", priority: "medium", message: "" }); toast.success("يمكنك إرسال طلب دعم جديد") }}>
               إرسال طلب آخر
             </Button>
           </CardContent>
@@ -140,7 +143,7 @@ export default function SupportPage() {
             <CardContent>
               <div className="space-y-3">
                 {previousTickets.map((ticket) => (
-                  <div key={ticket.id} className="flex items-center justify-between p-4 rounded-xl bg-surface-secondary border border-border hover:bg-surface transition-colors cursor-pointer">
+                  <Link key={ticket.id} href={`/teacher/support/${ticket.id}`} className="flex items-center justify-between p-4 rounded-xl bg-surface-secondary border border-border hover:bg-surface transition-colors cursor-pointer">
                     <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
                         ticket.status === "open" ? "bg-warning/10 text-warning" : "bg-success/10 text-success"
@@ -162,7 +165,7 @@ export default function SupportPage() {
                       </Badge>
                       <span className="text-[10px] text-text-tertiary">{ticket.createdAt.toLocaleDateString("ar-EG")}</span>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </CardContent>
@@ -211,7 +214,7 @@ export default function SupportPage() {
               <div className="space-y-2">
                 {mockFaq.slice(0, 5).map((faq) => (
                   <div key={faq.id} className="border border-border rounded-xl overflow-hidden">
-                    <button
+                    <button type="button"
                       onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)}
                       className="w-full flex items-center justify-between px-4 py-3 text-right hover:bg-surface-secondary transition-colors"
                     >

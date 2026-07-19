@@ -1,3 +1,17 @@
+import type { Bundle, CenterCode, CourseEnrollment, EnrollmentStatus, AccessType } from "@/lib/types"
+
+function seededRandom(seed: number): () => number {
+  let s = seed
+  return () => {
+    s = (s * 1103515245 + 12345) & 0x7fffffff
+    return s / 0x7fffffff
+  }
+}
+
+const det = seededRandom(42)
+const detInt = (min: number, max: number) => Math.floor(det() * (max - min + 1)) + min
+const detPick = <T,>(arr: T[]): T => arr[Math.floor(det() * arr.length)]
+
 export const mockTeacher = {
   id: "t-1",
   name: "أحمد محمد",
@@ -57,9 +71,9 @@ export const mockStudents = Array.from({ length: 50 }, (_, i) => ({
     startDate: new Date(2025, 6, 1),
     endDate: new Date(2025, 6 + (i % 3), 1),
   },
-  xp: Math.floor(Math.random() * 5000),
-  level: Math.floor(Math.random() * 15) + 1,
-  streak: Math.floor(Math.random() * 30),
+  xp: Math.floor(det() * 5000),
+  level: Math.floor(det() * 15) + 1,
+  streak: Math.floor(det() * 30),
 }))
 
 export const mockCourses = [
@@ -164,7 +178,7 @@ export const mockCourses = [
 function generateChapters(count: number, courseId: string) {
   const chapterNames = ["المقدمة", "الأساسيات", "المستوى المتقدم", "التطبيقات", "المراجعة", "الاختبارات", "تمارين شاملة", "المشروع النهائي"]
   return Array.from({ length: count }, (_, i) => {
-    const lessonCount = Math.floor(Math.random() * 6) + 3
+    const lessonCount = Math.floor(det() * 6) + 3
     return {
       id: `ch-${courseId}-${i + 1}`,
       title: chapterNames[i] || `الفصل ${i + 1}`,
@@ -176,7 +190,7 @@ function generateChapters(count: number, courseId: string) {
         title: `درس ${j + 1}: ${["المقدمة", "الشرح", "التطبيق", "الملخص", "تمارين", "اختبار قصير"][j % 6]}`,
         description: `شرح الدرس ${j + 1}`,
         order: j + 1,
-        duration: Math.floor(Math.random() * 45) + 10,
+        duration: Math.floor(det() * 45) + 10,
         isFree: j === 0,
         isLocked: false,
         status: "published" as const,
@@ -185,10 +199,10 @@ function generateChapters(count: number, courseId: string) {
           title: `فيديو الدرس ${j + 1}`,
           description: `شرح فيديو للدرس ${j + 1}`,
           thumbnail: `https://images.unsplash.com/photo-${[1611162617474, 1611162617474, 1611162617474][j % 3]}?w=640&q=85`,
-          duration: Math.floor(Math.random() * 45) + 10,
+          duration: Math.floor(det() * 45) + 10,
           url: "#",
-          views: Math.floor(Math.random() * 5000),
-          completionRate: Math.floor(Math.random() * 40) + 60,
+          views: Math.floor(det() * 5000),
+          completionRate: Math.floor(det() * 40) + 60,
           status: "ready" as const,
         },
         files: [],
@@ -211,7 +225,7 @@ export const mockParents = Array.from({ length: 30 }, (_, i) => ({
     name: `طالب ${((i * 3 + j) % 50) + 1}`,
     grade: ["أولى ثانوي", "ثانية ثانوي", "ثالثة ثانوي"][j % 3],
   })),
-  totalPaid: Math.floor(Math.random() * 5000) + 1000,
+  totalPaid: Math.floor(det() * 5000) + 1000,
   lastPayment: new Date(2025, 5 + (i % 3), (i % 28) + 1),
 }))
 
@@ -246,7 +260,7 @@ export const mockWallet = {
   transactions: Array.from({ length: 30 }, (_, i) => ({
     id: `txn-${i + 1}`,
     type: (["deposit", "deposit", "withdrawal", "refund"] as const)[i % 4],
-    amount: Math.floor(Math.random() * 5000) + 100,
+    amount: Math.floor(det() * 5000) + 100,
     description: ["إيداع نقدي", "تحويل فوري", "سحب رصيد", "استرداد اشتراك"][i % 4],
     status: (["completed", "completed", "completed", "pending", "failed"] as const)[i % 5],
     createdAt: new Date(2025, 4 + Math.floor(i / 5), (i % 28) + 1),
@@ -280,8 +294,8 @@ export const mockAttendance = Array.from({ length: 50 }, (_, i) => ({
   courseName: mockCourses[i % 8].title,
   date: new Date(2025, 5 + Math.floor(i / 20), (i % 28) + 1),
   status: (["present", "present", "present", "absent", "late", "excused"] as const)[i % 6],
-  checkIn: i % 6 !== 3 ? `${8 + Math.floor(Math.random() * 2)}:${String(Math.floor(Math.random() * 60)).padStart(2, "0")}` : undefined,
-  checkOut: i % 6 !== 3 ? `${10 + Math.floor(Math.random() * 2)}:${String(Math.floor(Math.random() * 60)).padStart(2, "0")}` : undefined,
+  checkIn: i % 6 !== 3 ? `${8 + Math.floor(det() * 2)}:${String(Math.floor(det() * 60)).padStart(2, "0")}` : undefined,
+  checkOut: i % 6 !== 3 ? `${10 + Math.floor(det() * 2)}:${String(Math.floor(det() * 60)).padStart(2, "0")}` : undefined,
   notes: i % 5 === 0 ? "ملاحظات عن الحضور" : "",
   recordedBy: "أحمد محمد",
 }))
@@ -339,15 +353,15 @@ export const mockVideoLibrary = Array.from({ length: 30 }, (_, i) => ({
   title: `فيديو ${i + 1}: ${["شرح قاعدة النحو", "تحليل النص", "حل تمارين", "مراجعة", "اختبار تجريبي"][i % 5]}`,
   description: "وصف الفيديو مع تفاصيل المحتوى",
   thumbnail: `https://images.unsplash.com/photo-${[1611162617474, 1513475382585, 1434030216411][i % 3]}?w=640&q=85`,
-  duration: Math.floor(Math.random() * 45) + 5,
-  size: Math.floor(Math.random() * 500) + 50,
+  duration: Math.floor(det() * 45) + 5,
+  size: Math.floor(det() * 500) + 50,
   format: ["mp4", "mp4", "mp4", "avi", "mkv"][i % 5],
   resolution: ["1080p", "1080p", "720p", "720p", "480p"][i % 5],
   courseId: mockCourses[i % 8].id,
   courseName: mockCourses[i % 8].title,
   chapterId: "",
   uploadDate: new Date(2025, 4 + Math.floor(i / 6), (i % 28) + 1),
-  views: Math.floor(Math.random() * 3000) + 100,
+  views: Math.floor(det() * 3000) + 100,
   status: (["ready", "ready", "ready", "processing", "failed"] as const)[i % 5],
 }))
 
@@ -381,18 +395,68 @@ export const mockExams = Array.from({ length: 15 }, (_, i) => ({
   endDate: new Date(2025, 7, 30),
   showResultImmediately: true,
   status: (["active", "active", "active", "closed", "draft"] as const)[i % 5],
-  questions: Array.from({ length: [10, 15, 20][i % 3] }, (_, q) => ({
-    id: `q-${i + 1}-${q + 1}`,
-    type: (["multiple-choice", "true-false", "fill-blank", "essay"] as const)[q % 4],
-    text: `السؤال رقم ${q + 1}: ${["اختر الإجابة الصحيحة", "ضع علامة صح أو خطأ", "املأ الفراغ", "أجب عن السؤال التالي"][q % 4]}`,
-    grade: [2, 3, 5][q % 3],
-    suggestedTime: [1, 2, 3][q % 3],
-    difficulty: (["easy", "medium", "hard"] as const)[q % 3],
-    tags: ["نحو", "صرف", "بلاغة", "أدب"],
-    choices: q % 4 !== 3 ? Array.from({ length: 4 }, (_, c) => ({ id: `ch-${c + 1}`, text: `اختيار ${c + 1}`, isCorrect: c === 0 })) : undefined,
-    explanation: "الشرح التفصيلي للإجابة الصحيحة",
-    stats: { timesUsed: Math.floor(Math.random() * 50) + 1, correctRate: Math.floor(Math.random() * 40) + 60, incorrectRate: Math.floor(Math.random() * 40) },
-  })),
+  gradingMode: (["auto", "auto", "mixed", "manual"] as const)[i % 4],
+  questions: Array.from({ length: [12, 15, 18][i % 3] }, (_, q) => {
+    const types = ["multiple-choice", "true-false", "fill-blank", "essay", "ordering", "matching"] as const
+    const type = types[q % 6]
+    const mcTexts = ["ما هو إعراب المبتدأ في جملة 'الطالب مجتهد'؟", "علامة رفع جمع المذكر السالم هي:", "ما هي علامة نصب الاسم المنقوص؟", "أي من التالية أداة نصب للفعل المضارع؟", "ما إعراب كلمة 'طلاباً' في جملة 'رأيت الطلاباً'؟", "اختر الجملة الصحيحة نحوياً:"]
+    const tfTexts = ["الفعل المضارع يرفع بالضمة الظاهرة إذا كان صحيح الآخر", "الاسم المنقوص تقدر فيه الضمة والكسرة", "جملة 'الطالب الذي نجح مجتهد' تشتمل على خبر مفرد", "المبتدأ دائماً يأتي في أول الجملة", "الأفعال الخمسة ترفع بثبوت النون", "كان وأخواتها ترفع المبتدأ وتنصب الخبر"]
+    const fillTexts = ["يكتب الطالب ........... الدرس (باستخدام - بكتابة - بقراءة)", "................. الجو بارداً (إن - ليت - لعل)", "المسلمون ............ صادقون (هم - هم - أولئك)", "إن .............. مجتهدان (الطالبان - الطالبين - الطالبون)"]
+    const essayTexts = ["اشرح قاعدة إعراب المبتدأ والخبر مع ثلاثة أمثلة", "ما الفرق بين الاسم المقصور والاسم المنقوص؟ وضح بالأمثلة", "اكتب فقرة عن أهمية النحو في فهم اللغة العربية", "حلل الجمل التالية إعرابياً: 'كان الطالب مجتهداً في دراسته'"]
+    const orderingTexts = ["رتب الأحداث التالية حسب تسلسلها التاريخي:", "رتب خطوات الإعراب الصحيحة:", "رتب الجمل التالية لتكوين فقرة مترابطة:"]
+    const matchingTexts = ["وصل كل مصطلح من العمود الأول بالتعريف المناسب من العمود الثاني:", "وصل كل حرف جر بمعناه المناسب:"]
+    const text = type === 'multiple-choice' ? mcTexts[q % mcTexts.length] :
+                 type === 'true-false' ? tfTexts[q % tfTexts.length] :
+                 type === 'fill-blank' ? fillTexts[q % fillTexts.length] :
+                 type === 'essay' ? essayTexts[q % essayTexts.length] :
+                 type === 'ordering' ? orderingTexts[q % orderingTexts.length] :
+                 matchingTexts[q % matchingTexts.length]
+    const base = {
+      id: `q-${i + 1}-${q + 1}`,
+      type,
+      text,
+      grade: type === 'essay' ? 10 : type === 'ordering' || type === 'matching' ? 8 : [2, 3, 5][q % 3],
+      suggestedTime: type === 'essay' ? 5 : [1, 2, 3][q % 3],
+      difficulty: (["easy", "medium", "hard"] as const)[q % 3],
+      tags: ["نحو", "صرف", "بلاغة", "أدب"],
+      explanation: "الشرح التفصيلي للإجابة الصحيحة",
+      stats: { timesUsed: Math.floor(det() * 50) + 1, correctRate: Math.floor(det() * 40) + 60, incorrectRate: Math.floor(det() * 40) },
+    } as any
+    if (type === 'multiple-choice' || type === 'true-false') {
+      const mcChoices = [
+        [{ id: "a", text: "الرفع بالضمة", isCorrect: true }, { id: "b", text: "النصب بالفتحة", isCorrect: false }, { id: "c", text: "الجر بالكسرة", isCorrect: false }, { id: "d", text: "الجزم بالسكون", isCorrect: false }],
+        [{ id: "a", text: "الواو", isCorrect: true }, { id: "b", text: "الألف", isCorrect: false }, { id: "c", text: "الياء", isCorrect: false }, { id: "d", text: "النون", isCorrect: false }],
+        [{ id: "a", text: "الفتحة المقدرة", isCorrect: true }, { id: "b", text: "الكسرة المقدرة", isCorrect: false }, { id: "c", text: "الضمة المقدرة", isCorrect: false }, { id: "d", text: "السكون", isCorrect: false }],
+        [{ id: "a", text: "أن", isCorrect: true }, { id: "b", text: "لم", isCorrect: false }, { id: "c", text: "لن", isCorrect: false }, { id: "d", text: "لا", isCorrect: false }],
+        [{ id: "a", text: "مفعول به منصوب", isCorrect: true }, { id: "b", text: "فاعل مرفوع", isCorrect: false }, { id: "c", text: "مبتدأ مرفوع", isCorrect: false }, { id: "d", text: "خبر مرفوع", isCorrect: false }],
+        [{ id: "a", text: "الطالبان مجتهدان", isCorrect: true }, { id: "b", text: "الطالب مجتهد", isCorrect: false }, { id: "c", text: "الطلاب مجتهدون", isCorrect: false }, { id: "d", text: "طالب مجتهد", isCorrect: false }],
+      ]
+      base.choices = mcChoices[q % mcChoices.length]
+    }
+    if (type === 'ordering') {
+      base.orderingItems = [
+        { id: "ord-1", text: "الفعل المضارع" },
+        { id: "ord-2", text: "الفعل الماضي" },
+        { id: "ord-3", text: "فعل الأمر" },
+        { id: "ord-4", text: "المصدر المؤول" },
+      ]
+    }
+    if (type === 'matching') {
+      base.matchingLeft = [
+        { id: "ml-1", text: "حرف الجر 'في'" },
+        { id: "ml-2", text: "حرف الجر 'على'" },
+        { id: "ml-3", text: "حرف الجر 'عن'" },
+        { id: "ml-4", text: "حرف الجر 'الباء'" },
+      ]
+      base.matchingRight = [
+        { id: "mr-1", text: "الاستعلاء" },
+        { id: "mr-2", text: "الظرفية" },
+        { id: "mr-3", text: "الإلصاق" },
+        { id: "mr-4", text: "المجاوزة" },
+      ]
+    }
+    return base
+  }),
   analytics: {
     averageGrade: 68, highestGrade: 100, lowestGrade: 15, passRate: 72, failRate: 28,
     hardestQuestion: "", easiestQuestion: "", mostMistakenQuestion: "", mostSkippedQuestion: "",
@@ -414,25 +478,25 @@ export const mockHomework = Array.from({ length: 20 }, (_, i) => ({
   maxResubmitCount: [1, 2, 3][i % 3],
   type: (["quiz", "pdf", "writing", "mixed"] as const)[i % 4],
   status: (["active", "active", "active", "closed", "draft"] as const)[i % 5],
-  submissions: Array.from({ length: Math.floor(Math.random() * 30) + 20 }, (_, s) => ({
+  submissions: Array.from({ length: Math.floor(det() * 30) + 20 }, (_, s) => ({
     id: `sub-${i + 1}-${s + 1}`,
     studentId: `s-${s + 1}`,
     studentName: `طالب ${s + 1}`,
     files: [],
     notes: "",
     submittedAt: new Date(2025, 7, 10 + (s % 15)),
-    grade: Math.random() > 0.15 ? Math.floor(Math.random() * 30) + 1 : undefined,
-    feedback: Math.random() > 0.5 ? "ممتاز، عمل جيد" : undefined,
+    grade: det() > 0.15 ? Math.floor(det() * 30) + 1 : undefined,
+    feedback: det() > 0.5 ? "ممتاز، عمل جيد" : undefined,
     status: (["submitted", "graded", "graded", "graded", "late"] as const)[s % 5],
   })),
   analytics: {
-    submitted: Math.floor(Math.random() * 10) + 25,
-    notSubmitted: Math.floor(Math.random() * 8) + 2,
-    late: Math.floor(Math.random() * 5),
-    averageGrade: Math.floor(Math.random() * 30) + 15,
+    submitted: Math.floor(det() * 10) + 25,
+    notSubmitted: Math.floor(det() * 8) + 2,
+    late: Math.floor(det() * 5),
+    averageGrade: Math.floor(det() * 30) + 15,
     highestGrade: 30,
-    lowestGrade: Math.floor(Math.random() * 10) + 3,
-    passRate: Math.floor(Math.random() * 30) + 60,
+    lowestGrade: Math.floor(det() * 10) + 3,
+    passRate: Math.floor(det() * 30) + 60,
   },
 }))
 
@@ -449,7 +513,7 @@ export const mockQuestions = Array.from({ length: 50 }, (_, i) => ({
   choices: i % 6 < 2 ? Array.from({ length: 4 }, (_, c) => ({ id: `ch-${c + 1}`, text: `اختيار ${c + 1}`, isCorrect: c === 0 })) : undefined,
   correctAnswer: "الإجابة الصحيحة",
   explanation: "شرح الإجابة الصحيحة مع التفاصيل",
-  stats: { timesUsed: Math.floor(Math.random() * 30) + 1, correctRate: Math.floor(Math.random() * 40) + 60, incorrectRate: Math.floor(Math.random() * 40) },
+  stats: { timesUsed: Math.floor(det() * 30) + 1, correctRate: Math.floor(det() * 40) + 60, incorrectRate: Math.floor(det() * 40) },
 }))
 
 export const mockSubscriptionPlans = [
@@ -479,8 +543,8 @@ export const mockCertificates = Array.from({ length: 30 }, (_, i) => ({
   courseId: mockCourses[i % mockCourses.length].id,
   courseName: mockCourses[i % mockCourses.length].title,
   teacherName: "أحمد محمد",
-  grade: Math.floor(Math.random() * 30) + 70,
-  percentage: Math.floor(Math.random() * 25) + 75,
+  grade: Math.floor(det() * 30) + 70,
+  percentage: Math.floor(det() * 25) + 75,
   issuedAt: new Date(2025, 4 + (i % 4), (i % 28) + 1),
   certificateNumber: `CRT-${String(i + 1).padStart(6, "0")}`,
   qrCode: "#",
@@ -545,11 +609,11 @@ export const mockTestimonials = [
 ]
 
 export const mockAnalytics = {
-  monthlyRevenue: Array.from({ length: 12 }, (_, i) => ({ month: ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"][i], revenue: Math.floor(Math.random() * 50000) + 80000, students: Math.floor(Math.random() * 40) + 80 })),
-  weeklyActivity: Array.from({ length: 7 }, (_, i) => ({ day: ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"][i], videos: Math.floor(Math.random() * 15) + 5, exams: Math.floor(Math.random() * 5) + 1, homework: Math.floor(Math.random() * 8) + 3 })),
-  coursePerformance: mockCourses.map(c => ({ courseId: c.id, courseName: c.title, completionRate: Math.floor(Math.random() * 30) + 65, avgGrade: Math.floor(Math.random() * 20) + 70, studentSatisfaction: Math.floor(Math.random() * 15) + 80 })),
-  studentGrowth: Array.from({ length: 12 }, (_, i) => ({ month: ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"][i], total: 500 + (i * 65) + Math.floor(Math.random() * 50), newStudents: Math.floor(Math.random() * 30) + 20 + (i * 3) })),
-  examPerformance: Array.from({ length: 10 }, (_, i) => ({ examName: `امتحان ${i + 1}`, passRate: Math.floor(Math.random() * 20) + 70, avgScore: Math.floor(Math.random() * 15) + 70, participationRate: Math.floor(Math.random() * 20) + 75 })),
+  monthlyRevenue: Array.from({ length: 12 }, (_, i) => ({ month: ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"][i], revenue: Math.floor(det() * 50000) + 80000, students: Math.floor(det() * 40) + 80 })),
+  weeklyActivity: Array.from({ length: 7 }, (_, i) => ({ day: ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"][i], videos: Math.floor(det() * 15) + 5, exams: Math.floor(det() * 5) + 1, homework: Math.floor(det() * 8) + 3 })),
+  coursePerformance: mockCourses.map(c => ({ courseId: c.id, courseName: c.title, completionRate: Math.floor(det() * 30) + 65, avgGrade: Math.floor(det() * 20) + 70, studentSatisfaction: Math.floor(det() * 15) + 80 })),
+  studentGrowth: Array.from({ length: 12 }, (_, i) => ({ month: ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"][i], total: 500 + (i * 65) + Math.floor(det() * 50), newStudents: Math.floor(det() * 30) + 20 + (i * 3) })),
+  examPerformance: Array.from({ length: 10 }, (_, i) => ({ examName: `امتحان ${i + 1}`, passRate: Math.floor(det() * 20) + 70, avgScore: Math.floor(det() * 15) + 70, participationRate: Math.floor(det() * 20) + 75 })),
 }
 
 export const mockGamification = {
@@ -562,7 +626,7 @@ export const mockGamification = {
     { id: "badge-5", name: "المنافس", description: "الفوز في التحدي الأسبوعي", icon: "🏅", xpReward: 200 },
     { id: "badge-6", name: "المساعد", description: "مساعدة 5 زملاء في المنتدى", icon: "🤝", xpReward: 150 },
   ],
-  leaderboard: Array.from({ length: 20 }, (_, i) => ({ rank: i + 1, studentName: `طالب ${i + 1}`, xp: 5000 - (i * 180), level: 15 - Math.floor(i / 2), badges: Math.floor(Math.random() * 6) + 1, streak: Math.floor(Math.random() * 30) + 1 })),
+  leaderboard: Array.from({ length: 20 }, (_, i) => ({ rank: i + 1, studentName: `طالب ${i + 1}`, xp: 5000 - (i * 180), level: 15 - Math.floor(i / 2), badges: Math.floor(det() * 6) + 1, streak: Math.floor(det() * 30) + 1 })),
 }
 
 export const mockParentChildren = [
@@ -610,16 +674,16 @@ export const mockCmsContent = {
 export function getStudentPerformance(studentId: string) {
   const idx = parseInt(studentId.replace("s-", "")) || 0
   return {
-    overallGrade: Math.floor(Math.random() * 20) + 75,
-    attendance: Math.floor(Math.random() * 15) + 85,
-    examsAvg: Math.floor(Math.random() * 20) + 70,
-    homeworkAvg: Math.floor(Math.random() * 15) + 80,
-    completedLessons: Math.floor(Math.random() * 40) + 60,
+    overallGrade: Math.floor(det() * 20) + 75,
+    attendance: Math.floor(det() * 15) + 85,
+    examsAvg: Math.floor(det() * 20) + 70,
+    homeworkAvg: Math.floor(det() * 15) + 80,
+    completedLessons: Math.floor(det() * 40) + 60,
     totalLessons: 100,
     strengths: ["النحو", "الإملاء", "القراءة"],
     weaknesses: ["البلاغة", "التعبير"],
-    recentExams: Array.from({ length: 5 }, (_, i) => ({ name: `امتحان ${i + 1}`, grade: Math.floor(Math.random() * 30) + 65, date: new Date(2025, 5 + i, 15) })),
-    weeklyProgress: Array.from({ length: 7 }, (_, i) => ({ day: ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"][i], hours: Math.floor(Math.random() * 3) + 1 })),
+    recentExams: Array.from({ length: 5 }, (_, i) => ({ name: `امتحان ${i + 1}`, grade: Math.floor(det() * 30) + 65, date: new Date(2025, 5 + i, 15) })),
+    weeklyProgress: Array.from({ length: 7 }, (_, i) => ({ day: ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"][i], hours: Math.floor(det() * 3) + 1 })),
   }
 }
 
@@ -637,15 +701,15 @@ export const mockAchievements = [
 export const mockStudentXpData = Array.from({ length: 50 }, (_, i) => ({
   studentId: `s-${i + 1}`,
   studentName: `طالب ${i + 1}`,
-  totalXp: Math.floor(Math.random() * 8000) + 500,
-  level: Math.floor(Math.random() * 18) + 1,
-  streak: Math.floor(Math.random() * 40) + 1,
-  badges: Math.floor(Math.random() * 8) + 1,
-  achievements: Math.floor(Math.random() * 5),
+  totalXp: Math.floor(det() * 8000) + 500,
+  level: Math.floor(det() * 18) + 1,
+  streak: Math.floor(det() * 40) + 1,
+  badges: Math.floor(det() * 8) + 1,
+  achievements: Math.floor(det() * 5),
   rank: 0,
-  weeklyXp: Math.floor(Math.random() * 500) + 100,
-  monthlyXp: Math.floor(Math.random() * 2000) + 500,
-  lastActive: new Date(Date.now() - Math.random() * 86400000 * 3),
+  weeklyXp: Math.floor(det() * 500) + 100,
+  monthlyXp: Math.floor(det() * 2000) + 500,
+  lastActive: new Date(Date.now() - det() * 86400000 * 3),
 })).sort((a, b) => b.totalXp - a.totalXp).map((s, i) => ({ ...s, rank: i + 1 }))
 
 export const mockGamificationConfig = {
@@ -684,6 +748,7 @@ export const mockCmsPages = {
   },
   theme: {
     primaryColor: "#6366F1",
+    secondaryColor: "#8B5CF6",
     fontFamily: "Cairo",
     borderRadius: "rounded-xl",
     animationStyle: "smooth",
@@ -712,8 +777,646 @@ export const mockCmsPages = {
   },
 }
 
+export const mockSettings = {
+  general: {
+    centerName: 'أكاديمية النخبة التعليمية',
+    centerDescription: 'أكاديمية تعليمية متخصصة في تقديم الكورسات والتدريبات للطلاب في مختلف المراحل الدراسية',
+    email: 'info@elite-academy.com',
+    phone: '+201234567890',
+    address: 'شارع النخيل، مدينة نصر، القاهرة',
+    timezone: 'Africa/Cairo',
+    defaultLanguage: 'ar',
+    trialDays: 7,
+    maxStudentsPerCourse: 100,
+  },
+  notifications: {
+    newStudent: true,
+    newPayment: true,
+    examResults: true,
+    attendance: false,
+    subscriptionExpiry: true,
+    newMessages: true,
+    weeklyReport: false,
+  },
+  payment: {
+    fawryEnabled: true,
+    creditCardEnabled: false,
+    walletEnabled: true,
+    currency: 'EGP',
+    vatPercent: 14,
+    maxDiscountPercent: 50,
+    renewalPeriod: 'monthly',
+    bankAccount: {
+      bankName: 'البنك الأهلي المصري',
+      accountNumber: '1234567890123456',
+      iban: 'EG123456789012345678901234',
+    },
+  },
+  security: {
+    twoFactorEnabled: false,
+    sessionTimeout: 2,
+    loginHistory: [
+      { date: '2026-07-19', time: '10:30', ip: '192.168.1.100', device: 'Windows Desktop', browser: 'Chrome 126', location: 'القاهرة، مصر', status: 'success' },
+      { date: '2026-07-18', time: '22:15', ip: '192.168.1.100', device: 'Windows Desktop', browser: 'Chrome 126', location: 'القاهرة، مصر', status: 'success' },
+      { date: '2026-07-17', time: '08:45', ip: '10.0.0.5', device: 'iPhone 15', browser: 'Safari 18', location: 'القاهرة، مصر', status: 'success' },
+      { date: '2026-07-16', time: '14:20', ip: '203.0.113.50', device: 'Unknown', browser: 'Unknown', location: 'بكين، الصين', status: 'failed' },
+      { date: '2026-07-15', time: '19:00', ip: '192.168.1.100', device: 'MacBook Pro', browser: 'Firefox 128', location: 'القاهرة، مصر', status: 'success' },
+    ],
+    activeSessions: [
+      { device: 'Windows Desktop', browser: 'Chrome 126', ip: '192.168.1.100', lastActive: 'منذ دقيقتين', isCurrent: true },
+      { device: 'iPhone 15', browser: 'Safari 18', ip: '10.0.0.5', lastActive: 'منذ 3 ساعات', isCurrent: false },
+    ],
+  },
+  social: {
+    facebook: 'https://facebook.com/eliteacademy',
+    twitter: 'https://twitter.com/eliteacademy',
+    youtube: 'https://youtube.com/@eliteacademy',
+    tiktok: 'https://tiktok.com/@eliteacademy',
+    whatsapp: 'https://wa.me/201234567890',
+    telegram: 'https://t.me/eliteacademy',
+    linkedin: 'https://linkedin.com/company/eliteacademy',
+    instagram: 'https://instagram.com/eliteacademy',
+  },
+}
+
+export const mockCourseCategories = [
+  { id: '1', name: 'الرياضيات', description: 'كورسات الرياضيات لجميع المراحل', icon: '📐', color: '#6366F1', courseCount: 5 },
+  { id: '2', name: 'العلوم', description: 'كورسات العلوم والفيزياء والكيمياء', icon: '🔬', color: '#10B981', courseCount: 4 },
+  { id: '3', name: 'اللغات', description: 'كورسات اللغات المختلفة', icon: '🌍', color: '#F59E0B', courseCount: 3 },
+  { id: '4', name: 'التاريخ', description: 'كورسات التاريخ والجغرافيا', icon: '📜', color: '#EF4444', courseCount: 2 },
+  { id: '5', name: 'البرمجة', description: 'كورسات البرمجة وتكنولوجيا المعلومات', icon: '💻', color: '#8B5CF6', courseCount: 6 },
+  { id: '6', name: 'الفنون', description: 'كورسات الفنون والإبداع', icon: '🎨', color: '#EC4899', courseCount: 1 },
+]
+
+export const mockComingSoonLessons = [
+  { lessonId: 'ls-1', name: 'تطبيقات التفاضل', courseId: 'c1', status: 'coming-soon', availableDate: '2026-08-01' },
+  { lessonId: 'ls-2', name: 'قوانين نيوتن المتقدمة', courseId: 'c2', status: 'locked', prerequisite: 'قوانين نيوتن الأساسية' },
+  { lessonId: 'ls-3', name: 'التفاعلات العضوية', courseId: 'c3', status: 'coming-soon', availableDate: '2026-07-25' },
+]
+
+export const mockAnalyticsDetailed = {
+  overview: {
+    totalStudents: 1250,
+    totalRevenue: 587500,
+    totalCourses: 24,
+    totalExams: 156,
+    completionRate: 73,
+    averageRating: 4.6,
+    revenueGrowth: 12.5,
+    studentGrowth: 8.3,
+  },
+  courseAnalytics: [
+    { id: '1', name: 'الرياضيات المتكاملة', enrolled: 245, revenue: 122500, rating: 4.8, completionRate: 78, lessons: 48, status: 'active' },
+    { id: '2', name: 'الفيزياء الحديثة', enrolled: 189, revenue: 94500, rating: 4.6, completionRate: 72, lessons: 36, status: 'active' },
+    { id: '3', name: 'الكيمياء العضوية', enrolled: 167, revenue: 83500, rating: 4.5, completionRate: 68, lessons: 42, status: 'active' },
+    { id: '4', name: 'الأحياء الدقيقة', enrolled: 134, revenue: 67000, rating: 4.7, completionRate: 75, lessons: 30, status: 'active' },
+    { id: '5', name: 'اللغة العربية', enrolled: 198, revenue: 99000, rating: 4.4, completionRate: 65, lessons: 54, status: 'active' },
+    { id: '6', name: 'اللغة الإنجليزية', enrolled: 212, revenue: 106000, rating: 4.3, completionRate: 62, lessons: 50, status: 'active' },
+    { id: '7', name: 'التاريخ الحديث', enrolled: 98, revenue: 49000, rating: 4.2, completionRate: 55, lessons: 28, status: 'draft' },
+    { id: '8', name: 'الجغرافيا السياسية', enrolled: 87, revenue: 43500, rating: 4.1, completionRate: 52, lessons: 24, status: 'draft' },
+  ],
+  videoAnalytics: [
+    { id: '1', name: 'مقدمة في التفاضل', course: 'الرياضيات المتكاملة', views: 3420, avgWatchTime: '18:25', completionRate: 85, likes: 234, comments: 45, uploadDate: '2026-01-15' },
+    { id: '2', name: 'قوانين نيوتن', course: 'الفيزياء الحديثة', views: 2890, avgWatchTime: '22:10', completionRate: 82, likes: 198, comments: 38, uploadDate: '2026-02-03' },
+    { id: '3', name: 'الروابط الكيميائية', course: 'الكيمياء العضوية', views: 2650, avgWatchTime: '15:45', completionRate: 78, likes: 176, comments: 29, uploadDate: '2026-01-28' },
+    { id: '4', name: 'الخلية النباتية', course: 'الأحياء الدقيقة', views: 2340, avgWatchTime: '20:30', completionRate: 88, likes: 156, comments: 34, uploadDate: '2026-03-12' },
+    { id: '5', name: 'النحو والصرف', course: 'اللغة العربية', views: 2100, avgWatchTime: '25:00', completionRate: 72, likes: 145, comments: 52, uploadDate: '2026-02-20' },
+    { id: '6', name: 'المعادلات التفاضلية', course: 'الرياضيات المتكاملة', views: 1950, avgWatchTime: '16:30', completionRate: 70, likes: 123, comments: 28, uploadDate: '2026-03-05' },
+    { id: '7', name: 'الكهرباء الساكنة', course: 'الفيزياء الحديثة', views: 1820, avgWatchTime: '19:15', completionRate: 74, likes: 112, comments: 22, uploadDate: '2026-03-18' },
+    { id: '8', name: 'التفاعلات الكيميائية', course: 'الكيمياء العضوية', views: 1650, avgWatchTime: '14:50', completionRate: 71, likes: 98, comments: 19, uploadDate: '2026-04-01' },
+    { id: '9', name: 'الانقسام الخلوي', course: 'الأحياء الدقيقة', views: 1480, avgWatchTime: '21:00', completionRate: 80, likes: 87, comments: 15, uploadDate: '2026-04-10' },
+    { id: '10', name: 'الأدب والنقد', course: 'اللغة العربية', views: 1340, avgWatchTime: '23:45', completionRate: 66, likes: 76, comments: 31, uploadDate: '2026-04-22' },
+  ],
+  examAnalytics: [
+    { id: '1', name: 'امتحان التفاضل النهائي', course: 'الرياضيات المتكاملة', students: 215, avgGrade: 78, highestGrade: 100, lowestGrade: 32, passRate: 82, attempts: 215 },
+    { id: '2', name: 'اختبار الفيزياء الشهري', course: 'الفيزياء الحديثة', students: 178, avgGrade: 72, highestGrade: 98, lowestGrade: 28, passRate: 76, attempts: 185 },
+    { id: '3', name: 'امتحان الكيمياء النهائي', course: 'الكيمياء العضوية', students: 156, avgGrade: 75, highestGrade: 97, lowestGrade: 25, passRate: 79, attempts: 160 },
+    { id: '4', name: 'اختبار الأحياء الشهري', course: 'الأحياء الدقيقة', students: 125, avgGrade: 81, highestGrade: 100, lowestGrade: 35, passRate: 86, attempts: 130 },
+    { id: '5', name: 'امتحان اللغة العربية', course: 'اللغة العربية', students: 185, avgGrade: 70, highestGrade: 96, lowestGrade: 20, passRate: 73, attempts: 192 },
+  ],
+  financialReports: [
+    { month: 'يناير', revenue: 95000, expenses: 32000, netProfit: 63000, growth: 8.2 },
+    { month: 'فبراير', revenue: 102000, expenses: 35000, netProfit: 67000, growth: 6.3 },
+    { month: 'مارس', revenue: 88000, expenses: 30000, netProfit: 58000, growth: -13.4 },
+    { month: 'أبريل', revenue: 115000, expenses: 38000, netProfit: 77000, growth: 32.8 },
+    { month: 'مايو', revenue: 98000, expenses: 33000, netProfit: 65000, growth: -15.6 },
+    { month: 'يونيو', revenue: 120000, expenses: 40000, netProfit: 80000, growth: 23.1 },
+    { month: 'يوليو', revenue: 105000, expenses: 36000, netProfit: 69000, growth: -13.8 },
+    { month: 'أغسطس', revenue: 112000, expenses: 37000, netProfit: 75000, growth: 6.7 },
+  ],
+  revenueBreakdown: [
+    { name: 'اشتراكات شهرية', value: 320000 },
+    { name: 'اشتراكات سنوية', value: 185000 },
+    { name: 'مدفوعات فردية', value: 75000 },
+    { name: 'أخرى', value: 7500 },
+  ],
+  monthlyRevenue: [
+    { month: 'يناير', الإيرادات: 95000, المصروفات: 32000 },
+    { month: 'فبراير', الإيرادات: 102000, المصروفات: 35000 },
+    { month: 'مارس', الإيرادات: 88000, المصروفات: 30000 },
+    { month: 'أبريل', الإيرادات: 115000, المصروفات: 38000 },
+    { month: 'مايو', الإيرادات: 98000, المصروفات: 33000 },
+    { month: 'يونيو', الإيرادات: 120000, المصروفات: 40000 },
+    { month: 'يوليو', الإيرادات: 105000, المصروفات: 36000 },
+    { month: 'أغسطس', الإيرادات: 112000, المصروفات: 37000 },
+  ],
+}
+
 export const mockBackupHistory = [
   { id: "bck-1", fileName: "backup-2025-07-01.zip", size: "256 MB", createdAt: new Date("2025-07-01"), type: "full", status: "completed" },
   { id: "bck-2", fileName: "backup-2025-06-15.zip", size: "248 MB", createdAt: new Date("2025-06-15"), type: "full", status: "completed" },
   { id: "bck-3", fileName: "backup-2025-06-01.zip", size: "240 MB", createdAt: new Date("2025-06-01"), type: "incremental", status: "completed" },
 ]
+
+export const mockSessions = [
+  { id: '1', user: 'أحمد محمد', role: 'مدرس', device: 'Windows Desktop', browser: 'Chrome 126', ip: '192.168.1.100', lastActive: 'منذ دقيقة واحدة', loginDate: '2026-07-19 08:30', status: 'active' },
+  { id: '2', user: 'أحمد محمد', role: 'مدرس', device: 'iPhone 15', browser: 'Safari 18', ip: '10.0.0.5', lastActive: 'منذ 3 ساعات', loginDate: '2026-07-19 10:00', status: 'active' },
+  { id: '3', user: 'سارة أحمد', role: 'موظف', device: 'MacBook Pro', browser: 'Firefox 128', ip: '192.168.1.102', lastActive: 'منذ 30 دقيقة', loginDate: '2026-07-19 09:15', status: 'active' },
+  { id: '4', user: 'خالد عمر', role: 'مدرس', device: 'Windows Laptop', browser: 'Edge 125', ip: '192.168.1.103', lastActive: 'منذ 2 ساعات', loginDate: '2026-07-18 14:00', status: 'active' },
+  { id: '5', user: 'فاطمة علي', role: 'موظف', device: 'Android Tablet', browser: 'Chrome 126', ip: '10.0.0.10', lastActive: 'منذ 5 ساعات', loginDate: '2026-07-18 08:00', status: 'expired' },
+  { id: '6', user: 'محمد حسن', role: 'مدرس', device: 'Windows Desktop', browser: 'Chrome 125', ip: '192.168.1.105', lastActive: 'أمس', loginDate: '2026-07-17 11:00', status: 'expired' },
+  { id: '7', user: 'نورا سامي', role: 'موظف', device: 'MacBook Air', browser: 'Safari 17', ip: '192.168.1.106', lastActive: 'منذ 4 ساعات', loginDate: '2026-07-18 16:30', status: 'active' },
+  { id: '8', user: 'عمر خالد', role: 'مدرس', device: 'iPhone 14', browser: 'Safari 17', ip: '10.0.0.15', lastActive: 'منذ 6 ساعات', loginDate: '2026-07-18 07:45', status: 'expired' },
+]
+
+export const mockSessionStats = {
+  totalActive: 5,
+  todaySessions: 12,
+  averageDuration: '2h 45m',
+  topBrowser: 'Chrome 126',
+}
+
+export const mockBundles: Bundle[] = [
+  { id: "bundle-1", name: "الباقة العربية", description: "جميع كورسات اللغة العربية", courses: ["c-1", "c-2", "c-3"], price: 450, discount: 20, status: "active", createdAt: new Date("2026-01-01") },
+  { id: "bundle-2", name: "الباقة الشاملة", description: "جميع الكورسات المتاحة", courses: ["c-1", "c-2", "c-3", "c-4", "c-5", "c-6", "c-7", "c-8"], price: 1200, discount: 35, status: "active", createdAt: new Date("2026-01-01") },
+  { id: "bundle-3", name: "باقة النحو والصرف", description: "كورسات النحو والصرف المتقدمة", courses: ["c-1", "c-5"], price: 250, discount: 15, status: "active", createdAt: new Date("2026-02-01") },
+  { id: "bundle-4", name: "باقة المراجعة النهائية", description: "جميع كورسات المراجعة للامتحانات", courses: ["c-3", "c-6", "c-8"], price: 350, discount: 10, status: "inactive", createdAt: new Date("2026-03-01") },
+]
+
+export const mockEnrollments: CourseEnrollment[] = Array.from({ length: 60 }, (_, i) => {
+  const course = mockCourses[i % mockCourses.length]
+  const statuses: EnrollmentStatus[] = ["active", "active", "active", "expired", "cancelled", "trial"]
+  const accessTypes: AccessType[] = ["single", "bundle", "free", "trial", "vip", "lifetime"]
+  return {
+    id: `enr-${i + 1}`,
+    studentId: `s-${(i % 50) + 1}`,
+    studentName: `طالب ${(i % 50) + 1}`,
+    courseId: course.id,
+    courseName: course.title,
+    bundleId: i % 4 === 0 ? "bundle-1" : undefined,
+    status: statuses[i % 6],
+    accessType: accessTypes[i % 6],
+    enrolledAt: new Date(2026, 0, (i % 28) + 1),
+    expiresAt: i % 3 === 0 ? new Date(2026, 6 + (i % 3), (i % 28) + 1) : undefined,
+    progress: Math.floor(det() * 100),
+    grade: det() > 0.3 ? Math.floor(det() * 40) + 60 : undefined,
+    completedAt: det() > 0.7 ? new Date(2026, 3 + (i % 3), (i % 28) + 1) : undefined,
+    source: (["payment", "code", "free", "admin"] as const)[i % 4],
+    sourceId: i % 4 === 1 ? `code-${(i % 10) + 1}` : undefined,
+  }
+})
+
+
+
+export const mockClassGroups = Array.from({ length: 8 }, (_, i) => {
+  const course = mockCourses[i % mockCourses.length]
+  const capacity = [20, 25, 30][i % 3]
+  return {
+    id: `grp-${i + 1}`,
+    name: `مجموعة ${String.fromCharCode(65 + i)}`,
+    courseId: course.id,
+    courseName: course.title,
+    capacity,
+    enrolledCount: Math.floor(det() * capacity * 0.9),
+    waitingCount: det() > 0.6 ? Math.floor(det() * 5) + 1 : 0,
+    seatNumbers: true,
+    classroom: `قاعة ${["الأندلس", "الأزهر", "النور", "الهدى", "الفرقان", "البيان", "الإيمان", "القراءات"][i]}`,
+    schedule: [
+      { id: `sched-${i + 1}-1`, day: ["saturday", "monday", "wednesday"][i % 3] as ClassSchedule["day"], startTime: "10:00", endTime: "11:30", classroom: `قاعة ${["الأندلس", "الأزهر", "النور", "الهدى"][i % 4]}` },
+    ],
+    status: (["active", "active", "active", "completed"] as const)[i % 4],
+  }
+})
+
+export const mockWaitingStudents: WaitingStudent[] = Array.from({ length: 12 }, (_, i) => ({
+  id: `wait-${i + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب منتظر ${i + 1}`,
+  groupId: `grp-${(i % 4) + 1}`,
+  groupName: `مجموعة ${String.fromCharCode(65 + (i % 4))}`,
+  joinedAt: new Date(2026, 5, (i % 28) + 1),
+  priority: i < 3 ? 1 : i < 7 ? 2 : 3,
+  notified: i % 3 === 0,
+  status: (["waiting", "waiting", "waiting", "offered", "enrolled", "cancelled"] as const)[i % 6],
+}))
+
+export const mockFreezeRecords: FreezeRecord[] = Array.from({ length: 8 }, (_, i) => ({
+  id: `frz-${i + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  groupId: `grp-${(i % 4) + 1}`,
+  enrollmentId: `enr-${(i % 20) + 1}`,
+  startDate: new Date(2026, 5, (i % 28) + 1),
+  endDate: new Date(2026, 6 + (i % 3), (i % 28) + 1),
+  reason: ["سفر", "ظروف عائلية", "انقطاع مؤقت", "مرض"][i % 4],
+  status: (["active", "active", "expired", "cancelled"] as const)[i % 4],
+}))
+
+export const mockMissedLessons: MissedLesson[] = Array.from({ length: 10 }, (_, i) => ({
+  id: `miss-${i + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  lessonId: `ls-${(i % 8) + 1}`,
+  lessonTitle: `درس ${(i % 6) + 1}: ${["المقدمة", "الشرح", "التطبيق", "الملخص", "تمارين", "اختبار قصير"][i % 6]}`,
+  courseId: mockCourses[i % mockCourses.length].id,
+  date: new Date(2026, 5, (i % 20) + 1),
+  recovered: i % 4 === 0,
+  recoveredAt: i % 4 === 0 ? new Date(2026, 5, (i % 20) + 3) : undefined,
+}))
+
+export const mockExamVersions: ExamVersion[] = Array.from({ length: 6 }, (_, i) => ({
+  id: `ev-${i + 1}`,
+  examId: `exam-${(i % 5) + 1}`,
+  label: `النسخة ${String.fromCharCode(65 + i)}`,
+  questions: Array.from({ length: 10 }, (_, q) => ({
+    id: `evq-${i + 1}-${q + 1}`,
+    type: (["multiple-choice", "true-false", "fill-blank", "essay"] as const)[q % 4],
+    text: `سؤال النسخة ${String.fromCharCode(65 + i)} رقم ${q + 1}`,
+    grade: [2, 3, 5][q % 3],
+    suggestedTime: [1, 2, 3][q % 3],
+    difficulty: (["easy", "medium", "hard"] as const)[q % 3],
+    tags: ["نحو", "صرف", "بلاغة"],
+    choices: q % 4 < 2 ? Array.from({ length: 4 }, (_, c) => ({ id: `ech-${c + 1}`, text: `اختيار ${String.fromCharCode(65 + c)}`, isCorrect: c === 0 })) : undefined,
+    explanation: "شرح الإجابة الصحيحة",
+  })),
+  shuffleQuestions: true,
+  shuffleChoices: true,
+  totalGrade: 100,
+}))
+
+export const mockQuestionAnalysis: QuestionAnalysis[] = Array.from({ length: 20 }, (_, i) => ({
+  questionId: `qan-${i + 1}`,
+  questionText: `سؤال التحليل رقم ${i + 1}`,
+  type: (["multiple-choice", "true-false", "fill-blank", "essay"] as const)[i % 4],
+  difficulty: (["easy", "medium", "hard"] as const)[i % 3],
+  correctCount: Math.floor(det() * 60) + 10,
+  incorrectCount: Math.floor(det() * 30) + 5,
+  skippedCount: Math.floor(det() * 10),
+  correctRate: Math.floor(det() * 40) + 60,
+  averageTime: Math.floor(det() * 120) + 30,
+  tag: (["نحو", "صرف", "بلاغة", "أدب", "نصوص"] as const)[i % 5],
+}))
+
+export const mockInstallments: Installment[] = Array.from({ length: 10 }, (_, i) => {
+  const total = [3000, 4500, 6000, 12000][i % 4]
+  const paid = det() > 0.5 ? Math.floor(det() * total) : 0
+  const numInst = [3, 4, 6][i % 3]
+  return {
+    id: `inst-${i + 1}`,
+    studentId: `s-${(i % 50) + 1}`,
+    studentName: `طالب ${(i % 50) + 1}`,
+    enrollmentId: `enr-${(i % 20) + 1}`,
+    totalAmount: total,
+    paidAmount: paid,
+    remainingAmount: total - paid,
+    numberOfInstallments: numInst,
+    installments: Array.from({ length: numInst }, (_, j) => ({
+      id: `inst-item-${i + 1}-${j + 1}`,
+      amount: total / numInst,
+      dueDate: new Date(2026, 5 + j, 1),
+      paidDate: j < Math.floor(paid / (total / numInst)) ? new Date(2026, 4 + j, 15) : undefined,
+      status: (j < Math.floor(paid / (total / numInst)) ? "paid" : j === Math.floor(paid / (total / numInst)) ? "pending" : "pending") as "paid" | "pending" | "overdue",
+      lateFee: j === Math.floor(paid / (total / numInst)) && det() > 0.7 ? 25 : undefined,
+    })),
+    status: (["active", "active", "completed", "defaulted"] as const)[i % 4],
+    startDate: new Date(2026, 4, 1),
+    nextDueDate: new Date(2026, 5 + Math.floor(paid / (total / numInst)), 1),
+  }
+})
+
+export const mockCoupons: Coupon[] = Array.from({ length: 8 }, (_, i) => ({
+  id: `cup-${i + 1}`,
+  code: `SAVE${[10, 15, 20, 25, 30, 50][i % 6]}${i + 1}`,
+  type: (["percentage", "fixed"] as const)[i % 2],
+  value: [10, 15, 20, 25, 100, 200, 300, 500][i],
+  maxUses: [50, 100, 200][i % 3],
+  currentUses: Math.floor(det() * 30),
+  minAmount: i % 2 === 0 ? 500 : undefined,
+  maxDiscount: i % 2 === 0 ? 2000 : undefined,
+  expiresAt: new Date(2026, 11, 31),
+  status: (["active", "active", "active", "expired", "disabled"] as const)[i % 5],
+}))
+
+export const mockReceipts: Receipt[] = Array.from({ length: 15 }, (_, i) => ({
+  id: `rcpt-${i + 1}`,
+  receiptNumber: `RCP-${String(i + 1).padStart(5, "0")}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  amount: [300, 765, 2700, 1500][i % 4],
+  method: (["cash", "fawry", "code"] as const)[i % 3],
+  status: "completed",
+  items: [{ description: ["اشتراك شهري", "اشتراك ثلاثي", "اشتراك سنوي", "كورس واحد"][i % 4], amount: [300, 765, 2700, 1500][i % 4] }],
+  createdAt: new Date(2026, 4 + (i % 3), (i % 28) + 1),
+  printed: i % 3 === 0,
+}))
+
+export const mockRefunds: Refund[] = Array.from({ length: 5 }, (_, i) => ({
+  id: `ref-${i + 1}`,
+  paymentId: `pay-${(i % 20) + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  amount: [300, 765, 1500][i % 3],
+  reason: ["إلغاء اشتراك", "خطأ في الدفع", "عدم رضا", "ظروف شخصية", "تغيير خطة"][i],
+  status: (["pending", "approved", "processed", "rejected", "processed"] as const)[i],
+  requestedAt: new Date(2026, 5, (i % 20) + 1),
+  processedAt: i > 0 ? new Date(2026, 5, (i % 20) + 3) : undefined,
+}))
+
+export const mockBranches: Branch[] = Array.from({ length: 4 }, (_, i) => ({
+  id: `br-${i + 1}`,
+  name: ["الفرع الرئيسي - القاهرة", "فرع الإسكندرية", "فرع المنصورة", "فرع أونلاين"][i],
+  address: ["القاهرة الجديدة", "سموحة، الإسكندرية", "مدينة المنصورة", "عن بُعد"][i],
+  phone: `+20 100 000 0${i + 1}0${i + 1}`,
+  email: `branch${i + 1}@teacher-os.com`,
+  manager: ["أحمد محمد", "سارة أحمد", "محمد علي", "نورا حسن"][i],
+  status: (["active", "active", "active", "inactive"] as const)[i % 4],
+  capacity: [500, 300, 200, 9999][i],
+  currentCount: [420, 180, 150, 1230][i],
+  createdAt: new Date(2024, 0, 1),
+}))
+
+export const mockClassrooms: Classroom[] = Array.from({ length: 12 }, (_, i) => ({
+  id: `clr-${i + 1}`,
+  name: `قاعة ${["الأندلس", "الأزهر", "النور", "الهدى", "الفرقان", "البيان", "الإيمان", "القراءات", "الحكمة", "المعرفة", "النجاح", "التفوق"][i]}`,
+  branchId: `br-${(i % 2) + 1}`,
+  capacity: [20, 25, 30, 40][i % 4],
+  equipment: [["سبورة ذكية", "بروجيكتور"], ["سبورة ذكية"], ["بروجيكتور", "نظام صوت"], ["سبورة عادية", "بروجيكتور", "نظام تسجيل"]][i % 4],
+  status: (["available", "occupied", "occupied", "occupied", "maintenance"] as const)[i % 5],
+}))
+
+export const mockSeats: Seat[] = Array.from({ length: 60 }, (_, i) => ({
+  id: `seat-${i + 1}`,
+  classroomId: `clr-${(i % 6) + 1}`,
+  number: i + 1,
+  status: (["available", "occupied", "occupied", "reserved", "maintenance"] as const)[i % 5],
+  assignedTo: i % 5 === 1 ? `s-${(i % 50) + 1}` : i % 5 === 2 ? `s-${((i + 13) % 50) + 1}` : undefined,
+  assignedName: i % 5 === 1 ? `طالب ${(i % 50) + 1}` : i % 5 === 2 ? `طالب ${((i + 13) % 50) + 1}` : undefined,
+}))
+
+export const mockEmployees: Employee[] = Array.from({ length: 10 }, (_, i) => ({
+  id: `emp-${i + 1}`,
+  name: ["محمد علي", "نورا حسن", "أحمد سامي", "سارة محمود", "خالد عمر", "فاطمة أحمد", "يوسف إبراهيم", "مريم كامل", "عمر حسن", "ليلى عبدالله"][i],
+  email: `emp${i + 1}@teacher-os.com`,
+  phone: `+20 100 000 ${String(2000 + i).padStart(4, "0")}`,
+  jobTitle: ["مسؤول تقنية", "دعم عملاء", "محاسب", "موارد بشرية", "مدرس", "مدرس", "مساعد إداري", "مسوق", "مشرف", "سكرتير"][i],
+  department: ["تقنية", "دعم", "مالية", "إدارة", "تعليم", "تعليم", "إدارة", "تسويق", "إشراف", "إدارة"][i],
+  salary: [8000, 5000, 7000, 6000, 10000, 10000, 4500, 5500, 9000, 4000][i],
+  hireDate: new Date(2024, (i % 12), (i % 28) + 1),
+  status: (["active", "active", "active", "active", "active", "on-leave", "active", "active", "active", "inactive"] as const)[i],
+  branchId: `br-${(i % 2) + 1}`,
+  avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=emp${i}`,
+}))
+
+export const mockSalaries: SalaryRecord[] = Array.from({ length: 10 }, (_, i) => {
+  const emp = mockEmployees[i]
+  const bonus = [0, 200, 500, 0, 1000, 0, 300, 0, 750, 0][i]
+  const deduction = [0, 0, 0, 200, 0, 500, 0, 100, 0, 300][i]
+  return {
+    id: `sal-${i + 1}`,
+    employeeId: emp.id,
+    employeeName: emp.name,
+    baseSalary: emp.salary,
+    bonuses: bonus,
+    deductions: deduction,
+    netSalary: emp.salary + bonus - deduction,
+    month: 7,
+    year: 2026,
+    paidAt: det() > 0.2 ? new Date(2026, 6, 28) : undefined,
+    status: (["paid", "paid", "paid", "pending", "paid", "paid", "pending", "paid", "paid", "cancelled"] as const)[i],
+  }
+})
+
+export const mockInventory: InventoryItem[] = Array.from({ length: 15 }, (_, i) => ({
+  id: `inv-${i + 1}`,
+  name: ["سبورة بيضاء", "بروجيكتور", "كرسي طالب", "طاولة مدرس", "مروحة", "مكيف", "حاسوب", "طابعة", "كاميرا", "مكبر صوت", "جهاز لوحي", "مايكروفون", "سماعة", "شاشة عرض", "واي فاي راوتر"][i],
+  category: ["أثاث", "الكترونيات", "أثاث", "أثاث", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات", "الكترونيات"][i],
+  quantity: [5, 3, 50, 2, 8, 4, 10, 2, 3, 6, 15, 5, 8, 4, 3][i],
+  minQuantity: [2, 2, 30, 1, 4, 2, 5, 1, 2, 3, 10, 3, 5, 2, 2][i],
+  unit: ["وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة", "وحدة"][i],
+  price: [500, 3000, 150, 800, 400, 5000, 8000, 2500, 2000, 600, 3000, 350, 200, 4000, 1500][i],
+  branchId: `br-${(i % 2) + 1}`,
+  status: (["in-stock", "in-stock", "in-stock", "low-stock", "in-stock", "in-stock", "low-stock", "in-stock", "in-stock", "in-stock", "out-of-stock", "in-stock", "in-stock", "in-stock", "low-stock"] as const)[i],
+}))
+
+export const mockExpenses: Expense[] = Array.from({ length: 12 }, (_, i) => ({
+  id: `exp-${i + 1}`,
+  category: ["إيجار", "كهرباء", "مياه", "إنترنت", "صيانة", "تنظيف", "قرطاسية", "إعلانات", "مواصلات", "رواتب", "تأمين", "أخرى"][i],
+  description: ["دفع إيجار المقر الشهري", "فاتورة كهرباء يوليو", "فاتورة مياه", "اشتراك إنترنت", "صيانة مكيفات", "خدمات نظافة", "شراء قرطاسية", "إعلان فيسبوك", "مواصلات موظفين", "مرتبات الشهر", "تأمين صحي", "مصاريف متنوعة"][i],
+  amount: [15000, 2500, 800, 1200, 3500, 1000, 500, 3000, 1500, 45000, 2000, 1000][i],
+  date: new Date(2026, 6, (i % 28) + 1),
+  branchId: `br-${(i % 2) + 1}`,
+  paidBy: ["أحمد محمد", "نورا حسن", "أحمد محمد", "محمد علي", "نورا حسن", "أحمد محمد", "نورا حسن", "محمد علي", "أحمد محمد", "أحمد محمد", "نورا حسن", "محمد علي"][i],
+  receipt: det() > 0.5 ? `receipt-${i + 1}.pdf` : undefined,
+  status: (["approved", "approved", "pending", "approved", "approved", "approved", "pending", "approved", "rejected", "approved", "pending", "approved"] as const)[i],
+}))
+
+export const mockVideoSessions: VideoSession[] = Array.from({ length: 20 }, (_, i) => ({
+  id: `vs-${i + 1}`,
+  videoId: `vidlib-${(i % 30) + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  deviceId: `dev-${(i % 5) + 1}`,
+  deviceName: (["Windows Desktop", "iPhone 15", "Android Tablet", "MacBook Pro", "iPad Air"] as const)[i % 5],
+  deviceType: (["desktop", "mobile", "tablet", "laptop", "tablet"] as const)[i % 5],
+  ip: `192.168.${Math.floor(i / 10) + 1}.${(i % 255) + 1}`,
+  startedAt: new Date(Date.now() - 86400000 * (i % 3) - 3600000 * (i % 8)),
+  lastActiveAt: new Date(Date.now() - 3600000 * (i % 4)),
+  active: i % 4 !== 0,
+}))
+
+export const mockDevices: DeviceInfo[] = Array.from({ length: 8 }, (_, i) => ({
+  id: `dev-${i + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  name: (["جهاز منزلي", "لابتوب شخصي", "الآيباد", "الجوال", "جهاز العمل", "التابلت", "اللابتوب الثاني", "الساعة الذكية"] as const)[i],
+  type: (["desktop", "laptop", "tablet", "mobile", "laptop", "tablet", "laptop", "watch"] as const)[i],
+  os: (["Windows 11", "macOS 14", "iOS 18", "Android 14", "Windows 10", "iPadOS 18", "macOS 13", "WatchOS 11"] as const)[i],
+  browser: (["Chrome 126", "Safari 18", "Chrome 126", "Chrome Android", "Firefox 128", "Safari 18", "Safari 17", "WatchOS"] as const)[i],
+  lastUsed: new Date(Date.now() - 86400000 * (i % 5)),
+  trusted: i % 3 !== 0,
+}))
+
+export const mockWatchProgress: WatchProgress[] = Array.from({ length: 50 }, (_, i) => ({
+  videoId: `vidlib-${(i % 30) + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  progress: Math.floor(det() * 100),
+  lastPosition: Math.floor(det() * 3000),
+  completed: det() > 0.6,
+  startedAt: new Date(2026, 4 + Math.floor(i / 15), (i % 28) + 1),
+  lastWatchedAt: new Date(Date.now() - 86400000 * (i % 7)),
+  completions: Math.floor(det() * 3) + (det() > 0.6 ? 1 : 0),
+}))
+
+export const mockStudentIDCards: StudentIDCard[] = Array.from({ length: 10 }, (_, i) => ({
+  id: `idcard-${i + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  studentImage: `https://api.dicebear.com/7.x/avataaars/svg?seed=student${i}`,
+  grade: ["أولى ثانوي", "ثانية ثانوي", "ثالثة ثانوي"][i % 3],
+  group: `مجموعة ${String.fromCharCode(65 + (i % 4))}`,
+  studentCode: `STU-${String(i + 1).padStart(5, "0")}`,
+  enrollmentStatus: "active",
+  qrCode: "#",
+  issuedAt: new Date(2026, 0, 1),
+  expiresAt: new Date(2027, 0, 1),
+}))
+
+export const mockRecycleBin: RecycleBinItem[] = Array.from({ length: 8 }, (_, i) => ({
+  id: `rbin-${i + 1}`,
+  originalId: `del-${i + 1}`,
+  type: ["طالب", "كورس", "امتحان", "واجب", "اشتراك", "قسط", "كوبون", "فاتورة"][i],
+  name: [`طالب ${i + 1} (محذوف)`, `كورس ${i + 1}`, `امتحان ${i + 1}`, `واجب ${i + 1}`, `اشتراك ${i + 1}`, `قسط ${i + 1}`, `كوبون ${i + 1}`, `فاتورة ${i + 1}`][i],
+  deletedBy: "أحمد محمد",
+  deletedAt: new Date(2026, 5 + Math.floor(i / 3), (i % 20) + 1),
+  expiresAt: new Date(2026, 8 + Math.floor(i / 3), (i % 20) + 1),
+  data: {},
+}))
+
+export const mockPermissionRoles: PermissionRole[] = [
+  {
+    id: "role-1", name: "مدير النظام", description: "صلاحية كاملة", isSystem: true, userCount: 1,
+    permissions: {
+      "students": { module: "students", label: "الطلاب", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "courses": { module: "courses", label: "الكورسات", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "exams": { module: "exams", label: "الامتحانات", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "homework": { module: "homework", label: "الواجبات", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "payments": { module: "payments", label: "المدفوعات", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "attendance": { module: "attendance", label: "الحضور", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "reports": { module: "reports", label: "التقارير", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "employees": { module: "employees", label: "الموظفين", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "inventory": { module: "inventory", label: "المخزون", canView: true, canCreate: true, canEdit: true, canDelete: true, canPrint: true, canExport: true, canApprove: true, canManage: true },
+      "settings": { module: "settings", label: "الإعدادات", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: false, canExport: false, canApprove: true, canManage: true },
+    },
+  },
+  {
+    id: "role-2", name: "مشرف", description: "إدارة الطلاب والكورسات والتقارير", isSystem: false, userCount: 2,
+    permissions: {
+      "students": { module: "students", label: "الطلاب", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: true, canExport: true, canApprove: false, canManage: false },
+      "courses": { module: "courses", label: "الكورسات", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: true, canExport: true, canApprove: false, canManage: false },
+      "exams": { module: "exams", label: "الامتحانات", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: true, canExport: true, canApprove: false, canManage: false },
+      "homework": { module: "homework", label: "الواجبات", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: true, canExport: true, canApprove: false, canManage: false },
+      "payments": { module: "payments", label: "المدفوعات", canView: true, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "attendance": { module: "attendance", label: "الحضور", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: true, canExport: true, canApprove: false, canManage: false },
+      "reports": { module: "reports", label: "التقارير", canView: true, canCreate: false, canEdit: false, canDelete: false, canPrint: true, canExport: true, canApprove: false, canManage: false },
+      "employees": { module: "employees", label: "الموظفين", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "inventory": { module: "inventory", label: "المخزون", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "settings": { module: "settings", label: "الإعدادات", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+    },
+  },
+  {
+    id: "role-3", name: "محاسب", description: "إدارة المدفوعات والاشتراكات والتقارير المالية", isSystem: false, userCount: 1,
+    permissions: {
+      "students": { module: "students", label: "الطلاب", canView: true, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "courses": { module: "courses", label: "الكورسات", canView: true, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "exams": { module: "exams", label: "الامتحانات", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "homework": { module: "homework", label: "الواجبات", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "payments": { module: "payments", label: "المدفوعات", canView: true, canCreate: true, canEdit: true, canDelete: false, canPrint: true, canExport: true, canApprove: true, canManage: false },
+      "attendance": { module: "attendance", label: "الحضور", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "reports": { module: "reports", label: "التقارير", canView: true, canCreate: false, canEdit: false, canDelete: false, canPrint: true, canExport: true, canApprove: false, canManage: false },
+      "employees": { module: "employees", label: "الموظفين", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "inventory": { module: "inventory", label: "المخزون", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+      "settings": { module: "settings", label: "الإعدادات", canView: false, canCreate: false, canEdit: false, canDelete: false, canPrint: false, canExport: false, canApprove: false, canManage: false },
+    },
+  },
+]
+
+export const mockStudentNotes: StudentNote[] = Array.from({ length: 15 }, (_, i) => ({
+  id: `note-${i + 1}`,
+  type: (["personal", "academic"] as const)[i % 2],
+  title: ["ملاحظة شخصية", "ملاحظة أكاديمية", "تقييم سلوك", "توصيات", "متابعة", "إنجاز"][i % 6],
+  content: `محتوى الملاحظة رقم ${i + 1} مع تفاصيل كاملة عن الطالب وملاحظاته`,
+  createdBy: "أحمد محمد",
+  createdAt: new Date(2026, 4 + Math.floor(i / 3), (i % 28) + 1),
+  priority: (["low", "medium", "high"] as const)[i % 3],
+}))
+
+export const mockTimelineEvents: TimelineEvent[] = Array.from({ length: 20 }, (_, i) => ({
+  id: `tl-${i + 1}`,
+  type: (["enrolled", "completed", "payment", "attendance", "exam", "reward", "penalty", "note"] as const)[i % 8],
+  title: ["تسجيل في الكورس", "إكمال الكورس", "دفع اشتراك", "تسجيل حضور", "أدى امتحان", "حصل على مكافأة", "عقوبة تأخير", "إضافة ملاحظة"][i % 8],
+  description: `تفاصيل الحدث: ${["تم تسجيل الطالب في الكورس", "أكمل الطالب جميع متطلبات الكورس", "تم دفع مبلغ الاشتراك", "حضر الطالب الحصة", "أدى الطالب الامتحان وحصل على درجة", "حصل الطالب على شهادة تقدير", "تم تسجيل مخالفة تأخير", "تم إضافة ملاحظة من المدرس"][i % 8]}`,
+  date: new Date(2026, 4 + Math.floor(i / 4), (i % 28) + 1),
+}))
+
+export const mockDisciplineRecords: DisciplineRecord[] = Array.from({ length: 10 }, (_, i) => ({
+  id: `disc-${i + 1}`,
+  type: (i < 6 ? "reward" : "penalty") as "reward" | "penalty",
+  title: i < 6 ? ["تفوق دراسي", "تميز في الحضور", "مشاركة فعالة", "تحسن ملحوظ", "مساعدة الزملاء", "إنجاز متميز"][i] : ["تأخير متكرر", "عدم انضباط", "تأخير في تسليم الواجبات", "سلوك غير لائق"][i - 6],
+  description: i < 6 ? "تكريم الطالب على تميزه واجتهاده" : "تنبيه الطالب بضرورة الالتزام باللوائح",
+  points: i < 6 ? [50, 30, 40, 60, 20, 100][i] : [-20, -30, -10, -50][i - 6],
+  date: new Date(2026, 4 + (i % 3), (i % 28) + 1),
+  issuedBy: "أحمد محمد",
+}))
+
+export const mockParentDocuments: StudentDocument[] = Array.from({ length: 8 }, (_, i) => ({
+  id: `doc-${i + 1}`,
+  name: ["شهادة ميلاد", "صورة شخصية", "إثبات قيد", "شهادة نجاح", "شهادة صحية", "تقرير درجات", "صورة بطاقة", "إقرار ولي الأمر"][i],
+  type: (["birth", "photo", "certificate", "certificate", "other", "certificate", "id", "other"] as const)[i],
+  url: "#",
+  uploadedAt: new Date(2026, 0, (i % 28) + 1),
+  verified: i % 3 !== 0,
+}))
+
+export const mockMedicalInfo: MedicalInfo = {
+  id: "med-1",
+  bloodType: "O+",
+  allergies: ["بنسلين", "مكسرات"],
+  chronicDiseases: ["حساسية صدرية"],
+  medications: ["بخاخ الربو عند اللزوم"],
+  emergencyNotes: "يرجى الاتصال بولي الأمر في حالة الطوارئ",
+  doctorName: "د. محمد السيد",
+  doctorPhone: "+20 100 000 0000",
+}
+
+export const mockParentContacts: ParentInfo[] = Array.from({ length: 8 }, (_, i) => ({
+  id: `parc-${i + 1}`,
+  name: `ولي أمر ${i + 1}`,
+  relation: ["أب", "أم", "وصي", "أخ", "جد", "جدة", "عم", "خال"][i],
+  phone: `+20 100 000 ${String(8000 + i).padStart(4, "0")}`,
+  email: `parent${i + 1}@email.com`,
+  isPrimary: i === 0,
+}))
+
+export const mockEmergencyContacts: EmergencyContact[] = Array.from({ length: 6 }, (_, i) => ({
+  id: `emc-${i + 1}`,
+  name: `مخالصة ${i + 1}`,
+  relation: ["والد", "والدة", "عم", "خال", "جدة", "أخ"][i],
+  phone: `+20 100 000 ${String(9000 + i).padStart(4, "0")}`,
+  alternatePhone: i % 2 === 0 ? `+20 100 000 ${String(9500 + i).padStart(4, "0")}` : undefined,
+}))
+
+export const mockStudentReports = Array.from({ length: 10 }, (_, i) => ({
+  id: `srep-${i + 1}`,
+  studentId: `s-${(i % 50) + 1}`,
+  studentName: `طالب ${(i % 50) + 1}`,
+  reportType: (["monthly", "weekly", "final"] as const)[i % 3],
+  period: `شهر ${["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو"][i % 6]}`,
+  attendanceRate: Math.floor(det() * 20) + 80,
+  averageGrade: Math.floor(det() * 25) + 65,
+  completedHomework: Math.floor(det() * 10) + 10,
+  missedHomework: Math.floor(det() * 5),
+  behavior: (["ممتاز", "جيد جداً", "جيد", "مقبول"] as const)[i % 4],
+  teacherNotes: `ملاحظات المدرس عن الطالب للفترة ${["الأولى", "الثانية", "الثالثة"][i % 3]}`,
+  generatedAt: new Date(2026, 4 + (i % 3), (i % 28) + 1),
+}))
+
+export const mockWaitingQueueStats: WaitingQueueStats = {
+  totalWaiting: 12,
+  byGroup: [
+    { groupName: "مجموعة A", count: 4 },
+    { groupName: "مجموعة B", count: 3 },
+    { groupName: "مجموعة C", count: 3 },
+    { groupName: "مجموعة D", count: 2 },
+  ],
+  averageWaitDays: 7,
+  notifiedToday: 2,
+  enrolledToday: 1,
+}

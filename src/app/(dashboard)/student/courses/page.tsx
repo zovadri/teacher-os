@@ -1,11 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { HiOutlineBookOpen, HiOutlinePlay, HiOutlineClock, HiOutlineAcademicCap, HiStar, HiOutlineChevronLeft } from "react-icons/hi"
+import { HiOutlineBookOpen, HiOutlineClock, HiOutlineStar, HiOutlineChevronLeft } from "react-icons/hi"
+import { Card } from "@/components/ui/Card"
+import { Badge } from "@/components/ui/Badge"
+import { Progress } from "@/components/ui/Progress"
 
-const enrolledCourses = [
+const enrolledCourseItems = [
   {
     id: "c-1", title: "النحو والصرف", grade: "ثالثة ثانوي", teacher: "أحمد محمد",
     progress: 75, totalLessons: 36, completedLessons: 27, rating: 4.9,
@@ -35,6 +38,8 @@ const enrolledCourses = [
 export default function StudentCoursesPage() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
+  const courses = useMemo(() => enrolledCourseItems, [])
+
   if (!mounted) return null
 
   return (
@@ -47,7 +52,7 @@ export default function StudentCoursesPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-5">
-          {enrolledCourses.map((course, i) => (
+          {courses.map((course, i) => (
             <motion.div
               key={course.id}
               initial={{ opacity: 0, y: 20 }}

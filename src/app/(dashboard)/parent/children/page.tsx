@@ -45,7 +45,7 @@ export default function ParentChildrenPage() {
         {/* Filter Tabs */}
         <div className="flex gap-1 p-1 rounded-xl bg-surface border border-border w-fit">
           {(["all", "active", "pending", "expired"] as const).map((f) => (
-            <button
+            <button type="button"
               key={f}
               onClick={() => setFilter(f)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${

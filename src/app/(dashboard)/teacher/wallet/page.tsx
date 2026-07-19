@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -31,13 +31,16 @@ import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
 import Select from "@/components/ui/Select"
 import { mockWallet } from "@/lib/mock/data"
-import { formatCurrency, formatDate } from "@/lib/utils"
+import { formatCurrency, formatDate, det } from "@/lib/utils"
 import { useThemeStore } from "@/lib/store/useThemeStore"
+import toast from "react-hot-toast"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const typeConfig: Record<string, { label: string; variant: "success" | "error" | "warning" }> = {
-  deposit: { label: "إيداع", variant: "success" },
-  withdrawal: { label: "سحب", variant: "error" },
-  refund: { label: "استرداد", variant: "warning" },
+  deposit: { label: "ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹", variant: "success" },
+  withdrawal: { label: "ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨", variant: "error" },
+  refund: { label: "ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¯", variant: "warning" },
 }
 
 const statusBadge: Record<string, "success" | "warning" | "error"> = {
@@ -47,18 +50,19 @@ const statusBadge: Record<string, "success" | "warning" | "error"> = {
 }
 
 const methodLabels: Record<string, string> = {
-  cash: "نقداً",
-  fawry: "فوري",
-  bank: "بنك",
+  cash: "ط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹",
+  fawry: "ط·آ¸ط¸آ¾ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸ط¸آ¹",
+  bank: "ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ¸ط¦â€™",
 }
 
 const chartData = Array.from({ length: 12 }, (_, i) => ({
-  month: ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"][i],
-  deposits: Math.floor(Math.random() * 15000) + 8000,
-  withdrawals: Math.floor(Math.random() * 10000) + 3000,
+  month: ["ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ·ط¢آ±", "ط·آ¸ط¸آ¾ط·آ·ط¢آ¨ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ·ط¢آ±", "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ³", "ط·آ·ط¢آ¥ط·آ·ط¢آ¨ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ", "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸ط«â€ ", "ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ¸ط«â€ ", "ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸ط«â€ ", "ط·آ·ط¢آ£ط·آ·ط·â€؛ط·آ·ط¢آ³ط·آ·ط¢آ·ط·آ·ط¢آ³", "ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ·ط¢آ±", "ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ±", "ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ·ط¢آ±", "ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ·ط¢آ±"][i],
+  deposits: Math.floor(det() * 15000) + 8000,
+  withdrawals: Math.floor(det() * 10000) + 3000,
 }))
 
 export default function WalletPage() {
+  const router = useRouter()
   const { theme } = useThemeStore()
   const isDark = theme === "dark"
   const textColor = isDark ? "#CBD5E1" : "#475569"
@@ -70,7 +74,7 @@ export default function WalletPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="المحفظة" subtitle="إدارة الرصيد والمعاملات المالية" />
+      <DashboardHeader title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ¸ط¸آ¾ط·آ·ط¢آ¸ط·آ·ط¢آ©" subtitle="ط·آ·ط¢آ¥ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ·ط¢آ©" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -82,46 +86,44 @@ export default function WalletPage() {
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white" />
         </div>
         <div className="relative z-10">
-          <p className="text-primary-100 text-sm mb-1">الرصيد الحالي</p>
+          <p className="text-primary-100 text-sm mb-1">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹</p>
           <p className="text-4xl md:text-5xl font-bold text-white mb-4">
             {formatCurrency(wallet.balance)}
           </p>
           <div className="flex items-center gap-4">
-            <Button
-              variant="secondary"
+            <button type="button"`nvariant="secondary"
               size="sm"
               leftIcon={<HiOutlinePlus className="w-4 h-4" />}
               onClick={() => setShowDepositModal(true)}
               className="bg-white/20 text-white border-white/30 hover:bg-white/30"
             >
-              إيداع
+              ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹
             </Button>
-            <Button
-              variant="secondary"
+            <button type="button"`nvariant="secondary"
               size="sm"
               leftIcon={<HiOutlineMinus className="w-4 h-4" />}
               onClick={() => setShowWithdrawModal(true)}
               className="bg-white/20 text-white border-white/30 hover:bg-white/30"
             >
-              سحب
+              ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨
             </Button>
           </div>
         </div>
       </motion.div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="إجمالي الإيداعات" value={formatCurrency(wallet.totalDeposits)} icon={HiOutlineArrowUp} color="success" />
-        <StatsCard title="إجمالي السحوبات" value={formatCurrency(wallet.totalWithdrawals)} icon={HiOutlineArrowDown} color="error" />
-        <StatsCard title="السحوبات المعلقة" value={formatCurrency(wallet.pendingWithdrawals)} icon={HiOutlineRefresh} color="warning" />
-        <StatsCard title="العملة" value={wallet.currency} icon={HiOutlineCash} color="primary" />
+        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={formatCurrency(wallet.totalDeposits)} icon={HiOutlineArrowUp} color="success" />
+        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={formatCurrency(wallet.totalWithdrawals)} icon={HiOutlineArrowDown} color="error" />
+        <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©" value={formatCurrency(wallet.pendingWithdrawals)} icon={HiOutlineRefresh} color="warning" />
+        <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©" value={wallet.currency} icon={HiOutlineCash} color="primary" />
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>حركة الرصيد الشهرية</CardTitle>
+          <CardTitle>ط·آ·ط¢آ­ط·آ·ط¢آ±ط·آ¸ط¦â€™ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ©</CardTitle>
           <Badge variant="primary" size="sm">
             <HiOutlineTrendingUp className="w-3 h-3 ml-1" />
-            إيداعات وسحوبات
+            ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾
           </Badge>
         </CardHeader>
         <CardContent>
@@ -149,10 +151,10 @@ export default function WalletPage() {
                     color: isDark ? "#F8FAFC" : "#0F172A",
                     fontSize: "13px",
                   }}
-                  formatter={(value: any) => { if (value == null) return []; return [formatCurrency(Number(value)), ""] }}
+                  formatter={(value: number | null) => { if (value == null) return []; return [formatCurrency(Number(value)), ""] }}
                 />
-                <Area type="monotone" dataKey="deposits" stroke="#10B981" strokeWidth={2} fill="url(#depositGradient)" name="إيداعات" />
-                <Area type="monotone" dataKey="withdrawals" stroke="#EF4444" strokeWidth={2} fill="url(#withdrawGradient)" name="سحوبات" />
+                <Area type="monotone" dataKey="deposits" stroke="#10B981" strokeWidth={2} fill="url(#depositGradient)" name="ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
+                <Area type="monotone" dataKey="withdrawals" stroke="#EF4444" strokeWidth={2} fill="url(#withdrawGradient)" name="ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -161,30 +163,31 @@ export default function WalletPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>آخر المعاملات</CardTitle>
+          <CardTitle>ط·آ·ط¢آ¢ط·آ·ط¢آ®ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾</CardTitle>
+          <Link href="/teacher/finance" className="text-sm text-primary hover:underline mr-auto">التقارير المالية</Link>
         </CardHeader>
         <CardContent className="p-0">
           <Table
             columns={[
-              { key: "type", header: "النوع", render: (t) => {
+              { key: "type", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ·ط¢آ¹", render: (t) => {
                 const config = typeConfig[t.type]
                 return <Badge variant={config.variant} size="sm">{config.label}</Badge>
               }},
-              { key: "amount", header: "المبلغ", render: (t) => (
+              { key: "amount", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛", render: (t) => (
                 <span className={`font-medium ${t.type === "deposit" ? "text-success" : "text-error"}`}>
                   {t.type === "deposit" ? "+" : "-"}{formatCurrency(t.amount)}
                 </span>
               )},
-              { key: "description", header: "الوصف" },
-              { key: "paymentMethod", header: "طريقة الدفع", render: (t) => (
+              { key: "description", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آµط·آ¸ط¸آ¾" },
+              { key: "paymentMethod", header: "ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹", render: (t) => (
                 <Badge variant="neutral" size="sm">{methodLabels[t.paymentMethod] || t.paymentMethod}</Badge>
               )},
-              { key: "status", header: "الحالة", render: (t) => (
+              { key: "status", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©", render: (t) => (
                 <Badge variant={statusBadge[t.status]}>
-                  {t.status === "completed" ? "مكتمل" : t.status === "pending" ? "معلق" : "فاشل"}
+                  {t.status === "completed" ? "ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¦â€™ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ" : t.status === "pending" ? "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘" : "ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¢آ´ط·آ¸أ¢â‚¬â€چ"}
                 </Badge>
               )},
-              { key: "createdAt", header: "التاريخ", render: (t) => (
+              { key: "createdAt", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ®", render: (t) => (
                 <span className="text-sm text-text-tertiary">{formatDate(t.createdAt)}</span>
               )},
             ]}
@@ -193,36 +196,36 @@ export default function WalletPage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showDepositModal} onClose={() => setShowDepositModal(false)} title="إيداع رصيد" subtitle="أدخل المبلغ وطريقة الدفع" size="md">
+      <Modal isOpen={showDepositModal} onClose={() => setShowDepositModal(false)} title="ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹ ط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯" subtitle="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ ط·آ¸ط«â€ ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" size="md">
         <div className="space-y-4">
-          <Input label="المبلغ" type="number" placeholder="أدخل المبلغ" leftIcon={<HiOutlineCash className="w-4 h-4" />} />
-          <Select label="طريقة الدفع" options={[
-            { value: "cash", label: "نقداً" },
-            { value: "fawry", label: "فوري" },
-            { value: "bank", label: "تحويل بنكي" },
-          ]} placeholder="اختر طريقة الدفع" />
-          <Input label="المرجع (اختياري)" placeholder="رقم المرجع أو الإيصال" />
+          <Input label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" type="number" placeholder="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" leftIcon={<HiOutlineCash className="w-4 h-4" />} />
+          <Select label="ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" options={[
+            { value: "cash", label: "ط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹" },
+            { value: "fawry", label: "ط·آ¸ط¸آ¾ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ¸ط¸آ¹" },
+            { value: "bank", label: "ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ¸ط¦â€™ط·آ¸ط¸آ¹" },
+          ]} placeholder="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" />
+          <Input label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ¹ (ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹)" placeholder="ط·آ·ط¢آ±ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ¹ ط·آ·ط¢آ£ط·آ¸ط«â€  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ" />
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1">تأكيد الإيداع</Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowDepositModal(false)}>إلغاء</Button>
+            <button type="button" variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إيداع المبلغ بنجاح"); setShowDepositModal(false); }}>ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowDepositModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
           </div>
         </div>
       </Modal>
 
-      <Modal isOpen={showWithdrawModal} onClose={() => setShowWithdrawModal(false)} title="سحب رصيد" subtitle="أدخل المبلغ المراد سحبه" size="md">
+      <Modal isOpen={showWithdrawModal} onClose={() => setShowWithdrawModal(false)} title="ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨ ط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯" subtitle="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ ط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬طŒ" size="md">
         <div className="space-y-4">
-          <Input label="المبلغ" type="number" placeholder="أدخل المبلغ" leftIcon={<HiOutlineCash className="w-4 h-4" />} />
-          <Select label="الوجهة" options={[
-            { value: "bank", label: "حساب بنكي" },
-            { value: "cash", label: "كاش" },
-          ]} placeholder="اختر وجهة السحب" />
-          <Input label="ملاحظات (اختياري)" placeholder="ملاحظات إضافية" />
+          <Input label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" type="number" placeholder="ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛" leftIcon={<HiOutlineCash className="w-4 h-4" />} />
+          <Select label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ©" options={[
+            { value: "bank", label: "ط·آ·ط¢آ­ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ¨ ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ¸ط¦â€™ط·آ¸ط¸آ¹" },
+            { value: "cash", label: "ط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ·ط¢آ´" },
+          ]} placeholder="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨" />
+          <Input label="ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ¸ط·آ·ط¢آ§ط·آ·ط¹آ¾ (ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹)" placeholder="ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ¸ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ©" />
           <div className="p-3 rounded-xl bg-warning/10 border border-warning/20 text-sm text-warning">
-            الرصيد الحالي: {formatCurrency(wallet.balance)}
+            ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹: {formatCurrency(wallet.balance)}
           </div>
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1">تأكيد السحب</Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowWithdrawModal(false)}>إلغاء</Button>
+            <button type="button" variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم تقديم طلب السحب بنجاح"); setShowWithdrawModal(false); }}>ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowWithdrawModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
           </div>
         </div>
       </Modal>

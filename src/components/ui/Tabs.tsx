@@ -25,7 +25,7 @@ export function Tabs({ tabs, defaultTab, onChange, children, className }: TabsPr
     <div className={cn(className)}>
       <div className="flex gap-1 border-b border-border mb-6 overflow-x-auto">
         {tabs.map((tab) => (
-          <button
+          <button type="button"
             key={tab.id}
             onClick={() => { setActiveTab(tab.id); onChange?.(tab.id) }}
             className={cn(

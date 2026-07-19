@@ -69,7 +69,7 @@ export const useAuthStore = create<AuthStore>()(
           set({
             user,
             isAuthenticated: true,
-            sessionId: `sess_${Math.random().toString(36).substring(2, 15)}`,
+            sessionId: `sess_${Date.now().toString(36)}_${Math.floor(Math.random() * 1000)}`,
             sessionExpiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
           })
           return true
@@ -88,7 +88,7 @@ export const useAuthStore = create<AuthStore>()(
         set({
           user,
           isAuthenticated: true,
-          sessionId: `sess_${Math.random().toString(36).substring(2, 15)}`,
+          sessionId: `sess_${Date.now().toString(36)}_${Math.floor(Math.random() * 1000)}`,
           sessionExpiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
         })
       },
