@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -18,16 +18,16 @@ interface BulkActionsProps {
 }
 
 const groups = [
-  { label: 'ظ…ط¬ظ…ظˆط¹ط© A', value: 'ظ…ط¬ظ…ظˆط¹ط© A' },
-  { label: 'ظ…ط¬ظ…ظˆط¹ط© B', value: 'ظ…ط¬ظ…ظˆط¹ط© B' },
-  { label: 'ظ…ط¬ظ…ظˆط¹ط© C', value: 'ظ…ط¬ظ…ظˆط¹ط© C' },
+  { label: 'المجموعة A', value: 'المجموعة A' },
+  { label: 'المجموعة B', value: 'المجموعة B' },
+  { label: 'المجموعة C', value: 'المجموعة C' },
 ]
 
 const statuses = [
-  { label: 'ظ†ط´ط·', value: 'active' },
-  { label: 'ط؛ظٹط± ظ†ط´ط·', value: 'inactive' },
-  { label: 'ظ…ظ†طھظ‡ظٹ', value: 'expired' },
-  { label: 'ظ…ظˆظ‚ظˆظپ', value: 'suspended' },
+  { label: 'نشط', value: 'active' },
+  { label: 'غير نشط', value: 'inactive' },
+  { label: 'منتهي', value: 'expired' },
+  { label: 'موقوف', value: 'suspended' },
 ]
 
 export function BulkActions({ selectedCount, onClear, onMoveToGroup, onChangeStatus, onSendMessage, onPrint, onExportExcel }: BulkActionsProps) {
@@ -47,73 +47,77 @@ export function BulkActions({ selectedCount, onClear, onMoveToGroup, onChangeSta
         className="flex items-center gap-3 px-4 py-3 bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-xl"
       >
         <span className="text-sm font-medium text-primary-700 dark:text-primary-300 whitespace-nowrap">
-          {selectedCount} ط·ط§ظ„ط¨ ظ…ط­ط¯ط¯
+          {selectedCount} طالب محدد
         </span>
         <div className="flex items-center gap-2 flex-wrap">
           <button type="button"
             onClick={() => setShowGroupModal(true)}
             className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-border rounded-lg text-text-secondary hover:bg-surface-tertiary transition-colors"
           >
-            ظ†ظ‚ظ„ ط¥ظ„ظ‰ ظ…ط¬ظ…ظˆط¹ط©
+            نقل إلى مجموعة
           </button>
           <button type="button"
             onClick={() => setShowStatusModal(true)}
             className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-border rounded-lg text-text-secondary hover:bg-surface-tertiary transition-colors"
           >
-            طھط؛ظٹظٹط± ط§ظ„ط­ط§ظ„ط©
+            تغيير الحالة
           </button>
-          <button type="button"`nonClick={onSendMessage}
+          <button type="button"
+            onClick={onSendMessage}
             className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-border rounded-lg text-text-secondary hover:bg-surface-tertiary transition-colors"
           >
-            ط¥ط±ط³ط§ظ„ ط±ط³ط§ظ„ط©
+            إرسال رسالة
           </button>
-          <button type="button"`nonClick={onPrint}
+          <button type="button"
+            onClick={onPrint}
             className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-border rounded-lg text-text-secondary hover:bg-surface-tertiary transition-colors"
           >
-            ط·ط¨ط§ط¹ط©
+            طباعة
           </button>
-          <button type="button"`nonClick={onExportExcel}
+          <button type="button"
+            onClick={onExportExcel}
             className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-800 border border-border rounded-lg text-text-secondary hover:bg-surface-tertiary transition-colors"
           >
-            طھطµط¯ظٹط± Excel
+            تصدير Excel
           </button>
         </div>
-        <button type="button"`nonClick={onClear}
+        <button type="button"
+          onClick={onClear}
           className="mr-auto p-1.5 text-text-tertiary hover:text-error transition-colors"
-          title="ط¥ظ„ط؛ط§ط، ط§ظ„طھط­ط¯ظٹط¯"
+          title="إلغاء التحديد"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
       </motion.div>
 
-      <Modal isOpen={showGroupModal} onClose={() => setShowGroupModal(false)} title="ظ†ظ‚ظ„ ط¥ظ„ظ‰ ظ…ط¬ظ…ظˆط¹ط©" size="sm">
+      <Modal isOpen={showGroupModal} onClose={() => setShowGroupModal(false)} title="نقل إلى مجموعة" size="sm">
         <div className="space-y-4">
           <Select
-            label="ط§ط®طھط± ط§ظ„ظ…ط¬ظ…ظˆط¹ط©"
+            label="اختر المجموعة"
             options={groups}
             value={selectedGroup}
             onChange={(e) => setSelectedGroup(e.target.value)}
-            placeholder="-- ط§ط®طھط± --"
+            placeholder="-- اختر --"
           />
           <div className="flex gap-3">
-            <button type="button" variant="secondary" className="flex-1" onClick={() => setShowGroupModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
-            <button type="button" variant="primary" className="flex-1" onClick={() => { onMoveToGroup(selectedGroup); setShowGroupModal(false) }} disabled={!selectedGroup}>ظ†ظ‚ظ„</Button>
+            <Button variant="secondary" className="flex-1" onClick={() => setShowGroupModal(false)}>إلغاء</Button>
+            <Button variant="primary" className="flex-1" onClick={() => { onMoveToGroup(selectedGroup); setShowGroupModal(false) }} disabled={!selectedGroup}>نقل</Button>
           </div>
         </div>
       </Modal>
 
-      <Modal isOpen={showStatusModal} onClose={() => setShowStatusModal(false)} title="طھط؛ظٹظٹط± ط§ظ„ط­ط§ظ„ط©" size="sm">
+      <Modal isOpen={showStatusModal} onClose={() => setShowStatusModal(false)} title="تغيير الحالة" size="sm">
         <div className="space-y-4">
           <Select
-            label="ط§ط®طھط± ط§ظ„ط­ط§ظ„ط©"
+            label="اختر الحالة"
             options={statuses}
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            placeholder="-- ط§ط®طھط± --"
+            placeholder="-- اختر --"
           />
           <div className="flex gap-3">
-            <button type="button" variant="secondary" className="flex-1" onClick={() => setShowStatusModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
-            <button type="button" variant="primary" className="flex-1" onClick={() => { onChangeStatus(selectedStatus); setShowStatusModal(false) }} disabled={!selectedStatus}>طھط؛ظٹظٹط±</Button>
+            <Button variant="secondary" className="flex-1" onClick={() => setShowStatusModal(false)}>إلغاء</Button>
+            <Button variant="primary" className="flex-1" onClick={() => { onChangeStatus(selectedStatus); setShowStatusModal(false) }} disabled={!selectedStatus}>تغيير</Button>
           </div>
         </div>
       </Modal>

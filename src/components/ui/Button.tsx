@@ -32,7 +32,8 @@ const sizes: Record<string, string> = {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", isLoading, leftIcon, rightIcon, children, disabled, type = "button", ...props }, ref) => {
     return (
-      <button type="button"`nref={ref}
+      <button
+        ref={ref}
         type={type}
         disabled={disabled || isLoading}
         className={cn(

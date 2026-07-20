@@ -55,7 +55,6 @@ export function Modal({ isOpen, onClose, title, subtitle, children, size = "md",
           <motion.div
             ref={modalRef}
             tabIndex={-1}
-          <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2 }}
             className={cn(

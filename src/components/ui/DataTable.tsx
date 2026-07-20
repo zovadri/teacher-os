@@ -1,11 +1,11 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback, memo } from "react"
 import { cn } from "@/lib/utils"
-import { Button } from "./Button"
+import Button from "./Button"
 import { SearchInput } from "./SearchInput"
 import { Pagination } from "./Pagination"
-import { Select } from "./Select"
+import Select from "./Select"
 import { EmptyState } from "./EmptyState"
 import { Skeleton } from "./Skeleton"
 import { handleExport, type ExportFormat } from "@/lib/print-utils"
@@ -57,9 +57,9 @@ interface DataTableProps<T> {
 }
 
 function DataTableInner<T extends Record<string, unknown>>({
-  columns: rawColumns, data, pageSize = 10, searchable = true, searchKeys, searchPlaceholder = "بحث...",
+  columns: rawColumns, data, pageSize = 10, searchable = true, searchKeys, searchPlaceholder = "ط¨ط­ط«...",
   sortable = true, selectable = false, exportable = true, printable = true, filters, quickFilters,
-  filename = "export", loading, emptyMessage = "لا توجد بيانات", onRowClick,
+  filename = "export", loading, emptyMessage = "ظ„ط§ طھظˆط¬ط¯ ط¨ظٹط§ظ†ط§طھ", onRowClick,
   onSelectionChange, bulkActions, stickyHeader = true, skeletonRows = 5,
   noCard, className, id,
 }: DataTableProps<T>) {
@@ -115,7 +115,7 @@ function DataTableInner<T extends Record<string, unknown>>({
 
   const toggleSelect = (id: string) => {
     const next = new Set(selected)
-    if (next.has(id)) next.delete(id) else next.add(id)
+    if (next.has(id)) { next.delete(id) } else { next.add(id) }
     setSelected(next); onSelectionChange?.(data.filter((d) => next.has(String(d.id ?? ""))))
   }
   const toggleAll = () => {
@@ -142,7 +142,7 @@ function DataTableInner<T extends Record<string, unknown>>({
   const ExportButton = ({ format }: { format: ExportFormat }) => (
     <button type="button" onClick={() => handleExport(format, exportData, tableId, filename)}
       className="px-2 py-1 text-xs rounded-md border border-border hover:bg-surface-secondary transition-colors">
-      {format === "csv" ? "CSV" : format === "excel" ? "Excel" : format === "pdf" ? "PDF" : "طباعة"}
+      {format === "csv" ? "CSV" : format === "excel" ? "Excel" : format === "pdf" ? "PDF" : "ط·ط¨ط§ط¹ط©"}
     </button>
   )
 
@@ -168,11 +168,11 @@ function DataTableInner<T extends Record<string, unknown>>({
             <button type="button" onClick={() => setShowFilters(!showFilters)}
               className={cn("flex items-center gap-1 px-3 py-1.5 text-xs rounded-lg border transition-colors",
                 hasActiveFilters ? "bg-primary/10 border-primary text-primary" : "border-border hover:bg-surface-secondary")}>
-              <HiFilter className="w-3.5 h-3.5" /> فلتر {hasActiveFilters && <span className="w-1.5 h-1.5 rounded-full bg-primary" />}
+              <HiFilter className="w-3.5 h-3.5" /> ظپظ„طھط± {hasActiveFilters && <span className="w-1.5 h-1.5 rounded-full bg-primary" />}
             </button>
           ) : null}
           {selectable && bulkActions && selected.size > 0 ? (
-            <span className="text-xs text-text-secondary px-2">{selected.size} محدد</span>
+            <span className="text-xs text-text-secondary px-2">{selected.size} ظ…ط­ط¯ط¯</span>
           ) : null}
           <div className="flex items-center gap-1 mr-auto">
             <div className="relative">
@@ -187,7 +187,7 @@ function DataTableInner<T extends Record<string, unknown>>({
                       <input type="checkbox" checked={visibleColumns.has(col.key)}
                         onChange={() => {
                           const next = new Set(visibleColumns)
-                          if (next.has(col.key)) next.delete(col.key) else next.add(col.key)
+                          if (next.has(col.key)) { next.delete(col.key) } else { next.add(col.key) }
                           setVisibleColumns(next)
                         }} className="rounded border-border" />
                       {col.header}
@@ -214,14 +214,14 @@ function DataTableInner<T extends Record<string, unknown>>({
               <Select
                 value={activeFilters[f.key] || f.defaultValue || ""}
                 onChange={(v) => { setActiveFilters((prev) => ({ ...prev, [f.key]: v })); setCurrentPage(1) }}
-                options={[{ value: "", label: `كل ${f.label}` }, ...f.options]}
+                options={[{ value: "", label: `ظƒظ„ ${f.label}` }, ...f.options]}
               />
             </div>
           ))}
           {hasActiveFilters ? (
             <button type="button" onClick={resetFilters}
               className="flex items-center gap-1 px-3 py-1.5 text-xs text-error hover:bg-error/10 rounded-lg transition-colors">
-              <HiX className="w-3.5 h-3.5" /> إعادة تعيين
+              <HiX className="w-3.5 h-3.5" /> ط¥ط¹ط§ط¯ط© طھط¹ظٹظٹظ†
             </button>
           ) : null}
         </div>
@@ -229,7 +229,7 @@ function DataTableInner<T extends Record<string, unknown>>({
 
       {selectable && selected.size > 0 && bulkActions ? (
         <div className="flex items-center gap-2 p-2 bg-primary/5 rounded-xl border border-primary/20">
-          <span className="text-xs text-text-secondary px-2">{selected.size} محدد</span>
+          <span className="text-xs text-text-secondary px-2">{selected.size} ظ…ط­ط¯ط¯</span>
           {bulkActions.map((action, i) => (
             <Button key={i} size="sm" variant={action.variant || "ghost"} onClick={() => { action.onClick(data.filter((d) => selected.has(String(d.id ?? "")))); setSelected(new Set()) }}>
               {action.icon} {action.label}
@@ -302,7 +302,7 @@ function DataTableInner<T extends Record<string, unknown>>({
 
       {totalPages > 1 ? (
         <div className="flex items-center justify-between">
-          <span className="text-xs text-text-tertiary">{sorted.length} نتيجة</span>
+          <span className="text-xs text-text-tertiary">{sorted.length} ظ†طھظٹط¬ط©</span>
           <Pagination current={safePage} total={totalPages} onChange={setCurrentPage} />
         </div>
       ) : null}

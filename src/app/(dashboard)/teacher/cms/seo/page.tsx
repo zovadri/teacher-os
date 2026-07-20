@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import toast from "react-hot-toast"
@@ -46,7 +46,7 @@ export default function SeoPage() {
   const handleSave = () => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
-    toast.success("تم حفظ إعدادات SEO بنجاح")
+    toast.success("طھظ… ط­ظپط¸ ط¥ط¹ط¯ط§ط¯ط§طھ SEO ط¨ظ†ط¬ط§ط­")
   }
 
   const handleReset = () => {
@@ -59,8 +59,8 @@ export default function SeoPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط¥ط¯ط§ط±ط© ط§ظ„ظ…ط­طھظˆظ‰", href: "/teacher/cms" }, { label: "طھط­ط³ظٹظ† ظ…ط­ط±ظƒط§طھ ط§ظ„ط¨ط­ط«" }]} />
-      <DashboardHeader title="ط¥ط¹ط¯ط§ط¯ط§طھ SEO" subtitle="طھط­ط³ظٹظ† ظ…ط­ط±ظƒط§طھ ط§ظ„ط¨ط­ط« ظˆط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ظˆطµظپظٹط© ظ„ظ„ظ…ظˆظ‚ط¹" />
+      <Breadcrumb items={[{ label: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·ع¾ط¸ث†ط¸â€°", href: "/teacher/cms" }, { label: "ط·ع¾ط·آ­ط·آ³ط¸ظ¹ط¸â€  ط¸â€¦ط·آ­ط·آ±ط¸ئ’ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«" }]} />
+      <DashboardHeader title="ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ SEO" subtitle="ط·ع¾ط·آ­ط·آ³ط¸ظ¹ط¸â€  ط¸â€¦ط·آ­ط·آ±ط¸ئ’ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ« ط¸ث†ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾ط¸ظ¹ط·آ© ط¸â€‍ط¸â€‍ط¸â€¦ط¸ث†ط¸â€ڑط·آ¹" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
@@ -68,19 +68,19 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineSearchCircle className="w-5 h-5 text-primary" />
-                <CardTitle>ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ظˆطµظپظٹط©</CardTitle>
+                <CardTitle>ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾ط¸ظ¹ط·آ©</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
                 <Input
-                  label="ط¹ظ†ظˆط§ظ† ط§ظ„ظ…ظˆظ‚ط¹ (Meta Title)"
+                  label="ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط¸â€ڑط·آ¹ (Meta Title)"
                   value={seo.title}
                   onChange={(e) => setSeo({ ...seo, title: e.target.value })}
                 />
                 <div className="flex items-center justify-between mt-1">
                   <span className={cn("text-xs", titleLength > 60 ? "text-error" : "text-text-tertiary")}>
-                    {titleLength}/60 ط­ط±ظپ
+                    {titleLength}/60 ط·آ­ط·آ±ط¸ظ¾
                   </span>
                   <div className="w-32 h-1 bg-surface-tertiary rounded-full overflow-hidden">
                     <div className={cn("h-full rounded-full transition-all", titleLength > 60 ? "bg-error" : titleLength > 50 ? "bg-warning" : "bg-success")} style={{ width: `${Math.min((titleLength / 60) * 100, 100)}%` }} />
@@ -90,14 +90,14 @@ export default function SeoPage() {
 
               <div>
                 <Textarea
-                  label="ط§ظ„ظˆطµظپ (Meta Description)"
+                  label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾ (Meta Description)"
                   value={seo.description}
                   onChange={(e) => setSeo({ ...seo, description: e.target.value })}
                   rows={3}
                 />
                 <div className="flex items-center justify-between mt-1">
                   <span className={cn("text-xs", descLength > 160 ? "text-error" : "text-text-tertiary")}>
-                    {descLength}/160 ط­ط±ظپ
+                    {descLength}/160 ط·آ­ط·آ±ط¸ظ¾
                   </span>
                   <div className="w-32 h-1 bg-surface-tertiary rounded-full overflow-hidden">
                     <div className={cn("h-full rounded-full transition-all", descLength > 160 ? "bg-error" : descLength > 140 ? "bg-warning" : "bg-success")} style={{ width: `${Math.min((descLength / 160) * 100, 100)}%` }} />
@@ -106,15 +106,15 @@ export default function SeoPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-text mb-2">ط§ظ„ظƒظ„ظ…ط§طھ ط§ظ„ظ…ظپطھط§ط­ظٹط©</label>
+                <label className="block text-sm font-medium text-text mb-2">ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ط¸â€¦ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط¸ظ¾ط·ع¾ط·آ§ط·آ­ط¸ظ¹ط·آ©</label>
                 <div className="flex items-center gap-2 mb-2">
                   <Input
                     value={newKeyword}
                     onChange={(e) => setNewKeyword(e.target.value)}
-                    placeholder="ط£ط¯ط®ظ„ ظƒظ„ظ…ط© ظ…ظپطھط§ط­ظٹط©..."
+                    placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط¸ئ’ط¸â€‍ط¸â€¦ط·آ© ط¸â€¦ط¸ظ¾ط·ع¾ط·آ§ط·آ­ط¸ظ¹ط·آ©..."
                     onKeyDown={(e) => e.key === "Enter" && addKeyword()}
                   />
-                  <Button variant="primary" size="md" onClick={addKeyword}>ط¥ط¶ط§ظپط©</Button>
+                  <Button variant="primary" size="md" onClick={addKeyword}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ©</Button>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {keywords.map((kw) => (
@@ -134,7 +134,7 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlinePhotograph className="w-5 h-5 text-primary" />
-                <CardTitle>طµظˆط±ط© OG (Open Graph)</CardTitle>
+                <CardTitle>ط·آµط¸ث†ط·آ±ط·آ© OG (Open Graph)</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -155,8 +155,8 @@ export default function SeoPage() {
                 ) : (
                   <div className="flex flex-col items-center gap-2">
                     <HiOutlineUpload className="w-8 h-8 text-text-tertiary" />
-                    <p className="text-sm text-text-tertiary">ط§ظ†ظ‚ط± ظ„ط±ظپط¹ طµظˆط±ط© OG</p>
-                    <Badge variant="neutral" size="sm">1200أ—630 ط¨ظƒط³ظ„</Badge>
+                    <p className="text-sm text-text-tertiary">ط·آ§ط¸â€ ط¸â€ڑط·آ± ط¸â€‍ط·آ±ط¸ظ¾ط·آ¹ ط·آµط¸ث†ط·آ±ط·آ© OG</p>
+                    <Badge variant="neutral" size="sm">1200ط£â€”630 ط·آ¨ط¸ئ’ط·آ³ط¸â€‍</Badge>
                   </div>
                 )}
               </div>
@@ -167,12 +167,12 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineGlobe className="w-5 h-5 text-primary" />
-                <CardTitle>ط¥ط¹ط¯ط§ط¯ط§طھ ط¥ط¶ط§ظپظٹط©</CardTitle>
+                <CardTitle>ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط¸ظ¹ط·آ©</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <Input
-                label="ط­ط³ط§ط¨ Twitter/X"
+                label="ط·آ­ط·آ³ط·آ§ط·آ¨ Twitter/X"
                 value={seo.twitterHandle}
                 onChange={(e) => setSeo({ ...seo, twitterHandle: e.target.value })}
                 placeholder="@username"
@@ -186,7 +186,7 @@ export default function SeoPage() {
                 dir="ltr"
               />
               <div className="flex items-center justify-between py-2">
-                <span className="text-sm text-text-secondary">طھظپط¹ظٹظ„ Sitemap</span>
+                <span className="text-sm text-text-secondary">ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ Sitemap</span>
                 <button type="button"
                   onClick={() => setSeo({ ...seo, enableSitemap: !seo.enableSitemap })}
                   className={cn(
@@ -201,7 +201,7 @@ export default function SeoPage() {
                 </button>
               </div>
               <div className="flex items-center justify-between py-2">
-                <span className="text-sm text-text-secondary">طھظپط¹ظٹظ„ Robots.txt</span>
+                <span className="text-sm text-text-secondary">ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ Robots.txt</span>
                 <button type="button"
                   onClick={() => setSeo({ ...seo, enableRobots: !seo.enableRobots })}
                   className={cn(
@@ -224,60 +224,60 @@ export default function SeoPage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineEye className="w-5 h-5 text-primary" />
-                <CardTitle>ظ…ط¹ط§ظٹظ†ط© ط§ظ„ط¨ط­ط«</CardTitle>
-                <CardDescription>ظƒظٹظپ ط³ظٹط¸ظ‡ط± ظ…ظˆظ‚ط¹ظƒ ظپظٹ ظ†طھط§ط¦ط¬ ط§ظ„ط¨ط­ط«</CardDescription>
+                <CardTitle>ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«</CardTitle>
+                <CardDescription>ط¸ئ’ط¸ظ¹ط¸ظ¾ ط·آ³ط¸ظ¹ط·آ¸ط¸â€،ط·آ± ط¸â€¦ط¸ث†ط¸â€ڑط·آ¹ط¸ئ’ ط¸ظ¾ط¸ظ¹ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«</CardDescription>
               </div>
             </CardHeader>
             <CardContent>
               <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
                 <p className="text-xs text-green-700 mb-1">{seo.title ? "teacher-os.com/" : ""}</p>
                 <h3 className="text-sm font-semibold text-blue-700 hover:underline cursor-pointer line-clamp-1">
-                  {seo.title || "ط¹ظ†ظˆط§ظ† ط§ظ„ظ…ظˆظ‚ط¹"}
+                  {seo.title || "ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط¸â€ڑط·آ¹"}
                 </h3>
                 <p className="text-xs text-text-secondary mt-1 line-clamp-2">
-                  {seo.description || "ظˆطµظپ ط§ظ„ظ…ظˆظ‚ط¹"}
+                  {seo.description || "ط¸ث†ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط¸â€ڑط·آ¹"}
                 </p>
                 {keywords.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {keywords.slice(0, 4).map((kw) => (
-                      <span key={kw} className="text-xs text-text-tertiary">آ· {kw}</span>
+                      <span key={kw} className="text-xs text-text-tertiary">ط¢آ· {kw}</span>
                     ))}
                   </div>
                 )}
               </div>
 
               <div className="mt-4 p-4 rounded-xl bg-surface-secondary border border-border">
-                <p className="text-xs font-medium text-text-secondary mb-2">ظ…ظ„ط®طµ SEO</p>
+                <p className="text-xs font-medium text-text-secondary mb-2">ط¸â€¦ط¸â€‍ط·آ®ط·آµ SEO</p>
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-text-tertiary">ط§ظ„ط¹ظ†ظˆط§ظ†</span>
+                    <span className="text-text-tertiary">ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€ </span>
                     <span className={cn("font-medium", titleLength > 60 ? "text-error" : "text-success")}>{titleLength}/60</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-text-tertiary">ط§ظ„ظˆطµظپ</span>
+                    <span className="text-text-tertiary">ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾</span>
                     <span className={cn("font-medium", descLength > 160 ? "text-error" : "text-success")}>{descLength}/160</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-text-tertiary">ط§ظ„ظƒظ„ظ…ط§طھ ط§ظ„ظ…ظپطھط§ط­ظٹط©</span>
+                    <span className="text-text-tertiary">ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ط¸â€¦ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط¸ظ¾ط·ع¾ط·آ§ط·آ­ط¸ظ¹ط·آ©</span>
                     <span className="font-medium text-text">{keywords.length}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-text-tertiary">Sitemap</span>
-                    <Badge variant={seo.enableSitemap ? "success" : "error"} size="sm">{seo.enableSitemap ? "ظ…ظپط¹ظ„" : "ظ…ط¹ط·ظ„"}</Badge>
+                    <Badge variant={seo.enableSitemap ? "success" : "error"} size="sm">{seo.enableSitemap ? "ط¸â€¦ط¸ظ¾ط·آ¹ط¸â€‍" : "ط¸â€¦ط·آ¹ط·آ·ط¸â€‍"}</Badge>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-text-tertiary">Robots.txt</span>
-                    <Badge variant={seo.enableRobots ? "success" : "error"} size="sm">{seo.enableRobots ? "ظ…ظپط¹ظ„" : "ظ…ط¹ط·ظ„"}</Badge>
+                    <Badge variant={seo.enableRobots ? "success" : "error"} size="sm">{seo.enableRobots ? "ط¸â€¦ط¸ظ¾ط·آ¹ط¸â€‍" : "ط¸â€¦ط·آ¹ط·آ·ط¸â€‍"}</Badge>
                   </div>
                 </div>
               </div>
             </CardContent>
             <CardFooter className="flex gap-3">
-              <button type="button" variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
-                {saved ? "طھظ… ط§ظ„ط­ظپط¸!" : "ط­ظپط¸"}
+              <Button variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
+                {saved ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ­ط¸ظ¾ط·آ¸!" : "ط·آ­ط¸ظ¾ط·آ¸"}
               </Button>
-              <button type="button" variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
-                ط¥ط¹ط§ط¯ط©
+              <Button variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
+                ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ©
               </Button>
             </CardFooter>
           </Card>

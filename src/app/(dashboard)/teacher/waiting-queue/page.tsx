@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import {
@@ -51,7 +51,7 @@ export default function WaitingQueuePage() {
     const interval = setInterval(() => {
       const availableSeats = mockClassGroups.filter(g => g.enrolledCount < g.capacity).length
       if (availableSeats > 0 && mockWaitingStudents.some(w => w.status === "waiting")) {
-        toast.success(`طھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ${availableSeats} ظ…ظ‚ط¹ط¯ ط´ط§ط؛ط± - ط¬ط§ط±ظٹ ط¥ط®ط·ط§ط± ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ظ†طھط¸ط±ظٹظ†`)
+        toast.success(`ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ${availableSeats} ط¸â€¦ط¸â€ڑط·آ¹ط·آ¯ ط·آ´ط·آ§ط·ط›ط·آ± - ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€ `)
       }
       setLastCheck(new Date())
     }, 30000)
@@ -70,14 +70,14 @@ export default function WaitingQueuePage() {
   const handleNotify = async (id: string) => {
     setNotifyingId(id)
     await new Promise(r => setTimeout(r, 800))
-    toast.success("طھظ… ط¥ط±ط³ط§ظ„ ط§ظ„ط¥ط´ط¹ط§ط± ظ„ظ„ط·ط§ظ„ط¨ ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ± ط¸â€‍ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
     setNotifyingId(null)
   }
 
   const handleEnroll = async (id: string) => {
     setEnrollingId(id)
     await new Promise(r => setTimeout(r, 1000))
-    toast.success("طھظ… طھط³ط¬ظٹظ„ ط§ظ„ط·ط§ظ„ط¨ ظپظٹ ط§ظ„ظ…ط¬ظ…ظˆط¹ط©")
+    toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©")
     setEnrollingId(null)
   }
 
@@ -86,7 +86,7 @@ export default function WaitingQueuePage() {
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط¥ط¯ط§ط±ط© ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±" description="ظ…طھط§ط¨ط¹ط© ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ظ†طھط¸ط±ظٹظ† ظˆط¥ط¯ط§ط±ط© ط§ظ„ظ…ظ‚ط§ط¹ط¯ ط§ظ„ط´ط§ط؛ط±ط©" />
+        <PageHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" description="ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€  ط¸ث†ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·ط›ط·آ±ط·آ©" />
         <ErrorState message={error} onRetry={handleRetry} />
       </div>
     )
@@ -95,19 +95,20 @@ export default function WaitingQueuePage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <PageHeader
-        title="ط¥ط¯ط§ط±ط© ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±"
-        description="ظ…طھط§ط¨ط¹ط© ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ظ†طھط¸ط±ظٹظ† ظˆط¥ط¯ط§ط±ط© ط§ظ„ظ…ظ‚ط§ط¹ط¯ ط§ظ„ط´ط§ط؛ط±ط©"
+        title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±"
+        description="ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€  ط¸ث†ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·ط›ط·آ±ط·آ©"
         actions={
           <div className="flex items-center gap-3">
-            <button type="button"`nvariant={autoNotify ? "success" : "outline"}
+            <Button type="button"
+variant={autoNotify ? "success" : "outline"}
               size="sm"
               leftIcon={<HiOutlineBell className="w-4 h-4" />}
-              onClick={() => { setAutoNotify(!autoNotify); toast.success(autoNotify ? "طھظ… ط¥ظٹظ‚ط§ظپ ط§ظ„ط¥ط®ط·ط§ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ" : "طھظ… طھظپط¹ظٹظ„ ط§ظ„ط¥ط®ط·ط§ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ ظƒظ„ 30 ط«ط§ظ†ظٹط©") }}
+              onClick={() => { setAutoNotify(!autoNotify); toast.success(autoNotify ? "ط·ع¾ط¸â€¦ ط·آ¥ط¸ظ¹ط¸â€ڑط·آ§ط¸ظ¾ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹" : "ط·ع¾ط¸â€¦ ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط¸ئ’ط¸â€‍ 30 ط·آ«ط·آ§ط¸â€ ط¸ظ¹ط·آ©") }}
             >
-              {autoNotify ? "ط§ظ„ط¥ط®ط·ط§ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ ظ…ظپط¹ظ„" : "طھظپط¹ظٹظ„ ط§ظ„ط¥ط®ط·ط§ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ"}
+              {autoNotify ? "ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط¸â€¦ط¸ظ¾ط·آ¹ط¸â€‍" : "ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹"}
             </Button>
-            <button type="button" variant="ghost" size="sm" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={loadData}>
-              طھط­ط¯ظٹط«
+            <Button variant="ghost" size="sm" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={loadData}>
+              ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«
             </Button>
           </div>
         }
@@ -117,10 +118,10 @@ export default function WaitingQueuePage() {
         <StatsSkeleton count={4} />
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ظ†طھط¸ط±ظٹظ†" value={stats.totalWaiting} icon={HiOutlineUsers} color="warning" />
-          <StatsCard title="ظ…طھظˆط³ط· ط£ظٹط§ظ… ط§ظ„ط§ظ†طھط¸ط§ط±" value={stats.averageWaitDays} icon={HiOutlineClock} color="info" subtitle="ظٹظˆظ…" />
-          <StatsCard title="طھظ… ط§ظ„ط¥ط®ط·ط§ط± ط§ظ„ظٹظˆظ…" value={stats.notifiedToday} icon={HiOutlineBell} color="primary" />
-          <StatsCard title="طھظ… ط§ظ„طھط³ط¬ظٹظ„ ط§ظ„ظٹظˆظ…" value={stats.enrolledToday} icon={HiOutlineUserAdd} color="success" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€ " value={stats.totalWaiting} icon={HiOutlineUsers} color="warning" />
+          <StatsCard title="ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ£ط¸ظ¹ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" value={stats.averageWaitDays} icon={HiOutlineClock} color="info" subtitle="ط¸ظ¹ط¸ث†ط¸â€¦" />
+          <StatsCard title="ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.notifiedToday} icon={HiOutlineBell} color="primary" />
+          <StatsCard title="ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.enrolledToday} icon={HiOutlineUserAdd} color="success" />
         </div>
       )}
 
@@ -129,7 +130,7 @@ export default function WaitingQueuePage() {
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>طھظˆط²ظٹط¹ ط§ظ„ط·ظ„ط§ط¨ ط­ط³ط¨ ط§ظ„ظ…ط¬ظ…ظˆط¹ط©</CardTitle>
+            <CardTitle>ط·ع¾ط¸ث†ط·آ²ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ­ط·آ³ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -137,7 +138,7 @@ export default function WaitingQueuePage() {
                 <div key={g.groupName} className="p-4 rounded-xl bg-surface-secondary border border-border text-center">
                   <p className="text-sm text-text-secondary mb-1">{g.groupName}</p>
                   <p className="text-2xl font-bold text-text">{g.count}</p>
-                  <p className="text-xs text-text-tertiary mt-1">ظ…ظ†طھط¸ط±</p>
+                  <p className="text-xs text-text-tertiary mt-1">ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±</p>
                 </div>
               ))}
             </div>
@@ -147,18 +148,18 @@ export default function WaitingQueuePage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ظ†طھط¸ط±ظˆظ†</CardTitle>
+          <CardTitle>ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ث†ط¸â€ </CardTitle>
           <Badge variant="warning">{filtered.length}</Badge>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ط·ط§ظ„ط¨..." />
+              <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ·ط·آ§ط¸â€‍ط·آ¨..." />
             </div>
             <div className="flex gap-3">
               <Select
                 options={[
-                  { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ" },
+                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾" },
                   ...mockClassGroups.map(g => ({ value: g.id, label: g.name })),
                 ]}
                 value={groupFilter}
@@ -166,11 +167,11 @@ export default function WaitingQueuePage() {
               />
               <Select
                 options={[
-                  { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" },
-                  { value: "waiting", label: "ط¨ط§ظ†طھط¸ط§ط±" },
-                  { value: "offered", label: "طھظ… ط§ظ„ط¹ط±ط¶" },
-                  { value: "enrolled", label: "ظ…ط³ط¬ظ„" },
-                  { value: "cancelled", label: "ظ…ظ„ط؛ظٹ" },
+                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" },
+                  { value: "waiting", label: "ط·آ¨ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" },
+                  { value: "offered", label: "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¶" },
+                  { value: "enrolled", label: "ط¸â€¦ط·آ³ط·آ¬ط¸â€‍" },
+                  { value: "cancelled", label: "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹" },
                 ]}
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
@@ -183,20 +184,20 @@ export default function WaitingQueuePage() {
           ) : filtered.length === 0 ? (
             <EmptyState
               icon={HiOutlineUsers}
-              title="ظ„ط§ ظٹظˆط¬ط¯ ط·ظ„ط§ط¨ ظپظٹ ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±"
-              description={search || groupFilter !== "all" || statusFilter !== "all" ? "ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬ ظ„ظ„طھطµظپظٹط©" : "ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط± ظپط§ط±ط؛ط© ط­ط§ظ„ظٹط§ظ‹"}
+              title="ط¸â€‍ط·آ§ ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±"
+              description={search || groupFilter !== "all" || statusFilter !== "all" ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط¸â€‍ط¸â€‍ط·ع¾ط·آµط¸ظ¾ط¸ظ¹ط·آ©" : "ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ± ط¸ظ¾ط·آ§ط·آ±ط·ط›ط·آ© ط·آ­ط·آ§ط¸â€‍ط¸ظ¹ط·آ§ط¸â€¹"}
             />
           ) : (
             <div className="overflow-x-auto rounded-xl border border-border">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-surface-secondary border-b border-border">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط·ط§ظ„ط¨</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ظ…ط¬ظ…ظˆط¹ط©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">طھط§ط±ظٹط® ط§ظ„ط§ظ†ط¶ظ…ط§ظ…</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط£ظˆظ„ظˆظٹط©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط­ط§ظ„ط©</th>
-                    <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·آ¶ط¸â€¦ط·آ§ط¸â€¦</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
+                    <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -209,31 +210,33 @@ export default function WaitingQueuePage() {
                       <td className="px-4 py-3 text-text-secondary">{w.joinedAt.toLocaleDateString("ar-EG")}</td>
                       <td className="px-4 py-3">
                         <Badge variant={w.priority === 1 ? "error" : w.priority === 2 ? "warning" : "info"}>
-                          {w.priority === 1 ? "ط¹ط§ظ„ظٹط©" : w.priority === 2 ? "ظ…طھظˆط³ط·ط©" : "ظ…ظ†ط®ظپط¶ط©"}
+                          {w.priority === 1 ? "ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©" : w.priority === 2 ? "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·ط·آ©" : "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶ط·آ©"}
                         </Badge>
                       </td>
                       <td className="px-4 py-3">
                         <Badge variant={w.status === "waiting" ? "warning" : w.status === "offered" ? "info" : w.status === "enrolled" ? "success" : "error"}>
-                          {w.status === "waiting" ? "ط¨ط§ظ†طھط¸ط§ط±" : w.status === "offered" ? "طھظ… ط§ظ„ط¹ط±ط¶" : w.status === "enrolled" ? "ظ…ط³ط¬ظ„" : "ظ…ظ„ط؛ظٹ"}
+                          {w.status === "waiting" ? "ط·آ¨ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" : w.status === "offered" ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¶" : w.status === "enrolled" ? "ط¸â€¦ط·آ³ط·آ¬ط¸â€‍" : "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹"}
                         </Badge>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-center gap-2">
-                          <button type="button"`nvariant={w.notified ? "secondary" : "outline"}
+                          <Button type="button"
+variant={w.notified ? "secondary" : "outline"}
                             size="xs"
                             leftIcon={notifyingId === w.id ? <HiOutlineRefresh className="w-3.5 h-3.5 animate-spin" /> : <HiOutlineBell className="w-3.5 h-3.5" />}
                             onClick={() => handleNotify(w.id)}
                             disabled={notifyingId === w.id}
                           >
-                            {w.notified ? "طھظ… ط§ظ„ط¥ط®ط·ط§ط±" : "ط¥ط®ط·ط§ط±"}
+                            {w.notified ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ±" : "ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ±"}
                           </Button>
-                          <button type="button"`nvariant="success"
+                          <Button type="button"
+variant="success"
                             size="xs"
                             leftIcon={enrollingId === w.id ? <HiOutlineRefresh className="w-3.5 h-3.5 animate-spin" /> : <HiOutlineCheckCircle className="w-3.5 h-3.5" />}
                             onClick={() => handleEnroll(w.id)}
                             disabled={enrollingId === w.id || w.status === "enrolled"}
                           >
-                            {w.status === "enrolled" ? "ظ…ط³ط¬ظ„" : "طھط³ط¬ظٹظ„"}
+                            {w.status === "enrolled" ? "ط¸â€¦ط·آ³ط·آ¬ط¸â€‍" : "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"}
                           </Button>
                         </div>
                       </td>
@@ -247,8 +250,8 @@ export default function WaitingQueuePage() {
       </Card>
 
       <div className="text-center text-xs text-text-tertiary">
-        ط¢ط®ط± طھط­ط¯ظٹط«: {lastCheck.toLocaleTimeString("ar-EG")}
-        {autoNotify && " | ط§ظ„ط¥ط®ط·ط§ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ ظ†ط´ط· (ظƒظ„ 30 ط«ط§ظ†ظٹط©)"}
+        ط·آ¢ط·آ®ط·آ± ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«: {lastCheck.toLocaleTimeString("ar-EG")}
+        {autoNotify && " | ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط¸â€ ط·آ´ط·آ· (ط¸ئ’ط¸â€‍ 30 ط·آ«ط·آ§ط¸â€ ط¸ظ¹ط·آ©)"}
       </div>
     </div>
   )

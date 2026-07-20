@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -29,45 +29,45 @@ interface Group {
 
 const groups: Group[] = [
   {
-    id: "g1", name: "الكيمياء - الثانوية العامة", members: 1247, lastActive: "منذ 5 دقائق", unread: 12,
+    id: "g1", name: "ط§ظ„ظƒظٹظ…ظٹط§ط، - ط§ظ„ط«ط§ظ†ظˆظٹط© ط§ظ„ط¹ط§ظ…ط©", members: 1247, lastActive: "ظ…ظ†ط° 5 ط¯ظ‚ط§ط¦ظ‚", unread: 12,
     messages: [
-      { id: "m1", user: "أحمد علي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=1", text: "حد عنده فكرة عن تفاعلات الباب الثالث؟", time: "منذ 10 دقائق", likes: 5 },
-      { id: "m2", user: "مريم حسن", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=2", text: "هشرحلكم تفاعلات الاحلال البسيط بطريقة سهلة", time: "منذ 8 دقائق", likes: 12 },
-      { id: "m3", user: "خالد صقر", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=3", text: "فيديو النهاردة عن الاتزان الكيميائي، يا ريت نشوفه", time: "منذ 5 دقائق", likes: 24 },
-      { id: "m4", user: "ندى سامي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=4", text: "ايه رأيكم في امتحان الأسبوع ده؟", time: "منذ 3 دقائق", likes: 3 },
+      { id: "m1", user: "ط£ط­ظ…ط¯ ط¹ظ„ظٹ", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=1", text: "ط­ط¯ ط¹ظ†ط¯ظ‡ ظپظƒط±ط© ط¹ظ† طھظپط§ط¹ظ„ط§طھ ط§ظ„ط¨ط§ط¨ ط§ظ„ط«ط§ظ„ط«طں", time: "ظ…ظ†ط° 10 ط¯ظ‚ط§ط¦ظ‚", likes: 5 },
+      { id: "m2", user: "ظ…ط±ظٹظ… ط­ط³ظ†", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=2", text: "ظ‡ط´ط±ط­ظ„ظƒظ… طھظپط§ط¹ظ„ط§طھ ط§ظ„ط§ط­ظ„ط§ظ„ ط§ظ„ط¨ط³ظٹط· ط¨ط·ط±ظٹظ‚ط© ط³ظ‡ظ„ط©", time: "ظ…ظ†ط° 8 ط¯ظ‚ط§ط¦ظ‚", likes: 12 },
+      { id: "m3", user: "ط®ط§ظ„ط¯ طµظ‚ط±", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=3", text: "ظپظٹط¯ظٹظˆ ط§ظ„ظ†ظ‡ط§ط±ط¯ط© ط¹ظ† ط§ظ„ط§طھط²ط§ظ† ط§ظ„ظƒظٹظ…ظٹط§ط¦ظٹطŒ ظٹط§ ط±ظٹطھ ظ†ط´ظˆظپظ‡", time: "ظ…ظ†ط° 5 ط¯ظ‚ط§ط¦ظ‚", likes: 24 },
+      { id: "m4", user: "ظ†ط¯ظ‰ ط³ط§ظ…ظٹ", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=4", text: "ط§ظٹظ‡ ط±ط£ظٹظƒظ… ظپظٹ ط§ظ…طھط­ط§ظ† ط§ظ„ط£ط³ط¨ظˆط¹ ط¯ظ‡طں", time: "ظ…ظ†ط° 3 ط¯ظ‚ط§ط¦ظ‚", likes: 3 },
     ],
   },
   {
-    id: "g2", name: "الرياضيات - التفاضل", members: 982, lastActive: "منذ 15 دقيقة", unread: 5,
+    id: "g2", name: "ط§ظ„ط±ظٹط§ط¶ظٹط§طھ - ط§ظ„طھظپط§ط¶ظ„", members: 982, lastActive: "ظ…ظ†ط° 15 ط¯ظ‚ظٹظ‚ط©", unread: 5,
     messages: [
-      { id: "m5", user: "عمر مصطفى", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=5", text: "ممكن حد يشرح لي قاعدة السلسلة؟", time: "منذ 20 دقيقة", likes: 8 },
-      { id: "m6", user: "سارة أحمد", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=6", text: "عندي ملخص جميل للتفاضل هرفعه", time: "منذ 12 دقيقة", likes: 15 },
+      { id: "m5", user: "ط¹ظ…ط± ظ…طµط·ظپظ‰", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=5", text: "ظ…ظ…ظƒظ† ط­ط¯ ظٹط´ط±ط­ ظ„ظٹ ظ‚ط§ط¹ط¯ط© ط§ظ„ط³ظ„ط³ظ„ط©طں", time: "ظ…ظ†ط° 20 ط¯ظ‚ظٹظ‚ط©", likes: 8 },
+      { id: "m6", user: "ط³ط§ط±ط© ط£ط­ظ…ط¯", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=6", text: "ط¹ظ†ط¯ظٹ ظ…ظ„ط®طµ ط¬ظ…ظٹظ„ ظ„ظ„طھظپط§ط¶ظ„ ظ‡ط±ظپط¹ظ‡", time: "ظ…ظ†ط° 12 ط¯ظ‚ظٹظ‚ط©", likes: 15 },
     ],
   },
   {
-    id: "g3", name: "الفيزياء - الكهربية", members: 756, lastActive: "منذ 30 دقيقة", unread: 3,
+    id: "g3", name: "ط§ظ„ظپظٹط²ظٹط§ط، - ط§ظ„ظƒظ‡ط±ط¨ظٹط©", members: 756, lastActive: "ظ…ظ†ط° 30 ط¯ظ‚ظٹظ‚ط©", unread: 3,
     messages: [
-      { id: "m7", user: "محمد جمال", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=7", text: "قانون أوم بطريقة بسيطة من شرح مستر محمد", time: "منذ 35 دقيقة", likes: 10 },
+      { id: "m7", user: "ظ…ط­ظ…ط¯ ط¬ظ…ط§ظ„", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=7", text: "ظ‚ط§ظ†ظˆظ† ط£ظˆظ… ط¨ط·ط±ظٹظ‚ط© ط¨ط³ظٹط·ط© ظ…ظ† ط´ط±ط­ ظ…ط³طھط± ظ…ط­ظ…ط¯", time: "ظ…ظ†ط° 35 ط¯ظ‚ظٹظ‚ط©", likes: 10 },
     ],
   },
   {
-    id: "g4", name: "العربي - النحو", members: 1103, lastActive: "منذ 10 دقائق", unread: 8,
+    id: "g4", name: "ط§ظ„ط¹ط±ط¨ظٹ - ط§ظ„ظ†ط­ظˆ", members: 1103, lastActive: "ظ…ظ†ط° 10 ط¯ظ‚ط§ط¦ظ‚", unread: 8,
     messages: [
-      { id: "m8", user: "آية كريم", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=8", text: "إعراب الجمل دي صعبة أوي!", time: "منذ 15 دقيقة", likes: 6 },
-      { id: "m9", user: "نور الدين", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=9", text: "شوفوا فيديو شرح كان وأخواتها هتظبط", time: "منذ 7 دقائق", likes: 11 },
+      { id: "m8", user: "ط¢ظٹط© ظƒط±ظٹظ…", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=8", text: "ط¥ط¹ط±ط§ط¨ ط§ظ„ط¬ظ…ظ„ ط¯ظٹ طµط¹ط¨ط© ط£ظˆظٹ!", time: "ظ…ظ†ط° 15 ط¯ظ‚ظٹظ‚ط©", likes: 6 },
+      { id: "m9", user: "ظ†ظˆط± ط§ظ„ط¯ظٹظ†", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=9", text: "ط´ظˆظپظˆط§ ظپظٹط¯ظٹظˆ ط´ط±ط­ ظƒط§ظ† ظˆط£ط®ظˆط§طھظ‡ط§ ظ‡طھط¸ط¨ط·", time: "ظ…ظ†ط° 7 ط¯ظ‚ط§ط¦ظ‚", likes: 11 },
     ],
   },
   {
-    id: "g5", name: "الإنجليزي - Grammar", members: 834, lastActive: "منذ ساعة", unread: 2,
+    id: "g5", name: "ط§ظ„ط¥ظ†ط¬ظ„ظٹط²ظٹ - Grammar", members: 834, lastActive: "ظ…ظ†ط° ط³ط§ط¹ط©", unread: 2,
     messages: [
-      { id: "m10", user: "يوسف محمود", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=10", text: "Anyone struggling with passive voice?", time: "منذ ساعتين", likes: 7 },
+      { id: "m10", user: "ظٹظˆط³ظپ ظ…ط­ظ…ظˆط¯", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=10", text: "Anyone struggling with passive voice?", time: "ظ…ظ†ط° ط³ط§ط¹طھظٹظ†", likes: 7 },
     ],
   },
   {
-    id: "g6", name: "استفسارات عامة", members: 2100, lastActive: "منذ دقيقتين", unread: 25,
+    id: "g6", name: "ط§ط³طھظپط³ط§ط±ط§طھ ط¹ط§ظ…ط©", members: 2100, lastActive: "ظ…ظ†ط° ط¯ظ‚ظٹظ‚طھظٹظ†", unread: 25,
     messages: [
-      { id: "m11", user: "منى شريف", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=11", text: "الامتحانات هتبدأ امتى؟", time: "منذ 5 دقائق", likes: 4 },
-      { id: "m12", user: "أستاذ أحمد", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=12", text: "مهم: مراجعة امتحانات نهاية العام متاحة الآن", time: "منذ 2 دقيقة", likes: 30 },
+      { id: "m11", user: "ظ…ظ†ظ‰ ط´ط±ظٹظپ", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=11", text: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ ظ‡طھط¨ط¯ط£ ط§ظ…طھظ‰طں", time: "ظ…ظ†ط° 5 ط¯ظ‚ط§ط¦ظ‚", likes: 4 },
+      { id: "m12", user: "ط£ط³طھط§ط° ط£ط­ظ…ط¯", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=12", text: "ظ…ظ‡ظ…: ظ…ط±ط§ط¬ط¹ط© ط§ظ…طھط­ط§ظ†ط§طھ ظ†ظ‡ط§ظٹط© ط§ظ„ط¹ط§ظ… ظ…طھط§ط­ط© ط§ظ„ط¢ظ†", time: "ظ…ظ†ط° 2 ط¯ظ‚ظٹظ‚ط©", likes: 30 },
     ],
   },
 ]
@@ -96,10 +96,10 @@ export default function CommunityPage() {
     if (!newPost.trim() || !selectedGroup) return
     const msg: Message = {
       id: `new-${Date.now()}`,
-      user: "أنت",
+      user: "ط£ظ†طھ",
       avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=me",
       text: newPost,
-      time: "الآن",
+      time: "ط§ظ„ط¢ظ†",
       likes: 0,
     }
     selectedGroup.messages.push(msg)
@@ -112,7 +112,7 @@ export default function CommunityPage() {
       <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto">
         <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
           className="text-2xl font-bold text-text mb-6 flex items-center gap-2">
-          <HiOutlineUserGroup className="w-6 h-6 text-primary" /> مجتمع الطلاب
+          <HiOutlineUserGroup className="w-6 h-6 text-primary" /> ظ…ط¬طھظ…ط¹ ط§ظ„ط·ظ„ط§ط¨
         </motion.h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -120,7 +120,7 @@ export default function CommunityPage() {
             <div className="relative">
               <HiSearch className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
               <input value={search} onChange={(e) => setSearch(e.target.value)}
-                placeholder="ابحث في المجموعات..."
+                placeholder="ط§ط¨ط­ط« ظپظٹ ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ..."
                 className="w-full pr-10 pl-4 py-2.5 rounded-xl bg-surface border border-border text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
 
@@ -136,7 +136,7 @@ export default function CommunityPage() {
                       </div>
                       <div className="min-w-0">
                         <p className="text-sm font-medium text-text truncate">{group.name}</p>
-                        <p className="text-xs text-text-tertiary">{group.members.toLocaleString()} عضو</p>
+                        <p className="text-xs text-text-tertiary">{group.members.toLocaleString()} ط¹ط¶ظˆ</p>
                       </div>
                     </div>
                     <div className="shrink-0 text-left">
@@ -160,7 +160,7 @@ export default function CommunityPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-text text-sm">{selectedGroup.name}</p>
-                    <p className="text-xs text-text-tertiary">{selectedGroup.members.toLocaleString()} عضو - آخر نشاط {selectedGroup.lastActive}</p>
+                    <p className="text-xs text-text-tertiary">{selectedGroup.members.toLocaleString()} ط¹ط¶ظˆ - ط¢ط®ط± ظ†ط´ط§ط· {selectedGroup.lastActive}</p>
                   </div>
                   <button type="button" onClick={() => setSelectedGroup(null)} className="mr-auto p-1.5 text-text-tertiary hover:text-text rounded-lg hover:bg-surface-secondary transition-colors lg:hidden">
                     <HiChevronRight className="w-5 h-5" />
@@ -190,7 +190,7 @@ export default function CommunityPage() {
                 <div className="p-3 border-t border-border flex gap-2">
                   <input value={newPost} onChange={(e) => setNewPost(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handlePost()}
-                    placeholder="اكتب رسالتك..."
+                    placeholder="ط§ظƒطھط¨ ط±ط³ط§ظ„طھظƒ..."
                     className="flex-1 px-4 py-2.5 rounded-xl bg-surface-secondary border border-border text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
                   <button type="button" onClick={handlePost} disabled={!newPost.trim()}
                     className="p-2.5 rounded-xl bg-primary text-white hover:bg-primary-dark transition-colors disabled:opacity-40">
@@ -201,8 +201,8 @@ export default function CommunityPage() {
             ) : (
               <div className="h-[600px] flex flex-col items-center justify-center text-text-tertiary bg-surface rounded-2xl border border-border">
                 <HiOutlineChat className="w-16 h-16 mb-4 opacity-30" />
-                <p className="font-medium">اختر مجموعة للدخول في النقاش</p>
-                <p className="text-xs mt-1">شارك زملاءك الأسئلة والأفكار</p>
+                <p className="font-medium">ط§ط®طھط± ظ…ط¬ظ…ظˆط¹ط© ظ„ظ„ط¯ط®ظˆظ„ ظپظٹ ط§ظ„ظ†ظ‚ط§ط´</p>
+                <p className="text-xs mt-1">ط´ط§ط±ظƒ ط²ظ…ظ„ط§ط،ظƒ ط§ظ„ط£ط³ط¦ظ„ط© ظˆط§ظ„ط£ظپظƒط§ط±</p>
               </div>
             )}
           </div>

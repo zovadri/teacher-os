@@ -1,9 +1,9 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useMemo, useCallback, ChangeEvent } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  HiOutlineLightningBolt, HiOutlineTrophy, HiOutlineUserGroup,
+  HiOutlineLightningBolt, HiOutlineStar, HiOutlineUserGroup,
   HiOutlineClock, HiOutlineCalendar, HiOutlineFilter,
   HiOutlineChevronLeft, HiOutlinePlusCircle, HiStar, HiFire,
   HiOutlineChartBar, HiOutlineExclamationCircle, HiOutlineCheckCircle,
@@ -18,34 +18,34 @@ import Button from "@/components/ui/Button"
 import Select from "@/components/ui/Select"
 
 const mockOpponents = [
-  { id: "o1", name: "أحمد علي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch1" },
-  { id: "o2", name: "مريم حسن", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch2" },
-  { id: "o3", name: "خالد صقر", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch3" },
-  { id: "o4", name: "ندى سامي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch4" },
-  { id: "o5", name: "عمر مصطفى", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch5" },
-  { id: "o6", name: "سارة أحمد", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch6" },
+  { id: "o1", name: "ط£ط­ظ…ط¯ ط¹ظ„ظٹ", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch1" },
+  { id: "o2", name: "ظ…ط±ظٹظ… ط­ط³ظ†", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch2" },
+  { id: "o3", name: "ط®ط§ظ„ط¯ طµظ‚ط±", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch3" },
+  { id: "o4", name: "ظ†ط¯ظ‰ ط³ط§ظ…ظٹ", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch4" },
+  { id: "o5", name: "ط¹ظ…ط± ظ…طµط·ظپظ‰", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch5" },
+  { id: "o6", name: "ط³ط§ط±ط© ط£ط­ظ…ط¯", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ch6" },
 ]
 
 const subjectOptions = [
-  { value: "chemistry", label: "كيمياء" },
-  { value: "physics", label: "فيزياء" },
-  { value: "math", label: "رياضيات" },
-  { value: "arabic", label: "عربي" },
-  { value: "english", label: "إنجليزي" },
+  { value: "chemistry", label: "ظƒظٹظ…ظٹط§ط،" },
+  { value: "physics", label: "ظپظٹط²ظٹط§ط،" },
+  { value: "math", label: "ط±ظٹط§ط¶ظٹط§طھ" },
+  { value: "arabic", label: "ط¹ط±ط¨ظٹ" },
+  { value: "english", label: "ط¥ظ†ط¬ظ„ظٹط²ظٹ" },
 ]
 
 const subjectLabels: Record<string, string> = {
-  chemistry: "كيمياء", physics: "فيزياء", math: "رياضيات", arabic: "عربي", english: "إنجليزي",
+  chemistry: "ظƒظٹظ…ظٹط§ط،", physics: "ظپظٹط²ظٹط§ط،", math: "ط±ظٹط§ط¶ظٹط§طھ", arabic: "ط¹ط±ط¨ظٹ", english: "ط¥ظ†ط¬ظ„ظٹط²ظٹ",
 }
 
 const difficultyOptions = [
-  { value: "easy", label: "سهل" },
-  { value: "medium", label: "متوسط" },
-  { value: "hard", label: "صعب" },
+  { value: "easy", label: "ط³ظ‡ظ„" },
+  { value: "medium", label: "ظ…طھظˆط³ط·" },
+  { value: "hard", label: "طµط¹ط¨" },
 ]
 
 const difficultyLabels: Record<string, string> = {
-  easy: "سهل", medium: "متوسط", hard: "صعب",
+  easy: "ط³ظ‡ظ„", medium: "ظ…طھظˆط³ط·", hard: "طµط¹ط¨",
 }
 
 const difficultyColors: Record<string, "success" | "warning" | "error"> = {
@@ -53,19 +53,19 @@ const difficultyColors: Record<string, "success" | "warning" | "error"> = {
 }
 
 const questionsOptions = [
-  { value: "5", label: "5 أسئلة" },
-  { value: "10", label: "10 أسئلة" },
-  { value: "15", label: "15 سؤال" },
+  { value: "5", label: "5 ط£ط³ط¦ظ„ط©" },
+  { value: "10", label: "10 ط£ط³ط¦ظ„ط©" },
+  { value: "15", label: "15 ط³ط¤ط§ظ„" },
 ]
 
 const timeOptions = [
-  { value: "5", label: "5 دقائق" },
-  { value: "10", label: "10 دقائق" },
-  { value: "15", label: "15 دقيقة" },
+  { value: "5", label: "5 ط¯ظ‚ط§ط¦ظ‚" },
+  { value: "10", label: "10 ط¯ظ‚ط§ط¦ظ‚" },
+  { value: "15", label: "15 ط¯ظ‚ظٹظ‚ط©" },
 ]
 
 const statusLabels: Record<string, string> = {
-  waiting: "قيد الانتظار", active: "جاري", finished: "منتهي",
+  waiting: "ظ‚ظٹط¯ ط§ظ„ط§ظ†طھط¸ط§ط±", active: "ط¬ط§ط±ظٹ", finished: "ظ…ظ†طھظ‡ظٹ",
 }
 
 const statusVariants: Record<string, "neutral" | "primary" | "success"> = {
@@ -73,7 +73,7 @@ const statusVariants: Record<string, "neutral" | "primary" | "success"> = {
 }
 
 const resultLabels: Record<string, string> = {
-  win: "فوز", loss: "خسارة", draw: "تعادل",
+  win: "ظپظˆط²", loss: "ط®ط³ط§ط±ط©", draw: "طھط¹ط§ط¯ظ„",
 }
 
 const resultVariants: Record<string, "success" | "error" | "warning"> = {
@@ -220,7 +220,7 @@ export default function ChallengesPage() {
       status: "waiting",
     }
     setActiveChallenges((prev) => [newChallenge, ...prev])
-    toast.success("تم إنشاء التحدي بنجاح! في انتظار قبول الخصم.")
+    toast.success("طھظ… ط¥ظ†ط´ط§ط، ط§ظ„طھط­ط¯ظٹ ط¨ظ†ط¬ط§ط­! ظپظٹ ط§ظ†طھط¸ط§ط± ظ‚ط¨ظˆظ„ ط§ظ„ط®طµظ….")
   }, [createForm])
 
   const handleQuickChallenge = useCallback(() => {
@@ -242,76 +242,75 @@ export default function ChallengesPage() {
       status: "active",
     }
     setActiveChallenges((prev) => [newChallenge, ...prev])
-    toast.success(`تحدي سريع مع ${opponent.name}!`)
+    toast.success(`طھط­ط¯ظٹ ط³ط±ظٹط¹ ظ…ط¹ ${opponent.name}!`)
   }, [quickCount])
 
   const enterChallenge = useCallback((id: string) => {
-    toast.success("جاري الدخول إلى التحدي...")
+    toast.success("ط¬ط§ط±ظٹ ط§ظ„ط¯ط®ظˆظ„ ط¥ظ„ظ‰ ط§ظ„طھط­ط¯ظٹ...")
   }, [])
 
   const shownHistory = showHistory ? mockHistory : mockHistory.slice(0, 4)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
-      <DashboardHeader title="تحديات الطلاب" subtitle="تنافس مع زملائك في مسابقات تعليمية" />
+      <DashboardHeader title="طھط­ط¯ظٹط§طھ ط§ظ„ط·ظ„ط§ط¨" subtitle="طھظ†ط§ظپط³ ظ…ط¹ ط²ظ…ظ„ط§ط¦ظƒ ظپظٹ ظ…ط³ط§ط¨ظ‚ط§طھ طھط¹ظ„ظٹظ…ظٹط©" />
       <div className="p-4 md:p-6 lg:p-8 max-w-5xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <StatsCard title="إجمالي التحديات" value={challengeStats.totalChallenges} icon={HiOutlineTrophy} color="primary" />
-            <StatsCard title="فوز" value={challengeStats.wins} icon={HiOutlineCheckCircle} color="success" />
-            <StatsCard title="خسارة" value={challengeStats.losses} icon={HiOutlineExclamationCircle} color="error" />
-            <StatsCard title="نسبة الفوز" value={`${winRate}%`} icon={HiOutlineChartBar} color="info" />
+            <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„طھط­ط¯ظٹط§طھ" value={challengeStats.totalChallenges} icon={HiOutlineStar} color="primary" />
+            <StatsCard title="ظپظˆط²" value={challengeStats.wins} icon={HiOutlineCheckCircle} color="success" />
+            <StatsCard title="ط®ط³ط§ط±ط©" value={challengeStats.losses} icon={HiOutlineExclamationCircle} color="error" />
+            <StatsCard title="ظ†ط³ط¨ط© ط§ظ„ظپظˆط²" value={`${winRate}%`} icon={HiOutlineChartBar} color="info" />
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-2">
               <Badge variant="premium" size="md">
                 <HiFire className="w-3.5 h-3.5 ml-1" />
-                التسلسل الحالي: {streak} انتصارات متتالية
+                ط§ظ„طھط³ظ„ط³ظ„ ط§ظ„ط­ط§ظ„ظٹ: {streak} ط§ظ†طھطµط§ط±ط§طھ ظ…طھطھط§ظ„ظٹط©
               </Badge>
             </div>
-            <Button
-              leftIcon={<HiOutlineLightningBolt size={18} />}
+            <Button leftIcon={<HiOutlineLightningBolt size={18} />}
               onClick={handleQuickChallenge}
               className="bg-gradient-to-l from-amber-500 to-orange-500 text-white border-none hover:from-amber-600 hover:to-orange-600"
             >
-              تحدي سريع
+              طھط­ط¯ظٹ ط³ط±ظٹط¹
             </Button>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <Card>
               <CardHeader>
-                <CardTitle>إنشاء تحدي جديد</CardTitle>
+                <CardTitle>ط¥ظ†ط´ط§ط، طھط­ط¯ظٹ ط¬ط¯ظٹط¯</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                   <Select
-                    label="المادة"
+                    label="ط§ظ„ظ…ط§ط¯ط©"
                     value={createForm.subject}
                     options={subjectOptions}
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => setCreateForm({ ...createForm, subject: e.target.value })}
                   />
                   <Select
-                    label="الصعوبة"
+                    label="ط§ظ„طµط¹ظˆط¨ط©"
                     value={createForm.difficulty}
                     options={difficultyOptions}
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => setCreateForm({ ...createForm, difficulty: e.target.value })}
                   />
                   <Select
-                    label="عدد الأسئلة"
+                    label="ط¹ط¯ط¯ ط§ظ„ط£ط³ط¦ظ„ط©"
                     value={createForm.questions}
                     options={questionsOptions}
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => setCreateForm({ ...createForm, questions: e.target.value })}
                   />
                   <Select
-                    label="الوقت"
+                    label="ط§ظ„ظˆظ‚طھ"
                     value={createForm.timeLimit}
                     options={timeOptions}
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => setCreateForm({ ...createForm, timeLimit: e.target.value })}
                   />
                   <Select
-                    label="الخصم"
+                    label="ط§ظ„ط®طµظ…"
                     value={createForm.opponentId}
                     options={mockOpponents.map((o) => ({ value: o.id, label: o.name }))}
                     onChange={(e: ChangeEvent<HTMLSelectElement>) => setCreateForm({ ...createForm, opponentId: e.target.value })}
@@ -319,7 +318,7 @@ export default function ChallengesPage() {
                 </div>
                 <div className="mt-4 flex justify-end">
                   <Button leftIcon={<HiOutlinePlusCircle size={16} />} onClick={handleCreateChallenge}>
-                    إنشاء
+                    ط¥ظ†ط´ط§ط،
                   </Button>
                 </div>
               </CardContent>
@@ -329,7 +328,7 @@ export default function ChallengesPage() {
           <motion.div variants={itemVariants}>
             <Card>
               <CardHeader>
-                <CardTitle>التحديات النشطة</CardTitle>
+                <CardTitle>ط§ظ„طھط­ط¯ظٹط§طھ ط§ظ„ظ†ط´ط·ط©</CardTitle>
               </CardHeader>
               <CardContent>
                 {activeChallenges.length > 0 ? (
@@ -368,30 +367,30 @@ export default function ChallengesPage() {
                             </div>
                             <div className="flex items-center gap-3 text-xs text-text-tertiary">
                               <span>{subjectLabels[challenge.subject]}</span>
-                              <span>•</span>
-                              <span>{challenge.totalQuestions} أسئلة</span>
+                              <span>â€¢</span>
+                              <span>{challenge.totalQuestions} ط£ط³ط¦ظ„ط©</span>
                               {challenge.status !== "waiting" && (
                                 <>
-                                  <span>•</span>
+                                  <span>â€¢</span>
                                   <span className="font-semibold text-text">
                                     {challenge.myScore} - {challenge.opponentScore}
                                   </span>
                                 </>
                               )}
-                              <span>•</span>
+                              <span>â€¢</span>
                               <ChallengeTimer challenge={challenge} />
                             </div>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
                             {challenge.status === "waiting" && (
-                              <Badge variant="neutral" size="sm">في انتظار القبول</Badge>
+                              <Badge variant="neutral" size="sm">ظپظٹ ط§ظ†طھط¸ط§ط± ط§ظ„ظ‚ط¨ظˆظ„</Badge>
                             )}
                             {challenge.status === "finished" && challenge.result && (
                               <Badge variant={resultVariants[challenge.result]} size="sm">{resultLabels[challenge.result]}</Badge>
                             )}
                             {(challenge.status === "waiting" || challenge.status === "active") && (
                               <Button size="sm" onClick={() => enterChallenge(challenge.id)}>
-                                دخول
+                                ط¯ط®ظˆظ„
                               </Button>
                             )}
                           </div>
@@ -401,9 +400,9 @@ export default function ChallengesPage() {
                   </div>
                 ) : (
                   <div className="text-center py-8 text-text-tertiary">
-                    <HiOutlineTrophy className="w-12 h-12 mx-auto mb-2 opacity-40" />
-                    <p className="text-sm">لا توجد تحديات نشطة</p>
-                    <p className="text-xs mt-1">أنشئ تحدياً جديداً أو ابدأ تحدياً سريعاً</p>
+                    <HiOutlineStar className="w-12 h-12 mx-auto mb-2 opacity-40" />
+                    <p className="text-sm">ظ„ط§ طھظˆط¬ط¯ طھط­ط¯ظٹط§طھ ظ†ط´ط·ط©</p>
+                    <p className="text-xs mt-1">ط£ظ†ط´ط¦ طھط­ط¯ظٹط§ظ‹ ط¬ط¯ظٹط¯ط§ظ‹ ط£ظˆ ط§ط¨ط¯ط£ طھط­ط¯ظٹط§ظ‹ ط³ط±ظٹط¹ط§ظ‹</p>
                   </div>
                 )}
               </CardContent>
@@ -413,13 +412,13 @@ export default function ChallengesPage() {
           <motion.div variants={itemVariants}>
             <Card>
               <CardHeader>
-                <CardTitle>سجل التحديات</CardTitle>
+                <CardTitle>ط³ط¬ظ„ ط§ظ„طھط­ط¯ظٹط§طھ</CardTitle>
                 <button
                   type="button"
                   onClick={() => setShowHistory((prev) => !prev)}
                   className="text-sm text-primary hover:underline"
                 >
-                  {showHistory ? "عرض أقل" : "عرض الكل"}
+                  {showHistory ? "ط¹ط±ط¶ ط£ظ‚ظ„" : "ط¹ط±ط¶ ط§ظ„ظƒظ„"}
                 </button>
               </CardHeader>
               <CardContent>
@@ -428,11 +427,11 @@ export default function ChallengesPage() {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-border">
-                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">التاريخ</th>
-                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">الخصم</th>
-                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">المادة</th>
-                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">النتيجة</th>
-                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">النتيجة</th>
+                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">ط§ظ„طھط§ط±ظٹط®</th>
+                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">ط§ظ„ط®طµظ…</th>
+                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">ط§ظ„ظ…ط§ط¯ط©</th>
+                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">ط§ظ„ظ†طھظٹط¬ط©</th>
+                          <th className="text-right py-3 px-2 text-text-tertiary font-medium text-xs">ط§ظ„ظ†طھظٹط¬ط©</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -466,7 +465,7 @@ export default function ChallengesPage() {
                 ) : (
                   <div className="text-center py-8 text-text-tertiary">
                     <HiOutlineClock className="w-12 h-12 mx-auto mb-2 opacity-40" />
-                    <p className="text-sm">لا يوجد سجل تحديات بعد</p>
+                    <p className="text-sm">ظ„ط§ ظٹظˆط¬ط¯ ط³ط¬ظ„ طھط­ط¯ظٹط§طھ ط¨ط¹ط¯</p>
                   </div>
                 )}
               </CardContent>

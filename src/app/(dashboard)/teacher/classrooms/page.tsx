@@ -1,9 +1,9 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  HiOutlineSquare, HiOutlinePlus, HiOutlineFilter, HiOutlineTable,
+  HiOutlineShare, HiOutlinePlus, HiOutlineFilter, HiOutlineTable,
   HiOutlineViewGrid, HiOutlineChevronDown, HiOutlineChevronUp, HiOutlineAcademicCap,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
@@ -23,9 +23,9 @@ import { cn } from "@/lib/utils"
 import { mockClassrooms, mockBranches } from "@/lib/mock/data"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" }> = {
-  available: { label: "ظ…طھط§ط­ط©", variant: "success" },
-  occupied: { label: "ظ…ط´ط؛ظˆظ„ط©", variant: "warning" },
-  maintenance: { label: "طµظٹط§ظ†ط©", variant: "error" },
+  available: { label: "ط¸â€¦ط·ع¾ط·آ§ط·آ­ط·آ©", variant: "success" },
+  occupied: { label: "ط¸â€¦ط·آ´ط·ط›ط¸ث†ط¸â€‍ط·آ©", variant: "warning" },
+  maintenance: { label: "ط·آµط¸ظ¹ط·آ§ط¸â€ ط·آ©", variant: "error" },
 }
 
 export default function ClassroomsPage() {
@@ -78,7 +78,7 @@ export default function ClassroomsPage() {
     setClassrooms((prev) => [classroom, ...prev])
     setShowAddModal(false)
     setNewClassroom({ name: "", branchId: "", capacity: 25, equipment: "" })
-    toast.success("طھظ… ط¥ط¶ط§ظپط© ط§ظ„ظ‚ط§ط¹ط© ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ© ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
   }
 
   const getBranchName = (branchId: string) => mockBranches.find((b) => b.id === branchId)?.name || branchId
@@ -86,7 +86,7 @@ export default function ClassroomsPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ظ‚ط§ط¹ط§طھ ط§ظ„ط¯ط±ط§ط³ط©" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظ‚ط§ط¹ط§طھ ظˆط§ظ„ظپطµظˆظ„" />
+        <DashboardHeader title="ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط·آ©" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸ظ¾ط·آµط¸ث†ط¸â€‍" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -94,10 +94,10 @@ export default function ClassroomsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ظ‚ط§ط¹ط§طھ ط§ظ„ط¯ط±ط§ط³ط©" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظ‚ط§ط¹ط§طھ ظˆط§ظ„ظپطµظˆظ„" />
+      <DashboardHeader title="ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط·آ©" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸ظ¾ط·آµط¸ث†ط¸â€‍" />
       <div className="flex justify-end">
-        <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-          ط¥ط¶ط§ظپط© ظ‚ط§ط¹ط©
+        <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
+          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€ڑط·آ§ط·آ¹ط·آ©
         </Button>
       </div>
 
@@ -105,16 +105,16 @@ export default function ClassroomsPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ‚ط§ط¹ط§طھ" value={stats.total} icon={HiOutlineAcademicCap} color="primary" subtitle={`ط§ظ„ط³ط¹ط© ط§ظ„ظƒظ„ظٹط©: ${stats.totalCapacity}`} />
-          <StatsCard title="ظ…طھط§ط­ط©" value={stats.available} icon={HiOutlineSquare} color="success" />
-          <StatsCard title="ظ…ط´ط؛ظˆظ„ط©" value={stats.occupied} icon={HiOutlineTable} color="warning" />
-          <StatsCard title="طµظٹط§ظ†ط©" value={stats.maintenance} icon={HiOutlineFilter} color="error" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾" value={stats.total} icon={HiOutlineAcademicCap} color="primary" subtitle={`ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ط¸ظ¹ط·آ©: ${stats.totalCapacity}`} />
+          <StatsCard title="ط¸â€¦ط·ع¾ط·آ§ط·آ­ط·آ©" value={stats.available} icon={HiOutlineShare} color="success" />
+          <StatsCard title="ط¸â€¦ط·آ´ط·ط›ط¸ث†ط¸â€‍ط·آ©" value={stats.occupied} icon={HiOutlineTable} color="warning" />
+          <StatsCard title="ط·آµط¸ظ¹ط·آ§ط¸â€ ط·آ©" value={stats.maintenance} icon={HiOutlineFilter} color="error" />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>{viewMode === "grid" ? "ط¹ط±ط¶ ط´ط¨ظƒظٹ" : "ط¹ط±ط¶ ط¬ط¯ظˆظ„ظٹ"}</CardTitle>
+          <CardTitle>{viewMode === "grid" ? "ط·آ¹ط·آ±ط·آ¶ ط·آ´ط·آ¨ط¸ئ’ط¸ظ¹" : "ط·آ¹ط·آ±ط·آ¶ ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط¸ظ¹"}</CardTitle>
           <div className="flex items-center gap-2">
             <button type="button" onClick={() => setViewMode("grid")} className={cn("p-2 rounded-lg transition-colors", viewMode === "grid" ? "bg-primary-100 text-primary" : "text-text-tertiary hover:text-text-secondary")}>
               <HiOutlineViewGrid className="w-5 h-5" />
@@ -127,19 +127,19 @@ export default function ClassroomsPage() {
         <CardContent className="p-0">
           <div className="p-4 border-b border-border flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ظ‚ط§ط¹ط©..." />
+              <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط¸â€ڑط·آ§ط·آ¹ط·آ©..." />
             </div>
             <div className="flex flex-wrap gap-2">
               <Select
-                options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظپط±ظˆط¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]}
+                options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]}
                 value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)}
               />
               <Select
                 options={[
-                  { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" },
-                  { value: "available", label: "ظ…طھط§ط­ط©" },
-                  { value: "occupied", label: "ظ…ط´ط؛ظˆظ„ط©" },
-                  { value: "maintenance", label: "طµظٹط§ظ†ط©" },
+                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" },
+                  { value: "available", label: "ط¸â€¦ط·ع¾ط·آ§ط·آ­ط·آ©" },
+                  { value: "occupied", label: "ط¸â€¦ط·آ´ط·ط›ط¸ث†ط¸â€‍ط·آ©" },
+                  { value: "maintenance", label: "ط·آµط¸ظ¹ط·آ§ط¸â€ ط·آ©" },
                 ]}
                 value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
               />
@@ -149,7 +149,7 @@ export default function ClassroomsPage() {
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineAcademicCap} title="ظ„ط§ طھظˆط¬ط¯ ظ‚ط§ط¹ط§طھ" description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ظ‚ط§ط¹ط§طھ ظ…ط·ط§ط¨ظ‚ط© ظ„ظ„ط¨ط­ط«" />
+            <EmptyState icon={HiOutlineAcademicCap} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾ ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ© ط¸â€‍ط¸â€‍ط·آ¨ط·آ­ط·آ«" />
           ) : viewMode === "grid" ? (
             <div className="p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
               {filtered.map((classroom) => (
@@ -165,8 +165,8 @@ export default function ClassroomsPage() {
                         <span>{getBranchName(classroom.branchId)}</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-text-secondary">
-                        <HiOutlineSquare className="w-4 h-4 shrink-0" />
-                        <span>ط§ظ„ط³ط¹ط©: {classroom.capacity} ظ…ظ‚ط¹ط¯</span>
+                        <HiOutlineShare className="w-4 h-4 shrink-0" />
+                        <span>ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ©: {classroom.capacity} ط¸â€¦ط¸â€ڑط·آ¹ط·آ¯</span>
                       </div>
                       <div className="flex flex-wrap gap-1 mt-3">
                         {classroom.equipment.map((eq, i) => (
@@ -175,14 +175,14 @@ export default function ClassroomsPage() {
                       </div>
                       <div className="flex items-center gap-1 mt-3 text-xs text-text-tertiary">
                         {expandedId === classroom.id ? <HiOutlineChevronUp className="w-3.5 h-3.5" /> : <HiOutlineChevronDown className="w-3.5 h-3.5" />}
-                        <span>{expandedId === classroom.id ? "ط¥ط®ظپط§ط،" : "ط¹ط±ط¶ ط§ظ„ظ…ظ‚ط§ط¹ط¯"}</span>
+                        <span>{expandedId === classroom.id ? "ط·آ¥ط·آ®ط¸ظ¾ط·آ§ط·طŒ" : "ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط·آ¹ط·آ¯"}</span>
                       </div>
                     </div>
                     <AnimatePresence>
                       {expandedId === classroom.id && (
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden border-t border-border">
                           <div className="p-4">
-                            <p className="text-sm text-text-secondary mb-2">طھظˆط²ظٹط¹ ط§ظ„ظ…ظ‚ط§ط¹ط¯ ({classroom.capacity} ظ…ظ‚ط¹ط¯)</p>
+                            <p className="text-sm text-text-secondary mb-2">ط·ع¾ط¸ث†ط·آ²ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط·آ¹ط·آ¯ ({classroom.capacity} ط¸â€¦ط¸â€ڑط·آ¹ط·آ¯)</p>
                             <div className="grid grid-cols-5 gap-1.5">
                               {Array.from({ length: Math.min(classroom.capacity, 30) }, (_, i) => (
                                 <div key={i} className={cn("w-full aspect-square rounded-md flex items-center justify-center text-[10px] font-medium", i < Math.floor(classroom.capacity * 0.7) ? "bg-success-100 text-success" : "bg-surface-secondary text-text-tertiary")}>
@@ -190,7 +190,7 @@ export default function ClassroomsPage() {
                                 </div>
                               ))}
                             </div>
-                            <p className="text-[10px] text-text-tertiary mt-2">* ط¹ط±ط¶ طھظˆط¶ظٹط­ظٹ ظ„ظ„ظ…ظ‚ط§ط¹ط¯</p>
+                            <p className="text-[10px] text-text-tertiary mt-2">* ط·آ¹ط·آ±ط·آ¶ ط·ع¾ط¸ث†ط·آ¶ط¸ظ¹ط·آ­ط¸ظ¹ ط¸â€‍ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط·آ¹ط·آ¯</p>
                           </div>
                         </motion.div>
                       )}
@@ -204,11 +204,11 @@ export default function ClassroomsPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ط³ظ… ط§ظ„ظ‚ط§ط¹ط©</th>
-                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„ظپط±ط¹</th>
-                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„ط³ط¹ط©</th>
-                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„طھط¬ظ‡ظٹط²ط§طھ</th>
-                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„ط­ط§ظ„ط©</th>
+                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ©</th>
+                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹</th>
+                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ©</th>
+                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·ع¾ط·آ¬ط¸â€،ط¸ظ¹ط·آ²ط·آ§ط·ع¾</th>
+                    <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -238,19 +238,19 @@ export default function ClassroomsPage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¥ط¶ط§ظپط© ظ‚ط§ط¹ط© ط¬ط¯ظٹط¯ط©" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€ڑط·آ§ط·آ¹ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©" size="md">
         <div className="space-y-4">
-          <Input label="ط§ط³ظ… ط§ظ„ظ‚ط§ط¹ط©" value={newClassroom.name} onChange={(e) => setNewClassroom({ ...newClassroom, name: e.target.value })} placeholder="ط£ط¯ط®ظ„ ط§ط³ظ… ط§ظ„ظ‚ط§ط¹ط©" />
+          <Input label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ©" value={newClassroom.name} onChange={(e) => setNewClassroom({ ...newClassroom, name: e.target.value })} placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ©" />
           <Select
-            label="ط§ظ„ظپط±ط¹"
+            label="ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹"
             options={mockBranches.map((b) => ({ value: b.id, label: b.name }))}
             value={newClassroom.branchId} onChange={(e) => setNewClassroom({ ...newClassroom, branchId: e.target.value })}
           />
-          <Input label="ط§ظ„ط³ط¹ط©" type="number" value={String(newClassroom.capacity)} onChange={(e) => setNewClassroom({ ...newClassroom, capacity: Number(e.target.value) })} />
-          <Input label="ط§ظ„طھط¬ظ‡ظٹط²ط§طھ (ظ…ظپطµظˆظ„ط© ط¨ظپظˆط§طµظ„)" value={newClassroom.equipment} onChange={(e) => setNewClassroom({ ...newClassroom, equipment: e.target.value })} placeholder="ظ…ط«ط§ظ„: ط³ط¨ظˆط±ط© ط°ظƒظٹط©, ط¨ط±ظˆط¬ظٹظƒطھظˆط±" />
+          <Input label="ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ©" type="number" value={String(newClassroom.capacity)} onChange={(e) => setNewClassroom({ ...newClassroom, capacity: Number(e.target.value) })} />
+          <Input label="ط·آ§ط¸â€‍ط·ع¾ط·آ¬ط¸â€،ط¸ظ¹ط·آ²ط·آ§ط·ع¾ (ط¸â€¦ط¸ظ¾ط·آµط¸ث†ط¸â€‍ط·آ© ط·آ¨ط¸ظ¾ط¸ث†ط·آ§ط·آµط¸â€‍)" value={newClassroom.equipment} onChange={(e) => setNewClassroom({ ...newClassroom, equipment: e.target.value })} placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ³ط·آ¨ط¸ث†ط·آ±ط·آ© ط·آ°ط¸ئ’ط¸ظ¹ط·آ©, ط·آ¨ط·آ±ط¸ث†ط·آ¬ط¸ظ¹ط¸ئ’ط·ع¾ط¸ث†ط·آ±" />
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1" onClick={handleAddClassroom} disabled={!newClassroom.name}>ط¥ط¶ط§ظپط© ط§ظ„ظ‚ط§ط¹ط©</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" className="flex-1" onClick={handleAddClassroom} disabled={!newClassroom.name}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ©</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

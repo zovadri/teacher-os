@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -33,7 +33,7 @@ function useLoadExams() {
         if (det() > 0.1) {
           setLoading(false)
         } else {
-          throw new Error("ط¸ظ¾ط·آ´ط¸â€‍ ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾")
+          throw new Error("ط·آ¸ط¸آ¾ط·آ·ط¢آ´ط·آ¸أ¢â‚¬â€چ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾")
         }
       } catch (e) {
         setError((e as Error).message)
@@ -46,12 +46,12 @@ function useLoadExams() {
 }
 
 const typeLabels: Record<string, string> = {
-  "multiple-choice": "ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط¸â€¦ط¸â€  ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯",
-  "true-false": "ط·آµط¸ث†ط·آ§ط·آ¨/ط·آ®ط·آ·ط·آ£",
-  "fill-blank": "ط¸â€¦ط¸â€‍ط·طŒ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ§ط·ط›",
-  essay: "ط¸â€¦ط¸â€ڑط·آ§ط¸â€‍ط¸ظ¹",
-  ordering: "ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨",
-  matching: "ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©",
+  "multiple-choice": "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯",
+  "true-false": "ط·آ·ط¢آµط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¨/ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£",
+  "fill-blank": "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط·إ’ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط·â€؛",
+  essay: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹",
+  ordering: "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨",
+  matching: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©",
 }
 
 export default function PrintExamPage() {
@@ -70,7 +70,7 @@ export default function PrintExamPage() {
   const [selectedVersions, setSelectedVersions] = useState<string[]>([])
 
   const examOptions = useMemo(() => [
-    { value: "", label: "ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ..." },
+    { value: "", label: "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ..." },
     ...mockExams.map((e) => ({ value: e.id, label: e.title })),
   ], [])
 
@@ -87,27 +87,27 @@ export default function PrintExamPage() {
 
   const handlePrint = () => {
     if (!selectedExam) return
-    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·ع¾ط·آ­ط·آ¶ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©...")
+    toast.success("ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ©...")
   }
 
   const handlePrintAnswerSheet = () => {
     if (!selectedExam) return
-    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط¸ئ’ط·آ±ط·آ§ط·آ³ط·آ© ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ©...")
+    toast.success("ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ¸ط¦â€™ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ©...")
   }
 
   const handleMultiPrint = () => {
     if (selectedVersions.length === 0) {
-      toast.error("ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط¸â€ ط·آ³ط·آ®ط·آ© ط¸ث†ط·آ§ط·آ­ط·آ¯ط·آ© ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط·آ£ط¸â€ڑط¸â€‍")
+      toast.error("ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬â€چ")
       return
     }
-    toast.success(`ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ${selectedVersions.length} ط¸â€ ط·آ³ط·آ®`)
+    toast.success(`ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ${selectedVersions.length} ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®`)
     setShowMultiPrint(false)
   }
 
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ " description="ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ±ط·آ§ط·ع¾" />
+        <PageHeader title="ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " description="ط·آ·ط¢آ¥ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
         <ErrorState error={error} onRetry={retry} />
       </div>
     )
@@ -115,20 +115,20 @@ export default function PrintExamPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "طباعة الامتحان" }]} />
+      <Breadcrumb items={[{ label: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", href: "/teacher/exams" }, { label: "ط·ط¨ط§ط¹ط© ط§ظ„ط§ظ…طھط­ط§ظ†" }]} />
       <PageHeader
-        title="ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ "
-        description="ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ±ط·آ§ط·ع¾"
+        title="ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ "
+        description="ط·آ·ط¢آ¥ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¹آ¾"
         actions={
           <div className="flex gap-2">
             <Button variant="success" onClick={handlePrint} rightIcon={<HiOutlinePrinter size={18} />}>
-              ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©
+              ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ©
             </Button>
             <Button variant="primary" onClick={handlePrintAnswerSheet} rightIcon={<HiOutlineDocumentText size={18} />}>
-              ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط¸ئ’ط·آ±ط·آ§ط·آ³ط·آ© ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ©
+              ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ¸ط¦â€™ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ©
             </Button>
             <Button variant="outline" onClick={() => setShowMultiPrint(true)} rightIcon={<HiOutlineDocumentDuplicate size={18} />}>
-              ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط¸â€ ط·آ³ط·آ® ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯ط·آ©
+              ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ط·آ·ط¢آ©
             </Button>
           </div>
         }
@@ -136,7 +136,7 @@ export default function PrintExamPage() {
 
       <Card>
         <CardContent className="space-y-4">
-          <Select label="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ " options={examOptions} value={selectedExamId} onChange={(e) => setSelectedExamId(e.target.value)} />
+          <Select label="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " options={examOptions} value={selectedExamId} onChange={(e) => setSelectedExamId(e.target.value)} />
         </CardContent>
       </Card>
 
@@ -148,63 +148,63 @@ export default function PrintExamPage() {
       )}
 
       {!loading && !selectedExam && (
-        <EmptyState icon={HiOutlinePrinter} title="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط¸â€¹" description="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط¸â€¹ ط¸â€¦ط¸â€  ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ£ط·آ¹ط¸â€‍ط·آ§ط¸â€، ط¸â€‍ط·آ¨ط·آ¯ط·طŒ ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©" />
+        <EmptyState icon={HiOutlinePrinter} title="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹" description="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹ ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ© ط·آ·ط¢آ£ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒ ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ط·آ·ط¢آ¯ط·آ·ط·إ’ ط·آ·ط¢آ¥ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ©" />
       )}
 
       {!loading && selectedExam && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><HiOutlineAdjustments className="text-primary" size={20} />ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©</CardTitle>
+              <CardTitle className="flex items-center gap-2"><HiOutlineAdjustments className="text-primary" size={20} />ط·آ·ط¢آ¥ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ©</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between p-3 rounded-lg bg-surface-secondary">
-                <span className="text-sm text-text">ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·آ±ط·آ£ط·آ³ ط¸ث†ط·آ§ط¸â€‍ط·ع¾ط·آ°ط¸ظ¹ط¸ظ¹ط¸â€‍</span>
+                <span className="text-sm text-text">ط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ£ط·آ·ط¢آ³ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ°ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ</span>
                 <button type="button" onClick={() => toggleConfig("includeHeader")} className={cn("w-10 h-5 rounded-full transition-colors relative", config.includeHeader ? "bg-primary" : "bg-surface-tertiary")}>
                   <span className={cn("absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-all", config.includeHeader ? "left-0.5" : "right-0.5")} />
                 </button>
               </div>
               <div className="flex items-center justify-between p-3 rounded-lg bg-surface-secondary">
-                <span className="text-sm text-text">ط·آ¥ط·آ¸ط¸â€،ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ§ط·ع¾</span>
+                <span className="text-sm text-text">ط·آ·ط¢آ¥ط·آ·ط¢آ¸ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾</span>
                 <button type="button" onClick={() => toggleConfig("showAnswers")} className={cn("w-10 h-5 rounded-full transition-colors relative", config.showAnswers ? "bg-primary" : "bg-surface-tertiary")}>
                   <span className={cn("absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-all", config.showAnswers ? "left-0.5" : "right-0.5")} />
                 </button>
               </div>
               <div className="flex items-center justify-between p-3 rounded-lg bg-surface-secondary">
-                <span className="text-sm text-text">ط·آ¥ط·آ¸ط¸â€،ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ§ط·ع¾</span>
+                <span className="text-sm text-text">ط·آ·ط¢آ¥ط·آ·ط¢آ¸ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾</span>
                 <button type="button" onClick={() => toggleConfig("showGrade")} className={cn("w-10 h-5 rounded-full transition-colors relative", config.showGrade ? "bg-primary" : "bg-surface-tertiary")}>
                   <span className={cn("absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-all", config.showGrade ? "left-0.5" : "right-0.5")} />
                 </button>
               </div>
               <div className="flex items-center justify-between p-3 rounded-lg bg-surface-secondary">
-                <span className="text-sm text-text">ط¸â€¦ط·آ¹ط¸â€‍ط¸ث†ط¸â€¦ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</span>
+                <span className="text-sm text-text">ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨</span>
                 <button type="button" onClick={() => toggleConfig("includeStudentInfo")} className={cn("w-10 h-5 rounded-full transition-colors relative", config.includeStudentInfo ? "bg-primary" : "bg-surface-tertiary")}>
                   <span className={cn("absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-all", config.includeStudentInfo ? "left-0.5" : "right-0.5")} />
                 </button>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Select label="ط·آ­ط·آ¬ط¸â€¦ ط·آ§ط¸â€‍ط·آ®ط·آ·" options={[{ value: "small", label: "ط·آµط·ط›ط¸ظ¹ط·آ±" }, { value: "medium", label: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·" }, { value: "large", label: "ط¸ئ’ط·آ¨ط¸ظ¹ط·آ±" }]} value={config.fontSize} onChange={(e) => setConfig((p) => ({ ...p, fontSize: e.target.value as "small" | "medium" | "large" }))} />
-                <Select label="ط·آ¹ط·آ¯ط·آ¯ ط·آ§ط¸â€‍ط·آ£ط·آ¹ط¸â€¦ط·آ¯ط·آ©" options={[{ value: "1", label: "ط·آ¹ط¸â€¦ط¸ث†ط·آ¯ ط¸ث†ط·آ§ط·آ­ط·آ¯" }, { value: "2", label: "ط·آ¹ط¸â€¦ط¸ث†ط·آ¯ط·آ§ط¸â€ " }]} value={String(config.columns)} onChange={(e) => setConfig((p) => ({ ...p, columns: Number(e.target.value) as 1 | 2 }))} />
+                <Select label="ط·آ·ط¢آ­ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ®ط·آ·ط¢آ·" options={[{ value: "small", label: "ط·آ·ط¢آµط·آ·ط·â€؛ط·آ¸ط¸آ¹ط·آ·ط¢آ±" }, { value: "medium", label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ·" }, { value: "large", label: "ط·آ¸ط¦â€™ط·آ·ط¢آ¨ط·آ¸ط¸آ¹ط·آ·ط¢آ±" }]} value={config.fontSize} onChange={(e) => setConfig((p) => ({ ...p, fontSize: e.target.value as "small" | "medium" | "large" }))} />
+                <Select label="ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯ط·آ·ط¢آ©" options={[{ value: "1", label: "ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¯ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ¯" }, { value: "2", label: "ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " }]} value={String(config.columns)} onChange={(e) => setConfig((p) => ({ ...p, columns: Number(e.target.value) as 1 | 2 }))} />
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><HiOutlineEye className="text-primary" size={20} />ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ§ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©</CardTitle>
+              <CardTitle className="flex items-center gap-2"><HiOutlineEye className="text-primary" size={20} />ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ©</CardTitle>
             </CardHeader>
             <CardContent>
               <div className={cn("border border-border rounded-xl p-6 bg-white space-y-4", config.fontSize === "small" ? "text-xs" : config.fontSize === "large" ? "text-base" : "text-sm")}>
                 {config.includeHeader && (
                   <div className="text-center border-b border-border pb-3 mb-3">
                     <h3 className="font-bold text-text text-lg">{selectedExam.title}</h3>
-                    <p className="text-text-tertiary">{selectedExam.questions.length} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© | {selectedExam.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ© | ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ©: {selectedExam.duration} ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑط·آ©</p>
+                    <p className="text-text-tertiary">{selectedExam.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© | {selectedExam.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ© | ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯ط·آ·ط¢آ©: {selectedExam.duration} ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©</p>
                   </div>
                 )}
                 {config.includeStudentInfo && (
                   <div className="grid grid-cols-2 gap-3 text-sm border-b border-border pb-3 mb-3">
-                    <div><span className="text-text-tertiary">ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨: </span><span className="border-b border-dotted border-text-tertiary px-4">............</span></div>
-                    <div><span className="text-text-tertiary">ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®: </span><span className="border-b border-dotted border-text-tertiary px-4">............</span></div>
+                    <div><span className="text-text-tertiary">ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨: </span><span className="border-b border-dotted border-text-tertiary px-4">............</span></div>
+                    <div><span className="text-text-tertiary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ®: </span><span className="border-b border-dotted border-text-tertiary px-4">............</span></div>
                   </div>
                 )}
                 <div className={cn(config.columns === 2 ? "grid grid-cols-2 gap-4" : "space-y-3")}>
@@ -216,11 +216,11 @@ export default function PrintExamPage() {
                           <p className="text-text">{q.text}</p>
                           <div className="flex gap-2 mt-1">
                             <Badge size="sm" variant="info">{typeLabels[q.type]}</Badge>
-                            {config.showGrade && <Badge size="sm">{q.grade} ط·آ¯ط·آ±ط·آ¬ط·آ§ط·ع¾</Badge>}
+                            {config.showGrade && <Badge size="sm">{q.grade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾</Badge>}
                           </div>
                           {config.showAnswers && q.choices && (
                             <div className="mt-2 p-2 rounded-lg bg-success/5 border border-success/20">
-                              <span className="text-success text-xs">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ©: {q.choices.find((c) => c.isCorrect)?.text}</span>
+                              <span className="text-success text-xs">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ©: {q.choices.find((c) => c.isCorrect)?.text}</span>
                             </div>
                           )}
                         </div>
@@ -228,12 +228,12 @@ export default function PrintExamPage() {
                     </div>
                   ))}
                   {selectedExam.questions.length > 6 && (
-                    <p className="text-center text-text-tertiary text-sm">... ط¸ث† {selectedExam.questions.length - 6} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط·آ£ط·آ®ط·آ±ط¸â€°</p>
+                    <p className="text-center text-text-tertiary text-sm">... ط·آ¸ط«â€  {selectedExam.questions.length - 6} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ·ط¢آ£ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ°</p>
                   )}
                 </div>
                 {config.includeFooter && (
                   <div className="text-center border-t border-border pt-3 mt-3 text-text-tertiary text-xs">
-                    <p>TeacherOS - ط¸â€ ط·آ¸ط·آ§ط¸â€¦ ط·ع¾ط·آ´ط·ط›ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³ | ط·آ§ط¸â€‍ط·آµط¸ظ¾ط·آ­ط·آ© 1 ط¸â€¦ط¸â€  1</p>
+                    <p>TeacherOS - ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¸ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¹آ¾ط·آ·ط¢آ´ط·آ·ط·â€؛ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ³ | ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آµط·آ¸ط¸آ¾ط·آ·ط¢آ­ط·آ·ط¢آ© 1 ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  1</p>
                   </div>
                 )}
               </div>
@@ -242,11 +242,11 @@ export default function PrintExamPage() {
         </div>
       )}
 
-      <Modal isOpen={showMultiPrint} onClose={() => setShowMultiPrint(false)} title="ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط¸â€ ط·آ³ط·آ® ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯ط·آ©" size="md">
+      <Modal isOpen={showMultiPrint} onClose={() => setShowMultiPrint(false)} title="ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ط·آ·ط¢آ©" size="md">
         <div className="space-y-4">
-          <p className="text-sm text-text-secondary">ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ® ط·آ§ط¸â€‍ط·ع¾ط¸ظ¹ ط·ع¾ط·آ±ط¸ظ¹ط·آ¯ ط·آ·ط·آ¨ط·آ§ط·آ¹ط·ع¾ط¸â€،ط·آ§:</p>
+          <p className="text-sm text-text-secondary">ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§:</p>
           {versionsForExam.length === 0 ? (
-            <p className="text-text-tertiary text-sm">ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·آ³ط·آ® ط¸â€¦ط·ع¾ط·آ§ط·آ­ط·آ© ط¸â€‍ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ </p>
+            <p className="text-text-tertiary text-sm">ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ </p>
           ) : (
             <div className="space-y-2">
               {versionsForExam.map((v) => (
@@ -254,15 +254,15 @@ export default function PrintExamPage() {
                   <input type="checkbox" checked={selectedVersions.includes(v.id)} onChange={() => setSelectedVersions((p) => p.includes(v.id) ? p.filter((id) => id !== v.id) : [...p, v.id])} className="w-4 h-4 rounded border-border text-primary focus:ring-primary" />
                   <div>
                     <span className="text-sm font-medium text-text">{v.label}</span>
-                    <p className="text-xs text-text-tertiary">{v.questions.length} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© - {v.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ©</p>
+                    <p className="text-xs text-text-tertiary">{v.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© - {v.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©</p>
                   </div>
                 </label>
               ))}
             </div>
           )}
           <div className="flex gap-3 justify-end">
-            <Button variant="secondary" onClick={() => setShowMultiPrint(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
-            <Button variant="primary" onClick={handleMultiPrint} disabled={selectedVersions.length === 0} rightIcon={<HiOutlinePrinter size={18} />}>ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ({selectedVersions.length})</Button>
+            <Button variant="secondary" onClick={() => setShowMultiPrint(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
+            <Button variant="primary" onClick={handleMultiPrint} disabled={selectedVersions.length === 0} rightIcon={<HiOutlinePrinter size={18} />}>ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ({selectedVersions.length})</Button>
           </div>
         </div>
       </Modal>

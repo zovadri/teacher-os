@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -31,14 +31,14 @@ interface ParentNotification {
 }
 
 const mockParentNotifications: ParentNotification[] = [
-  { id: "pn-1", type: "success", title: "طھظپظˆظ‚ ط£ط­ظ…ط¯ ظپظٹ ط§ظ„ط§ظ…طھط­ط§ظ†", message: "ط­طµظ„ ط§ط¨ظ†ظƒ ط£ط­ظ…ط¯ ط¹ظ„ظ‰ 95% ظپظٹ ط§ظ…طھط­ط§ظ† ط§ظ„ظ†ط­ظˆ ط§ظ„ط´ظ‡ط±ظٹ", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 30), icon: HiOutlineStar },
-  { id: "pn-2", type: "warning", title: "طھط°ظƒظٹط± ط¨ظˆط§ط¬ط¨ ط§ظ„ظ†ط­ظˆ", message: "ط¨ط§ظ‚ظٹ ظٹظˆظ… ط¹ظ„ظ‰ ظ…ظˆط¹ط¯ طھط³ظ„ظٹظ… ظˆط§ط¬ط¨ ط§ظ„ظ†ط­ظˆ ط§ظ„ط£ط³ط¨ظˆط¹ظٹ", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 120), icon: HiOutlineCalendar },
-  { id: "pn-3", type: "info", title: "طھظ… ط¥ط¶ط§ظپط© ظ…ط­طھظˆظ‰ ط¬ط¯ظٹط¯", message: "طھظ… ط¥ط¶ط§ظپط© ظپظٹط¯ظٹظˆ ط´ط±ط­ ط¬ط¯ظٹط¯ ظ„ظƒظˆط±ط³ ط§ظ„ط¨ظ„ط§ط؛ط©", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 180), icon: HiOutlineInformationCircle },
-  { id: "pn-4", type: "error", title: "ط؛ظٹط§ط¨ ط£ط­ظ…ط¯", message: "ظ„ظ… ظٹط­ط¶ط± ط§ط¨ظ†ظƒ ط£ط­ظ…ط¯ ط¬ظ„ط³ط© ط§ظ„ظٹظˆظ… ظ„ظƒظˆط±ط³ ط§ظ„ظ†ط­ظˆ", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 300), icon: HiOutlineExclamation },
-  { id: "pn-5", type: "info", title: "طھظ‚ط±ظٹط± ط§ظ„ط£ط¯ط§ط، ط§ظ„ط´ظ‡ط±ظٹ", message: "طھظ… طھط­ط¯ظٹط« طھظ‚ط±ظٹط± ط£ط¯ط§ط، ط§ط¨ظ†ظƒ ظ„ظ„ط´ظ‡ط± ط§ظ„ط­ط§ظ„ظٹ", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), icon: HiOutlineChartBar },
-  { id: "pn-6", type: "success", title: "ط¥طھظ…ط§ظ… ظƒظˆط±ط³ ط§ظ„ظ†ط­ظˆ", message: "ط£ظƒظ…ظ„ ط§ط¨ظ†ظƒ ط£ط­ظ…ط¯ ط¨ظ†ط¬ط§ط­ ظƒظˆط±ط³ ط§ظ„ظ†ط­ظˆ ظˆط§ظ„طµط±ظپ", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), icon: HiOutlineAcademicCap },
-  { id: "pn-7", type: "info", title: "ظ…ظˆط¹ط¯ ط§ظ…طھط­ط§ظ† ط¬ط¯ظٹط¯", message: "ط³ظٹطھظ… ط¹ظ‚ط¯ ط§ظ…طھط­ط§ظ† ط§ظ„ط¨ظ„ط§ط؛ط© ظٹظˆظ… ط§ظ„ط®ظ…ظٹط³ ط§ظ„ظ‚ط§ط¯ظ…", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), icon: HiOutlineCalendar },
-  { id: "pn-8", type: "warning", title: "ط§ظ‚طھط±ط§ط¨ ط§ظ†طھظ‡ط§ط، ط§ظ„ط§ط´طھط±ط§ظƒ", message: "ط¨ط§ظ‚ظٹ 5 ط£ظٹط§ظ… ط¹ظ„ظ‰ ط§ظ†طھظ‡ط§ط، ط§ط´طھط±ط§ظƒ ط§ط¨ظ†ظƒ ظپظٹ ط§ظ„ط¨ط§ظ‚ط© ط§ظ„ط«ظ„ط§ط«ظٹط©", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), icon: HiOutlineExclamation },
+  { id: "pn-1", type: "success", title: "ط·ع¾ط¸ظ¾ط¸ث†ط¸â€ڑ ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ", message: "ط·آ­ط·آµط¸â€‍ ط·آ§ط·آ¨ط¸â€ ط¸ئ’ ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط·آ¹ط¸â€‍ط¸â€° 95% ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ±ط¸ظ¹", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 30), icon: HiOutlineStar },
+  { id: "pn-2", type: "warning", title: "ط·ع¾ط·آ°ط¸ئ’ط¸ظ¹ط·آ± ط·آ¨ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث†", message: "ط·آ¨ط·آ§ط¸â€ڑط¸ظ¹ ط¸ظ¹ط¸ث†ط¸â€¦ ط·آ¹ط¸â€‍ط¸â€° ط¸â€¦ط¸ث†ط·آ¹ط·آ¯ ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 120), icon: HiOutlineCalendar },
+  { id: "pn-3", type: "info", title: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آ­ط·ع¾ط¸ث†ط¸â€° ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯", message: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث† ط·آ´ط·آ±ط·آ­ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ©", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 180), icon: HiOutlineInformationCircle },
+  { id: "pn-4", type: "error", title: "ط·ط›ط¸ظ¹ط·آ§ط·آ¨ ط·آ£ط·آ­ط¸â€¦ط·آ¯", message: "ط¸â€‍ط¸â€¦ ط¸ظ¹ط·آ­ط·آ¶ط·آ± ط·آ§ط·آ¨ط¸â€ ط¸ئ’ ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط·آ¬ط¸â€‍ط·آ³ط·آ© ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦ ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث†", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 300), icon: HiOutlineExclamation },
+  { id: "pn-5", type: "info", title: "ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ±ط¸ظ¹", message: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط·آ¨ط¸â€ ط¸ئ’ ط¸â€‍ط¸â€‍ط·آ´ط¸â€،ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط¸ظ¹", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), icon: HiOutlineChartBar },
+  { id: "pn-6", type: "success", title: "ط·آ¥ط·ع¾ط¸â€¦ط·آ§ط¸â€¦ ط¸ئ’ط¸ث†ط·آ±ط·آ³ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث†", message: "ط·آ£ط¸ئ’ط¸â€¦ط¸â€‍ ط·آ§ط·آ¨ط¸â€ ط¸ئ’ ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­ ط¸ئ’ط¸ث†ط·آ±ط·آ³ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط¸ث†ط·آ§ط¸â€‍ط·آµط·آ±ط¸ظ¾", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), icon: HiOutlineAcademicCap },
+  { id: "pn-7", type: "info", title: "ط¸â€¦ط¸ث†ط·آ¹ط·آ¯ ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯", message: "ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¹ط¸â€ڑط·آ¯ ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ© ط¸ظ¹ط¸ث†ط¸â€¦ ط·آ§ط¸â€‍ط·آ®ط¸â€¦ط¸ظ¹ط·آ³ ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¯ط¸â€¦", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), icon: HiOutlineCalendar },
+  { id: "pn-8", type: "warning", title: "ط·آ§ط¸â€ڑط·ع¾ط·آ±ط·آ§ط·آ¨ ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ§ط·آ´ط·ع¾ط·آ±ط·آ§ط¸ئ’", message: "ط·آ¨ط·آ§ط¸â€ڑط¸ظ¹ 5 ط·آ£ط¸ظ¹ط·آ§ط¸â€¦ ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ ط·آ§ط·آ´ط·ع¾ط·آ±ط·آ§ط¸ئ’ ط·آ§ط·آ¨ط¸â€ ط¸ئ’ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ§ط¸â€‍ط·آ«ط¸â€‍ط·آ§ط·آ«ط¸ظ¹ط·آ©", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), icon: HiOutlineExclamation },
 ]
 
 const typeConfig: Record<string, { bg: string; border: string }> = {
@@ -68,7 +68,7 @@ export default function ParentNotificationsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ" subtitle="ظ…طھط§ط¨ط¹ط© ط¢ط®ط± ط§ظ„ظ…ط³طھط¬ط¯ط§طھ ظˆط§ظ„طھط­ط¯ظٹط«ط§طھ" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾" subtitle="ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ¢ط·آ®ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط·آ¬ط·آ¯ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«ط·آ§ط·ع¾" />
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -80,7 +80,7 @@ export default function ParentNotificationsPage() {
                 filter === "all" ? "bg-primary text-white" : "bg-surface-secondary text-text-secondary hover:bg-surface-tertiary"
               )}
             >
-              ط§ظ„ظƒظ„
+              ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍
             </button>
             <button type="button"
               onClick={() => setFilter("unread")}
@@ -89,7 +89,7 @@ export default function ParentNotificationsPage() {
                 filter === "unread" ? "bg-primary text-white" : "bg-surface-secondary text-text-secondary hover:bg-surface-tertiary"
               )}
             >
-              ط؛ظٹط± ظ…ظ‚ط±ظˆط،
+              ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ
               {unreadCount > 0 && (
                 <span className="mr-1.5 px-1.5 py-0.5 text-xs bg-white/20 rounded-full">{unreadCount}</span>
               )}
@@ -97,8 +97,8 @@ export default function ParentNotificationsPage() {
           </div>
         </div>
         {unreadCount > 0 && (
-          <button type="button" variant="ghost" size="sm" leftIcon={<HiOutlineCheck className="w-4 h-4" />} onClick={markAllAsRead}>
-            طھط­ط¯ظٹط¯ ط§ظ„ظƒظ„ ظƒظ…ظ‚ط±ظˆط،
+          <Button variant="ghost" size="sm" leftIcon={<HiOutlineCheck className="w-4 h-4" />} onClick={markAllAsRead}>
+            ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ
           </Button>
         )}
       </div>
@@ -106,28 +106,28 @@ export default function ParentNotificationsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="md:col-span-2">
           <CardHeader>
-            <CardTitle>ظ…ظ„ط®طµ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ</CardTitle>
+            <CardTitle>ط¸â€¦ط¸â€‍ط·آ®ط·آµ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary border border-border">
                 <div className="flex items-center gap-2">
                   <HiOutlineBell className="w-4 h-4 text-primary" />
-                  <span className="text-sm text-text-secondary">ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ</span>
+                  <span className="text-sm text-text-secondary">ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾</span>
                 </div>
                 <span className="text-sm font-bold text-text">{notifications.length}</span>
               </div>
               <div className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary border border-border">
                 <div className="flex items-center gap-2">
                   <HiOutlineExclamation className="w-4 h-4 text-warning" />
-                  <span className="text-sm text-text-secondary">ط؛ظٹط± ظ…ظ‚ط±ظˆط،</span>
+                  <span className="text-sm text-text-secondary">ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ</span>
                 </div>
                 <span className="text-sm font-bold text-warning">{unreadCount}</span>
               </div>
               <div className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary border border-border">
                 <div className="flex items-center gap-2">
                   <HiOutlineCheckCircle className="w-4 h-4 text-success" />
-                  <span className="text-sm text-text-secondary">ظ…ظ‚ط±ظˆط،</span>
+                  <span className="text-sm text-text-secondary">ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ</span>
                 </div>
                 <span className="text-sm font-bold text-success">{notifications.length - unreadCount}</span>
               </div>
@@ -136,7 +136,7 @@ export default function ParentNotificationsPage() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>ط­ط³ط¨ ط§ظ„ظ†ظˆط¹</CardTitle>
+            <CardTitle>ط·آ­ط·آ³ط·آ¨ ط·آ§ط¸â€‍ط¸â€ ط¸ث†ط·آ¹</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -153,7 +153,7 @@ export default function ParentNotificationsPage() {
                     <div className="flex items-center gap-2">
                       <span className={`w-2.5 h-2.5 rounded-full ${colors[type].split(" ")[0]}`} />
                       <span className="text-sm text-text-secondary">
-                        {type === "success" ? "ط¥ظ†ط¬ط§ط²" : type === "warning" ? "طھظ†ط¨ظٹظ‡" : type === "info" ? "ظ…ط¹ظ„ظˆظ…ط§طھ" : "ط®ط·ط£"}
+                        {type === "success" ? "ط·آ¥ط¸â€ ط·آ¬ط·آ§ط·آ²" : type === "warning" ? "ط·ع¾ط¸â€ ط·آ¨ط¸ظ¹ط¸â€،" : type === "info" ? "ط¸â€¦ط·آ¹ط¸â€‍ط¸ث†ط¸â€¦ط·آ§ط·ع¾" : "ط·آ®ط·آ·ط·آ£"}
                       </span>
                     </div>
                     <span className="text-sm font-medium text-text">{count}</span>
@@ -168,8 +168,8 @@ export default function ParentNotificationsPage() {
       {filtered.length === 0 ? (
         <EmptyState
           icon={HiOutlineBell}
-          title="ظ„ط§ طھظˆط¬ط¯ ط¥ط´ط¹ط§ط±ط§طھ"
-          description={filter === "unread" ? "ظ„ط§ طھظˆط¬ط¯ ط¥ط´ط¹ط§ط±ط§طھ ط؛ظٹط± ظ…ظ‚ط±ظˆط،ط©" : "ظ„ظٹط³ ظ„ط¯ظٹظƒ ط£ظٹ ط¥ط´ط¹ط§ط±ط§طھ ط­طھظ‰ ط§ظ„ط¢ظ†"}
+          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
+          description={filter === "unread" ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒط·آ©" : "ط¸â€‍ط¸ظ¹ط·آ³ ط¸â€‍ط·آ¯ط¸ظ¹ط¸ئ’ ط·آ£ط¸ظ¹ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ­ط·ع¾ط¸â€° ط·آ§ط¸â€‍ط·آ¢ط¸â€ "}
         />
       ) : (
         <div className="space-y-3">

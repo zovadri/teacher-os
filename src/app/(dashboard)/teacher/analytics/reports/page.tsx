@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -31,18 +31,18 @@ import { mockAnalytics, mockStats, mockPayments } from "@/lib/mock/data"
 import { formatCurrency, formatDate } from "@/lib/utils"
 
 const reportTypes = [
-  { id: "summary", label: "طھظ‚ط±ظٹط± ظ…ظ„ط®طµ", icon: HiOutlineDocumentReport, color: "primary", desc: "ظ…ظ„ط®طµ ط´ط§ظ…ظ„ ظ„ط£ط¯ط§ط، ط§ظ„ظ…ظ†طµط©" },
-  { id: "students", label: "ط£ط¯ط§ط، ط§ظ„ط·ظ„ط§ط¨", icon: HiOutlineUsers, color: "info", desc: "طھط­ظ„ظٹظ„ ط£ط¯ط§ط، ط§ظ„ط·ظ„ط§ط¨ ظˆطھظ‚ط¯ظ…ظ‡ظ…" },
-  { id: "revenue", label: "ط§ظ„ط¥ظٹط±ط§ط¯ط§طھ", icon: HiOutlineCash, color: "success", desc: "طھظ‚ط±ظٹط± ط§ظ„ط¥ظٹط±ط§ط¯ط§طھ ظˆط§ظ„ظ…ط¨ظٹط¹ط§طھ" },
-  { id: "attendance", label: "ط§ظ„ط­ط¶ظˆط±", icon: HiOutlineAcademicCap, color: "warning", desc: "ط¥ط­طµط§ط¦ظٹط§طھ ط­ط¶ظˆط± ط§ظ„ط·ظ„ط§ط¨" },
-  { id: "exams", label: "طھط­ظ„ظٹظ„ ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", icon: HiOutlineChartSquareBar, color: "error", desc: "طھط­ظ„ظٹظ„ ظ†طھط§ط¦ط¬ ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ" },
+  { id: "summary", label: "ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط¸â€¦ط¸â€‍ط·آ®ط·آµ", icon: HiOutlineDocumentReport, color: "primary", desc: "ط¸â€¦ط¸â€‍ط·آ®ط·آµ ط·آ´ط·آ§ط¸â€¦ط¸â€‍ ط¸â€‍ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·آµط·آ©" },
+  { id: "students", label: "ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨", icon: HiOutlineUsers, color: "info", desc: "ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ث†ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦ط¸â€،ط¸â€¦" },
+  { id: "revenue", label: "ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾", icon: HiOutlineCash, color: "success", desc: "ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸ظ¹ط·آ¹ط·آ§ط·ع¾" },
+  { id: "attendance", label: "ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±", icon: HiOutlineAcademicCap, color: "warning", desc: "ط·آ¥ط·آ­ط·آµط·آ§ط·آ¦ط¸ظ¹ط·آ§ط·ع¾ ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨" },
+  { id: "exams", label: "ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾", icon: HiOutlineChartSquareBar, color: "error", desc: "ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾" },
 ]
 
 const dateRangeOptions = [
-  { value: "7", label: "ط¢ط®ط± 7 ط£ظٹط§ظ…" },
-  { value: "30", label: "ط¢ط®ط± 30 ظٹظˆظ…" },
-  { value: "90", label: "ط¢ط®ط± 3 ط£ط´ظ‡ط±" },
-  { value: "365", label: "ط¢ط®ط± ط³ظ†ط©" },
+  { value: "7", label: "ط·آ¢ط·آ®ط·آ± 7 ط·آ£ط¸ظ¹ط·آ§ط¸â€¦" },
+  { value: "30", label: "ط·آ¢ط·آ®ط·آ± 30 ط¸ظ¹ط¸ث†ط¸â€¦" },
+  { value: "90", label: "ط·آ¢ط·آ®ط·آ± 3 ط·آ£ط·آ´ط¸â€،ط·آ±" },
+  { value: "365", label: "ط·آ¢ط·آ®ط·آ± ط·آ³ط¸â€ ط·آ©" },
 ]
 
 const formatOptions = [
@@ -77,17 +77,17 @@ export default function ReportsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط§ظ„طھظ‚ط§ط±ظٹط±" subtitle="ط¥ظ†ط´ط§ط، ظˆطھطµط¯ظٹط± ط§ظ„طھظ‚ط§ط±ظٹط±" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±" subtitle="ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸ث†ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
-        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط¥ظٹط±ط§ط¯ط§طھ" value={formatCurrency(mockAnalytics.monthlyRevenue.reduce((s, m) => s + m.revenue, 0))} icon={HiOutlineCash} color="success" />
-        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط·ظ„ط§ط¨" value={mockStats.totalStudents} icon={HiOutlineUsers} color="primary" />
-        <StatsCard title="ط§ظ„ظ…ط¹ط§ظ…ظ„ط§طھ" value={mockPayments.length} icon={HiOutlineChartSquareBar} color="info" />
+        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾" value={formatCurrency(mockAnalytics.monthlyRevenue.reduce((s, m) => s + m.revenue, 0))} icon={HiOutlineCash} color="success" />
+        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨" value={mockStats.totalStudents} icon={HiOutlineUsers} color="primary" />
+        <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط·آ§ط¸â€¦ط¸â€‍ط·آ§ط·ع¾" value={mockPayments.length} icon={HiOutlineChartSquareBar} color="info" />
       </motion.div>
 
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="lg:w-72 space-y-2">
-          <h3 className="text-sm font-semibold text-text mb-3">ط£ظ†ظˆط§ط¹ ط§ظ„طھظ‚ط§ط±ظٹط±</h3>
+          <h3 className="text-sm font-semibold text-text mb-3">ط·آ£ط¸â€ ط¸ث†ط·آ§ط·آ¹ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±</h3>
           {reportTypes.map((rt) => {
             const Icon = rt.icon
             return (
@@ -116,19 +116,19 @@ export default function ReportsPage() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <CardTitle>ظ…ط¹ط§ظٹظ†ط© ط§ظ„طھظ‚ط±ظٹط±</CardTitle>
+                <CardTitle>ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±</CardTitle>
                 <Badge variant="primary" size="sm">{reportTypes.find((r) => r.id === selectedReport)?.label}</Badge>
               </div>
-              <CardDescription>ظ…ط¹ط§ظٹظ†ط© ط§ظ„ط¨ظٹط§ظ†ط§طھ ظ‚ط¨ظ„ ط§ظ„طھطµط¯ظٹط±</CardDescription>
+              <CardDescription>ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط¸â€ڑط·آ¨ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±</CardDescription>
             </CardHeader>
             <CardContent>
               {selectedReport === "summary" && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
-                    { label: "ط§ظ„ط·ظ„ط§ط¨", value: mockStats.totalStudents, icon: HiOutlineUsers, color: "text-primary" },
-                    { label: "ط§ظ„ظƒظˆط±ط³ط§طھ", value: mockStats.totalCourses, icon: HiOutlineAcademicCap, color: "text-info" },
-                    { label: "ط§ظ„ط¥ظٹط±ط§ط¯ط§طھ", value: formatCurrency(mockStats.monthlyRevenue), icon: HiOutlineCash, color: "text-success" },
-                    { label: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", value: mockStats.totalExams, icon: HiOutlineChartSquareBar, color: "text-warning" },
+                    { label: "ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨", value: mockStats.totalStudents, icon: HiOutlineUsers, color: "text-primary" },
+                    { label: "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", value: mockStats.totalCourses, icon: HiOutlineAcademicCap, color: "text-info" },
+                    { label: "ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾", value: formatCurrency(mockStats.monthlyRevenue), icon: HiOutlineCash, color: "text-success" },
+                    { label: "ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾", value: mockStats.totalExams, icon: HiOutlineChartSquareBar, color: "text-warning" },
                   ].map((s) => (
                     <div key={s.label} className="p-4 rounded-xl bg-surface-secondary border border-border">
                       <div className="flex items-center gap-2 mb-2">
@@ -169,7 +169,7 @@ export default function ReportsPage() {
                       <XAxis dataKey="examName" tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                       <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
                       <Tooltip />
-                      <Bar dataKey="passRate" fill="#10B981" radius={[4, 4, 0, 0]} name="ظ†ط³ط¨ط© ط§ظ„ظ†ط¬ط§ط­" />
+                      <Bar dataKey="passRate" fill="#10B981" radius={[4, 4, 0, 0]} name="ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ¬ط·آ§ط·آ­" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -193,29 +193,30 @@ export default function ReportsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>ط®ظٹط§ط±ط§طھ ط§ظ„طھطµط¯ظٹط±</CardTitle>
+              <CardTitle>ط·آ®ط¸ظ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap items-end gap-4">
                 <div className="w-44">
-                  <Select label="ظ†ط·ط§ظ‚ ط§ظ„طھط§ط±ظٹط®" options={dateRangeOptions} value={dateRange} onChange={(e) => setDateRange(e.target.value)} />
+                  <Select label="ط¸â€ ط·آ·ط·آ§ط¸â€ڑ ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®" options={dateRangeOptions} value={dateRange} onChange={(e) => setDateRange(e.target.value)} />
                 </div>
                 <div className="w-36">
-                  <Select label="ط§ظ„طµظٹط؛ط©" options={formatOptions} value={exportFormat} onChange={(e) => setExportFormat(e.target.value)} />
+                  <Select label="ط·آ§ط¸â€‍ط·آµط¸ظ¹ط·ط›ط·آ©" options={formatOptions} value={exportFormat} onChange={(e) => setExportFormat(e.target.value)} />
                 </div>
-                <button type="button"`nvariant="primary"
+                <Button type="button"
+variant="primary"
                   size="lg"
                   leftIcon={isExporting ? undefined : <HiOutlineDownload className="w-4 h-4" />}
                   isLoading={isExporting}
                   onClick={handleExport}
                   className="min-w-[140px]"
                 >
-                  {isExporting ? "ط¬ط§ط±ظٹ ط§ظ„طھطµط¯ظٹط±..." : exportDone ? "طھظ… ط§ظ„طھطµط¯ظٹط±!" : "طھطµط¯ظٹط± ط§ظ„طھظ‚ط±ظٹط±"}
+                  {isExporting ? "ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±..." : exportDone ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±!" : "ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±"}
                 </Button>
                 {exportDone && (
                   <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 text-success text-sm font-medium">
                     <HiOutlineCheck className="w-4 h-4" />
-                    طھظ… ط§ظ„طھطµط¯ظٹط± ط¨ظ†ط¬ط§ط­
+                    ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­
                   </motion.div>
                 )}
               </div>
@@ -224,30 +225,30 @@ export default function ReportsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>ط§ظ„طھظ‚ط§ط±ظٹط± ط§ظ„ظ…ط¬ط¯ظˆظ„ط©</CardTitle>
-              <button type="button" size="sm" variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowScheduleModal(true)}>
-                ط¬ط¯ظˆظ„ط© طھظ‚ط±ظٹط±
+              <CardTitle>ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</CardTitle>
+              <Button type="button" size="sm" variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowScheduleModal(true)}>
+                ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±
               </Button>
             </CardHeader>
             <CardContent>
               <EmptyState
                 icon={HiOutlineClock}
-                title="ظ„ط§ طھظˆط¬ط¯ طھظ‚ط§ط±ظٹط± ظ…ط¬ط¯ظˆظ„ط©"
-                description="ظٹظ…ظƒظ†ظƒ ط¬ط¯ظˆظ„ط© طھظ‚ط§ط±ظٹط± ط¯ظˆط±ظٹط© ظ„طھطµظ„ظƒ ط¹ظ„ظ‰ ط¨ط±ظٹط¯ظƒ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ"
+                title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©"
+                description="ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€ ط¸ئ’ ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ¯ط¸ث†ط·آ±ط¸ظ¹ط·آ© ط¸â€‍ط·ع¾ط·آµط¸â€‍ط¸ئ’ ط·آ¹ط¸â€‍ط¸â€° ط·آ¨ط·آ±ط¸ظ¹ط·آ¯ط¸ئ’ ط·آ§ط¸â€‍ط·آ¥ط¸â€‍ط¸ئ’ط·ع¾ط·آ±ط¸ث†ط¸â€ ط¸ظ¹"
               />
             </CardContent>
           </Card>
         </div>
       </div>
 
-      <Modal isOpen={showScheduleModal} onClose={() => setShowScheduleModal(false)} title="ط¬ط¯ظˆظ„ط© طھظ‚ط±ظٹط± ط¯ظˆط±ظٹ" size="md">
+      <Modal isOpen={showScheduleModal} onClose={() => setShowScheduleModal(false)} title="ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¯ط¸ث†ط·آ±ط¸ظ¹" size="md">
         <div className="space-y-4">
-          <Select label="ظ†ظˆط¹ ط§ظ„طھظ‚ط±ظٹط±" options={reportTypes.map((r) => ({ value: r.id, label: r.label }))} placeholder="ط§ط®طھط± ظ†ظˆط¹ ط§ظ„طھظ‚ط±ظٹط±" />
-          <Select label="ط§ظ„ط¯ظˆط±ظٹط©" options={[{ value: "daily", label: "ظٹظˆظ…ظٹ" }, { value: "weekly", label: "ط£ط³ط¨ظˆط¹ظٹ" }, { value: "monthly", label: "ط´ظ‡ط±ظٹ" }]} placeholder="ط§ط®طھط± ط§ظ„ط¯ظˆط±ظٹط©" />
-          <Select label="ط§ظ„طµظٹط؛ط©" options={formatOptions} placeholder="ط§ط®طھط± ط§ظ„طµظٹط؛ط©" />
+          <Select label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±" options={reportTypes.map((r) => ({ value: r.id, label: r.label }))} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±" />
+          <Select label="ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±ط¸ظ¹ط·آ©" options={[{ value: "daily", label: "ط¸ظ¹ط¸ث†ط¸â€¦ط¸ظ¹" }, { value: "weekly", label: "ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹" }, { value: "monthly", label: "ط·آ´ط¸â€،ط·آ±ط¸ظ¹" }]} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±ط¸ظ¹ط·آ©" />
+          <Select label="ط·آ§ط¸â€‍ط·آµط¸ظ¹ط·ط›ط·آ©" options={formatOptions} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آµط¸ظ¹ط·ط›ط·آ©" />
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1">ط¬ط¯ظˆظ„ط©</Button>
-            <Button variant="secondary" onClick={() => setShowScheduleModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" className="flex-1">ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</Button>
+            <Button variant="secondary" onClick={() => setShowScheduleModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

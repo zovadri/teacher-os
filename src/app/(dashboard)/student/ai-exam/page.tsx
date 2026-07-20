@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback, useMemo } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, type Variants } from "framer-motion"
 import {
   HiOutlineSparkles, HiOutlineAcademicCap, HiOutlineLightningBolt,
   HiOutlineCheckCircle, HiOutlineXCircle, HiOutlineChartBar,
@@ -25,10 +25,10 @@ type QuestionType = "mcq" | "truefalse" | "essay"
 interface Question {
   id: number
   type: QuestionType
-  difficulty: "easy" | "medium" | "hard"
+  difficulty: Difficulty
   text: string
   options?: string[]
-  correctAnswer: string | boolean
+  correctAnswer?: string | boolean
   estimatedTime: number
 }
 
@@ -232,7 +232,7 @@ function generateQuestions(subject: Subject, topic: string, count: number, diffi
     const diff = diffOrder[i]
     const text = pool[i % pool.length]
     const seed = i * 7 + 13
-    const timeMap = { easy: 30, medium: 60, hard: 120 }
+    const timeMap: Record<string, number> = { easy: 30, medium: 60, hard: 120, mixed: 75 }
     const baseTime = timeMap[diff]
 
     const q: Question = {
@@ -304,7 +304,7 @@ const questionVariants = {
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4 } },
 }
 
-const shimmerVariants = {
+const shimmerVariants: Variants = {
   initial: { backgroundPosition: "200% 0" },
   animate: { backgroundPosition: "-200% 0", transition: { repeat: Infinity, duration: 1.5, ease: "linear" } },
 }

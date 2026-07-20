@@ -3,10 +3,9 @@
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
 import {
-  HiOutlineTrophy,
+  HiOutlineStar,
   HiOutlineClipboardList,
   HiOutlineClock,
-  HiOutlineStar,
   HiOutlineUsers,
   HiOutlineAcademicCap,
 } from "react-icons/hi"
@@ -41,9 +40,9 @@ const timePeriods = [
 ] as const
 
 const rankStyles = [
-  { card: "border-amber-300 bg-amber-50/60 dark:border-amber-600 dark:bg-amber-900/10", badge: "bg-amber-400 text-white", icon: HiOutlineTrophy },
-  { card: "border-slate-300 bg-slate-50/60 dark:border-slate-500 dark:bg-slate-800/10", badge: "bg-slate-400 text-white", icon: HiOutlineTrophy },
-  { card: "border-orange-300 bg-orange-50/60 dark:border-orange-600 dark:bg-orange-900/10", badge: "bg-orange-500 text-white", icon: HiOutlineTrophy },
+  { card: "border-amber-300 bg-amber-50/60 dark:border-amber-600 dark:bg-amber-900/10", badge: "bg-amber-400 text-white", icon: HiOutlineStar },
+  { card: "border-slate-300 bg-slate-50/60 dark:border-slate-500 dark:bg-slate-800/10", badge: "bg-slate-400 text-white", icon: HiOutlineStar },
+  { card: "border-orange-300 bg-orange-50/60 dark:border-orange-600 dark:bg-orange-900/10", badge: "bg-orange-500 text-white", icon: HiOutlineStar },
 ]
 
 const examOptions = mockExams.map((e) => ({ value: e.id, label: e.title }))
@@ -184,7 +183,7 @@ export default function LeaderboardPage() {
       {top3.length === 0 ? (
         <Card>
           <CardContent className="text-center py-12">
-            <HiOutlineTrophy className="w-12 h-12 mx-auto mb-3 text-text-tertiary/50" />
+            <HiOutlineStar className="w-12 h-12 mx-auto mb-3 text-text-tertiary/50" />
             <p className="text-text-secondary font-medium">لا توجد بيانات متاحة للعرض</p>
           </CardContent>
         </Card>
@@ -211,7 +210,7 @@ export default function LeaderboardPage() {
                     rankStyles[rank].badge
                   )}>
                     {isFirst ? (
-                      <HiOutlineTrophy className="w-5 h-5 text-yellow-600" />
+                      <HiOutlineStar className="w-5 h-5 text-yellow-600" />
                     ) : (
                       <span className="text-sm font-bold">{rank + 1}</span>
                     )}

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -23,9 +23,9 @@ import { formatCurrency, formatDate } from "@/lib/utils"
 import { mockExpenses, mockBranches } from "@/lib/mock/data"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" }> = {
-  approved: { label: "ظ…ط¹طھظ…ط¯", variant: "success" },
-  pending: { label: "ظ…ط¹ظ„ظ‚", variant: "warning" },
-  rejected: { label: "ظ…ط±ظپظˆط¶", variant: "error" },
+  approved: { label: "ط¸â€¦ط·آ¹ط·ع¾ط¸â€¦ط·آ¯", variant: "success" },
+  pending: { label: "ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑ", variant: "warning" },
+  rejected: { label: "ط¸â€¦ط·آ±ط¸ظ¾ط¸ث†ط·آ¶", variant: "error" },
 }
 
 export default function ExpensesPage() {
@@ -89,7 +89,7 @@ export default function ExpensesPage() {
     setExpenses((prev) => [exp, ...prev])
     setShowAddModal(false)
     setNewExpense({ category: "", description: "", amount: 0, branchId: "", paidBy: "" })
-    toast.success("طھظ… ط¥ط¶ط§ظپط© ط§ظ„ظ…طµط±ظˆظپ ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
   }
 
   const getBranchName = (branchId: string) => mockBranches.find((b) => b.id === branchId)?.name || branchId
@@ -97,7 +97,7 @@ export default function ExpensesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط§ظ„ظ…طµط±ظˆظپط§طھ" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظ…طµط±ظˆظپط§طھ" />
+        <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -105,10 +105,10 @@ export default function ExpensesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط§ظ„ظ…طµط±ظˆظپط§طھ" subtitle="ط¥ط¯ط§ط±ط© ظ…طµط±ظˆظپط§طھ ط§ظ„ظ…ط±ظƒط²" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ±ط¸ئ’ط·آ²" />
       <div className="flex justify-end">
-        <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-          ط¥ط¶ط§ظپط© ظ…طµط±ظˆظپ
+        <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
+          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾
         </Button>
       </div>
 
@@ -116,45 +116,45 @@ export default function ExpensesPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…طµط±ظˆظپط§طھ" value={formatCurrency(stats.totalAmount)} icon={HiOutlineCash} color="primary" />
-          <StatsCard title="ط§ظ„ظ…طµط±ظˆظپط§طھ ط§ظ„ط´ظ‡ط±ظٹط©" value={formatCurrency(monthlyTotal)} icon={HiOutlineCalendar} color="info" />
-          <StatsCard title="ط§ظ„ظ…ط¹طھظ…ط¯ط©" value={formatCurrency(stats.approved)} icon={HiOutlineTag} color="success" />
-          <StatsCard title="ط§ظ„ظ…ط¹ظ„ظ‚ط©" value={formatCurrency(stats.pending)} icon={HiOutlineFilter} color="warning" subtitle={`${stats.pendingCount} ظ…ط¹ط§ظ…ظ„ط©`} />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" value={formatCurrency(stats.totalAmount)} icon={HiOutlineCash} color="primary" />
+          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ±ط¸ظ¹ط·آ©" value={formatCurrency(monthlyTotal)} icon={HiOutlineCalendar} color="info" />
+          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط·ع¾ط¸â€¦ط·آ¯ط·آ©" value={formatCurrency(stats.approved)} icon={HiOutlineTag} color="success" />
+          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑط·آ©" value={formatCurrency(stats.pending)} icon={HiOutlineFilter} color="warning" subtitle={`${stats.pendingCount} ط¸â€¦ط·آ¹ط·آ§ط¸â€¦ط¸â€‍ط·آ©`} />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>ط³ط¬ظ„ ط§ظ„ظ…طµط±ظˆظپط§طھ</CardTitle>
+          <CardTitle>ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="p-4 border-b border-border flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط«..." />
+              <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ«..." />
             </div>
             <div className="flex flex-wrap gap-2">
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظپط¦ط§طھ" }, ...categories.map((c) => ({ value: c, label: c }))]} value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} />
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظپط±ظˆط¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)} />
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" }, { value: "approved", label: "ظ…ط¹طھظ…ط¯" }, { value: "pending", label: "ظ…ط¹ظ„ظ‚" }, { value: "rejected", label: "ظ…ط±ظپظˆط¶" }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ§ط·ع¾" }, ...categories.map((c) => ({ value: c, label: c }))]} value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" }, { value: "approved", label: "ط¸â€¦ط·آ¹ط·ع¾ط¸â€¦ط·آ¯" }, { value: "pending", label: "ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑ" }, { value: "rejected", label: "ط¸â€¦ط·آ±ط¸ظ¾ط¸ث†ط·آ¶" }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
             </div>
           </div>
 
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineCash} title="ظ„ط§ طھظˆط¬ط¯ ظ…طµط±ظˆظپط§طھ" description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ظ…طµط±ظˆظپط§طھ ظ…ط·ط§ط¨ظ‚ط©" action={<button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط¥ط¶ط§ظپط© ظ…طµط±ظˆظپ</Button>} />
+            <EmptyState icon={HiOutlineCash} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾ ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾</Button>} />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظپط¦ط©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظˆطµظپ</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظ…ط¨ظ„ط؛</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„طھط§ط±ظٹط®</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظپط±ط¹</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظ…ظڈطµط±ظپ</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط­ط§ظ„ط©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸â€‍ط·ط›</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط¸عˆط·آµط·آ±ط¸ظ¾</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -182,24 +182,24 @@ export default function ExpensesPage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¥ط¶ط§ظپط© ظ…طµط±ظˆظپ ط¬ط¯ظٹط¯" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="md">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
-            <Input label="ط§ظ„ظپط¦ط©" value={newExpense.category} onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value })} placeholder="ظ…ط«ط§ظ„: ط¥ظٹط¬ط§ط±" />
-            <Input label="ط§ظ„ظ…ط¨ظ„ط؛" type="number" value={String(newExpense.amount)} onChange={(e) => setNewExpense({ ...newExpense, amount: Number(e.target.value) })} placeholder="ط§ظ„ظ…ط¨ظ„ط؛" />
+            <Input label="ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ©" value={newExpense.category} onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value })} placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ¥ط¸ظ¹ط·آ¬ط·آ§ط·آ±" />
+            <Input label="ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸â€‍ط·ط›" type="number" value={String(newExpense.amount)} onChange={(e) => setNewExpense({ ...newExpense, amount: Number(e.target.value) })} placeholder="ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸â€‍ط·ط›" />
           </div>
-          <Input label="ط§ظ„ظˆطµظپ" value={newExpense.description} onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })} placeholder="ظˆطµظپ ط§ظ„ظ…طµط±ظˆظپ" />
+          <Input label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾" value={newExpense.description} onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })} placeholder="ط¸ث†ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾" />
           <div className="grid grid-cols-2 gap-3">
             <Select
-              label="ط§ظ„ظپط±ط¹"
+              label="ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹"
               options={mockBranches.map((b) => ({ value: b.id, label: b.name }))}
               value={newExpense.branchId} onChange={(e) => setNewExpense({ ...newExpense, branchId: e.target.value })}
             />
-            <Input label="ط§ظ„ظ…ظڈطµط±ظپ" value={newExpense.paidBy} onChange={(e) => setNewExpense({ ...newExpense, paidBy: e.target.value })} placeholder="ط§ط³ظ… ط§ظ„ظ…ظڈطµط±ظپ" />
+            <Input label="ط·آ§ط¸â€‍ط¸â€¦ط¸عˆط·آµط·آ±ط¸ظ¾" value={newExpense.paidBy} onChange={(e) => setNewExpense({ ...newExpense, paidBy: e.target.value })} placeholder="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط¸عˆط·آµط·آ±ط¸ظ¾" />
           </div>
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1" onClick={handleAddExpense} disabled={!newExpense.category || !newExpense.amount}>ط¥ط¶ط§ظپط© ط§ظ„ظ…طµط±ظˆظپ</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" className="flex-1" onClick={handleAddExpense} disabled={!newExpense.category || !newExpense.amount}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

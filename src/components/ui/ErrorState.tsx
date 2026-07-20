@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
@@ -16,8 +16,8 @@ interface ErrorStateProps {
 }
 
 export function ErrorState({
-  title = "ط­ط¯ط« ط®ط·ط£",
-  message = "ط¹ط°ط±ط§ظ‹طŒ ط­ط¯ط« ط®ط·ط£ ط؛ظٹط± ظ…طھظˆظ‚ط¹. ظٹط±ط¬ظ‰ ط§ظ„ظ…ط­ط§ظˆظ„ط© ظ…ط±ط© ط£ط®ط±ظ‰.",
+  title = "ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£",
+  message = "ط·آ¹ط·آ°ط·آ±ط·آ§ط¸â€¹ط·إ’ ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£ ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·ع¾ط¸ث†ط¸â€ڑط·آ¹. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ© ط¸â€¦ط·آ±ط·آ© ط·آ£ط·آ®ط·آ±ط¸â€°.",
   error,
   onRetry,
   className,
@@ -45,8 +45,8 @@ export function ErrorState({
         </div>
       )}
       {onRetry && (
-        <button type="button" variant="primary" onClick={onRetry} leftIcon={<RefreshCw className="w-4 h-4" />}>
-          ط¥ط¹ط§ط¯ط© ط§ظ„ظ…ط­ط§ظˆظ„ط©
+        <Button variant="primary" onClick={onRetry} leftIcon={<RefreshCw className="w-4 h-4" />}>
+          ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ©
         </Button>
       )}
     </motion.div>

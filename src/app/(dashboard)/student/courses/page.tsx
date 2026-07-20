@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { HiOutlineBookOpen, HiOutlineClock, HiOutlineStar, HiOutlineChevronLeft } from "react-icons/hi"
+import { HiOutlineBookOpen, HiOutlineClock, HiOutlineStar, HiOutlineChevronLeft, HiStar } from "react-icons/hi"
 import { Card } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Progress } from "@/components/ui/Progress"

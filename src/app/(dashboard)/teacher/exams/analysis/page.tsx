@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -41,18 +41,18 @@ const COLORS = {
 const PIE_COLORS = [COLORS.success, COLORS.warning, COLORS.error, COLORS.info, COLORS.primary, COLORS.purple]
 
 const difficultyConfig: Record<string, { label: string; color: string; variant: "success" | "warning" | "error" }> = {
-  easy: { label: "ط·آ³ط¸â€،ط¸â€‍", color: COLORS.success, variant: "success" },
-  medium: { label: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·", color: COLORS.warning, variant: "warning" },
-  hard: { label: "ط·آµط·آ¹ط·آ¨", color: COLORS.error, variant: "error" },
+  easy: { label: "ط·آ·ط¢آ³ط·آ¸أ¢â‚¬طŒط·آ¸أ¢â‚¬â€چ", color: COLORS.success, variant: "success" },
+  medium: { label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ·", color: COLORS.warning, variant: "warning" },
+  hard: { label: "ط·آ·ط¢آµط·آ·ط¢آ¹ط·آ·ط¢آ¨", color: COLORS.error, variant: "error" },
 }
 
 const typeLabels: Record<string, string> = {
-  "multiple-choice": "ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط¸â€¦ط¸â€  ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯",
-  "true-false": "ط·آµط¸ث†ط·آ§ط·آ¨/ط·آ®ط·آ·ط·آ£",
-  "fill-blank": "ط¸â€¦ط¸â€‍ط·طŒ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ§ط·ط›",
-  essay: "ط¸â€¦ط¸â€ڑط·آ§ط¸â€‍ط¸ظ¹",
-  ordering: "ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨",
-  matching: "ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©",
+  "multiple-choice": "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯",
+  "true-false": "ط·آ·ط¢آµط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¨/ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£",
+  "fill-blank": "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط·إ’ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط·â€؛",
+  essay: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹",
+  ordering: "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨",
+  matching: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©",
 }
 
 function useLoadAnalysis() {
@@ -68,7 +68,7 @@ function useLoadAnalysis() {
         if (det() > 0.1) {
           setData(mockQuestionAnalysis)
         } else {
-          throw new Error("ط¸ظ¾ط·آ´ط¸â€‍ ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾")
+          throw new Error("ط·آ¸ط¸آ¾ط·آ·ط¢آ´ط·آ¸أ¢â‚¬â€چ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾")
         }
       } catch (e) {
         setError((e as Error).message)
@@ -85,25 +85,25 @@ function useLoadAnalysis() {
 export default function AnalysisPage() {
   const { data: analysis, loading, error, retry } = useLoadAnalysis()
   const [selectedExamId, setSelectedExamId] = useState("")
-  const [difficultyFilter, setDifficultyFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
-  const [typeFilter, setTypeFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
-  const [tagFilter, setTagFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
+  const [difficultyFilter, setDifficultyFilter] = useState("ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ")
+  const [typeFilter, setTypeFilter] = useState("ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ")
+  const [tagFilter, setTagFilter] = useState("ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ")
 
   const examOptions = useMemo(() => [
-    { value: "", label: "ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ..." },
+    { value: "", label: "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ..." },
     ...mockExams.map((e) => ({ value: e.id, label: e.title })),
   ], [])
 
   const allTags = useMemo(() => {
     const tags = new Set(analysis.map((a) => a.tag))
-    return ["ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", ...Array.from(tags)]
+    return ["ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ", ...Array.from(tags)]
   }, [analysis])
 
   const filtered = useMemo(() => {
     return analysis.filter((a) => {
-      if (difficultyFilter !== "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" && a.difficulty !== difficultyFilter) return false
-      if (typeFilter !== "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" && a.type !== typeFilter) return false
-      if (tagFilter !== "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" && a.tag !== tagFilter) return false
+      if (difficultyFilter !== "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ" && a.difficulty !== difficultyFilter) return false
+      if (typeFilter !== "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ" && a.type !== typeFilter) return false
+      if (tagFilter !== "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ" && a.tag !== tagFilter) return false
       return true
     })
   }, [analysis, difficultyFilter, typeFilter, tagFilter])
@@ -136,17 +136,17 @@ export default function AnalysisPage() {
   }, [filtered])
 
   const statsCards = useMemo(() => [
-    { title: "ط·آ£ط·آµط·آ¹ط·آ¨ ط·آ³ط·آ¤ط·آ§ط¸â€‍", value: hardest ? `${hardest.correctRate}%` : "-", icon: HiOutlineTrendingDown, color: "error" as const, subtitle: hardest?.questionText },
-    { title: "ط·آ£ط·آ³ط¸â€،ط¸â€‍ ط·آ³ط·آ¤ط·آ§ط¸â€‍", value: easiest ? `${easiest.correctRate}%` : "-", icon: HiOutlineTrendingUp, color: "success" as const, subtitle: easiest?.questionText },
-    { title: "ط·آ£ط¸ئ’ط·آ«ط·آ± ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط·آ®ط·آ·ط·آ£", value: mostMistaken ? `${mostMistaken.incorrectCount} ط·آ®ط·آ·ط·آ£` : "-", icon: HiOutlineExclamationCircle, color: "warning" as const, subtitle: mostMistaken?.questionText },
-    { title: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ§ط·ع¾", value: filtered.length > 0 ? `${Math.round(filtered.reduce((s, a) => s + a.correctRate, 0) / filtered.length)}%` : "-", icon: HiOutlineChartSquareBar, color: "info" as const },
+    { title: "ط·آ·ط¢آ£ط·آ·ط¢آµط·آ·ط¢آ¹ط·آ·ط¢آ¨ ط·آ·ط¢آ³ط·آ·ط¢آ¤ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ", value: hardest ? `${hardest.correctRate}%` : "-", icon: HiOutlineTrendingDown, color: "error" as const, subtitle: hardest?.questionText },
+    { title: "ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ¸أ¢â‚¬طŒط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ³ط·آ·ط¢آ¤ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ", value: easiest ? `${easiest.correctRate}%` : "-", icon: HiOutlineTrendingUp, color: "success" as const, subtitle: easiest?.questionText },
+    { title: "ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ·ط¢آ«ط·آ·ط¢آ± ط·آ·ط¢آ³ط·آ·ط¢آ¤ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£", value: mostMistaken ? `${mostMistaken.incorrectCount} ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£` : "-", icon: HiOutlineExclamationCircle, color: "warning" as const, subtitle: mostMistaken?.questionText },
+    { title: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾", value: filtered.length > 0 ? `${Math.round(filtered.reduce((s, a) => s + a.correctRate, 0) / filtered.length)}%` : "-", icon: HiOutlineChartSquareBar, color: "info" as const },
   ], [hardest, easiest, mostMistaken, filtered])
 
   const columns = [
-    { key: "questionText", header: "ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍", render: (a: QuestionAnalysis) => <span className="text-sm line-clamp-1 max-w-[200px]">{a.questionText}</span> },
-    { key: "type", header: "ط·آ§ط¸â€‍ط¸â€ ط¸ث†ط·آ¹", render: (a: QuestionAnalysis) => <Badge variant="info" size="sm">{typeLabels[a.type] || a.type}</Badge> },
-    { key: "difficulty", header: "ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ©", render: (a: QuestionAnalysis) => <Badge variant={difficultyConfig[a.difficulty].variant} size="sm">{difficultyConfig[a.difficulty].label}</Badge> },
-    { key: "correctRate", header: "ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط·آ©", render: (a: QuestionAnalysis) => (
+    { key: "questionText", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ¤ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ", render: (a: QuestionAnalysis) => <span className="text-sm line-clamp-1 max-w-[200px]">{a.questionText}</span> },
+    { key: "type", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ·ط¢آ¹", render: (a: QuestionAnalysis) => <Badge variant="info" size="sm">{typeLabels[a.type] || a.type}</Badge> },
+    { key: "difficulty", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آµط·آ·ط¢آ¹ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ©", render: (a: QuestionAnalysis) => <Badge variant={difficultyConfig[a.difficulty].variant} size="sm">{difficultyConfig[a.difficulty].label}</Badge> },
+    { key: "correctRate", header: "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آµط·آ·ط¢آ­ط·آ·ط¢آ©", render: (a: QuestionAnalysis) => (
       <div className="flex items-center gap-2">
         <div className="w-20 h-2 rounded-full bg-surface-tertiary overflow-hidden">
           <div className="h-full rounded-full bg-success transition-all" style={{ width: `${a.correctRate}%` }} />
@@ -154,18 +154,18 @@ export default function AnalysisPage() {
         <span className="text-xs font-medium">{a.correctRate}%</span>
       </div>
     )},
-    { key: "incorrectCount", header: "ط·آ®ط·آ·ط·آ£", render: (a: QuestionAnalysis) => <span className="text-error">{a.incorrectCount}</span> },
-    { key: "skippedCount", header: "ط·ع¾ط·آ®ط·آ·ط¸â€°", render: (a: QuestionAnalysis) => <span className="text-text-tertiary">{a.skippedCount}</span> },
-    { key: "averageTime", header: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ§ط¸â€‍ط¸ث†ط¸â€ڑط·ع¾", render: (a: QuestionAnalysis) => (
-      <span className="flex items-center gap-1"><HiOutlineClock size={14} className="text-text-tertiary" />{a.averageTime} ط·آ«</span>
+    { key: "incorrectCount", header: "ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£", render: (a: QuestionAnalysis) => <span className="text-error">{a.incorrectCount}</span> },
+    { key: "skippedCount", header: "ط·آ·ط¹آ¾ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ¸أ¢â‚¬آ°", render: (a: QuestionAnalysis) => <span className="text-text-tertiary">{a.skippedCount}</span> },
+    { key: "averageTime", header: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¹آ¾", render: (a: QuestionAnalysis) => (
+      <span className="flex items-center gap-1"><HiOutlineClock size={14} className="text-text-tertiary" />{a.averageTime} ط·آ·ط¢آ«</span>
     )},
-    { key: "tag", header: "ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸â€¦", render: (a: QuestionAnalysis) => <Badge size="sm">{a.tag}</Badge> },
+    { key: "tag", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦", render: (a: QuestionAnalysis) => <Badge size="sm">{a.tag}</Badge> },
   ]
 
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©" description="ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط¸ث†ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾" />
+        <PageHeader title="ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©" description="ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط·إ’ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
         <ErrorState error={error} onRetry={retry} />
       </div>
     )
@@ -173,12 +173,12 @@ export default function AnalysisPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "تحليل الأسئلة" }]} />
-      <PageHeader title="ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©" description="ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط¸ث†ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾" />
+      <Breadcrumb items={[{ label: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", href: "/teacher/exams" }, { label: "طھط­ظ„ظٹظ„ ط§ظ„ط£ط³ط¦ظ„ط©" }]} />
+      <PageHeader title="ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©" description="ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط·إ’ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
 
       <Card>
         <CardContent className="space-y-4">
-          <Select label="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ " options={examOptions} value={selectedExamId} onChange={(e) => setSelectedExamId(e.target.value)} />
+          <Select label="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " options={examOptions} value={selectedExamId} onChange={(e) => setSelectedExamId(e.target.value)} />
         </CardContent>
       </Card>
 
@@ -190,7 +190,7 @@ export default function AnalysisPage() {
       )}
 
       {!loading && !selectedExamId && (
-        <EmptyState icon={HiOutlineChartSquareBar} title="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط¸â€¹" description="ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط¸â€‍ط·آ¹ط·آ±ط·آ¶ ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©" />
+        <EmptyState icon={HiOutlineChartSquareBar} title="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹" description="ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©" />
       )}
 
       {!loading && selectedExamId && (
@@ -205,27 +205,27 @@ export default function AnalysisPage() {
 
           <div className="flex flex-wrap gap-3">
             <div className="w-44">
-              <Select options={[{ value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ§ط·ع¾" }, { value: "easy", label: "ط·آ³ط¸â€،ط¸â€‍" }, { value: "medium", label: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·" }, { value: "hard", label: "ط·آµط·آ¹ط·آ¨" }]} value={difficultyFilter} onChange={(e) => setDifficultyFilter(e.target.value)} />
+              <Select options={[{ value: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ", label: "ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آµط·آ·ط¢آ¹ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾" }, { value: "easy", label: "ط·آ·ط¢آ³ط·آ¸أ¢â‚¬طŒط·آ¸أ¢â‚¬â€چ" }, { value: "medium", label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ·" }, { value: "hard", label: "ط·آ·ط¢آµط·آ·ط¢آ¹ط·آ·ط¢آ¨" }]} value={difficultyFilter} onChange={(e) => setDifficultyFilter(e.target.value)} />
             </div>
             <div className="w-44">
-              <Select options={[{ value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط¸â€ ط¸ث†ط·آ§ط·آ¹" }, ...Object.entries(typeLabels).map(([v, l]) => ({ value: v, label: l }))]} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} />
+              <Select options={[{ value: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ", label: "ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¹" }, ...Object.entries(typeLabels).map(([v, l]) => ({ value: v, label: l }))]} value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} />
             </div>
             <div className="w-44">
-              <Select options={allTags.map((t) => ({ value: t, label: t === "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" ? "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸ث†ط¸â€¦" : t }))} value={tagFilter} onChange={(e) => setTagFilter(e.target.value)} />
+              <Select options={allTags.map((t) => ({ value: t, label: t === "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ" ? "ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ¦" : t }))} value={tagFilter} onChange={(e) => setTagFilter(e.target.value)} />
             </div>
-            <Button variant="ghost" onClick={() => { setDifficultyFilter("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍"); setTypeFilter("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍"); setTagFilter("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍") }} rightIcon={<HiOutlineRefresh size={16} />}>
-              ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€ 
+            <Button variant="ghost" onClick={() => { setDifficultyFilter("ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ"); setTypeFilter("ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ"); setTagFilter("ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ") }} rightIcon={<HiOutlineRefresh size={16} />}>
+              ط·آ·ط¢آ¥ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ 
             </Button>
           </div>
 
           {filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineFilter} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬" description="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط·آµط¸ظ¾ط¸ظ¹ط·آ©" />
+            <EmptyState icon={HiOutlineFilter} title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ·ط¢آ¬" description="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ·ط¹آ¾ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬ع‘ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آµط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ©" />
           ) : (
             <>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><HiOutlineChartPie className="text-primary" size={20} />ط·ع¾ط¸ث†ط·آ²ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ©</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><HiOutlineChartPie className="text-primary" size={20} />ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ²ط·آ¸ط¸آ¹ط·آ·ط¢آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آµط·آ·ط¢آ¹ط·آ¸ط«â€ ط·آ·ط¢آ¨ط·آ·ط¢آ©</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div dir="ltr" className="h-72">
@@ -244,7 +244,7 @@ export default function AnalysisPage() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><HiOutlineTag className="text-primary" size={20} />ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸ث†ط¸â€¦</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><HiOutlineTag className="text-primary" size={20} />ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ¦</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div dir="ltr" className="h-72">
@@ -264,8 +264,8 @@ export default function AnalysisPage() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©</CardTitle>
-                  <CardDescription>{filtered.length} ط·آ³ط·آ¤ط·آ§ط¸â€‍</CardDescription>
+                  <CardTitle>ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©</CardTitle>
+                  <CardDescription>{filtered.length} ط·آ·ط¢آ³ط·آ·ط¢آ¤ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Table columns={columns} data={filtered} />

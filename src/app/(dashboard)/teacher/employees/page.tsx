@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -24,9 +24,9 @@ import { cn, formatCurrency } from "@/lib/utils"
 import { mockEmployees, mockBranches } from "@/lib/mock/data"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "neutral" }> = {
-  active: { label: "ظ†ط´ط·", variant: "success" },
-  "on-leave": { label: "ط¥ط¬ط§ط²ط©", variant: "warning" },
-  inactive: { label: "ط؛ظٹط± ظ†ط´ط·", variant: "neutral" },
+  active: { label: "ط¸â€ ط·آ´ط·آ·", variant: "success" },
+  "on-leave": { label: "ط·آ¥ط·آ¬ط·آ§ط·آ²ط·آ©", variant: "warning" },
+  inactive: { label: "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·", variant: "neutral" },
 }
 
 const PAGE_SIZE = 5
@@ -92,7 +92,7 @@ export default function EmployeesPage() {
     setEmployees((prev) => [emp, ...prev])
     setShowAddModal(false)
     setNewEmployee({ name: "", email: "", phone: "", jobTitle: "", department: "", salary: 0, branchId: "" })
-    toast.success("طھظ… ط¥ط¶ط§ظپط© ط§ظ„ظ…ظˆط¸ظپ ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
   }
 
   const getBranchName = (branchId: string) => mockBranches.find((b) => b.id === branchId)?.name || branchId
@@ -100,7 +100,7 @@ export default function EmployeesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط§ظ„ظ…ظˆط¸ظپظˆظ†" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظ…ظˆط¸ظپظٹظ†" />
+        <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ث†ط¸â€ " subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€ " />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -108,10 +108,10 @@ export default function EmployeesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط§ظ„ظ…ظˆط¸ظپظˆظ†" subtitle="ط¥ط¯ط§ط±ط© ط¨ظٹط§ظ†ط§طھ ط§ظ„ظ…ظˆط¸ظپظٹظ†" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ث†ط¸â€ " subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€ " />
       <div className="flex justify-end">
-        <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-          ط¥ط¶ط§ظپط© ظ…ظˆط¸ظپ
+        <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
+          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾
         </Button>
       </div>
 
@@ -119,45 +119,45 @@ export default function EmployeesPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ظˆط¸ظپظٹظ†" value={stats.total} icon={HiOutlineUserGroup} color="primary" />
-          <StatsCard title="ظ†ط´ط·" value={stats.active} icon={HiOutlineBriefcase} color="success" />
-          <StatsCard title="ط¥ط¬ط§ط²ط©" value={stats.onLeave} icon={HiOutlineChevronDown} color="warning" />
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط±ظˆط§طھط¨" value={formatCurrency(stats.totalSalary)} icon={HiOutlineCurrencyDollar} color="info" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€ " value={stats.total} icon={HiOutlineUserGroup} color="primary" />
+          <StatsCard title="ط¸â€ ط·آ´ط·آ·" value={stats.active} icon={HiOutlineBriefcase} color="success" />
+          <StatsCard title="ط·آ¥ط·آ¬ط·آ§ط·آ²ط·آ©" value={stats.onLeave} icon={HiOutlineChevronDown} color="warning" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨" value={formatCurrency(stats.totalSalary)} icon={HiOutlineCurrencyDollar} color="info" />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>ظ‚ط§ط¦ظ…ط© ط§ظ„ظ…ظˆط¸ظپظٹظ†</CardTitle>
+          <CardTitle>ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€ </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="p-4 border-b border-border flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="ط¨ط­ط« ط¨ط§ظ„ط§ط³ظ… ط£ظˆ ط§ظ„ظ…ط³ظ…ظ‰..." />
+              <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¨ط·آ§ط¸â€‍ط·آ§ط·آ³ط¸â€¦ ط·آ£ط¸ث† ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط¸â€¦ط¸â€°..." />
             </div>
             <div className="flex flex-wrap gap-2">
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط£ظ‚ط³ط§ظ…" }, ...departments.map((d) => ({ value: d, label: d }))]} value={departmentFilter} onChange={(e) => { setDepartmentFilter(e.target.value); setPage(1) }} />
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظپط±ظˆط¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => { setBranchFilter(e.target.value); setPage(1) }} />
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" }, { value: "active", label: "ظ†ط´ط·" }, { value: "on-leave", label: "ط¥ط¬ط§ط²ط©" }, { value: "inactive", label: "ط؛ظٹط± ظ†ط´ط·" }]} value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1) }} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ£ط¸â€ڑط·آ³ط·آ§ط¸â€¦" }, ...departments.map((d) => ({ value: d, label: d }))]} value={departmentFilter} onChange={(e) => { setDepartmentFilter(e.target.value); setPage(1) }} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => { setBranchFilter(e.target.value); setPage(1) }} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" }, { value: "active", label: "ط¸â€ ط·آ´ط·آ·" }, { value: "on-leave", label: "ط·آ¥ط·آ¬ط·آ§ط·آ²ط·آ©" }, { value: "inactive", label: "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·" }]} value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setPage(1) }} />
             </div>
           </div>
 
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineUserGroup} title="ظ„ط§ ظٹظˆط¬ط¯ ظ…ظˆط¸ظپظˆظ†" description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ظ…ظˆط¸ظپظٹظ† ظ…ط·ط§ط¨ظ‚ظٹظ†" action={search ? undefined : <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط¥ط¶ط§ظپط© ظ…ظˆط¸ظپ</Button>} />
+            <EmptyState icon={HiOutlineUserGroup} title="ط¸â€‍ط·آ§ ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ث†ط¸â€ " description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€  ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط¸ظ¹ط¸â€ " action={search ? undefined : <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾</Button>} />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط§ط³ظ…</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظ…ط³ظ…ظ‰</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظ‚ط³ظ…</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظ‡ط§طھظپ</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط±ط§طھط¨</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظپط±ط¹</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط­ط§ظ„ط©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ§ط·آ³ط¸â€¦</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط¸â€¦ط¸â€°</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€ڑط·آ³ط¸â€¦</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€،ط·آ§ط·ع¾ط¸ظ¾</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -183,22 +183,22 @@ export default function EmployeesPage() {
                         <tr key={`${emp.id}-detail`} className="bg-surface-secondary">
                           <td colSpan={7} className="px-4 py-4">
                             <div className="space-y-3">
-                              <h4 className="text-sm font-semibold text-text">طھظپط§طµظٹظ„ ط§ظ„ط±ط§طھط¨</h4>
+                              <h4 className="text-sm font-semibold text-text">ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨</h4>
                               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                                 <div className="p-3 rounded-lg bg-surface border border-border">
-                                  <p className="text-xs text-text-tertiary">ط§ظ„ط±ط§طھط¨ ط§ظ„ط£ط³ط§ط³ظٹ</p>
+                                  <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ§ط·آ³ط¸ظ¹</p>
                                   <p className="text-lg font-bold text-text">{formatCurrency(emp.salary)}</p>
                                 </div>
                                 <div className="p-3 rounded-lg bg-surface border border-border">
-                                  <p className="text-xs text-text-tertiary">طµط§ظپظٹ ط§ظ„ط±ط§طھط¨</p>
+                                  <p className="text-xs text-text-tertiary">ط·آµط·آ§ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨</p>
                                   <p className="text-lg font-bold text-text">{formatCurrency(emp.salary)}</p>
                                 </div>
                                 <div className="p-3 rounded-lg bg-surface border border-border">
-                                  <p className="text-xs text-text-tertiary">طھط§ط±ظٹط® ط§ظ„طھظˆط¸ظٹظپ</p>
+                                  <p className="text-xs text-text-tertiary">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·ع¾ط¸ث†ط·آ¸ط¸ظ¹ط¸ظ¾</p>
                                   <p className="text-sm font-medium text-text">{new Date(emp.hireDate).toLocaleDateString("ar-EG")}</p>
                                 </div>
                                 <div className="p-3 rounded-lg bg-surface border border-border">
-                                  <p className="text-xs text-text-tertiary">ط§ظ„ط¨ط±ظٹط¯</p>
+                                  <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ¨ط·آ±ط¸ظ¹ط·آ¯</p>
                                   <p className="text-sm font-medium text-text truncate">{emp.email}</p>
                                 </div>
                               </div>
@@ -220,28 +220,28 @@ export default function EmployeesPage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¥ط¶ط§ظپط© ظ…ظˆط¸ظپ ط¬ط¯ظٹط¯" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="md">
         <div className="space-y-4">
-          <Input label="ط§ظ„ط§ط³ظ…" value={newEmployee.name} onChange={(e) => setNewEmployee({ ...newEmployee, name: e.target.value })} placeholder="ط§ط³ظ… ط§ظ„ظ…ظˆط¸ظپ" />
+          <Input label="ط·آ§ط¸â€‍ط·آ§ط·آ³ط¸â€¦" value={newEmployee.name} onChange={(e) => setNewEmployee({ ...newEmployee, name: e.target.value })} placeholder="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾" />
           <div className="grid grid-cols-2 gap-3">
-            <Input label="ط§ظ„ط¨ط±ظٹط¯" value={newEmployee.email} onChange={(e) => setNewEmployee({ ...newEmployee, email: e.target.value })} placeholder="ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ" />
-            <Input label="ط§ظ„ظ‡ط§طھظپ" value={newEmployee.phone} onChange={(e) => setNewEmployee({ ...newEmployee, phone: e.target.value })} placeholder="ط±ظ‚ظ… ط§ظ„ظ‡ط§طھظپ" />
+            <Input label="ط·آ§ط¸â€‍ط·آ¨ط·آ±ط¸ظ¹ط·آ¯" value={newEmployee.email} onChange={(e) => setNewEmployee({ ...newEmployee, email: e.target.value })} placeholder="ط·آ§ط¸â€‍ط·آ¨ط·آ±ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ¥ط¸â€‍ط¸ئ’ط·ع¾ط·آ±ط¸ث†ط¸â€ ط¸ظ¹" />
+            <Input label="ط·آ§ط¸â€‍ط¸â€،ط·آ§ط·ع¾ط¸ظ¾" value={newEmployee.phone} onChange={(e) => setNewEmployee({ ...newEmployee, phone: e.target.value })} placeholder="ط·آ±ط¸â€ڑط¸â€¦ ط·آ§ط¸â€‍ط¸â€،ط·آ§ط·ع¾ط¸ظ¾" />
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Input label="ط§ظ„ظ…ط³ظ…ظ‰" value={newEmployee.jobTitle} onChange={(e) => setNewEmployee({ ...newEmployee, jobTitle: e.target.value })} placeholder="ط§ظ„ظ…ط³ظ…ظ‰ ط§ظ„ظˆط¸ظٹظپظٹ" />
-            <Input label="ط§ظ„ظ‚ط³ظ…" value={newEmployee.department} onChange={(e) => setNewEmployee({ ...newEmployee, department: e.target.value })} placeholder="ط§ظ„ظ‚ط³ظ…" />
+            <Input label="ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط¸â€¦ط¸â€°" value={newEmployee.jobTitle} onChange={(e) => setNewEmployee({ ...newEmployee, jobTitle: e.target.value })} placeholder="ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط¸â€¦ط¸â€° ط·آ§ط¸â€‍ط¸ث†ط·آ¸ط¸ظ¹ط¸ظ¾ط¸ظ¹" />
+            <Input label="ط·آ§ط¸â€‍ط¸â€ڑط·آ³ط¸â€¦" value={newEmployee.department} onChange={(e) => setNewEmployee({ ...newEmployee, department: e.target.value })} placeholder="ط·آ§ط¸â€‍ط¸â€ڑط·آ³ط¸â€¦" />
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Input label="ط§ظ„ط±ط§طھط¨" type="number" value={String(newEmployee.salary)} onChange={(e) => setNewEmployee({ ...newEmployee, salary: Number(e.target.value) })} placeholder="ط§ظ„ط±ط§طھط¨" />
+            <Input label="ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨" type="number" value={String(newEmployee.salary)} onChange={(e) => setNewEmployee({ ...newEmployee, salary: Number(e.target.value) })} placeholder="ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨" />
             <Select
-              label="ط§ظ„ظپط±ط¹"
+              label="ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹"
               options={mockBranches.map((b) => ({ value: b.id, label: b.name }))}
               value={newEmployee.branchId} onChange={(e) => setNewEmployee({ ...newEmployee, branchId: e.target.value })}
             />
           </div>
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1" onClick={handleAddEmployee} disabled={!newEmployee.name}>ط¥ط¶ط§ظپط© ط§ظ„ظ…ظˆط¸ظپ</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" className="flex-1" onClick={handleAddEmployee} disabled={!newEmployee.name}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

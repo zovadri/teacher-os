@@ -1,11 +1,11 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import {
   HiOutlineDocumentDuplicate, HiOutlinePrinter, HiOutlineEye,
   HiOutlinePlus, HiOutlineScale,
-  HiOutlineTemplate, HiOutlineShuffle,
+  HiOutlineTemplate, HiOutlineStatusOffline,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card"
@@ -35,7 +35,7 @@ function useLoadVersions() {
         if (det() > 0.1) {
           setData(mockExamVersions)
         } else {
-          throw new Error("ط¸ظ¾ط·آ´ط¸â€‍ ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®")
+          throw new Error("ط·آ¸ط¸آ¾ط·آ·ط¢آ´ط·آ¸أ¢â‚¬â€چ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®")
         }
       } catch (e) {
         setError((e as Error).message)
@@ -51,12 +51,12 @@ function useLoadVersions() {
 }
 
 const typeLabels: Record<string, string> = {
-  "multiple-choice": "ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط¸â€¦ط¸â€  ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯",
-  "true-false": "ط·آµط¸ث†ط·آ§ط·آ¨/ط·آ®ط·آ·ط·آ£",
-  "fill-blank": "ط¸â€¦ط¸â€‍ط·طŒ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ§ط·ط›",
-  essay: "ط¸â€¦ط¸â€ڑط·آ§ط¸â€‍ط¸ظ¹",
-  ordering: "ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨",
-  matching: "ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©",
+  "multiple-choice": "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯",
+  "true-false": "ط·آ·ط¢آµط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¨/ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£",
+  "fill-blank": "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط·إ’ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط·â€؛",
+  essay: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹",
+  ordering: "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨",
+  matching: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©",
 }
 
 const difficultyColors: Record<string, "success" | "warning" | "error"> = {
@@ -75,7 +75,7 @@ export default function ExamVersionsPage() {
   const [showAddModal, setShowAddModal] = useState(false)
 
   const examOptions = useMemo(() => [
-    { value: "", label: "ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ..." },
+    { value: "", label: "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ..." },
     ...mockExams.map((e) => ({ value: e.id, label: e.title })),
   ], [])
 
@@ -93,7 +93,7 @@ export default function ExamVersionsPage() {
   }, [versions, selectedExamId])
 
   const compareOptions = useMemo(() => [
-    { value: "", label: "ط·آ§ط·آ®ط·ع¾ط·آ±..." },
+    { value: "", label: "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ±..." },
     ...versionForCompare.map((v) => ({ value: v.id, label: v.label })),
   ], [versionForCompare])
 
@@ -106,18 +106,18 @@ export default function ExamVersionsPage() {
   }, [compareVersionA, compareVersionB, versions])
 
   const handleAddVersion = () => {
-    toast.success("ط·ع¾ط¸â€¦ط·ع¾ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
+    toast.success("ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ­")
     setShowAddModal(false)
   }
 
   const handlePrintVersion = (label: string) => {
-    toast.success(`ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ${label}`)
+    toast.success(`ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ${label}`)
   }
 
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط¸â€ ط·آ³ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ " description="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€ ط·آ³ط·آ® ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯ط·آ© ط¸â€‍ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ " />
+        <PageHeader title="ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " description="ط·آ·ط¢آ¥ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " />
         <ErrorState error={error} onRetry={retry} />
       </div>
     )
@@ -125,17 +125,17 @@ export default function ExamVersionsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "إصدارات متعددة" }]} />
+      <Breadcrumb items={[{ label: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", href: "/teacher/exams" }, { label: "ط¥طµط¯ط§ط±ط§طھ ظ…طھط¹ط¯ط¯ط©" }]} />
       <PageHeader
-        title="ط¸â€ ط·آ³ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ "
-        description="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€ ط·آ³ط·آ® ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯ط·آ© ط¸â€‍ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ "
+        title="ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ "
+        description="ط·آ·ط¢آ¥ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ "
         actions={
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => setShowCompare(true)} rightIcon={<HiOutlineScale size={18} />}>
-              ط¸â€¦ط¸â€ڑط·آ§ط·آ±ط¸â€ ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®
+              ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®
             </Button>
             <Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>
-              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€ ط·آ³ط·آ®ط·آ©
+              ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ©
             </Button>
           </div>
         }
@@ -144,7 +144,7 @@ export default function ExamVersionsPage() {
       <Card>
         <CardContent className="space-y-4">
           <Select
-            label="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ "
+            label="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ "
             options={examOptions}
             value={selectedExamId}
             onChange={(e) => setSelectedExamId(e.target.value)}
@@ -152,7 +152,7 @@ export default function ExamVersionsPage() {
           {selectedExam && (
             <div className="text-sm text-text-secondary">
               <span className="font-medium text-text">{selectedExam.title}</span>
-              {" | "}{selectedExam.questions.length} ط·آ³ط·آ¤ط·آ§ط¸â€‍ | {selectedExam.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ©
+              {" | "}{selectedExam.questions.length} ط·آ·ط¢آ³ط·آ·ط¢آ¤ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ | {selectedExam.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©
             </div>
           )}
         </CardContent>
@@ -179,17 +179,17 @@ export default function ExamVersionsPage() {
       {!loading && !selectedExamId && (
         <EmptyState
           icon={HiOutlineTemplate}
-          title="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط¸â€¹"
-          description="ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط¸â€¦ط¸â€  ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ£ط·آ¹ط¸â€‍ط·آ§ط¸â€، ط¸â€‍ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ® ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط·آ§ط·آ­ط·آ©"
+          title="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹"
+          description="ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ© ط·آ·ط¢آ£ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒ ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ©"
         />
       )}
 
       {!loading && selectedExamId && filteredVersions.length === 0 && (
         <EmptyState
           icon={HiOutlineDocumentDuplicate}
-          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·آ³ط·آ®"
-          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸â€ ط·آ³ط·آ® ط¸â€‍ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ¨ط·آ¹ط·آ¯. ط·آ£ط·آ¶ط¸ظ¾ ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ© ط¸â€‍ط¸â€‍ط·آ¨ط·آ¯ط·طŒ."
-          action={<Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€ ط·آ³ط·آ®ط·آ©</Button>}
+          title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®"
+          description="ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ ط·آ¸ط¸آ¹ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط·إ’ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ¯. ط·آ·ط¢آ£ط·آ·ط¢آ¶ط·آ¸ط¸آ¾ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ط·آ·ط¢آ¯ط·آ·ط·إ’."
+          action={<Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ©</Button>}
         />
       )}
 
@@ -211,27 +211,27 @@ export default function ExamVersionsPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-text">{version.label}</h3>
-                        <p className="text-xs text-text-tertiary">{version.questions.length} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©</p>
+                        <p className="text-xs text-text-tertiary">{version.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©</p>
                       </div>
                     </div>
-                    <Badge variant="primary">{version.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ©</Badge>
+                    <Badge variant="primary">{version.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©</Badge>
                   </div>
                   <div className="flex items-center gap-3 text-xs text-text-secondary">
                     <span className="flex items-center gap-1">
-                      <HiOutlineShuffle size={14} />
-                      {version.shuffleQuestions ? "ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨ ط·آ¹ط·آ´ط¸ث†ط·آ§ط·آ¦ط¸ظ¹" : "ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨ ط·آ«ط·آ§ط·آ¨ط·ع¾"}
+                      <HiOutlineStatusOffline size={14} />
+                      {version.shuffleQuestions ? "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨ ط·آ·ط¢آ¹ط·آ·ط¢آ´ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸ط¸آ¹" : "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨ ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¹آ¾"}
                     </span>
                     <span className={cn("px-2 py-0.5 rounded-full", version.shuffleQuestions ? "bg-success/10 text-success" : "bg-surface-tertiary text-text-tertiary")}>
-                      {version.shuffleQuestions ? "ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©" : "ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©"} {version.shuffleQuestions ? "ط·آ¹ط·آ´ط¸ث†ط·آ§ط·آ¦ط¸ظ¹ط·آ©" : "ط¸â€¦ط·آ±ط·ع¾ط·آ¨ط·آ©"}
+                      {version.shuffleQuestions ? "ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©" : "ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©"} {version.shuffleQuestions ? "ط·آ·ط¢آ¹ط·آ·ط¢آ´ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ©" : "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ·ط¢آ¨ط·آ·ط¢آ©"}
                     </span>
                   </div>
                   <div className="pt-2 border-t border-border">
                     <div className="flex flex-wrap gap-2">
                       <Button variant="outline" size="sm" onClick={() => setPreviewVersion(version)} rightIcon={<HiOutlineEye size={16} />}>
-                        ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ©
+                        ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ©
                       </Button>
                       <Button variant="secondary" size="sm" onClick={() => handlePrintVersion(version.label)} rightIcon={<HiOutlinePrinter size={16} />}>
-                        ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®ط·آ©
+                        ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ©
                       </Button>
                     </div>
                   </div>
@@ -242,7 +242,7 @@ export default function ExamVersionsPage() {
         </div>
       )}
 
-      <Modal isOpen={!!previewVersion} onClose={() => setPreviewVersion(null)} title={`ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ©: ${previewVersion?.label}`} size="xl">
+      <Modal isOpen={!!previewVersion} onClose={() => setPreviewVersion(null)} title={`ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ©: ${previewVersion?.label}`} size="xl">
         {previewVersion && (
           <div className="space-y-4 max-h-[70vh] overflow-y-auto">
             {previewVersion.questions.map((q, idx) => (
@@ -255,13 +255,13 @@ export default function ExamVersionsPage() {
                     </div>
                     <div className="flex gap-1 shrink-0">
                       <Badge variant="info" size="sm">{typeLabels[q.type]}</Badge>
-                      <Badge variant={difficultyColors[q.difficulty]} size="sm">{q.difficulty === "easy" ? "ط·آ³ط¸â€،ط¸â€‍" : q.difficulty === "medium" ? "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·" : "ط·آµط·آ¹ط·آ¨"}</Badge>
+                      <Badge variant={difficultyColors[q.difficulty]} size="sm">{q.difficulty === "easy" ? "ط·آ·ط¢آ³ط·آ¸أ¢â‚¬طŒط·آ¸أ¢â‚¬â€چ" : q.difficulty === "medium" ? "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ·" : "ط·آ·ط¢آµط·آ·ط¢آ¹ط·آ·ط¢آ¨"}</Badge>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 text-xs text-text-secondary">
-                    <span>ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©: {q.grade}</span>
-                    <span>ط·آ§ط¸â€‍ط¸ث†ط¸â€ڑط·ع¾: {q.suggestedTime} ط·آ¯</span>
-                    {q.tags.length > 0 && <span>ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸ث†ط¸â€¦: {q.tags.join(", ")}</span>}
+                    <span>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©: {q.grade}</span>
+                    <span>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¹آ¾: {q.suggestedTime} ط·آ·ط¢آ¯</span>
+                    {q.tags.length > 0 && <span>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ¦: {q.tags.join(", ")}</span>}
                   </div>
                   {q.choices && (
                     <div className="grid grid-cols-2 gap-2">
@@ -279,18 +279,18 @@ export default function ExamVersionsPage() {
         )}
       </Modal>
 
-      <Modal isOpen={showCompare} onClose={() => setShowCompare(false)} title="ط¸â€¦ط¸â€ڑط·آ§ط·آ±ط¸â€ ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®" size="xl">
+      <Modal isOpen={showCompare} onClose={() => setShowCompare(false)} title="ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®" size="xl">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <Select label="ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ§ط¸â€‍ط·آ£ط¸ث†ط¸â€‍ط¸â€°" options={compareOptions} value={compareVersionA} onChange={(e) => setCompareVersionA(e.target.value)} />
-            <Select label="ط·آ§ط¸â€‍ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ§ط¸â€‍ط·آ«ط·آ§ط¸â€ ط¸ظ¹ط·آ©" options={compareOptions} value={compareVersionB} onChange={(e) => setCompareVersionB(e.target.value)} />
+            <Select label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ°" options={compareOptions} value={compareVersionA} onChange={(e) => setCompareVersionA(e.target.value)} />
+            <Select label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ·ط¢آ©" options={compareOptions} value={compareVersionB} onChange={(e) => setCompareVersionB(e.target.value)} />
           </div>
           {comparedVersions && (
             <div className="grid grid-cols-2 gap-4">
               <Card>
                 <CardHeader>
                   <CardTitle>{comparedVersions.a.label}</CardTitle>
-                  <CardDescription>{comparedVersions.a.questions.length} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© - {comparedVersions.a.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ©</CardDescription>
+                  <CardDescription>{comparedVersions.a.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© - {comparedVersions.a.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2 max-h-80 overflow-y-auto">
                   {comparedVersions.a.questions.map((q, idx) => (
@@ -299,7 +299,7 @@ export default function ExamVersionsPage() {
                       <span className="text-text-secondary">{q.text}</span>
                       <div className="flex gap-1 mt-1">
                         <Badge size="sm" variant="info">{typeLabels[q.type]}</Badge>
-                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} ط·آ¯ط·آ±ط·آ¬ط·آ§ط·ع¾</Badge>
+                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾</Badge>
                       </div>
                     </div>
                   ))}
@@ -308,7 +308,7 @@ export default function ExamVersionsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>{comparedVersions.b.label}</CardTitle>
-                  <CardDescription>{comparedVersions.b.questions.length} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© - {comparedVersions.b.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ©</CardDescription>
+                  <CardDescription>{comparedVersions.b.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© - {comparedVersions.b.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2 max-h-80 overflow-y-auto">
                   {comparedVersions.b.questions.map((q, idx) => (
@@ -317,7 +317,7 @@ export default function ExamVersionsPage() {
                       <span className="text-text-secondary">{q.text}</span>
                       <div className="flex gap-1 mt-1">
                         <Badge size="sm" variant="info">{typeLabels[q.type]}</Badge>
-                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} ط·آ¯ط·آ±ط·آ¬ط·آ§ط·ع¾</Badge>
+                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾</Badge>
                       </div>
                     </div>
                   ))}
@@ -328,12 +328,12 @@ export default function ExamVersionsPage() {
         </div>
       </Modal>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ©" size="md">
         <div className="space-y-4">
-          <p className="text-sm text-text-secondary">ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸â€ ط·آ³ط·آ®ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ© ط¸â€¦ط¸â€  ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ¯ط·آ¯ ط¸â€¦ط·آ¹ ط·آ¥ط¸â€¦ط¸ئ’ط·آ§ط¸â€ ط¸ظ¹ط·آ© ط·ع¾ط·آ®ط·آµط¸ظ¹ط·آµ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط¸ث†ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨.</p>
+          <p className="text-sm text-text-secondary">ط·آ·ط¢آ³ط·آ¸ط¸آ¹ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط·إ’ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ·ط¢آ© ط·آ·ط¹آ¾ط·آ·ط¢آ®ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آµ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨.</p>
           <div className="flex gap-3 justify-end">
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
-            <Button variant="primary" onClick={handleAddVersion} rightIcon={<HiOutlinePlus size={18} />}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ©</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
+            <Button variant="primary" onClick={handleAddVersion} rightIcon={<HiOutlinePlus size={18} />}>ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ©</Button>
           </div>
         </div>
       </Modal>

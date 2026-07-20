@@ -215,7 +215,7 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
     { title: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦", value: overview.averageRating.toFixed(1), icon: HiOutlineStar, color: "warning" as const },
   ]
 
-  const monthlyRevenueData = data.financialReports.map(r => ({ month: r.month, ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾: r.revenue }))
+  const monthlyRevenueData = data.financialReports.map(r => ({ month: r.month, "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾": r.revenue }))
   const studentGrowthData = data.monthlyRevenue.map((_, i) => ({
     month: data.financialReports[i]?.month || `ط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ± ${i + 1}`,
     newStudents: Math.floor(det() * 40) + 20 + i * 3,
@@ -437,7 +437,7 @@ function CourseAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }
             </button>
           ))}
         </div>
-        <button type="button" variant="outline" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleExportCSV}>
+        <Button variant="outline" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleExportCSV}>
           ط·آ·ط¹آ¾ط·آ·ط¢آµط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ± CSV
         </Button>
       </motion.div>
@@ -867,8 +867,8 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
   const monthlyComparisonData = useMemo(() => {
     return filteredReports.map(r => ({
       month: r.month,
-      ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾: r.revenue,
-      ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾: r.expenses,
+      "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾": r.revenue,
+      "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾": r.expenses,
       "ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ­": r.netProfit,
     }))
   }, [filteredReports])
@@ -900,10 +900,10 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <button type="button" variant="outline" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />}>
+          <Button variant="outline" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />}>
             PDF
           </Button>
-          <button type="button" variant="outline" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />}>
+          <Button variant="outline" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />}>
             CSV
           </Button>
         </div>

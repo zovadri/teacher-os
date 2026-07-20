@@ -18,6 +18,8 @@ jobs:
           node-version: 20
       - run: npm install --legacy-peer-deps
       - run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /teacher-os
       - run: |
           touch out/.nojekyll
           cd out

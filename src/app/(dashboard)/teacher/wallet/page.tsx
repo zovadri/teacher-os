@@ -91,7 +91,8 @@ export default function WalletPage() {
             {formatCurrency(wallet.balance)}
           </p>
           <div className="flex items-center gap-4">
-            <button type="button"`nvariant="secondary"
+            <Button type="button"
+variant="secondary"
               size="sm"
               leftIcon={<HiOutlinePlus className="w-4 h-4" />}
               onClick={() => setShowDepositModal(true)}
@@ -99,7 +100,8 @@ export default function WalletPage() {
             >
               ط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹
             </Button>
-            <button type="button"`nvariant="secondary"
+            <Button type="button"
+variant="secondary"
               size="sm"
               leftIcon={<HiOutlineMinus className="w-4 h-4" />}
               onClick={() => setShowWithdrawModal(true)}
@@ -206,7 +208,7 @@ export default function WalletPage() {
           ]} placeholder="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ·ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" />
           <Input label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ¹ (ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹)" placeholder="ط·آ·ط¢آ±ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ¹ ط·آ·ط¢آ£ط·آ¸ط«â€  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ" />
           <div className="pt-4 flex gap-3">
-            <button type="button" variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إيداع المبلغ بنجاح"); setShowDepositModal(false); }}>ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹</Button>
+            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إيداع المبلغ بنجاح"); setShowDepositModal(false); }}>ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ¹</Button>
             <Button variant="secondary" size="lg" onClick={() => setShowDepositModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
           </div>
         </div>
@@ -224,7 +226,7 @@ export default function WalletPage() {
             ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹: {formatCurrency(wallet.balance)}
           </div>
           <div className="pt-4 flex gap-3">
-            <button type="button" variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم تقديم طلب السحب بنجاح"); setShowWithdrawModal(false); }}>ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨</Button>
+            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم تقديم طلب السحب بنجاح"); setShowWithdrawModal(false); }}>ط·آ·ط¹آ¾ط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ·ط¢آ­ط·آ·ط¢آ¨</Button>
             <Button variant="secondary" size="lg" onClick={() => setShowWithdrawModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
           </div>
         </div>

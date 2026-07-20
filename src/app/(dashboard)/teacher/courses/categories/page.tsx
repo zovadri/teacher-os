@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -19,29 +19,29 @@ import { useNotificationStore } from "@/lib/notification-store"
 import { generateId } from "@/lib/utils"
 
 const iconOptions = [
-  { value: "ًں“گ", label: "ًں“گ ظ…ط«ظ„ط«" },
-  { value: "ًں”¬", label: "ًں”¬ ظ…ط¬ظ‡ط±" },
-  { value: "ًںŒچ", label: "ًںŒچ ظƒط±ط© ط£ط±ط¶ظٹط©" },
-  { value: "ًں“œ", label: "ًں“œ ظ„ظپط§ظپط©" },
-  { value: "ًں’»", label: "ًں’» ط­ط§ط³ظˆط¨" },
-  { value: "ًںژ¨", label: "ًںژ¨ ظ„ظˆط­ط©" },
-  { value: "ًں“–", label: "ًں“– ظƒطھط§ط¨" },
-  { value: "âœڈï¸ڈ", label: "âœڈï¸ڈ ظ‚ظ„ظ…" },
-  { value: "ًں§®", label: "ًں§® ط¹ط¯ط§ط¯" },
-  { value: "ًں”­", label: "ًں”­ طھظ„ط³ظƒظˆط¨" },
-  { value: "ًںژµ", label: "ًںژµ ظ…ظˆط³ظٹظ‚ظ‰" },
-  { value: "âڑ½", label: "âڑ½ ظƒط±ط©" },
+  { value: "ظ‹ع؛â€œع¯", label: "ظ‹ع؛â€œع¯ ط¸â€¦ط·آ«ط¸â€‍ط·آ«" },
+  { value: "ظ‹ع؛â€‌آ¬", label: "ظ‹ع؛â€‌آ¬ ط¸â€¦ط·آ¬ط¸â€،ط·آ±" },
+  { value: "ظ‹ع؛إ’ع†", label: "ظ‹ع؛إ’ع† ط¸ئ’ط·آ±ط·آ© ط·آ£ط·آ±ط·آ¶ط¸ظ¹ط·آ©" },
+  { value: "ظ‹ع؛â€œإ“", label: "ظ‹ع؛â€œإ“ ط¸â€‍ط¸ظ¾ط·آ§ط¸ظ¾ط·آ©" },
+  { value: "ظ‹ع؛â€™آ»", label: "ظ‹ع؛â€™آ» ط·آ­ط·آ§ط·آ³ط¸ث†ط·آ¨" },
+  { value: "ظ‹ع؛عکآ¨", label: "ظ‹ع؛عکآ¨ ط¸â€‍ط¸ث†ط·آ­ط·آ©" },
+  { value: "ظ‹ع؛â€œâ€“", label: "ظ‹ع؛â€œâ€“ ط¸ئ’ط·ع¾ط·آ§ط·آ¨" },
+  { value: "أ¢إ“عˆأ¯آ¸عˆ", label: "أ¢إ“عˆأ¯آ¸عˆ ط¸â€ڑط¸â€‍ط¸â€¦" },
+  { value: "ظ‹ع؛آ§آ®", label: "ظ‹ع؛آ§آ® ط·آ¹ط·آ¯ط·آ§ط·آ¯" },
+  { value: "ظ‹ع؛â€‌آ­", label: "ظ‹ع؛â€‌آ­ ط·ع¾ط¸â€‍ط·آ³ط¸ئ’ط¸ث†ط·آ¨" },
+  { value: "ظ‹ع؛عکآµ", label: "ظ‹ع؛عکآµ ط¸â€¦ط¸ث†ط·آ³ط¸ظ¹ط¸â€ڑط¸â€°" },
+  { value: "أ¢ع‘آ½", label: "أ¢ع‘آ½ ط¸ئ’ط·آ±ط·آ©" },
 ]
 
 const colorOptions = [
-  { value: "#6366F1", label: "ط¨ظ†ظپط³ط¬ظٹ" },
-  { value: "#10B981", label: "ط£ط®ط¶ط±" },
-  { value: "#F59E0B", label: "ط£طµظپط±" },
-  { value: "#EF4444", label: "ط£ط­ظ…ط±" },
-  { value: "#8B5CF6", label: "ط¨ظ†ظپط³ط¬ظٹ ط؛ط§ظ…ظ‚" },
-  { value: "#EC4899", label: "ظˆط±ط¯ظٹ" },
-  { value: "#3B82F6", label: "ط£ط²ط±ظ‚" },
-  { value: "#F97316", label: "ط¨ط±طھظ‚ط§ظ„ظٹ" },
+  { value: "#6366F1", label: "ط·آ¨ط¸â€ ط¸ظ¾ط·آ³ط·آ¬ط¸ظ¹" },
+  { value: "#10B981", label: "ط·آ£ط·آ®ط·آ¶ط·آ±" },
+  { value: "#F59E0B", label: "ط·آ£ط·آµط¸ظ¾ط·آ±" },
+  { value: "#EF4444", label: "ط·آ£ط·آ­ط¸â€¦ط·آ±" },
+  { value: "#8B5CF6", label: "ط·آ¨ط¸â€ ط¸ظ¾ط·آ³ط·آ¬ط¸ظ¹ ط·ط›ط·آ§ط¸â€¦ط¸â€ڑ" },
+  { value: "#EC4899", label: "ط¸ث†ط·آ±ط·آ¯ط¸ظ¹" },
+  { value: "#3B82F6", label: "ط·آ£ط·آ²ط·آ±ط¸â€ڑ" },
+  { value: "#F97316", label: "ط·آ¨ط·آ±ط·ع¾ط¸â€ڑط·آ§ط¸â€‍ط¸ظ¹" },
 ]
 
 interface CategoryForm {
@@ -51,7 +51,7 @@ interface CategoryForm {
   color: string
 }
 
-const emptyForm: CategoryForm = { name: "", description: "", icon: "ًں“گ", color: "#6366F1" }
+const emptyForm: CategoryForm = { name: "", description: "", icon: "ظ‹ع؛â€œع¯", color: "#6366F1" }
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState(mockCourseCategories)
@@ -80,8 +80,8 @@ export default function CategoriesPage() {
 
   const validate = (): boolean => {
     const errs: Partial<Record<keyof CategoryForm, string>> = {}
-    if (!form.name.trim()) errs.name = "ط§ط³ظ… ط§ظ„طھطµظ†ظٹظپ ظ…ط·ظ„ظˆط¨"
-    if (!form.description.trim()) errs.description = "ط§ظ„ظˆطµظپ ظ…ط·ظ„ظˆط¨"
+    if (!form.name.trim()) errs.name = "ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ ط¸â€¦ط·آ·ط¸â€‍ط¸ث†ط·آ¨"
+    if (!form.description.trim()) errs.description = "ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾ ط¸â€¦ط·آ·ط¸â€‍ط¸ث†ط·آ¨"
     setFormErrors(errs)
     return Object.keys(errs).length === 0
   }
@@ -96,13 +96,13 @@ export default function CategoriesPage() {
             : c
         )
       )
-      addToast({ type: "success", title: "طھظ… طھط­ط¯ظٹط« ط§ظ„طھطµظ†ظٹظپ ط¨ظ†ط¬ط§ط­" })
+      addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
     } else {
       setCategories((prev) => [
         ...prev,
         { id: generateId(), name: form.name, description: form.description, icon: form.icon, color: form.color, courseCount: 0 },
       ])
-      addToast({ type: "success", title: "طھظ… ط¥ط¶ط§ظپط© ط§ظ„طھطµظ†ظٹظپ ط¨ظ†ط¬ط§ط­" })
+      addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
     }
     setModalOpen(false)
   }
@@ -110,27 +110,27 @@ export default function CategoriesPage() {
   const handleDelete = () => {
     if (!deleteTarget) return
     setCategories((prev) => prev.filter((c) => c.id !== deleteTarget.id))
-    addToast({ type: "success", title: `طھظ… ط­ط°ظپ طھطµظ†ظٹظپ "${deleteTarget.name}" ط¨ظ†ط¬ط§ط­` })
+    addToast({ type: "success", title: `ط·ع¾ط¸â€¦ ط·آ­ط·آ°ط¸ظ¾ ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ "${deleteTarget.name}" ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­` })
     setDeleteTarget(null)
   }
 
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <ErrorState title="ط­ط¯ط« ط®ط·ط£" message={error} onRetry={() => setError(null)} />
+        <ErrorState title="ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£" message={error} onRetry={() => setError(null)} />
       </div>
     )
   }
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "الكورسات", href: "/teacher/courses" }, { label: "التصنيفات" }]} />
+      <Breadcrumb items={[{ label: "ط§ظ„ظƒظˆط±ط³ط§طھ", href: "/teacher/courses" }, { label: "ط§ظ„طھطµظ†ظٹظپط§طھ" }]} />
       <PageHeader
-        title="طھطµظ†ظٹظپط§طھ ط§ظ„ظƒظˆط±ط³ط§طھ"
-        description="ط¥ط¯ط§ط±ط© طھطµظ†ظٹظپط§طھ ط§ظ„ظƒظˆط±ط³ط§طھ ط§ظ„طھط¹ظ„ظٹظ…ظٹط©"
+        title="ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾"
+        description="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط¸â€‍ط¸ظ¹ط¸â€¦ط¸ظ¹ط·آ©"
         actions={
           <Button variant="primary" onClick={openCreateModal} leftIcon={<HiOutlinePlus size={18} />}>
-            ط¥ط¶ط§ظپط© طھطµظ†ظٹظپ ط¬ط¯ظٹط¯
+            ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯
           </Button>
         }
       />
@@ -139,11 +139,11 @@ export default function CategoriesPage() {
         <CardSkeleton count={6} />
       ) : categories.length === 0 ? (
         <EmptyState
-          title="ظ„ط§ طھظˆط¬ط¯ طھطµظ†ظٹظپط§طھ"
-          description="ظ„ظ… ظٹطھظ… ط¥ط¶ط§ظپط© ط£ظٹ طھطµظ†ظٹظپط§طھ ط¨ط¹ط¯. ط£ط¶ظپ طھطµظ†ظٹظپط§ظ‹ ط¬ط¯ظٹط¯ط§ظ‹ ظ„ظ„ط¨ط¯ط،."
+          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾"
+          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ£ط¸ظ¹ ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾ ط·آ¨ط·آ¹ط·آ¯. ط·آ£ط·آ¶ط¸ظ¾ ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط¸â€¹ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ§ط¸â€¹ ط¸â€‍ط¸â€‍ط·آ¨ط·آ¯ط·طŒ."
           action={
             <Button variant="primary" onClick={openCreateModal}>
-              ط¥ط¶ط§ظپط© طھطµظ†ظٹظپ ط¬ط¯ظٹط¯
+              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯
             </Button>
           }
         />
@@ -170,7 +170,7 @@ export default function CategoriesPage() {
                       <p className="text-xs text-text-tertiary mb-2 line-clamp-2">{cat.description}</p>
                       <div className="flex items-center gap-2">
                         <span className="w-3 h-3 rounded-full" style={{ backgroundColor: cat.color }} />
-                        <span className="text-xs text-text-secondary">{cat.courseCount} ظƒظˆط±ط³</span>
+                        <span className="text-xs text-text-secondary">{cat.courseCount} ط¸ئ’ط¸ث†ط·آ±ط·آ³</span>
                       </div>
                     </div>
                   </div>
@@ -179,14 +179,14 @@ export default function CategoriesPage() {
                     <button type="button"
                       onClick={() => openEditModal(cat)}
                       className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
-                      title="طھط¹ط¯ظٹظ„"
+                      title="ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍"
                     >
                       <HiOutlinePencil size={16} />
                     </button>
                     <button type="button"
                       onClick={() => setDeleteTarget(cat)}
                       className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"
-                      title="ط­ط°ظپ"
+                      title="ط·آ­ط·آ°ط¸ظ¾"
                     >
                       <HiOutlineTrash size={16} />
                     </button>
@@ -201,32 +201,32 @@ export default function CategoriesPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingCategory ? "طھط¹ط¯ظٹظ„ طھطµظ†ظٹظپ" : "ط¥ط¶ط§ظپط© طھطµظ†ظٹظپ ط¬ط¯ظٹط¯"}
+        title={editingCategory ? "ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾" : "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯"}
         size="md"
       >
         <div className="space-y-4">
           <Input
-            label="ط§ط³ظ… ط§ظ„طھطµظ†ظٹظپ"
+            label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾"
             value={form.name}
             onChange={(e) => { setForm((p) => ({ ...p, name: e.target.value })); setFormErrors((p) => ({ ...p, name: undefined })) }}
-            placeholder="ظ…ط«ط§ظ„: ط§ظ„ط±ظٹط§ط¶ظٹط§طھ"
+            placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ§ط¸â€‍ط·آ±ط¸ظ¹ط·آ§ط·آ¶ط¸ظ¹ط·آ§ط·ع¾"
             error={formErrors.name}
           />
           <Input
-            label="ط§ظ„ظˆطµظپ"
+            label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾"
             value={form.description}
             onChange={(e) => { setForm((p) => ({ ...p, description: e.target.value })); setFormErrors((p) => ({ ...p, description: undefined })) }}
-            placeholder="ظˆطµظپ ظ…ط®طھطµط± ظ„ظ„طھطµظ†ظٹظپ"
+            placeholder="ط¸ث†ط·آµط¸ظ¾ ط¸â€¦ط·آ®ط·ع¾ط·آµط·آ± ط¸â€‍ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾"
             error={formErrors.description}
           />
           <Select
-            label="ط§ظ„ط£ظٹظ‚ظˆظ†ط©"
+            label="ط·آ§ط¸â€‍ط·آ£ط¸ظ¹ط¸â€ڑط¸ث†ط¸â€ ط·آ©"
             value={form.icon}
             onChange={(e) => setForm((p) => ({ ...p, icon: e.target.value }))}
             options={iconOptions}
           />
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-text">ط§ظ„ظ„ظˆظ†</label>
+            <label className="block text-sm font-medium text-text">ط·آ§ط¸â€‍ط¸â€‍ط¸ث†ط¸â€ </label>
             <div className="flex items-center gap-2">
               {colorOptions.map((opt) => (
                 <button type="button"
@@ -242,11 +242,11 @@ export default function CategoriesPage() {
             </div>
           </div>
           <div className="flex items-center gap-3 pt-2">
-            <button type="button" variant="primary" onClick={handleSave} className="flex-1">
-              {editingCategory ? "ط­ظپط¸ ط§ظ„طھط؛ظٹظٹط±ط§طھ" : "ط¥ط¶ط§ظپط© ط§ظ„طھطµظ†ظٹظپ"}
+            <Button variant="primary" onClick={handleSave} className="flex-1">
+              {editingCategory ? "ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·ط›ط¸ظ¹ط¸ظ¹ط·آ±ط·آ§ط·ع¾" : "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾"}
             </Button>
             <Button variant="secondary" onClick={() => setModalOpen(false)} className="flex-1">
-              ط¥ظ„ط؛ط§ط،
+              ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ
             </Button>
           </div>
         </div>
@@ -256,10 +256,10 @@ export default function CategoriesPage() {
         isOpen={!!deleteTarget}
         onClose={() => setDeleteTarget(null)}
         onConfirm={handleDelete}
-        title="ط­ط°ظپ ط§ظ„طھطµظ†ظٹظپ"
-        message={deleteTarget ? `ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯ ظ…ظ† ط­ط°ظپ طھطµظ†ظٹظپ "${deleteTarget.name}"طں ظ‡ط°ط§ ط§ظ„ط¥ط¬ط±ط§ط، ظ„ط§ ظٹظ…ظƒظ† ط§ظ„طھط±ط§ط¬ط¹ ط¹ظ†ظ‡.` : ""}
-        confirmText="ط­ط°ظپ"
-        cancelText="ط¥ظ„ط؛ط§ط،"
+        title="ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾"
+        message={deleteTarget ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ­ط·آ°ط¸ظ¾ ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ "${deleteTarget.name}"ط·ع؛ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ ط¸â€‍ط·آ§ ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·آ§ط·آ¬ط·آ¹ ط·آ¹ط¸â€ ط¸â€،.` : ""}
+        confirmText="ط·آ­ط·آ°ط¸ظ¾"
+        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
         variant="danger"
       />
     </div>

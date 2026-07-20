@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useMemo } from "react"
 import {
@@ -33,10 +33,10 @@ const todayDayName = dayNames[now.getDay()]
 
 const mockAppointments = Array.from({ length: 6 }, (_, i) => ({
   id: `appt-${i + 1}`,
-  studentName: `ط·ط§ظ„ط¨ ${i + 1}`,
+  studentName: `ط·آ·ط·آ§ط¸â€‍ط·آ¨ ${i + 1}`,
   time: `${8 + i}:00`,
-  type: i % 2 === 0 ? "ظ…ظ‚ط§ط¨ظ„ط©" : "ط§ط®طھط¨ط§ط± طھط­ط¯ظٹط¯ ظ…ط³طھظˆظ‰",
-  status: i < 2 ? "ط¬ط§ط±ظٹ" : i < 4 ? "ظ‚ط§ط¯ظ…" : "ظ…ظ†طھظ‡ظٹ" as const,
+  type: i % 2 === 0 ? "ط¸â€¦ط¸â€ڑط·آ§ط·آ¨ط¸â€‍ط·آ©" : "ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ± ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ ط¸â€¦ط·آ³ط·ع¾ط¸ث†ط¸â€°",
+  status: i < 2 ? "ط·آ¬ط·آ§ط·آ±ط¸ظ¹" : i < 4 ? "ط¸â€ڑط·آ§ط·آ¯ط¸â€¦" : "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹" as const,
 }))
 
 function SectionSkeleton() {
@@ -60,7 +60,7 @@ export default function ReceptionPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setLastRefresh(new Date())
-      toast.success("طھظ… طھط­ط¯ظٹط« ط§ظ„ط¨ظٹط§ظ†ط§طھ طھظ„ظ‚ط§ط¦ظٹط§ظ‹")
+      toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ط·آ§ط¸â€¹")
     }, 60000)
     return () => clearInterval(interval)
   }, [])
@@ -90,7 +90,7 @@ export default function ReceptionPage() {
     waitingCount: waitingSummary.length,
     pendingPayments: pendingPayments.length,
     todayRegistrations: todayRegistrations.length,
-    todayAppointments: mockAppointments.filter(a => a.status !== "ظ…ظ†طھظ‡ظٹ").length,
+    todayAppointments: mockAppointments.filter(a => a.status !== "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹").length,
   }), [todayClasses, currentAttendance, waitingSummary, pendingPayments, todayRegistrations])
 
   const handleRefresh = () => {
@@ -98,22 +98,22 @@ export default function ReceptionPage() {
     setTimeout(() => {
       setLoading(false)
       setLastRefresh(new Date())
-      toast.success("طھظ… طھط­ط¯ظٹط« ط§ظ„ط¨ظٹط§ظ†ط§طھ")
+      toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾")
     }, 600)
   }
 
   return (
     <div className="p-4 md:p-6 space-y-6">
       <PageHeader
-        title="ظ„ظˆط­ط© ط§ظ„ط§ط³طھظ‚ط¨ط§ظ„"
-        description="ظ†ط¸ط±ط© ط¹ط§ظ…ط© ط¹ظ„ظ‰ ظ†ط´ط§ط· ط§ظ„ظٹظˆظ…"
+        title="ط¸â€‍ط¸ث†ط·آ­ط·آ© ط·آ§ط¸â€‍ط·آ§ط·آ³ط·ع¾ط¸â€ڑط·آ¨ط·آ§ط¸â€‍"
+        description="ط¸â€ ط·آ¸ط·آ±ط·آ© ط·آ¹ط·آ§ط¸â€¦ط·آ© ط·آ¹ط¸â€‍ط¸â€° ط¸â€ ط·آ´ط·آ§ط·آ· ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦"
         actions={
           <div className="flex items-center gap-3">
             <span className="text-xs text-text-tertiary">
-              ط¢ط®ط± طھط­ط¯ظٹط«: {lastRefresh.toLocaleTimeString("ar-EG")}
+              ط·آ¢ط·آ®ط·آ± ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«: {lastRefresh.toLocaleTimeString("ar-EG")}
             </span>
-            <button type="button" variant="ghost" size="sm" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleRefresh}>
-              طھط­ط¯ظٹط«
+            <Button variant="ghost" size="sm" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleRefresh}>
+              ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«
             </Button>
           </div>
         }
@@ -123,26 +123,26 @@ export default function ReceptionPage() {
         <StatsSkeleton count={6} />
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-          <StatsCard title="ط­طµطµ ط§ظ„ظٹظˆظ…" value={stats.todayClasses} icon={HiOutlineAcademicCap} color="primary" />
-          <StatsCard title="ط§ظ„ط­ط¶ظˆط± ط§ظ„ط­ط§ظ„ظٹ" value={stats.currentAttendance} icon={HiOutlineUsers} color="success" />
-          <StatsCard title="ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ظ†طھط¸ط±ظˆظ†" value={stats.waitingCount} icon={HiOutlineClock} color="warning" />
-          <StatsCard title="ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ ط§ظ„ظ…ط¹ظ„ظ‚ط©" value={stats.pendingPayments} icon={HiOutlineCash} color="error" />
-          <StatsCard title="طھط³ط¬ظٹظ„ط§طھ ط§ظ„ظٹظˆظ…" value={stats.todayRegistrations} icon={HiOutlineUserAdd} color="info" />
-          <StatsCard title="ظ…ظˆط§ط¹ظٹط¯ ط§ظ„ظٹظˆظ…" value={stats.todayAppointments} icon={HiOutlineCalendar} color="primary" />
+          <StatsCard title="ط·آ­ط·آµط·آµ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.todayClasses} icon={HiOutlineAcademicCap} color="primary" />
+          <StatsCard title="ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط¸ظ¹" value={stats.currentAttendance} icon={HiOutlineUsers} color="success" />
+          <StatsCard title="ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ث†ط¸â€ " value={stats.waitingCount} icon={HiOutlineClock} color="warning" />
+          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط¸ظ¾ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑط·آ©" value={stats.pendingPayments} icon={HiOutlineCash} color="error" />
+          <StatsCard title="ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.todayRegistrations} icon={HiOutlineUserAdd} color="info" />
+          <StatsCard title="ط¸â€¦ط¸ث†ط·آ§ط·آ¹ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.todayAppointments} icon={HiOutlineCalendar} color="primary" />
         </div>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>ط­طµطµ ط§ظ„ظٹظˆظ…</CardTitle>
+            <CardTitle>ط·آ­ط·آµط·آµ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦</CardTitle>
             <Badge variant="primary">{todayClasses.length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <SectionSkeleton />
             ) : todayClasses.length === 0 ? (
-              <EmptyState icon={HiOutlineAcademicCap} title="ظ„ط§ طھظˆط¬ط¯ ط­طµطµ ط§ظ„ظٹظˆظ…" description="ظ„ظٹط³ ظ„ط¯ظٹظƒ ط£ظٹ ط­طµطµ ظ…ط¬ط¯ظˆظ„ط© ط§ظ„ظٹظˆظ…" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineAcademicCap} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ­ط·آµط·آµ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" description="ط¸â€‍ط¸ظ¹ط·آ³ ط¸â€‍ط·آ¯ط¸ظ¹ط¸ئ’ ط·آ£ط¸ظ¹ ط·آ­ط·آµط·آµ ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {todayClasses.map((g) => {
@@ -161,7 +161,7 @@ export default function ReceptionPage() {
                       </div>
                       <div className="text-left">
                         <p className="text-sm font-medium text-text">{todaySched.startTime} - {todaySched.endTime}</p>
-                        <p className="text-xs text-text-tertiary">{g.enrolledCount} ط·ط§ظ„ط¨</p>
+                        <p className="text-xs text-text-tertiary">{g.enrolledCount} ط·آ·ط·آ§ط¸â€‍ط·آ¨</p>
                       </div>
                     </div>
                   )
@@ -173,14 +173,14 @@ export default function ReceptionPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>ط§ظ„ط­ط¶ظˆط± ط§ظ„ط­ط§ظ„ظٹ</CardTitle>
+            <CardTitle>ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط¸ظ¹</CardTitle>
             <Badge variant="success">{currentAttendance.filter(a => a.checkedIn).length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <SectionSkeleton />
             ) : currentAttendance.filter(a => a.checkedIn).length === 0 ? (
-              <EmptyState icon={HiOutlineUsers} title="ظ„ط§ ظٹظˆط¬ط¯ ط­ط¶ظˆط± ط­ط§ظ„ظٹط§ظ‹" description="ظ„ظ… ظٹطھظ… طھط³ط¬ظٹظ„ ط£ظٹ ط­ط¶ظˆط± ط­طھظ‰ ط§ظ„ط¢ظ†" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineUsers} title="ط¸â€‍ط·آ§ ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ­ط·آ§ط¸â€‍ط¸ظ¹ط·آ§ط¸â€¹" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ£ط¸ظ¹ ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ­ط·ع¾ط¸â€° ط·آ§ط¸â€‍ط·آ¢ط¸â€ " bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {currentAttendance.filter(a => a.checkedIn).map((a) => (
@@ -193,7 +193,7 @@ export default function ReceptionPage() {
                       </div>
                     </div>
                     <div className="text-left">
-                      <p className="text-xs text-text-secondary">ط¯ط®ظˆظ„: {a.checkIn}</p>
+                      <p className="text-xs text-text-secondary">ط·آ¯ط·آ®ط¸ث†ط¸â€‍: {a.checkIn}</p>
                     </div>
                   </div>
                 ))}
@@ -204,14 +204,14 @@ export default function ReceptionPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ظ†طھط¸ط±ظˆظ†</CardTitle>
+            <CardTitle>ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ث†ط¸â€ </CardTitle>
             <Badge variant="warning">{waitingSummary.length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <SectionSkeleton />
             ) : waitingSummary.length === 0 ? (
-              <EmptyState icon={HiOutlineClock} title="ظ„ط§ ظٹظˆط¬ط¯ ط·ظ„ط§ط¨ ظ…ظ†طھط¸ط±ظˆظ†" description="ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط± ظپط§ط±ط؛ط© ط­ط§ظ„ظٹط§ظ‹" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineClock} title="ط¸â€‍ط·آ§ ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ث†ط¸â€ " description="ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ± ط¸ظ¾ط·آ§ط·آ±ط·ط›ط·آ© ط·آ­ط·آ§ط¸â€‍ط¸ظ¹ط·آ§ط¸â€¹" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {waitingSummary.slice(0, 5).map((w) => (
@@ -225,13 +225,13 @@ export default function ReceptionPage() {
                     </div>
                     <div className="text-left">
                       <Badge variant={w.priority === 1 ? "error" : w.priority === 2 ? "warning" : "info"} size="sm">
-                        ط£ظˆظ„ظˆظٹط© {w.priority}
+                        ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ© {w.priority}
                       </Badge>
                     </div>
                   </div>
                 ))}
                 {waitingSummary.length > 5 && (
-                  <p className="text-center text-xs text-text-tertiary pt-2">+ {waitingSummary.length - 5} ط¢ط®ط±ظˆظ†</p>
+                  <p className="text-center text-xs text-text-tertiary pt-2">+ {waitingSummary.length - 5} ط·آ¢ط·آ®ط·آ±ط¸ث†ط¸â€ </p>
                 )}
               </div>
             )}
@@ -240,14 +240,14 @@ export default function ReceptionPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ ط§ظ„ظ…ط¹ظ„ظ‚ط©</CardTitle>
+            <CardTitle>ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط¸ظ¾ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑط·آ©</CardTitle>
             <Badge variant="error">{pendingPayments.length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <SectionSkeleton />
             ) : pendingPayments.length === 0 ? (
-              <EmptyState icon={HiOutlineCash} title="ظ„ط§ طھظˆط¬ط¯ ظ…ط¯ظپظˆط¹ط§طھ ظ…ط¹ظ„ظ‚ط©" description="ط¬ظ…ظٹط¹ ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ ظ…ط³ط¯ط¯ط©" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineCash} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€¦ط·آ¯ط¸ظ¾ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑط·آ©" description="ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط¸ظ¾ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط¸â€¦ط·آ³ط·آ¯ط·آ¯ط·آ©" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {pendingPayments.slice(0, 5).map((p) => (
@@ -256,17 +256,17 @@ export default function ReceptionPage() {
                       <HiOutlineCash className="w-5 h-5 text-error" />
                       <div>
                         <p className="text-sm font-medium text-text">{p.studentName}</p>
-                        <p className="text-xs text-text-tertiary">{p.method === "cash" ? "ظ†ظ‚ط¯ط§ظ‹" : p.method === "fawry" ? "ظپظˆط±ظٹ" : "ظƒظˆط¯"}</p>
+                        <p className="text-xs text-text-tertiary">{p.method === "cash" ? "ط¸â€ ط¸â€ڑط·آ¯ط·آ§ط¸â€¹" : p.method === "fawry" ? "ط¸ظ¾ط¸ث†ط·آ±ط¸ظ¹" : "ط¸ئ’ط¸ث†ط·آ¯"}</p>
                       </div>
                     </div>
                     <div className="text-left">
-                      <p className="text-sm font-bold text-error">{p.amount.toLocaleString("ar-EG")} ط¬.ظ…</p>
+                      <p className="text-sm font-bold text-error">{p.amount.toLocaleString("ar-EG")} ط·آ¬.ط¸â€¦</p>
                       <p className="text-xs text-text-tertiary">{p.createdAt.toLocaleDateString("ar-EG")}</p>
                     </div>
                   </div>
                 ))}
                 {pendingPayments.length > 5 && (
-                  <p className="text-center text-xs text-text-tertiary pt-2">+ {pendingPayments.length - 5} ظ…ط¯ظپظˆط¹ط§طھ ط£ط®ط±ظ‰</p>
+                  <p className="text-center text-xs text-text-tertiary pt-2">+ {pendingPayments.length - 5} ط¸â€¦ط·آ¯ط¸ظ¾ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط·آ£ط·آ®ط·آ±ط¸â€°</p>
                 )}
               </div>
             )}
@@ -275,14 +275,14 @@ export default function ReceptionPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>طھط³ط¬ظٹظ„ط§طھ ط§ظ„ظٹظˆظ…</CardTitle>
+            <CardTitle>ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦</CardTitle>
             <Badge variant="info">{todayRegistrations.length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <SectionSkeleton />
             ) : todayRegistrations.length === 0 ? (
-              <EmptyState icon={HiOutlineUserAdd} title="ظ„ط§ طھظˆط¬ط¯ طھط³ط¬ظٹظ„ط§طھ ط§ظ„ظٹظˆظ…" description="ظ„ظ… ظٹطھظ… طھط³ط¬ظٹظ„ ط£ظٹ ط·ط§ظ„ط¨ ط¬ط¯ظٹط¯ ط§ظ„ظٹظˆظ…" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineUserAdd} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ£ط¸ظ¹ ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {todayRegistrations.map((e) => (
@@ -295,7 +295,7 @@ export default function ReceptionPage() {
                       </div>
                     </div>
                     <Badge variant={e.status === "active" ? "success" : "warning"} size="sm">
-                      {e.status === "active" ? "ظ†ط´ط·" : e.status}
+                      {e.status === "active" ? "ط¸â€ ط·آ´ط·آ·" : e.status}
                     </Badge>
                   </div>
                 ))}
@@ -306,14 +306,14 @@ export default function ReceptionPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>ظ…ظˆط§ط¹ظٹط¯ ط§ظ„ظٹظˆظ…</CardTitle>
-            <Badge variant="primary">{mockAppointments.filter(a => a.status !== "ظ…ظ†طھظ‡ظٹ").length}</Badge>
+            <CardTitle>ط¸â€¦ط¸ث†ط·آ§ط·آ¹ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦</CardTitle>
+            <Badge variant="primary">{mockAppointments.filter(a => a.status !== "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹").length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <SectionSkeleton />
             ) : mockAppointments.length === 0 ? (
-              <EmptyState icon={HiOutlineCalendar} title="ظ„ط§ طھظˆط¬ط¯ ظ…ظˆط§ط¹ظٹط¯ ط§ظ„ظٹظˆظ…" description="ظ„ط§ طھظˆط¬ط¯ ظ…ظˆط§ط¹ظٹط¯ ظ…ط¬ط¯ظˆظ„ط© ظ„ظ„ظٹظˆظ…" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineCalendar} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€¦ط¸ث†ط·آ§ط·آ¹ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" description="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€¦ط¸ث†ط·آ§ط·آ¹ط¸ظ¹ط·آ¯ ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط¸â€‍ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {mockAppointments.map((a) => (
@@ -327,7 +327,7 @@ export default function ReceptionPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-text-secondary">{a.time}</span>
-                      <Badge variant={a.status === "ط¬ط§ط±ظٹ" ? "success" : a.status === "ظ‚ط§ط¯ظ…" ? "info" : "neutral"} size="sm">
+                      <Badge variant={a.status === "ط·آ¬ط·آ§ط·آ±ط¸ظ¹" ? "success" : a.status === "ط¸â€ڑط·آ§ط·آ¯ط¸â€¦" ? "info" : "neutral"} size="sm">
                         {a.status}
                       </Badge>
                     </div>
@@ -340,7 +340,7 @@ export default function ReceptionPage() {
       </div>
 
       <div className="text-center text-xs text-text-tertiary">
-        ط§ظ„طھط­ط¯ظٹط« ط§ظ„طھظ„ظ‚ط§ط¦ظٹ ظƒظ„ 60 ط«ط§ظ†ظٹط© | ط¢ط®ط± طھط­ط¯ظٹط«: {lastRefresh.toLocaleTimeString("ar-EG")}
+        ط·آ§ط¸â€‍ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط¸ئ’ط¸â€‍ 60 ط·آ«ط·آ§ط¸â€ ط¸ظ¹ط·آ© | ط·آ¢ط·آ®ط·آ± ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«: {lastRefresh.toLocaleTimeString("ar-EG")}
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -33,9 +33,9 @@ const allBadges = mockGamificationConfig.badgeCategories.flatMap((cat) =>
     category: cat.name,
     categoryIcon: cat.icon,
     xpReward: [150, 200, 100, 250, 80][bi % 5],
-    criteria: ["ط¥ظƒظ…ط§ظ„ 10 ط¯ط±ظˆط³", "ط§ظ„ط­طµظˆظ„ ط¹ظ„ظ‰ 95%", "ط§ظ„ظ…ط´ط§ط±ظƒط© ظپظٹ 5 ظ…ظ†ط§ظ‚ط´ط§طھ", "طھط³ظ„ط³ظ„ 20 ظٹظˆظ…"][bi % 4],
+    criteria: ["ط·آ¥ط¸ئ’ط¸â€¦ط·آ§ط¸â€‍ 10 ط·آ¯ط·آ±ط¸ث†ط·آ³", "ط·آ§ط¸â€‍ط·آ­ط·آµط¸ث†ط¸â€‍ ط·آ¹ط¸â€‍ط¸â€° 95%", "ط·آ§ط¸â€‍ط¸â€¦ط·آ´ط·آ§ط·آ±ط¸ئ’ط·آ© ط¸ظ¾ط¸ظ¹ 5 ط¸â€¦ط¸â€ ط·آ§ط¸â€ڑط·آ´ط·آ§ط·ع¾", "ط·ع¾ط·آ³ط¸â€‍ط·آ³ط¸â€‍ 20 ط¸ظ¹ط¸ث†ط¸â€¦"][bi % 4],
     studentsCount: [15, 22, 30, 8, 18][bi % 5],
-    icon: ["ًں“–", "ًں“…", "ًںژ¯", "ًں¤‌", "ًں‘‘"][bi % 5],
+    icon: ["ظ‹ع؛â€œâ€“", "ظ‹ع؛â€œâ€¦", "ظ‹ع؛عکآ¯", "ظ‹ع؛آ¤â€Œ", "ظ‹ع؛â€کâ€ک"][bi % 5],
   }))
 )
 
@@ -50,23 +50,23 @@ allBadges.forEach((b, bi) => {
 })
 
 const iconOptions = [
-  { value: "ًں“–", label: "ًں“– ظƒطھط§ط¨" },
-  { value: "ًں“…", label: "ًں“… طھظ‚ظˆظٹظ…" },
-  { value: "ًںژ¯", label: "ًںژ¯ ظ‡ط¯ظپ" },
-  { value: "ًں¤‌", label: "ًں¤‌ ظ…طµط§ظپط­ط©" },
-  { value: "ًں‘‘", label: "ًں‘‘ طھط§ط¬" },
-  { value: "ًں”¥", label: "ًں”¥ ظ†ط§ط±" },
-  { value: "â­گ", label: "â­گ ظ†ط¬ظ…ط©" },
-  { value: "ًں’ھ", label: "ًں’ھ ظ‚ظˆط©" },
-  { value: "ًںڈ…", label: "ًںڈ… ظˆط³ط§ظ…" },
-  { value: "ًںڑ€", label: "ًںڑ€ طµط§ط±ظˆط®" },
+  { value: "ظ‹ع؛â€œâ€“", label: "ظ‹ع؛â€œâ€“ ط¸ئ’ط·ع¾ط·آ§ط·آ¨" },
+  { value: "ظ‹ع؛â€œâ€¦", label: "ظ‹ع؛â€œâ€¦ ط·ع¾ط¸â€ڑط¸ث†ط¸ظ¹ط¸â€¦" },
+  { value: "ظ‹ع؛عکآ¯", label: "ظ‹ع؛عکآ¯ ط¸â€،ط·آ¯ط¸ظ¾" },
+  { value: "ظ‹ع؛آ¤â€Œ", label: "ظ‹ع؛آ¤â€Œ ط¸â€¦ط·آµط·آ§ط¸ظ¾ط·آ­ط·آ©" },
+  { value: "ظ‹ع؛â€کâ€ک", label: "ظ‹ع؛â€کâ€ک ط·ع¾ط·آ§ط·آ¬" },
+  { value: "ظ‹ع؛â€‌آ¥", label: "ظ‹ع؛â€‌آ¥ ط¸â€ ط·آ§ط·آ±" },
+  { value: "أ¢آ­ع¯", label: "أ¢آ­ع¯ ط¸â€ ط·آ¬ط¸â€¦ط·آ©" },
+  { value: "ظ‹ع؛â€™ع¾", label: "ظ‹ع؛â€™ع¾ ط¸â€ڑط¸ث†ط·آ©" },
+  { value: "ظ‹ع؛عˆâ€¦", label: "ظ‹ع؛عˆâ€¦ ط¸ث†ط·آ³ط·آ§ط¸â€¦" },
+  { value: "ظ‹ع؛ع‘â‚¬", label: "ظ‹ع؛ع‘â‚¬ ط·آµط·آ§ط·آ±ط¸ث†ط·آ®" },
 ]
 
 export default function BadgesPage() {
   const [search, setSearch] = useState("")
   const [showCreate, setShowCreate] = useState(false)
   const [expandedBadge, setExpandedBadge] = useState<string | null>(null)
-  const [newBadge, setNewBadge] = useState({ name: "", icon: "ًںڈ…", category: "ط£ظƒط§ط¯ظٹظ…ظٹ", xpReward: 100, criteria: "" })
+  const [newBadge, setNewBadge] = useState({ name: "", icon: "ظ‹ع؛عˆâ€¦", category: "ط·آ£ط¸ئ’ط·آ§ط·آ¯ط¸ظ¹ط¸â€¦ط¸ظ¹", xpReward: 100, criteria: "" })
 
   const stats = useMemo(() => ({
     total: allBadges.length,
@@ -81,19 +81,19 @@ export default function BadgesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "الألعاب", href: "/teacher/gamification" }, { label: "الشارات" }]} />
-      <DashboardHeader title="ط¥ط¯ط§ط±ط© ط§ظ„ط´ط§ط±ط§طھ" subtitle="ط¥ظ†ط´ط§ط، ظˆطھط¹ط¯ظٹظ„ ط§ظ„ط´ط§ط±ط§طھ ظˆط§ظ„ظ…ظƒط§ظپط¢طھ" />
+      <Breadcrumb items={[{ label: "ط§ظ„ط£ظ„ط¹ط§ط¨", href: "/teacher/gamification" }, { label: "ط§ظ„ط´ط§ط±ط§طھ" }]} />
+      <DashboardHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ§ط·ع¾" subtitle="ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸ث†ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط¸ئ’ط·آ§ط¸ظ¾ط·آ¢ط·ع¾" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
-        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط´ط§ط±ط§طھ" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />
-        <StatsCard title="ط§ظ„طھطµظ†ظٹظپط§طھ" value={stats.categories} icon={HiOutlineCollection} color="info" />
-        <StatsCard title="طھظ… ط¥طµط¯ط§ط±ظ‡ط§" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
+        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ§ط·ع¾" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />
+        <StatsCard title="ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾" value={stats.categories} icon={HiOutlineCollection} color="info" />
+        <StatsCard title="ط·ع¾ط¸â€¦ ط·آ¥ط·آµط·آ¯ط·آ§ط·آ±ط¸â€،ط·آ§" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
       </motion.div>
 
       <div className="flex items-center justify-between">
-        <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ط´ط§ط±ط©..." className="max-w-xs" />
-        <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreate(true)}>
-          ط¥ط¶ط§ظپط© ط´ط§ط±ط© ط¬ط¯ظٹط¯ط©
+        <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ´ط·آ§ط·آ±ط·آ©..." className="max-w-xs" />
+        <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreate(true)}>
+          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ´ط·آ§ط·آ±ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
         </Button>
       </div>
 
@@ -118,8 +118,8 @@ export default function BadgesPage() {
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button type="button" onClick={() => toast.success("تم تعديل الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
-                  <button type="button" onClick={() => toast.success("تم حذف الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
+                  <button type="button" onClick={() => toast.success("طھظ… طھط¹ط¯ظٹظ„ ط§ظ„ط´ط§ط±ط© ط¨ظ†ط¬ط§ط­")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
+                  <button type="button" onClick={() => toast.success("طھظ… ط­ط°ظپ ط§ظ„ط´ط§ط±ط© ط¨ظ†ط¬ط§ط­")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
                 </div>
               </div>
 
@@ -132,12 +132,12 @@ export default function BadgesPage() {
               </div>
 
               <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
-                <span className="text-xs text-text-secondary"><HiOutlineUsers className="w-3.5 h-3.5 inline ml-1" />{badge.studentsCount} ط·ط§ظ„ط¨</span>
+                <span className="text-xs text-text-secondary"><HiOutlineUsers className="w-3.5 h-3.5 inline ml-1" />{badge.studentsCount} ط·آ·ط·آ§ط¸â€‍ط·آ¨</span>
                 <button type="button"
                   onClick={() => setExpandedBadge(expandedBadge === badge.id ? null : badge.id)}
                   className="flex items-center gap-1 text-xs text-primary hover:text-primary-dark transition-colors"
                 >
-                  ط¹ط±ط¶ ط§ظ„ط­ط§طµظ„ظٹظ†
+                  ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·آ­ط·آ§ط·آµط¸â€‍ط¸ظ¹ط¸â€ 
                   <HiOutlineChevronDown className={cn("w-3 h-3 transition-transform", expandedBadge === badge.id && "rotate-180")} />
                 </button>
               </div>
@@ -159,41 +159,41 @@ export default function BadgesPage() {
         ))}
       </div>
 
-      <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="ط¥ظ†ط´ط§ط، ط´ط§ط±ط© ط¬ط¯ظٹط¯ط©" size="lg">
+      <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط·آ´ط·آ§ط·آ±ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©" size="lg">
         <div className="space-y-4">
           <Input
-            label="ط§ط³ظ… ط§ظ„ط´ط§ط±ط©"
+            label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ©"
             value={newBadge.name}
             onChange={(e) => setNewBadge({ ...newBadge, name: e.target.value })}
-            placeholder="ط£ط¯ط®ظ„ ط§ط³ظ… ط§ظ„ط´ط§ط±ط©"
+            placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ©"
           />
           <Select
-            label="ط§ظ„ط£ظٹظ‚ظˆظ†ط©"
+            label="ط·آ§ط¸â€‍ط·آ£ط¸ظ¹ط¸â€ڑط¸ث†ط¸â€ ط·آ©"
             options={iconOptions}
             value={newBadge.icon}
             onChange={(e) => setNewBadge({ ...newBadge, icon: e.target.value })}
           />
           <Select
-            label="ط§ظ„طھطµظ†ظٹظپ"
+            label="ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾"
             options={mockGamificationConfig.badgeCategories.map((c) => ({ value: c.name, label: `${c.icon} ${c.name}` }))}
             value={newBadge.category}
             onChange={(e) => setNewBadge({ ...newBadge, category: e.target.value })}
           />
           <Input
-            label="ظ…ظƒط§ظپط£ط© XP"
+            label="ط¸â€¦ط¸ئ’ط·آ§ط¸ظ¾ط·آ£ط·آ© XP"
             type="number"
             value={newBadge.xpReward}
             onChange={(e) => setNewBadge({ ...newBadge, xpReward: Number(e.target.value) })}
           />
           <Input
-            label="ظ…ط¹ظٹط§ط± ط§ظ„ط­طµظˆظ„"
+            label="ط¸â€¦ط·آ¹ط¸ظ¹ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آµط¸ث†ط¸â€‍"
             value={newBadge.criteria}
             onChange={(e) => setNewBadge({ ...newBadge, criteria: e.target.value })}
-            placeholder="ظ…ط«ط§ظ„: ط¥ظƒظ…ط§ظ„ 10 ط¯ط±ظˆط³"
+            placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ¥ط¸ئ’ط¸â€¦ط·آ§ط¸â€‍ 10 ط·آ¯ط·آ±ط¸ث†ط·آ³"
           />
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1" onClick={() => { setShowCreate(false); toast.success("تم إنشاء الشارة بنجاح") }}>ط¥ظ†ط´ط§ط، ط§ظ„ط´ط§ط±ط©</Button>
-            <Button variant="secondary" onClick={() => setShowCreate(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" className="flex-1" onClick={() => { setShowCreate(false); toast.success("طھظ… ط¥ظ†ط´ط§ط، ط§ظ„ط´ط§ط±ط© ط¨ظ†ط¬ط§ط­") }}>ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ©</Button>
+            <Button variant="secondary" onClick={() => setShowCreate(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

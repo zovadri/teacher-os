@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -22,15 +22,15 @@ import { cn, formatDate, formatRelativeTime } from "@/lib/utils"
 import { mockAuditLogs } from "@/lib/mock/data"
 
 const actionConfig: Record<string, { label: string; variant: "info" | "neutral" | "success" | "warning" | "error" | "premium" }> = {
-  login: { label: "طھط³ط¬ظٹظ„ ط¯ط®ظˆظ„", variant: "info" },
-  logout: { label: "طھط³ط¬ظٹظ„ ط®ط±ظˆط¬", variant: "neutral" },
-  create: { label: "ط¥ظ†ط´ط§ط،", variant: "success" },
-  edit: { label: "طھط¹ط¯ظٹظ„", variant: "warning" },
-  delete: { label: "ط­ط°ظپ", variant: "error" },
-  payment: { label: "ط¯ظپط¹", variant: "premium" },
-  attendance: { label: "ط­ط¶ظˆط±", variant: "info" },
-  exam: { label: "ط§ظ…طھط­ط§ظ†", variant: "warning" },
-  homework: { label: "ظˆط§ط¬ط¨", variant: "success" },
+  login: { label: "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¯ط·آ®ط¸ث†ط¸â€‍", variant: "info" },
+  logout: { label: "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ®ط·آ±ط¸ث†ط·آ¬", variant: "neutral" },
+  create: { label: "ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ", variant: "success" },
+  edit: { label: "ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍", variant: "warning" },
+  delete: { label: "ط·آ­ط·آ°ط¸ظ¾", variant: "error" },
+  payment: { label: "ط·آ¯ط¸ظ¾ط·آ¹", variant: "premium" },
+  attendance: { label: "ط·آ­ط·آ¶ط¸ث†ط·آ±", variant: "info" },
+  exam: { label: "ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ", variant: "warning" },
+  homework: { label: "ط¸ث†ط·آ§ط·آ¬ط·آ¨", variant: "success" },
 }
 
 const modules = [...new Set(mockAuditLogs.map((l) => l.module))]
@@ -73,13 +73,13 @@ export default function AuditLogPage() {
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
   const handleExport = () => {
-    toast.success("ط³ظٹطھظ… طھطµط¯ظٹط± ط§ظ„ط³ط¬ظ„ ط¥ظ„ظ‰ Excel")
+    toast.success("ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ³ط·آ¬ط¸â€‍ ط·آ¥ط¸â€‍ط¸â€° Excel")
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط³ط¬ظ„ ط§ظ„طھط¯ظ‚ظٹظ‚" subtitle="ظ…ط±ط§ظ‚ط¨ط© ظ†ط´ط§ط· ط§ظ„ظ†ط¸ط§ظ…" />
+        <DashboardHeader title="ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑ" subtitle="ط¸â€¦ط·آ±ط·آ§ط¸â€ڑط·آ¨ط·آ© ط¸â€ ط·آ´ط·آ§ط·آ· ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -87,10 +87,10 @@ export default function AuditLogPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط³ط¬ظ„ ط§ظ„طھط¯ظ‚ظٹظ‚" subtitle="ظ…ط±ط§ظ‚ط¨ط© ظ†ط´ط§ط· ط§ظ„ظ†ط¸ط§ظ…" />
+      <DashboardHeader title="ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑ" subtitle="ط¸â€¦ط·آ±ط·آ§ط¸â€ڑط·آ¨ط·آ© ط¸â€ ط·آ´ط·آ§ط·آ· ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦" />
       <div className="flex justify-end">
-        <button type="button" variant="secondary" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleExport}>
-          طھطµط¯ظٹط±
+        <Button variant="secondary" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleExport}>
+          ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±
         </Button>
       </div>
 
@@ -98,44 +98,44 @@ export default function AuditLogPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط³ط¬ظ„ط§طھ" value={stats.total} icon={HiOutlineClipboardList} color="primary" />
-          <StatsCard title="ط³ط¬ظ„ط§طھ ط§ظ„ظٹظˆظ…" value={stats.today} icon={HiOutlineCalendar} color="info" />
-          <StatsCard title="ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ" value={actions.length} icon={HiOutlineFilter} color="warning" subtitle="ظ†ظˆط¹ ط¥ط¬ط±ط§ط،" />
-          <StatsCard title="ط§ظ„ظˆط­ط¯ط§طھ" value={modules.length} icon={HiOutlineShieldCheck} color="success" subtitle="ظˆط­ط¯ط© ظ†ط¸ط§ظ…" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾" value={stats.total} icon={HiOutlineClipboardList} color="primary" />
+          <StatsCard title="ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.today} icon={HiOutlineCalendar} color="info" />
+          <StatsCard title="ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾" value={actions.length} icon={HiOutlineFilter} color="warning" subtitle="ط¸â€ ط¸ث†ط·آ¹ ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ" />
+          <StatsCard title="ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ§ط·ع¾" value={modules.length} icon={HiOutlineShieldCheck} color="success" subtitle="ط¸ث†ط·آ­ط·آ¯ط·آ© ط¸â€ ط·آ¸ط·آ§ط¸â€¦" />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>ط³ط¬ظ„ ط§ظ„ظ†ط´ط§ط·ط§طھ</CardTitle>
+          <CardTitle>ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ§ط·آ·ط·آ§ط·ع¾</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="p-4 border-b border-border flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="ط¨ط­ط« ط¨ط§ط³ظ… ط§ظ„ظ…ط³طھط®ط¯ظ… ط£ظˆ IP..." />
+              <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¨ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط·آ®ط·آ¯ط¸â€¦ ط·آ£ط¸ث† IP..." />
             </div>
             <div className="flex flex-wrap gap-2">
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ" }, ...actions.map((a) => ({ value: a, label: actionConfig[a]?.label || a }))]} value={actionFilter} onChange={(e) => { setActionFilter(e.target.value); setPage(1) }} />
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظˆط­ط¯ط§طھ" }, ...modules.map((m) => ({ value: m, label: m }))]} value={moduleFilter} onChange={(e) => { setModuleFilter(e.target.value); setPage(1) }} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾" }, ...actions.map((a) => ({ value: a, label: actionConfig[a]?.label || a }))]} value={actionFilter} onChange={(e) => { setActionFilter(e.target.value); setPage(1) }} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ§ط·ع¾" }, ...modules.map((m) => ({ value: m, label: m }))]} value={moduleFilter} onChange={(e) => { setModuleFilter(e.target.value); setPage(1) }} />
             </div>
           </div>
 
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineClipboardList} title="ظ„ط§ طھظˆط¬ط¯ ط³ط¬ظ„ط§طھ" description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط³ط¬ظ„ط§طھ ظ…ط·ط§ط¨ظ‚ط© ظ„ظ„ط¨ط­ط«" />
+            <EmptyState icon={HiOutlineClipboardList} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ© ط¸â€‍ط¸â€‍ط·آ¨ط·آ­ط·آ«" />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظ…ط³طھط®ط¯ظ…</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط¥ط¬ط±ط§ط،</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظˆط­ط¯ط©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظˆطµظپ</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط·آ®ط·آ¯ط¸â€¦</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾</th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary">IP</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط¬ظ‡ط§ط²</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„طھط§ط±ظٹط®</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ¬ط¸â€،ط·آ§ط·آ²</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</th>
                   </tr>
                 </thead>
                 <tbody>

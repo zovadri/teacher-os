@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -101,17 +101,17 @@ export default function AttendanceReportsPage() {
   const totalPages = Math.ceil(filtered.length / pageSize)
 
   const handleExportPDF = () => {
-    toast.success("ط¬ط§ط±ظچ طھطµط¯ظٹط± ط§ظ„طھظ‚ط±ظٹط± ط¨طµظٹط؛ط© PDF", { position: "top-left" })
-    setTimeout(() => toast.success("طھظ… طھطµط¯ظٹط± ط§ظ„طھظ‚ط±ظٹط± ط¨ظ†ط¬ط§ط­", { position: "top-left" }), 1500)
+    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط·آµط¸ظ¹ط·ط›ط·آ© PDF", { position: "top-left" })
+    setTimeout(() => toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­", { position: "top-left" }), 1500)
   }
 
   const handleExportExcel = () => {
-    toast.success("ط¬ط§ط±ظچ طھطµط¯ظٹط± ط§ظ„طھظ‚ط±ظٹط± ط¨طµظٹط؛ط© Excel", { position: "top-left" })
-    setTimeout(() => toast.success("طھظ… طھطµط¯ظٹط± ط§ظ„طھظ‚ط±ظٹط± ط¨ظ†ط¬ط§ط­", { position: "top-left" }), 1500)
+    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط·آµط¸ظ¹ط·ط›ط·آ© Excel", { position: "top-left" })
+    setTimeout(() => toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­", { position: "top-left" }), 1500)
   }
 
   const handlePrint = () => {
-    toast.success("ط¬ط§ط±ظچ طھط­ط¶ظٹط± ط§ظ„طھظ‚ط±ظٹط± ظ„ظ„ط·ط¨ط§ط¹ط©", { position: "top-left" })
+    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آ­ط·آ¶ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط¸â€‍ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©", { position: "top-left" })
     setTimeout(() => window.print(), 500)
   }
 
@@ -119,8 +119,8 @@ export default function AttendanceReportsPage() {
     return (
       <div className="p-4 md:p-6">
         <ErrorState
-          title="ط­ط¯ط« ط®ط·ط£ ظپظٹ طھط­ظ…ظٹظ„ ط§ظ„طھظ‚ط§ط±ظٹط±"
-          message="ظٹط±ط¬ظ‰ ط§ظ„ظ…ط­ط§ظˆظ„ط© ظ…ط±ط© ط£ط®ط±ظ‰"
+          title="ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£ ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±"
+          message="ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ© ط¸â€¦ط·آ±ط·آ© ط·آ£ط·آ®ط·آ±ط¸â€°"
           onRetry={() => setHasError(false)}
         />
       </div>
@@ -130,20 +130,20 @@ export default function AttendanceReportsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Toaster />
-      <Breadcrumb items={[{ label: "الحضور", href: "/teacher/attendance" }, { label: "تقارير الحضور" }]} />
+      <Breadcrumb items={[{ label: "ط§ظ„ط­ط¶ظˆط±", href: "/teacher/attendance" }, { label: "طھظ‚ط§ط±ظٹط± ط§ظ„ط­ط¶ظˆط±" }]} />
       <PageHeader
-        title="طھظ‚ط§ط±ظٹط± ط§ظ„ط­ط¶ظˆط±"
-        description="ط¹ط±ط¶ ظˆطھط­ظ„ظٹظ„ ط¥ط­طµط§ط¦ظٹط§طھ ط­ط¶ظˆط± ط§ظ„ط·ظ„ط§ط¨"
+        title="ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±"
+        description="ط·آ¹ط·آ±ط·آ¶ ط¸ث†ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ¥ط·آ­ط·آµط·آ§ط·آ¦ط¸ظ¹ط·آ§ط·ع¾ ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨"
         actions={
           <div className="flex items-center gap-2">
-            <button type="button" variant="secondary" size="sm" leftIcon={<HiOutlineDocumentText className="w-4 h-4" />} onClick={handleExportPDF}>
+            <Button variant="secondary" size="sm" leftIcon={<HiOutlineDocumentText className="w-4 h-4" />} onClick={handleExportPDF}>
               PDF
             </Button>
-            <button type="button" variant="secondary" size="sm" leftIcon={<HiOutlineTable className="w-4 h-4" />} onClick={handleExportExcel}>
+            <Button variant="secondary" size="sm" leftIcon={<HiOutlineTable className="w-4 h-4" />} onClick={handleExportExcel}>
               Excel
             </Button>
-            <button type="button" variant="primary" size="sm" leftIcon={<HiOutlinePrinter className="w-4 h-4" />} onClick={handlePrint}>
-              ط·ط¨ط§ط¹ط©
+            <Button variant="primary" size="sm" leftIcon={<HiOutlinePrinter className="w-4 h-4" />} onClick={handlePrint}>
+              ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©
             </Button>
           </div>
         }
@@ -153,26 +153,26 @@ export default function AttendanceReportsPage() {
         <StatsSkeleton count={5} />
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          <StatsCard title="ط§ظ„ط¥ط¬ظ…ط§ظ„ظٹ" value={stats.total} icon={HiOutlineChartSquareBar} color="primary" />
-          <StatsCard title="ط­ط§ط¶ط±" value={stats.present} icon={HiOutlineCheckCircle} color="success" />
-          <StatsCard title="ط؛ط§ط¦ط¨" value={stats.absent} icon={HiOutlineXCircle} color="error" />
-          <StatsCard title="ظ…طھط£ط®ط±" value={stats.late} icon={HiOutlineClock} color="warning" />
-          <StatsCard title="ظ…ط¹ط°ط±" value={stats.excused} icon={HiOutlineExclamation} color="info" />
+          <StatsCard title="ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹" value={stats.total} icon={HiOutlineChartSquareBar} color="primary" />
+          <StatsCard title="ط·آ­ط·آ§ط·آ¶ط·آ±" value={stats.present} icon={HiOutlineCheckCircle} color="success" />
+          <StatsCard title="ط·ط›ط·آ§ط·آ¦ط·آ¨" value={stats.absent} icon={HiOutlineXCircle} color="error" />
+          <StatsCard title="ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±" value={stats.late} icon={HiOutlineClock} color="warning" />
+          <StatsCard title="ط¸â€¦ط·آ¹ط·آ°ط·آ±" value={stats.excused} icon={HiOutlineExclamation} color="info" />
         </div>
       )}
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <Card className="xl:col-span-2">
           <CardHeader>
-            <CardTitle>ظ†ط³ط¨ط© ط§ظ„ط­ط¶ظˆط± ط­ط³ط¨ ط§ظ„طھط§ط±ظٹط®</CardTitle>
+            <CardTitle>ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ­ط·آ³ط·آ¨ ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</CardTitle>
             <Badge variant="primary" size="sm">{stats.rate}%</Badge>
           </CardHeader>
           <CardContent>
             {chartData.length === 0 ? (
               <EmptyState
                 icon={HiOutlineChartSquareBar}
-                title="ظ„ط§ طھظˆط¬ط¯ ط¨ظٹط§ظ†ط§طھ"
-                description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط³ط¬ظ„ط§طھ ط­ط¶ظˆط± ظ„ظ„ظپطھط±ط© ط§ظ„ظ…ط­ط¯ط¯ط©"
+                title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾"
+                description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط·آ­ط·آ¶ط¸ث†ط·آ± ط¸â€‍ط¸â€‍ط¸ظ¾ط·ع¾ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ¯ط·آ¯ط·آ©"
                 withBackground={false}
               />
             ) : (
@@ -193,7 +193,7 @@ export default function AttendanceReportsPage() {
                     />
                     <Legend
                       formatter={(value: string) => {
-                        const labels: Record<string, string> = { present: "ط­ط§ط¶ط±", absent: "ط؛ط§ط¦ط¨", late: "ظ…طھط£ط®ط±", excused: "ظ…ط¹ط°ط±" }
+                        const labels: Record<string, string> = { present: "ط·آ­ط·آ§ط·آ¶ط·آ±", absent: "ط·ط›ط·آ§ط·آ¦ط·آ¨", late: "ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±", excused: "ط¸â€¦ط·آ¹ط·آ°ط·آ±" }
                         return labels[value] || value
                       }}
                     />
@@ -210,39 +210,39 @@ export default function AttendanceReportsPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>طھطµظپظٹط© ط§ظ„ط¨ظٹط§ظ†ط§طھ</CardTitle>
+            <CardTitle>ط·ع¾ط·آµط¸ظ¾ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-text mb-1.5">ظ…ظ† طھط§ط±ظٹط®</label>
+              <label className="block text-sm font-medium text-text mb-1.5">ط¸â€¦ط¸â€  ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</label>
               <Input type="date" value={fromDate} onChange={(e) => { setFromDate(e.target.value); setCurrentPage(1) }} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-text mb-1.5">ط¥ظ„ظ‰ طھط§ط±ظٹط®</label>
+              <label className="block text-sm font-medium text-text mb-1.5">ط·آ¥ط¸â€‍ط¸â€° ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</label>
               <Input type="date" value={toDate} onChange={(e) => { setToDate(e.target.value); setCurrentPage(1) }} />
             </div>
             <Select
-              label="ط§ظ„ظƒظˆط±ط³"
+              label="ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
               value={courseFilter}
               onChange={(e) => { setCourseFilter(e.target.value); setCurrentPage(1) }}
               options={[
-                { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ" },
+                { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" },
                 ...mockCourses.map((c) => ({ value: c.id, label: c.title })),
               ]}
             />
             <Select
-              label="ط§ظ„ط­ط§ظ„ط©"
+              label="ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©"
               value={statusFilter}
               onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1) }}
               options={[
-                { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" },
-                { value: "present", label: "ط­ط§ط¶ط±" },
-                { value: "absent", label: "ط؛ط§ط¦ط¨" },
-                { value: "late", label: "ظ…طھط£ط®ط±" },
-                { value: "excused", label: "ظ…ط¹ط°ط±" },
+                { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" },
+                { value: "present", label: "ط·آ­ط·آ§ط·آ¶ط·آ±" },
+                { value: "absent", label: "ط·ط›ط·آ§ط·آ¦ط·آ¨" },
+                { value: "late", label: "ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±" },
+                { value: "excused", label: "ط¸â€¦ط·آ¹ط·آ°ط·آ±" },
               ]}
             />
-            <SearchInput value={searchTerm} onChange={(v) => { setSearchTerm(v); setCurrentPage(1) }} placeholder="ط¨ط­ط« ط¨ط§ط³ظ… ط§ظ„ط·ط§ظ„ط¨..." />
+            <SearchInput value={searchTerm} onChange={(v) => { setSearchTerm(v); setCurrentPage(1) }} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¨ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨..." />
           </CardContent>
         </Card>
       </div>
@@ -252,11 +252,11 @@ export default function AttendanceReportsPage() {
       ) : paginated.length === 0 ? (
         <EmptyState
           icon={HiOutlineFilter}
-          title="ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬"
-          description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط³ط¬ظ„ط§طھ طھط·ط§ط¨ظ‚ ظ…ط¹ط§ظٹظٹط± ط§ظ„ط¨ط­ط«"
+          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬"
+          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«"
           action={
             <Button variant="secondary" onClick={() => { setSearchTerm(""); setCourseFilter("all"); setStatusFilter("all"); setFromDate(""); setToDate("") }}>
-              ط¥ط¹ط§ط¯ط© طھط¹ظٹظٹظ† ط§ظ„ظپظ„طھط±ط©
+              ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط¸â€‍ط·ع¾ط·آ±ط·آ©
             </Button>
           }
         />
@@ -265,32 +265,32 @@ export default function AttendanceReportsPage() {
           <CardContent className="p-0">
             <Table
               columns={[
-                { key: "studentName", header: "ط§ط³ظ… ط§ظ„ط·ط§ظ„ط¨", render: (a) => (
+                { key: "studentName", header: "ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨", render: (a) => (
                   <span className="font-medium text-text">{a.studentName}</span>
                 )},
-                { key: "courseName", header: "ط§ظ„ظƒظˆط±ط³" },
-                { key: "date", header: "ط§ظ„طھط§ط±ظٹط®", render: (a) => (
+                { key: "courseName", header: "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³" },
+                { key: "date", header: "ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®", render: (a) => (
                   <span className="text-text-secondary">{formatDate(a.date)}</span>
                 )},
-                { key: "status", header: "ط§ظ„ط­ط§ظ„ط©", render: (a) => {
+                { key: "status", header: "ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©", render: (a) => {
                   const colors: Record<string, string> = {
                     present: "bg-emerald-100 text-emerald-700 border-emerald-200",
                     absent: "bg-red-100 text-red-700 border-red-200",
                     late: "bg-amber-100 text-amber-700 border-amber-200",
                     excused: "bg-blue-100 text-blue-700 border-blue-200",
                   }
-                  const labels: Record<string, string> = { present: "ط­ط§ط¶ط±", absent: "ط؛ط§ط¦ط¨", late: "ظ…طھط£ط®ط±", excused: "ظ…ط¹ط°ط±" }
+                  const labels: Record<string, string> = { present: "ط·آ­ط·آ§ط·آ¶ط·آ±", absent: "ط·ط›ط·آ§ط·آ¦ط·آ¨", late: "ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±", excused: "ط¸â€¦ط·آ¹ط·آ°ط·آ±" }
                   return (
                     <span className={cn("inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border", colors[a.status])}>
                       {labels[a.status]}
                     </span>
                   )
                 }},
-                { key: "checkIn", header: "ط§ظ„ط­ط¶ظˆط±", render: (a) => (
-                  <span className="text-text-secondary" dir="ltr">{a.checkIn || "â€”"}</span>
+                { key: "checkIn", header: "ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±", render: (a) => (
+                  <span className="text-text-secondary" dir="ltr">{a.checkIn || "أ¢â‚¬â€‌"}</span>
                 )},
-                { key: "checkOut", header: "ط§ظ„ط§ظ†طµط±ط§ظپ", render: (a) => (
-                  <span className="text-text-secondary" dir="ltr">{a.checkOut || "â€”"}</span>
+                { key: "checkOut", header: "ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·آµط·آ±ط·آ§ط¸ظ¾", render: (a) => (
+                  <span className="text-text-secondary" dir="ltr">{a.checkOut || "أ¢â‚¬â€‌"}</span>
                 )},
               ]}
               data={paginated}

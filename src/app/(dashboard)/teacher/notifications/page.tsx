@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import toast from "react-hot-toast"
@@ -37,9 +37,9 @@ import { formatRelativeTime, cn } from "@/lib/utils"
 const notificationCategories = ["all", "system", "academic", "financial", "student", "exam", "homework", "attendance"] as const
 
 const priorityLabels: Record<string, string> = {
-  high: "ط¹ط§ظ„ظٹط©",
-  medium: "ظ…طھظˆط³ط·ط©",
-  low: "ظ…ظ†ط®ظپط¶ط©",
+  high: "ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©",
+  medium: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·ط·آ©",
+  low: "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶ط·آ©",
 }
 
 const priorityColors: Record<string, string> = {
@@ -63,20 +63,20 @@ const typeColors: Record<string, string> = {
 }
 
 const typeLabels: Record<string, string> = {
-  info: "ظ…ط¹ظ„ظˆظ…ط©",
-  success: "ظ†ط¬ط§ط­",
-  warning: "طھظ†ط¨ظٹظ‡",
-  error: "ط®ط·ط£",
+  info: "ط¸â€¦ط·آ¹ط¸â€‍ط¸ث†ط¸â€¦ط·آ©",
+  success: "ط¸â€ ط·آ¬ط·آ§ط·آ­",
+  warning: "ط·ع¾ط¸â€ ط·آ¨ط¸ظ¹ط¸â€،",
+  error: "ط·آ®ط·آ·ط·آ£",
 }
 
 const categoryLabels: Record<string, string> = {
-  system: "ط§ظ„ظ†ط¸ط§ظ…",
-  academic: "ط£ظƒط§ط¯ظٹظ…ظٹ",
-  financial: "ظ…ط§ظ„ظٹ",
-  student: "ط·ظ„ط§ط¨",
-  exam: "ط§ظ…طھط­ط§ظ†ط§طھ",
-  homework: "ظˆط§ط¬ط¨ط§طھ",
-  attendance: "ط­ط¶ظˆط±",
+  system: "ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦",
+  academic: "ط·آ£ط¸ئ’ط·آ§ط·آ¯ط¸ظ¹ط¸â€¦ط¸ظ¹",
+  financial: "ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹",
+  student: "ط·آ·ط¸â€‍ط·آ§ط·آ¨",
+  exam: "ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾",
+  homework: "ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾",
+  attendance: "ط·آ­ط·آ¶ط¸ث†ط·آ±",
 }
 
 interface ExtendedNotification {
@@ -102,8 +102,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-7",
     type: "warning",
-    title: "طھط£ط®ظٹط± ظپظٹ طھط³ظ„ظٹظ… ط§ظ„ظˆط§ط¬ط¨ط§طھ",
-    message: "ظ‡ظ†ط§ظƒ 8 ط·ظ„ط§ط¨ ظ„ظ… ظٹط³ظ„ظ…ظˆط§ ظˆط§ط¬ط¨ ط§ظ„ط£ط³ط¨ظˆط¹ ط§ظ„ظ…ط§ط¶ظٹ. ظٹظڈط±ط¬ظ‰ ظ…طھط§ط¨ط¹طھظ‡ظ… ظˆط§طھط®ط§ط° ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ ط§ظ„ظ„ط§ط²ظ…ط©.",
+    title: "ط·ع¾ط·آ£ط·آ®ط¸ظ¹ط·آ± ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾",
+    message: "ط¸â€،ط¸â€ ط·آ§ط¸ئ’ 8 ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸â€‍ط¸â€¦ ط¸ظ¹ط·آ³ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ§ط·آ¶ط¸ظ¹. ط¸ظ¹ط¸عˆط·آ±ط·آ¬ط¸â€° ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·ع¾ط¸â€،ط¸â€¦ ط¸ث†ط·آ§ط·ع¾ط·آ®ط·آ§ط·آ° ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€‍ط·آ§ط·آ²ط¸â€¦ط·آ©.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 45),
     link: "/dashboard/teacher/homework",
@@ -114,8 +114,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-8",
     type: "info",
-    title: "طھط­ط¯ظٹط« ط¬ط¯ظˆظ„ ط§ظ„ط­طµطµ",
-    message: "طھظ… طھط¹ط¯ظٹظ„ ط¬ط¯ظˆظ„ ط§ظ„ط­طµطµ ط§ظ„ط£ط³ط¨ظˆط¹ظٹ. ظٹظڈط±ط¬ظ‰ ظ…ط±ط§ط¬ط¹ط© ط§ظ„ط¬ط¯ظˆظ„ ط§ظ„ط¬ط¯ظٹط¯ ط¹ظ„ظ‰ ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ….",
+    title: "ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ",
+    message: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹. ط¸ظ¹ط¸عˆط·آ±ط·آ¬ط¸â€° ط¸â€¦ط·آ±ط·آ§ط·آ¬ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ ط·آ¹ط¸â€‍ط¸â€° ط¸â€‍ط¸ث†ط·آ­ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ­ط¸ئ’ط¸â€¦.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 90),
     priority: "low",
@@ -125,8 +125,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-9",
     type: "success",
-    title: "طھظ… طھط³ط¬ظٹظ„ 3 ط·ظ„ط§ط¨ ظپظٹ ط§ظ„ظƒظˆط±ط³",
-    message: "طھظ… طھط³ط¬ظٹظ„ 3 ط·ظ„ط§ط¨ ط¬ط¯ط¯ ظپظٹ ظƒظˆط±ط³ ط§ظ„ظ†ط­ظˆ ط§ظ„ظ…طھظ‚ط¯ظ…. ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ط¢ظ† 45 ط·ط§ظ„ط¨ط§ظ‹.",
+    title: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ 3 ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³",
+    message: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ 3 ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ¬ط·آ¯ط·آ¯ ط¸ظ¾ط¸ظ¹ ط¸ئ’ط¸ث†ط·آ±ط·آ³ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦. ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط·آ¢ط¸â€  45 ط·آ·ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€¹.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 200),
     link: "/dashboard/teacher/courses",
@@ -137,8 +137,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-10",
     type: "error",
-    title: "ظ…ط´ظƒظ„ط© ظپظٹ ظ†ط¸ط§ظ… ط§ظ„ط¯ظپط¹",
-    message: "طھظ… ط§ظ„ط¥ط¨ظ„ط§ط؛ ط¹ظ† ط®ظ„ظ„ ظپظٹ ظ†ط¸ط§ظ… ط§ظ„ط¯ظپط¹ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ. ظپط±ظٹظ‚ ط§ظ„طھظ‚ظ†ظٹط© ظٹط¹ظ…ظ„ ط¹ظ„ظ‰ ط­ظ„ ط§ظ„ظ…ط´ظƒظ„ط©.",
+    title: "ط¸â€¦ط·آ´ط¸ئ’ط¸â€‍ط·آ© ط¸ظ¾ط¸ظ¹ ط¸â€ ط·آ¸ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ظ¾ط·آ¹",
+    message: "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¥ط·آ¨ط¸â€‍ط·آ§ط·ط› ط·آ¹ط¸â€  ط·آ®ط¸â€‍ط¸â€‍ ط¸ظ¾ط¸ظ¹ ط¸â€ ط·آ¸ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ظ¾ط·آ¹ ط·آ§ط¸â€‍ط·آ¥ط¸â€‍ط¸ئ’ط·ع¾ط·آ±ط¸ث†ط¸â€ ط¸ظ¹. ط¸ظ¾ط·آ±ط¸ظ¹ط¸â€ڑ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط¸â€ ط¸ظ¹ط·آ© ط¸ظ¹ط·آ¹ط¸â€¦ط¸â€‍ ط·آ¹ط¸â€‍ط¸â€° ط·آ­ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط·آ´ط¸ئ’ط¸â€‍ط·آ©.",
     read: true,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 3),
     priority: "high",
@@ -148,8 +148,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-11",
     type: "info",
-    title: "طھظ‚ط±ظٹط± ط§ظ„ط­ط¶ظˆط± ط§ظ„ط£ط³ط¨ظˆط¹ظٹ",
-    message: "ظ†ط³ط¨ط© ط­ط¶ظˆط± ط§ظ„ط·ظ„ط§ط¨ ظ‡ط°ط§ ط§ظ„ط£ط³ط¨ظˆط¹ 92%. ظ‡ظ†ط§ظƒ طھط­ط³ظ† ظ…ظ„ط­ظˆط¸ ظ…ظ‚ط§ط±ظ†ط© ط¨ط§ظ„ط£ط³ط¨ظˆط¹ ط§ظ„ظ…ط§ط¶ظٹ.",
+    title: "ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹",
+    message: "ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ 92%. ط¸â€،ط¸â€ ط·آ§ط¸ئ’ ط·ع¾ط·آ­ط·آ³ط¸â€  ط¸â€¦ط¸â€‍ط·آ­ط¸ث†ط·آ¸ ط¸â€¦ط¸â€ڑط·آ§ط·آ±ط¸â€ ط·آ© ط·آ¨ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ§ط·آ¶ط¸ظ¹.",
     read: true,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5),
     link: "/dashboard/teacher/attendance",
@@ -160,8 +160,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-12",
     type: "success",
-    title: "ط§ظƒطھظ…ط§ظ„ طھطµط­ظٹط­ ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ",
-    message: "طھظ… ط§ظ„ط§ظ†طھظ‡ط§ط، ظ…ظ† طھطµط­ظٹط­ ط§ظ…طھط­ط§ظ†ط§طھ ط§ظ„ط´ظ‡ط± ظ„ظ…ط§ط¯ط© ط§ظ„ظ†ط­ظˆ. ط§ظ„ظ†طھط§ط¦ط¬ ط¬ط§ظ‡ط²ط© ظ„ظ„ظ†ط´ط±.",
+    title: "ط·آ§ط¸ئ’ط·ع¾ط¸â€¦ط·آ§ط¸â€‍ ط·ع¾ط·آµط·آ­ط¸ظ¹ط·آ­ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾",
+    message: "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ ط¸â€¦ط¸â€  ط·ع¾ط·آµط·آ­ط¸ظ¹ط·آ­ ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ± ط¸â€‍ط¸â€¦ط·آ§ط·آ¯ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث†. ط·آ§ط¸â€‍ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط·آ¬ط·آ§ط¸â€،ط·آ²ط·آ© ط¸â€‍ط¸â€‍ط¸â€ ط·آ´ط·آ±.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 8),
     link: "/dashboard/teacher/exams",
@@ -172,8 +172,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-13",
     type: "warning",
-    title: "ط§ظ‚طھط±ط§ط¨ ظ…ظˆط¹ط¯ ط¯ظˆط±ط© طھط¯ط±ظٹط¨ظٹط©",
-    message: "ط§ظ„ط¯ظˆط±ط© ط§ظ„طھط¯ط±ظٹط¨ظٹط© ظ„ظ„ظ…ط¹ظ„ظ…ظٹظ† ط³طھط¨ط¯ط£ ط¨ط¹ط¯ ظٹظˆظ…ظٹظ†. ظٹظڈط±ط¬ظ‰ طھط£ظƒظٹط¯ ط§ظ„ط­ط¶ظˆط±.",
+    title: "ط·آ§ط¸â€ڑط·ع¾ط·آ±ط·آ§ط·آ¨ ط¸â€¦ط¸ث†ط·آ¹ط·آ¯ ط·آ¯ط¸ث†ط·آ±ط·آ© ط·ع¾ط·آ¯ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ©",
+    message: "ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ¯ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ© ط¸â€‍ط¸â€‍ط¸â€¦ط·آ¹ط¸â€‍ط¸â€¦ط¸ظ¹ط¸â€  ط·آ³ط·ع¾ط·آ¨ط·آ¯ط·آ£ ط·آ¨ط·آ¹ط·آ¯ ط¸ظ¹ط¸ث†ط¸â€¦ط¸ظ¹ط¸â€ . ط¸ظ¹ط¸عˆط·آ±ط·آ¬ط¸â€° ط·ع¾ط·آ£ط¸ئ’ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 12),
     priority: "medium",
@@ -183,8 +183,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-14",
     type: "info",
-    title: "ط¥ط¶ط§ظپط© ظ…ظٹط²ط© ط¬ط¯ظٹط¯ط©",
-    message: "طھظ… ط¥ط¶ط§ظپط© ظ…ظٹط²ط© ط¥ظ†ط´ط§ط، ط§ظ„طھظ‚ط§ط±ظٹط± ط§ظ„ظ…ط®طµطµط©. ظٹظ…ظƒظ†ظƒ ط§ظ„ط¢ظ† طھطµط¯ظٹط± طھظ‚ط§ط±ظٹط± ظ…ط®طµطµط© ط­ط³ط¨ ط§ط­طھظٹط§ط¬ظƒ.",
+    title: "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ظ¹ط·آ²ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©",
+    message: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ظ¹ط·آ²ط·آ© ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آµط·آµط·آ©. ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€ ط¸ئ’ ط·آ§ط¸â€‍ط·آ¢ط¸â€  ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط¸â€¦ط·آ®ط·آµط·آµط·آ© ط·آ­ط·آ³ط·آ¨ ط·آ§ط·آ­ط·ع¾ط¸ظ¹ط·آ§ط·آ¬ط¸ئ’.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24),
     link: "/dashboard/teacher/analytics",
@@ -254,12 +254,12 @@ export default function NotificationsPage() {
 
   const markAsRead = (id: string) => {
     setReadIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
-    toast.success("تم تعيين الإشعار كمقروء")
+    toast.success("طھظ… طھط¹ظٹظٹظ† ط§ظ„ط¥ط´ط¹ط§ط± ظƒظ…ظ‚ط±ظˆط،")
   }
 
   const markAsUnread = (id: string) => {
     setReadIds((prev) => prev.filter((rid) => rid !== id))
-    toast.success("تم تعيين الإشعار كغير مقروء")
+    toast.success("طھظ… طھط¹ظٹظٹظ† ط§ظ„ط¥ط´ط¹ط§ط± ظƒط؛ظٹط± ظ…ظ‚ط±ظˆط،")
   }
 
   const toggleRead = (id: string) => {
@@ -272,12 +272,12 @@ export default function NotificationsPage() {
       const unreadIds = filtered.filter((n) => !prev.includes(n.id)).map((n) => n.id)
       return [...prev, ...unreadIds]
     })
-    toast.success("تم تعيين الكل كمقروء")
+    toast.success("طھظ… طھط¹ظٹظٹظ† ط§ظ„ظƒظ„ ظƒظ…ظ‚ط±ظˆط،")
   }
 
   const archiveSingle = (id: string) => {
     setArchivedIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
-    toast.success("تم أرشفة الإشعار")
+    toast.success("طھظ… ط£ط±ط´ظپط© ط§ظ„ط¥ط´ط¹ط§ط±")
   }
 
   const bulkArchive = (ids: string[]) => {
@@ -286,7 +286,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`تم أرشفة ${ids.length} إشعار`)
+    toast.success(`طھظ… ط£ط±ط´ظپط© ${ids.length} ط¥ط´ط¹ط§ط±`)
   }
 
   const bulkDelete = (ids: string[]) => {
@@ -295,7 +295,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`تم حذف ${ids.length} إشعار`)
+    toast.success(`طھظ… ط­ط°ظپ ${ids.length} ط¥ط´ط¹ط§ط±`)
   }
 
   const bulkMarkRead = (ids: string[]) => {
@@ -304,7 +304,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`تم تعيين ${ids.length} إشعار كمقروء`)
+    toast.success(`طھظ… طھط¹ظٹظٹظ† ${ids.length} ط¥ط´ط¹ط§ط± ظƒظ…ظ‚ط±ظˆط،`)
   }
 
   const toggleSelect = (id: string) => {
@@ -330,32 +330,32 @@ export default function NotificationsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ظ…ط±ظƒط² ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ ط§ظ„ظ…طھظ‚ط¯ظ…" subtitle="ط¥ط¯ط§ط±ط© ط¬ظ…ظٹط¹ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ ظˆط§ظ„طھظ†ط¨ظٹظ‡ط§طھ" />
+      <DashboardHeader title="ط¸â€¦ط·آ±ط¸ئ’ط·آ² ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·ع¾ط¸â€ ط·آ¨ط¸ظ¹ط¸â€،ط·آ§ط·ع¾" />
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatsCard
-          title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ"
+          title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
           value={stats.total}
           icon={HiOutlineBell}
           color="primary"
           delay={0}
         />
         <StatsCard
-          title="ط؛ظٹط± ظ…ظ‚ط±ظˆط،"
+          title="ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"
           value={stats.unread}
           icon={HiOutlineMailOpen}
           color="info"
           delay={0.1}
         />
         <StatsCard
-          title="ط£ظˆظ„ظˆظٹط© ط¹ط§ظ„ظٹط©"
+          title="ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ© ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©"
           value={stats.highPriority}
           icon={HiOutlineFlag}
           color="error"
           delay={0.2}
         />
         <StatsCard
-          title="ظ…ط¤ط±ط´ظپ"
+          title="ط¸â€¦ط·آ¤ط·آ±ط·آ´ط¸ظ¾"
           value={stats.archived}
           icon={HiOutlineArchive}
           color="warning"
@@ -368,7 +368,7 @@ export default function NotificationsPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="ط§ط¨ط­ط« ظپظٹ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ..."
+            placeholder="ط·آ§ط·آ¨ط·آ­ط·آ« ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾..."
             className="w-full md:w-64"
           />
           <Select
@@ -376,7 +376,7 @@ export default function NotificationsPage() {
             onChange={(e) => setCategoryFilter(e.target.value)}
             options={notificationCategories.map((cat) => ({
               value: cat,
-              label: cat === "all" ? "ظƒظ„ ط§ظ„طھطµظ†ظٹظپط§طھ" : categoryLabels[cat] || cat,
+              label: cat === "all" ? "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾" : categoryLabels[cat] || cat,
             }))}
             className="w-full md:w-40"
           />
@@ -384,18 +384,18 @@ export default function NotificationsPage() {
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
             options={[
-              { value: "all", label: "ظƒظ„ ط§ظ„ط£ظˆظ„ظˆظٹط§طھ" },
-              { value: "high", label: "ط¹ط§ظ„ظٹط©" },
-              { value: "medium", label: "ظ…طھظˆط³ط·ط©" },
-              { value: "low", label: "ظ…ظ†ط®ظپط¶ط©" },
+              { value: "all", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ§ط·ع¾" },
+              { value: "high", label: "ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©" },
+              { value: "medium", label: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·ط·آ©" },
+              { value: "low", label: "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶ط·آ©" },
             ]}
             className="w-full md:w-36"
           />
           <div className="flex items-center gap-1 p-1 bg-surface border border-border rounded-xl">
             {[
-              { value: null, label: "ط§ظ„ظƒظ„" },
-              { value: false, label: "ط؛ظٹط± ظ…ظ‚ط±ظˆط،" },
-              { value: true, label: "ظ…ظ‚ط±ظˆط،" },
+              { value: null, label: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" },
+              { value: false, label: "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" },
+              { value: true, label: "ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" },
             ].map((f) => (
               <button type="button"
                 key={String(f.value)}
@@ -417,15 +417,14 @@ export default function NotificationsPage() {
       {unreadCount > 0 && filtered.length > 0 && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-text-secondary">
-            {unreadCount} ط¥ط´ط¹ط§ط± ط؛ظٹط± ظ…ظ‚ط±ظˆط،
+            {unreadCount} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ± ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ
           </p>
-          <Button
-            variant="outline"
+          <Button variant="outline"
             size="sm"
             leftIcon={<HiOutlineMailOpen size={16} />}
             onClick={markAllAsRead}
           >
-            طھط­ط¯ظٹط¯ ط§ظ„ظƒظ„ ظƒظ…ظ‚ط±ظˆط، ({unreadCount})
+            ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ ({unreadCount})
           </Button>
         </div>
       )}
@@ -437,38 +436,34 @@ export default function NotificationsPage() {
           className="flex items-center gap-2 p-3 bg-primary/5 border border-primary/20 rounded-xl"
         >
           <span className="text-sm font-medium text-text ml-2">
-            طھظ… طھط­ط¯ظٹط¯ {selectedIds.length} ط¥ط´ط¹ط§ط±
+            ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ {selectedIds.length} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±
           </span>
-          <Button
-            variant="secondary"
+          <Button variant="secondary"
             size="xs"
             leftIcon={<HiOutlineMailOpen size={14} />}
             onClick={() => setConfirmAction({ type: "markRead", ids: selectedIds })}
           >
-            طھط¹ظٹظٹظ† ظ…ظ‚ط±ظˆط،
+            ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ
           </Button>
-          <Button
-            variant="secondary"
+          <Button variant="secondary"
             size="xs"
             leftIcon={<HiOutlineArchive size={14} />}
             onClick={() => setConfirmAction({ type: "archive", ids: selectedIds })}
           >
-            ط£ط±ط´ظپط©
+            ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ©
           </Button>
-          <Button
-            variant="danger"
+          <Button variant="danger"
             size="xs"
             leftIcon={<HiOutlineTrash size={14} />}
             onClick={() => setConfirmAction({ type: "delete", ids: selectedIds })}
           >
-            ط­ط°ظپ
+            ط·آ­ط·آ°ط¸ظ¾
           </Button>
-          <Button
-            variant="ghost"
+          <Button variant="ghost"
             size="xs"
             onClick={() => setSelectedIds([])}
           >
-            ط¥ظ„ط؛ط§ط، ط§ظ„طھط­ط¯ظٹط¯
+            ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯
           </Button>
         </motion.div>
       )}
@@ -476,28 +471,29 @@ export default function NotificationsPage() {
       {filtered.length === 0 ? (
         <EmptyState
           icon={HiOutlineBell}
-          title="ظ„ط§ طھظˆط¬ط¯ ط¥ط´ط¹ط§ط±ط§طھ"
+          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
           description={
             search || categoryFilter !== "all" || priorityFilter !== "all" || showRead !== null
-              ? "ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط¥ط´ط¹ط§ط±ط§طھ طھط·ط§ط¨ظ‚ ظ…ط¹ط§ظٹظٹط± ط§ظ„ط¨ط­ط«"
+              ? "ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«"
               : showRead === true
-                ? "ظ„ط§ طھظˆط¬ط¯ ط¥ط´ط¹ط§ط±ط§طھ ظ…ظ‚ط±ظˆط،ط©"
+                ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒط·آ©"
                 : showRead === false
-                  ? "ظ„ط§ طھظˆط¬ط¯ ط¥ط´ط¹ط§ط±ط§طھ ط؛ظٹط± ظ…ظ‚ط±ظˆط،ط©"
-                  : "ظ„ظٹط³ ظ„ط¯ظٹظƒ ط£ظٹ ط¥ط´ط¹ط§ط±ط§طھ ط­طھظ‰ ط§ظ„ط¢ظ†"
+                  ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒط·آ©"
+                  : "ط¸â€‍ط¸ظ¹ط·آ³ ط¸â€‍ط·آ¯ط¸ظ¹ط¸ئ’ ط·آ£ط¸ظ¹ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ­ط·ع¾ط¸â€° ط·آ§ط¸â€‍ط·آ¢ط¸â€ "
           }
         />
       ) : (
         <div className="space-y-2">
           <div className="flex items-center gap-2 px-1">
-            <button type="button"`nonClick={toggleSelectAll}
+            <button type="button"
+onClick={toggleSelectAll}
               className="p-1 rounded hover:bg-surface-tertiary text-text-tertiary transition-colors"
-              title="طھط­ط¯ظٹط¯ ط§ظ„ظƒظ„"
+              title="ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍"
             >
               <HiOutlineSelector size={18} />
             </button>
             <span className="text-xs text-text-tertiary">
-              {filtered.length} ط¥ط´ط¹ط§ط±
+              {filtered.length} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±
             </span>
           </div>
           <AnimatePresence>
@@ -600,28 +596,28 @@ export default function NotificationsPage() {
                         href={notif.link || "#"}
                         onClick={(e) => { if (!notif.link) e.preventDefault() }}
                         className="p-1.5 rounded-lg hover:bg-surface-tertiary text-text-tertiary hover:text-primary transition-colors"
-                        title="ط¹ط±ط¶ ط§ظ„Øµظپط­ط© ط§ظ„ظ…ط±طھط¨ط·ط©"
+                        title="ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍أکآµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ±ط·ع¾ط·آ¨ط·آ·ط·آ©"
                       >
                         <HiOutlineExternalLink size={16} />
                       </Link>
                       <button type="button"
                         onClick={() => toggleRead(notif.id)}
                         className="p-1.5 rounded-lg hover:bg-surface-tertiary text-text-tertiary hover:text-text transition-colors"
-                        title={isUnread ? "طھط¹ظٹظٹظ† ظƒظ…ظ‚ط±ظˆط،" : "طھط¹ظٹظٹظ† ظƒط؛ظٹط± ظ…ظ‚ط±ظˆط،"}
+                        title={isUnread ? "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" : "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"}
                       >
                         {isUnread ? <HiOutlineEye size={16} /> : <HiOutlineEyeOff size={16} />}
                       </button>
                       <button type="button"
                         onClick={() => archiveSingle(notif.id)}
                         className="p-1.5 rounded-lg hover:bg-surface-tertiary text-text-tertiary hover:text-text transition-colors"
-                        title="ط£ط±ط´ظپط©"
+                        title="ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ©"
                       >
                         <HiOutlineArchive size={16} />
                       </button>
                       <button type="button"
                         onClick={() => setConfirmAction({ type: "delete", ids: [notif.id] })}
                         className="p-1.5 rounded-lg hover:bg-error/10 text-text-tertiary hover:text-error transition-colors"
-                        title="ط­ط°ظپ"
+                        title="ط·آ­ط·آ°ط¸ظ¾"
                       >
                         <HiOutlineTrash size={16} />
                       </button>
@@ -637,7 +633,7 @@ export default function NotificationsPage() {
       {archivedList.length > 0 && categoryFilter === "all" && priorityFilter === "all" && showRead === null && !search && (
         <details className="mt-6">
           <summary className="text-sm font-medium text-text-secondary cursor-pointer hover:text-text transition-colors">
-            ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ ط§ظ„ظ…ط¤ط±ط´ظپط© ({archivedList.length})
+            ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ¤ط·آ±ط·آ´ط¸ظ¾ط·آ© ({archivedList.length})
           </summary>
           <div className="mt-3 space-y-2">
             {archivedList.map((notif) => {
@@ -663,7 +659,7 @@ export default function NotificationsPage() {
 
       <div className="text-center">
         <p className="text-xs text-text-tertiary">
-          ط¥ط¬ظ…ط§ظ„ظٹ {notifications.length} ط¥ط´ط¹ط§ط± آ· {stats.unread} ط؛ظٹط± ظ…ظ‚ط±ظˆط، آ· {stats.archived} ظ…ط¤ط±ط´ظپ
+          ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ {notifications.length} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ± ط¢آ· {stats.unread} ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ ط¢آ· {stats.archived} ط¸â€¦ط·آ¤ط·آ±ط·آ´ط¸ظ¾
         </p>
       </div>
 
@@ -714,38 +710,35 @@ export default function NotificationsPage() {
               </div>
               <div className="flex items-center gap-1.5">
                 <HiOutlineFlag size={14} />
-                <span>ط£ظˆظ„ظˆظٹط© {priorityLabels[detailNotif.priority]}</span>
+                <span>ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ© {priorityLabels[detailNotif.priority]}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <HiOutlineEye size={14} />
-                <span>{readIds.includes(detailNotif.id) ? "ظ…ظ‚ط±ظˆط،" : "ط؛ظٹط± ظ…ظ‚ط±ظˆط،"}</span>
+                <span>{readIds.includes(detailNotif.id) ? "ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"}</span>
               </div>
             </div>
 
               <div className="flex items-center gap-2 pt-4 border-t border-border">
                 {detailNotif.link && (
                   <Link href={detailNotif.link}>
-                    <Button
-                      variant="primary"
+                    <Button variant="primary"
                       size="sm"
                       leftIcon={<HiOutlineExternalLink size={16} />}
                     >
-                      ط¹ط±ط¶ ط§ظ„Øµظپط­ط©
+                      ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍أکآµط¸ظ¾ط·آ­ط·آ©
                     </Button>
                   </Link>
                 )}
-                <Button
-                  variant={readIds.includes(detailNotif.id) ? "secondary" : "primary"}
+                <Button variant={readIds.includes(detailNotif.id) ? "secondary" : "primary"}
                   size="sm"
                   leftIcon={readIds.includes(detailNotif.id) ? <HiOutlineEyeOff size={16} /> : <HiOutlineEye size={16} />}
                   onClick={() => {
                     toggleRead(detailNotif.id)
                   }}
                 >
-                  {readIds.includes(detailNotif.id) ? "طھط¹ظٹظٹظ† ظƒط؛ظٹط± ظ…ظ‚ط±ظˆط،" : "طھط¹ظٹظٹظ† ظƒظ…ظ‚ط±ظˆط،"}
+                  {readIds.includes(detailNotif.id) ? "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" : "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"}
                 </Button>
-              <Button
-                variant="secondary"
+              <Button variant="secondary"
                 size="sm"
                 leftIcon={<HiOutlineArchive size={16} />}
                 onClick={() => {
@@ -753,10 +746,9 @@ export default function NotificationsPage() {
                   setDetailNotif(null)
                 }}
               >
-                ط£ط±ط´ظپط©
+                ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ©
               </Button>
-              <Button
-                variant="danger"
+              <Button variant="danger"
                 size="sm"
                 leftIcon={<HiOutlineTrash size={16} />}
                 onClick={() => {
@@ -764,7 +756,7 @@ export default function NotificationsPage() {
                   setConfirmAction({ type: "delete", ids: [detailNotif.id] })
                 }}
               >
-                ط­ط°ظپ
+                ط·آ­ط·آ°ط¸ظ¾
               </Button>
             </div>
           </div>
@@ -777,21 +769,21 @@ export default function NotificationsPage() {
         onConfirm={handleConfirmAction}
         title={
           confirmAction?.type === "delete"
-            ? "ط­ط°ظپ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ"
+            ? "ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
             : confirmAction?.type === "archive"
-              ? "ط£ط±ط´ظپط© ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ"
-              : "طھط¹ظٹظٹظ† ظƒظ…ظ‚ط±ظˆط،"
+              ? "ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
+              : "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"
         }
         message={
           confirmAction?.type === "delete"
-            ? `ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯ ظ…ظ† ط­ط°ظپ ${confirmAction.ids.length === 1 ? "ظ‡ط°ط§ ط§ظ„ط¥ط´ط¹ط§ط±" : `ظ‡ط°ظ‡ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ (${confirmAction.ids.length})`}طں`
+            ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ­ط·آ°ط¸ظ¾ ${confirmAction.ids.length === 1 ? "ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±" : `ط¸â€،ط·آ°ط¸â€، ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ (${confirmAction.ids.length})`}ط·ع؛`
             : confirmAction?.type === "archive"
-              ? `ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯ ظ…ظ† ط£ط±ط´ظپط© ${confirmAction.ids.length === 1 ? "ظ‡ط°ط§ ط§ظ„ط¥ط´ط¹ط§ط±" : `ظ‡ط°ظ‡ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ (${confirmAction.ids.length})`}طں`
-              : `ط³ظٹطھظ… طھط¹ظٹظٹظ† ${confirmAction?.ids.length === 1 ? "ظ‡ط°ط§ ط§ظ„ط¥ط´ط¹ط§ط±" : `ظ‡ط°ظ‡ ط§ظ„ط¥ط´ط¹ط§ط±ط§طھ (${confirmAction?.ids.length})`} ظƒظ…ظ‚ط±ظˆط،`
+              ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ© ${confirmAction.ids.length === 1 ? "ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±" : `ط¸â€،ط·آ°ط¸â€، ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ (${confirmAction.ids.length})`}ط·ع؛`
+              : `ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ${confirmAction?.ids.length === 1 ? "ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±" : `ط¸â€،ط·آ°ط¸â€، ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ (${confirmAction?.ids.length})`} ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ`
         }
         variant={confirmAction?.type === "delete" ? "danger" : "info"}
-        confirmText="طھط£ظƒظٹط¯"
-        cancelText="ط¥ظ„ط؛ط§ط،"
+        confirmText="ط·ع¾ط·آ£ط¸ئ’ط¸ظ¹ط·آ¯"
+        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
       />
     </div>
   )

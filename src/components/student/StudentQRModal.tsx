@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useRef } from 'react'
 import { Modal } from '@/components/ui/Modal'
@@ -62,23 +62,23 @@ export function StudentQRModal({ isOpen, onClose, student }: StudentQRModalProps
   const handlePrint = () => {
     const w = window.open('', '_blank')
     if (!w) return
-    w.document.write(`<html dir="rtl"><head><meta charset="utf-8"><title>QR Code - ${student.name}</title><style>body{font-family:sans-serif;text-align:center;padding:40px}h2{margin:16px 0 4px}p{margin:4px 0;color:#666}.qr{width:300px;height:300px;margin:0 auto}</style></head><body>${qrSvg.replace('<svg', '<svg class="qr"')}<h2>${student.name}</h2><p>${student.grade} آ· ${student.group}</p><p>ط§ظ„ط±ظ…ط²: TOS-${student.id}</p></body></html>`)
+    w.document.write(`<html dir="rtl"><head><meta charset="utf-8"><title>QR Code - ${student.name}</title><style>body{font-family:sans-serif;text-align:center;padding:40px}h2{margin:16px 0 4px}p{margin:4px 0;color:#666}.qr{width:300px;height:300px;margin:0 auto}</style></head><body>${qrSvg.replace('<svg', '<svg class="qr"')}<h2>${student.name}</h2><p>${student.grade} ط¢آ· ${student.group}</p><p>ط·آ§ط¸â€‍ط·آ±ط¸â€¦ط·آ²: TOS-${student.id}</p></body></html>`)
     w.document.close()
     w.print()
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="ط±ظ…ط² QR ظ„ظ„ط·ط§ظ„ط¨" size="sm">
+    <Modal isOpen={isOpen} onClose={onClose} title="ط·آ±ط¸â€¦ط·آ² QR ط¸â€‍ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨" size="sm">
       <div className="flex flex-col items-center gap-4 py-4">
         <div ref={svgRef} className="w-52 h-52" dangerouslySetInnerHTML={{ __html: qrSvg }} />
         <div className="text-center">
           <h3 className="text-lg font-bold text-text">{student.name}</h3>
-          <p className="text-sm text-text-secondary">{student.grade} آ· {student.group}</p>
+          <p className="text-sm text-text-secondary">{student.grade} ط¢آ· {student.group}</p>
           <p className="text-xs text-text-tertiary mt-1">TOS-{student.id}</p>
         </div>
         <div className="flex gap-3 w-full pt-2">
-          <button type="button" variant="primary" className="flex-1" onClick={handleDownload}>طھط­ظ…ظٹظ„ PNG</Button>
-          <button type="button" variant="secondary" className="flex-1" onClick={handlePrint}>ط·ط¨ط§ط¹ط©</Button>
+          <Button variant="primary" className="flex-1" onClick={handleDownload}>ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ PNG</Button>
+          <Button variant="secondary" className="flex-1" onClick={handlePrint}>ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©</Button>
         </div>
       </div>
     </Modal>

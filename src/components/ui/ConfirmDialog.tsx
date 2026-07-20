@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useCallback, useState } from "react"
 import { cn } from "@/lib/utils"
@@ -44,8 +44,8 @@ export function ConfirmDialog({
   onConfirm,
   title,
   message,
-  confirmText = "طھط£ظƒظٹط¯",
-  cancelText = "ط¥ظ„ط؛ط§ط،",
+  confirmText = "تأكيد",
+  cancelText = "إلغاء",
   variant = "danger",
 }: ConfirmDialogProps) {
   const [isLoading, setIsLoading] = useState(false)
@@ -95,7 +95,8 @@ export function ConfirmDialog({
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
             className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-md p-6"
           >
-            <button type="button"`nonClick={onClose}
+            <button type="button"
+              onClick={onClose}
               className="absolute top-4 left-4 p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 transition-colors"
             >
               <X className="w-5 h-5" />
@@ -110,14 +111,14 @@ export function ConfirmDialog({
               )}
             </div>
             <div className="flex gap-3">
-              <button type="button"`nvariant="secondary"
+              <Button variant="secondary"
                 onClick={onClose}
                 className="flex-1"
                 disabled={isLoading}
               >
                 {cancelText}
               </Button>
-              <button type="button"`nvariant={config.buttonVariant}
+              <Button variant={config.buttonVariant}
                 onClick={handleConfirm}
                 className="flex-1"
                 isLoading={isLoading}

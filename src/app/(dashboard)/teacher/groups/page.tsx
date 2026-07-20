@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
@@ -35,8 +35,8 @@ import { cn } from "@/lib/utils"
 import { mockClassGroups, mockWaitingStudents, mockFreezeRecords, mockMissedLessons, mockCourses } from "@/lib/mock/data"
 
 const dayMap: Record<string, string> = {
-  saturday: "ط§ظ„ط³ط¨طھ", sunday: "ط§ظ„ط£ط­ط¯", monday: "ط§ظ„ط¥ط«ظ†ظٹظ†",
-  tuesday: "ط§ظ„ط«ظ„ط§ط«ط§ط،", wednesday: "ط§ظ„ط£ط±ط¨ط¹ط§ط،", thursday: "ط§ظ„ط®ظ…ظٹط³", friday: "ط§ظ„ط¬ظ…ط¹ط©",
+  saturday: "ط·آ§ط¸â€‍ط·آ³ط·آ¨ط·ع¾", sunday: "ط·آ§ط¸â€‍ط·آ£ط·آ­ط·آ¯", monday: "ط·آ§ط¸â€‍ط·آ¥ط·آ«ط¸â€ ط¸ظ¹ط¸â€ ",
+  tuesday: "ط·آ§ط¸â€‍ط·آ«ط¸â€‍ط·آ§ط·آ«ط·آ§ط·طŒ", wednesday: "ط·آ§ط¸â€‍ط·آ£ط·آ±ط·آ¨ط·آ¹ط·آ§ط·طŒ", thursday: "ط·آ§ط¸â€‍ط·آ®ط¸â€¦ط¸ظ¹ط·آ³", friday: "ط·آ§ط¸â€‍ط·آ¬ط¸â€¦ط·آ¹ط·آ©",
 }
 
 const statusVariant: Record<string, "success" | "warning" | "neutral"> = {
@@ -44,10 +44,10 @@ const statusVariant: Record<string, "success" | "warning" | "neutral"> = {
 }
 
 const tabs = [
-  { id: "groups", label: "ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ", icon: <HiOutlineUserGroup className="w-4 h-4" /> },
-  { id: "waiting", label: "ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±", icon: <HiOutlineClock className="w-4 h-4" /> },
-  { id: "freeze", label: "ط§ظ„طھط¬ظ…ظٹط¯", icon: <HiOutlinePause className="w-4 h-4" /> },
-  { id: "missed", label: "ط§ظ„ط¯ط±ظˆط³ ط§ظ„ظ…ظپظ‚ظˆط¯ط©", icon: <HiOutlineExclamation className="w-4 h-4" /> },
+  { id: "groups", label: "ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾", icon: <HiOutlineUserGroup className="w-4 h-4" /> },
+  { id: "waiting", label: "ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±", icon: <HiOutlineClock className="w-4 h-4" /> },
+  { id: "freeze", label: "ط·آ§ط¸â€‍ط·ع¾ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¯", icon: <HiOutlinePause className="w-4 h-4" /> },
+  { id: "missed", label: "ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط·آ§ط¸â€‍ط¸â€¦ط¸ظ¾ط¸â€ڑط¸ث†ط·آ¯ط·آ©", icon: <HiOutlineExclamation className="w-4 h-4" /> },
 ]
 
 export default function GroupsPage() {
@@ -80,17 +80,17 @@ export default function GroupsPage() {
   }), [])
 
   const handleAddGroup = () => {
-    toast.success(`طھظ… ط¥ط¶ط§ظپط© ط§ظ„ظ…ط¬ظ…ظˆط¹ط© ${addForm.name || "ط¬ط¯ظٹط¯ط©"} ط¨ظ†ط¬ط§ط­`)
+    toast.success(`ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ© ${addForm.name || "ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©"} ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­`)
     setShowAddModal(false)
     setAddForm({ name: "", courseId: "", capacity: "25", classroom: "" })
   }
 
   const handleNotify = (id: string) => {
-    toast.success("طھظ… ط¥ط±ط³ط§ظ„ ط§ظ„ط¥ط´ط¹ط§ط± ظ„ظ„ط·ط§ظ„ط¨")
+    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ± ط¸â€‍ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨")
   }
 
   const handleRecover = (id: string) => {
-    toast.success("طھظ… طھط¹ظˆظٹط¶ ط§ظ„ط¯ط±ط³ ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ¹ط¸ث†ط¸ظ¹ط·آ¶ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
   }
 
   const handleRetry = () => {
@@ -102,7 +102,7 @@ export default function GroupsPage() {
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط¥ط¯ط§ط±ط© ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ ظˆط§ظ„ظپطµظˆظ„" description="ط¹ط±ط¶ ظˆط¥ط¯ط§ط±ط© ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ ط§ظ„ط¯ط±ط§ط³ظٹط©" />
+        <PageHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸ظ¾ط·آµط¸ث†ط¸â€‍" description="ط·آ¹ط·آ±ط·آ¶ ط¸ث†ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط¸ظ¹ط·آ©" />
         <ErrorState message={error} onRetry={handleRetry} />
       </div>
     )
@@ -111,11 +111,11 @@ export default function GroupsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <PageHeader
-        title="ط¥ط¯ط§ط±ط© ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ ظˆط§ظ„ظپطµظˆظ„"
-        description="ط¹ط±ط¶ ظˆط¥ط¯ط§ط±ط© ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ ط§ظ„ط¯ط±ط§ط³ظٹط©"
+        title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸ظ¾ط·آµط¸ث†ط¸â€‍"
+        description="ط·آ¹ط·آ±ط·آ¶ ط¸ث†ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط¸ظ¹ط·آ©"
         actions={
           <Button onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus className="w-4 h-4" />}>
-            ط¥ط¶ط§ظپط© ظ…ط¬ظ…ظˆط¹ط©
+            ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©
           </Button>
         }
       />
@@ -124,10 +124,10 @@ export default function GroupsPage() {
         <StatsSkeleton count={4} />
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ" value={stats.totalGroups} icon={HiOutlineUserGroup} color="primary" />
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط·ظ„ط§ط¨" value={stats.totalStudents} icon={HiOutlineUsers} color="success" />
-          <StatsCard title="ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±" value={stats.waitingCount} icon={HiOutlineClock} color="warning" />
-          <StatsCard title="ط§ظ„ظ…ط¬ظ…ط¯ظˆظ†" value={stats.frozenCount} icon={HiOutlinePause} color="error" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾" value={stats.totalGroups} icon={HiOutlineUserGroup} color="primary" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨" value={stats.totalStudents} icon={HiOutlineUsers} color="success" />
+          <StatsCard title="ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" value={stats.waitingCount} icon={HiOutlineClock} color="warning" />
+          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط·آ¯ط¸ث†ط¸â€ " value={stats.frozenCount} icon={HiOutlinePause} color="error" />
         </div>
       )}
 
@@ -136,15 +136,15 @@ export default function GroupsPage() {
           <>
             <TabPanel id="groups" activeTab={activeTab}>
               <div className="space-y-4">
-                <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ظ…ط¬ظ…ظˆط¹ط©..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©..." />
                 {loading ? (
                   <CardSkeleton count={3} />
                 ) : paginatedGroups.length === 0 ? (
                   <EmptyState
                     icon={HiOutlineUserGroup}
-                    title="ظ„ط§ طھظˆط¬ط¯ ظ…ط¬ظ…ظˆط¹ط§طھ"
-                    description={search ? "ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬ ظ„ظ„ط¨ط­ط«" : "ظ„ظ… ظٹطھظ… ط¥ط¶ط§ظپط© ط£ظٹ ظ…ط¬ظ…ظˆط¹ط§طھ ط¨ط¹ط¯"}
-                    action={<Button onClick={() => { setAddForm({ name: "", courseId: "", capacity: "25", classroom: "" }); setShowAddModal(true) }}>ط¥ط¶ط§ظپط© ظ…ط¬ظ…ظˆط¹ط©</Button>}
+                    title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾"
+                    description={search ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط¸â€‍ط¸â€‍ط·آ¨ط·آ­ط·آ«" : "ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ£ط¸ظ¹ ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾ ط·آ¨ط·آ¹ط·آ¯"}
+                    action={<Button onClick={() => { setAddForm({ name: "", courseId: "", capacity: "25", classroom: "" }); setShowAddModal(true) }}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©</Button>}
                   />
                 ) : (
                   <>
@@ -157,12 +157,12 @@ export default function GroupsPage() {
                                 <CardTitle>{group.name}</CardTitle>
                                 <p className="text-sm text-text-secondary mt-0.5">{group.courseName}</p>
                               </div>
-                              <Badge variant={statusVariant[group.status]}>{group.status === "active" ? "ظ†ط´ط·" : group.status === "completed" ? "ظ…ظƒطھظ…ظ„" : "ط؛ظٹط± ظ†ط´ط·"}</Badge>
+                              <Badge variant={statusVariant[group.status]}>{group.status === "active" ? "ط¸â€ ط·آ´ط·آ·" : group.status === "completed" ? "ط¸â€¦ط¸ئ’ط·ع¾ط¸â€¦ط¸â€‍" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·"}</Badge>
                             </CardHeader>
                             <CardContent className="space-y-3">
                               <div>
                                 <div className="flex justify-between text-sm mb-1">
-                                  <span className="text-text-secondary">ط§ظ„ط³ط¹ط©</span>
+                                  <span className="text-text-secondary">ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ©</span>
                                   <span className="text-text font-medium">{group.enrolledCount}/{group.capacity}</span>
                                 </div>
                                 <Progress value={group.enrolledCount} max={group.capacity} variant={group.enrolledCount >= group.capacity ? "warning" : "primary"} size="sm" />
@@ -182,19 +182,19 @@ export default function GroupsPage() {
                               {group.waitingCount > 0 && (
                                 <div className="flex items-center gap-1.5 text-sm text-warning">
                                   <HiOutlineClock className="w-4 h-4" />
-                                  <span>{group.waitingCount} ط·ط§ظ„ط¨ ظپظٹ ط§ظ„ط§ظ†طھط¸ط§ط±</span>
+                                  <span>{group.waitingCount} ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±</span>
                                 </div>
                               )}
                             </CardContent>
                             <div className="flex items-center gap-2 px-6 pb-4 pt-0">
                               <Link href={`/teacher/groups/${group.id}`}>
-                                <button type="button" variant="primary" size="sm" leftIcon={<HiOutlineEye className="w-4 h-4" />}>
-                                  ط¹ط±ط¶ ط§ظ„ظ…ط¬ظ…ظˆط¹ط©
+                                <Button variant="primary" size="sm" leftIcon={<HiOutlineEye className="w-4 h-4" />}>
+                                  ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©
                                 </Button>
                               </Link>
                               {group.waitingCount > 0 && (
-                                <button type="button" variant="outline" size="sm" leftIcon={<HiOutlineClock className="w-4 h-4" />}>
-                                  ط¹ط±ط¶ ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±
+                                <Button variant="outline" size="sm" leftIcon={<HiOutlineClock className="w-4 h-4" />}>
+                                  ط·آ¹ط·آ±ط·آ¶ ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±
                                 </Button>
                               )}
                             </div>
@@ -212,18 +212,18 @@ export default function GroupsPage() {
               {loading ? (
                 <TableSkeleton rows={5} columns={5} />
               ) : mockWaitingStudents.length === 0 ? (
-                <EmptyState icon={HiOutlineClock} title="ظ„ط§ ظٹظˆط¬ط¯ ط·ظ„ط§ط¨ ظپظٹ ط§ظ„ط§ظ†طھط¸ط§ط±" description="ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط± ظپط§ط±ط؛ط© ط­ط§ظ„ظٹط§ظ‹" />
+                <EmptyState icon={HiOutlineClock} title="ط¸â€‍ط·آ§ ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" description="ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ± ط¸ظ¾ط·آ§ط·آ±ط·ط›ط·آ© ط·آ­ط·آ§ط¸â€‍ط¸ظ¹ط·آ§ط¸â€¹" />
               ) : (
                 <div className="overflow-x-auto rounded-xl border border-border">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-surface-secondary border-b border-border">
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط·ط§ظ„ط¨</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ظ…ط¬ظ…ظˆط¹ط©</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">طھط§ط±ظٹط® ط§ظ„ط§ظ†ط¶ظ…ط§ظ…</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط£ظˆظ„ظˆظٹط©</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط­ط§ظ„ط©</th>
-                        <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·آ¶ط¸â€¦ط·آ§ط¸â€¦</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ©</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
+                        <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -236,21 +236,21 @@ export default function GroupsPage() {
                           <td className="px-4 py-3 text-text-secondary">{w.joinedAt.toLocaleDateString("ar-EG")}</td>
                           <td className="px-4 py-3">
                             <Badge variant={w.priority === 1 ? "error" : w.priority === 2 ? "warning" : "info"}>
-                              {w.priority === 1 ? "ط¹ط§ظ„ظٹط©" : w.priority === 2 ? "ظ…طھظˆط³ط·ط©" : "ظ…ظ†ط®ظپط¶ط©"}
+                              {w.priority === 1 ? "ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©" : w.priority === 2 ? "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·ط·آ©" : "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶ط·آ©"}
                             </Badge>
                           </td>
                           <td className="px-4 py-3">
                             <Badge variant={w.status === "waiting" ? "warning" : w.status === "enrolled" ? "success" : w.status === "cancelled" ? "error" : "info"}>
-                              {w.status === "waiting" ? "ط¨ط§ظ†طھط¸ط§ط±" : w.status === "offered" ? "طھظ… ط§ظ„ط¹ط±ط¶" : w.status === "enrolled" ? "ظ…ط³ط¬ظ„" : "ظ…ظ„ط؛ظٹ"}
+                              {w.status === "waiting" ? "ط·آ¨ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" : w.status === "offered" ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¶" : w.status === "enrolled" ? "ط¸â€¦ط·آ³ط·آ¬ط¸â€‍" : "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹"}
                             </Badge>
                           </td>
                           <td className="px-4 py-3">
                             <div className="flex items-center justify-center gap-2">
-                              <button type="button" variant="outline" size="xs" leftIcon={<HiOutlineBell className="w-3.5 h-3.5" />} onClick={() => handleNotify(w.id)}>
-                                ط¥ط®ط·ط§ط±
+                              <Button variant="outline" size="xs" leftIcon={<HiOutlineBell className="w-3.5 h-3.5" />} onClick={() => handleNotify(w.id)}>
+                                ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ±
                               </Button>
-                              <button type="button" variant="success" size="xs" leftIcon={<HiOutlinePlus className="w-3.5 h-3.5" />}>
-                                طھط³ط¬ظٹظ„
+                              <Button variant="success" size="xs" leftIcon={<HiOutlinePlus className="w-3.5 h-3.5" />}>
+                                ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍
                               </Button>
                             </div>
                           </td>
@@ -266,18 +266,18 @@ export default function GroupsPage() {
               {loading ? (
                 <TableSkeleton rows={4} columns={5} />
               ) : mockFreezeRecords.length === 0 ? (
-                <EmptyState icon={HiOutlinePause} title="ظ„ط§ طھظˆط¬ط¯ ط³ط¬ظ„ط§طھ طھط¬ظ…ظٹط¯" description="ظ„ط§ ظٹظˆط¬ط¯ ط§ط´طھط±ط§ظƒط§طھ ظ…ط¬ظ…ط¯ط© ط­ط§ظ„ظٹط§ظ‹" />
+                <EmptyState icon={HiOutlinePause} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط·ع¾ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¯" description="ط¸â€‍ط·آ§ ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ ط·آ§ط·آ´ط·ع¾ط·آ±ط·آ§ط¸ئ’ط·آ§ط·ع¾ ط¸â€¦ط·آ¬ط¸â€¦ط·آ¯ط·آ© ط·آ­ط·آ§ط¸â€‍ط¸ظ¹ط·آ§ط¸â€¹" />
               ) : (
                 <div className="overflow-x-auto rounded-xl border border-border">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-surface-secondary border-b border-border">
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط·ط§ظ„ط¨</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ظ…ط¬ظ…ظˆط¹ط©</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">طھط§ط±ظٹط® ط§ظ„ط¨ط¯ط§ظٹط©</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">طھط§ط±ظٹط® ط§ظ„ظ†ظ‡ط§ظٹط©</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط³ط¨ط¨</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط­ط§ظ„ط©</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ¨ط·آ¯ط·آ§ط¸ظ¹ط·آ©</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط¸â€ ط¸â€،ط·آ§ط¸ظ¹ط·آ©</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ³ط·آ¨ط·آ¨</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -290,7 +290,7 @@ export default function GroupsPage() {
                           <td className="px-4 py-3 text-text-secondary">{f.reason}</td>
                           <td className="px-4 py-3">
                             <Badge variant={f.status === "active" ? "warning" : f.status === "expired" ? "neutral" : "info"}>
-                              {f.status === "active" ? "ظ†ط´ط·" : f.status === "expired" ? "ظ…ظ†طھظ‡ظٹ" : "ظ…ظ„ط؛ظٹ"}
+                              {f.status === "active" ? "ط¸â€ ط·آ´ط·آ·" : f.status === "expired" ? "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹" : "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹"}
                             </Badge>
                           </td>
                         </tr>
@@ -305,17 +305,17 @@ export default function GroupsPage() {
               {loading ? (
                 <TableSkeleton rows={4} columns={5} />
               ) : mockMissedLessons.length === 0 ? (
-                <EmptyState icon={HiOutlineExclamation} title="ظ„ط§ طھظˆط¬ط¯ ط¯ط±ظˆط³ ظ…ظپظ‚ظˆط¯ط©" description="ط¬ظ…ظٹط¹ ط§ظ„ط¯ط±ظˆط³ طھظ… طھط¹ظˆظٹط¶ظ‡ط§" />
+                <EmptyState icon={HiOutlineExclamation} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¯ط·آ±ط¸ث†ط·آ³ ط¸â€¦ط¸ظ¾ط¸â€ڑط¸ث†ط·آ¯ط·آ©" description="ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط·ع¾ط¸â€¦ ط·ع¾ط·آ¹ط¸ث†ط¸ظ¹ط·آ¶ط¸â€،ط·آ§" />
               ) : (
                 <div className="overflow-x-auto rounded-xl border border-border">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-surface-secondary border-b border-border">
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط·ط§ظ„ط¨</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط¯ط±ط³</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„طھط§ط±ظٹط®</th>
-                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط­ط§ظ„ط©</th>
-                        <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</th>
+                        <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
+                        <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -326,13 +326,13 @@ export default function GroupsPage() {
                           <td className="px-4 py-3 text-text-secondary">{m.date.toLocaleDateString("ar-EG")}</td>
                           <td className="px-4 py-3">
                             <Badge variant={m.recovered ? "success" : "error"}>
-                              {m.recovered ? "طھظ… ط§ظ„طھط¹ظˆظٹط¶" : "ظ…ظپظ‚ظˆط¯"}
+                              {m.recovered ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط¸ث†ط¸ظ¹ط·آ¶" : "ط¸â€¦ط¸ظ¾ط¸â€ڑط¸ث†ط·آ¯"}
                             </Badge>
                           </td>
                           <td className="px-4 py-3">
                             <div className="flex justify-center">
-                              <button type="button" variant="primary" size="xs" leftIcon={<HiOutlineRefresh className="w-3.5 h-3.5" />} onClick={() => handleRecover(m.id)}>
-                                طھط¹ظˆظٹط¶
+                              <Button variant="primary" size="xs" leftIcon={<HiOutlineRefresh className="w-3.5 h-3.5" />} onClick={() => handleRecover(m.id)}>
+                                ط·ع¾ط·آ¹ط¸ث†ط¸ظ¹ط·آ¶
                               </Button>
                             </div>
                           </td>
@@ -347,15 +347,15 @@ export default function GroupsPage() {
         )}
       </Tabs>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¥ط¶ط§ظپط© ظ…ط¬ظ…ظˆط¹ط© ط¬ط¯ظٹط¯ط©" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©" size="md">
         <div className="space-y-4">
-          <Input label="ط§ط³ظ… ط§ظ„ظ…ط¬ظ…ظˆط¹ط©" value={addForm.name} onChange={(e) => setAddForm({ ...addForm, name: e.target.value })} placeholder="ظ…ط«ط§ظ„: ظ…ط¬ظ…ظˆط¹ط© A" />
-          <Select label="ط§ظ„ظƒظˆط±ط³" options={mockCourses.map(c => ({ value: c.id, label: c.title }))} value={addForm.courseId} onChange={(e) => setAddForm({ ...addForm, courseId: e.target.value })} placeholder="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³" />
-          <Input label="ط§ظ„ط³ط¹ط©" type="number" value={addForm.capacity} onChange={(e) => setAddForm({ ...addForm, capacity: e.target.value })} placeholder="25" />
-          <Input label="ط§ظ„ظ‚ط§ط¹ط©" value={addForm.classroom} onChange={(e) => setAddForm({ ...addForm, classroom: e.target.value })} placeholder="ظ…ط«ط§ظ„: ظ‚ط§ط¹ط© ط§ظ„ط£ظ†ط¯ظ„ط³" />
+          <Input label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©" value={addForm.name} onChange={(e) => setAddForm({ ...addForm, name: e.target.value })} placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ© A" />
+          <Select label="ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³" options={mockCourses.map(c => ({ value: c.id, label: c.title }))} value={addForm.courseId} onChange={(e) => setAddForm({ ...addForm, courseId: e.target.value })} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³" />
+          <Input label="ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ©" type="number" value={addForm.capacity} onChange={(e) => setAddForm({ ...addForm, capacity: e.target.value })} placeholder="25" />
+          <Input label="ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¹ط·آ©" value={addForm.classroom} onChange={(e) => setAddForm({ ...addForm, classroom: e.target.value })} placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط¸â€ڑط·آ§ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ£ط¸â€ ط·آ¯ط¸â€‍ط·آ³" />
           <div className="flex gap-3 pt-2">
-            <Button variant="secondary" onClick={() => setShowAddModal(false)} className="flex-1">ط¥ظ„ط؛ط§ط،</Button>
-            <button type="button" onClick={handleAddGroup} className="flex-1">ط¥ط¶ط§ظپط©</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)} className="flex-1">ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <button type="button" onClick={handleAddGroup} className="flex-1">ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ©</button>
           </div>
         </div>
       </Modal>

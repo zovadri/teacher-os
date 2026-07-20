@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect } from 'react'
 import { ExamTimer } from './ExamTimer'
@@ -47,7 +47,7 @@ export function ExamHeader({
             <div className="min-w-0">
               <h1 className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">{title}</h1>
               <p className="text-xs text-gray-500">
-                ط³ط¤ط§ظ„ {currentIndex + 1} ظ…ظ† {totalQuestions}
+                ط·آ³ط·آ¤ط·آ§ط¸â€‍ {currentIndex + 1} ط¸â€¦ط¸â€  {totalQuestions}
               </p>
             </div>
           </div>
@@ -63,18 +63,20 @@ export function ExamHeader({
               onTimeUp={onTimeUp}
             />
 
-            <button type="button"`nonClick={onPause}
+            <button type="button"
+onClick={onPause}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 transition-colors"
-              title={isPaused ? 'ط§ط³طھط¦ظ†ط§ظپ' : 'ط¥ظٹظ‚ط§ظپ ظ…ط¤ظ‚طھ'}
+              title={isPaused ? 'ط·آ§ط·آ³ط·ع¾ط·آ¦ط¸â€ ط·آ§ط¸ظ¾' : 'ط·آ¥ط¸ظ¹ط¸â€ڑط·آ§ط¸ظ¾ ط¸â€¦ط·آ¤ط¸â€ڑط·ع¾'}
             >
               {isPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
             </button>
 
-            <button type="button"`nonClick={onSubmit}
+            <button type="button"
+onClick={onSubmit}
               className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors active:scale-[0.97]"
             >
               <Send className="w-4 h-4" />
-              <span className="hidden sm:inline">طھط³ظ„ظٹظ… ط§ظ„ط§ظ…طھط­ط§ظ†</span>
+              <span className="hidden sm:inline">ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ </span>
             </button>
           </div>
         </div>

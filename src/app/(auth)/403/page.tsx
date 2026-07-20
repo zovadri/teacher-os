@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -18,17 +18,17 @@ export default function ForbiddenPage() {
           <HiShieldExclamation className="w-10 h-10 text-error" />
         </div>
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-text">ط؛ظٹط± ظ…طµط±ط­ ط¨ط§ظ„ظˆطµظˆظ„</h1>
-          <p className="text-text-secondary">ظ„ظٹط³ ظ„ط¯ظٹظƒ ط§ظ„طµظ„ط§ط­ظٹط© ظ„ظ„ظˆطµظˆظ„ ط¥ظ„ظ‰ ظ‡ط°ظ‡ ط§ظ„طµظپط­ط©. ظٹط±ط¬ظ‰ ط§ظ„طھظˆط§طµظ„ ظ…ط¹ ظ…ط¯ظٹط± ط§ظ„ظ†ط¸ط§ظ….</p>
+          <h1 className="text-3xl font-bold text-text">ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·آµط·آ±ط·آ­ ط·آ¨ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍</h1>
+          <p className="text-text-secondary">ط¸â€‍ط¸ظ¹ط·آ³ ط¸â€‍ط·آ¯ط¸ظ¹ط¸ئ’ ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ© ط¸â€‍ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍ ط·آ¥ط¸â€‍ط¸â€° ط¸â€،ط·آ°ط¸â€، ط·آ§ط¸â€‍ط·آµط¸ظ¾ط·آ­ط·آ©. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط·ع¾ط¸ث†ط·آ§ط·آµط¸â€‍ ط¸â€¦ط·آ¹ ط¸â€¦ط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦.</p>
         </div>
         <div className="flex justify-center gap-3">
           <Link href="/">
-            <button type="button" variant="primary" leftIcon={<HiArrowRight className="w-4 h-4" />}>
-              ط§ظ„ط¹ظˆط¯ط© ظ„ظ„ط±ط¦ظٹط³ظٹط©
+            <Button variant="primary" leftIcon={<HiArrowRight className="w-4 h-4" />}>
+              ط·آ§ط¸â€‍ط·آ¹ط¸ث†ط·آ¯ط·آ© ط¸â€‍ط¸â€‍ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ط·آ©
             </Button>
           </Link>
           <Link href="/login">
-            <Button variant="secondary">طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„</Button>
+            <Button variant="secondary">ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¯ط·آ®ط¸ث†ط¸â€‍</Button>
           </Link>
         </div>
       </motion.div>

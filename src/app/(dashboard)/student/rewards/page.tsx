@@ -3,9 +3,9 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  HiStar, HiFire, HiGift, HiTrophy, HiBookOpen, HiVideoCamera,
+  HiStar, HiFire, HiGift, HiBookOpen, HiVideoCamera,
   HiAcademicCap, HiBadgeCheck, HiColorSwatch, HiClock, HiCheck,
-  HiOutlineClock, HiOutlineTrophy, HiOutlineLightningBolt
+  HiOutlineClock, HiOutlineStar, HiOutlineLightningBolt
 } from "react-icons/hi"
 import DashboardHeader from "@/components/layout/DashboardHeader"
 import { toast } from "react-hot-toast"
@@ -31,7 +31,7 @@ const rewards: Reward[] = [
   { id: "r2", name: "مراجعة واجب优先级", description: "مراجعة الواجب القادم بأولوية عالية من المدرس", cost: 500, icon: HiBookOpen, color: "text-emerald-500" },
   { id: "r3", name: "جلسة خاصة مع المدرس", description: "جلسة أونلاين 30 دقيقة للمراجعة الفردية", cost: 1000, icon: HiAcademicCap, color: "text-purple-500" },
   { id: "r4", name: "شهادة تفوق", description: "شهادة إلكترونية موثقة لإنجازاتك الدراسية", cost: 750, icon: HiBadgeCheck, color: "text-amber-500" },
-  { id: "r5", name: "اختبار تدريبي إضافي", description: "فتح اختبار تدريبي جديد لمادة من اختيارك", cost: 400, icon: HiTrophy, color: "text-rose-500" },
+  { id: "r5", name: "اختبار تدريبي إضافي", description: "فتح اختبار تدريبي جديد لمادة من اختيارك", cost: 400, icon: HiStar, color: "text-rose-500" },
   { id: "r6", name: "إطار صورة شخصي مميز", description: "إطار حصري لصورة بروفايل الطالب", cost: 600, icon: HiColorSwatch, color: "text-indigo-500" },
 ]
 

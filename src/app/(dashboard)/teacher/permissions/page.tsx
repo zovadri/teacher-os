@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -22,8 +22,8 @@ import { mockPermissionRoles } from "@/lib/mock/data"
 
 const actions = ["canView", "canCreate", "canEdit", "canDelete", "canPrint", "canExport", "canApprove", "canManage"] as const
 const actionLabels: Record<string, string> = {
-  canView: "ط¹ط±ط¶", canCreate: "ط¥ظ†ط´ط§ط،", canEdit: "طھط¹ط¯ظٹظ„", canDelete: "ط­ط°ظپ",
-  canPrint: "ط·ط¨ط§ط¹ط©", canExport: "طھطµط¯ظٹط±", canApprove: "ط§ط¹طھظ…ط§ط¯", canManage: "ط¥ط¯ط§ط±ط©",
+  canView: "ط·آ¹ط·آ±ط·آ¶", canCreate: "ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ", canEdit: "ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍", canDelete: "ط·آ­ط·آ°ط¸ظ¾",
+  canPrint: "ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©", canExport: "ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±", canApprove: "ط·آ§ط·آ¹ط·ع¾ط¸â€¦ط·آ§ط·آ¯", canManage: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ©",
 }
 
 export default function PermissionsPage() {
@@ -63,7 +63,7 @@ export default function PermissionsPage() {
         },
       }
     }))
-    toast.success("طھظ… طھط­ط¯ظٹط« ط§ظ„طµظ„ط§ط­ظٹط©")
+    toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ©")
   }
 
   const handleAddRole = () => {
@@ -83,13 +83,13 @@ export default function PermissionsPage() {
     setRoles((prev) => [...prev, role])
     setShowAddModal(false)
     setNewRole({ name: "", description: "" })
-    toast.success("طھظ… ط¥ط¶ط§ظپط© ط§ظ„ط¯ظˆط± ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط§ظ„طµظ„ط§ط­ظٹط§طھ" subtitle="ط¥ط¯ط§ط±ط© ط£ط¯ظˆط§ط± ط§ظ„طµظ„ط§ط­ظٹط§طھ" />
+        <DashboardHeader title="ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -97,17 +97,17 @@ export default function PermissionsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط§ظ„طµظ„ط§ط­ظٹط§طھ" subtitle="ط¥ط¯ط§ط±ط© ط£ط¯ظˆط§ط± ط§ظ„طµظ„ط§ط­ظٹط§طھ" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" />
       <div className="flex justify-end">
-        <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-          ط¥ط¶ط§ظپط© ط¯ظˆط±
+        <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
+          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¯ط¸ث†ط·آ±
         </Button>
       </div>
 
       {isLoading ? (
         <CardSkeleton count={3} />
       ) : roles.length === 0 ? (
-        <EmptyState icon={HiOutlineShieldCheck} title="ظ„ط§ طھظˆط¬ط¯ ط£ط¯ظˆط§ط±" description="ظ„ظ… ظٹطھظ… ط¥ط¶ط§ظپط© ط£ظٹ ط£ط¯ظˆط§ط± طµظ„ط§ط­ظٹط§طھ ط¨ط¹ط¯" action={<button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط¥ط¶ط§ظپط© ط¯ظˆط±</Button>} />
+        <EmptyState icon={HiOutlineShieldCheck} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ±" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ£ط¸ظ¹ ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ± ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾ ط·آ¨ط·آ¹ط·آ¯" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¯ط¸ث†ط·آ±</Button>} />
       ) : (
         <div className="grid grid-cols-1 gap-4">
           {roles.map((role) => (
@@ -124,7 +124,7 @@ export default function PermissionsPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge variant={role.isSystem ? "premium" : "neutral"} size="sm">{role.isSystem ? "ظ†ط¸ط§ظ…" : "ظ…ط®طµطµ"}</Badge>
+                    <Badge variant={role.isSystem ? "premium" : "neutral"} size="sm">{role.isSystem ? "ط¸â€ ط·آ¸ط·آ§ط¸â€¦" : "ط¸â€¦ط·آ®ط·آµط·آµ"}</Badge>
                     <div className="flex items-center gap-1 text-sm text-text-tertiary">
                       <HiOutlineUserGroup className="w-4 h-4" />
                       <span>{role.userCount}</span>
@@ -140,7 +140,7 @@ export default function PermissionsPage() {
                       <table className="w-full text-sm border-collapse">
                         <thead>
                           <tr>
-                            <th className="text-right px-3 py-2 font-semibold text-text-secondary border-b border-border whitespace-nowrap">ط§ظ„ظˆط­ط¯ط©</th>
+                            <th className="text-right px-3 py-2 font-semibold text-text-secondary border-b border-border whitespace-nowrap">ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ©</th>
                             {actions.map((action) => (
                               <th key={action} className="text-center px-2 py-2 font-semibold text-text-secondary border-b border-border whitespace-nowrap text-xs">{actionLabels[action]}</th>
                             ))}
@@ -184,13 +184,13 @@ export default function PermissionsPage() {
         </div>
       )}
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¥ط¶ط§ظپط© ط¯ظˆط± ط¬ط¯ظٹط¯" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¯ط¸ث†ط·آ± ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="md">
         <div className="space-y-4">
-          <Input label="ط§ط³ظ… ط§ظ„ط¯ظˆط±" value={newRole.name} onChange={(e) => setNewRole({ ...newRole, name: e.target.value })} placeholder="ط£ط¯ط®ظ„ ط§ط³ظ… ط§ظ„ط¯ظˆط±" />
-          <Input label="ط§ظ„ظˆطµظپ" value={newRole.description} onChange={(e) => setNewRole({ ...newRole, description: e.target.value })} placeholder="ظˆطµظپ ط§ظ„ط¯ظˆط±" />
+          <Input label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±" value={newRole.name} onChange={(e) => setNewRole({ ...newRole, name: e.target.value })} placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±" />
+          <Input label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾" value={newRole.description} onChange={(e) => setNewRole({ ...newRole, description: e.target.value })} placeholder="ط¸ث†ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±" />
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1" onClick={handleAddRole} disabled={!newRole.name}>ط¥ط¶ط§ظپط© ط§ظ„ط¯ظˆط±</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" className="flex-1" onClick={handleAddRole} disabled={!newRole.name}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

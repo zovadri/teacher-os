@@ -477,7 +477,7 @@ export const mockHomework = Array.from({ length: 20 }, (_, i) => ({
   allowResubmit: i % 3 !== 0,
   maxResubmitCount: [1, 2, 3][i % 3],
   type: (["quiz", "pdf", "writing", "mixed"] as const)[i % 4],
-  status: (["active", "active", "active", "closed", "draft"] as const)[i % 5],
+  status: (["pending", "active", "submitted", "graded", "closed", "draft", "late"] as const)[i % 7],
   submissions: Array.from({ length: Math.floor(det() * 30) + 20 }, (_, s) => ({
     id: `sub-${i + 1}-${s + 1}`,
     studentId: `s-${s + 1}`,
@@ -497,6 +497,16 @@ export const mockHomework = Array.from({ length: 20 }, (_, i) => ({
     highestGrade: 30,
     lowestGrade: Math.floor(det() * 10) + 3,
     passRate: Math.floor(det() * 30) + 60,
+  },
+  grade: i % 3 === 0 ? undefined : Math.floor(det() * 30) + 1,
+  feedback: i % 3 === 0 ? undefined : "ممتاز، عمل جيد",
+  downloadUrl: `https://example.com/homework/hw-${i + 1}.pdf`,
+  submission: {
+    fileName: `واجب_${i + 1}.pdf`,
+    submittedAt: new Date(2025, 7, 10 + (i % 15)),
+    notes: i % 2 === 0 ? "لدي استفسار بخصوص التمرين الثالث" : undefined,
+    feedback: i % 3 === 0 ? "ممتاز، عمل جيد" : undefined,
+    grade: Math.floor(det() * 30) + 1,
   },
 }))
 

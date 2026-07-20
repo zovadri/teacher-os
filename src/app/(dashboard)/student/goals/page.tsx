@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  HiOutlineTarget, HiOutlineCheckCircle, HiOutlineExclamationCircle,
+  HiOutlineTag, HiOutlineCheckCircle, HiOutlineExclamationCircle,
   HiOutlineClock, HiOutlineCalendar, HiOutlineTrash, HiOutlinePencil,
   HiOutlinePlusCircle, HiOutlineChevronDown, HiOutlineTrendingUp,
 } from "react-icons/hi"
@@ -98,7 +98,7 @@ export default function StudentGoalsPage() {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-4"
         >
-          <StatsCard title="الأهداف النشطة" value={totalActive} icon={HiOutlineTarget} color="primary" />
+          <StatsCard title="الأهداف النشطة" value={totalActive} icon={HiOutlineTag} color="primary" />
           <StatsCard title="مكتملة" value={totalCompleted} icon={HiOutlineCheckCircle} color="success" />
           <StatsCard title="في خطر" value={atRisk} icon={HiOutlineExclamationCircle} color="error" subtitle="تقدم منخفض وموعد وشيك" />
         </motion.div>
@@ -178,7 +178,7 @@ export default function StudentGoalsPage() {
           </div>
         ) : (
           <EmptyState
-            icon={HiOutlineTarget}
+            icon={HiOutlineTag}
             title="لا توجد أهداف"
             description="لم تقم بإضافة أي أهداف بعد. ابدأ بإضافة هدفك الأول."
             action={<Button leftIcon={<HiOutlinePlusCircle size={16} />} onClick={() => setShowAddModal(true)}>إضافة هدف</Button>}
@@ -295,8 +295,7 @@ export default function StudentGoalsPage() {
                 </div>
               </div>
             ) : (
-              <Button
-                variant="secondary"
+              <Button variant="secondary"
                 leftIcon={<HiOutlineTrendingUp size={16} />}
                 onClick={() => setEditingProgress(selectedGoal.id)}
                 className="w-full"
@@ -313,8 +312,7 @@ export default function StudentGoalsPage() {
                   <Button variant="danger" size="sm" onClick={() => deleteGoal(selectedGoal.id)}>حذف</Button>
                 </div>
               ) : (
-                <Button
-                  variant="danger" size="sm"
+                <Button variant="danger" size="sm"
                   leftIcon={<HiOutlineTrash size={16} />}
                   onClick={() => setDeleteConfirm(selectedGoal.id)}
                 >

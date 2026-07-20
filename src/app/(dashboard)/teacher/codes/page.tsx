@@ -105,7 +105,7 @@ export default function CodesPage() {
             <option value="expired">ظ…ظ†طھظ‡ظٹ</option>
           </select>
         </div>
-        <button type="button" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreateModal(true)}>
+        <Button leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreateModal(true)}>
           ط¥ظ†ط´ط§ط، ط£ظƒظˆط§ط¯ ط¬ط¯ظٹط¯ط©
         </Button>
       </div>
@@ -228,7 +228,7 @@ export default function CodesPage() {
           <Input label="ط§ط³ظ… ط§ظ„ط¯ظپط¹ط©" placeholder="ظ…ط«ط§ظ„: ط§ظ„ط¯ظپط¹ط© ط§ظ„ط£ظˆظ„ظ‰ 2025" />
           <Input label="طھط§ط±ظٹط® ط§ظ†طھظ‡ط§ط، ط§ظ„طµظ„ط§ط­ظٹط©" type="date" />
           <div className="pt-4 flex gap-3">
-            <button type="button" variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إنشاء الأكواد بنجاح"); setShowCreateModal(false); }}>ط¥ظ†ط´ط§ط، ط§ظ„ط£ظƒظˆط§ط¯</Button>
+            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إنشاء الأكواد بنجاح"); setShowCreateModal(false); }}>ط¥ظ†ط´ط§ط، ط§ظ„ط£ظƒظˆط§ط¯</Button>
             <Button variant="secondary" size="lg" onClick={() => setShowCreateModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
           </div>
         </div>

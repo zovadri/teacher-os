@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
@@ -41,26 +41,26 @@ const statusBadge: Record<EnrollmentStatus, "success" | "error" | "neutral" | "w
 }
 
 const statusLabels: Record<EnrollmentStatus, string> = {
-  active: "ظ†ط´ط·",
-  expired: "ظ…ظ†طھظ‡ظٹ",
-  cancelled: "ظ…ظ„ط؛ظٹ",
-  trial: "طھط¬ط±ظٹط¨ظٹ",
+  active: "ط¸â€ ط·آ´ط·آ·",
+  expired: "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹",
+  cancelled: "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹",
+  trial: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹",
 }
 
 const accessTypeLabels: Record<AccessType, string> = {
-  single: "ظپط±ط¯ظٹ",
-  bundle: "ط¨ط§ظ‚ط©",
-  free: "ظ…ط¬ط§ظ†ظٹ",
-  trial: "طھط¬ط±ظٹط¨ظٹ",
+  single: "ط¸ظ¾ط·آ±ط·آ¯ط¸ظ¹",
+  bundle: "ط·آ¨ط·آ§ط¸â€ڑط·آ©",
+  free: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹",
+  trial: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹",
   vip: "VIP",
-  lifetime: "ظ…ط¯ظ‰ ط§ظ„ط­ظٹط§ط©",
+  lifetime: "ط¸â€¦ط·آ¯ط¸â€° ط·آ§ط¸â€‍ط·آ­ط¸ظ¹ط·آ§ط·آ©",
 }
 
 const sourceLabels: Record<string, string> = {
-  payment: "ط¯ظپط¹",
-  code: "ظƒظˆط¯",
-  free: "ظ…ط¬ط§ظ†ظٹ",
-  admin: "ط¥ط¯ط§ط±ظٹ",
+  payment: "ط·آ¯ط¸ظ¾ط·آ¹",
+  code: "ط¸ئ’ط¸ث†ط·آ¯",
+  free: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹",
+  admin: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط¸ظ¹",
 }
 
 const sourceColors: Record<string, "primary" | "success" | "info" | "warning"> = {
@@ -71,26 +71,26 @@ const sourceColors: Record<string, "primary" | "success" | "info" | "warning"> =
 }
 
 const courseOptions = [
-  { value: "ط§ظ„ظƒظ„", label: "ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ" },
+  { value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" },
   ...mockCourses.map((c) => ({ value: c.id, label: c.title })),
 ]
 
 const statusOptions = [
-  { value: "ط§ظ„ظƒظ„", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" },
-  { value: "active", label: "ظ†ط´ط·" },
-  { value: "expired", label: "ظ…ظ†طھظ‡ظٹ" },
-  { value: "cancelled", label: "ظ…ظ„ط؛ظٹ" },
-  { value: "trial", label: "طھط¬ط±ظٹط¨ظٹ" },
+  { value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" },
+  { value: "active", label: "ط¸â€ ط·آ´ط·آ·" },
+  { value: "expired", label: "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹" },
+  { value: "cancelled", label: "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹" },
+  { value: "trial", label: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹" },
 ]
 
 const accessOptions = [
-  { value: "ط§ظ„ظƒظ„", label: "ط¬ظ…ظٹط¹ ط£ظ†ظˆط§ط¹ ط§ظ„ظˆطµظˆظ„" },
-  { value: "single", label: "ظپط±ط¯ظٹ" },
-  { value: "bundle", label: "ط¨ط§ظ‚ط©" },
-  { value: "free", label: "ظ…ط¬ط§ظ†ظٹ" },
-  { value: "trial", label: "طھط¬ط±ظٹط¨ظٹ" },
+  { value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ£ط¸â€ ط¸ث†ط·آ§ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍" },
+  { value: "single", label: "ط¸ظ¾ط·آ±ط·آ¯ط¸ظ¹" },
+  { value: "bundle", label: "ط·آ¨ط·آ§ط¸â€ڑط·آ©" },
+  { value: "free", label: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹" },
+  { value: "trial", label: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹" },
   { value: "vip", label: "VIP" },
-  { value: "lifetime", label: "ظ…ط¯ظ‰ ط§ظ„ط­ظٹط§ط©" },
+  { value: "lifetime", label: "ط¸â€¦ط·آ¯ط¸â€° ط·آ§ط¸â€‍ط·آ­ط¸ظ¹ط·آ§ط·آ©" },
 ]
 
 interface CreateForm {
@@ -112,9 +112,9 @@ const emptyCreateForm: CreateForm = {
 export default function EnrollmentsPage() {
   const [enrollments, setEnrollments] = useState(mockEnrollments)
   const [search, setSearch] = useState("")
-  const [courseFilter, setCourseFilter] = useState("ط§ظ„ظƒظ„")
-  const [statusFilter, setStatusFilter] = useState("ط§ظ„ظƒظ„")
-  const [accessFilter, setAccessFilter] = useState("ط§ظ„ظƒظ„")
+  const [courseFilter, setCourseFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
+  const [statusFilter, setStatusFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
+  const [accessFilter, setAccessFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
   const [selectedEnrollment, setSelectedEnrollment] = useState<CourseEnrollment | null>(null)
   const [detailModalOpen, setDetailModalOpen] = useState(false)
   const [createModalOpen, setCreateModalOpen] = useState(false)
@@ -133,9 +133,9 @@ export default function EnrollmentsPage() {
   const filtered = useMemo(() => {
     return enrollments.filter((e) => {
       const matchSearch = e.studentName.includes(search) || e.courseName.includes(search)
-      const matchCourse = courseFilter === "ط§ظ„ظƒظ„" || e.courseId === courseFilter
-      const matchStatus = statusFilter === "ط§ظ„ظƒظ„" || e.status === statusFilter
-      const matchAccess = accessFilter === "ط§ظ„ظƒظ„" || e.accessType === accessFilter
+      const matchCourse = courseFilter === "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" || e.courseId === courseFilter
+      const matchStatus = statusFilter === "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" || e.status === statusFilter
+      const matchAccess = accessFilter === "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" || e.accessType === accessFilter
       return matchSearch && matchCourse && matchStatus && matchAccess
     })
   }, [enrollments, search, courseFilter, statusFilter, accessFilter])
@@ -163,7 +163,7 @@ export default function EnrollmentsPage() {
       source: "admin",
     }
     setEnrollments((prev) => [newEnr, ...prev])
-    addToast({ type: "success", title: "طھظ… ط¥ط¶ط§ظپط© ط§ظ„طھط³ط¬ظٹظ„ ط¨ظ†ط¬ط§ط­" })
+    addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
     setCreateModalOpen(false)
     setCreateForm(emptyCreateForm)
   }
@@ -175,20 +175,20 @@ export default function EnrollmentsPage() {
         e.id === bulkEndTarget.id ? { ...e, status: "expired" as const } : e
       )
     )
-    addToast({ type: "success", title: `طھظ… ط¥ظ†ظ‡ط§ط، طھط³ط¬ظٹظ„ "${bulkEndTarget.studentName}" ط¨ظ†ط¬ط§ط­` })
+    addToast({ type: "success", title: `ط·ع¾ط¸â€¦ ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ "${bulkEndTarget.studentName}" ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­` })
     setBulkEndTarget(null)
   }
 
   const statsCards = [
-    { title: "ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„طھط³ط¬ظٹظ„ط§طھ", value: stats.total, icon: HiOutlineUsers, color: "primary" as const },
-    { title: "ط§ظ„طھط³ط¬ظٹظ„ط§طھ ط§ظ„ظ†ط´ط·ط©", value: stats.active, icon: HiOutlineCheckCircle, color: "success" as const },
-    { title: "ط§ظ„طھط³ط¬ظٹظ„ط§طھ ط§ظ„ظ…ظ†طھظ‡ظٹط©", value: stats.expired, icon: HiOutlineXCircle, color: "error" as const },
-    { title: "ط§ظ„طھط³ط¬ظٹظ„ط§طھ ط§ظ„طھط¬ط±ظٹط¨ظٹط©", value: stats.trial, icon: HiOutlineBeaker, color: "warning" as const },
+    { title: "ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾", value: stats.total, icon: HiOutlineUsers, color: "primary" as const },
+    { title: "ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ·ط·آ©", value: stats.active, icon: HiOutlineCheckCircle, color: "success" as const },
+    { title: "ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹ط·آ©", value: stats.expired, icon: HiOutlineXCircle, color: "error" as const },
+    { title: "ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ©", value: stats.trial, icon: HiOutlineBeaker, color: "warning" as const },
   ]
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط¥ط¯ط§ط±ط© ط§ظ„طھط³ط¬ظٹظ„ط§طھ" subtitle="ط¥ط¯ط§ط±ط© طھط³ط¬ظٹظ„ط§طھ ط§ظ„ط·ظ„ط§ط¨ ظپظٹ ط§ظ„ظƒظˆط±ط³ط§طھ" />
+      <DashboardHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {statsCards.map((s, i) => (
@@ -200,7 +200,7 @@ export default function EnrollmentsPage() {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1">
-          <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ط·ط§ظ„ط¨ ط£ظˆ ظƒظˆط±ط³..." />
+          <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ£ط¸ث† ط¸ئ’ط¸ث†ط·آ±ط·آ³..." />
         </div>
         <div className="flex flex-wrap gap-3">
           <select
@@ -231,18 +231,18 @@ export default function EnrollmentsPage() {
             ))}
           </select>
           <Button variant="primary" size="md" onClick={() => setCreateModalOpen(true)} leftIcon={<HiOutlinePlus size={18} />}>
-            ط¥ط¶ط§ظپط© طھط³ط¬ظٹظ„
+            ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍
           </Button>
         </div>
       </div>
 
       {filtered.length === 0 ? (
         <EmptyState
-          title="ظ„ط§ طھظˆط¬ط¯ طھط³ط¬ظٹظ„ط§طھ"
-          description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ طھط³ط¬ظٹظ„ط§طھ طھط·ط§ط¨ظ‚ ظ…ط¹ط§ظٹظٹط± ط§ظ„ط¨ط­ط«"
+          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾"
+          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«"
           action={
             <Button variant="primary" onClick={() => setCreateModalOpen(true)}>
-              ط¥ط¶ط§ظپط© طھط³ط¬ظٹظ„ ط¬ط¯ظٹط¯
+              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯
             </Button>
           }
         />
@@ -294,7 +294,7 @@ export default function EnrollmentsPage() {
                       <button type="button"
                         onClick={() => openDetail(enr)}
                         className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
-                        title="ط¹ط±ط¶"
+                        title="ط·آ¹ط·آ±ط·آ¶"
                       >
                         <HiOutlineEye size={16} />
                       </button>
@@ -302,7 +302,7 @@ export default function EnrollmentsPage() {
                         <button type="button"
                           onClick={() => setBulkEndTarget(enr)}
                           className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"
-                          title="ط¥ظ†ظ‡ط§ط، ط§ظ„طھط³ط¬ظٹظ„"
+                          title="ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
                         >
                           <HiOutlineTrash size={16} />
                         </button>
@@ -319,7 +319,7 @@ export default function EnrollmentsPage() {
       <Modal
         isOpen={detailModalOpen}
         onClose={() => setDetailModalOpen(false)}
-        title="طھظپط§طµظٹظ„ ط§ظ„طھط³ط¬ظٹظ„"
+        title="ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
         size="lg"
       >
         {selectedEnrollment && (
@@ -335,26 +335,26 @@ export default function EnrollmentsPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط§ظ„ط­ط§ظ„ط©</p>
+                <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</p>
                 <Badge variant={statusBadge[selectedEnrollment.status]} size="md">{statusLabels[selectedEnrollment.status]}</Badge>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ظ†ظˆط¹ ط§ظ„ظˆطµظˆظ„</p>
+                <p className="text-xs text-text-tertiary">ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍</p>
                 <Badge variant="info" size="md">{accessTypeLabels[selectedEnrollment.accessType]}</Badge>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط§ظ„ظ…طµط¯ط±</p>
+                <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ¯ط·آ±</p>
                 <Badge variant={sourceColors[selectedEnrollment.source]} size="md">{sourceLabels[selectedEnrollment.source]}</Badge>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط§ظ„طھظ‚ط¯ظ…</p>
+                <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦</p>
                 <div className="flex items-center gap-2">
                   <Progress value={selectedEnrollment.progress} size="sm" className="flex-1" />
                   <span className="text-sm font-medium text-text">{selectedEnrollment.progress}%</span>
                 </div>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">طھط§ط±ظٹط® ط§ظ„طھط³ط¬ظٹظ„</p>
+                <p className="text-xs text-text-tertiary">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍</p>
                 <div className="flex items-center gap-1.5 text-sm text-text">
                   <HiOutlineCalendar size={16} className="text-text-tertiary" />
                   {formatDate(selectedEnrollment.enrolledAt)}
@@ -362,7 +362,7 @@ export default function EnrollmentsPage() {
               </div>
               {selectedEnrollment.expiresAt && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">طھط§ط±ظٹط® ط§ظ„ط§ظ†طھظ‡ط§ط،</p>
+                  <p className="text-xs text-text-tertiary">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ</p>
                   <div className="flex items-center gap-1.5 text-sm text-text">
                     <HiOutlineClock size={16} className="text-text-tertiary" />
                     {formatDate(selectedEnrollment.expiresAt)}
@@ -371,16 +371,16 @@ export default function EnrollmentsPage() {
               )}
               {selectedEnrollment.bundleId && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">ط§ظ„ط¨ط§ظ‚ط©</p>
+                  <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©</p>
                   <div className="flex items-center gap-1.5 text-sm text-text">
                     <HiOutlineTemplate size={16} className="text-text-tertiary" />
-                    {mockBundles.find((b) => b.id === selectedEnrollment.bundleId)?.name || "ط؛ظٹط± ظ…ط¹ط±ظˆظپط©"}
+                    {mockBundles.find((b) => b.id === selectedEnrollment.bundleId)?.name || "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·آ¹ط·آ±ط¸ث†ط¸ظ¾ط·آ©"}
                   </div>
                 </div>
               )}
               {selectedEnrollment.grade !== undefined && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">ط§ظ„ط¯ط±ط¬ط©</p>
+                  <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©</p>
                   <div className="flex items-center gap-1.5 text-sm text-text">
                     <HiOutlineTag size={16} className="text-text-tertiary" />
                     {selectedEnrollment.grade}%
@@ -389,7 +389,7 @@ export default function EnrollmentsPage() {
               )}
               {selectedEnrollment.sourceId && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">ظ…ط¹ط±ظ‘ظپ ط§ظ„ظ…طµط¯ط±</p>
+                  <p className="text-xs text-text-tertiary">ط¸â€¦ط·آ¹ط·آ±ط¸â€کط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ¯ط·آ±</p>
                   <p className="text-sm text-text font-mono">{selectedEnrollment.sourceId}</p>
                 </div>
               )}
@@ -401,65 +401,65 @@ export default function EnrollmentsPage() {
       <Modal
         isOpen={createModalOpen}
         onClose={() => { setCreateModalOpen(false); setCreateForm(emptyCreateForm) }}
-        title="ط¥ط¶ط§ظپط© طھط³ط¬ظٹظ„ ط¬ط¯ظٹط¯"
+        title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯"
         size="md"
       >
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-text">ط§ط³ظ… ط§ظ„ط·ط§ظ„ط¨</label>
+              <label className="block text-sm font-medium text-text">ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</label>
               <input
                 value={createForm.studentName}
                 onChange={(e) => setCreateForm((p) => ({ ...p, studentName: e.target.value }))}
-                placeholder="ظ…ط«ط§ظ„: ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯"
+                placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯"
                 className="w-full bg-surface border border-border rounded-lg px-3.5 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
               />
             </div>
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-text">ظ…ط¹ط±ظ‘ظپ ط§ظ„ط·ط§ظ„ط¨</label>
+              <label className="block text-sm font-medium text-text">ط¸â€¦ط·آ¹ط·آ±ط¸â€کط¸ظ¾ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</label>
               <input
                 value={createForm.studentId}
                 onChange={(e) => setCreateForm((p) => ({ ...p, studentId: e.target.value }))}
-                placeholder="ظ…ط«ط§ظ„: s-123"
+                placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: s-123"
                 className="w-full bg-surface border border-border rounded-lg px-3.5 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
               />
             </div>
           </div>
           <Select
-            label="ط§ظ„ظƒظˆط±ط³"
+            label="ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
             value={createForm.courseId}
             onChange={(e) => setCreateForm((p) => ({ ...p, courseId: e.target.value }))}
             options={mockCourses.map((c) => ({ value: c.id, label: c.title }))}
-            placeholder="ط§ط®طھط± ظƒظˆط±ط³..."
+            placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط¸ئ’ط¸ث†ط·آ±ط·آ³..."
           />
           <Select
-            label="ظ†ظˆط¹ ط§ظ„ظˆطµظˆظ„"
+            label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍"
             value={createForm.accessType}
             onChange={(e) => setCreateForm((p) => ({ ...p, accessType: e.target.value as AccessType }))}
             options={[
-              { value: "single", label: "ظپط±ط¯ظٹ" },
-              { value: "bundle", label: "ط¨ط§ظ‚ط©" },
-              { value: "free", label: "ظ…ط¬ط§ظ†ظٹ" },
-              { value: "trial", label: "طھط¬ط±ظٹط¨ظٹ" },
+              { value: "single", label: "ط¸ظ¾ط·آ±ط·آ¯ط¸ظ¹" },
+              { value: "bundle", label: "ط·آ¨ط·آ§ط¸â€ڑط·آ©" },
+              { value: "free", label: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹" },
+              { value: "trial", label: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹" },
               { value: "vip", label: "VIP" },
-              { value: "lifetime", label: "ظ…ط¯ظ‰ ط§ظ„ط­ظٹط§ط©" },
+              { value: "lifetime", label: "ط¸â€¦ط·آ¯ط¸â€° ط·آ§ط¸â€‍ط·آ­ط¸ظ¹ط·آ§ط·آ©" },
             ]}
           />
           {createForm.accessType === "bundle" && (
             <Select
-              label="ط§ظ„ط¨ط§ظ‚ط©"
+              label="ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©"
               value={createForm.bundleId}
               onChange={(e) => setCreateForm((p) => ({ ...p, bundleId: e.target.value }))}
               options={mockBundles.filter((b) => b.status === "active").map((b) => ({ value: b.id, label: b.name }))}
-              placeholder="ط§ط®طھط± ط¨ط§ظ‚ط©..."
+              placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ¨ط·آ§ط¸â€ڑط·آ©..."
             />
           )}
           <div className="flex items-center gap-3 pt-2">
-            <button type="button" variant="primary" onClick={handleCreate} className="flex-1" disabled={!createForm.studentName.trim() || !createForm.courseId}>
-              طھط³ط¬ظٹظ„
+            <Button variant="primary" onClick={handleCreate} className="flex-1" disabled={!createForm.studentName.trim() || !createForm.courseId}>
+              ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍
             </Button>
             <Button variant="secondary" onClick={() => { setCreateModalOpen(false); setCreateForm(emptyCreateForm) }} className="flex-1">
-              ط¥ظ„ط؛ط§ط،
+              ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ
             </Button>
           </div>
         </div>
@@ -469,10 +469,10 @@ export default function EnrollmentsPage() {
         isOpen={!!bulkEndTarget}
         onClose={() => setBulkEndTarget(null)}
         onConfirm={handleBulkEnd}
-        title="ط¥ظ†ظ‡ط§ط، ط§ظ„طھط³ط¬ظٹظ„"
-        message={bulkEndTarget ? `ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯ ظ…ظ† ط¥ظ†ظ‡ط§ط، طھط³ط¬ظٹظ„ "${bulkEndTarget.studentName}" ظپظٹ ظƒظˆط±ط³ "${bulkEndTarget.courseName}"طں` : ""}
-        confirmText="ط¥ظ†ظ‡ط§ط، ط§ظ„طھط³ط¬ظٹظ„"
-        cancelText="ط¥ظ„ط؛ط§ط،"
+        title="ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
+        message={bulkEndTarget ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ "${bulkEndTarget.studentName}" ط¸ظ¾ط¸ظ¹ ط¸ئ’ط¸ث†ط·آ±ط·آ³ "${bulkEndTarget.courseName}"ط·ع؛` : ""}
+        confirmText="ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
+        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
         variant="danger"
       />
     </div>

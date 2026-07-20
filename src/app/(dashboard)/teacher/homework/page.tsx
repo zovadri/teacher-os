@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
@@ -29,20 +29,20 @@ const statusBadge: Record<string, "success" | "error" | "neutral"> = {
 }
 
 const statusLabels: Record<string, string> = {
-  active: "نشط",
-  closed: "مغلق",
-  draft: "مسودة",
+  active: "ظ†ط´ط·",
+  closed: "ظ…ط؛ظ„ظ‚",
+  draft: "ظ…ط³ظˆط¯ط©",
 }
 
 const typeLabels: Record<string, string> = {
-  quiz: "اختبار",
+  quiz: "ط§ط®طھط¨ط§ط±",
   pdf: "PDF",
-  image: "صورة",
+  image: "طµظˆط±ط©",
   word: "Word",
-  video: "فيديو",
-  zip: "مضغوط",
-  writing: "كتابي",
-  mixed: "متنوع",
+  video: "ظپظٹط¯ظٹظˆ",
+  zip: "ظ…ط¶ط؛ظˆط·",
+  writing: "ظƒطھط§ط¨ظٹ",
+  mixed: "ظ…طھظ†ظˆط¹",
 }
 
 const typeBadge: Record<string, "primary" | "info" | "warning" | "premium" | "neutral" | "success"> = {
@@ -58,19 +58,19 @@ const typeBadge: Record<string, "primary" | "info" | "warning" | "premium" | "ne
 
 const typeOptions = Object.entries(typeLabels).map(([value, label]) => ({ value, label }))
 const statusOptions = [
-  { value: "all", label: "جميع الحالات" },
+  { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" },
   ...Object.entries(statusLabels).map(([value, label]) => ({ value, label })),
 ]
 const courseOptions = [
-  { value: "all", label: "جميع الكورسات" },
+  { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ" },
   ...mockCourses.map((c) => ({ value: c.id, label: c.title })),
 ]
 
 const stats = [
-  { title: "إجمالي الواجبات", value: mockHomework.length, icon: HiOutlineBookOpen, color: "primary" as const },
-  { title: "نشط", value: mockHomework.filter((h) => h.status === "active").length, icon: HiOutlineClipboardList, color: "success" as const },
-  { title: "مغلق", value: mockHomework.filter((h) => h.status === "closed").length, icon: HiOutlineXCircle, color: "error" as const },
-  { title: "تحت الإعداد", value: mockHomework.filter((h) => h.status === "draft").length, icon: HiOutlineClock, color: "warning" as const },
+  { title: "ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظˆط§ط¬ط¨ط§طھ", value: mockHomework.length, icon: HiOutlineBookOpen, color: "primary" as const },
+  { title: "ظ†ط´ط·", value: mockHomework.filter((h) => h.status === "active").length, icon: HiOutlineClipboardList, color: "success" as const },
+  { title: "ظ…ط؛ظ„ظ‚", value: mockHomework.filter((h) => h.status === "closed").length, icon: HiOutlineXCircle, color: "error" as const },
+  { title: "طھط­طھ ط§ظ„ط¥ط¹ط¯ط§ط¯", value: mockHomework.filter((h) => h.status === "draft").length, icon: HiOutlineClock, color: "warning" as const },
 ]
 
 export default function HomeworkPage() {
@@ -91,7 +91,7 @@ export default function HomeworkPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="الواجبات" subtitle="إدارة الواجبات المنزلية ومتابعة تسليم الطلاب" />
+      <DashboardHeader title="ط§ظ„ظˆط§ط¬ط¨ط§طھ" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظˆط§ط¬ط¨ط§طھ ط§ظ„ظ…ظ†ط²ظ„ظٹط© ظˆظ…طھط§ط¨ط¹ط© طھط³ظ„ظٹظ… ط§ظ„ط·ظ„ط§ط¨" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s, i) => (
@@ -103,7 +103,7 @@ export default function HomeworkPage() {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1">
-          <SearchInput value={search} onChange={setSearch} placeholder="بحث عن واجب..." />
+          <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ظˆط§ط¬ط¨..." />
         </div>
         <div className="flex gap-3 flex-wrap">
           <div className="w-40">
@@ -115,7 +115,7 @@ export default function HomeworkPage() {
           </div>
           <div className="w-36">
             <Select
-              options={[{ value: "all", label: "جميع الأنواع" }, ...typeOptions]}
+              options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط£ظ†ظˆط§ط¹" }, ...typeOptions]}
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
             />
@@ -129,7 +129,7 @@ export default function HomeworkPage() {
           </div>
           <Link href="/teacher/homework/create">
             <Button variant="primary" size="md" leftIcon={<HiOutlinePlus size={18} />}>
-              إضافة واجب
+              ط¥ط¶ط§ظپط© ظˆط§ط¬ط¨
             </Button>
           </Link>
         </div>
@@ -138,12 +138,12 @@ export default function HomeworkPage() {
       {filtered.length === 0 ? (
         <EmptyState
           icon={HiOutlineDocumentText}
-          title="لا توجد واجبات مطابقة"
-          description="حاول تغيير معايير البحث أو إضافة واجب جديد"
+          title="ظ„ط§ طھظˆط¬ط¯ ظˆط§ط¬ط¨ط§طھ ظ…ط·ط§ط¨ظ‚ط©"
+          description="ط­ط§ظˆظ„ طھط؛ظٹظٹط± ظ…ط¹ط§ظٹظٹط± ط§ظ„ط¨ط­ط« ط£ظˆ ط¥ط¶ط§ظپط© ظˆط§ط¬ط¨ ط¬ط¯ظٹط¯"
           action={
             <Link href="/teacher/homework/create">
               <Button variant="primary" leftIcon={<HiOutlinePlus size={18} />}>
-                إضافة واجب
+                ط¥ط¶ط§ظپط© ظˆط§ط¬ط¨
               </Button>
             </Link>
           }
@@ -176,30 +176,30 @@ export default function HomeworkPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-text mb-0.5 line-clamp-1">{hw.title}</h3>
-                        <p className="text-xs text-text-tertiary">{course?.title || "كورس عام"}</p>
+                        <p className="text-xs text-text-tertiary">{course?.title || "ظƒظˆط±ط³ ط¹ط§ظ…"}</p>
                       </div>
                       <div className="grid grid-cols-3 gap-3 text-center text-xs">
                         <div className="p-2 rounded-lg bg-surface-secondary">
                           <p className="font-bold text-text">{hw.deadline.toLocaleDateString("ar-EG")}</p>
-                          <p className="text-text-tertiary">الموعد النهائي</p>
+                          <p className="text-text-tertiary">ط§ظ„ظ…ظˆط¹ط¯ ط§ظ„ظ†ظ‡ط§ط¦ظٹ</p>
                         </div>
                         <div className="p-2 rounded-lg bg-surface-secondary">
                           <p className="font-bold text-text">{submitted}/{totalStudents}</p>
-                          <p className="text-text-tertiary">تم التسليم</p>
+                          <p className="text-text-tertiary">طھظ… ط§ظ„طھط³ظ„ظٹظ…</p>
                         </div>
                         <div className="p-2 rounded-lg bg-surface-secondary">
                           <p className="font-bold text-text">{hw.analytics.averageGrade}</p>
-                          <p className="text-text-tertiary">متوسط الدرجة</p>
+                          <p className="text-text-tertiary">ظ…طھظˆط³ط· ط§ظ„ط¯ط±ط¬ط©</p>
                         </div>
                       </div>
                       <div className="flex items-center justify-between pt-2 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="flex items-center gap-1">
-                          <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/homework/${hw.id}`) }} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="عرض">
+                          <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/homework/${hw.id}`) }} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="ط¹ط±ط¶">
                             <HiOutlineEye size={16} />
                           </button>
                         </div>
                         <Badge variant={hw.allowResubmit ? "info" : "neutral"} size="sm">
-                          {hw.allowResubmit ? `إعادة تسليم (${hw.maxResubmitCount})` : "تسليم مرة واحدة"}
+                          {hw.allowResubmit ? `ط¥ط¹ط§ط¯ط© طھط³ظ„ظٹظ… (${hw.maxResubmitCount})` : "طھط³ظ„ظٹظ… ظ…ط±ط© ظˆط§ط­ط¯ط©"}
                         </Badge>
                       </div>
                     </CardContent>

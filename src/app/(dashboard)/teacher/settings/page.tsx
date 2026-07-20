@@ -4,9 +4,10 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   Settings2, Bell, CreditCard, Shield, Link2, Save, Eye, EyeOff,
-  Facebook, Twitter, Youtube, Music2, MessageCircle, Send, Linkedin, Instagram,
+  Music2, MessageCircle, Send,
   ChevronLeft, ChevronRight, LogOut, Smartphone, Globe, Monitor,
 } from "lucide-react"
+import { FaTwitter, FaYoutube, FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa6"
 import DashboardHeader from "@/components/layout/DashboardHeader"
 import { Tabs, TabPanel } from "@/components/ui/Tabs"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card"
@@ -104,14 +105,14 @@ function PasswordInput({ label, value, onChange, id }: { label: string; value: s
 }
 
 const socialPlatforms = [
-  { key: "facebook", label: "فيسبوك", icon: Facebook, color: "text-[#1877F2]", placeholder: "https://facebook.com/..." },
-  { key: "twitter", label: "تويتر / إكس", icon: Twitter, color: "text-[#1DA1F2]", placeholder: "https://twitter.com/..." },
-  { key: "youtube", label: "يوتيوب", icon: Youtube, color: "text-[#FF0000]", placeholder: "https://youtube.com/..." },
+  { key: "facebook", label: "فيسبوك", icon: FaFacebook, color: "text-[#1877F2]", placeholder: "https://facebook.com/..." },
+  { key: "twitter", label: "تويتر / إكس", icon: FaTwitter, color: "text-[#1DA1F2]", placeholder: "https://twitter.com/..." },
+  { key: "youtube", label: "يوتيوب", icon: FaYoutube, color: "text-[#FF0000]", placeholder: "https://youtube.com/..." },
   { key: "tiktok", label: "تيك توك", icon: Music2, color: "text-[#000000]", placeholder: "https://tiktok.com/..." },
   { key: "whatsapp", label: "واتساب", icon: MessageCircle, color: "text-[#25D366]", placeholder: "https://wa.me/..." },
   { key: "telegram", label: "تلغرام", icon: Send, color: "text-[#0088CC]", placeholder: "https://t.me/..." },
-  { key: "linkedin", label: "لينكد إن", icon: Linkedin, color: "text-[#0A66C2]", placeholder: "https://linkedin.com/..." },
-  { key: "instagram", label: "انستغرام", icon: Instagram, color: "text-[#E4405F]", placeholder: "https://instagram.com/..." },
+  { key: "linkedin", label: "لينكد إن", icon: FaLinkedin, color: "text-[#0A66C2]", placeholder: "https://linkedin.com/..." },
+  { key: "instagram", label: "انستغرام", icon: FaInstagram, color: "text-[#E4405F]", placeholder: "https://instagram.com/..." },
 ]
 
 const ITEMS_PER_PAGE = 3
@@ -240,8 +241,7 @@ export default function SettingsPage() {
                       </div>
                     </CardContent>
                     <CardFooter>
-                      <Button
-                        variant="primary"
+                      <Button variant="primary"
                         leftIcon={<Save size={16} />}
                         isLoading={saving === "general"}
                         onClick={() => handleSave("general")}
@@ -297,8 +297,7 @@ export default function SettingsPage() {
                     />
                   </CardContent>
                   <CardFooter>
-                    <Button
-                      variant="primary"
+                    <Button variant="primary"
                       leftIcon={<Save size={16} />}
                       isLoading={saving === "notifications"}
                       onClick={() => handleSave("notifications")}
@@ -395,8 +394,7 @@ export default function SettingsPage() {
                       </div>
                     </CardContent>
                     <CardFooter>
-                      <Button
-                        variant="primary"
+                      <Button variant="primary"
                         leftIcon={<Save size={16} />}
                         isLoading={saving === "payment"}
                         onClick={() => handleSave("payment")}
@@ -435,8 +433,7 @@ export default function SettingsPage() {
                       </div>
                     </CardContent>
                     <CardFooter>
-                      <Button
-                        variant="primary"
+                      <Button variant="primary"
                         leftIcon={<Save size={16} />}
                         isLoading={saving === "password"}
                         onClick={handleChangePassword}
@@ -504,8 +501,7 @@ export default function SettingsPage() {
                       />
                     </CardContent>
                     <CardFooter>
-                      <Button
-                        variant="danger"
+                      <Button variant="danger"
                         leftIcon={<LogOut size={16} />}
                         onClick={() => setShowEndSessionConfirm(true)}
                       >
@@ -593,8 +589,7 @@ export default function SettingsPage() {
                       </div>
                     )}
                     <CardFooter>
-                      <Button
-                        variant="primary"
+                      <Button variant="primary"
                         leftIcon={<Save size={16} />}
                         isLoading={saving === "security"}
                         onClick={() => handleSave("security")}
@@ -626,8 +621,7 @@ export default function SettingsPage() {
                       ))}
                     </CardContent>
                     <CardFooter>
-                      <Button
-                        variant="primary"
+                      <Button variant="primary"
                         leftIcon={<Save size={16} />}
                         isLoading={saving === "social"}
                         onClick={() => handleSave("social")}

@@ -103,7 +103,7 @@ export default function VideosPage() {
           {selectedVideos.size > 0 && (
             <div className="flex items-center gap-2">
               <span className="text-sm text-text-secondary">طھظ… ط§ط®طھظٹط§ط± {selectedVideos.size}</span>
-              <button type="button" size="sm" variant="danger" leftIcon={<HiOutlineTrash className="w-4 h-4" />} onClick={() => setShowBulkModal(true)}>
+              <Button type="button" size="sm" variant="danger" leftIcon={<HiOutlineTrash className="w-4 h-4" />} onClick={() => setShowBulkModal(true)}>
                 ط­ط°ظپ ط§ظ„ظ…ط­ط¯ط¯
               </Button>
             </div>
@@ -217,7 +217,7 @@ export default function VideosPage() {
             ط³ظٹطھظ… ط­ط°ظپ {selectedVideos.size} ظپظٹط¯ظٹظˆ(ط§طھ) ط¨ط´ظƒظ„ ط¯ط§ط¦ظ…. ظ„ط§ ظٹظ…ظƒظ† ط§ظ„طھط±ط§ط¬ط¹ ط¹ظ† ظ‡ط°ط§ ط§ظ„ط¥ط¬ط±ط§ط،.
           </Alert>
           <div className="flex gap-3">
-            <button type="button" variant="danger" size="lg" className="flex-1">طھط£ظƒظٹط¯ ط§ظ„ط­ط°ظپ</Button>
+            <Button variant="danger" size="lg" className="flex-1">طھط£ظƒظٹط¯ ط§ظ„ط­ط°ظپ</Button>
             <Button variant="secondary" size="lg" onClick={() => setShowBulkModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
           </div>
         </div>

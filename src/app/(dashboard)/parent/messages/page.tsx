@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -35,11 +35,11 @@ interface ParentMessage {
 }
 
 const mockParentMessages: ParentMessage[] = [
-  { id: "pm-1", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ظ…طھط§ط¨ط¹ط© طھظ‚ط¯ظ… ط§ط¨ظ†ظƒ", content: "ط£ظˆط¯ ط¥ط¹ظ„ط§ظ…ظƒظ… ط¨ط£ظ† ط§ط¨ظ†ظƒظ… ط£ط­ظ…ط¯ ظٹظ‚ظˆظ… ط¨ط¹ظ…ظ„ ظ…ظ…طھط§ط² ظپظٹ ط§ظ„ظƒظˆط±ط³. ظٹط±ط¬ظ‰ ظ…طھط§ط¨ط¹ط© ط§ظ„ظˆط§ط¬ط¨ط§طھ ط§ظ„ط£ط³ط¨ظˆط¹ظٹط©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
-  { id: "pm-2", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ظ†طھظٹط¬ط© ط§ظ…طھط­ط§ظ† ط§ظ„ظ†ط­ظˆ", content: "ط­طµظ„ ط§ط¨ظ†ظƒظ… ط¹ظ„ظ‰ 90% ظپظٹ ط§ظ…طھط­ط§ظ† ط§ظ„ظ†ط­ظˆ ط§ظ„ط´ظ‡ط±ظٹ. ط£ط¯ط§ط، ظ…ظ…طھط§ط² ظˆظٹط­طھط§ط¬ ظ„ظ…ط±ط§ط¬ط¹ط© ط¨ط¹ط¶ ط§ظ„ظ†ظ‚ط§ط· ظپظٹ ط§ظ„ط¨ظ„ط§ط؛ط©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
-  { id: "pm-3", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ط·ظ„ط¨ طھط£ط¬ظٹظ„ ظˆط§ط¬ط¨", content: "طھظ…طھ ط§ظ„ظ…ظˆط§ظپظ‚ط© ط¹ظ„ظ‰ ط·ظ„ط¨ طھط£ط¬ظٹظ„ ظˆط§ط¬ط¨ ط§ظ„ظ†ط­ظˆ ط­طھظ‰ ظ†ظ‡ط§ظٹط© ط§ظ„ط£ط³ط¨ظˆط¹.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
-  { id: "pm-4", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "ط§ط³طھظپط³ط§ط± ط¹ظ† ط§ظ„ط¯ط±ط³", content: "ظ†ط¹ظ…طŒ ط¯ط±ط³ ط§ظ„ط¨ظ„ط§ط؛ط© ظ…طھط§ط­ ظ„ظ„طھط³ط¬ظٹظ„. ظٹظ…ظƒظ† ظ„ط§ط¨ظ†ظƒ ظ…ط´ط§ظ‡ط¯طھظ‡ ظ…ظ† طµظپط­ط© ط§ظ„ظƒظˆط±ط³.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), isTeacher: true },
-  { id: "pm-5", senderName: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", senderRole: "ظ…ط¯ط±ط³", subject: "طھط­ط¯ظٹط« ط¬ط¯ظˆظ„ ط§ظ„ط­طµطµ", content: "طھظ… طھط­ط¯ظٹط« ط¬ط¯ظˆظ„ ط§ظ„ط­طµطµ ظ„ظ„ط£ط³ط¨ظˆط¹ ط§ظ„ظ‚ط§ط¯ظ…. ظٹط±ط¬ظ‰ ط§ظ„ط§ط·ظ„ط§ط¹ ط¹ظ„ظ‰ ط§ظ„ظ…ظˆط§ط¹ظٹط¯ ط§ظ„ط¬ط¯ظٹط¯ط©.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
+  { id: "pm-1", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦ ط·آ§ط·آ¨ط¸â€ ط¸ئ’", content: "ط·آ£ط¸ث†ط·آ¯ ط·آ¥ط·آ¹ط¸â€‍ط·آ§ط¸â€¦ط¸ئ’ط¸â€¦ ط·آ¨ط·آ£ط¸â€  ط·آ§ط·آ¨ط¸â€ ط¸ئ’ط¸â€¦ ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸ظ¹ط¸â€ڑط¸ث†ط¸â€¦ ط·آ¨ط·آ¹ط¸â€¦ط¸â€‍ ط¸â€¦ط¸â€¦ط·ع¾ط·آ§ط·آ² ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹ط·آ©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
+  { id: "pm-2", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط¸â€ ط·ع¾ط¸ظ¹ط·آ¬ط·آ© ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث†", content: "ط·آ­ط·آµط¸â€‍ ط·آ§ط·آ¨ط¸â€ ط¸ئ’ط¸â€¦ ط·آ¹ط¸â€‍ط¸â€° 90% ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ±ط¸ظ¹. ط·آ£ط·آ¯ط·آ§ط·طŒ ط¸â€¦ط¸â€¦ط·ع¾ط·آ§ط·آ² ط¸ث†ط¸ظ¹ط·آ­ط·ع¾ط·آ§ط·آ¬ ط¸â€‍ط¸â€¦ط·آ±ط·آ§ط·آ¬ط·آ¹ط·آ© ط·آ¨ط·آ¹ط·آ¶ ط·آ§ط¸â€‍ط¸â€ ط¸â€ڑط·آ§ط·آ· ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
+  { id: "pm-3", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط·آ·ط¸â€‍ط·آ¨ ط·ع¾ط·آ£ط·آ¬ط¸ظ¹ط¸â€‍ ط¸ث†ط·آ§ط·آ¬ط·آ¨", content: "ط·ع¾ط¸â€¦ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ط¸ظ¾ط¸â€ڑط·آ© ط·آ¹ط¸â€‍ط¸â€° ط·آ·ط¸â€‍ط·آ¨ ط·ع¾ط·آ£ط·آ¬ط¸ظ¹ط¸â€‍ ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ­ط·ع¾ط¸â€° ط¸â€ ط¸â€،ط·آ§ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
+  { id: "pm-4", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط·آ§ط·آ³ط·ع¾ط¸ظ¾ط·آ³ط·آ§ط·آ± ط·آ¹ط¸â€  ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³", content: "ط¸â€ ط·آ¹ط¸â€¦ط·إ’ ط·آ¯ط·آ±ط·آ³ ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ© ط¸â€¦ط·ع¾ط·آ§ط·آ­ ط¸â€‍ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍. ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط¸â€‍ط·آ§ط·آ¨ط¸â€ ط¸ئ’ ط¸â€¦ط·آ´ط·آ§ط¸â€،ط·آ¯ط·ع¾ط¸â€، ط¸â€¦ط¸â€  ط·آµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), isTeacher: true },
+  { id: "pm-5", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ", content: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ ط¸â€‍ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¯ط¸â€¦. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط·آ§ط·آ·ط¸â€‍ط·آ§ط·آ¹ ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ط·آ¹ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
 ]
 
 export default function ParentMessagesPage() {
@@ -57,7 +57,7 @@ export default function ParentMessagesPage() {
 
   return (
     <div className="p-4 md:p-6 h-[calc(100vh-4rem)]">
-      <DashboardHeader title="ط§ظ„ط±ط³ط§ط¦ظ„" subtitle="ط§ظ„طھظˆط§طµظ„ ظ…ط¹ ط§ظ„ظ…ط¯ط±ط³" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط·آ¦ط¸â€‍" subtitle="ط·آ§ط¸â€‍ط·ع¾ط¸ث†ط·آ§ط·آµط¸â€‍ ط¸â€¦ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³" />
 
       <div className="flex gap-4 h-[calc(100%-5rem)] mt-4">
         <div className={cn(
@@ -67,10 +67,10 @@ export default function ParentMessagesPage() {
           <div className="p-3 border-b border-border space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex-1">
-                <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ظپظٹ ط§ظ„ط±ط³ط§ط¦ظ„..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط·آ¦ط¸â€‍..." />
               </div>
               <Button size="sm" variant="primary" onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                ط¬ط¯ظٹط¯ط©
+                ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
               </Button>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function ParentMessagesPage() {
                       {msg.isTeacher ? (
                         <HiOutlineUser className="w-5 h-5 text-primary" />
                       ) : (
-                        <span className="text-sm font-bold text-primary">ظˆ</span>
+                        <span className="text-sm font-bold text-primary">ط¸ث†</span>
                       )}
                     </div>
                     {!msg.read && <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary rounded-full border-2 border-surface" />}
@@ -143,19 +143,19 @@ export default function ParentMessagesPage() {
                     <p className="text-sm text-text leading-relaxed">{selectedMessage.content}</p>
                   </div>
                   <div className="p-4 rounded-xl bg-primary-50/50 dark:bg-primary-900/10 border border-primary/20">
-                    <p className="text-sm text-text font-medium mb-2">ط§ظ„ط±ط¯ ط¹ظ„ظ‰ ط§ظ„ط±ط³ط§ظ„ط©</p>
+                    <p className="text-sm text-text font-medium mb-2">ط·آ§ط¸â€‍ط·آ±ط·آ¯ ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©</p>
                     <textarea
-                      placeholder="ط§ظƒطھط¨ ط±ط¯ظƒ ظ‡ظ†ط§..."
+                      placeholder="ط·آ§ط¸ئ’ط·ع¾ط·آ¨ ط·آ±ط·آ¯ط¸ئ’ ط¸â€،ط¸â€ ط·آ§..."
                       rows={4}
                       className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
                     />
                     <div className="flex items-center justify-between mt-3">
                       <button type="button" className="flex items-center gap-1 text-sm text-text-tertiary hover:text-primary transition-colors">
                         <HiOutlinePaperClip className="w-4 h-4" />
-                        <span>ط¥ط±ظپط§ظ‚ ظ…ظ„ظپ</span>
+                        <span>ط·آ¥ط·آ±ط¸ظ¾ط·آ§ط¸â€ڑ ط¸â€¦ط¸â€‍ط¸ظ¾</span>
                       </button>
-                      <button type="button" size="sm" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-                        ط¥ط±ط³ط§ظ„ ط§ظ„ط±ط¯
+                      <Button type="button" size="sm" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
+                        ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍ ط·آ§ط¸â€‍ط·آ±ط·آ¯
                       </Button>
                     </div>
                   </div>
@@ -166,11 +166,11 @@ export default function ParentMessagesPage() {
             <div className="flex-1 flex items-center justify-center">
               <EmptyState
                 icon={HiOutlineChat}
-                title="ط§ط®طھط± ط±ط³ط§ظ„ط©"
-                description="ط§ط®طھط± ط±ط³ط§ظ„ط© ظ…ظ† ط§ظ„ظ‚ط§ط¦ظ…ط© ظ„ط¹ط±ط¶ ظ…ط­طھظˆط§ظ‡ط§"
+                title="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©"
+                description="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط¸â€¦ط¸â€  ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط¸â€‍ط·آ¹ط·آ±ط·آ¶ ط¸â€¦ط·آ­ط·ع¾ط¸ث†ط·آ§ط¸â€،ط·آ§"
                 action={
                   <Button onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                    ط¥ط±ط³ط§ظ„ ط±ط³ط§ظ„ط© ط¬ط¯ظٹط¯ط©
+                    ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍ ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
                   </Button>
                 }
               />
@@ -179,19 +179,19 @@ export default function ParentMessagesPage() {
         </div>
       </div>
 
-      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="ط±ط³ط§ظ„ط© ط¬ط¯ظٹط¯ط© ط¥ظ„ظ‰ ط§ظ„ظ…ط¯ط±ط³" subtitle="ط£ط±ط³ظ„ ط§ط³طھظپط³ط§ط±ط§ظ‹ ط£ظˆ ط·ظ„ط¨ط§ظ‹ ط¥ظ„ظ‰ ط§ظ„ظ…ط¯ط±ط³" size="lg">
+      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ© ط·آ¥ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³" subtitle="ط·آ£ط·آ±ط·آ³ط¸â€‍ ط·آ§ط·آ³ط·ع¾ط¸ظ¾ط·آ³ط·آ§ط·آ±ط·آ§ط¸â€¹ ط·آ£ط¸ث† ط·آ·ط¸â€‍ط·آ¨ط·آ§ط¸â€¹ ط·آ¥ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³" size="lg">
         <div className="space-y-4">
-          <Input label="ط§ظ„ظ…ظˆط¶ظˆط¹" placeholder="ط¹ظ†ظˆط§ظ† ط§ظ„ط±ط³ط§ظ„ط©" />
-          <Textarea label="ظ†طµ ط§ظ„ط±ط³ط§ظ„ط©" placeholder="ط§ظƒطھط¨ ط±ط³ط§ظ„طھظƒ ظ‡ظ†ط§..." rows={5} />
+          <Input label="ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¶ط¸ث†ط·آ¹" placeholder="ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©" />
+          <Textarea label="ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©" placeholder="ط·آ§ط¸ئ’ط·ع¾ط·آ¨ ط·آ±ط·آ³ط·آ§ط¸â€‍ط·ع¾ط¸ئ’ ط¸â€،ط¸â€ ط·آ§..." rows={5} />
           <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary border border-border cursor-pointer hover:bg-surface-tertiary transition-colors">
             <HiOutlinePaperClip className="w-4 h-4 text-text-tertiary" />
-            <span className="text-sm text-text-tertiary">ط¥ط±ظپط§ظ‚ ظ…ظ„ظپ (ط§ط®طھظٹط§ط±ظٹ)</span>
+            <span className="text-sm text-text-tertiary">ط·آ¥ط·آ±ط¸ظ¾ط·آ§ط¸â€ڑ ط¸â€¦ط¸â€‍ط¸ظ¾ (ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ±ط¸ظ¹)</span>
           </div>
           <div className="pt-4 flex gap-3">
-            <button type="button" variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-              ط¥ط±ط³ط§ظ„
+            <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
+              ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍
             </Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

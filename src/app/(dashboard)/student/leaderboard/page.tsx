@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import {
-  HiOutlineTrophy, HiOutlineChartBar, HiOutlineTrendingUp,
+  HiOutlineStar, HiOutlineChartBar, HiOutlineTrendingUp,
   HiOutlineTrendingDown, HiOutlineMinus, HiOutlineFilter,
   HiOutlineAcademicCap, HiStar, HiFire,
 } from "react-icons/hi"
@@ -84,7 +84,7 @@ export default function LeaderboardPage() {
       <div className="p-4 md:p-6 max-w-5xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-            <StatsCard title="ترتيبي" value={`#${currentRank}`} icon={HiOutlineTrophy} color="primary" />
+            <StatsCard title="ترتيبي" value={`#${currentRank}`} icon={HiOutlineStar} color="primary" />
             <StatsCard title="نقاطي" value={currentUser.totalScore} icon={HiOutlineChartBar} color="success" />
             <StatsCard title="الامتحانات" value={currentUser.exams} icon={HiOutlineAcademicCap} color="info" />
             <StatsCard title="الدقة" value={`${currentUser.accuracy}%`} icon={HiStar} color="warning" />
@@ -201,7 +201,7 @@ export default function LeaderboardPage() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={200}>
                   <PieChart>
-                    <Pie data={scoreDistData} dataKey="count" nameKey="name" cx="50%" cy="50%" outerRadius={70} label={({ name, count }) => `${name} (${count})`}>
+                    <Pie data={scoreDistData} dataKey="count" nameKey="name" cx="50%" cy="50%" outerRadius={70} label={({ name, count }: { name: string; count: number }) => `${name} (${count})`}>
                       {scoreDistData.map((e, i) => <Cell key={i} fill={e.fill} />)}
                     </Pie>
                     <Legend />

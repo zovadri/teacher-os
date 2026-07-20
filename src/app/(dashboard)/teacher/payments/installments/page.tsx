@@ -8,7 +8,7 @@ import DashboardHeader from "@/components/layout/DashboardHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
-import DataTable from "@/components/ui/DataTable"
+import { DataTable } from "@/components/ui/DataTable"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 
 interface Installment {

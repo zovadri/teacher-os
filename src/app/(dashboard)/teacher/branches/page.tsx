@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -62,7 +62,7 @@ export default function BranchesPage() {
     setBranches((prev) => [branch, ...prev])
     setShowAddModal(false)
     setNewBranch({ name: "", address: "", phone: "", email: "", manager: "", capacity: 100 })
-    toast.success("طھظ… ط¥ط¶ط§ظپط© ط§ظ„ظپط±ط¹ ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
   }
 
   const handleRetry = useCallback(() => {
@@ -72,7 +72,7 @@ export default function BranchesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط§ظ„ظپط±ظˆط¹" subtitle="ط¥ط¯ط§ط±ط© ظپط±ظˆط¹ ط§ظ„ظ…ط±ظƒط²" />
+        <DashboardHeader title="ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸ظ¾ط·آ±ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ±ط¸ئ’ط·آ²" />
         <ErrorState onRetry={handleRetry} />
       </div>
     )
@@ -80,10 +80,10 @@ export default function BranchesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط§ظ„ظپط±ظˆط¹" subtitle="ط¥ط¯ط§ط±ط© ظپط±ظˆط¹ ط§ظ„ظ…ط±ظƒط²" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸ظ¾ط·آ±ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ±ط¸ئ’ط·آ²" />
       <div className="flex justify-end">
-        <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-          ط¥ط¶ط§ظپط© ظپط±ط¹
+        <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
+          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸ظ¾ط·آ±ط·آ¹
         </Button>
       </div>
 
@@ -91,10 +91,10 @@ export default function BranchesPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظپط±ظˆط¹" value={stats.total} icon={HiOutlineOfficeBuilding} color="primary" subtitle={`${stats.active} ظ†ط´ط·`} />
-          <StatsCard title="ط§ظ„ط³ط¹ط© ط§ظ„ط¥ط¬ظ…ط§ظ„ظٹط©" value={stats.totalCapacity} icon={HiOutlineLocationMarker} color="info" />
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ط³ط¬ظ„ظٹظ†" value={stats.totalCurrent} icon={HiOutlineUser} color="success" subtitle={`${Math.round((stats.totalCurrent / stats.totalCapacity) * 100)}% ظ…ظ† ط§ظ„ط³ط¹ط©`} />
-          <StatsCard title="ظ…طھظˆط³ط· ط§ظ„ط¥ط´ط؛ط§ظ„" value={`${stats.total > 0 ? Math.round(branches.reduce((s, b) => s + (b.capacity > 0 ? (b.currentCount / b.capacity) * 100 : 0), 0) / stats.total) : 0}%`} icon={HiOutlineExclamation} color="warning" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" value={stats.total} icon={HiOutlineOfficeBuilding} color="primary" subtitle={`${stats.active} ط¸â€ ط·آ´ط·آ·`} />
+          <StatsCard title="ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ط·آ©" value={stats.totalCapacity} icon={HiOutlineLocationMarker} color="info" />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·آ¬ط¸â€‍ط¸ظ¹ط¸â€ " value={stats.totalCurrent} icon={HiOutlineUser} color="success" subtitle={`${Math.round((stats.totalCurrent / stats.totalCapacity) * 100)}% ط¸â€¦ط¸â€  ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ©`} />
+          <StatsCard title="ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·ط›ط·آ§ط¸â€‍" value={`${stats.total > 0 ? Math.round(branches.reduce((s, b) => s + (b.capacity > 0 ? (b.currentCount / b.capacity) * 100 : 0), 0) / stats.total) : 0}%`} icon={HiOutlineExclamation} color="warning" />
         </motion.div>
       )}
 
@@ -103,9 +103,9 @@ export default function BranchesPage() {
       ) : branches.length === 0 ? (
         <EmptyState
           icon={HiOutlineOfficeBuilding}
-          title="ظ„ط§ طھظˆط¬ط¯ ظپط±ظˆط¹"
-          description="ظ„ظ… ظٹطھظ… ط¥ط¶ط§ظپط© ط£ظٹ ظپط±ظˆط¹ ط¨ط¹ط¯. ط£ط¶ظپ ظپط±ط¹ط§ظ‹ ط¬ط¯ظٹط¯ط§ظ‹ ظ„ظ„ط¨ط¯ط،."
-          action={<button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط¥ط¶ط§ظپط© ظپط±ط¹</Button>}
+          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸ظ¾ط·آ±ط¸ث†ط·آ¹"
+          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ£ط¸ظ¹ ط¸ظ¾ط·آ±ط¸ث†ط·آ¹ ط·آ¨ط·آ¹ط·آ¯. ط·آ£ط·آ¶ط¸ظ¾ ط¸ظ¾ط·آ±ط·آ¹ط·آ§ط¸â€¹ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ§ط¸â€¹ ط¸â€‍ط¸â€‍ط·آ¨ط·آ¯ط·طŒ."
+          action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸ظ¾ط·آ±ط·آ¹</Button>}
         />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -123,7 +123,7 @@ export default function BranchesPage() {
                         <p className="text-xs text-text-tertiary">{branch.manager}</p>
                       </div>
                     </div>
-                    <Badge variant={branch.status === "active" ? "success" : "neutral"}>{branch.status === "active" ? "ظ†ط´ط·" : "ط؛ظٹط± ظ†ط´ط·"}</Badge>
+                    <Badge variant={branch.status === "active" ? "success" : "neutral"}>{branch.status === "active" ? "ط¸â€ ط·آ´ط·آ·" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·"}</Badge>
                   </div>
                   <div className="space-y-2 text-sm text-text-secondary">
                     <div className="flex items-center gap-2">
@@ -137,14 +137,14 @@ export default function BranchesPage() {
                   </div>
                   <div className="mt-3">
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-text-secondary">ط³ط¹ط© ط§ظ„ظپط±ط¹</span>
+                      <span className="text-text-secondary">ط·آ³ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹</span>
                       <span className="text-text font-medium">{branch.currentCount}/{branch.capacity}</span>
                     </div>
                     <Progress value={(branch.currentCount / branch.capacity) * 100} size="sm" variant={branch.currentCount / branch.capacity > 0.85 ? "warning" : "primary"} />
                   </div>
                   <div className="flex items-center gap-1 mt-3 text-xs text-text-tertiary">
                     {expandedId === branch.id ? <HiOutlineChevronUp className="w-3.5 h-3.5" /> : <HiOutlineChevronDown className="w-3.5 h-3.5" />}
-                    <span>{expandedId === branch.id ? "ط¥ط®ظپط§ط، ط§ظ„طھظپط§طµظٹظ„" : "ط¹ط±ط¶ ط§ظ„طھظپط§طµظٹظ„"}</span>
+                    <span>{expandedId === branch.id ? "ط·آ¥ط·آ®ط¸ظ¾ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍" : "ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍"}</span>
                   </div>
                 </div>
                 <AnimatePresence>
@@ -153,20 +153,20 @@ export default function BranchesPage() {
                       <div className="p-5 space-y-3">
                         <div className="flex items-center gap-2 text-sm">
                           <HiOutlineUser className="w-4 h-4 text-text-tertiary" />
-                          <span className="text-text-secondary">ط§ظ„ظ…ط¯ظٹط±:</span>
+                          <span className="text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط¸ظ¹ط·آ±:</span>
                           <span className="text-text font-medium">{branch.manager}</span>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div className="p-3 rounded-lg bg-surface-secondary">
-                            <p className="text-xs text-text-tertiary">ط¹ط¯ط¯ ظ‚ط§ط¹ط§طھ ط§ظ„ط¯ط±ط§ط³ط©</p>
+                            <p className="text-xs text-text-tertiary">ط·آ¹ط·آ¯ط·آ¯ ط¸â€ڑط·آ§ط·آ¹ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط·آ©</p>
                             <p className="text-lg font-bold text-text">--</p>
                           </div>
                           <div className="p-3 rounded-lg bg-surface-secondary">
-                            <p className="text-xs text-text-tertiary">ط¹ط¯ط¯ ط§ظ„ظ…ظˆط¸ظپظٹظ†</p>
+                            <p className="text-xs text-text-tertiary">ط·آ¹ط·آ¯ط·آ¯ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€ </p>
                             <p className="text-lg font-bold text-text">--</p>
                           </div>
                         </div>
-                        <p className="text-xs text-text-tertiary">طھط§ط±ظٹط® ط§ظ„ط¥ظ†ط´ط§ط،: {formatDate(branch.createdAt)}</p>
+                        <p className="text-xs text-text-tertiary">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ: {formatDate(branch.createdAt)}</p>
                       </div>
                     </motion.div>
                   )}
@@ -177,19 +177,19 @@ export default function BranchesPage() {
         </div>
       )}
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¥ط¶ط§ظپط© ظپط±ط¹ ط¬ط¯ظٹط¯" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸ظ¾ط·آ±ط·آ¹ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="md">
         <div className="space-y-4">
-          <Input label="ط§ط³ظ… ط§ظ„ظپط±ط¹" value={newBranch.name} onChange={(e) => setNewBranch({ ...newBranch, name: e.target.value })} placeholder="ط£ط¯ط®ظ„ ط§ط³ظ… ط§ظ„ظپط±ط¹" />
-          <Input label="ط§ظ„ط¹ظ†ظˆط§ظ†" value={newBranch.address} onChange={(e) => setNewBranch({ ...newBranch, address: e.target.value })} placeholder="ط£ط¯ط®ظ„ ط§ظ„ط¹ظ†ظˆط§ظ†" />
+          <Input label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹" value={newBranch.name} onChange={(e) => setNewBranch({ ...newBranch, name: e.target.value })} placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹" />
+          <Input label="ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€ " value={newBranch.address} onChange={(e) => setNewBranch({ ...newBranch, address: e.target.value })} placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€ " />
           <div className="grid grid-cols-2 gap-3">
-            <Input label="ط±ظ‚ظ… ط§ظ„ظ‡ط§طھظپ" value={newBranch.phone} onChange={(e) => setNewBranch({ ...newBranch, phone: e.target.value })} placeholder="ط±ظ‚ظ… ط§ظ„ظ‡ط§طھظپ" />
-            <Input label="ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ" value={newBranch.email} onChange={(e) => setNewBranch({ ...newBranch, email: e.target.value })} placeholder="ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ" />
+            <Input label="ط·آ±ط¸â€ڑط¸â€¦ ط·آ§ط¸â€‍ط¸â€،ط·آ§ط·ع¾ط¸ظ¾" value={newBranch.phone} onChange={(e) => setNewBranch({ ...newBranch, phone: e.target.value })} placeholder="ط·آ±ط¸â€ڑط¸â€¦ ط·آ§ط¸â€‍ط¸â€،ط·آ§ط·ع¾ط¸ظ¾" />
+            <Input label="ط·آ§ط¸â€‍ط·آ¨ط·آ±ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ¥ط¸â€‍ط¸ئ’ط·ع¾ط·آ±ط¸ث†ط¸â€ ط¸ظ¹" value={newBranch.email} onChange={(e) => setNewBranch({ ...newBranch, email: e.target.value })} placeholder="ط·آ§ط¸â€‍ط·آ¨ط·آ±ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ¥ط¸â€‍ط¸ئ’ط·ع¾ط·آ±ط¸ث†ط¸â€ ط¸ظ¹" />
           </div>
-          <Input label="ط§ط³ظ… ط§ظ„ظ…ط¯ظٹط±" value={newBranch.manager} onChange={(e) => setNewBranch({ ...newBranch, manager: e.target.value })} placeholder="ط§ط³ظ… ط§ظ„ظ…ط¯ظٹط±" />
-          <Input label="ط§ظ„ط³ط¹ط© ط§ظ„ظ‚طµظˆظ‰" type="number" value={String(newBranch.capacity)} onChange={(e) => setNewBranch({ ...newBranch, capacity: Number(e.target.value) })} placeholder="ط§ظ„ط³ط¹ط© ط§ظ„ظ‚طµظˆظ‰" />
+          <Input label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط¸ظ¹ط·آ±" value={newBranch.manager} onChange={(e) => setNewBranch({ ...newBranch, manager: e.target.value })} placeholder="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط¸ظ¹ط·آ±" />
+          <Input label="ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸â€ڑط·آµط¸ث†ط¸â€°" type="number" value={String(newBranch.capacity)} onChange={(e) => setNewBranch({ ...newBranch, capacity: Number(e.target.value) })} placeholder="ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸â€ڑط·آµط¸ث†ط¸â€°" />
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1" onClick={handleAddBranch} disabled={!newBranch.name}>ط¥ط¶ط§ظپط© ط§ظ„ظپط±ط¹</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" className="flex-1" onClick={handleAddBranch} disabled={!newBranch.name}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>

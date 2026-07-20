@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -31,14 +31,14 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 
-const daysOfWeek = ["ط§ظ„ط³ط¨طھ", "ط§ظ„ط£ط­ط¯", "ط§ظ„ط¥ط«ظ†ظٹظ†", "ط§ظ„ط«ظ„ط§ط«ط§ط،", "ط§ظ„ط£ط±ط¨ط¹ط§ط،", "ط§ظ„ط®ظ…ظٹط³", "ط§ظ„ط¬ظ…ط¹ط©"]
+const daysOfWeek = ["ط·آ§ط¸â€‍ط·آ³ط·آ¨ط·ع¾", "ط·آ§ط¸â€‍ط·آ£ط·آ­ط·آ¯", "ط·آ§ط¸â€‍ط·آ¥ط·آ«ط¸â€ ط¸ظ¹ط¸â€ ", "ط·آ§ط¸â€‍ط·آ«ط¸â€‍ط·آ§ط·آ«ط·آ§ط·طŒ", "ط·آ§ط¸â€‍ط·آ£ط·آ±ط·آ¨ط·آ¹ط·آ§ط·طŒ", "ط·آ§ط¸â€‍ط·آ®ط¸â€¦ط¸ظ¹ط·آ³", "ط·آ§ط¸â€‍ط·آ¬ط¸â€¦ط·آ¹ط·آ©"]
 
 const mockScheduledLessons = [
-  { id: "sched-1", courseId: "c-1", courseName: "ط§ظ„ظ†ط­ظˆ ظˆط§ظ„طµط±ظپ", lessonName: "ط¯ط±ط³ 1: ط§ظ„ظ…ظ‚ط¯ظ…ط©", date: new Date(2025, 6, 20), time: "10:00", duration: 45, notes: "ظ…ط±ط§ط¬ط¹ط© ط³ط±ظٹط¹ط© ظ„ظ„ط¯ط±ط³ ط§ظ„ط³ط§ط¨ظ‚", autoPublish: true },
-  { id: "sched-2", courseId: "c-1", courseName: "ط§ظ„ظ†ط­ظˆ ظˆط§ظ„طµط±ظپ", lessonName: "ط¯ط±ط³ 2: ط§ظ„ط´ط±ط­", date: new Date(2025, 6, 22), time: "10:00", duration: 45, notes: "", autoPublish: false },
-  { id: "sched-3", courseId: "c-2", courseName: "ط§ظ„ط¨ظ„ط§ط؛ط© ظˆط§ظ„ط£ط¯ط¨", lessonName: "ط¯ط±ط³ 1: ط§ظ„ظ…ظ‚ط¯ظ…ط©", date: new Date(2025, 6, 21), time: "14:00", duration: 60, notes: "طھط¬ظ‡ظٹط² ط§ظ„ط¹ط±ط¶ ط§ظ„طھظ‚ط¯ظٹظ…ظٹ", autoPublish: true },
-  { id: "sched-4", courseId: "c-6", courseName: "ط§ظ„طھط¹ط¨ظٹط± ظˆط§ظ„ط¥ظ†ط´ط§ط،", lessonName: "ط¯ط±ط³ 3: ط§ظ„طھط·ط¨ظٹظ‚", date: new Date(2025, 6, 23), time: "12:00", duration: 30, notes: "", autoPublish: true },
-  { id: "sched-5", courseId: "c-4", courseName: "ظ‚ظˆط§ط¹ط¯ ط§ظ„ظ†ط­ظˆ ط§ظ„ظ…طھظ‚ط¯ظ…", lessonName: "ط¯ط±ط³ 1: ظ…ظ‚ط¯ظ…ط©", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "ط§ط®طھط¨ط§ط± ظ‚طµظٹط± ظپظٹ ظ†ظ‡ط§ظٹط© ط§ظ„ط¯ط±ط³", autoPublish: false },
+  { id: "sched-1", courseId: "c-1", courseName: "ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط¸ث†ط·آ§ط¸â€‍ط·آµط·آ±ط¸ظ¾", lessonName: "ط·آ¯ط·آ±ط·آ³ 1: ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ¯ط¸â€¦ط·آ©", date: new Date(2025, 6, 20), time: "10:00", duration: 45, notes: "ط¸â€¦ط·آ±ط·آ§ط·آ¬ط·آ¹ط·آ© ط·آ³ط·آ±ط¸ظ¹ط·آ¹ط·آ© ط¸â€‍ط¸â€‍ط·آ¯ط·آ±ط·آ³ ط·آ§ط¸â€‍ط·آ³ط·آ§ط·آ¨ط¸â€ڑ", autoPublish: true },
+  { id: "sched-2", courseId: "c-1", courseName: "ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط¸ث†ط·آ§ط¸â€‍ط·آµط·آ±ط¸ظ¾", lessonName: "ط·آ¯ط·آ±ط·آ³ 2: ط·آ§ط¸â€‍ط·آ´ط·آ±ط·آ­", date: new Date(2025, 6, 22), time: "10:00", duration: 45, notes: "", autoPublish: false },
+  { id: "sched-3", courseId: "c-2", courseName: "ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ© ط¸ث†ط·آ§ط¸â€‍ط·آ£ط·آ¯ط·آ¨", lessonName: "ط·آ¯ط·آ±ط·آ³ 1: ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ¯ط¸â€¦ط·آ©", date: new Date(2025, 6, 21), time: "14:00", duration: 60, notes: "ط·ع¾ط·آ¬ط¸â€،ط¸ظ¹ط·آ² ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ¯ط¸ظ¹ط¸â€¦ط¸ظ¹", autoPublish: true },
+  { id: "sched-4", courseId: "c-6", courseName: "ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ¨ط¸ظ¹ط·آ± ط¸ث†ط·آ§ط¸â€‍ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ", lessonName: "ط·آ¯ط·آ±ط·آ³ 3: ط·آ§ط¸â€‍ط·ع¾ط·آ·ط·آ¨ط¸ظ¹ط¸â€ڑ", date: new Date(2025, 6, 23), time: "12:00", duration: 30, notes: "", autoPublish: true },
+  { id: "sched-5", courseId: "c-4", courseName: "ط¸â€ڑط¸ث†ط·آ§ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦", lessonName: "ط·آ¯ط·آ±ط·آ³ 1: ط¸â€¦ط¸â€ڑط·آ¯ط¸â€¦ط·آ©", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ± ط¸â€ڑط·آµط¸ظ¹ط·آ± ط¸ظ¾ط¸ظ¹ ط¸â€ ط¸â€،ط·آ§ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³", autoPublish: false },
 ]
 
 export default function SchedulePage() {
@@ -80,14 +80,14 @@ export default function SchedulePage() {
       notes: newLesson.notes,
       autoPublish: autoPublish,
     }])
-    toast.success("تمت إضافة الدرس إلى الجدولة بنجاح")
+    toast.success("طھظ…طھ ط¥ط¶ط§ظپط© ط§ظ„ط¯ط±ط³ ط¥ظ„ظ‰ ط§ظ„ط¬ط¯ظˆظ„ط© ط¨ظ†ط¬ط§ط­")
     setShowAddModal(false)
     setNewLesson({ courseId: "", lessonName: "", date: "", time: "", duration: 45, notes: "" })
   }
 
   const deleteLesson = (id: string) => {
     setSchedule((prev) => prev.filter((s) => s.id !== id))
-    toast.success("تم حذف الدرس من الجدولة")
+    toast.success("طھظ… ط­ط°ظپ ط§ظ„ط¯ط±ط³ ظ…ظ† ط§ظ„ط¬ط¯ظˆظ„ط©")
   }
 
   const courseOptions = mockCourses.map((c) => ({ value: c.id, label: c.title }))
@@ -98,13 +98,13 @@ export default function SchedulePage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط§ظ„ظƒظˆط±ط³ط§طھ", href: "/teacher/courses" }, { label: "ط¬ط¯ظˆظ„ ط§ظ„ظƒظˆط±ط³ط§طھ" }]} />
-      <DashboardHeader title="ط¬ط¯ظˆظ„ط© ط§ظ„ط¯ط±ظˆط³" subtitle="طھط®ط·ظٹط· ظˆط¬ط¯ظˆظ„ط© ط§ظ„ط¯ط±ظˆط³ ظ„ظ„ط·ظ„ط§ط¨" />
+      <Breadcrumb items={[{ label: "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", href: "/teacher/courses" }, { label: "ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" }]} />
+      <DashboardHeader title="ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³" subtitle="ط·ع¾ط·آ®ط·آ·ط¸ظ¹ط·آ· ط¸ث†ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط¸â€‍ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨" />
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Badge variant="info" size="md">{schedule.length} ط¯ط±ط³ ظ…ط¬ط¯ظˆظ„</Badge>
-          <Badge variant="success" size="md">{upcomingLessons.length} ظ‚ط§ط¯ظ…</Badge>
+          <Badge variant="info" size="md">{schedule.length} ط·آ¯ط·آ±ط·آ³ ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍</Badge>
+          <Badge variant="success" size="md">{upcomingLessons.length} ط¸â€ڑط·آ§ط·آ¯ط¸â€¦</Badge>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 p-1 bg-surface border border-border rounded-xl">
@@ -112,17 +112,17 @@ export default function SchedulePage() {
               onClick={() => setViewMode("list")}
               className={cn("px-3 py-1.5 text-xs rounded-lg transition-colors", viewMode === "list" ? "bg-primary text-white" : "text-text-secondary")}
             >
-              ظ‚ط§ط¦ظ…ط©
+              ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ©
             </button>
             <button type="button"
               onClick={() => setViewMode("grid")}
               className={cn("px-3 py-1.5 text-xs rounded-lg transition-colors", viewMode === "grid" ? "bg-primary text-white" : "text-text-secondary")}
             >
-              طھظ‚ظˆظٹظ…
+              ط·ع¾ط¸â€ڑط¸ث†ط¸ظ¹ط¸â€¦
             </button>
           </div>
-          <button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-            ط¬ط¯ظˆظ„ط© ط¯ط±ط³ ط¬ط¯ظٹط¯
+          <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
+            ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ¯ط·آ±ط·آ³ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯
           </Button>
         </div>
       </div>
@@ -176,16 +176,16 @@ export default function SchedulePage() {
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>ط§ظ„ط¯ط±ظˆط³ ط§ظ„ظ…ط¬ط¯ظˆظ„ط©</CardTitle>
-            <CardDescription>ط¬ظ…ظٹط¹ ط§ظ„ط¯ط±ظˆط³ ط­ط³ط¨ طھط§ط±ظٹط® ط§ظ„ط¬ط¯ظˆظ„ط©</CardDescription>
+            <CardTitle>ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</CardTitle>
+            <CardDescription>ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط·آ­ط·آ³ط·آ¨ ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</CardDescription>
           </CardHeader>
           <CardContent>
             {sortedSchedule.length === 0 ? (
               <EmptyState
                 icon={HiOutlineCalendar}
-                title="ظ„ط§ طھظˆط¬ط¯ ط¯ط±ظˆط³ ظ…ط¬ط¯ظˆظ„ط©"
-                description="ظ‚ظ… ط¨ط¬ط¯ظˆظ„ط© ط£ظˆظ„ ط¯ط±ط³ ط§ظ„ط¢ظ†"
-                action={<button type="button" variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowAddModal(true)}>ط¬ط¯ظˆظ„ط© ط¯ط±ط³</Button>}
+                title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¯ط·آ±ط¸ث†ط·آ³ ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©"
+                description="ط¸â€ڑط¸â€¦ ط·آ¨ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ£ط¸ث†ط¸â€‍ ط·آ¯ط·آ±ط·آ³ ط·آ§ط¸â€‍ط·آ¢ط¸â€ "
+                action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowAddModal(true)}>ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ¯ط·آ±ط·آ³</Button>}
               />
             ) : (
               <div className="space-y-2">
@@ -210,12 +210,12 @@ export default function SchedulePage() {
                       </div>
                       <div className="flex items-center gap-3 mt-1 text-xs text-text-tertiary">
                         <span className="flex items-center gap-1"><HiOutlineClock className="w-3 h-3" />{s.time}</span>
-                        <span>{s.duration} ط¯ظ‚ظٹظ‚ط©</span>
-                        {s.notes && <span className="truncate max-w-[200px]">آ· {s.notes}</span>}
+                        <span>{s.duration} ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑط·آ©</span>
+                        {s.notes && <span className="truncate max-w-[200px]">ط¢آ· {s.notes}</span>}
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant={s.autoPublish ? "success" : "warning"} size="sm">{s.autoPublish ? "ظ†ط´ط± طھظ„ظ‚ط§ط¦ظٹ" : "ظٹط¯ظˆظٹ"}</Badge>
+                      <Badge variant={s.autoPublish ? "success" : "warning"} size="sm">{s.autoPublish ? "ط¸â€ ط·آ´ط·آ± ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹" : "ط¸ظ¹ط·آ¯ط¸ث†ط¸ظ¹"}</Badge>
                       <button type="button" className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={14} /></button>
                       <button type="button" onClick={() => deleteLesson(s.id)} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={14} /></button>
                     </div>
@@ -231,14 +231,14 @@ export default function SchedulePage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <HiOutlineEye className="w-5 h-5 text-primary" />
-            <CardTitle>ط§ظ„ظ†ط´ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ</CardTitle>
+            <CardTitle>ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-text">ط§ظ„ظ†ط´ط± ط§ظ„طھظ„ظ‚ط§ط¦ظٹ ط¹ظ†ط¯ ط­ظ„ظˆظ„ ط§ظ„ظ…ظˆط¹ط¯</p>
-              <p className="text-xs text-text-tertiary">ط¹ظ†ط¯ طھظپط¹ظٹظ„ظ‡طŒ ط³ظٹطھظ… ظ†ط´ط± ط§ظ„ط¯ط±ط³ طھظ„ظ‚ط§ط¦ظٹط§ظ‹ ظ„ظ„ط·ظ„ط§ط¨ ظپظٹ طھط§ط±ظٹط® ظˆظ…ظٹط¹ط§ط¯ ط§ظ„ط¬ط¯ظˆظ„ط©</p>
+              <p className="text-sm font-medium text-text">ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط·آ¹ط¸â€ ط·آ¯ ط·آ­ط¸â€‍ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¹ط·آ¯</p>
+              <p className="text-xs text-text-tertiary">ط·آ¹ط¸â€ ط·آ¯ ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ط¸â€،ط·إ’ ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط¸â€ ط·آ´ط·آ± ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³ ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ط·آ§ط¸â€¹ ط¸â€‍ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط¸ث†ط¸â€¦ط¸ظ¹ط·آ¹ط·آ§ط·آ¯ ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</p>
             </div>
             <button type="button"
               onClick={() => setAutoPublish(!autoPublish)}
@@ -250,30 +250,30 @@ export default function SchedulePage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¬ط¯ظˆظ„ط© ط¯ط±ط³ ط¬ط¯ظٹط¯" size="lg">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ¯ط·آ±ط·آ³ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="lg">
         <div className="space-y-4">
           <Select
-            label="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³"
+            label="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
             options={courseOptions}
             value={newLesson.courseId}
             onChange={(e) => setNewLesson({ ...newLesson, courseId: e.target.value })}
-            placeholder="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³"
+            placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
           />
           <Input
-            label="ط§ط³ظ… ط§ظ„ط¯ط±ط³"
+            label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³"
             value={newLesson.lessonName}
             onChange={(e) => setNewLesson({ ...newLesson, lessonName: e.target.value })}
-            placeholder="ظ…ط«ط§ظ„: ط¯ط±ط³ 4: ط§ظ„طھط·ط¨ظٹظ‚ط§طھ"
+            placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ¯ط·آ±ط·آ³ 4: ط·آ§ط¸â€‍ط·ع¾ط·آ·ط·آ¨ط¸ظ¹ط¸â€ڑط·آ§ط·ع¾"
           />
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="ط§ظ„طھط§ط±ظٹط®"
+              label="ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®"
               type="date"
               value={newLesson.date}
               onChange={(e) => setNewLesson({ ...newLesson, date: e.target.value })}
             />
             <Input
-              label="ط§ظ„ظˆظ‚طھ"
+              label="ط·آ§ط¸â€‍ط¸ث†ط¸â€ڑط·ع¾"
               type="time"
               value={newLesson.time}
               onChange={(e) => setNewLesson({ ...newLesson, time: e.target.value })}
@@ -281,14 +281,14 @@ export default function SchedulePage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="ط§ظ„ظ…ط¯ط© (ط¯ظ‚ظٹظ‚ط©)"
+              label="ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ© (ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑط·آ©)"
               type="number"
               value={newLesson.duration}
               onChange={(e) => setNewLesson({ ...newLesson, duration: Number(e.target.value) })}
             />
             <div className="flex items-end pb-3">
               <div className="flex items-center gap-3">
-                <span className="text-sm text-text-secondary">ظ†ط´ط± طھظ„ظ‚ط§ط¦ظٹ</span>
+                <span className="text-sm text-text-secondary">ط¸â€ ط·آ´ط·آ± ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹</span>
                 <button type="button"
                   onClick={() => setAutoPublish(!autoPublish)}
                   className={cn("w-10 h-5 rounded-full transition-colors relative", autoPublish ? "bg-primary" : "bg-surface-tertiary")}
@@ -299,17 +299,17 @@ export default function SchedulePage() {
             </div>
           </div>
           <Input
-            label="ظ…ظ„ط§ط­ط¸ط§طھ (ط§ط®طھظٹط§ط±ظٹ)"
+            label="ط¸â€¦ط¸â€‍ط·آ§ط·آ­ط·آ¸ط·آ§ط·ع¾ (ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ±ط¸ظ¹)"
             value={newLesson.notes}
             onChange={(e) => setNewLesson({ ...newLesson, notes: e.target.value })}
-            placeholder="ظ…ظ„ط§ط­ط¸ط§طھ ظ„ظ„ط¯ط±ط³..."
+            placeholder="ط¸â€¦ط¸â€‍ط·آ§ط·آ­ط·آ¸ط·آ§ط·ع¾ ط¸â€‍ط¸â€‍ط·آ¯ط·آ±ط·آ³..."
           />
           <div className="flex gap-3 pt-2">
-            <button type="button" variant="primary" className="flex-1" leftIcon={<HiOutlineCheck className="w-4 h-4" />} onClick={addLesson}>
-              ط¥ط¶ط§ظپط© ط¥ظ„ظ‰ ط§ظ„ط¬ط¯ظˆظ„
+            <Button variant="primary" className="flex-1" leftIcon={<HiOutlineCheck className="w-4 h-4" />} onClick={addLesson}>
+              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¥ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍
             </Button>
-            <button type="button" variant="secondary" leftIcon={<HiOutlineX className="w-4 h-4" />} onClick={() => setShowAddModal(false)}>
-              ط¥ظ„ط؛ط§ط،
+            <Button variant="secondary" leftIcon={<HiOutlineX className="w-4 h-4" />} onClick={() => setShowAddModal(false)}>
+              ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ
             </Button>
           </div>
         </div>

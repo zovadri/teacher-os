@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useEffect } from "react"
 import { motion } from "framer-motion"
@@ -58,21 +58,21 @@ export default function StudentIDCardsPage() {
   }, [gradeFilter, groupFilter])
 
   const handlePrint = () => {
-    toast.success("ط¬ط§ط±ظچ طھط­ط¶ظٹط± ط§ظ„ط¨ط·ط§ظ‚ط§طھ ظ„ظ„ط·ط¨ط§ط¹ط©", { position: "top-left" })
+    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آ­ط·آ¶ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط¸â€‍ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©", { position: "top-left" })
     setTimeout(() => window.print(), 500)
   }
 
   const handleDownloadPDF = () => {
-    toast.success("ط¬ط§ط±ظچ ط¥ظ†ط´ط§ط، ظ…ظ„ظپ PDF", { position: "top-left" })
-    setTimeout(() => toast.success("طھظ… ط¥ظ†ط´ط§ط، ظ…ظ„ظپ PDF ط¨ظ†ط¬ط§ط­", { position: "top-left" }), 2000)
+    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸â€¦ط¸â€‍ط¸ظ¾ PDF", { position: "top-left" })
+    setTimeout(() => toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸â€¦ط¸â€‍ط¸ظ¾ PDF ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­", { position: "top-left" }), 2000)
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6">
         <ErrorState
-          title="ط­ط¯ط« ط®ط·ط£ ظپظٹ طھط­ظ…ظٹظ„ ط§ظ„ط¨ط·ط§ظ‚ط§طھ"
-          message="ظٹط±ط¬ظ‰ ط§ظ„ظ…ط­ط§ظˆظ„ط© ظ…ط±ط© ط£ط®ط±ظ‰"
+          title="ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£ ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾"
+          message="ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ© ط¸â€¦ط·آ±ط·آ© ط·آ£ط·آ®ط·آ±ط¸â€°"
           onRetry={() => { setHasError(false); setIsLoading(true); setTimeout(() => setIsLoading(false), 1200) }}
         />
       </div>
@@ -82,17 +82,17 @@ export default function StudentIDCardsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Toaster />
-      <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: "بطاقات الطلاب" }]} />
+      <Breadcrumb items={[{ label: "ط§ظ„ط·ظ„ط§ط¨", href: "/teacher/students" }, { label: "ط¨ط·ط§ظ‚ط§طھ ط§ظ„ط·ظ„ط§ط¨" }]} />
       <PageHeader
-        title="ط¨ط·ط§ظ‚ط§طھ ط§ظ„ط·ط§ظ„ط¨ ط§ظ„طھط¹ط±ظٹظپظٹط©"
-        description="ط¹ط±ط¶ ظˆط·ط¨ط§ط¹ط© ط¨ط·ط§ظ‚ط§طھ ط§ظ„ط·ظ„ط§ط¨ ط§ظ„طھط¹ط±ظٹظپظٹط©"
+        title="ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ±ط¸ظ¹ط¸ظ¾ط¸ظ¹ط·آ©"
+        description="ط·آ¹ط·آ±ط·آ¶ ط¸ث†ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ±ط¸ظ¹ط¸ظ¾ط¸ظ¹ط·آ©"
         actions={
           <div className="flex items-center gap-2">
-            <button type="button" variant="secondary" size="sm" leftIcon={<HiOutlinePrinter className="w-4 h-4" />} onClick={handlePrint}>
-              ط·ط¨ط§ط¹ط©
+            <Button variant="secondary" size="sm" leftIcon={<HiOutlinePrinter className="w-4 h-4" />} onClick={handlePrint}>
+              ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©
             </Button>
-            <button type="button" variant="primary" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleDownloadPDF}>
-              PDF طھط­ظ…ظٹظ„
+            <Button variant="primary" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleDownloadPDF}>
+              PDF ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍
             </Button>
           </div>
         }
@@ -106,7 +106,7 @@ export default function StudentIDCardsPage() {
                 value={gradeFilter}
                 onChange={(e) => setGradeFilter(e.target.value)}
                 options={[
-                  { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„طµظپظˆظپ" },
+                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آµط¸ظ¾ط¸ث†ط¸ظ¾" },
                   ...grades.map((g) => ({ value: g, label: g })),
                 ]}
               />
@@ -116,14 +116,14 @@ export default function StudentIDCardsPage() {
                 value={groupFilter}
                 onChange={(e) => setGroupFilter(e.target.value)}
                 options={[
-                  { value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ" },
+                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾" },
                   ...groups.map((g) => ({ value: g, label: g })),
                 ]}
               />
             </div>
             <div className="flex items-center text-sm text-text-tertiary">
               <HiOutlineIdentification className="w-4 h-4 ml-1" />
-              {filtered.length} ط¨ط·ط§ظ‚ط©
+              {filtered.length} ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ©
             </div>
           </div>
         </CardContent>
@@ -148,11 +148,11 @@ export default function StudentIDCardsPage() {
       ) : filtered.length === 0 ? (
         <EmptyState
           icon={HiOutlineIdentification}
-          title="ظ„ط§ طھظˆط¬ط¯ ط¨ط·ط§ظ‚ط§طھ"
-          description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط¨ط·ط§ظ‚ط§طھ طھط·ط§ط¨ظ‚ ظ…ط¹ط§ظٹظٹط± ط§ظ„ظپظ„طھط±ط©"
+          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾"
+          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸ظ¾ط¸â€‍ط·ع¾ط·آ±ط·آ©"
           action={
             <Button variant="secondary" onClick={() => { setGradeFilter("all"); setGroupFilter("all") }}>
-              ط¥ط¹ط§ط¯ط© طھط¹ظٹظٹظ† ط§ظ„ظپظ„طھط±ط©
+              ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط¸â€‍ط·ع¾ط·آ±ط·آ©
             </Button>
           }
         />
@@ -178,35 +178,35 @@ export default function StudentIDCardsPage() {
                     className="mt-2"
                     dot
                   >
-                    {card.enrollmentStatus === "active" ? "ظ†ط´ط·" : "ط؛ظٹط± ظ†ط´ط·"}
+                    {card.enrollmentStatus === "active" ? "ط¸â€ ط·آ´ط·آ·" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·"}
                   </Badge>
                 </div>
                 <div className="p-4 space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineAcademicCap className="w-3.5 h-3.5" />
-                      ط§ظ„طµظپ
+                      ط·آ§ط¸â€‍ط·آµط¸ظ¾
                     </span>
                     <span className="text-text font-medium">{card.grade}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineUserGroup className="w-3.5 h-3.5" />
-                      ط§ظ„ظ…ط¬ظ…ظˆط¹ط©
+                      ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©
                     </span>
                     <span className="text-text font-medium">{card.group}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineCalendar className="w-3.5 h-3.5" />
-                      طھط§ط±ظٹط® ط§ظ„ط¥طµط¯ط§ط±
+                      ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ¥ط·آµط·آ¯ط·آ§ط·آ±
                     </span>
                     <span className="text-text font-medium">{formatDate(card.issuedAt)}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineBadgeCheck className="w-3.5 h-3.5" />
-                      طھط§ط±ظٹط® ط§ظ„ط§ظ†طھظ‡ط§ط،
+                      ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ
                     </span>
                     <span className="text-text font-medium">{formatDate(card.expiresAt)}</span>
                   </div>

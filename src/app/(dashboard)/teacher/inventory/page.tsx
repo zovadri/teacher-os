@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -25,9 +25,9 @@ import { cn, formatCurrency } from "@/lib/utils"
 import { mockInventory, mockBranches } from "@/lib/mock/data"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" }> = {
-  "in-stock": { label: "ظ…طھظˆظپط±", variant: "success" },
-  "low-stock": { label: "ظ…ظ†ط®ظپط¶", variant: "warning" },
-  "out-of-stock": { label: "ظ†ظپط°", variant: "error" },
+  "in-stock": { label: "ط¸â€¦ط·ع¾ط¸ث†ط¸ظ¾ط·آ±", variant: "success" },
+  "low-stock": { label: "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶", variant: "warning" },
+  "out-of-stock": { label: "ط¸â€ ط¸ظ¾ط·آ°", variant: "error" },
 }
 
 export default function InventoryPage() {
@@ -85,7 +85,7 @@ export default function InventoryPage() {
       }
       return i
     }))
-    toast.success("طھظ… طھط­ط¯ظٹط« ط§ظ„ظ…ط®ط²ظˆظ† ط¨ظ†ط¬ط§ط­")
+    toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€  ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
     setEditModal({ open: false, item: null })
   }
 
@@ -94,7 +94,7 @@ export default function InventoryPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط§ظ„ظ…ط®ط²ظˆظ†" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظ…ط®ط²ظˆظ† ظˆط§ظ„ظ…ط³طھظˆط¯ط¹ط§طھ" />
+        <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€ " subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€  ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط¸ث†ط·آ¯ط·آ¹ط·آ§ط·ع¾" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -102,11 +102,11 @@ export default function InventoryPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط§ظ„ظ…ط®ط²ظˆظ†" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظ…ط®ط²ظˆظ† ظˆط§ظ„ظ…ط³طھظˆط¯ط¹ط§طھ" />
+      <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€ " subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€  ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط¸ث†ط·آ¯ط·آ¹ط·آ§ط·ع¾" />
 
       {lowStockItems.length > 0 && (
-        <Alert variant="warning" title="طھظ†ط¨ظٹظ‡ ط§ظ„ظ…ط®ط²ظˆظ† ط§ظ„ظ…ظ†ط®ظپط¶">
-          ظٹظˆط¬ط¯ {lowStockItems.length} طµظ†ظپ ط¨ط­ط§ط¬ط© ط¥ظ„ظ‰ ط¥ط¹ط§ط¯ط© طھظˆط±ظٹط¯. ظٹط±ط¬ظ‰ ظ…ط±ط§ط¬ط¹ط© ط§ظ„ظ…ط®ط²ظˆظ† ط§ظ„ظ…ظ†ط®ظپط¶.
+        <Alert variant="warning" title="ط·ع¾ط¸â€ ط·آ¨ط¸ظ¹ط¸â€، ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶">
+          ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ {lowStockItems.length} ط·آµط¸â€ ط¸ظ¾ ط·آ¨ط·آ­ط·آ§ط·آ¬ط·آ© ط·آ¥ط¸â€‍ط¸â€° ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط¸ث†ط·آ±ط¸ظ¹ط·آ¯. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط¸â€¦ط·آ±ط·آ§ط·آ¬ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶.
         </Alert>
       )}
 
@@ -114,45 +114,45 @@ export default function InventoryPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط£طµظ†ط§ظپ" value={stats.total} icon={HiOutlineCube} color="primary" />
-          <StatsCard title="ظ…طھظˆظپط±" value={stats.inStock} icon={HiOutlinePlus} color="success" />
-          <StatsCard title="ظ…ظ†ط®ظپط¶" value={stats.lowStock} icon={HiOutlineExclamation} color="warning" />
-          <StatsCard title="ظ†ظپط°" value={stats.outOfStock} icon={HiOutlineMinus} color="error" subtitle={`ط§ظ„ظ‚ظٹظ…ط©: ${formatCurrency(stats.totalValue)}`} />
+          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ£ط·آµط¸â€ ط·آ§ط¸ظ¾" value={stats.total} icon={HiOutlineCube} color="primary" />
+          <StatsCard title="ط¸â€¦ط·ع¾ط¸ث†ط¸ظ¾ط·آ±" value={stats.inStock} icon={HiOutlinePlus} color="success" />
+          <StatsCard title="ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶" value={stats.lowStock} icon={HiOutlineExclamation} color="warning" />
+          <StatsCard title="ط¸â€ ط¸ظ¾ط·آ°" value={stats.outOfStock} icon={HiOutlineMinus} color="error" subtitle={`ط·آ§ط¸â€‍ط¸â€ڑط¸ظ¹ط¸â€¦ط·آ©: ${formatCurrency(stats.totalValue)}`} />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>ط£طµظ†ط§ظپ ط§ظ„ظ…ط®ط²ظˆظ†</CardTitle>
+          <CardTitle>ط·آ£ط·آµط¸â€ ط·آ§ط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€ </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="p-4 border-b border-border flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط«..." />
+              <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ«..." />
             </div>
             <div className="flex flex-wrap gap-2">
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظپط¦ط§طھ" }, ...categories.map((c) => ({ value: c, label: c }))]} value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} />
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ظپط±ظˆط¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)} />
-              <Select options={[{ value: "all", label: "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" }, { value: "in-stock", label: "ظ…طھظˆظپط±" }, { value: "low-stock", label: "ظ…ظ†ط®ظپط¶" }, { value: "out-of-stock", label: "ظ†ظپط°" }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ§ط·ع¾" }, ...categories.map((c) => ({ value: c, label: c }))]} value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" }, { value: "in-stock", label: "ط¸â€¦ط·ع¾ط¸ث†ط¸ظ¾ط·آ±" }, { value: "low-stock", label: "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶" }, { value: "out-of-stock", label: "ط¸â€ ط¸ظ¾ط·آ°" }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
             </div>
           </div>
 
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineCube} title="ظ„ط§ طھظˆط¬ط¯ ط£طµظ†ط§ظپ" description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط£طµظ†ط§ظپ ظ…ط·ط§ط¨ظ‚ط©" />
+            <EmptyState icon={HiOutlineCube} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آµط¸â€ ط·آ§ط¸ظ¾" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ£ط·آµط¸â€ ط·آ§ط¸ظ¾ ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©" />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„طµظ†ظپ</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظپط¦ط©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظƒظ…ظٹط©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط­ط¯ ط§ظ„ط£ط¯ظ†ظ‰</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط³ط¹ط± ط§ظ„ظˆط­ط¯ط©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ظپط±ط¹</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط§ظ„ط­ط§ظ„ط©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آµط¸â€ ط¸ظ¾</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ئ’ط¸â€¦ط¸ظ¹ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ¯ ط·آ§ط¸â€‍ط·آ£ط·آ¯ط¸â€ ط¸â€°</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ³ط·آ¹ط·آ± ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary"></th>
                   </tr>
                 </thead>
@@ -178,9 +178,9 @@ export default function InventoryPage() {
                         <Badge variant={statusConfig[item.status].variant} size="sm">{statusConfig[item.status].label}</Badge>
                       </td>
                       <td className="px-4 py-3">
-                        <button type="button" variant="ghost" size="xs" leftIcon={<HiOutlineAdjustments className="w-3.5 h-3.5" />}
+                        <Button variant="ghost" size="xs" leftIcon={<HiOutlineAdjustments className="w-3.5 h-3.5" />}
                           onClick={() => { setEditModal({ open: true, item }); setEditQuantity(item.quantity) }}>
-                          طھط¹ط¯ظٹظ„
+                          ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍
                         </Button>
                       </td>
                     </tr>
@@ -192,7 +192,7 @@ export default function InventoryPage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={editModal.open} onClose={() => setEditModal({ open: false, item: null })} title="طھط¹ط¯ظٹظ„ ط§ظ„ظ…ط®ط²ظˆظ†" size="sm">
+      <Modal isOpen={editModal.open} onClose={() => setEditModal({ open: false, item: null })} title="ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آ²ط¸ث†ط¸â€ " size="sm">
         <div className="space-y-4">
           {editModal.item && (
             <>
@@ -200,10 +200,10 @@ export default function InventoryPage() {
                 <p className="text-sm font-medium text-text">{editModal.item.name}</p>
                 <p className="text-xs text-text-tertiary">{editModal.item.category}</p>
               </div>
-              <Input label="ط§ظ„ظƒظ…ظٹط© ط§ظ„ط¬ط¯ظٹط¯ط©" type="number" value={String(editQuantity)} onChange={(e) => setEditQuantity(Number(e.target.value))} />
+              <Input label="ط·آ§ط¸â€‍ط¸ئ’ط¸â€¦ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©" type="number" value={String(editQuantity)} onChange={(e) => setEditQuantity(Number(e.target.value))} />
               <div className="flex gap-3 pt-2">
-                <button type="button" variant="primary" className="flex-1" onClick={handleEdit}>ط­ظپط¸ ط§ظ„طھط¹ط¯ظٹظ„ط§طھ</Button>
-                <Button variant="secondary" onClick={() => setEditModal({ open: false, item: null })}>ط¥ظ„ط؛ط§ط،</Button>
+                <Button variant="primary" className="flex-1" onClick={handleEdit}>ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾</Button>
+                <Button variant="secondary" onClick={() => setEditModal({ open: false, item: null })}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
               </div>
             </>
           )}

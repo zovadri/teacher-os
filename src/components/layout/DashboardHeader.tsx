@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import { HiBell, HiMoon, HiSun, HiSearch } from "react-icons/hi"
@@ -20,12 +20,14 @@ export default function DashboardHeader({ title, subtitle }: { title?: string; s
         </div>
 
         <div className="flex items-center gap-2">
-          <button type="button"`nonClick={toggleSearch}
+          <button type="button"
+onClick={toggleSearch}
             className="p-2 rounded-lg hover:bg-surface-tertiary text-text-tertiary transition-colors"
           >
             <HiSearch className="w-5 h-5" />
           </button>
-          <button type="button"`nonClick={toggleTheme}
+          <button type="button"
+onClick={toggleTheme}
             className="p-2 rounded-lg hover:bg-surface-tertiary text-text-tertiary transition-colors"
           >
             {theme === "dark" ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}

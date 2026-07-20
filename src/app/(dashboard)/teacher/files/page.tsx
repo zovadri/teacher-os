@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -33,9 +33,9 @@ import toast from "react-hot-toast"
 import Link from "next/link"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" }> = {
-  ready: { label: "ط¬ط§ظ‡ط²", variant: "success" },
-  processing: { label: "ظ‚ظٹط¯ ط§ظ„ظ…ط¹ط§ظ„ط¬ط©", variant: "warning" },
-  failed: { label: "ظپط§ط´ظ„", variant: "error" },
+  ready: { label: "ط·آ¬ط·آ§ط¸â€،ط·آ²", variant: "success" },
+  processing: { label: "ط¸â€ڑط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط·آ§ط¸â€‍ط·آ¬ط·آ©", variant: "warning" },
+  failed: { label: "ط¸ظ¾ط·آ§ط·آ´ط¸â€‍", variant: "error" },
 }
 
 const formatDuration = (mins: number) => `${mins}:${String((mins * 7 + 13) % 60).padStart(2, "0")}`
@@ -66,26 +66,26 @@ export default function FilesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ظ…ظƒطھط¨ط© ط§ظ„ظ…ظ„ظپط§طھ" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھ ظˆط§ظ„ظ…ظ„ظپط§طھ ط§ظ„طھط¹ظ„ظٹظ…ظٹط©" />
+      <DashboardHeader title="ط¸â€¦ط¸ئ’ط·ع¾ط·آ¨ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸â€‍ط¸ظ¾ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث†ط¸â€،ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط¸â€‍ط¸ظ¾ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط¸â€‍ط¸ظ¹ط¸â€¦ط¸ظ¹ط·آ©" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھ" value={stats.total} icon={HiOutlineFilm} color="primary" />
-        <StatsCard title="ط¬ط§ظ‡ط²ط©" value={stats.ready} icon={HiOutlineCheckCircle} color="success" />
-        <StatsCard title="ظ‚ظٹط¯ ط§ظ„ظ…ط¹ط§ظ„ط¬ط©" value={stats.processing} icon={HiOutlineServer} color="warning" />
-        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ط´ط§ظ‡ط¯ط§طھ" value={stats.totalViews.toLocaleString("ar-EG")} icon={HiOutlineEye} color="info" />
+        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث†ط¸â€،ط·آ§ط·ع¾" value={stats.total} icon={HiOutlineFilm} color="primary" />
+        <StatsCard title="ط·آ¬ط·آ§ط¸â€،ط·آ²ط·آ©" value={stats.ready} icon={HiOutlineCheckCircle} color="success" />
+        <StatsCard title="ط¸â€ڑط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط·آ§ط¸â€‍ط·آ¬ط·آ©" value={stats.processing} icon={HiOutlineServer} color="warning" />
+        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ´ط·آ§ط¸â€،ط·آ¯ط·آ§ط·ع¾" value={stats.totalViews.toLocaleString("ar-EG")} icon={HiOutlineEye} color="info" />
       </div>
 
       <div className="flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
         <div className="flex flex-1 flex-wrap gap-3 w-full">
           <div className="flex-1 min-w-[200px]">
-            <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ظپظٹ ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھ..." />
+            <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث†ط¸â€،ط·آ§ط·ع¾..." />
           </div>
           <select
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
             className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
           >
-            <option value="all">ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ</option>
+            <option value="all">ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾</option>
             {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
           </select>
           <select
@@ -93,10 +93,10 @@ export default function FilesPage() {
             onChange={(e) => setStatusFilter(e.target.value)}
             className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
           >
-            <option value="all">ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ</option>
-            <option value="ready">ط¬ط§ظ‡ط²</option>
-            <option value="processing">ظ‚ظٹط¯ ط§ظ„ظ…ط¹ط§ظ„ط¬ط©</option>
-            <option value="failed">ظپط§ط´ظ„</option>
+            <option value="all">ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾</option>
+            <option value="ready">ط·آ¬ط·آ§ط¸â€،ط·آ²</option>
+            <option value="processing">ط¸â€ڑط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط·آ§ط¸â€‍ط·آ¬ط·آ©</option>
+            <option value="failed">ط¸ظ¾ط·آ§ط·آ´ط¸â€‍</option>
           </select>
         </div>
         <div className="flex items-center gap-2">
@@ -114,8 +114,8 @@ export default function FilesPage() {
               <HiOutlineViewList className="w-4 h-4" />
             </button>
           </div>
-          <button type="button" leftIcon={<HiOutlineUpload className="w-4 h-4" />} onClick={() => setShowUploadModal(true)}>
-            ط±ظپط¹ ظپظٹط¯ظٹظˆ
+          <Button leftIcon={<HiOutlineUpload className="w-4 h-4" />} onClick={() => setShowUploadModal(true)}>
+            ط·آ±ط¸ظ¾ط·آ¹ ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث†
           </Button>
         </div>
       </div>
@@ -138,7 +138,7 @@ export default function FilesPage() {
                 </div>
                 <div className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-1 rounded-lg bg-black/60 text-white text-xs">
                   <HiOutlineClock className="w-3 h-3" />
-                  <span>{video.duration} ط¯ظ‚ظٹظ‚ط©</span>
+                  <span>{video.duration} ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑط·آ©</span>
                 </div>
                 <div className="absolute top-2 left-2">
                   <Badge variant={statusConfig[video.status].variant} size="sm">
@@ -169,9 +169,9 @@ export default function FilesPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-text truncate">{video.title}</p>
-                <p className="text-xs text-text-tertiary truncate"><Link href={`/teacher/courses/${video.courseId}`} className="hover:text-primary transition-colors">{video.courseName}</Link> آ· {video.resolution} آ· {video.format}</p>
+                <p className="text-xs text-text-tertiary truncate"><Link href={`/teacher/courses/${video.courseId}`} className="hover:text-primary transition-colors">{video.courseName}</Link> ط¢آ· {video.resolution} ط¢آ· {video.format}</p>
               </div>
-              <div className="text-xs text-text-tertiary shrink-0">{video.duration} ط¯</div>
+              <div className="text-xs text-text-tertiary shrink-0">{video.duration} ط·آ¯</div>
               <Badge variant={statusConfig[video.status].variant} size="sm">{statusConfig[video.status].label}</Badge>
               <div className="flex items-center gap-1 text-xs text-text-tertiary shrink-0">
                 <HiOutlineEye className="w-3 h-3" />
@@ -182,26 +182,26 @@ export default function FilesPage() {
         </div>
       )}
 
-      <Modal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} title="ط±ظپط¹ ظپظٹط¯ظٹظˆ ط¬ط¯ظٹط¯" subtitle="ط£ط¯ط®ظ„ ط¨ظٹط§ظ†ط§طھ ط§ظ„ظپظٹط¯ظٹظˆ ظˆط§ط®طھط± ط§ظ„ظ…ظ„ظپ" size="lg">
+      <Modal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} title="ط·آ±ط¸ظ¾ط·آ¹ ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث† ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" subtitle="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث† ط¸ث†ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط¸â€‍ط¸ظ¾" size="lg">
         <div className="space-y-4">
-          <Input label="ط¹ظ†ظˆط§ظ† ط§ظ„ظپظٹط¯ظٹظˆ" placeholder="ط£ط¯ط®ظ„ ط¹ظ†ظˆط§ظ† ط§ظ„ظپظٹط¯ظٹظˆ" />
-          <Textarea label="ط§ظ„ظˆطµظپ" placeholder="ظˆطµظپ ط§ظ„ظپظٹط¯ظٹظˆ ظ…ط¹ طھظپط§طµظٹظ„ ط§ظ„ظ…ط­طھظˆظ‰" rows={3} />
-          <Select label="ط§ظ„ظƒظˆط±ط³" options={mockCourses.map((c) => ({ value: c.id, label: c.title }))} placeholder="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³" />
-          <Select label="ط§ظ„ظپطµظ„" options={[
-            { value: "ch-1", label: "ط§ظ„ظ…ظ‚ط¯ظ…ط©" },
-            { value: "ch-2", label: "ط§ظ„ط£ط³ط§ط³ظٹط§طھ" },
-            { value: "ch-3", label: "ط§ظ„ظ…ط³طھظˆظ‰ ط§ظ„ظ…طھظ‚ط¯ظ…" },
-          ]} placeholder="ط§ط®طھط± ط§ظ„ظپطµظ„ (ط§ط®طھظٹط§ط±ظٹ)" />
+          <Input label="ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث†" placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث†" />
+          <Textarea label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾" placeholder="ط¸ث†ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث† ط¸â€¦ط·آ¹ ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·ع¾ط¸ث†ط¸â€°" rows={3} />
+          <Select label="ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³" options={mockCourses.map((c) => ({ value: c.id, label: c.title }))} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³" />
+          <Select label="ط·آ§ط¸â€‍ط¸ظ¾ط·آµط¸â€‍" options={[
+            { value: "ch-1", label: "ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ¯ط¸â€¦ط·آ©" },
+            { value: "ch-2", label: "ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ§ط·آ³ط¸ظ¹ط·آ§ط·ع¾" },
+            { value: "ch-3", label: "ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط¸ث†ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦" },
+          ]} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸ظ¾ط·آµط¸â€‍ (ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ±ط¸ظ¹)" />
           <div className="flex items-center justify-center p-8 rounded-xl border-2 border-dashed border-border bg-surface-secondary cursor-pointer hover:border-primary/50 transition-colors">
             <div className="text-center">
               <HiOutlineUpload className="w-8 h-8 mx-auto text-text-tertiary mb-2" />
-              <p className="text-sm text-text-secondary">ط§ط³ط­ط¨ ظˆط£ظپظ„طھ ط§ظ„ظپظٹط¯ظٹظˆ ظ‡ظ†ط§ ط£ظˆ ط§ط¶ط؛ط· ظ„ظ„ط§ط®طھظٹط§ط±</p>
-              <p className="text-xs text-text-tertiary mt-1">MP4, AVI, MKV - ط­ط¯ ط£ظ‚طµظ‰ 500MB</p>
+              <p className="text-sm text-text-secondary">ط·آ§ط·آ³ط·آ­ط·آ¨ ط¸ث†ط·آ£ط¸ظ¾ط¸â€‍ط·ع¾ ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث† ط¸â€،ط¸â€ ط·آ§ ط·آ£ط¸ث† ط·آ§ط·آ¶ط·ط›ط·آ· ط¸â€‍ط¸â€‍ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ±</p>
+              <p className="text-xs text-text-tertiary mt-1">MP4, AVI, MKV - ط·آ­ط·آ¯ ط·آ£ط¸â€ڑط·آµط¸â€° 500MB</p>
             </div>
           </div>
           <div className="pt-4 flex gap-3">
-            <button type="button" variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("جاري رفع الفيديو..."); setShowUploadModal(false); }}>ط±ظپط¹ ط§ظ„ظپظٹط¯ظٹظˆ</Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowUploadModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("ط¬ط§ط±ظٹ ط±ظپط¹ ط§ظ„ظپظٹط¯ظٹظˆ..."); setShowUploadModal(false); }}>ط·آ±ط¸ظ¾ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ¯ط¸ظ¹ط¸ث†</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowUploadModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
           </div>
         </div>
       </Modal>
