@@ -18,7 +18,12 @@ jobs:
           node-version: 20
       - run: npm install --legacy-peer-deps
       - run: npm run build
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+      - run: |
+          touch out/.nojekyll
+          cd out
+          git init
+          git config user.name zovadri
+          git config user.email zovadri@gmail.com
+          git add -A
+          git commit -m "deploy"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/zovadri/teacher-os.git HEAD:gh-pages --force
