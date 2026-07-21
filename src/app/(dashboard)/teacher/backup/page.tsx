@@ -83,14 +83,14 @@ export default function BackupPage() {
   const handleRestoreItem = () => {
     if (!confirmRestore.item) return
     setRecycleItems((prev) => prev.filter((i) => i.id !== confirmRestore.item!.id))
-    toast.success(`طھظ…طھ استعادة "${confirmRestore.item.name}" بنجاح`)
+    toast.success(`تم استعادة "${confirmRestore.item.name}" بنجاح`)
     setConfirmRestore({ open: false, item: null })
   }
 
   const handlePermanentDelete = () => {
     if (!confirmDelete.item) return
     setRecycleItems((prev) => prev.filter((i) => i.id !== confirmDelete.item!.id))
-    toast.success(`طھظ… حذف "${confirmDelete.item.name}" بشكل نهائي`)
+    toast.success(`تم حذف "${confirmDelete.item.name}" بشكل نهائي`)
     setConfirmDelete({ open: false, item: null })
   }
 
@@ -113,7 +113,7 @@ export default function BackupPage() {
             <div>
               <p className="text-sm text-text-secondary">آخر نسخة احتياطية</p>
               <p className="font-bold text-text">{lastBackup ? formatDate(lastBackup.createdAt) : "لا توجد"}</p>
-              <p className="text-xs text-text-tertiary">{lastBackup?.size} ط¢آ· {lastBackup?.type === "full" ? "كاملة" : "تزايدية"}</p>
+              <p className="text-xs text-text-tertiary">{lastBackup?.size}  |  {lastBackup?.type === "full" ? "كاملة" : "تزايدية"}</p>
             </div>
           </div>
         </Card>
@@ -125,7 +125,7 @@ export default function BackupPage() {
             <div>
               <p className="text-sm text-text-secondary">إجمالي النسخ</p>
               <p className="font-bold text-text">{backups.length}</p>
-              <p className="text-xs text-text-tertiary">{backups.filter((b) => b.type === "full").length} كاملة ط¢آ· {backups.filter((b) => b.type === "incremental").length} تزايدية</p>
+              <p className="text-xs text-text-tertiary">{backups.filter((b) => b.type === "full").length} كاملة  |  {backups.filter((b) => b.type === "incremental").length} تزايدية</p>
             </div>
           </div>
         </Card>
@@ -137,7 +137,7 @@ export default function BackupPage() {
             <div>
               <p className="text-sm text-text-secondary">سلة المحذوفات</p>
               <p className="font-bold text-text">{recycleStats.total} عنصر</p>
-              <p className="text-xs text-text-tertiary">{recycleStats.students} طالب ط¢آ· {recycleStats.courses} كورس</p>
+              <p className="text-xs text-text-tertiary">{recycleStats.students} طالب  |  {recycleStats.courses} كورس</p>
             </div>
           </div>
         </Card>
@@ -164,7 +164,7 @@ variant="primary" size="lg"
                     disabled={isBackingUp}
                     className="min-w-[200px]"
                   >
-                    {isBackingUp ? "جاري إنشاء النسخة..." : backupDone ? "طھظ… الإنشاء!" : "إنشاء نسخة احتياطية الآن"}
+                    {isBackingUp ? "جاري إنشاء النسخة..." : backupDone ? "تم الإنشاء!" : "إنشاء نسخة احتياطية الآن"}
                   </Button>
                   {isBackingUp && (
                     <div className="flex-1 max-w-xs">
@@ -174,7 +174,7 @@ variant="primary" size="lg"
                   {backupDone && (
                     <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-1.5 text-success text-sm font-medium">
                       <HiOutlineCheckCircle className="w-4 h-4" />
-                      طھظ… إنشاء النسخة الاحتياطية بنجاح
+                      تم إنشاء النسخة الاحتياطية بنجاح
                     </motion.div>
                   )}
                 </div>
@@ -182,7 +182,7 @@ variant="primary" size="lg"
                 <Card>
                   <CardHeader>
                     <CardTitle>سجل النسخ الاحتياطية</CardTitle>
-                    <CardDescription>جميع النسخ الاحتياطية التي طھظ… إنشاؤها</CardDescription>
+                    <CardDescription>جميع النسخ الاحتياطية التي تم إنشاؤها</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="overflow-x-auto">
@@ -273,7 +273,7 @@ variant="primary" size="lg"
                           <HiOutlineDocumentDownload className="w-8 h-8 text-text-tertiary" />
                           <div>
                             <p className="font-medium text-text">{selectedBackup.fileName}</p>
-                            <p className="text-xs text-text-tertiary">{selectedBackup.size} ط¢آ· {formatDate(selectedBackup.createdAt)}</p>
+                            <p className="text-xs text-text-tertiary">{selectedBackup.size}  |  {formatDate(selectedBackup.createdAt)}</p>
                           </div>
                         </div>
                       </div>
@@ -347,7 +347,7 @@ variant="primary" size="lg"
         onClose={() => setConfirmRestore({ open: false, item: null })}
         onConfirm={handleRestoreItem}
         title="تأكيد الاستعادة"
-        message={`هل أنت متأكد ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ¦ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ  استعادة "${confirmRestore.item?.name}"طں`}
+        message={`هل أنت متأكد أنك تريد استعادة "${confirmRestore.item?.name}"؟`}
         confirmText="استعادة"
         cancelText="إلغاء"
         variant="info"
@@ -358,7 +358,7 @@ variant="primary" size="lg"
         onClose={() => setConfirmDelete({ open: false, item: null })}
         onConfirm={handlePermanentDelete}
         title="تأكيد الحذف النهائي"
-        message={`هل أنت متأكد ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ¦ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ  حذف "${confirmDelete.item?.name}" بشكل نهائي؟ لا يمكن التراجع عن هذا الإجراء.`}
+        message={`هل أنت متأكد أنك تريد حذف "${confirmDelete.item?.name}" بشكل نهائي؟ لا يمكن التراجع عن هذا الإجراء.`}
         confirmText="حذف نهائي"
         cancelText="إلغاء"
         variant="danger"

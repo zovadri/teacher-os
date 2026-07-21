@@ -287,10 +287,10 @@ export default function AttendanceReportsPage() {
                   )
                 }},
                 { key: "checkIn", header: "الحضور", render: (a) => (
-                  <span className="text-text-secondary" dir="ltr">{a.checkIn || "â€”"}</span>
+                  <span className="text-text-secondary" dir="ltr">{a.checkIn || "”"}</span>
                 )},
                 { key: "checkOut", header: "الانصراف", render: (a) => (
-                  <span className="text-text-secondary" dir="ltr">{a.checkOut || "â€”"}</span>
+                  <span className="text-text-secondary" dir="ltr">{a.checkOut || "”"}</span>
                 )},
               ]}
               data={paginated}

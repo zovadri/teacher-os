@@ -144,7 +144,7 @@ export default function CreateExamPage() {
                 i === step ? "bg-primary/10 text-primary border-2 border-primary" :
                 "bg-surface-tertiary text-text-tertiary"
               }`}>
-                {i < step ? "âœ“" : i + 1}
+                {i < step ? "✓" : i + 1}
               </div>
               <span className="text-sm font-medium hidden md:inline">{s}</span>
             </div>
@@ -325,7 +325,7 @@ export default function CreateExamPage() {
                           <p className="font-medium mb-3">{q.text || "نص السؤال"}</p>
                           {q.type === "multiple-choice" && q.choices?.map((c) => (
                             <div key={c.id} className={`p-3 rounded-lg mb-2 text-sm border ${c.isCorrect ? "border-success/30 bg-success/5" : "border-border bg-surface"}`}>
-                              {c.isCorrect && <span className="text-success ml-1">âœ“</span>} {c.text || "اختيار"}
+                              {c.isCorrect && <span className="text-success ml-1">✓</span>} {c.text || "اختيار"}
                             </div>
                           ))}
                           {q.type === "true-false" && (

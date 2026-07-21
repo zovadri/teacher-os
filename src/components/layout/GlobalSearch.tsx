@@ -296,8 +296,8 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
               )}
             </div>
             <div className="p-3 border-t border-border flex items-center gap-4 text-xs text-text-tertiary">
-              <span>â†‘â†“ للتنقل</span>
-              <span>â†µ للاختيار</span>
+              <span>↑↓ للتنقل</span>
+              <span>↵ للاختيار</span>
               <span>Esc للإغلاق</span>
             </div>
           </motion.div>

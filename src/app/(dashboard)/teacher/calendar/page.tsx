@@ -142,7 +142,7 @@ export default function CalendarPage() {
           type: "exam",
           date: exam.startDate,
           endDate: exam.endDate,
-          description: `${exam.duration} دقيقة â€¢ ${exam.totalGrade} درجة`,
+          description: `${exam.duration} دقيقة • ${exam.totalGrade} درجة`,
           courseId: exam.courseId,
         })
       })
@@ -181,7 +181,7 @@ export default function CalendarPage() {
         type: "class",
         date: classDate,
         endDate: new Date(classDate.getTime() + 2 * 60 * 60 * 1000),
-        description: `حصة ${i + 1} â€¢ من ${formatTime(classDate)}`,
+        description: `حصة ${i + 1} • من ${formatTime(classDate)}`,
         courseId: mockCourses[i % mockCourses.length]?.id,
       })
     }

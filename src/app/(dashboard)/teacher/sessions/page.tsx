@@ -120,14 +120,14 @@ export default function SessionsPage() {
     setSessions((prev) => prev.filter((s) => s.id !== id))
     setSelectedIds((prev) => prev.filter((i) => i !== id))
     setTerminateConfirm(null)
-    toast.success("طھظ… إنهاء الجلسة بنجاح")
+    toast.success("تم إنهاء الجلسة بنجاح")
   }, [])
 
   const handleTerminateAll = () => {
     setSessions([])
     setSelectedIds([])
     setTerminateAllConfirm(false)
-    toast.success("طھظ… إنهاء جميع الجلسات بنجاح")
+    toast.success("تم إنهاء جميع الجلسات بنجاح")
   }
 
   const handleRetry = () => {
@@ -211,7 +211,7 @@ variant="danger"
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <p className="text-sm text-text-secondary">
-                        طھظ… تحديد {selectedIds.length} ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ¦ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ  {displayedSessions.length} جلسة
+                        تم تحديد {selectedIds.length} أنك تريد {displayedSessions.length} جلسة
                       </p>
                       {selectedIds.length > 0 && (
                         <Button type="button"
@@ -324,7 +324,7 @@ variant="ghost"
         onClose={() => setTerminateConfirm(null)}
         onConfirm={() => handleTerminate(terminateConfirm!)}
         title="إنهاء الجلسة"
-        message="هل أنت متأكد ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ¦ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ  إنهاء هذه الجلسة؟ سيتم تسجيل خروج المستخدم فوراً."
+        message="هل أنت متأكد أنك تريد إنهاء هذه الجلسة؟ سيتم تسجيل خروج المستخدم فوراً."
         confirmText="إنهاء الجلسة"
         cancelText="إلغاء"
         variant="danger"
@@ -333,9 +333,9 @@ variant="ghost"
       <ConfirmDialog
         isOpen={terminateConfirm === "selected"}
         onClose={() => setTerminateConfirm(null)}
-        onConfirm={() => { setSessions((prev) => prev.filter((s) => !selectedIds.includes(s.id))); setSelectedIds([]); setTerminateConfirm(null); toast.success("طھظ… إنهاء الجلسات المحددة بنجاح") }}
+        onConfirm={() => { setSessions((prev) => prev.filter((s) => !selectedIds.includes(s.id))); setSelectedIds([]); setTerminateConfirm(null); toast.success("تم إنهاء الجلسات المحددة بنجاح") }}
         title="إنهاء الجلسات المحددة"
-        message={`هل أنت متأكد ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ¦ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ  إنهاء ${selectedIds.length} جلسة محددة؟ سيتم تسجيل خروج المستخدمين فوراً.`}
+        message={`هل أنت متأكد أنك تريد إنهاء ${selectedIds.length} جلسة محددة؟ سيتم تسجيل خروج المستخدمين فوراً.`}
         confirmText="إنهاء الكل"
         cancelText="إلغاء"
         variant="danger"
@@ -346,7 +346,7 @@ variant="ghost"
         onClose={() => setTerminateAllConfirm(false)}
         onConfirm={handleTerminateAll}
         title="إنهاء جميع الجلسات"
-        message="هل أنت متأكد ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ¦ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ  إنهاء جميع الجلسات؟ سيتم تسجيل خروج جميع المستخدمين فوراً."
+        message="هل أنت متأكد أنك تريد إنهاء جميع الجلسات؟ سيتم تسجيل خروج جميع المستخدمين فوراً."
         confirmText="إنهاء الكل"
         cancelText="إلغاء"
         variant="danger"

@@ -851,7 +851,7 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
     )},
     { key: "growth", header: "النمو", render: (r: Record<string, unknown>) => (
       <span className={cn("flex items-center gap-1", r.growth >= 0 ? "text-success" : "text-error")}>
-        {r.growth >= 0 ? "أ¢â€ â€ک" : "أ¢â€ â€œ"} %{Math.abs(r.growth)}
+        {r.growth >= 0 ? "أ¢†‘" : "↓"} %{Math.abs(r.growth)}
       </span>
     )},
   ]

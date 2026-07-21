@@ -482,7 +482,7 @@ export default function ParentsPage() {
                                   {callTypeLabels[call.type]}
                                 </Badge>
                               </td>
-                              <td className="px-3 py-2.5 text-text-secondary">{call.notes || "â€”"}</td>
+                              <td className="px-3 py-2.5 text-text-secondary">{call.notes || "”"}</td>
                             </tr>
                           ))}
                         </tbody>

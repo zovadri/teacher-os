@@ -138,7 +138,7 @@ export default function CodesPage() {
               <Badge variant={statusBadge[c.status]}>{statusLabels[c.status]}</Badge>
             )},
             { key: "usedBy", header: "المستخدم", render: (c) => (
-              <span className="text-sm text-text-secondary">{c.usedBy || "â€"}</span>
+              <span className="text-sm text-text-secondary">{c.usedBy || "—"}</span>
             )},
             { key: "price", header: "السعر", render: (c) => (
               <span className="text-sm font-medium">{formatCurrency(c.price)}</span>

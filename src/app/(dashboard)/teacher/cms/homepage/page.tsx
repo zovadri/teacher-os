@@ -137,7 +137,7 @@ export default function HomepageBuilderPage() {
                     </button>
                   </div>
                   <div className="w-10 h-10 rounded-xl bg-surface-secondary border border-border flex items-center justify-center text-lg">
-                    {section.type === "hero" ? "ًںڈ " : section.type === "features" ? "أ¢إ“آ¨" : section.type === "stats" ? "ًں“ٹ" : section.type === "courses" ? "ًں“ڑ" : section.type === "testimonials" ? "💬" : section.type === "pricing" ? "ًں’°" : section.type === "faq" ? "â‌“" : "ًں”‌"}
+                    {section.type === "hero" ? "ًںڈ " : section.type === "features" ? "أ¢إ“آ¨" : section.type === "stats" ? "ًں“ٹ" : section.type === "courses" ? "ًں“ڑ" : section.type === "testimonials" ? "💬" : section.type === "pricing" ? "ًں’°" : section.type === "faq" ? "❓" : "ًں”‌"}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">

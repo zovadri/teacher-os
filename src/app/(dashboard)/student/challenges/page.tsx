@@ -367,17 +367,17 @@ export default function ChallengesPage() {
                             </div>
                             <div className="flex items-center gap-3 text-xs text-text-tertiary">
                               <span>{subjectLabels[challenge.subject]}</span>
-                              <span>â€¢</span>
+                              <span>•</span>
                               <span>{challenge.totalQuestions} أسئلة</span>
                               {challenge.status !== "waiting" && (
                                 <>
-                                  <span>â€¢</span>
+                                  <span>•</span>
                                   <span className="font-semibold text-text">
                                     {challenge.myScore} - {challenge.opponentScore}
                                   </span>
                                 </>
                               )}
-                              <span>â€¢</span>
+                              <span>•</span>
                               <ChallengeTimer challenge={challenge} />
                             </div>
                           </div>

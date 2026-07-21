@@ -197,7 +197,7 @@ export default function AnnouncementsPage() {
     setAnnouncements((prev) => [newAnn, ...prev])
     setSubmitting(false)
     setCreateModalOpen(false)
-    toast.success("طھظ… إنشاء الإعلان بنجاح")
+    toast.success("تم إنشاء الإعلان بنجاح")
   }
 
   const handleDelete = async () => {
@@ -205,7 +205,7 @@ export default function AnnouncementsPage() {
     await new Promise((r) => setTimeout(r, 500))
     setAnnouncements((prev) => prev.filter((a) => a.id !== deleteId))
     setDeleteId(null)
-    toast.success("طھظ… حذف الإعلان بنجاح")
+    toast.success("تم حذف الإعلان بنجاح")
   }
 
   const openDetail = (ann: Announcement) => {
@@ -226,7 +226,7 @@ export default function AnnouncementsPage() {
         <EmptyState
           icon={HiOutlineMail}
           title="لا توجد إعلانات"
-          description="لم ظٹطھظ… العثور على إعلانات تطابق معايير البحث"
+          description="لم ظٹتم العثور على إعلانات تطابق معايير البحث"
           action={
             <>
               <Link href="/teacher/announcements/create" className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary/90 transition-colors inline-flex items-center gap-2">
@@ -420,7 +420,7 @@ export default function AnnouncementsPage() {
                 <p className="text-text font-medium">{formatDate(selectedAnnouncement.createdAt)}</p>
               </div>
               <div>
-                <p className="text-text-tertiary">طھظ…طھ القراءة</p>
+                <p className="text-text-tertiary">تم القراءة</p>
                 <p className="text-text font-medium">{selectedAnnouncement.readCount} مرة</p>
               </div>
               <div>
@@ -443,7 +443,7 @@ export default function AnnouncementsPage() {
         onClose={() => { setDeleteConfirmOpen(false); setDeleteId(null) }}
         onConfirm={handleDelete}
         title="حذف الإعلان"
-        message="هل أنت متأكد ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ¦ط·آ·ط¢آ¸ط£آ¢أ¢â€ڑآ¬ط¢آ  حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء."
+        message="هل أنت متأكد أنك تريد حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء."
         confirmText="حذف"
         cancelText="إلغاء"
         variant="danger"

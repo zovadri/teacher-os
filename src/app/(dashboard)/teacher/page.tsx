@@ -130,7 +130,7 @@ export default function TeacherDashboard() {
     <div className="min-h-screen">
       <DashboardHeader
         title="لوحة التحكم الذكية"
-        subtitle={`${mockTeacher.name} â€” ${dateStr}`}
+        subtitle={`${mockTeacher.name} ” ${dateStr}`}
       />
 
       <div className="p-4 md:p-6 space-y-6">
