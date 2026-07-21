@@ -1,4 +1,5 @@
-﻿"use client"
+"use client"
+
 import { useState, useEffect, useCallback, useMemo } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
@@ -22,9 +23,10 @@ function getGrade(percent: number) {
   return gradeBadges.find((g) => percent >= g.min) || gradeBadges[gradeBadges.length - 1]
 }
 
-export default function Content({ id }: { id: string }) {
-    const router = useRouter()
-  const exam = useMemo(() => mockExams.find((e) => e.id === id) || mockExams[0], [id])
+export default function StudentExamPage() {
+  const params = useParams()
+  const router = useRouter()
+  const exam = useMemo(() => mockExams.find((e) => e.id === params.id) || mockExams[0], [params.id])
 
   const [mounted, setMounted] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -73,7 +75,7 @@ export default function Content({ id }: { id: string }) {
     setIsSubmitted(true)
     setShowSubmitModal(false)
     setShowPauseModal(false)
-    document.title = `╪ز┘à ╪د┘╪ز┘é╪»┘è┘à - ${exam.title}`
+    document.title = `تم التقديم - ${exam.title}`
 
     let correct = 0
     let incorrect = 0
@@ -116,9 +118,9 @@ export default function Content({ id }: { id: string }) {
   const handleTick = useCallback((remainingSeconds: number) => {
     setTimeTaken(exam.duration * 60 - remainingSeconds)
     if (remainingSeconds <= 60 && remainingSeconds > 0) {
-      document.title = `ظأبي╕ ${Math.floor(remainingSeconds / 60)}:${String(remainingSeconds % 60).padStart(2, "0")} - ${exam.title}`
+      document.title = `⚠️ ${Math.floor(remainingSeconds / 60)}:${String(remainingSeconds % 60).padStart(2, "0")} - ${exam.title}`
     } else if (remainingSeconds <= 300) {
-      document.title = `ظ░ ${Math.floor(remainingSeconds / 60)}:${String(remainingSeconds % 60).padStart(2, "0")} - ${exam.title}`
+      document.title = `⏰ ${Math.floor(remainingSeconds / 60)}:${String(remainingSeconds % 60).padStart(2, "0")} - ${exam.title}`
     }
   }, [exam.title, exam.duration])
 
@@ -179,7 +181,7 @@ export default function Content({ id }: { id: string }) {
                 {grade.label}
               </span>
 
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">╪ز┘à ╪ز┘é╪»┘è┘à ╪د┘╪د┘à╪ز╪ص╪د┘ ╪ذ┘╪ش╪د╪ص!</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">تم تقديم الامتحان بنجاح!</h2>
               <p className="text-sm text-gray-500 mb-6">{exam.title}</p>
 
               <div className="grid grid-cols-3 gap-3 mb-6">
@@ -188,27 +190,27 @@ export default function Content({ id }: { id: string }) {
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
                   <div className="text-lg font-bold text-emerald-600">{score.correct}</div>
-                  <div className="text-xs text-emerald-600">╪╡╪ص┘è╪ص╪ر</div>
+                  <div className="text-xs text-emerald-600">صحيحة</div>
                 </div>
                 <div className="p-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
                   <div className="flex items-center justify-center gap-1 text-red-600 mb-1">
                     <XCircle className="w-4 h-4" />
                   </div>
                   <div className="text-lg font-bold text-red-600">{score.incorrect}</div>
-                  <div className="text-xs text-red-600">╪«╪د╪╖╪خ╪ر</div>
+                  <div className="text-xs text-red-600">خاطئة</div>
                 </div>
                 <div className="p-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                   <div className="flex items-center justify-center gap-1 text-gray-500 mb-1">
                     <HelpCircle className="w-4 h-4" />
                   </div>
                   <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{totalQuestions - answeredCount}</div>
-                  <div className="text-xs text-gray-500">┘┘à ┘è╪ش╪ذ</div>
+                  <div className="text-xs text-gray-500">لم يجب</div>
                 </div>
               </div>
 
               <div className="flex items-center justify-center gap-2 text-sm text-gray-500 mb-6">
                 <Clock className="w-4 h-4" />
-                <span>╪د┘┘ê┘é╪ز ╪د┘┘à╪│╪ز╪║╪▒┘é: {Math.floor(timeTaken / 60)} ╪» {timeTaken % 60} ╪س</span>
+                <span>الوقت المستغرق: {Math.floor(timeTaken / 60)} د {timeTaken % 60} ث</span>
               </div>
 
               <div className="space-y-4">
@@ -237,10 +239,10 @@ export default function Content({ id }: { id: string }) {
                       </div>
                       {isAnswered && q.choices && typeof ans === "string" && (
                         <div className="text-xs text-gray-500">
-                          ╪ح╪ش╪د╪ذ╪ز┘â: {q.choices.find((c) => c.id === ans)?.text || ans}
+                          إجابتك: {q.choices.find((c) => c.id === ans)?.text || ans}
                           {isCorrect === false && (
                             <span className="mr-2 text-emerald-600">
-                              | ╪د┘╪ح╪ش╪د╪ذ╪ر ╪د┘╪╡╪ص┘è╪ص╪ر: {q.choices.find((c) => c.isCorrect)?.text}
+                              | الإجابة الصحيحة: {q.choices.find((c) => c.isCorrect)?.text}
                             </span>
                           )}
                         </div>
@@ -252,12 +254,11 @@ export default function Content({ id }: { id: string }) {
             </div>
 
             <div className="p-6 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50">
-              <Button
-                onClick={() => router.push("/student/exams")}
+              <Button onClick={() => router.push("/student/exams")}
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary-dark transition-colors active:scale-[0.97]"
               >
                 <BarChart3 className="w-4 h-4" />
-                ╪د┘╪╣┘ê╪»╪ر ╪ح┘┘ë ╪د┘╪د┘à╪ز╪ص╪د┘╪د╪ز
+                العودة إلى الامتحانات
               </Button>
             </div>
           </div>
@@ -292,14 +293,13 @@ export default function Content({ id }: { id: string }) {
             <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <Square className="w-10 h-10 text-primary fill-primary" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">╪د┘╪د┘à╪ز╪ص╪د┘ ┘à╪ز┘ê┘é┘</h2>
-            <p className="text-gray-500 mb-6">╪د╪╢╪║╪╖ ╪╣┘┘ë ╪▓╪▒ ╪د┘╪د╪│╪ز╪خ┘╪د┘ ┘┘┘à╪ز╪د╪ذ╪╣╪ر</p>
-            <Button
-              onClick={() => setIsPaused(false)}
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">الامتحان متوقف</h2>
+            <p className="text-gray-500 mb-6">اضغط على زر الاستئناف للمتابعة</p>
+            <Button onClick={() => setIsPaused(false)}
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary-dark transition-colors mx-auto"
             >
               <Play className="w-4 h-4" />
-              ╪د╪│╪ز╪خ┘╪د┘ ╪د┘╪د┘à╪ز╪ص╪د┘
+              استئناف الامتحان
             </Button>
           </motion.div>
         </div>
@@ -323,17 +323,15 @@ export default function Content({ id }: { id: string }) {
 
             <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4">
               <div className="max-w-3xl mx-auto flex items-center justify-between">
-                <Button
-                  onClick={() => setCurrentQuestion((prev) => Math.max(0, prev - 1))}
+                <Button onClick={() => setCurrentQuestion((prev) => Math.max(0, prev - 1))}
                   disabled={currentQuestion === 0}
                   className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <ChevronRight className="w-4 h-4" /> ╪د┘╪│╪د╪ذ┘é
+                  <ChevronRight className="w-4 h-4" /> السابق
                 </Button>
 
                 <div className="flex items-center gap-2">
-                  <Button
-                    onClick={() => toggleFlag(q.id)}
+                  <Button onClick={() => toggleFlag(q.id)}
                     className={cn(
                       "p-2.5 rounded-xl border transition-colors",
                       flaggedQuestions.has(q.id)
@@ -349,18 +347,16 @@ export default function Content({ id }: { id: string }) {
                 </div>
 
                 {currentQuestion < totalQuestions - 1 ? (
-                  <Button
-                    onClick={() => setCurrentQuestion((prev) => prev + 1)}
+                  <Button onClick={() => setCurrentQuestion((prev) => prev + 1)}
                     className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors active:scale-[0.97]"
                   >
-                    ╪د┘╪ز╪د┘┘è <ChevronLeft className="w-4 h-4" />
+                    التالي <ChevronLeft className="w-4 h-4" />
                   </Button>
                 ) : (
-                  <Button
-                    onClick={() => setShowSubmitModal(true)}
+                  <Button onClick={() => setShowSubmitModal(true)}
                     className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-emerald-500 text-white text-sm font-medium hover:bg-emerald-600 transition-colors active:scale-[0.97]"
                   >
-                    <Send className="w-4 h-4" /> ╪ز╪│┘┘è┘à ╪د┘╪د┘à╪ز╪ص╪د┘
+                    <Send className="w-4 h-4" /> تسليم الامتحان
                   </Button>
                 )}
               </div>
@@ -395,20 +391,20 @@ export default function Content({ id }: { id: string }) {
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               className="max-w-sm w-full p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl"
             >
-              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">╪ز╪ث┘â┘è╪» ╪ز╪│┘┘è┘à ╪د┘╪د┘à╪ز╪ص╪د┘</h2>
-              <p className="text-sm text-gray-500 mb-4">┘è╪▒╪ش┘ë ┘à╪▒╪د╪ش╪╣╪ر ┘à┘╪«╪╡ ╪د┘╪ح╪ش╪د╪ذ╪د╪ز ┘é╪ذ┘ ╪د┘╪ز┘é╪»┘è┘à</p>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">تأكيد تسليم الامتحان</h2>
+              <p className="text-sm text-gray-500 mb-4">يرجى مراجعة ملخص الإجابات قبل التقديم</p>
 
               <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 mb-4 space-y-3 text-sm">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-500">╪ز┘à╪ز ╪د┘╪ح╪ش╪د╪ذ╪ر</span>
+                  <span className="text-gray-500">تمت الإجابة</span>
                   <span className="font-bold text-emerald-600">{answeredCount}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-500">┘à┘à┘è╪▓ ┘┘┘à╪▒╪د╪ش╪╣╪ر</span>
+                  <span className="text-gray-500">مميز للمراجعة</span>
                   <span className="font-bold text-amber-600">{flaggedQuestions.size}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-500">┘┘à ╪ز╪ز┘à ╪د┘╪ح╪ش╪د╪ذ╪ر</span>
+                  <span className="text-gray-500">لم تتم الإجابة</span>
                   <span className={cn(
                     "font-bold",
                     totalQuestions - answeredCount > 0 ? "text-red-600" : "text-gray-500"
@@ -418,7 +414,7 @@ export default function Content({ id }: { id: string }) {
                 </div>
                 <div className="h-px bg-gray-200 dark:bg-gray-700" />
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">╪د┘┘à╪ش┘à┘ê╪╣</span>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">المجموع</span>
                   <span className="font-bold text-gray-900 dark:text-gray-100">{totalQuestions}</span>
                 </div>
               </div>
@@ -426,22 +422,20 @@ export default function Content({ id }: { id: string }) {
               {totalQuestions - answeredCount > 0 && (
                 <div className="flex items-center gap-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 mb-4 text-xs text-amber-700 dark:text-amber-400">
                   <AlertTriangle className="w-4 h-4 shrink-0" />
-                  <span>┘ç┘╪د┘â {totalQuestions - answeredCount} ╪│╪ج╪د┘/╪ث╪│╪خ┘╪ر ┘┘à ╪ز╪ز┘à ╪د┘╪ح╪ش╪د╪ذ╪ر ╪╣┘┘è┘ç╪د</span>
+                  <span>هناك {totalQuestions - answeredCount} سؤال/أسئلة لم تتم الإجابة عليها</span>
                 </div>
               )}
 
               <div className="flex gap-3">
-                <Button
-                  onClick={() => setShowSubmitModal(false)}
+                <Button onClick={() => setShowSubmitModal(false)}
                   className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                 >
-                  ╪د┘╪╣┘ê╪»╪ر
+                  العودة
                 </Button>
-                <Button
-                  onClick={handleSubmit}
+                <Button onClick={handleSubmit}
                   className="flex-1 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors active:scale-[0.97] flex items-center justify-center gap-1.5"
                 >
-                  <Send className="w-4 h-4" /> ╪ز╪│┘┘è┘à
+                  <Send className="w-4 h-4" /> تسليم
                 </Button>
               </div>
             </motion.div>
@@ -451,7 +445,3 @@ export default function Content({ id }: { id: string }) {
     </div>
   )
 }
-
-
-
-

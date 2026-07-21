@@ -1,6 +1,8 @@
-﻿"use client"
+"use client"
+
 import { useState, useMemo } from "react"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 import { motion } from "framer-motion"
 import {
   HiOutlineMail,
@@ -173,8 +175,9 @@ function getStudentExtended(studentId: string) {
   return { courses, exams, attendance, attSummary, certificates, activities, devices, gradeData }
 }
 
-export default function Content({ id }: { id: string }) {
-    const student = mockStudents.find((s) => s.id === id)
+export default function StudentDetailPage() {
+  const params = useParams()
+  const student = mockStudents.find((s) => s.id === params.id)
   const [showQR, setShowQR] = useState(false)
   const [showMoreMenu, setShowMoreMenu] = useState(false)
 
@@ -249,8 +252,7 @@ export default function Content({ id }: { id: string }) {
                       { label: "ط­ط¸ط±", icon: HiOutlineBan, color: "text-error" },
                       { label: "ط­ط°ظپ", icon: HiOutlineTrash, color: "text-error" },
                     ].map((item) => (
-                      <Button
-                        key={item.label}
+                      <Button key={item.label}
                         onClick={() => setShowMoreMenu(false)}
                         className={cn("flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-surface-secondary transition-colors", item.color)}
                       >
@@ -566,7 +568,3 @@ export default function Content({ id }: { id: string }) {
     </div>
   )
 }
-
-
-
-

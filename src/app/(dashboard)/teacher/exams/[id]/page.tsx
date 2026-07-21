@@ -1,4 +1,4 @@
-﻿import { mockExams } from "@/lib/mock/data"
+import { mockExams } from "@/lib/mock/data"
 import Content from "./Content"
 
 export function generateStaticParams() {
