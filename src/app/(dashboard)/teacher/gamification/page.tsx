@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -52,28 +52,28 @@ export default function GamificationPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ظ†ط¸ط§ظ… ط§ظ„طھط­ط¯ظٹط§طھ ظˆط§ظ„ظ…ظƒط§ظپط¢طھ" subtitle="XPطŒ ط§ظ„ظ…ط³طھظˆظٹط§طھطŒ ط§ظ„ط´ط§ط±ط§طھطŒ ظˆط§ظ„ط¥ظ†ط¬ط§ط²ط§طھ" />
+      <DashboardHeader title="نظام التحديات والمكافآت" subtitle="XPطŒ المستويات، الشارات، والإنجازات" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ XP ط§ظ„ظ…ظ…ظ†ظˆط­" value={stats.totalXp.toLocaleString("ar-EG")} icon={HiOutlineStar} color="primary" />
-        <StatsCard title="ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ†ط´ط·ظˆظ†" value={stats.activeStudents} icon={HiOutlineUsers} color="success" />
-        <StatsCard title="ظ…طھظˆط³ط· ط§ظ„ظ…ط³طھظˆظ‰" value={stats.avgLevel} icon={HiOutlineAcademicCap} color="info" />
-        <StatsCard title="ط£ظپط¶ظ„ ط·ط§ظ„ط¨" value={stats.topStudent.studentName} icon={HiStar} color="warning" />
+        <StatsCard title="إجمالي XP الممنوح" value={stats.totalXp.toLocaleString("ar-EG")} icon={HiOutlineStar} color="primary" />
+        <StatsCard title="الطلاب النشطون" value={stats.activeStudents} icon={HiOutlineUsers} color="success" />
+        <StatsCard title="متوسط المستوى" value={stats.avgLevel} icon={HiOutlineAcademicCap} color="info" />
+        <StatsCard title="أفضل طالب" value={stats.topStudent.studentName} icon={HiStar} color="warning" />
       </motion.div>
 
       <Tabs
         tabs={[
-          { id: "leaderboard", label: "ظ„ظˆط­ط© ط§ظ„ظ…طھطµط¯ط±ظٹظ†", icon: <HiStar className="w-4 h-4" /> },
-          { id: "badges", label: "ط§ظ„ط´ط§ط±ط§طھ ظˆط§ظ„ط¥ظ†ط¬ط§ط²ط§طھ", icon: <HiOutlineBadgeCheck className="w-4 h-4" /> },
-          { id: "levels", label: "ط§ظ„ظ…ط³طھظˆظٹط§طھ", icon: <HiOutlineChartSquareBar className="w-4 h-4" /> },
-          { id: "settings", label: "ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ", icon: <HiOutlineCog className="w-4 h-4" /> },
+          { id: "leaderboard", label: "لوحة المتصدرين", icon: <HiStar className="w-4 h-4" /> },
+          { id: "badges", label: "الشارات والإنجازات", icon: <HiOutlineBadgeCheck className="w-4 h-4" /> },
+          { id: "levels", label: "المستويات", icon: <HiOutlineChartSquareBar className="w-4 h-4" /> },
+          { id: "settings", label: "الإعدادات", icon: <HiOutlineCog className="w-4 h-4" /> },
         ]}
       >
         {(activeTab) => (
           <>
             {activeTab === "leaderboard" && (
               mockStudentXpData.length === 0 ? (
-                <EmptyState icon={HiOutlineStar} title="ظ„ط§ طھظˆط¬ط¯ ط¨ظٹط§ظ†ط§طھ ط£ظ„ط¹ط§ط¨" description="ظ„ظ… ظٹطھظ… طھط³ط¬ظٹظ„ ط£ظٹ ظ†ط´ط§ط· ط£ظ„ط¹ط§ط¨ ط¨ط¹ط¯" />
+                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم ظٹطھظ… تسجيل ط£ظٹ نشاط ألعاب بعد" />
               ) : (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -98,11 +98,11 @@ export default function GamificationPage() {
                             <HiOutlineStar className="w-3 h-3 ml-1" />
                             {s.totalXp.toLocaleString("ar-EG")} XP
                           </Badge>
-                          <Badge variant="primary" size="sm">ظ…ط³طھظˆظ‰ {s.level}</Badge>
+                          <Badge variant="primary" size="sm">مستوى {s.level}</Badge>
                         </div>
                         <div className="flex items-center justify-center gap-4 mt-3 text-xs text-text-tertiary">
-                          <span className="flex items-center gap-1"><HiOutlineFire className="w-3 h-3" />{s.streak} ظٹظˆظ…</span>
-                          <span className="flex items-center gap-1"><HiOutlineBadgeCheck className="w-3 h-3" />{s.badges} ط´ط§ط±ط©</span>
+                          <span className="flex items-center gap-1"><HiOutlineFire className="w-3 h-3" />{s.streak} يوم</span>
+                          <span className="flex items-center gap-1"><HiOutlineBadgeCheck className="w-3 h-3" />{s.badges} شارة</span>
                         </div>
                       </motion.div>
                     ))}
@@ -110,21 +110,21 @@ export default function GamificationPage() {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle>ط¬ظ…ظٹط¹ ط§ظ„ظ…طھطµط¯ط±ظٹظ†</CardTitle>
+                      <CardTitle>جميع المتصدرين</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                           <thead>
                             <tr className="border-b border-border">
-                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„طھط±طھظٹط¨</th>
-                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„ط·ط§ظ„ط¨</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">الترتيب</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">الطالب</th>
                               <th className="text-right px-3 py-3 font-semibold text-text-secondary">XP</th>
-                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„ظ…ط³طھظˆظ‰</th>
-                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„ط´ط§ط±ط§طھ</th>
-                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط§ظ„طھط³ظ„ط³ظ„</th>
-                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">XP ط£ط³ط¨ظˆط¹ظٹ</th>
-                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">ط¢ط®ط± ظ†ط´ط§ط·</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">المستوى</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">الشارات</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">التسلسل</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">XP أسبوعي</th>
+                              <th className="text-right px-3 py-3 font-semibold text-text-secondary">آخر نشاط</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -143,12 +143,12 @@ export default function GamificationPage() {
                                   </div>
                                 </td>
                                 <td className="px-3 py-3"><span className="font-bold text-text">{s.totalXp.toLocaleString("ar-EG")}</span></td>
-                                <td className="px-3 py-3"><Badge variant="primary" size="sm">ظ…ط³طھظˆظ‰ {s.level}</Badge></td>
+                                <td className="px-3 py-3"><Badge variant="primary" size="sm">مستوى {s.level}</Badge></td>
                                 <td className="px-3 py-3">{s.badges}</td>
                                 <td className="px-3 py-3">
                                   <div className="flex items-center gap-1">
                                     <HiOutlineFire className={cn("w-4 h-4", s.streak >= 30 ? "text-warning" : "text-text-tertiary")} />
-                                    <span className={s.streak >= 30 ? "text-warning font-medium" : "text-text-secondary"}>{s.streak} ظٹظˆظ…</span>
+                                    <span className={s.streak >= 30 ? "text-warning font-medium" : "text-text-secondary"}>{s.streak} يوم</span>
                                   </div>
                                 </td>
                                 <td className="px-3 py-3 text-text-secondary">{s.weeklyXp.toLocaleString("ar-EG")}</td>
@@ -166,15 +166,15 @@ export default function GamificationPage() {
 
             {activeTab === "badges" && (
               mockAchievements.length === 0 && mockGamificationConfig.badgeCategories.every((c) => c.badges.length === 0) ? (
-                <EmptyState icon={HiOutlineStar} title="ظ„ط§ طھظˆط¬ط¯ ط¨ظٹط§ظ†ط§طھ ط£ظ„ط¹ط§ط¨" description="ظ„ظ… ظٹطھظ… طھط³ط¬ظٹظ„ ط£ظٹ ظ†ط´ط§ط· ط£ظ„ط¹ط§ط¨ ط¨ط¹ط¯" />
+                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم ظٹطھظ… تسجيل ط£ظٹ نشاط ألعاب بعد" />
               ) : (
                 <div className="space-y-6">
                   <div className="flex items-center gap-6 text-sm">
                     <Link href="/teacher/gamification/badges" className="text-primary hover:underline font-medium">
-                      ط¥ط¯ط§ط±ط© ط§ظ„ط´ط§ط±ط§طھ
+                      إدارة الشارات
                     </Link>
                     <Link href="/teacher/gamification/achievements" className="text-primary hover:underline font-medium">
-                      ط¥ط¯ط§ط±ط© ط§ظ„ط¥ظ†ط¬ط§ط²ط§طھ
+                      إدارة الإنجازات
                     </Link>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -192,7 +192,7 @@ export default function GamificationPage() {
                               <Badge key={b} variant="premium" size="md">{b}</Badge>
                             ))}
                           </div>
-                          <p className="text-xs text-text-tertiary mt-3">{cat.badges.length} ط´ط§ط±ط©</p>
+                          <p className="text-xs text-text-tertiary mt-3">{cat.badges.length} شارة</p>
                         </CardContent>
                       </Card>
                     ))}
@@ -200,7 +200,7 @@ export default function GamificationPage() {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle>ط§ظ„ط¥ظ†ط¬ط§ط²ط§طھ</CardTitle>
+                      <CardTitle>الإنجازات</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -225,7 +225,7 @@ export default function GamificationPage() {
             {activeTab === "levels" && (
               <Card>
                 <CardHeader>
-                  <CardTitle>ط´ط¬ط±ط© ط§ظ„ظ…ط³طھظˆظٹط§طھ</CardTitle>
+                  <CardTitle>شجرة المستويات</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
@@ -260,39 +260,39 @@ export default function GamificationPage() {
             {activeTab === "settings" && (
               <Card>
                 <CardHeader>
-                  <CardTitle>ط¥ط¹ط¯ط§ط¯ط§طھ XP</CardTitle>
+                  <CardTitle>إعدادات XP</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-5 max-w-lg">
                   <Input
-                    label="XP ظ„ظƒظ„ ط¯ط±ط³"
+                    label="XP لكل درس"
                     type="number"
                     value={xpPerLesson}
                     onChange={(e) => setXpPerLesson(Number(e.target.value))}
                     leftIcon={<HiOutlineStar className="w-4 h-4" />}
                   />
                   <Input
-                    label="XP ظ„ظƒظ„ ط§ظ…طھط­ط§ظ†"
+                    label="XP لكل امتحان"
                     type="number"
                     value={xpPerExam}
                     onChange={(e) => setXpPerExam(Number(e.target.value))}
                     leftIcon={<HiOutlineStar className="w-4 h-4" />}
                   />
                   <Input
-                    label="XP ظ„ظƒظ„ ظˆط§ط¬ط¨"
+                    label="XP لكل واجب"
                     type="number"
                     value={xpPerHomework}
                     onChange={(e) => setXpPerHomework(Number(e.target.value))}
                     leftIcon={<HiOutlineStar className="w-4 h-4" />}
                   />
                   <Input
-                    label="ظ…ظƒط§ظپط£ط© ط§ظ„طھط³ظ„ط³ظ„ (Streak)"
+                    label="مكافأة التسلسل (Streak)"
                     type="number"
                     value={xpStreakBonus}
                     onChange={(e) => setXpStreakBonus(Number(e.target.value))}
                     leftIcon={<HiOutlineFire className="w-4 h-4" />}
                   />
                   <div className="pt-2">
-                    <Button variant="primary" onClick={() => toast.success("طھظ… ط­ظپط¸ ط¥ط¹ط¯ط§ط¯ط§طھ XP ط¨ظ†ط¬ط§ط­")}>ط­ظپط¸ ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ</Button>
+                    <Button variant="primary" onClick={() => toast.success("طھظ… حفظ إعدادات XP بنجاح")}>حفظ الإعدادات</Button>
                   </div>
                 </CardContent>
               </Card>

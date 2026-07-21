@@ -22,8 +22,8 @@ import { formatDate, det } from "@/lib/utils"
 import type { WeeklyReport } from "@/lib/types"
 
 const mockChildren = [
-  { id: "s-1", name: "ط·آ·ط¢آ£ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯", grade: "ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ«ط·آ·ط¢آ© ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ¸ط¸آ¹" },
-  { id: "s-2", name: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦", grade: "ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ·ط¢آ© ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ¸ط¸آ¹" },
+  { id: "s-1", name: "أحمد", grade: "ثالثة ثانوي" },
+  { id: "s-2", name: "مريم", grade: "ثانية ثانوي" },
 ]
 
 const generateWeeklyReports = (studentId: string): WeeklyReport[] => Array.from({ length: 4 }, (_, i) => ({
@@ -34,8 +34,8 @@ const generateWeeklyReports = (studentId: string): WeeklyReport[] => Array.from(
   attendanceRate: Math.floor(det() * 15 + 85),
   completedHomework: Math.floor(det() * 3 + 5),
   averageGrade: Math.floor(det() * 15 + 75),
-  behavior: ["ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ²", "ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹", "ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ·ط¢آ¯", "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ²"][i],
-  notes: ["ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬آ¦ ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ¸ط«â€ ط·آ·ط¢آ¸ ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط·إ’", "ط·آ¸ط¸آ¹ط·آ·ط¢آ­ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¬ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ¯", "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¦â€™ط·آ·ط¢آ© ط·آ¸ط¸آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آµط·آ·ط¢آ©", "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ²ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±"][i],
+  behavior: ["ممتاز", "جيد جداً", "جيد", "ممتاز"][i],
+  notes: ["تقدم ملحوظ ظپظٹ الأداء", "يحتاج مراجعة القواعد", "مشاركة فعالة ظپظٹ الحصة", "التزام بالحضور"][i],
 }))
 
 export default function ParentReportsPage() {
@@ -62,17 +62,17 @@ export default function ParentReportsPage() {
   }, [reports])
 
   const handleViewFull = (reportId: string) => {
-    toast.success("ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ")
+    toast.success("جاري تحميل التقرير الكامل")
   }
 
   const handleDownloadPdf = (reportId: string) => {
-    toast.success("ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ¨ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط·â€؛ط·آ·ط¢آ© PDF")
+    toast.success("جاري تحميل التقرير بصيغة PDF")
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط·إ’" subtitle="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸ط¸آ¹" />
+        <DashboardHeader title="تقارير الأبناء" subtitle="متابعة المستوى الدراسي" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -81,11 +81,11 @@ export default function ParentReportsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
       <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "تفاصيل الامتحان" }]} />
-      <DashboardHeader title="ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط·إ’" subtitle="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸ط¸آ¹" />
+      <DashboardHeader title="تقارير الأبناء" subtitle="متابعة المستوى الدراسي" />
 
       <div className="max-w-xs">
         <Select
-          label="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ "
+          label="اختر الابن"
           options={mockChildren.map((c) => ({ value: c.id, label: `${c.name} - ${c.grade}` }))}
           value={selectedChild}
           onChange={(e) => setSelectedChild(e.target.value)}
@@ -96,16 +96,16 @@ export default function ParentReportsPage() {
         <StatsSkeleton count={3} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <StatsCard title="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±" value={`${aggregatedStats.avgAttendance}%`} icon={HiOutlineCalendar} color="success" subtitle={child?.name} />
-          <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦" value={`${aggregatedStats.avgGrade}%`} icon={HiOutlineAcademicCap} color="primary" />
-          <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ²ط·آ·ط¢آ©" value={aggregatedStats.totalHomework} icon={HiOutlineClipboardCheck} color="info" />
+          <StatsCard title="متوسط الحضور" value={`${aggregatedStats.avgAttendance}%`} icon={HiOutlineCalendar} color="success" subtitle={child?.name} />
+          <StatsCard title="المتوسط العام" value={`${aggregatedStats.avgGrade}%`} icon={HiOutlineAcademicCap} color="primary" />
+          <StatsCard title="الواجبات المنجزة" value={aggregatedStats.totalHomework} icon={HiOutlineClipboardCheck} color="info" />
         </motion.div>
       )}
 
       {isLoading ? (
         <CardSkeleton count={2} />
       ) : reports.length === 0 ? (
-        <EmptyState icon={HiOutlineDocumentReport} title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ±" description="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ¸ط«â€ ط·آ·ط¢آ¹ط·آ¸ط¸آ¹ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨" />
+        <EmptyState icon={HiOutlineDocumentReport} title="لا توجد تقارير" description="لا توجد تقارير أسبوعية لهذا الطالب" />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {reports.map((report) => (
@@ -118,13 +118,13 @@ export default function ParentReportsPage() {
                         <HiOutlineCalendar className="w-4 h-4 text-primary" />
                         <h3 className="font-semibold text-text">{formatDate(report.weekStart)} - {formatDate(report.weekEnd)}</h3>
                       </div>
-                      <Badge variant="info" size="sm">ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ¸ط«â€ ط·آ·ط¢آ¹ط·آ¸ط¸آ¹</Badge>
+                      <Badge variant="info" size="sm">أسبوعي</Badge>
                     </div>
                     <div className="flex gap-1">
-                      <Button onClick={() => handleDownloadPdf(report.id)} className="p-2 rounded-lg hover:bg-surface-secondary text-text-tertiary hover:text-primary transition-colors" title="ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ PDF">
+                      <Button onClick={() => handleDownloadPdf(report.id)} className="p-2 rounded-lg hover:bg-surface-secondary text-text-tertiary hover:text-primary transition-colors" title="تحميل PDF">
                         <HiOutlineDownload className="w-4 h-4" />
                       </Button>
-                      <Button onClick={() => handleViewFull(report.id)} className="p-2 rounded-lg hover:bg-surface-secondary text-text-tertiary hover:text-primary transition-colors" title="ط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ">
+                      <Button onClick={() => handleViewFull(report.id)} className="p-2 rounded-lg hover:bg-surface-secondary text-text-tertiary hover:text-primary transition-colors" title="عرض التقرير الكامل">
                         <HiOutlineEye className="w-4 h-4" />
                       </Button>
                     </div>
@@ -134,28 +134,28 @@ export default function ParentReportsPage() {
                     <div className="p-3 rounded-lg bg-surface-secondary">
                       <div className="flex items-center gap-2 mb-1">
                         <HiOutlineCalendar className="w-3.5 h-3.5 text-success" />
-                        <span className="text-xs text-text-tertiary">ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ¶ط·آ¸ط«â€ ط·آ·ط¢آ±</span>
+                        <span className="text-xs text-text-tertiary">نسبة الحضور</span>
                       </div>
                       <Progress value={report.attendanceRate} size="sm" variant="success" showLabel />
                     </div>
                     <div className="p-3 rounded-lg bg-surface-secondary">
                       <div className="flex items-center gap-2 mb-1">
                         <HiOutlineClipboardCheck className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-xs text-text-tertiary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾</span>
+                        <span className="text-xs text-text-tertiary">الواجبات</span>
                       </div>
-                      <p className="text-lg font-bold text-text">{report.completedHomework} ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¨</p>
+                      <p className="text-lg font-bold text-text">{report.completedHomework} واجب</p>
                     </div>
                     <div className="p-3 rounded-lg bg-surface-secondary">
                       <div className="flex items-center gap-2 mb-1">
                         <HiOutlineAcademicCap className="w-3.5 h-3.5 text-warning" />
-                        <span className="text-xs text-text-tertiary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬â€چ</span>
+                        <span className="text-xs text-text-tertiary">المعدل</span>
                       </div>
                       <p className="text-lg font-bold text-text">{report.averageGrade}%</p>
                     </div>
                     <div className="p-3 rounded-lg bg-surface-secondary">
                       <div className="flex items-center gap-2 mb-1">
                         <HiOutlineStar className="w-3.5 h-3.5 text-premium" />
-                        <span className="text-xs text-text-tertiary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ³ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ¸ط¦â€™</span>
+                        <span className="text-xs text-text-tertiary">السلوك</span>
                       </div>
                       <p className="text-lg font-bold text-text">{report.behavior}</p>
                     </div>
@@ -169,7 +169,7 @@ export default function ParentReportsPage() {
 
                   <div className="flex gap-2 pt-1">
                     <Button variant="primary" size="sm" className="flex-1" leftIcon={<HiOutlineEye className="w-4 h-4" />} onClick={() => handleViewFull(report.id)}>
-                      ط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چ
+                      عرض التقرير الكامل
                     </Button>
                     <Button variant="secondary" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={() => handleDownloadPdf(report.id)}>
                       PDF

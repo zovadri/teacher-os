@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -29,9 +29,9 @@ import { generateId, formatCurrency } from "@/lib/utils"
 import type { Bundle } from "@/lib/types"
 
 const stats = [
-  { title: "ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾", value: mockBundles.length, icon: HiOutlineCollection, color: "primary" as const },
-  { title: "ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", value: mockBundles.reduce((s, b) => s + b.courses.length, 0), icon: HiOutlineBookOpen, color: "info" as const },
-  { title: "ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ·ط·آ©", value: mockBundles.filter((b) => b.status === "active").length, icon: HiOutlineCheckCircle, color: "success" as const },
+  { title: "إجمالي الباقات", value: mockBundles.length, icon: HiOutlineCollection, color: "primary" as const },
+  { title: "إجمالي الكورسات", value: mockBundles.reduce((s, b) => s + b.courses.length, 0), icon: HiOutlineBookOpen, color: "info" as const },
+  { title: "الباقات النشطة", value: mockBundles.filter((b) => b.status === "active").length, icon: HiOutlineCheckCircle, color: "success" as const },
 ]
 
 interface BundleForm {
@@ -87,10 +87,10 @@ export default function BundlesPage() {
 
   const validate = (): boolean => {
     const errs: Partial<Record<keyof BundleForm, string>> = {}
-    if (!form.name.trim()) errs.name = "ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ© ط¸â€¦ط·آ·ط¸â€‍ط¸ث†ط·آ¨"
-    if (!form.description.trim()) errs.description = "ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾ ط¸â€¦ط·آ·ط¸â€‍ط¸ث†ط·آ¨"
-    if (form.courseIds.length === 0) errs.courseIds = "ط¸ظ¹ط·آ¬ط·آ¨ ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط¸ئ’ط¸ث†ط·آ±ط·آ³ ط¸ث†ط·آ§ط·آ­ط·آ¯ ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط·آ£ط¸â€ڑط¸â€‍"
-    if (form.price <= 0) errs.price = "ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ± ط¸ظ¹ط·آ¬ط·آ¨ ط·آ£ط¸â€  ط¸ظ¹ط¸ئ’ط¸ث†ط¸â€  ط·آ£ط¸ئ’ط·آ¨ط·آ± ط¸â€¦ط¸â€  ط·آµط¸ظ¾ط·آ±"
+    if (!form.name.trim()) errs.name = "اسم الباقة مطلوب"
+    if (!form.description.trim()) errs.description = "الوصف مطلوب"
+    if (form.courseIds.length === 0) errs.courseIds = "يجب اختيار كورس واحد على الأقل"
+    if (form.price <= 0) errs.price = "السعر يجب أن يكون أكبر من صفر"
     setFormErrors(errs)
     return Object.keys(errs).length === 0
   }
@@ -105,13 +105,13 @@ export default function BundlesPage() {
             : b
         )
       )
-      addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
+      addToast({ type: "success", title: "طھظ… تحديث الباقة بنجاح" })
     } else {
       setBundles((prev) => [
         ...prev,
         { id: generateId(), name: form.name, description: form.description, courses: form.courseIds, price: form.price, discount: form.discount, status: form.status, createdAt: new Date() },
       ])
-      addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
+      addToast({ type: "success", title: "طھظ… إضافة الباقة بنجاح" })
     }
     setModalOpen(false)
   }
@@ -119,7 +119,7 @@ export default function BundlesPage() {
   const handleDelete = () => {
     if (!deleteTarget) return
     setBundles((prev) => prev.filter((b) => b.id !== deleteTarget.id))
-    addToast({ type: "success", title: `ط·ع¾ط¸â€¦ ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ© "${deleteTarget.name}" ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­` })
+    addToast({ type: "success", title: `طھظ… حذف الباقة "${deleteTarget.name}" بنجاح` })
     setDeleteTarget(null)
   }
 
@@ -134,15 +134,15 @@ export default function BundlesPage() {
   }
 
   const effectiveStats = [
-    { title: "ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾", value: bundles.length, icon: HiOutlineCollection, color: "primary" as const },
-    { title: "ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", value: totalCoursesCount, icon: HiOutlineBookOpen, color: "info" as const },
-    { title: "ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ·ط·آ©", value: activeCount, icon: HiOutlineCheckCircle, color: "success" as const },
+    { title: "إجمالي الباقات", value: bundles.length, icon: HiOutlineCollection, color: "primary" as const },
+    { title: "إجمالي الكورسات", value: totalCoursesCount, icon: HiOutlineBookOpen, color: "info" as const },
+    { title: "الباقات النشطة", value: activeCount, icon: HiOutlineCheckCircle, color: "success" as const },
   ]
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط§ظ„طھط³ط¬ظٹظ„ط§طھ", href: "/teacher/enrollments" }, { label: "ط§ظ„ط¨ط§ظ‚ط§طھ" }]} />
-      <DashboardHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¹ط¸ظ¹ط·آ±" />
+      <Breadcrumb items={[{ label: "التسجيلات", href: "/teacher/enrollments" }, { label: "الباقات" }]} />
+      <DashboardHeader title="إدارة الباقات" subtitle="إدارة باقات الكورسات والتسعير" />
 
       <div className="grid grid-cols-3 gap-4">
         {effectiveStats.map((s, i) => (
@@ -154,17 +154,17 @@ export default function BundlesPage() {
 
       <div className="flex justify-end">
         <Button variant="primary" onClick={openCreateModal} leftIcon={<HiOutlinePlus size={18} />}>
-          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
+          إضافة باقة جديدة
         </Button>
       </div>
 
       {bundles.length === 0 ? (
         <EmptyState
-          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾"
-          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ£ط¸ظ¹ ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ¨ط·آ¹ط·آ¯. ط·آ£ط·آ¶ط¸ظ¾ ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ© ط¸â€‍ط¸â€‍ط·آ¨ط·آ¯ط·طŒ."
+          title="لا توجد باقات"
+          description="لم ظٹطھظ… إضافة ط£ظٹ باقات بعد. أضف باقة جديدة للبدء."
           action={
             <Button variant="primary" onClick={openCreateModal}>
-              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
+              إضافة باقة جديدة
             </Button>
           }
         />
@@ -187,7 +187,7 @@ export default function BundlesPage() {
                         <HiOutlineCollection className="text-primary" size={20} />
                       </div>
                       <Badge variant={bundle.status === "active" ? "success" : "neutral"}>
-                        {bundle.status === "active" ? "ط¸â€ ط·آ´ط·آ·" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·"}
+                        {bundle.status === "active" ? "نشط" : "غير نشط"}
                       </Badge>
                     </div>
                     <h3 className="font-semibold text-text mb-1">{bundle.name}</h3>
@@ -202,7 +202,7 @@ export default function BundlesPage() {
                       )}
                     </div>
                     <div className="flex-1">
-                      <p className="text-xs text-text-secondary mb-2">{courseList.length} ط¸ئ’ط¸ث†ط·آ±ط·آ³</p>
+                      <p className="text-xs text-text-secondary mb-2">{courseList.length} كورس</p>
                       <div className="flex flex-wrap gap-1.5">
                         {courseList.map((c) => c && (
                           <Badge key={c.id} variant="primary" size="sm">{c.title}</Badge>
@@ -214,14 +214,14 @@ export default function BundlesPage() {
                       <button type="button"
                         onClick={() => openEditModal(bundle)}
                         className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
-                        title="ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍"
+                        title="تعديل"
                       >
                         <HiOutlinePencil size={16} />
                       </button>
                       <button type="button"
                         onClick={() => setDeleteTarget(bundle)}
                         className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"
-                        title="ط·آ­ط·آ°ط¸ظ¾"
+                        title="حذف"
                       >
                         <HiOutlineTrash size={16} />
                       </button>
@@ -237,26 +237,26 @@ export default function BundlesPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingBundle ? "ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ¨ط·آ§ط¸â€ڑط·آ©" : "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©"}
+        title={editingBundle ? "تعديل باقة" : "إضافة باقة جديدة"}
         size="lg"
       >
         <div className="space-y-4">
           <Input
-            label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©"
+            label="اسم الباقة"
             value={form.name}
             onChange={(e) => { setForm((p) => ({ ...p, name: e.target.value })); setFormErrors((p) => ({ ...p, name: undefined })) }}
-            placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ© ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¨ط¸ظ¹ط·آ©"
+            placeholder="مثال: الباقة العربية"
             error={formErrors.name}
           />
           <Input
-            label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾"
+            label="الوصف"
             value={form.description}
             onChange={(e) => { setForm((p) => ({ ...p, description: e.target.value })); setFormErrors((p) => ({ ...p, description: undefined })) }}
-            placeholder="ط¸ث†ط·آµط¸ظ¾ ط¸â€¦ط·آ®ط·ع¾ط·آµط·آ± ط¸â€‍ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©"
+            placeholder="وصف مختصر للباقة"
             error={formErrors.description}
           />
           <div className="space-y-1.5">
-            <label className="block text-sm font-medium text-text">ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾</label>
+            <label className="block text-sm font-medium text-text">الكورسات</label>
             <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto p-2 border border-border rounded-lg">
               {mockCourses.map((c) => (
                 <label
@@ -279,7 +279,7 @@ export default function BundlesPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="ط·آ§ط¸â€‍ط·آ³ط·آ¹ط·آ±"
+              label="السعر"
               type="number"
               value={form.price}
               onChange={(e) => { setForm((p) => ({ ...p, price: Number(e.target.value) })); setFormErrors((p) => ({ ...p, price: undefined })) }}
@@ -288,7 +288,7 @@ export default function BundlesPage() {
               error={formErrors.price}
             />
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-text">ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آ®ط·آµط¸â€¦ (%)</label>
+              <label className="block text-sm font-medium text-text">نسبة الخصم (%)</label>
               <div className="relative">
                 <input
                   type="number"
@@ -302,20 +302,20 @@ export default function BundlesPage() {
             </div>
           </div>
           <Select
-            label="ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©"
+            label="الحالة"
             value={form.status}
             onChange={(e) => setForm((p) => ({ ...p, status: e.target.value as "active" | "inactive" }))}
             options={[
-              { value: "active", label: "ط¸â€ ط·آ´ط·آ·" },
-              { value: "inactive", label: "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·" },
+              { value: "active", label: "نشط" },
+              { value: "inactive", label: "غير نشط" },
             ]}
           />
           <div className="flex items-center gap-3 pt-2">
             <Button variant="primary" onClick={handleSave} className="flex-1">
-              {editingBundle ? "ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·ط›ط¸ظ¹ط¸ظ¹ط·آ±ط·آ§ط·ع¾" : "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©"}
+              {editingBundle ? "حفظ التغييرات" : "إضافة الباقة"}
             </Button>
             <Button variant="secondary" onClick={() => setModalOpen(false)} className="flex-1">
-              ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ
+              إلغاء
             </Button>
           </div>
         </div>
@@ -325,10 +325,10 @@ export default function BundlesPage() {
         isOpen={!!deleteTarget}
         onClose={() => setDeleteTarget(null)}
         onConfirm={handleDelete}
-        title="ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©"
-        message={deleteTarget ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ© "${deleteTarget.name}"ط·ع؛ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ ط¸â€‍ط·آ§ ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·آ§ط·آ¬ط·آ¹ ط·آ¹ط¸â€ ط¸â€،.` : ""}
-        confirmText="ط·آ­ط·آ°ط¸ظ¾"
-        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
+        title="حذف الباقة"
+        message={deleteTarget ? `هل أنت متأكد من حذف الباقة "${deleteTarget.name}"طں هذا الإجراء لا يمكن التراجع عنه.` : ""}
+        confirmText="حذف"
+        cancelText="إلغاء"
         variant="danger"
       />
     </div>

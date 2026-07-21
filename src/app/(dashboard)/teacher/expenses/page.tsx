@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -23,9 +23,9 @@ import { formatCurrency, formatDate } from "@/lib/utils"
 import { mockExpenses, mockBranches } from "@/lib/mock/data"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" }> = {
-  approved: { label: "ط¸â€¦ط·آ¹ط·ع¾ط¸â€¦ط·آ¯", variant: "success" },
-  pending: { label: "ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑ", variant: "warning" },
-  rejected: { label: "ط¸â€¦ط·آ±ط¸ظ¾ط¸ث†ط·آ¶", variant: "error" },
+  approved: { label: "معتمد", variant: "success" },
+  pending: { label: "معلق", variant: "warning" },
+  rejected: { label: "مرفوض", variant: "error" },
 }
 
 export default function ExpensesPage() {
@@ -89,7 +89,7 @@ export default function ExpensesPage() {
     setExpenses((prev) => [exp, ...prev])
     setShowAddModal(false)
     setNewExpense({ category: "", description: "", amount: 0, branchId: "", paidBy: "" })
-    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
+    toast.success("طھظ… إضافة المصروف بنجاح")
   }
 
   const getBranchName = (branchId: string) => mockBranches.find((b) => b.id === branchId)?.name || branchId
@@ -97,7 +97,7 @@ export default function ExpensesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" />
+        <DashboardHeader title="المصروفات" subtitle="إدارة المصروفات" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -105,10 +105,10 @@ export default function ExpensesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ±ط¸ئ’ط·آ²" />
+      <DashboardHeader title="المصروفات" subtitle="إدارة مصروفات المركز" />
       <div className="flex justify-end">
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾
+          إضافة مصروف
         </Button>
       </div>
 
@@ -116,45 +116,45 @@ export default function ExpensesPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" value={formatCurrency(stats.totalAmount)} icon={HiOutlineCash} color="primary" />
-          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ±ط¸ظ¹ط·آ©" value={formatCurrency(monthlyTotal)} icon={HiOutlineCalendar} color="info" />
-          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط·ع¾ط¸â€¦ط·آ¯ط·آ©" value={formatCurrency(stats.approved)} icon={HiOutlineTag} color="success" />
-          <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑط·آ©" value={formatCurrency(stats.pending)} icon={HiOutlineFilter} color="warning" subtitle={`${stats.pendingCount} ط¸â€¦ط·آ¹ط·آ§ط¸â€¦ط¸â€‍ط·آ©`} />
+          <StatsCard title="إجمالي المصروفات" value={formatCurrency(stats.totalAmount)} icon={HiOutlineCash} color="primary" />
+          <StatsCard title="المصروفات الشهرية" value={formatCurrency(monthlyTotal)} icon={HiOutlineCalendar} color="info" />
+          <StatsCard title="المعتمدة" value={formatCurrency(stats.approved)} icon={HiOutlineTag} color="success" />
+          <StatsCard title="المعلقة" value={formatCurrency(stats.pending)} icon={HiOutlineFilter} color="warning" subtitle={`${stats.pendingCount} معاملة`} />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾</CardTitle>
+          <CardTitle>سجل المصروفات</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="p-4 border-b border-border flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ«..." />
+              <SearchInput value={search} onChange={setSearch} placeholder="بحث..." />
             </div>
             <div className="flex flex-wrap gap-2">
-              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ§ط·ع¾" }, ...categories.map((c) => ({ value: c, label: c }))]} value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} />
-              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط¸ث†ط·آ¹" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)} />
-              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" }, { value: "approved", label: "ط¸â€¦ط·آ¹ط·ع¾ط¸â€¦ط·آ¯" }, { value: "pending", label: "ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑ" }, { value: "rejected", label: "ط¸â€¦ط·آ±ط¸ظ¾ط¸ث†ط·آ¶" }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "جميع الفئات" }, ...categories.map((c) => ({ value: c, label: c }))]} value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "جميع الفروع" }, ...mockBranches.map((b) => ({ value: b.id, label: b.name }))]} value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)} />
+              <Select options={[{ value: "all", label: "جميع الحالات" }, { value: "approved", label: "معتمد" }, { value: "pending", label: "معلق" }, { value: "rejected", label: "مرفوض" }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
             </div>
           </div>
 
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineCash} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ط·آ§ط·ع¾ ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾</Button>} />
+            <EmptyState icon={HiOutlineCash} title="لا توجد مصروفات" description="لم ظٹطھظ… العثور على مصروفات مطابقة" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة مصروف</Button>} />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸â€‍ط·ط›</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط¸عˆط·آµط·آ±ط¸ظ¾</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الفئة</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الوصف</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">المبلغ</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">التاريخ</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الفرع</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">المُصرف</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الحالة</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -182,24 +182,24 @@ export default function ExpensesPage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="إضافة مصروف جديد" size="md">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
-            <Input label="ط·آ§ط¸â€‍ط¸ظ¾ط·آ¦ط·آ©" value={newExpense.category} onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value })} placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ¥ط¸ظ¹ط·آ¬ط·آ§ط·آ±" />
-            <Input label="ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸â€‍ط·ط›" type="number" value={String(newExpense.amount)} onChange={(e) => setNewExpense({ ...newExpense, amount: Number(e.target.value) })} placeholder="ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸â€‍ط·ط›" />
+            <Input label="الفئة" value={newExpense.category} onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value })} placeholder="مثال: إيجار" />
+            <Input label="المبلغ" type="number" value={String(newExpense.amount)} onChange={(e) => setNewExpense({ ...newExpense, amount: Number(e.target.value) })} placeholder="المبلغ" />
           </div>
-          <Input label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾" value={newExpense.description} onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })} placeholder="ط¸ث†ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾" />
+          <Input label="الوصف" value={newExpense.description} onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })} placeholder="وصف المصروف" />
           <div className="grid grid-cols-2 gap-3">
             <Select
-              label="ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹"
+              label="الفرع"
               options={mockBranches.map((b) => ({ value: b.id, label: b.name }))}
               value={newExpense.branchId} onChange={(e) => setNewExpense({ ...newExpense, branchId: e.target.value })}
             />
-            <Input label="ط·آ§ط¸â€‍ط¸â€¦ط¸عˆط·آµط·آ±ط¸ظ¾" value={newExpense.paidBy} onChange={(e) => setNewExpense({ ...newExpense, paidBy: e.target.value })} placeholder="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط¸عˆط·آµط·آ±ط¸ظ¾" />
+            <Input label="المُصرف" value={newExpense.paidBy} onChange={(e) => setNewExpense({ ...newExpense, paidBy: e.target.value })} placeholder="اسم المُصرف" />
           </div>
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1" onClick={handleAddExpense} disabled={!newExpense.category || !newExpense.amount}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ±ط¸ث†ط¸ظ¾</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <Button variant="primary" className="flex-1" onClick={handleAddExpense} disabled={!newExpense.category || !newExpense.amount}>إضافة المصروف</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>

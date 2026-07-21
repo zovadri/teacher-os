@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
@@ -41,26 +41,26 @@ const statusBadge: Record<EnrollmentStatus, "success" | "error" | "neutral" | "w
 }
 
 const statusLabels: Record<EnrollmentStatus, string> = {
-  active: "ط¸â€ ط·آ´ط·آ·",
-  expired: "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹",
-  cancelled: "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹",
-  trial: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹",
+  active: "نشط",
+  expired: "منتهي",
+  cancelled: "ملغي",
+  trial: "تجريبي",
 }
 
 const accessTypeLabels: Record<AccessType, string> = {
-  single: "ط¸ظ¾ط·آ±ط·آ¯ط¸ظ¹",
-  bundle: "ط·آ¨ط·آ§ط¸â€ڑط·آ©",
-  free: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹",
-  trial: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹",
+  single: "فردي",
+  bundle: "باقة",
+  free: "مجاني",
+  trial: "تجريبي",
   vip: "VIP",
-  lifetime: "ط¸â€¦ط·آ¯ط¸â€° ط·آ§ط¸â€‍ط·آ­ط¸ظ¹ط·آ§ط·آ©",
+  lifetime: "مدى الحياة",
 }
 
 const sourceLabels: Record<string, string> = {
-  payment: "ط·آ¯ط¸ظ¾ط·آ¹",
-  code: "ط¸ئ’ط¸ث†ط·آ¯",
-  free: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹",
-  admin: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط¸ظ¹",
+  payment: "دفع",
+  code: "كود",
+  free: "مجاني",
+  admin: "إداري",
 }
 
 const sourceColors: Record<string, "primary" | "success" | "info" | "warning"> = {
@@ -71,26 +71,26 @@ const sourceColors: Record<string, "primary" | "success" | "info" | "warning"> =
 }
 
 const courseOptions = [
-  { value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" },
+  { value: "الكل", label: "جميع الكورسات" },
   ...mockCourses.map((c) => ({ value: c.id, label: c.title })),
 ]
 
 const statusOptions = [
-  { value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" },
-  { value: "active", label: "ط¸â€ ط·آ´ط·آ·" },
-  { value: "expired", label: "ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹" },
-  { value: "cancelled", label: "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹" },
-  { value: "trial", label: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹" },
+  { value: "الكل", label: "جميع الحالات" },
+  { value: "active", label: "نشط" },
+  { value: "expired", label: "منتهي" },
+  { value: "cancelled", label: "ملغي" },
+  { value: "trial", label: "تجريبي" },
 ]
 
 const accessOptions = [
-  { value: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ£ط¸â€ ط¸ث†ط·آ§ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍" },
-  { value: "single", label: "ط¸ظ¾ط·آ±ط·آ¯ط¸ظ¹" },
-  { value: "bundle", label: "ط·آ¨ط·آ§ط¸â€ڑط·آ©" },
-  { value: "free", label: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹" },
-  { value: "trial", label: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹" },
+  { value: "الكل", label: "جميع أنواع الوصول" },
+  { value: "single", label: "فردي" },
+  { value: "bundle", label: "باقة" },
+  { value: "free", label: "مجاني" },
+  { value: "trial", label: "تجريبي" },
   { value: "vip", label: "VIP" },
-  { value: "lifetime", label: "ط¸â€¦ط·آ¯ط¸â€° ط·آ§ط¸â€‍ط·آ­ط¸ظ¹ط·آ§ط·آ©" },
+  { value: "lifetime", label: "مدى الحياة" },
 ]
 
 interface CreateForm {
@@ -112,9 +112,9 @@ const emptyCreateForm: CreateForm = {
 export default function EnrollmentsPage() {
   const [enrollments, setEnrollments] = useState(mockEnrollments)
   const [search, setSearch] = useState("")
-  const [courseFilter, setCourseFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
-  const [statusFilter, setStatusFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
-  const [accessFilter, setAccessFilter] = useState("ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍")
+  const [courseFilter, setCourseFilter] = useState("الكل")
+  const [statusFilter, setStatusFilter] = useState("الكل")
+  const [accessFilter, setAccessFilter] = useState("الكل")
   const [selectedEnrollment, setSelectedEnrollment] = useState<CourseEnrollment | null>(null)
   const [detailModalOpen, setDetailModalOpen] = useState(false)
   const [createModalOpen, setCreateModalOpen] = useState(false)
@@ -133,9 +133,9 @@ export default function EnrollmentsPage() {
   const filtered = useMemo(() => {
     return enrollments.filter((e) => {
       const matchSearch = e.studentName.includes(search) || e.courseName.includes(search)
-      const matchCourse = courseFilter === "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" || e.courseId === courseFilter
-      const matchStatus = statusFilter === "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" || e.status === statusFilter
-      const matchAccess = accessFilter === "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" || e.accessType === accessFilter
+      const matchCourse = courseFilter === "الكل" || e.courseId === courseFilter
+      const matchStatus = statusFilter === "الكل" || e.status === statusFilter
+      const matchAccess = accessFilter === "الكل" || e.accessType === accessFilter
       return matchSearch && matchCourse && matchStatus && matchAccess
     })
   }, [enrollments, search, courseFilter, statusFilter, accessFilter])
@@ -163,7 +163,7 @@ export default function EnrollmentsPage() {
       source: "admin",
     }
     setEnrollments((prev) => [newEnr, ...prev])
-    addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
+    addToast({ type: "success", title: "طھظ… إضافة التسجيل بنجاح" })
     setCreateModalOpen(false)
     setCreateForm(emptyCreateForm)
   }
@@ -175,20 +175,20 @@ export default function EnrollmentsPage() {
         e.id === bulkEndTarget.id ? { ...e, status: "expired" as const } : e
       )
     )
-    addToast({ type: "success", title: `ط·ع¾ط¸â€¦ ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ "${bulkEndTarget.studentName}" ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­` })
+    addToast({ type: "success", title: `طھظ… إنهاء تسجيل "${bulkEndTarget.studentName}" بنجاح` })
     setBulkEndTarget(null)
   }
 
   const statsCards = [
-    { title: "ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾", value: stats.total, icon: HiOutlineUsers, color: "primary" as const },
-    { title: "ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ·ط·آ©", value: stats.active, icon: HiOutlineCheckCircle, color: "success" as const },
-    { title: "ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط¸â€،ط¸ظ¹ط·آ©", value: stats.expired, icon: HiOutlineXCircle, color: "error" as const },
-    { title: "ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ©", value: stats.trial, icon: HiOutlineBeaker, color: "warning" as const },
+    { title: "إجمالي التسجيلات", value: stats.total, icon: HiOutlineUsers, color: "primary" as const },
+    { title: "التسجيلات النشطة", value: stats.active, icon: HiOutlineCheckCircle, color: "success" as const },
+    { title: "التسجيلات المنتهية", value: stats.expired, icon: HiOutlineXCircle, color: "error" as const },
+    { title: "التسجيلات التجريبية", value: stats.trial, icon: HiOutlineBeaker, color: "warning" as const },
   ]
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" />
+      <DashboardHeader title="إدارة التسجيلات" subtitle="إدارة تسجيلات الطلاب ظپظٹ الكورسات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {statsCards.map((s, i) => (
@@ -200,7 +200,7 @@ export default function EnrollmentsPage() {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1">
-          <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ£ط¸ث† ط¸ئ’ط¸ث†ط·آ±ط·آ³..." />
+          <SearchInput value={search} onChange={setSearch} placeholder="بحث عن طالب أو كورس..." />
         </div>
         <div className="flex flex-wrap gap-3">
           <select
@@ -231,18 +231,18 @@ export default function EnrollmentsPage() {
             ))}
           </select>
           <Button variant="primary" size="md" onClick={() => setCreateModalOpen(true)} leftIcon={<HiOutlinePlus size={18} />}>
-            ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍
+            إضافة تسجيل
           </Button>
         </div>
       </div>
 
       {filtered.length === 0 ? (
         <EmptyState
-          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾"
-          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«"
+          title="لا توجد تسجيلات"
+          description="لم ظٹطھظ… العثور على تسجيلات تطابق معايير البحث"
           action={
             <Button variant="primary" onClick={() => setCreateModalOpen(true)}>
-              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯
+              إضافة تسجيل جديد
             </Button>
           }
         />
@@ -294,7 +294,7 @@ export default function EnrollmentsPage() {
                       <button type="button"
                         onClick={() => openDetail(enr)}
                         className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
-                        title="ط·آ¹ط·آ±ط·آ¶"
+                        title="عرض"
                       >
                         <HiOutlineEye size={16} />
                       </button>
@@ -302,7 +302,7 @@ export default function EnrollmentsPage() {
                         <button type="button"
                           onClick={() => setBulkEndTarget(enr)}
                           className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"
-                          title="ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
+                          title="إنهاء التسجيل"
                         >
                           <HiOutlineTrash size={16} />
                         </button>
@@ -319,7 +319,7 @@ export default function EnrollmentsPage() {
       <Modal
         isOpen={detailModalOpen}
         onClose={() => setDetailModalOpen(false)}
-        title="ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
+        title="تفاصيل التسجيل"
         size="lg"
       >
         {selectedEnrollment && (
@@ -335,26 +335,26 @@ export default function EnrollmentsPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</p>
+                <p className="text-xs text-text-tertiary">الحالة</p>
                 <Badge variant={statusBadge[selectedEnrollment.status]} size="md">{statusLabels[selectedEnrollment.status]}</Badge>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍</p>
+                <p className="text-xs text-text-tertiary">نوع الوصول</p>
                 <Badge variant="info" size="md">{accessTypeLabels[selectedEnrollment.accessType]}</Badge>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ¯ط·آ±</p>
+                <p className="text-xs text-text-tertiary">المصدر</p>
                 <Badge variant={sourceColors[selectedEnrollment.source]} size="md">{sourceLabels[selectedEnrollment.source]}</Badge>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦</p>
+                <p className="text-xs text-text-tertiary">التقدم</p>
                 <div className="flex items-center gap-2">
                   <Progress value={selectedEnrollment.progress} size="sm" className="flex-1" />
                   <span className="text-sm font-medium text-text">{selectedEnrollment.progress}%</span>
                 </div>
               </div>
               <div className="space-y-1">
-                <p className="text-xs text-text-tertiary">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍</p>
+                <p className="text-xs text-text-tertiary">تاريخ التسجيل</p>
                 <div className="flex items-center gap-1.5 text-sm text-text">
                   <HiOutlineCalendar size={16} className="text-text-tertiary" />
                   {formatDate(selectedEnrollment.enrolledAt)}
@@ -362,7 +362,7 @@ export default function EnrollmentsPage() {
               </div>
               {selectedEnrollment.expiresAt && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ</p>
+                  <p className="text-xs text-text-tertiary">تاريخ الانتهاء</p>
                   <div className="flex items-center gap-1.5 text-sm text-text">
                     <HiOutlineClock size={16} className="text-text-tertiary" />
                     {formatDate(selectedEnrollment.expiresAt)}
@@ -371,16 +371,16 @@ export default function EnrollmentsPage() {
               )}
               {selectedEnrollment.bundleId && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©</p>
+                  <p className="text-xs text-text-tertiary">الباقة</p>
                   <div className="flex items-center gap-1.5 text-sm text-text">
                     <HiOutlineTemplate size={16} className="text-text-tertiary" />
-                    {mockBundles.find((b) => b.id === selectedEnrollment.bundleId)?.name || "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·آ¹ط·آ±ط¸ث†ط¸ظ¾ط·آ©"}
+                    {mockBundles.find((b) => b.id === selectedEnrollment.bundleId)?.name || "غير معروفة"}
                   </div>
                 </div>
               )}
               {selectedEnrollment.grade !== undefined && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©</p>
+                  <p className="text-xs text-text-tertiary">الدرجة</p>
                   <div className="flex items-center gap-1.5 text-sm text-text">
                     <HiOutlineTag size={16} className="text-text-tertiary" />
                     {selectedEnrollment.grade}%
@@ -389,7 +389,7 @@ export default function EnrollmentsPage() {
               )}
               {selectedEnrollment.sourceId && (
                 <div className="space-y-1">
-                  <p className="text-xs text-text-tertiary">ط¸â€¦ط·آ¹ط·آ±ط¸â€کط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط·آµط·آ¯ط·آ±</p>
+                  <p className="text-xs text-text-tertiary">معرّف المصدر</p>
                   <p className="text-sm text-text font-mono">{selectedEnrollment.sourceId}</p>
                 </div>
               )}
@@ -401,65 +401,65 @@ export default function EnrollmentsPage() {
       <Modal
         isOpen={createModalOpen}
         onClose={() => { setCreateModalOpen(false); setCreateForm(emptyCreateForm) }}
-        title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯"
+        title="إضافة تسجيل جديد"
         size="md"
       >
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-text">ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</label>
+              <label className="block text-sm font-medium text-text">اسم الطالب</label>
               <input
                 value={createForm.studentName}
                 onChange={(e) => setCreateForm((p) => ({ ...p, studentName: e.target.value }))}
-                placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯"
+                placeholder="مثال: أحمد محمد"
                 className="w-full bg-surface border border-border rounded-lg px-3.5 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
               />
             </div>
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-text">ط¸â€¦ط·آ¹ط·آ±ط¸â€کط¸ظ¾ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</label>
+              <label className="block text-sm font-medium text-text">معرّف الطالب</label>
               <input
                 value={createForm.studentId}
                 onChange={(e) => setCreateForm((p) => ({ ...p, studentId: e.target.value }))}
-                placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: s-123"
+                placeholder="مثال: s-123"
                 className="w-full bg-surface border border-border rounded-lg px-3.5 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
               />
             </div>
           </div>
           <Select
-            label="ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
+            label="الكورس"
             value={createForm.courseId}
             onChange={(e) => setCreateForm((p) => ({ ...p, courseId: e.target.value }))}
             options={mockCourses.map((c) => ({ value: c.id, label: c.title }))}
-            placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط¸ئ’ط¸ث†ط·آ±ط·آ³..."
+            placeholder="اختر كورس..."
           />
           <Select
-            label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ث†ط¸â€‍"
+            label="نوع الوصول"
             value={createForm.accessType}
             onChange={(e) => setCreateForm((p) => ({ ...p, accessType: e.target.value as AccessType }))}
             options={[
-              { value: "single", label: "ط¸ظ¾ط·آ±ط·آ¯ط¸ظ¹" },
-              { value: "bundle", label: "ط·آ¨ط·آ§ط¸â€ڑط·آ©" },
-              { value: "free", label: "ط¸â€¦ط·آ¬ط·آ§ط¸â€ ط¸ظ¹" },
-              { value: "trial", label: "ط·ع¾ط·آ¬ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹" },
+              { value: "single", label: "فردي" },
+              { value: "bundle", label: "باقة" },
+              { value: "free", label: "مجاني" },
+              { value: "trial", label: "تجريبي" },
               { value: "vip", label: "VIP" },
-              { value: "lifetime", label: "ط¸â€¦ط·آ¯ط¸â€° ط·آ§ط¸â€‍ط·آ­ط¸ظ¹ط·آ§ط·آ©" },
+              { value: "lifetime", label: "مدى الحياة" },
             ]}
           />
           {createForm.accessType === "bundle" && (
             <Select
-              label="ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€ڑط·آ©"
+              label="الباقة"
               value={createForm.bundleId}
               onChange={(e) => setCreateForm((p) => ({ ...p, bundleId: e.target.value }))}
               options={mockBundles.filter((b) => b.status === "active").map((b) => ({ value: b.id, label: b.name }))}
-              placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ¨ط·آ§ط¸â€ڑط·آ©..."
+              placeholder="اختر باقة..."
             />
           )}
           <div className="flex items-center gap-3 pt-2">
             <Button variant="primary" onClick={handleCreate} className="flex-1" disabled={!createForm.studentName.trim() || !createForm.courseId}>
-              ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍
+              تسجيل
             </Button>
             <Button variant="secondary" onClick={() => { setCreateModalOpen(false); setCreateForm(emptyCreateForm) }} className="flex-1">
-              ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ
+              إلغاء
             </Button>
           </div>
         </div>
@@ -469,10 +469,10 @@ export default function EnrollmentsPage() {
         isOpen={!!bulkEndTarget}
         onClose={() => setBulkEndTarget(null)}
         onConfirm={handleBulkEnd}
-        title="ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
-        message={bulkEndTarget ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ "${bulkEndTarget.studentName}" ط¸ظ¾ط¸ظ¹ ط¸ئ’ط¸ث†ط·آ±ط·آ³ "${bulkEndTarget.courseName}"ط·ع؛` : ""}
-        confirmText="ط·آ¥ط¸â€ ط¸â€،ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"
-        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
+        title="إنهاء التسجيل"
+        message={bulkEndTarget ? `هل أنت متأكد من إنهاء تسجيل "${bulkEndTarget.studentName}" ظپظٹ كورس "${bulkEndTarget.courseName}"طں` : ""}
+        confirmText="إنهاء التسجيل"
+        cancelText="إلغاء"
         variant="danger"
       />
     </div>

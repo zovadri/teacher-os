@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import {
@@ -51,7 +51,7 @@ export default function WaitingQueuePage() {
     const interval = setInterval(() => {
       const availableSeats = mockClassGroups.filter(g => g.enrolledCount < g.capacity).length
       if (availableSeats > 0 && mockWaitingStudents.some(w => w.status === "waiting")) {
-        toast.success(`ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ${availableSeats} ط¸â€¦ط¸â€ڑط·آ¹ط·آ¯ ط·آ´ط·آ§ط·ط›ط·آ± - ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€ `)
+        toast.success(`طھظ… العثور على ${availableSeats} مقعد شاغر - جاري إخطار الطلاب المنتظرين`)
       }
       setLastCheck(new Date())
     }, 30000)
@@ -70,14 +70,14 @@ export default function WaitingQueuePage() {
   const handleNotify = async (id: string) => {
     setNotifyingId(id)
     await new Promise(r => setTimeout(r, 800))
-    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ± ط¸â€‍ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
+    toast.success("طھظ… إرسال الإشعار للطالب بنجاح")
     setNotifyingId(null)
   }
 
   const handleEnroll = async (id: string) => {
     setEnrollingId(id)
     await new Promise(r => setTimeout(r, 1000))
-    toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©")
+    toast.success("طھظ… تسجيل الطالب ظپظٹ المجموعة")
     setEnrollingId(null)
   }
 
@@ -86,7 +86,7 @@ export default function WaitingQueuePage() {
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" description="ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€  ط¸ث†ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·ط›ط·آ±ط·آ©" />
+        <PageHeader title="إدارة قائمة الانتظار" description="متابعة الطلاب المنتظرين وإدارة المقاعد الشاغرة" />
         <ErrorState message={error} onRetry={handleRetry} />
       </div>
     )
@@ -95,20 +95,20 @@ export default function WaitingQueuePage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <PageHeader
-        title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±"
-        description="ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€  ط¸ث†ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ§ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·ط›ط·آ±ط·آ©"
+        title="إدارة قائمة الانتظار"
+        description="متابعة الطلاب المنتظرين وإدارة المقاعد الشاغرة"
         actions={
           <div className="flex items-center gap-3">
             <Button type="button"
 variant={autoNotify ? "success" : "outline"}
               size="sm"
               leftIcon={<HiOutlineBell className="w-4 h-4" />}
-              onClick={() => { setAutoNotify(!autoNotify); toast.success(autoNotify ? "ط·ع¾ط¸â€¦ ط·آ¥ط¸ظ¹ط¸â€ڑط·آ§ط¸ظ¾ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹" : "ط·ع¾ط¸â€¦ ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط¸ئ’ط¸â€‍ 30 ط·آ«ط·آ§ط¸â€ ط¸ظ¹ط·آ©") }}
+              onClick={() => { setAutoNotify(!autoNotify); toast.success(autoNotify ? "طھظ… إيقاف الإخطار التلقائي" : "طھظ… تفعيل الإخطار التلقائي كل 30 ثانية") }}
             >
-              {autoNotify ? "ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط¸â€¦ط¸ظ¾ط·آ¹ط¸â€‍" : "ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹"}
+              {autoNotify ? "الإخطار التلقائي مفعل" : "تفعيل الإخطار التلقائي"}
             </Button>
             <Button variant="ghost" size="sm" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={loadData}>
-              ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«
+              تحديث
             </Button>
           </div>
         }
@@ -118,10 +118,10 @@ variant={autoNotify ? "success" : "outline"}
         <StatsSkeleton count={4} />
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ظ¹ط¸â€ " value={stats.totalWaiting} icon={HiOutlineUsers} color="warning" />
-          <StatsCard title="ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ£ط¸ظ¹ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" value={stats.averageWaitDays} icon={HiOutlineClock} color="info" subtitle="ط¸ظ¹ط¸ث†ط¸â€¦" />
-          <StatsCard title="ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.notifiedToday} icon={HiOutlineBell} color="primary" />
-          <StatsCard title="ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.enrolledToday} icon={HiOutlineUserAdd} color="success" />
+          <StatsCard title="إجمالي المنتظرين" value={stats.totalWaiting} icon={HiOutlineUsers} color="warning" />
+          <StatsCard title="متوسط أيام الانتظار" value={stats.averageWaitDays} icon={HiOutlineClock} color="info" subtitle="يوم" />
+          <StatsCard title="طھظ… الإخطار اليوم" value={stats.notifiedToday} icon={HiOutlineBell} color="primary" />
+          <StatsCard title="طھظ… التسجيل اليوم" value={stats.enrolledToday} icon={HiOutlineUserAdd} color="success" />
         </div>
       )}
 
@@ -130,7 +130,7 @@ variant={autoNotify ? "success" : "outline"}
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>ط·ع¾ط¸ث†ط·آ²ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ­ط·آ³ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©</CardTitle>
+            <CardTitle>توزيع الطلاب حسب المجموعة</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -138,7 +138,7 @@ variant={autoNotify ? "success" : "outline"}
                 <div key={g.groupName} className="p-4 rounded-xl bg-surface-secondary border border-border text-center">
                   <p className="text-sm text-text-secondary mb-1">{g.groupName}</p>
                   <p className="text-2xl font-bold text-text">{g.count}</p>
-                  <p className="text-xs text-text-tertiary mt-1">ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±</p>
+                  <p className="text-xs text-text-tertiary mt-1">منتظر</p>
                 </div>
               ))}
             </div>
@@ -148,18 +148,18 @@ variant={autoNotify ? "success" : "outline"}
 
       <Card>
         <CardHeader>
-          <CardTitle>ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·ع¾ط·آ¸ط·آ±ط¸ث†ط¸â€ </CardTitle>
+          <CardTitle>الطلاب المنتظرون</CardTitle>
           <Badge variant="warning">{filtered.length}</Badge>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ·ط·آ§ط¸â€‍ط·آ¨..." />
+              <SearchInput value={search} onChange={setSearch} placeholder="بحث عن طالب..." />
             </div>
             <div className="flex gap-3">
               <Select
                 options={[
-                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾" },
+                  { value: "all", label: "جميع المجموعات" },
                   ...mockClassGroups.map(g => ({ value: g.id, label: g.name })),
                 ]}
                 value={groupFilter}
@@ -167,11 +167,11 @@ variant={autoNotify ? "success" : "outline"}
               />
               <Select
                 options={[
-                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" },
-                  { value: "waiting", label: "ط·آ¨ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" },
-                  { value: "offered", label: "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¶" },
-                  { value: "enrolled", label: "ط¸â€¦ط·آ³ط·آ¬ط¸â€‍" },
-                  { value: "cancelled", label: "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹" },
+                  { value: "all", label: "جميع الحالات" },
+                  { value: "waiting", label: "بانتظار" },
+                  { value: "offered", label: "طھظ… العرض" },
+                  { value: "enrolled", label: "مسجل" },
+                  { value: "cancelled", label: "ملغي" },
                 ]}
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
@@ -184,20 +184,20 @@ variant={autoNotify ? "success" : "outline"}
           ) : filtered.length === 0 ? (
             <EmptyState
               icon={HiOutlineUsers}
-              title="ط¸â€‍ط·آ§ ط¸ظ¹ط¸ث†ط·آ¬ط·آ¯ ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±"
-              description={search || groupFilter !== "all" || statusFilter !== "all" ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط¸â€‍ط¸â€‍ط·ع¾ط·آµط¸ظ¾ط¸ظ¹ط·آ©" : "ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ± ط¸ظ¾ط·آ§ط·آ±ط·ط›ط·آ© ط·آ­ط·آ§ط¸â€‍ط¸ظ¹ط·آ§ط¸â€¹"}
+              title="لا يوجد طلاب ظپظٹ قائمة الانتظار"
+              description={search || groupFilter !== "all" || statusFilter !== "all" ? "لا توجد نتائج للتصفية" : "قائمة الانتظار فارغة حالياً"}
             />
           ) : (
             <div className="overflow-x-auto rounded-xl border border-border">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-surface-secondary border-b border-border">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·آ¶ط¸â€¦ط·آ§ط¸â€¦</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
-                    <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">الطالب</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">المجموعة</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">تاريخ الانضمام</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">الأولوية</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">الحالة</th>
+                    <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">الإجراءات</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -210,12 +210,12 @@ variant={autoNotify ? "success" : "outline"}
                       <td className="px-4 py-3 text-text-secondary">{w.joinedAt.toLocaleDateString("ar-EG")}</td>
                       <td className="px-4 py-3">
                         <Badge variant={w.priority === 1 ? "error" : w.priority === 2 ? "warning" : "info"}>
-                          {w.priority === 1 ? "ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©" : w.priority === 2 ? "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·ط·آ©" : "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶ط·آ©"}
+                          {w.priority === 1 ? "عالية" : w.priority === 2 ? "متوسطة" : "منخفضة"}
                         </Badge>
                       </td>
                       <td className="px-4 py-3">
                         <Badge variant={w.status === "waiting" ? "warning" : w.status === "offered" ? "info" : w.status === "enrolled" ? "success" : "error"}>
-                          {w.status === "waiting" ? "ط·آ¨ط·آ§ط¸â€ ط·ع¾ط·آ¸ط·آ§ط·آ±" : w.status === "offered" ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¶" : w.status === "enrolled" ? "ط¸â€¦ط·آ³ط·آ¬ط¸â€‍" : "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹"}
+                          {w.status === "waiting" ? "بانتظار" : w.status === "offered" ? "طھظ… العرض" : w.status === "enrolled" ? "مسجل" : "ملغي"}
                         </Badge>
                       </td>
                       <td className="px-4 py-3">
@@ -227,7 +227,7 @@ variant={w.notified ? "secondary" : "outline"}
                             onClick={() => handleNotify(w.id)}
                             disabled={notifyingId === w.id}
                           >
-                            {w.notified ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ±" : "ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ±"}
+                            {w.notified ? "طھظ… الإخطار" : "إخطار"}
                           </Button>
                           <Button type="button"
 variant="success"
@@ -236,7 +236,7 @@ variant="success"
                             onClick={() => handleEnroll(w.id)}
                             disabled={enrollingId === w.id || w.status === "enrolled"}
                           >
-                            {w.status === "enrolled" ? "ط¸â€¦ط·آ³ط·آ¬ط¸â€‍" : "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍"}
+                            {w.status === "enrolled" ? "مسجل" : "تسجيل"}
                           </Button>
                         </div>
                       </td>
@@ -250,8 +250,8 @@ variant="success"
       </Card>
 
       <div className="text-center text-xs text-text-tertiary">
-        ط·آ¢ط·آ®ط·آ± ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«: {lastCheck.toLocaleTimeString("ar-EG")}
-        {autoNotify && " | ط·آ§ط¸â€‍ط·آ¥ط·آ®ط·آ·ط·آ§ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط¸â€ ط·آ´ط·آ· (ط¸ئ’ط¸â€‍ 30 ط·آ«ط·آ§ط¸â€ ط¸ظ¹ط·آ©)"}
+        آخر تحديث: {lastCheck.toLocaleTimeString("ar-EG")}
+        {autoNotify && " | الإخطار التلقائي نشط (كل 30 ثانية)"}
       </div>
     </div>
   )

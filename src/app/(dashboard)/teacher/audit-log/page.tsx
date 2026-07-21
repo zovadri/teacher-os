@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -22,15 +22,15 @@ import { cn, formatDate, formatRelativeTime } from "@/lib/utils"
 import { mockAuditLogs } from "@/lib/mock/data"
 
 const actionConfig: Record<string, { label: string; variant: "info" | "neutral" | "success" | "warning" | "error" | "premium" }> = {
-  login: { label: "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¯ط·آ®ط¸ث†ط¸â€‍", variant: "info" },
-  logout: { label: "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ®ط·آ±ط¸ث†ط·آ¬", variant: "neutral" },
-  create: { label: "ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ", variant: "success" },
-  edit: { label: "ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍", variant: "warning" },
-  delete: { label: "ط·آ­ط·آ°ط¸ظ¾", variant: "error" },
-  payment: { label: "ط·آ¯ط¸ظ¾ط·آ¹", variant: "premium" },
-  attendance: { label: "ط·آ­ط·آ¶ط¸ث†ط·آ±", variant: "info" },
-  exam: { label: "ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ", variant: "warning" },
-  homework: { label: "ط¸ث†ط·آ§ط·آ¬ط·آ¨", variant: "success" },
+  login: { label: "تسجيل دخول", variant: "info" },
+  logout: { label: "تسجيل خروج", variant: "neutral" },
+  create: { label: "إنشاء", variant: "success" },
+  edit: { label: "تعديل", variant: "warning" },
+  delete: { label: "حذف", variant: "error" },
+  payment: { label: "دفع", variant: "premium" },
+  attendance: { label: "حضور", variant: "info" },
+  exam: { label: "امتحان", variant: "warning" },
+  homework: { label: "واجب", variant: "success" },
 }
 
 const modules = [...new Set(mockAuditLogs.map((l) => l.module))]
@@ -73,13 +73,13 @@ export default function AuditLogPage() {
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
   const handleExport = () => {
-    toast.success("ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ³ط·آ¬ط¸â€‍ ط·آ¥ط¸â€‍ط¸â€° Excel")
+    toast.success("سيتم تصدير السجل إلى Excel")
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑ" subtitle="ط¸â€¦ط·آ±ط·آ§ط¸â€ڑط·آ¨ط·آ© ط¸â€ ط·آ´ط·آ§ط·آ· ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦" />
+        <DashboardHeader title="سجل التدقيق" subtitle="مراقبة نشاط النظام" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -87,10 +87,10 @@ export default function AuditLogPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑ" subtitle="ط¸â€¦ط·آ±ط·آ§ط¸â€ڑط·آ¨ط·آ© ط¸â€ ط·آ´ط·آ§ط·آ· ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦" />
+      <DashboardHeader title="سجل التدقيق" subtitle="مراقبة نشاط النظام" />
       <div className="flex justify-end">
         <Button variant="secondary" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleExport}>
-          ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±
+          تصدير
         </Button>
       </div>
 
@@ -98,44 +98,44 @@ export default function AuditLogPage() {
         <StatsSkeleton count={4} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾" value={stats.total} icon={HiOutlineClipboardList} color="primary" />
-          <StatsCard title="ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦" value={stats.today} icon={HiOutlineCalendar} color="info" />
-          <StatsCard title="ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾" value={actions.length} icon={HiOutlineFilter} color="warning" subtitle="ط¸â€ ط¸ث†ط·آ¹ ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ" />
-          <StatsCard title="ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ§ط·ع¾" value={modules.length} icon={HiOutlineShieldCheck} color="success" subtitle="ط¸ث†ط·آ­ط·آ¯ط·آ© ط¸â€ ط·آ¸ط·آ§ط¸â€¦" />
+          <StatsCard title="إجمالي السجلات" value={stats.total} icon={HiOutlineClipboardList} color="primary" />
+          <StatsCard title="سجلات اليوم" value={stats.today} icon={HiOutlineCalendar} color="info" />
+          <StatsCard title="الإجراءات" value={actions.length} icon={HiOutlineFilter} color="warning" subtitle="نوع إجراء" />
+          <StatsCard title="الوحدات" value={modules.length} icon={HiOutlineShieldCheck} color="success" subtitle="وحدة نظام" />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ§ط·آ·ط·آ§ط·ع¾</CardTitle>
+          <CardTitle>سجل النشاطات</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="p-4 border-b border-border flex flex-col md:flex-row gap-3">
             <div className="flex-1">
-              <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¨ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط·آ®ط·آ¯ط¸â€¦ ط·آ£ط¸ث† IP..." />
+              <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="بحث باسم المستخدم أو IP..." />
             </div>
             <div className="flex flex-wrap gap-2">
-              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾" }, ...actions.map((a) => ({ value: a, label: actionConfig[a]?.label || a }))]} value={actionFilter} onChange={(e) => { setActionFilter(e.target.value); setPage(1) }} />
-              <Select options={[{ value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ§ط·ع¾" }, ...modules.map((m) => ({ value: m, label: m }))]} value={moduleFilter} onChange={(e) => { setModuleFilter(e.target.value); setPage(1) }} />
+              <Select options={[{ value: "all", label: "جميع الإجراءات" }, ...actions.map((a) => ({ value: a, label: actionConfig[a]?.label || a }))]} value={actionFilter} onChange={(e) => { setActionFilter(e.target.value); setPage(1) }} />
+              <Select options={[{ value: "all", label: "جميع الوحدات" }, ...modules.map((m) => ({ value: m, label: m }))]} value={moduleFilter} onChange={(e) => { setModuleFilter(e.target.value); setPage(1) }} />
             </div>
           </div>
 
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineClipboardList} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ© ط¸â€‍ط¸â€‍ط·آ¨ط·آ­ط·آ«" />
+            <EmptyState icon={HiOutlineClipboardList} title="لا توجد سجلات" description="لم ظٹطھظ… العثور على سجلات مطابقة للبحث" />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط·آ®ط·آ¯ط¸â€¦</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ©</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">المستخدم</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الإجراء</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الوحدة</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الوصف</th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary">IP</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ¬ط¸â€،ط·آ§ط·آ²</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الجهاز</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">التاريخ</th>
                   </tr>
                 </thead>
                 <tbody>

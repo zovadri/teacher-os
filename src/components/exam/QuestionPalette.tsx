@@ -46,7 +46,7 @@ export function QuestionPalette({
         isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'
       )}>
         <div className="flex items-center justify-between mb-5">
-          <h3 className="font-bold text-sm text-gray-900 dark:text-gray-100">ظ‚ط§ط¦ظ…ط© ط§ظ„ط£ط³ط¦ظ„ط©</h3>
+          <h3 className="font-bold text-sm text-gray-900 dark:text-gray-100">قائمة الأسئلة</h3>
           <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 lg:hidden transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
@@ -54,7 +54,7 @@ export function QuestionPalette({
 
         <div className="mb-5 p-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-2 text-xs text-gray-500">
-            <span>طھظ…طھ ط§ظ„ط¥ط¬ط§ط¨ط©</span>
+            <span>طھظ…طھ الإجابة</span>
             <span className="font-bold text-emerald-600">{answeredCount}/{questions.length}</span>
           </div>
           <div className="h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
@@ -105,21 +105,21 @@ export function QuestionPalette({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded bg-emerald-500" />
-              <span className="text-gray-600 dark:text-gray-400">طھظ…طھ ط§ظ„ط¥ط¬ط§ط¨ط©</span>
+              <span className="text-gray-600 dark:text-gray-400">طھظ…طھ الإجابة</span>
             </div>
             <span className="font-medium text-emerald-600">{answeredCount}</span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded bg-amber-500" />
-              <span className="text-gray-600 dark:text-gray-400">ظ„ظ„ظ…ط±ط§ط¬ط¹ط©</span>
+              <span className="text-gray-600 dark:text-gray-400">للمراجعة</span>
             </div>
             <span className="font-medium text-amber-600">{flaggedCount}</span>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded bg-gray-300 dark:bg-gray-600" />
-              <span className="text-gray-600 dark:text-gray-400">ظ„ظ… ظٹطھظ… ط§ظ„ط¥ط¬ط§ط¨ط©</span>
+              <span className="text-gray-600 dark:text-gray-400">لم ظٹطھظ… الإجابة</span>
             </div>
             <span className="font-medium text-red-600">{unansweredCount}</span>
           </div>
@@ -143,7 +143,7 @@ export function QuestionPalette({
                 )}
               >
                 <Flag className={cn('w-3.5 h-3.5', isFlagged && 'fill-amber-500 text-amber-500')} />
-                <span>{isFlagged ? 'ط¥ظ„ط؛ط§ط، ط§ظ„طھظ…ظٹظٹط²' : 'طھظ…ظٹظٹط² ظ„ظ„ظ…ط±ط§ط¬ط¹ط©'} - ط³ط¤ط§ظ„ {i + 1}</span>
+                <span>{isFlagged ? 'إلغاء التمييز' : 'تمييز للمراجعة'} - سؤال {i + 1}</span>
               </button>
             )
           })}

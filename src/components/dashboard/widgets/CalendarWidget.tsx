@@ -7,18 +7,18 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { cn } from "@/lib/utils"
 
 const arabicMonths = [
-  "ظٹظ†ط§ظٹط±", "ظپط¨ط±ط§ظٹط±", "ظ…ط§ط±ط³", "ط¥ط¨ط±ظٹظ„", "ظ…ط§ظٹظˆ", "ظٹظˆظ†ظٹظˆ",
-  "ظٹظˆظ„ظٹظˆ", "ط£ط؛ط³ط·ط³", "ط³ط¨طھظ…ط¨ط±", "ط£ظƒطھظˆط¨ط±", "ظ†ظˆظپظ…ط¨ط±", "ط¯ظٹط³ظ…ط¨ط±",
+  "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+  "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر",
 ]
 
-const arabicDays = ["ط­", "ظ†", "ط«", "ط±", "ط®", "ط¬", "ط³"]
+const arabicDays = ["ح", "ن", "ط«", "ر", "ط®", "ج", "س"]
 
 const mockEvents = [
-  { day: 5, title: "ط§ظ…طھط­ط§ظ† ط§ظ„ظ†ط­ظˆ", type: "exam" },
-  { day: 12, title: "طھط³ظ„ظٹظ… ظˆط§ط¬ط¨", type: "homework" },
-  { day: 15, title: "ط§ط¬طھظ…ط§ط¹ ط£ظˆظ„ظٹط§ط، ط§ظ„ط£ظ…ظˆط±", type: "meeting" },
-  { day: 20, title: "ط§ط®طھط¨ط§ط± ط§ظ„ط¨ظ„ط§ط؛ط©", type: "exam" },
-  { day: 25, title: "ط¨ط¯ط§ظٹط© ط§ظ„ط¥ط¬ط§ط²ط©", type: "holiday" },
+  { day: 5, title: "امتحان النحو", type: "exam" },
+  { day: 12, title: "تسليم واجب", type: "homework" },
+  { day: 15, title: "اجتماع أولياء الأمور", type: "meeting" },
+  { day: 20, title: "اختبار البلاغة", type: "exam" },
+  { day: 25, title: "بداية الإجازة", type: "holiday" },
 ]
 
 const eventColors: Record<string, string> = {
@@ -63,7 +63,7 @@ export default function CalendarWidget() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>ط§ظ„طھظ‚ظˆظٹظ…</CardTitle>
+        <CardTitle>التقويم</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between mb-4">

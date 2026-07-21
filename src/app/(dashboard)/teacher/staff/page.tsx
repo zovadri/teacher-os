@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -37,25 +37,25 @@ const severityBadge: Record<string, "info" | "warning" | "error"> = {
 }
 
 const actionLabels: Record<string, string> = {
-  create: "ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ",
-  update: "ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ«",
-  delete: "ط·آ­ط·آ°ط¸ظ¾",
-  login: "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ¯ط·آ®ط¸ث†ط¸â€‍",
-  logout: "ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ ط·آ®ط·آ±ط¸ث†ط·آ¬",
-  export: "ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±",
-  approve: "ط¸â€¦ط¸ث†ط·آ§ط¸ظ¾ط¸â€ڑط·آ©",
-  reject: "ط·آ±ط¸ظ¾ط·آ¶",
+  create: "إنشاء",
+  update: "تحديث",
+  delete: "حذف",
+  login: "تسجيل دخول",
+  logout: "تسجيل خروج",
+  export: "تصدير",
+  approve: "موافقة",
+  reject: "رفض",
 }
 
 const resourceLabels: Record<string, string> = {
-  user: "ط¸â€¦ط·آ³ط·ع¾ط·آ®ط·آ¯ط¸â€¦",
-  course: "ط¸ئ’ط¸ث†ط·آ±ط·آ³",
-  exam: "ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ",
-  payment: "ط·آ¯ط¸ظ¾ط·آ¹ط·آ©",
-  subscription: "ط·آ§ط·آ´ط·ع¾ط·آ±ط·آ§ط¸ئ’",
-  certificate: "ط·آ´ط¸â€،ط·آ§ط·آ¯ط·آ©",
-  code: "ط¸ئ’ط¸ث†ط·آ¯",
-  setting: "ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾",
+  user: "مستخدم",
+  course: "كورس",
+  exam: "امتحان",
+  payment: "دفعة",
+  subscription: "اشتراك",
+  certificate: "شهادة",
+  code: "كود",
+  setting: "إعدادات",
 }
 
 interface PermissionTemplate {
@@ -68,19 +68,19 @@ interface PermissionTemplate {
 }
 
 const initialTemplates: PermissionTemplate[] = [
-  { id: "tmpl-1", name: "ط¸â€¦ط·آ¯ط¸ظ¹ط·آ± ط¸ئ’ط·آ§ط¸â€¦ط¸â€‍", description: "ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ© ط¸ئ’ط·آ§ط¸â€¦ط¸â€‍ط·آ© ط·آ¹ط¸â€‍ط¸â€° ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ£ط·آ¬ط·آ²ط·آ§ط·طŒ ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦", roleBadge: "ط¸â€¦ط·آ¯ط¸ظ¹ط·آ±", permissionCount: 27, permissions: {} },
-  { id: "tmpl-2", name: "ط¸â€¦ط·آ´ط·آ±ط¸ظ¾ ط·آ£ط¸ئ’ط·آ§ط·آ¯ط¸ظ¹ط¸â€¦ط¸ظ¹", description: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ث†ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾", roleBadge: "ط¸â€¦ط·آ´ط·آ±ط¸ظ¾", permissionCount: 18, permissions: {} },
-  { id: "tmpl-3", name: "ط¸â€¦ط·آ¯ط·آ®ط¸â€‍ ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾", description: "ط·آ¥ط·آ¯ط·آ®ط·آ§ط¸â€‍ ط¸ث†ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ث†ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", roleBadge: "ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾", permissionCount: 12, permissions: {} },
-  { id: "tmpl-4", name: "ط¸â€¦ط·آ´ط·آ±ط¸ظ¾ ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹", description: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ´ط·آ¤ط¸ث†ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ط·آ© ط¸ث†ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±", roleBadge: "ط¸â€¦ط·آ­ط·آ§ط·آ³ط·آ¨", permissionCount: 8, permissions: {} },
-  { id: "tmpl-5", name: "ط·آ¯ط·آ¹ط¸â€¦ ط¸ظ¾ط¸â€ ط¸ظ¹", description: "ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ§ط¸â€¦ط¸â€‍ ط¸â€¦ط·آ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ث†ط·آ§ط¸â€‍ط·آ¯ط·آ¹ط¸â€¦ ط·آ§ط¸â€‍ط¸ظ¾ط¸â€ ط¸ظ¹", roleBadge: "ط·آ¯ط·آ¹ط¸â€¦", permissionCount: 10, permissions: {} },
+  { id: "tmpl-1", name: "مدير كامل", description: "صلاحية كاملة على جميع أجزاء النظام", roleBadge: "مدير", permissionCount: 27, permissions: {} },
+  { id: "tmpl-2", name: "مشرف أكاديمي", description: "إدارة الطلاب والكورسات والامتحانات", roleBadge: "مشرف", permissionCount: 18, permissions: {} },
+  { id: "tmpl-3", name: "مدخل بيانات", description: "إدخال وتعديل بيانات الطلاب والكورسات", roleBadge: "موظف", permissionCount: 12, permissions: {} },
+  { id: "tmpl-4", name: "مشرف مالي", description: "إدارة الشؤون المالية والتقارير", roleBadge: "محاسب", permissionCount: 8, permissions: {} },
+  { id: "tmpl-5", name: "دعم فني", description: "التعامل مع الطلاب والدعم الفني", roleBadge: "دعم", permissionCount: 10, permissions: {} },
 ]
 
 const roleBadgeColors: Record<string, "primary" | "info" | "warning" | "success" | "neutral"> = {
-  "ط¸â€¦ط·آ¯ط¸ظ¹ط·آ±": "primary",
-  "ط¸â€¦ط·آ´ط·آ±ط¸ظ¾": "info",
-  "ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾": "warning",
-  "ط¸â€¦ط·آ­ط·آ§ط·آ³ط·آ¨": "success",
-  "ط·آ¯ط·آ¹ط¸â€¦": "neutral",
+  "مدير": "primary",
+  "مشرف": "info",
+  "موظف": "warning",
+  "محاسب": "success",
+  "دعم": "neutral",
 }
 
 export default function StaffPage() {
@@ -92,10 +92,10 @@ export default function StaffPage() {
   const [activeTab, setActiveTab] = useState("staff")
 
   const tabs = [
-    { id: "staff", label: "ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€ ", icon: <HiOutlineUsers className="w-4 h-4" />, count: mockStaffMembers.length },
-    { id: "templates", label: "ط¸â€ڑط¸ث†ط·آ§ط¸â€‍ط·آ¨ ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾", icon: <HiOutlineTemplate className="w-4 h-4" />, count: templates.length },
-    { id: "roles", label: "ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾", icon: <HiOutlineKey className="w-4 h-4" />, count: mockStaffPermissions.length },
-    { id: "audit", label: "ط·آ³ط·آ¬ط¸â€‍ ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ§ط·آ·ط·آ§ط·ع¾", icon: <HiOutlineClock className="w-4 h-4" />, count: mockAuditLogs.length },
+    { id: "staff", label: "الموظفين", icon: <HiOutlineUsers className="w-4 h-4" />, count: mockStaffMembers.length },
+    { id: "templates", label: "قوالب الصلاحيات", icon: <HiOutlineTemplate className="w-4 h-4" />, count: templates.length },
+    { id: "roles", label: "الصلاحيات", icon: <HiOutlineKey className="w-4 h-4" />, count: mockStaffPermissions.length },
+    { id: "audit", label: "سجل النشاطات", icon: <HiOutlineClock className="w-4 h-4" />, count: mockAuditLogs.length },
   ]
 
   const stats = useMemo(() => ({
@@ -114,18 +114,18 @@ export default function StaffPage() {
             : t
         )
       )
-      toast.success("طھظ… طھط­ط¯ظٹط« ط§ظ„ظ‚ط§ظ„ط¨ ط¨ظ†ط¬ط§ط­")
+      toast.success("طھظ… تحديث القالب بنجاح")
     } else {
       const newTemplate: PermissionTemplate = {
         id: `tmpl-${Date.now()}`,
         name: data.name,
         description: data.description,
-        roleBadge: "ظ…ط³طھط®ط¯ظ…",
+        roleBadge: "مستخدم",
         permissionCount: Object.keys(data.permissions).length,
         permissions: data.permissions,
       }
       setTemplates((prev) => [...prev, newTemplate])
-      toast.success("طھظ… ط¥ظ†ط´ط§ط، ط§ظ„ظ‚ط§ظ„ط¨ ط¨ظ†ط¬ط§ط­")
+      toast.success("طھظ… إنشاء القالب بنجاح")
     }
     setModalOpen(false)
     setEditingTemplate(null)
@@ -145,19 +145,19 @@ export default function StaffPage() {
     if (deleteConfirm) {
       setTemplates((prev) => prev.filter((t) => t.id !== deleteConfirm))
       setDeleteConfirm(null)
-      toast.success("طھظ… ط­ط°ظپ ط§ظ„ظ‚ط§ظ„ط¨ ط¨ظ†ط¬ط§ط­")
+      toast.success("طھظ… حذف القالب بنجاح")
     }
   }
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€  ط¸ث†ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" />
+      <DashboardHeader title="إدارة الموظفين والصلاحيات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€ " value={stats.total} icon={HiOutlineUsers} color="primary" />
-        <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ط¸ظ¹ط¸â€  ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ·ط¸ظ¹ط¸â€ " value={stats.active} icon={HiOutlineUserGroup} color="success" />
-        <StatsCard title="ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" value={stats.roles} icon={HiOutlineShieldCheck} color="info" />
-        <StatsCard title="ط¸â€ڑط¸ث†ط·آ§ط¸â€‍ط·آ¨ ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" value={templates.length} icon={HiOutlineTemplate} color="warning" />
+        <StatsCard title="إجمالي الموظفين" value={stats.total} icon={HiOutlineUsers} color="primary" />
+        <StatsCard title="الموظفين النشطين" value={stats.active} icon={HiOutlineUserGroup} color="success" />
+        <StatsCard title="أدوار الصلاحيات" value={stats.roles} icon={HiOutlineShieldCheck} color="info" />
+        <StatsCard title="قوالب الصلاحيات" value={templates.length} icon={HiOutlineTemplate} color="warning" />
       </div>
 
       <Tabs tabs={tabs} defaultTab="staff" onChange={setActiveTab}>
@@ -166,7 +166,7 @@ export default function StaffPage() {
             <TabPanel id="staff" activeTab={active}>
               <Table
                 columns={[
-                  { key: "name", header: "ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾", render: (s) => (
+                  { key: "name", header: "الموظف", render: (s) => (
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full bg-primary/10 overflow-hidden shrink-0">
                         <img src={s.avatar} alt="" className="w-full h-full object-cover" />
@@ -177,9 +177,9 @@ export default function StaffPage() {
                       </div>
                     </div>
                   )},
-                  { key: "jobTitle", header: "ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط¸â€¦ط¸â€° ط·آ§ط¸â€‍ط¸ث†ط·آ¸ط¸ظ¹ط¸ظ¾ط¸ظ¹" },
-                  { key: "role", header: "ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±" },
-                  { key: "permissions", header: "ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾", render: (s) => (
+                  { key: "jobTitle", header: "المسمى الوظيفي" },
+                  { key: "role", header: "الدور" },
+                  { key: "permissions", header: "الصلاحيات", render: (s) => (
                     <div className="flex flex-wrap gap-1">
                       {s.permissions.slice(0, 2).map((p: string) => {
                         const perm = mockPermissions.find((mp) => mp.key === p)
@@ -190,9 +190,9 @@ export default function StaffPage() {
                       )}
                     </div>
                   )},
-                  { key: "status", header: "ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©", render: (s) => (
+                  { key: "status", header: "الحالة", render: (s) => (
                     <Badge variant={s.status === "active" ? "success" : "warning"}>
-                      {s.status === "active" ? "ط¸â€ ط·آ´ط·آ·" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·"}
+                      {s.status === "active" ? "نشط" : "غير نشط"}
                     </Badge>
                   )},
                 ]}
@@ -202,9 +202,9 @@ export default function StaffPage() {
 
             <TabPanel id="templates" activeTab={active}>
               <div className="flex items-center justify-between mb-5">
-                <p className="text-sm text-text-secondary">ط¸â€ڑط¸ث†ط·آ§ط¸â€‍ط·آ¨ ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾ ط¸â€¦ط·آ³ط·آ¨ط¸â€ڑط·آ© ط·آ§ط¸â€‍ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ ط¸â€‍ط¸â€‍ط·آ§ط·آ³ط·ع¾ط·آ®ط·آ¯ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آ³ط·آ±ط¸ظ¹ط·آ¹</p>
+                <p className="text-sm text-text-secondary">قوالب صلاحيات مسبقة الإعداد للاستخدام السريع</p>
                 <Button variant="primary" size="sm" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={openCreate}>
-                  ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸â€ڑط·آ§ط¸â€‍ط·آ¨ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯
+                  إنشاء قالب جديد
                 </Button>
               </div>
               <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -227,15 +227,15 @@ export default function StaffPage() {
                       </CardHeader>
                       <CardContent className="flex-1">
                         <div className="flex items-center gap-2">
-                          <Badge variant="primary" size="sm">{template.permissionCount} ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ©</Badge>
+                          <Badge variant="primary" size="sm">{template.permissionCount} صلاحية</Badge>
                         </div>
                       </CardContent>
                       <CardFooter>
                         <Button variant="ghost" size="sm" leftIcon={<HiOutlinePencil className="w-4 h-4" />} onClick={() => openEdit(template)}>
-                          ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍
+                          تعديل
                         </Button>
                         <Button variant="ghost" size="sm" leftIcon={<HiOutlineTrash className="w-4 h-4" />} className="text-error hover:text-error" onClick={() => setDeleteConfirm(template.id)}>
-                          ط·آ­ط·آ°ط¸ظ¾
+                          حذف
                         </Button>
                       </CardFooter>
                     </Card>
@@ -257,23 +257,23 @@ export default function StaffPage() {
                         <CardDescription>{role.description}</CardDescription>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant="primary" size="sm">{role.permissions.length} ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ©</Badge>
+                        <Badge variant="primary" size="sm">{role.permissions.length} صلاحية</Badge>
                         <Badge variant={role.userCount > 0 ? "info" : "neutral"} size="sm">
-                          {role.userCount} ط¸â€¦ط·آ³ط·ع¾ط·آ®ط·آ¯ط¸â€¦
+                          {role.userCount} مستخدم
                         </Badge>
                       </div>
                     </CardHeader>
                     <CardContent>
                       {role.isSystem && (
                         <Alert variant="info" className="mb-3">
-                          ط·آ¯ط¸ث†ط·آ± ط¸â€ ط·آ¸ط·آ§ط¸â€¦ط¸ظ¹ ط¸â€‍ط·آ§ ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ط¸â€،
+                          دور نظامي لا يمكن تعديله
                         </Alert>
                       )}
                       <button type="button"
                         onClick={() => setExpandedRole(expandedRole === role.id ? null : role.id)}
                         className="flex items-center gap-1 text-sm text-primary hover:text-primary-dark transition-colors"
                       >
-                        {expandedRole === role.id ? "ط·آ¥ط·آ®ط¸ظ¾ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" : "ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾"}
+                        {expandedRole === role.id ? "إخفاء الصلاحيات" : "عرض الصلاحيات"}
                         {expandedRole === role.id ? <HiOutlineChevronUp className="w-4 h-4" /> : <HiOutlineChevronDown className="w-4 h-4" />}
                       </button>
                       <AnimatePresence>
@@ -306,22 +306,22 @@ export default function StaffPage() {
             <TabPanel id="audit" activeTab={active}>
               <Table
                 columns={[
-                  { key: "userName", header: "ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط·آ®ط·آ¯ط¸â€¦" },
-                  { key: "action", header: "ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ", render: (a) => (
+                  { key: "userName", header: "المستخدم" },
+                  { key: "action", header: "الإجراء", render: (a) => (
                     <Badge variant={a.action === "delete" || a.action === "reject" ? "error" : a.action === "create" || a.action === "approve" ? "success" : "info"}>
                       {actionLabels[a.action] || a.action}
                     </Badge>
                   )},
-                  { key: "resource", header: "ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ط·آ±ط·آ¯", render: (a) => (
+                  { key: "resource", header: "الموارد", render: (a) => (
                     <span className="text-sm text-text-secondary">{resourceLabels[a.resource] || a.resource}</span>
                   )},
-                  { key: "details", header: "ط·آ§ط¸â€‍ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍" },
-                  { key: "timestamp", header: "ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®", render: (a) => (
+                  { key: "details", header: "التفاصيل" },
+                  { key: "timestamp", header: "التاريخ", render: (a) => (
                     <span className="text-sm text-text-tertiary">{formatRelativeTime(a.timestamp)}</span>
                   )},
-                  { key: "severity", header: "ط·آ§ط¸â€‍ط·آ£ط¸â€،ط¸â€¦ط¸ظ¹ط·آ©", render: (a) => (
+                  { key: "severity", header: "الأهمية", render: (a) => (
                     <Badge variant={severityBadge[a.severity]} size="sm" dot>
-                      {a.severity === "info" ? "ط¸â€¦ط·آ¹ط¸â€‍ط¸ث†ط¸â€¦ط·آ§ط·ع¾" : a.severity === "warning" ? "ط·ع¾ط·آ­ط·آ°ط¸ظ¹ط·آ±" : "ط·آ®ط·آ·ط·آ£"}
+                      {a.severity === "info" ? "معلومات" : a.severity === "warning" ? "تحذير" : "خطأ"}
                     </Badge>
                   )},
                 ]}
@@ -343,10 +343,10 @@ export default function StaffPage() {
         isOpen={!!deleteConfirm}
         onClose={() => setDeleteConfirm(null)}
         onConfirm={handleDelete}
-        title="ط·آ­ط·آ°ط¸ظ¾ ط¸â€ڑط·آ§ط¸â€‍ط·آ¨ ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾"
-        message="ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ­ط·آ°ط¸ظ¾ ط¸â€ڑط·آ§ط¸â€‍ط·آ¨ ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾ط·ع؛ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ ط¸â€‍ط·آ§ ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·آ§ط·آ¬ط·آ¹ ط·آ¹ط¸â€ ط¸â€،."
-        confirmText="ط·آ­ط·آ°ط¸ظ¾"
-        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
+        title="حذف قالب الصلاحيات"
+        message="هل أنت متأكد من حذف قالب الصلاحيات؟ هذا الإجراء لا يمكن التراجع عنه."
+        confirmText="حذف"
+        cancelText="إلغاء"
         variant="danger"
       />
     </div>

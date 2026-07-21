@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import toast from "react-hot-toast"
@@ -26,14 +26,14 @@ import { cn } from "@/lib/utils"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 
 const sectionTypes = [
-  { value: "hero", label: "ط·آ´ط·آ±ط¸ظ¹ط·آ· ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ (Hero)" },
-  { value: "features", label: "ط¸â€¦ط¸â€¦ط¸ظ¹ط·آ²ط·آ§ط·ع¾" },
-  { value: "stats", label: "ط·آ¥ط·آ­ط·آµط·آ§ط·آ¦ط¸ظ¹ط·آ§ط·ع¾" },
-  { value: "courses", label: "ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" },
-  { value: "testimonials", label: "ط·آ¢ط·آ±ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ¹ط¸â€¦ط¸â€‍ط·آ§ط·طŒ" },
-  { value: "pricing", label: "ط·آ¨ط·آ§ط¸â€ڑط·آ§ط·ع¾" },
-  { value: "faq", label: "ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط·آ´ط·آ§ط·آ¦ط·آ¹ط·آ©" },
-  { value: "cta", label: "ط·آ¯ط·آ¹ط¸ث†ط·آ© ط¸â€‍ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ" },
+  { value: "hero", label: "شريط رئيسي (Hero)" },
+  { value: "features", label: "مميزات" },
+  { value: "stats", label: "إحصائيات" },
+  { value: "courses", label: "كورسات" },
+  { value: "testimonials", label: "آراء العملاء" },
+  { value: "pricing", label: "باقات" },
+  { value: "faq", label: "أسئلة شائعة" },
+  { value: "cta", label: "دعوة للإجراء" },
 ]
 
 export default function HomepageBuilderPage() {
@@ -95,22 +95,22 @@ export default function HomepageBuilderPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·ع¾ط¸ث†ط¸â€°", href: "/teacher/cms" }, { label: "ط·آ§ط¸â€‍ط·آµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ط·آ©" }]} />
-      <DashboardHeader title="ط·آ¨ط¸â€ ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ط·آ©" subtitle="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸ث†ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨ ط¸ث†ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ£ط¸â€ڑط·آ³ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ط·آ©" />
+      <Breadcrumb items={[{ label: "إدارة المحتوى", href: "/teacher/cms" }, { label: "الصفحة الرئيسية" }]} />
+      <DashboardHeader title="بناء الصفحة الرئيسية" subtitle="إضافة وترتيب وتعديل أقسام الصفحة الرئيسية" />
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Badge variant="info" size="md">{sections.length} ط·آ£ط¸â€ڑط·آ³ط·آ§ط¸â€¦</Badge>
+          <Badge variant="info" size="md">{sections.length} أقسام</Badge>
           <Badge variant={sections.filter((s) => s.active).length === sections.length ? "success" : "warning"} size="md">
-            {sections.filter((s) => s.active).length} ط¸â€ ط·آ´ط·آ·
+            {sections.filter((s) => s.active).length} نشط
           </Badge>
         </div>
         <div className="flex gap-2">
           <Button variant="secondary" leftIcon={<HiOutlineEye className="w-4 h-4" />} onClick={() => setShowPreview(true)}>
-            ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ©
+            معاينة
           </Button>
           <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-            ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€ڑط·آ³ط¸â€¦
+            إضافة قسم
           </Button>
         </div>
       </div>
@@ -137,7 +137,7 @@ export default function HomepageBuilderPage() {
                     </button>
                   </div>
                   <div className="w-10 h-10 rounded-xl bg-surface-secondary border border-border flex items-center justify-center text-lg">
-                    {section.type === "hero" ? "ظ‹ع؛عˆآ " : section.type === "features" ? "أ¢إ“آ¨" : section.type === "stats" ? "ظ‹ع؛â€œظ¹" : section.type === "courses" ? "ظ‹ع؛â€œع‘" : section.type === "testimonials" ? "ظ‹ع؛â€™آ¬" : section.type === "pricing" ? "ظ‹ع؛â€™آ°" : section.type === "faq" ? "أ¢â€Œâ€œ" : "ظ‹ع؛â€‌â€Œ"}
+                    {section.type === "hero" ? "ًںڈ " : section.type === "features" ? "أ¢إ“آ¨" : section.type === "stats" ? "ًں“ٹ" : section.type === "courses" ? "ًں“ڑ" : section.type === "testimonials" ? "💬" : section.type === "pricing" ? "ًں’°" : section.type === "faq" ? "â‌“" : "ًں”‌"}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -164,40 +164,40 @@ export default function HomepageBuilderPage() {
         </AnimatePresence>
       </div>
 
-      <Modal isOpen={!!editSection} onClose={() => setEditSection(null)} title="ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸â€ڑط·آ³ط¸â€¦" size="lg">
+      <Modal isOpen={!!editSection} onClose={() => setEditSection(null)} title="تعديل القسم" size="lg">
         {editSection && (
           <div className="space-y-4">
-            <Select label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€ڑط·آ³ط¸â€¦" options={sectionTypes} value={editSection.type} onChange={(e) => setEditSection({ ...editSection, type: e.target.value })} />
-            <Input label="ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€ " value={editSection.title} onChange={(e) => setEditSection({ ...editSection, title: e.target.value })} />
-            <Input label="ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹ط¸ظ¹" value={editSection?.subtitle ?? ""} onChange={(e) => setEditSection({ ...editSection, subtitle: e.target.value })} />
-            <Input label="ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ²ط·آ±" value={editSection?.cta ?? ""} onChange={(e) => setEditSection({ ...editSection, cta: e.target.value })} />
-            <Input label="ط·آµط¸ث†ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ®ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ© (URL)" value={editSection?.backgroundImage ?? ""} onChange={(e) => setEditSection({ ...editSection, backgroundImage: e.target.value })} />
+            <Select label="نوع القسم" options={sectionTypes} value={editSection.type} onChange={(e) => setEditSection({ ...editSection, type: e.target.value })} />
+            <Input label="العنوان" value={editSection.title} onChange={(e) => setEditSection({ ...editSection, title: e.target.value })} />
+            <Input label="العنوان الفرعي" value={editSection?.subtitle ?? ""} onChange={(e) => setEditSection({ ...editSection, subtitle: e.target.value })} />
+            <Input label="نص الزر" value={editSection?.cta ?? ""} onChange={(e) => setEditSection({ ...editSection, cta: e.target.value })} />
+            <Input label="صورة الخلفية (URL)" value={editSection?.backgroundImage ?? ""} onChange={(e) => setEditSection({ ...editSection, backgroundImage: e.target.value })} />
             <div className="flex items-center gap-3 pt-2">
               <Button variant="primary" className="flex-1" onClick={() => {
                 setSections((prev) => prev.map((s) => s.id === editSection.id ? editSection : s))
                 setEditSection(null)
-                toast.success("طھظ… ط­ظپط¸ ط§ظ„طµظپط­ط© ط§ظ„ط±ط¦ظٹط³ظٹط© ط¨ظ†ط¬ط§ط­")
-              }}>ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·ط›ط¸ظ¹ط¸ظ¹ط·آ±ط·آ§ط·ع¾</Button>
-              <Button variant="secondary" onClick={() => setEditSection(null)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+                toast.success("طھظ… حفظ الصفحة الرئيسية بنجاح")
+              }}>حفظ التغييرات</Button>
+              <Button variant="secondary" onClick={() => setEditSection(null)}>إلغاء</Button>
             </div>
           </div>
         )}
       </Modal>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€ڑط·آ³ط¸â€¦ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="إضافة قسم جديد" size="md">
         <div className="space-y-4">
-          <Select label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€ڑط·آ³ط¸â€¦" options={sectionTypes} value={newSection.type} onChange={(e) => setNewSection({ ...newSection, type: e.target.value })} />
-          <Input label="ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€ " value={newSection.title} onChange={(e) => setNewSection({ ...newSection, title: e.target.value })} />
-          <Input label="ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ¹ط¸ظ¹" value={newSection.subtitle} onChange={(e) => setNewSection({ ...newSection, subtitle: e.target.value })} />
-          <Input label="ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ²ط·آ±" value={newSection.cta} onChange={(e) => setNewSection({ ...newSection, cta: e.target.value })} />
+          <Select label="نوع القسم" options={sectionTypes} value={newSection.type} onChange={(e) => setNewSection({ ...newSection, type: e.target.value })} />
+          <Input label="العنوان" value={newSection.title} onChange={(e) => setNewSection({ ...newSection, title: e.target.value })} />
+          <Input label="العنوان الفرعي" value={newSection.subtitle} onChange={(e) => setNewSection({ ...newSection, subtitle: e.target.value })} />
+          <Input label="نص الزر" value={newSection.cta} onChange={(e) => setNewSection({ ...newSection, cta: e.target.value })} />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1" onClick={addSection}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ©</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <Button variant="primary" className="flex-1" onClick={addSection}>إضافة</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>
 
-      <Modal isOpen={showPreview} onClose={() => setShowPreview(false)} title="ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ§ط¸â€‍ط·آµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ط·آ©" size="xl">
+      <Modal isOpen={showPreview} onClose={() => setShowPreview(false)} title="معاينة الصفحة الرئيسية" size="xl">
         <div className="space-y-3">
           {sortedSections.filter((s) => s.active).map((s) => (
             <div key={s.id} className="p-6 rounded-xl bg-surface-secondary border border-border text-center">

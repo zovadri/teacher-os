@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import toast from "react-hot-toast"
@@ -32,39 +32,39 @@ const fontOptions = [
 ]
 
 const radiusOptions = [
-  { value: "rounded-none", label: "ط·آ¨ط·آ¯ط¸ث†ط¸â€  ط·ع¾ط·آ¯ط¸ث†ط¸ظ¹ط·آ±" },
-  { value: "rounded-sm", label: "ط·آµط·ط›ط¸ظ¹ط·آ±" },
-  { value: "rounded-md", label: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·" },
-  { value: "rounded-lg", label: "ط¸ئ’ط·آ¨ط¸ظ¹ط·آ±" },
-  { value: "rounded-xl", label: "ط¸ئ’ط·آ¨ط¸ظ¹ط·آ± ط·آ¬ط·آ¯ط·آ§ط¸â€¹" },
-  { value: "rounded-2xl", label: "ط·آ¶ط·آ®ط¸â€¦" },
-  { value: "rounded-full", label: "ط·آ¯ط·آ§ط·آ¦ط·آ±ط¸ظ¹ ط·آ¨ط·آ§ط¸â€‍ط¸ئ’ط·آ§ط¸â€¦ط¸â€‍" },
+  { value: "rounded-none", label: "بدون تدوير" },
+  { value: "rounded-sm", label: "صغير" },
+  { value: "rounded-md", label: "متوسط" },
+  { value: "rounded-lg", label: "كبير" },
+  { value: "rounded-xl", label: "كبير جداً" },
+  { value: "rounded-2xl", label: "ضخم" },
+  { value: "rounded-full", label: "دائري بالكامل" },
 ]
 
 const animationOptions = [
-  { value: "none", label: "ط·آ¨ط·آ¯ط¸ث†ط¸â€  ط·آ­ط·آ±ط¸ئ’ط·آ©" },
-  { value: "subtle", label: "ط·آ®ط¸ظ¾ط¸ظ¹ط¸ظ¾" },
-  { value: "smooth", label: "ط¸â€ ط·آ§ط·آ¹ط¸â€¦" },
-  { value: "dynamic", label: "ط·آ¯ط¸ظ¹ط¸â€ ط·آ§ط¸â€¦ط¸ظ¹ط¸ئ’ط¸ظ¹" },
-  { value: "playful", label: "ط¸â€¦ط·آ±ط·آ­" },
+  { value: "none", label: "بدون حركة" },
+  { value: "subtle", label: "ط®ظپظٹظپ" },
+  { value: "smooth", label: "ناعم" },
+  { value: "dynamic", label: "ديناميكي" },
+  { value: "playful", label: "مرح" },
 ]
 
 const layoutOptions = [
-  { value: "boxed", label: "ط¸â€¦ط·آ±ط·آ¨ط·آ¹ (Boxed)" },
-  { value: "fullwidth", label: "ط·آ¹ط·آ±ط·آ¶ ط¸ئ’ط·آ§ط¸â€¦ط¸â€‍" },
+  { value: "boxed", label: "مربع (Boxed)" },
+  { value: "fullwidth", label: "عرض كامل" },
 ]
 
 const headerOptions = [
-  { value: "default", label: "ط·آ§ط¸ظ¾ط·ع¾ط·آ±ط·آ§ط·آ¶ط¸ظ¹" },
-  { value: "glass", label: "ط·آ²ط·آ¬ط·آ§ط·آ¬ط¸ظ¹ (Glass)" },
-  { value: "solid", label: "ط·آµط¸â€‍ط·آ¨" },
-  { value: "transparent", label: "ط·آ´ط¸ظ¾ط·آ§ط¸ظ¾" },
+  { value: "default", label: "افتراضي" },
+  { value: "glass", label: "زجاجي (Glass)" },
+  { value: "solid", label: "صلب" },
+  { value: "transparent", label: "شفاف" },
 ]
 
 const footerOptions = [
-  { value: "light", label: "ط¸ظ¾ط·آ§ط·ع¾ط·آ­" },
-  { value: "dark", label: "ط·آ¯ط·آ§ط¸ئ’ط¸â€ " },
-  { value: "colored", label: "ط¸â€¦ط¸â€‍ط¸ث†ط¸â€ " },
+  { value: "light", label: "فاتح" },
+  { value: "dark", label: "داكن" },
+  { value: "colored", label: "ملون" },
 ]
 
 export default function ThemePage() {
@@ -79,7 +79,7 @@ export default function ThemePage() {
   const handleSave = () => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
-    toast.success("طھظ… ط­ظپط¸ ط§ظ„ظ…ط¸ظ‡ط± ط¨ظ†ط¬ط§ط­")
+    toast.success("طھظ… حفظ المظهر بنجاح")
   }
 
   const handleReset = () => {
@@ -88,8 +88,8 @@ export default function ThemePage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·ع¾ط¸ث†ط¸â€°", href: "/teacher/cms" }, { label: "ط·آ§ط¸â€‍ط¸â€¦ط·آ¸ط¸â€،ط·آ±" }]} />
-      <DashboardHeader title="ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ¸ط¸â€،ط·آ±" subtitle="ط·ع¾ط·آ®ط·آµط¸ظ¹ط·آµ ط·آ£ط¸â€‍ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·آµط·آ© ط¸ث†ط·آ§ط¸â€‍ط·آ®ط·آ·ط¸ث†ط·آ· ط¸ث†ط·آ§ط¸â€‍ط·آ£ط¸â€ ط¸â€¦ط·آ§ط·آ·" />
+      <Breadcrumb items={[{ label: "إدارة المحتوى", href: "/teacher/cms" }, { label: "المظهر" }]} />
+      <DashboardHeader title="إعدادات المظهر" subtitle="تخصيص ألوان المنصة والخطوط والأنماط" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
@@ -97,12 +97,12 @@ export default function ThemePage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineColorSwatch className="w-5 h-5 text-primary" />
-                <CardTitle>ط·آ§ط¸â€‍ط·آ£ط¸â€‍ط¸ث†ط·آ§ط¸â€ </CardTitle>
+                <CardTitle>الألوان</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-text mb-2">ط·آ§ط¸â€‍ط¸â€‍ط¸ث†ط¸â€  ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ§ط·آ³ط¸ظ¹</label>
+                <label className="block text-sm font-medium text-text mb-2">اللون الأساسي</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="color"
@@ -114,7 +114,7 @@ export default function ThemePage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-text mb-2">ط·آ§ط¸â€‍ط¸â€‍ط¸ث†ط¸â€  ط·آ§ط¸â€‍ط·آ«ط·آ§ط¸â€ ط¸ث†ط¸ظ¹</label>
+                <label className="block text-sm font-medium text-text mb-2">اللون الثانوي</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="color"
@@ -132,13 +132,13 @@ export default function ThemePage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlinePencil className="w-5 h-5 text-primary" />
-                <CardTitle>ط·آ§ط¸â€‍ط·آ®ط·آ·ط¸ث†ط·آ· ط¸ث†ط·آ§ط¸â€‍ط·آ£ط¸â€ ط¸â€¦ط·آ§ط·آ·</CardTitle>
+                <CardTitle>الخطوط والأنماط</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Select label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط·آ®ط·آ·" options={fontOptions} value={theme.fontFamily} onChange={(e) => setTheme({ ...theme, fontFamily: e.target.value })} />
-              <Select label="ط·ع¾ط·آ¯ط¸ث†ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ²ط¸ث†ط·آ§ط¸ظ¹ط·آ§" options={radiusOptions} value={theme.borderRadius} onChange={(e) => setTheme({ ...theme, borderRadius: e.target.value })} />
-              <Select label="ط¸â€ ط¸â€¦ط·آ· ط·آ§ط¸â€‍ط·آ­ط·آ±ط¸ئ’ط·آ©" options={animationOptions} value={theme.animationStyle} onChange={(e) => setTheme({ ...theme, animationStyle: e.target.value })} />
+              <Select label="نوع الخط" options={fontOptions} value={theme.fontFamily} onChange={(e) => setTheme({ ...theme, fontFamily: e.target.value })} />
+              <Select label="تدوير الزوايا" options={radiusOptions} value={theme.borderRadius} onChange={(e) => setTheme({ ...theme, borderRadius: e.target.value })} />
+              <Select label="نمط الحركة" options={animationOptions} value={theme.animationStyle} onChange={(e) => setTheme({ ...theme, animationStyle: e.target.value })} />
             </CardContent>
           </Card>
 
@@ -146,13 +146,13 @@ export default function ThemePage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlineTemplate className="w-5 h-5 text-primary" />
-                <CardTitle>ط·آ§ط¸â€‍ط·ع¾ط·آ®ط·آ·ط¸ظ¹ط·آ·</CardTitle>
+                <CardTitle>التخطيط</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Select label="ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·ع¾ط·آ®ط·آ·ط¸ظ¹ط·آ·" options={layoutOptions} value={theme.layoutWidth} onChange={(e) => setTheme({ ...theme, layoutWidth: e.target.value })} />
-              <Select label="ط¸â€ ط¸â€¦ط·آ· ط·آ§ط¸â€‍ط·آ±ط·آ£ط·آ³" options={headerOptions} value={theme.headerStyle} onChange={(e) => setTheme({ ...theme, headerStyle: e.target.value })} />
-              <Select label="ط¸â€ ط¸â€¦ط·آ· ط·آ§ط¸â€‍ط·ع¾ط·آ°ط¸ظ¹ط¸ظ¹ط¸â€‍" options={footerOptions} value={theme.footerStyle} onChange={(e) => setTheme({ ...theme, footerStyle: e.target.value })} />
+              <Select label="عرض التخطيط" options={layoutOptions} value={theme.layoutWidth} onChange={(e) => setTheme({ ...theme, layoutWidth: e.target.value })} />
+              <Select label="نمط الرأس" options={headerOptions} value={theme.headerStyle} onChange={(e) => setTheme({ ...theme, headerStyle: e.target.value })} />
+              <Select label="نمط التذييل" options={footerOptions} value={theme.footerStyle} onChange={(e) => setTheme({ ...theme, footerStyle: e.target.value })} />
             </CardContent>
           </Card>
         </div>
@@ -162,7 +162,7 @@ export default function ThemePage() {
             <CardHeader>
               <div className="flex items-center gap-2">
                 <HiOutlinePhotograph className="w-5 h-5 text-primary" />
-                <CardTitle>ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ­ط¸ظ¹ط·آ©</CardTitle>
+                <CardTitle>معاينة حية</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -184,7 +184,7 @@ export default function ThemePage() {
                 </div>
                 <div className="p-6 space-y-4 bg-white">
                   <div className="flex gap-3">
-                    {["ط·آ§ط¸â€‍ط·آ±ط·آ¦ط¸ظ¹ط·آ³ط¸ظ¹ط·آ©", "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", "ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾"].map((t) => (
+                    {["الرئيسية", "الكورسات", "الامتحانات"].map((t) => (
                       <span key={t} className="text-xs text-text-secondary hover:text-text cursor-pointer transition-colors">{t}</span>
                     ))}
                   </div>
@@ -192,22 +192,22 @@ export default function ThemePage() {
                     <div className="h-4 w-3/4 rounded-full bg-gray-200" style={{ borderRadius: previewStyle.borderRadius }} />
                     <div className="h-3 w-1/2 rounded-full bg-gray-100" style={{ borderRadius: previewStyle.borderRadius }} />
                     <div className="flex gap-2">
-                      <button type="button" className="px-4 py-2 text-white text-xs rounded-lg" style={{ backgroundColor: theme.primaryColor, borderRadius: previewStyle.borderRadius }}>ط·آ§ط·آ¨ط·آ¯ط·آ£ ط·آ§ط¸â€‍ط·آ¢ط¸â€ </button>
-                      <button type="button" className="px-4 py-2 text-xs rounded-lg border border-gray-200" style={{ borderRadius: previewStyle.borderRadius }}>ط·آ§ط·آ¹ط·آ±ط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ²ط¸ظ¹ط·آ¯</button>
+                      <button type="button" className="px-4 py-2 text-white text-xs rounded-lg" style={{ backgroundColor: theme.primaryColor, borderRadius: previewStyle.borderRadius }}>ابدأ الآن</button>
+                      <button type="button" className="px-4 py-2 text-xs rounded-lg border border-gray-200" style={{ borderRadius: previewStyle.borderRadius }}>اعرف المزيد</button>
                     </div>
                   </div>
                 </div>
                 <div className={`p-3 text-center text-xs ${theme.footerStyle === "dark" ? "bg-gray-900 text-white" : theme.footerStyle === "colored" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-600"}`}>
-                  ط¢آ© 2025 TeacherOS. ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط¸â€ڑط¸ث†ط¸â€ڑ ط¸â€¦ط·آ­ط¸ظ¾ط¸ث†ط·آ¸ط·آ©.
+                  ط¢آ© 2025 TeacherOS. جميع الحقوق محفوظة.
                 </div>
               </div>
             </CardContent>
             <CardFooter className="flex gap-3">
               <Button variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
-                {saved ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ­ط¸ظ¾ط·آ¸!" : "ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·ط›ط¸ظ¹ط¸ظ¹ط·آ±ط·آ§ط·ع¾"}
+                {saved ? "طھظ… الحفظ!" : "حفظ التغييرات"}
               </Button>
               <Button variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
-                ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€ 
+                إعادة تعيين
               </Button>
             </CardFooter>
           </Card>

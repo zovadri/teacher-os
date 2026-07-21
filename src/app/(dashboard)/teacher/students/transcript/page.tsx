@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -22,25 +22,25 @@ interface AttendanceSummary { present: number; absent: number; late: number; tot
 interface Certificate { id: string; name: string; date: string; serial: string }
 
 const students = [
-  { id: "s1", name: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=t1", grade: "ط§ظ„ط«ط§ظ„ط« ط§ظ„ط«ط§ظ†ظˆظٹ", gpa: "3.8", rank: 2, totalStudents: 45 },
-  { id: "s2", name: "ظ…ط±ظٹظ… ط£ط­ظ…ط¯", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=t2", grade: "ط§ظ„ط«ط§ظ„ط« ط§ظ„ط«ط§ظ†ظˆظٹ", gpa: "3.9", rank: 1, totalStudents: 45 },
-  { id: "s3", name: "ظٹظˆط³ظپ ط¹ظ„ظٹ", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=t3", grade: "ط§ظ„ط«ط§ظ„ط« ط§ظ„ط«ط§ظ†ظˆظٹ", gpa: "3.2", rank: 8, totalStudents: 45 },
+  { id: "s1", name: "أحمد محمد", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=t1", grade: "الثالث الثانوي", gpa: "3.8", rank: 2, totalStudents: 45 },
+  { id: "s2", name: "مريم أحمد", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=t2", grade: "الثالث الثانوي", gpa: "3.9", rank: 1, totalStudents: 45 },
+  { id: "s3", name: "يوسف علي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=t3", grade: "الثالث الثانوي", gpa: "3.2", rank: 8, totalStudents: 45 },
 ]
 
 const subjectsData: SubjectGrade[] = [
-  { name: "ط§ظ„ظƒظٹظ…ظٹط§ط،", exam1: 42, exam2: 38, final: 88, homework: 45, total: 213, max: 250 },
-  { name: "ط§ظ„ظپظٹط²ظٹط§ط،", exam1: 40, exam2: 42, final: 85, homework: 42, total: 209, max: 250 },
-  { name: "ط§ظ„ط±ظٹط§ط¶ظٹط§طھ", exam1: 45, exam2: 40, final: 90, homework: 48, total: 223, max: 250 },
-  { name: "ط§ظ„ط¹ط±ط¨ظٹ", exam1: 38, exam2: 36, final: 82, homework: 40, total: 196, max: 250 },
-  { name: "ط§ظ„ط¥ظ†ط¬ظ„ظٹط²ظٹ", exam1: 44, exam2: 46, final: 92, homework: 48, total: 230, max: 250 },
+  { name: "الكيمياء", exam1: 42, exam2: 38, final: 88, homework: 45, total: 213, max: 250 },
+  { name: "الفيزياء", exam1: 40, exam2: 42, final: 85, homework: 42, total: 209, max: 250 },
+  { name: "الرياضيات", exam1: 45, exam2: 40, final: 90, homework: 48, total: 223, max: 250 },
+  { name: "العربي", exam1: 38, exam2: 36, final: 82, homework: 40, total: 196, max: 250 },
+  { name: "الإنجليزي", exam1: 44, exam2: 46, final: 92, homework: 48, total: 230, max: 250 },
 ]
 
 const attendance: AttendanceSummary = { present: 42, absent: 2, late: 1, total: 45 }
 
 const certificates: Certificate[] = [
-  { id: "c1", name: "ط´ظ‡ط§ط¯ط© ط¥طھظ…ط§ظ… ط§ظ„ظƒظٹظ…ظٹط§ط، - ط§ظ„ظ…ط³طھظˆظ‰ ط§ظ„ظ…طھظ‚ط¯ظ…", date: "2026-06-15", serial: "TOS-2026-0001" },
-  { id: "c2", name: "ط´ظ‡ط§ط¯ط© ط§ظ„طھظپظˆظ‚ ظپظٹ ط§ظ„ظپظٹط²ظٹط§ط،", date: "2026-05-20", serial: "TOS-2026-0002" },
-  { id: "c3", name: "ط´ظ‡ط§ط¯ط© ط¥طھظ…ط§ظ… ط¯ظˆط±ط© ط§ظ„ط±ظٹط§ط¶ظٹط§طھ", date: "2026-04-10", serial: "TOS-2026-0003" },
+  { id: "c1", name: "شهادة إتمام الكيمياء - المستوى المتقدم", date: "2026-06-15", serial: "TOS-2026-0001" },
+  { id: "c2", name: "شهادة التفوق ظپظٹ الفيزياء", date: "2026-05-20", serial: "TOS-2026-0002" },
+  { id: "c3", name: "شهادة إتمام دورة الرياضيات", date: "2026-04-10", serial: "TOS-2026-0003" },
 ]
 
 const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.05 } } }
@@ -54,8 +54,8 @@ export default function TranscriptPage() {
 
   return (
     <div className="min-h-screen">
-      <Breadcrumb items={[{ label: "ط§ظ„ط·ظ„ط§ط¨", href: "/teacher/students" }, { label: "ظƒط´ظپ ط§ظ„ط¯ط±ط¬ط§طھ" }]} />
-      <DashboardHeader title="ظƒط´ظپ ط§ظ„ط¯ط±ط¬ط§طھ" subtitle="ط³ط¬ظ„ ط£ظƒط§ط¯ظٹظ…ظٹ ظƒط§ظ…ظ„ ظ„ظ„ط·ط§ظ„ط¨" />
+      <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: "كشف الدرجات" }]} />
+      <DashboardHeader title="كشف الدرجات" subtitle="سجل أكاديمي كامل للطالب" />
       <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="flex flex-wrap gap-2">
@@ -68,27 +68,27 @@ export default function TranscriptPage() {
 
           <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-4 gap-3">
             <Card><CardContent className="p-4"><div className="flex items-center gap-3"><img src={selected.avatar} alt="" className="w-12 h-12 rounded-full bg-surface-secondary" /><div><p className="text-sm font-bold text-text">{selected.name}</p><p className="text-xs text-text-tertiary">{selected.grade}</p></div></div></CardContent></Card>
-            <StatsCard title="ط§ظ„ظ…ط¹ط¯ظ„ ط§ظ„طھط±ط§ظƒظ…ظٹ" value={selected.gpa} icon={HiOutlineStar} color="primary" />
-            <StatsCard title="ط§ظ„طھط±طھظٹط¨" value={`#${selected.rank} ظ…ظ† ${selected.totalStudents}`} icon={HiOutlineChartBar} color="success" />
-            <StatsCard title="ط§ظ„ظ†ط³ط¨ط© ط§ظ„ظ…ط¦ظˆظٹط©" value={`${pct}%`} icon={HiOutlineAcademicCap} color="info" />
+            <StatsCard title="المعدل التراكمي" value={selected.gpa} icon={HiOutlineStar} color="primary" />
+            <StatsCard title="الترتيب" value={`#${selected.rank} من ${selected.totalStudents}`} icon={HiOutlineChartBar} color="success" />
+            <StatsCard title="النسبة المئوية" value={`${pct}%`} icon={HiOutlineAcademicCap} color="info" />
           </motion.div>
 
           <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <Card className="lg:col-span-2">
-              <CardHeader><CardTitle>ط§ظ„ط¯ط±ط¬ط§طھ ط­ط³ط¨ ط§ظ„ظ…ط§ط¯ط©</CardTitle></CardHeader>
+              <CardHeader><CardTitle>الدرجات حسب المادة</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-border">
-                        <th className="text-right py-2 px-2 text-xs text-text-tertiary">ط§ظ„ظ…ط§ط¯ط©</th>
-                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">ط§ظ…طھط­ط§ظ† ط£ظˆظ„</th>
-                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">ط§ظ…طھط­ط§ظ† ط«ط§ظ†ظٹ</th>
-                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">ظ†ظ‡ط§ط¦ظٹ</th>
-                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">ظˆط§ط¬ط¨ط§طھ</th>
-                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">ط§ظ„ظ…ط¬ظ…ظˆط¹</th>
-                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">ط§ظ„ظ†ط³ط¨ط©</th>
-                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">ط§ظ„ط­ط§ظ„ط©</th>
+                        <th className="text-right py-2 px-2 text-xs text-text-tertiary">المادة</th>
+                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">امتحان أول</th>
+                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">امتحان ثاني</th>
+                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">نهائي</th>
+                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">واجبات</th>
+                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">المجموع</th>
+                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">النسبة</th>
+                        <th className="text-center py-2 px-2 text-xs text-text-tertiary">الحالة</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -103,7 +103,7 @@ export default function TranscriptPage() {
                             <td className="py-2.5 px-2 text-center text-sm text-text">{sub.homework}</td>
                             <td className="py-2.5 px-2 text-center text-sm font-bold text-text">{sub.total}/{sub.max}</td>
                             <td className="py-2.5 px-2 text-center"><Progress value={p} size="sm" variant={p >= 80 ? "success" : p >= 60 ? "warning" : "error"} className="w-16" /></td>
-                            <td className="py-2.5 px-2 text-center">{p >= 60 ? <Badge variant="success" size="sm">ظ†ط§ط¬ط­</Badge> : <Badge variant="error" size="sm">ط±ط§ط³ط¨</Badge>}</td>
+                            <td className="py-2.5 px-2 text-center">{p >= 60 ? <Badge variant="success" size="sm">ناجح</Badge> : <Badge variant="error" size="sm">راسب</Badge>}</td>
                           </tr>
                         )
                       })}
@@ -113,13 +113,13 @@ export default function TranscriptPage() {
               </CardContent>
             </Card>
             <Card>
-              <CardHeader><CardTitle>ظ…ظ„ط®طµ ط§ظ„ط­ط¶ظˆط±</CardTitle></CardHeader>
+              <CardHeader><CardTitle>ملخص الحضور</CardTitle></CardHeader>
               <CardContent className="space-y-3">
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-3 rounded-xl bg-success/5 text-center"><p className="text-xs text-text-tertiary">ط­ط§ط¶ط±</p><p className="text-xl font-bold text-success">{attendance.present}</p></div>
-                  <div className="p-3 rounded-xl bg-error/5 text-center"><p className="text-xs text-text-tertiary">ط؛ط§ط¦ط¨</p><p className="text-xl font-bold text-error">{attendance.absent}</p></div>
-                  <div className="p-3 rounded-xl bg-warning/5 text-center"><p className="text-xs text-text-tertiary">ظ…طھط£ط®ط±</p><p className="text-xl font-bold text-warning">{attendance.late}</p></div>
-                  <div className="p-3 rounded-xl bg-primary/5 text-center"><p className="text-xs text-text-tertiary">ط§ظ„ط¥ط¬ظ…ط§ظ„ظٹ</p><p className="text-xl font-bold text-primary">{attendance.total}</p></div>
+                  <div className="p-3 rounded-xl bg-success/5 text-center"><p className="text-xs text-text-tertiary">حاضر</p><p className="text-xl font-bold text-success">{attendance.present}</p></div>
+                  <div className="p-3 rounded-xl bg-error/5 text-center"><p className="text-xs text-text-tertiary">غائب</p><p className="text-xl font-bold text-error">{attendance.absent}</p></div>
+                  <div className="p-3 rounded-xl bg-warning/5 text-center"><p className="text-xs text-text-tertiary">متأخر</p><p className="text-xl font-bold text-warning">{attendance.late}</p></div>
+                  <div className="p-3 rounded-xl bg-primary/5 text-center"><p className="text-xs text-text-tertiary">الإجمالي</p><p className="text-xl font-bold text-primary">{attendance.total}</p></div>
                 </div>
                 <Progress value={Math.round((attendance.present / attendance.total) * 100)} size="lg" variant="success" showLabel />
               </CardContent>
@@ -128,7 +128,7 @@ export default function TranscriptPage() {
 
           <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <Card>
-              <CardHeader><CardTitle>ظ…ظ‚ط§ط±ظ†ط© ط§ظ„ط¯ط±ط¬ط§طھ</CardTitle></CardHeader>
+              <CardHeader><CardTitle>مقارنة الدرجات</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={220}>
                   <BarChart data={subjectsData}>
@@ -144,7 +144,7 @@ export default function TranscriptPage() {
               </CardContent>
             </Card>
             <Card>
-              <CardHeader><CardTitle>ط±ظ…ط² ط§ظ„طھط­ظ‚ظ‚ ظ…ظ† ط§ظ„ط´ظ‡ط§ط¯ط©</CardTitle></CardHeader>
+              <CardHeader><CardTitle>رمز التحقق من الشهادة</CardTitle></CardHeader>
               <CardContent>
                 <div className="flex flex-col items-center justify-center p-6 bg-surface-secondary rounded-xl border border-border">
                   <div className="w-32 h-32 bg-white rounded-xl flex items-center justify-center mb-3 border">
@@ -153,9 +153,9 @@ export default function TranscriptPage() {
                       <p className="text-[10px] text-text-tertiary mt-1">QR Verification</p>
                     </div>
                   </div>
-                  <p className="text-xs text-text-tertiary mb-1">ط±ظ…ط² ط§ظ„طھط­ظ‚ظ‚:</p>
+                  <p className="text-xs text-text-tertiary mb-1">رمز التحقق:</p>
                   <p className="text-sm font-mono font-bold text-primary">TOS-VRFY-{selected.id.toUpperCase()}-2026</p>
-                  <button type="button" onClick={() => toast.success("طھظ… ظ†ط³ط® ط±ظ…ط² ط§ظ„طھط­ظ‚ظ‚")} className="mt-2 text-xs text-primary hover:underline">ظ†ط³ط® ط§ظ„ط±ظ…ط²</button>
+                  <button type="button" onClick={() => toast.success("طھظ… نسخ رمز التحقق")} className="mt-2 text-xs text-primary hover:underline">نسخ الرمز</button>
                 </div>
               </CardContent>
             </Card>
@@ -163,7 +163,7 @@ export default function TranscriptPage() {
 
           <motion.div variants={itemVariants}>
             <Card>
-              <CardHeader><div className="flex items-center justify-between"><CardTitle>ط§ظ„ط´ظ‡ط§ط¯ط§طھ ط§ظ„ظ…ط­طµظ„ ط¹ظ„ظٹظ‡ط§</CardTitle><div className="flex gap-2"><button type="button" onClick={() => toast.success("ط¬ط§ط±ظٹ طھط­ظ…ظٹظ„ ظƒط´ظپ ط§ظ„ط¯ط±ط¬ط§طھ...")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-border text-xs font-medium text-text hover:bg-surface-secondary transition-all"><HiOutlineDownload className="w-3.5 h-3.5" /> PDF</button><button type="button" onClick={() => toast.success("ط¬ط§ط±ظٹ ط§ظ„طھط­ظ…ظٹظ„ ظ„ظ„ط·ط¨ط§ط¹ط©...")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-border text-xs font-medium text-text hover:bg-surface-secondary transition-all"><HiOutlinePrinter className="w-3.5 h-3.5" /> ط·ط¨ط§ط¹ط©</button></div></div></CardHeader>
+              <CardHeader><div className="flex items-center justify-between"><CardTitle>الشهادات المحصل عليها</CardTitle><div className="flex gap-2"><button type="button" onClick={() => toast.success("جاري تحميل كشف الدرجات...")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-border text-xs font-medium text-text hover:bg-surface-secondary transition-all"><HiOutlineDownload className="w-3.5 h-3.5" /> PDF</button><button type="button" onClick={() => toast.success("جاري التحميل للطباعة...")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-border text-xs font-medium text-text hover:bg-surface-secondary transition-all"><HiOutlinePrinter className="w-3.5 h-3.5" /> طباعة</button></div></div></CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   {certificates.map((c) => (
@@ -172,7 +172,7 @@ export default function TranscriptPage() {
                         <HiOutlineStar className="w-8 h-8 text-primary" />
                         <div><p className="text-sm font-medium text-text">{c.name}</p><p className="text-xs text-text-tertiary">{c.date} - {c.serial}</p></div>
                       </div>
-                      <button type="button" onClick={() => toast.success("ط¬ط§ط±ظٹ طھط­ظ…ظٹظ„ ط§ظ„ط´ظ‡ط§ط¯ط©...")} className="px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-all"><HiOutlineDownload className="w-3.5 h-3.5 inline ml-1" />طھط­ظ…ظٹظ„</button>
+                      <button type="button" onClick={() => toast.success("جاري تحميل الشهادة...")} className="px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-all"><HiOutlineDownload className="w-3.5 h-3.5 inline ml-1" />تحميل</button>
                     </div>
                   ))}
                 </div>

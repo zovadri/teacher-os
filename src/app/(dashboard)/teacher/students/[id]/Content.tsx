@@ -51,10 +51,10 @@ const statusBadge: Record<string, "success" | "warning" | "error" | "neutral"> =
 }
 
 const statusLabels: Record<string, string> = {
-  active: "ظ†ط´ط·",
-  inactive: "ظ…ظ†ظ‚ط·ط¹",
-  suspended: "ظ…ط¹ظ„ظ‚",
-  expired: "ظ…ظƒطھظ…ظ„",
+  active: "نشط",
+  inactive: "منقطع",
+  suspended: "معلق",
+  expired: "مكتمل",
 }
 
 const attStatusBadge: Record<string, "success" | "error" | "warning" | "info"> = {
@@ -65,21 +65,21 @@ const attStatusBadge: Record<string, "success" | "error" | "warning" | "info"> =
 }
 
 const attStatusLabels: Record<string, string> = {
-  present: "ط­ط§ط¶ط±",
-  absent: "ط؛ط§ط¦ط¨",
-  late: "ظ…طھط£ط®ط±",
-  excused: "ظ…ط¹ط°ظˆط±",
+  present: "حاضر",
+  absent: "غائب",
+  late: "متأخر",
+  excused: "معذور",
 }
 
 const courseStatusLabels: Record<string, string> = {
-  in_progress: "ظ‚ظٹط¯ ط§ظ„طھظ†ظپظٹط°",
-  completed: "ظ…ظƒطھظ…ظ„",
-  not_started: "ظ„ظ… ظٹط¨ط¯ط£",
+  in_progress: "قيد التنفيذ",
+  completed: "مكتمل",
+  not_started: "لم يبدأ",
 }
 
 const certStatusLabels: Record<string, string> = {
-  active: "ظ†ط´ط·",
-  revoked: "ظ…ظ„ط؛ظٹ",
+  active: "نشط",
+  revoked: "ملغي",
 }
 
 const COLORS = ["#6366F1", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4"]
@@ -121,7 +121,7 @@ function getStudentExtended(studentId: string) {
       checkIn: i % 5 !== 3 ? `${8 + Math.floor(det() * 2)}:${String(Math.floor(det() * 60)).padStart(2, "0")}` : undefined,
       checkOut: i % 5 !== 3 ? `${10 + Math.floor(det() * 2)}:${String(Math.floor(det() * 60)).padStart(2, "0")}` : undefined,
         notes: "",
-        recordedBy: "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯",
+        recordedBy: "أحمد محمد",
       }))
 
   const attSummary = {
@@ -143,14 +143,14 @@ function getStudentExtended(studentId: string) {
     id: `act-${studentId}-${i}`,
     type: (["login", "exam", "course", "homework", "certificate", "payment"] as const)[i % 6],
     title: [
-      "طھط³ط¬ظٹظ„ ط¯ط®ظˆظ„ ط¥ظ„ظ‰ ط§ظ„ظ…ظ†طµط©",
-      `ط£ط¯ظ‰ ط§ظ…طھط­ط§ظ† ${mockCourses[i % mockCourses.length].title}`,
-      `ط§ط´طھط±ظƒ ظپظٹ ${mockCourses[i % mockCourses.length].title}`,
-      "ط³ظ„ظ… ظˆط§ط¬ط¨ ط§ظ„ظ†ط­ظˆ",
-      "ط­طµظ„ ط¹ظ„ظ‰ ط´ظ‡ط§ط¯ط© ط¥طھظ…ط§ظ…",
-      "طھظ… طھط¬ط¯ظٹط¯ ط§ظ„ط§ط´طھط±ط§ظƒ",
+      "تسجيل دخول إلى المنصة",
+      `أدى امتحان ${mockCourses[i % mockCourses.length].title}`,
+      `اشترك ظپظٹ ${mockCourses[i % mockCourses.length].title}`,
+      "سلم واجب النحو",
+      "حصل على شهادة إتمام",
+      "طھظ… تجديد الاشتراك",
     ][i % 6],
-    description: i % 2 === 0 ? undefined : "طھظپط§طµظٹظ„ ط¥ط¶ط§ظپظٹط© ط¹ظ† ط§ظ„ظ†ط´ط§ط·",
+    description: i % 2 === 0 ? undefined : "تفاصيل إضافية عن النشاط",
     date: new Date(Date.now() - 1000 * 60 * 60 * (i * 12)).toLocaleDateString("ar-EG"),
     time: new Date(Date.now() - 1000 * 60 * 60 * (i * 12)).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }),
   }))
@@ -166,10 +166,10 @@ function getStudentExtended(studentId: string) {
   }))
 
   const gradeData = [
-    { name: "ط§ظ…طھط­ط§ظ†ط§طھ", value: 40, fill: COLORS[0] },
-    { name: "ظˆط§ط¬ط¨ط§طھ", value: 25, fill: COLORS[1] },
-    { name: "ط­ط¶ظˆط±", value: 20, fill: COLORS[2] },
-    { name: "ظ…ط´ط§ط±ظƒط©", value: 15, fill: COLORS[3] },
+    { name: "امتحانات", value: 40, fill: COLORS[0] },
+    { name: "واجبات", value: 25, fill: COLORS[1] },
+    { name: "حضور", value: 20, fill: COLORS[2] },
+    { name: "مشاركة", value: 15, fill: COLORS[3] },
   ]
 
   return { courses, exams, attendance, attSummary, certificates, activities, devices, gradeData }
@@ -186,28 +186,28 @@ export default function StudentDetailPage() {
   if (!student || !extended) {
     return (
       <div className="p-4 md:p-6 text-center py-20">
-        <h2 className="text-xl font-bold text-text mb-2">ط§ظ„ط·ط§ظ„ط¨ ط؛ظٹط± ظ…ظˆط¬ظˆط¯</h2>
-        <p className="text-sm text-text-tertiary mb-4">ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط§ظ„ط·ط§ظ„ط¨ ط§ظ„ظ…ط·ظ„ظˆط¨</p>
+        <h2 className="text-xl font-bold text-text mb-2">الطالب غير موجود</h2>
+        <p className="text-sm text-text-tertiary mb-4">لم ظٹطھظ… العثور على الطالب المطلوب</p>
         <Link href="/teacher/students">
-          <Button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">ط§ظ„ط¹ظˆط¯ط© ظ„ظ„ط·ظ„ط§ط¨</Button>
+          <Button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">العودة للطلاب</Button>
         </Link>
       </div>
     )
   }
 
   const tabs = [
-    { id: "summary", label: "ط§ظ„ظ…ظ„ط®طµ" },
-    { id: "courses", label: "ط§ظ„ظƒظˆط±ط³ط§طھ", count: extended.courses.length },
-    { id: "exams", label: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", count: extended.exams.length },
-    { id: "attendance", label: "ط§ظ„ط­ط¶ظˆط±" },
-    { id: "certificates", label: "ط§ظ„ط´ظ‡ط§ط¯ط§طھ", count: extended.certificates.length },
-    { id: "activity", label: "ط§ظ„ظ†ط´ط§ط·" },
-    { id: "devices", label: "ط§ظ„ط£ط¬ظ‡ط²ط©", count: extended.devices.length },
+    { id: "summary", label: "الملخص" },
+    { id: "courses", label: "الكورسات", count: extended.courses.length },
+    { id: "exams", label: "الامتحانات", count: extended.exams.length },
+    { id: "attendance", label: "الحضور" },
+    { id: "certificates", label: "الشهادات", count: extended.certificates.length },
+    { id: "activity", label: "النشاط" },
+    { id: "devices", label: "الأجهزة", count: extended.devices.length },
   ]
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط§ظ„ط·ظ„ط§ط¨", href: "/teacher/students" }, { label: student.name }]} />
+      <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: student.name }]} />
 
       <div className="bg-surface rounded-xl border border-border p-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -231,10 +231,10 @@ export default function StudentDetailPage() {
           </div>
           <div className="flex items-center gap-2">
             <Button className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors">
-              <HiOutlineMail size={16} /> ط±ط³ط§ظ„ط©
+              <HiOutlineMail size={16} /> رسالة
             </Button>
             <Button className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-border text-text-secondary text-sm hover:bg-surface-secondary transition-colors">
-              <HiOutlinePrinter size={16} /> ط·ط¨ط§ط¹ط© ط§ظ„ط¨ظٹط§ظ†ط§طھ
+              <HiOutlinePrinter size={16} /> طباعة البيانات
             </Button>
             <Button onClick={() => setShowQR(true)} className="p-2 rounded-xl border border-border text-text-secondary hover:bg-surface-secondary transition-colors" title="QR Code">
               <HiOutlineQrcode size={18} />
@@ -248,9 +248,9 @@ export default function StudentDetailPage() {
                   <div className="fixed inset-0 z-10" onClick={() => setShowMoreMenu(false)} />
                   <div className="absolute left-0 top-full mt-1 w-40 bg-surface border border-border rounded-xl shadow-lg z-20 py-1 overflow-hidden">
                     {[
-                      { label: "طھط¹ظ„ظٹظ‚", icon: HiOutlinePause, color: "text-warning" },
-                      { label: "ط­ط¸ط±", icon: HiOutlineBan, color: "text-error" },
-                      { label: "ط­ط°ظپ", icon: HiOutlineTrash, color: "text-error" },
+                      { label: "تعليق", icon: HiOutlinePause, color: "text-warning" },
+                      { label: "حظر", icon: HiOutlineBan, color: "text-error" },
+                      { label: "حذف", icon: HiOutlineTrash, color: "text-error" },
                     ].map((item) => (
                       <Button key={item.label}
                         onClick={() => setShowMoreMenu(false)}
@@ -273,19 +273,19 @@ export default function StudentDetailPage() {
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-text">{student.level}</p>
-            <p className="text-xs text-text-tertiary mt-0.5">ط§ظ„ظ…ط³طھظˆظ‰</p>
+            <p className="text-xs text-text-tertiary mt-0.5">المستوى</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-text">{student.streak}</p>
-            <p className="text-xs text-text-tertiary mt-0.5">ط£ظٹط§ظ… ط§ظ„طھطھط§ط¨ط¹</p>
+            <p className="text-xs text-text-tertiary mt-0.5">أيام التتابع</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-text">{extended.courses.length}</p>
-            <p className="text-xs text-text-tertiary mt-0.5">ط§ظ„ظƒظˆط±ط³ط§طھ</p>
+            <p className="text-xs text-text-tertiary mt-0.5">الكورسات</p>
           </div>
           <div className="text-center">
               <p className="text-2xl font-bold text-text text-success">{Math.floor(det() * 20) + 75}%</p>
-            <p className="text-xs text-text-tertiary mt-0.5">ط§ظ„طھظ‚ظٹظٹظ… ط§ظ„ط¹ط§ظ…</p>
+            <p className="text-xs text-text-tertiary mt-0.5">التقييم العام</p>
           </div>
         </div>
       </div>
@@ -296,16 +296,16 @@ export default function StudentDetailPage() {
             <TabPanel id="summary" activeTab={activeTab}>
               <div className="space-y-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <StatsCard title="ظ†ط³ط¨ط© ط§ظ„ط­ط¶ظˆط±" value={`${extended.attSummary.present > 0 ? Math.round((extended.attSummary.present / extended.attSummary.total) * 100) : 90}%`} icon={HiOutlineCalendar} color="primary" />
-                  <StatsCard title="ظ…طھظˆط³ط· ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ" value={`${Math.floor(det() * 15) + 75}%`} icon={HiOutlineChartBar} color="success" />
-                  <StatsCard title="ظ…طھظˆط³ط· ط§ظ„ظˆط§ط¬ط¨ط§طھ" value={`${Math.floor(det() * 15) + 80}%`} icon={HiOutlineClipboardCheck} color="warning" />
-                  <StatsCard title="ط§ظ„طھط±طھظٹط¨" value={`#${(Math.floor(det() * 20) + 1)}`} icon={HiOutlineStar} color="premium" subtitle="ظ…ظ† ط¨ظٹظ† 50 ط·ط§ظ„ط¨" />
+                  <StatsCard title="نسبة الحضور" value={`${extended.attSummary.present > 0 ? Math.round((extended.attSummary.present / extended.attSummary.total) * 100) : 90}%`} icon={HiOutlineCalendar} color="primary" />
+                  <StatsCard title="متوسط الامتحانات" value={`${Math.floor(det() * 15) + 75}%`} icon={HiOutlineChartBar} color="success" />
+                  <StatsCard title="متوسط الواجبات" value={`${Math.floor(det() * 15) + 80}%`} icon={HiOutlineClipboardCheck} color="warning" />
+                  <StatsCard title="الترتيب" value={`#${(Math.floor(det() * 20) + 1)}`} icon={HiOutlineStar} color="premium" subtitle="من بين 50 طالب" />
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-6">
                   <Card>
                     <CardHeader>
-                      <CardTitle>طھظˆط²ظٹط¹ ط§ظ„ط¯ط±ط¬ط§طھ</CardTitle>
+                      <CardTitle>توزيع الدرجات</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div dir="ltr" className="h-56">
@@ -333,7 +333,7 @@ export default function StudentDetailPage() {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle>ط¢ط®ط± ط§ظ„ظ†ط´ط§ط·ط§طھ</CardTitle>
+                      <CardTitle>آخر النشاطات</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <StudentTimeline items={extended.activities.slice(0, 5)} />
@@ -343,7 +343,7 @@ export default function StudentDetailPage() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>ط§ظ„ظƒظˆط±ط³ط§طھ ط§ظ„ط­ط§ظ„ظٹط©</CardTitle>
+                    <CardTitle>الكورسات الحالية</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {extended.courses.filter(c => c.status === "in_progress").slice(0, 3).map((course) => (
@@ -366,26 +366,26 @@ export default function StudentDetailPage() {
             <TabPanel id="courses" activeTab={activeTab}>
               <Card>
                 <CardHeader>
-                  <CardTitle>ط§ظ„ظƒظˆط±ط³ط§طھ ط§ظ„ظ…ط³ط¬ظ„ ظپظٹظ‡ط§</CardTitle>
+                  <CardTitle>الكورسات المسجل فيها</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Table
                     columns={[
-                      { key: "name", header: "ط§ط³ظ… ط§ظ„ظƒظˆط±ط³" },
-                      { key: "progress", header: "ط§ظ„طھظ‚ط¯ظ…", render: (c) => (
+                      { key: "name", header: "اسم الكورس" },
+                      { key: "progress", header: "التقدم", render: (c) => (
                         <div className="w-32">
                           <Progress value={c.progress} size="sm" variant={c.progress >= 80 ? "success" : "primary"} showLabel />
                         </div>
                       )},
-                      { key: "grade", header: "ط§ظ„ط¯ط±ط¬ط©", render: (c) => (
+                      { key: "grade", header: "الدرجة", render: (c) => (
                         <span className="font-medium text-text">{c.grade}%</span>
                       )},
-                      { key: "status", header: "ط§ظ„ط­ط§ظ„ط©", render: (c) => (
+                      { key: "status", header: "الحالة", render: (c) => (
                         <Badge variant={c.status === "completed" ? "success" : c.status === "in_progress" ? "primary" : "neutral"}>
                           {courseStatusLabels[c.status]}
                         </Badge>
                       )},
-                      { key: "enrolledDate", header: "طھط§ط±ظٹط® ط§ظ„طھط³ط¬ظٹظ„", render: (c) => (
+                      { key: "enrolledDate", header: "تاريخ التسجيل", render: (c) => (
                         <span className="text-sm text-text-secondary">{c.enrolledDate.toLocaleDateString("ar-EG")}</span>
                       )},
                       { key: "actions", header: "", render: (c) => (
@@ -405,26 +405,26 @@ export default function StudentDetailPage() {
             <TabPanel id="exams" activeTab={activeTab}>
               <Card>
                 <CardHeader>
-                  <CardTitle>ظ†طھط§ط¦ط¬ ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ</CardTitle>
+                  <CardTitle>نتائج الامتحانات</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Table
                     columns={[
-                      { key: "name", header: "ط§ظ„ط§ظ…طھط­ط§ظ†" },
-                      { key: "date", header: "ط§ظ„طھط§ط±ظٹط®", render: (e) => (
+                      { key: "name", header: "الامتحان" },
+                      { key: "date", header: "التاريخ", render: (e) => (
                         <span className="text-sm text-text-secondary">{e.date.toLocaleDateString("ar-EG")}</span>
                       )},
-                      { key: "grade", header: "ط§ظ„ط¯ط±ط¬ط©", render: (e) => (
+                      { key: "grade", header: "الدرجة", render: (e) => (
                         <span className="font-medium">{e.grade} <span className="text-text-tertiary text-xs">/ {e.totalGrade}</span></span>
                       )},
-                      { key: "percentage", header: "ط§ظ„ظ†ط³ط¨ط©", render: (e) => (
+                      { key: "percentage", header: "النسبة", render: (e) => (
                         <span className={cn("font-medium", e.percentage >= 75 ? "text-success" : e.percentage >= 50 ? "text-warning" : "text-error")}>
                           {e.percentage}%
                         </span>
                       )},
-                      { key: "result", header: "ط§ظ„ظ†طھظٹط¬ط©", render: (e) => (
+                      { key: "result", header: "النتيجة", render: (e) => (
                         <Badge variant={e.result === "pass" ? "success" : "error"}>
-                          {e.result === "pass" ? "ظ†ط§ط¬ط­" : "ط±ط§ط³ط¨"}
+                          {e.result === "pass" ? "ناجح" : "راسب"}
                         </Badge>
                       )},
                       { key: "actions", header: "", render: (e) => (
@@ -444,26 +444,26 @@ export default function StudentDetailPage() {
             <TabPanel id="attendance" activeTab={activeTab}>
               <div className="space-y-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط­طµطµ" value={extended.attSummary.total} icon={HiOutlineCalendar} color="primary" />
-                  <StatsCard title="ط­ط§ط¶ط±" value={extended.attSummary.present} icon={HiOutlineCheck} color="success" />
-                  <StatsCard title="ط؛ط§ط¦ط¨" value={extended.attSummary.absent} icon={HiOutlineBan} color="error" />
-                  <StatsCard title="ظ…طھط£ط®ط±" value={extended.attSummary.late} icon={HiOutlineClock} color="warning" />
+                  <StatsCard title="إجمالي الحصص" value={extended.attSummary.total} icon={HiOutlineCalendar} color="primary" />
+                  <StatsCard title="حاضر" value={extended.attSummary.present} icon={HiOutlineCheck} color="success" />
+                  <StatsCard title="غائب" value={extended.attSummary.absent} icon={HiOutlineBan} color="error" />
+                  <StatsCard title="متأخر" value={extended.attSummary.late} icon={HiOutlineClock} color="warning" />
                 </div>
                 <Card>
                   <CardHeader>
-                    <CardTitle>ط³ط¬ظ„ ط§ظ„ط­ط¶ظˆط±</CardTitle>
+                    <CardTitle>سجل الحضور</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <Table
                       columns={[
-                        { key: "date", header: "ط§ظ„طھط§ط±ظٹط®", render: (a) => (
+                        { key: "date", header: "التاريخ", render: (a) => (
                           <span className="text-sm text-text-secondary">{a.date.toLocaleDateString("ar-EG")}</span>
                         )},
-                        { key: "courseName", header: "ط§ظ„ظƒظˆط±ط³" },
-                        { key: "status", header: "ط§ظ„ط­ط§ظ„ط©", render: (a) => (
+                        { key: "courseName", header: "الكورس" },
+                        { key: "status", header: "الحالة", render: (a) => (
                           <Badge variant={attStatusBadge[a.status]}>{attStatusLabels[a.status]}</Badge>
                         )},
-                        { key: "checkIn", header: "ظˆظ‚طھ ط§ظ„ط­ط¶ظˆط±", render: (a) => (
+                        { key: "checkIn", header: "وقت الحضور", render: (a) => (
                           <span className="text-sm text-text-secondary" dir="ltr">{a.checkIn || "-"}</span>
                         )},
                       ]}
@@ -479,8 +479,8 @@ export default function StudentDetailPage() {
                 <Card>
                   <CardContent>
                     <div className="text-center py-12 text-text-tertiary">
-                      <p className="text-lg font-medium mb-1">ظ„ط§ طھظˆط¬ط¯ ط´ظ‡ط§ط¯ط§طھ</p>
-                      <p className="text-sm">ظ„ظ… ظٹط­طµظ„ ط§ظ„ط·ط§ظ„ط¨ ط¹ظ„ظ‰ ط£ظٹ ط´ظ‡ط§ط¯ط§طھ ط­طھظ‰ ط§ظ„ط¢ظ†</p>
+                      <p className="text-lg font-medium mb-1">لا توجد شهادات</p>
+                      <p className="text-sm">لم يحصل الطالب على ط£ظٹ شهادات حتى الآن</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -499,12 +499,12 @@ export default function StudentDetailPage() {
                         </div>
                         <div>
                           <p className="font-medium text-text">{cert.courseName}</p>
-                          <p className="text-xs text-text-secondary mt-0.5">طµط§ط¯ط±ط© ظپظٹ {cert.issuedAt.toLocaleDateString("ar-EG")}</p>
+                          <p className="text-xs text-text-secondary mt-0.5">صادرة ظپظٹ {cert.issuedAt.toLocaleDateString("ar-EG")}</p>
                         </div>
                         <div className="flex items-center justify-between pt-2 border-t border-border">
                           <span className="text-sm font-bold text-text">{cert.grade}%</span>
                           <Button className="flex items-center gap-1 text-xs text-primary hover:text-primary-dark transition-colors">
-                            <HiOutlineDownload size={14} /> طھط­ظ…ظٹظ„
+                            <HiOutlineDownload size={14} /> تحميل
                           </Button>
                         </div>
                       </CardContent>
@@ -517,10 +517,10 @@ export default function StudentDetailPage() {
             <TabPanel id="activity" activeTab={activeTab}>
               <Card>
                 <CardHeader>
-                  <CardTitle>ط§ظ„ظ†ط´ط§ط·ط§طھ</CardTitle>
+                  <CardTitle>النشاطات</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <Timeline events={extended.activities.map((a: Record<string, unknown>) => ({ id: a.id || a, title: a.action || a.title || "ظ†ط´ط§ط·", date: a.date || new Date(), description: a.details || a.description }))} />
+                  <Timeline events={extended.activities.map((a: Record<string, unknown>) => ({ id: a.id || a, title: a.action || a.title || "نشاط", date: a.date || new Date(), description: a.details || a.description }))} />
                 </CardContent>
               </Card>
             </TabPanel>
@@ -528,26 +528,26 @@ export default function StudentDetailPage() {
             <TabPanel id="devices" activeTab={activeTab}>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-text-secondary">{extended.devices.length} ط¬ظ‡ط§ط² ظ…ط³ط¬ظ„</p>
+                  <p className="text-sm text-text-secondary">{extended.devices.length} جهاز مسجل</p>
                   <Button className="flex items-center gap-1.5 px-4 py-2 text-sm text-error border border-error/30 rounded-xl hover:bg-error/5 transition-colors">
-                    <HiOutlineTrash size={16} /> ط¥ظ†ظ‡ط§ط، ط¬ظ…ظٹط¹ ط§ظ„ط¬ظ„ط³ط§طھ
+                    <HiOutlineTrash size={16} /> إنهاء جميع الجلسات
                   </Button>
                 </div>
                 <Card>
                   <CardContent>
                     <Table
                       columns={[
-                        { key: "name", header: "ط§ظ„ط¬ظ‡ط§ط²" },
-                        { key: "browser", header: "ط§ظ„ظ…طھطµظپط­" },
-                        { key: "os", header: "ظ†ط¸ط§ظ… ط§ظ„طھط´ط؛ظٹظ„" },
-                        { key: "lastLogin", header: "ط¢ط®ط± طھط³ط¬ظٹظ„", render: (d) => (
+                        { key: "name", header: "الجهاز" },
+                        { key: "browser", header: "المتصفح" },
+                        { key: "os", header: "نظام التشغيل" },
+                        { key: "lastLogin", header: "آخر تسجيل", render: (d) => (
                           <span className="text-sm text-text-secondary" dir="ltr">{d.lastLogin.toLocaleDateString("ar-EG")} {d.lastLogin.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" })}</span>
                         )},
                         { key: "ip", header: "IP", render: (d) => (
                           <span className="text-xs font-mono text-text-secondary" dir="ltr">{d.ip}</span>
                         )},
-                        { key: "current", header: "ط§ظ„ط­ط§ظ„ط©", render: (d) => (
-                          d.isCurrent ? <Badge variant="success" size="sm">ط§ظ„ط¬ظ„ط³ط© ط§ظ„ط­ط§ظ„ظٹط©</Badge> : <span className="text-xs text-text-tertiary">-</span>
+                        { key: "current", header: "الحالة", render: (d) => (
+                          d.isCurrent ? <Badge variant="success" size="sm">الجلسة الحالية</Badge> : <span className="text-xs text-text-tertiary">-</span>
                         )},
                       ]}
                       data={extended.devices}

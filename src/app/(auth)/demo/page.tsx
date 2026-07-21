@@ -22,39 +22,39 @@ import { Badge } from "@/components/ui/Badge"
 const demoAccounts = [
   {
     id: "teacher",
-    name: "ظ…ط¯ط±ط³",
+    name: "مدرس",
     icon: HiAcademicCap,
     gradient: "from-primary-500 to-indigo-600",
     email: "ahmed@teacher-os.com",
     password: "123456",
-    description: "ط­ط³ط§ط¨ طھط¬ط±ظٹط¨ظٹ ظ„ظ„ظ…ط¯ط±ط³ ظ…ط¹ طµظ„ط§ط­ظٹط© ط§ظ„ظˆطµظˆظ„ ط§ظ„ظƒط§ظ…ظ„ ظ„ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… ظˆط¥ط¯ط§ط±ط© ط§ظ„ظƒظˆط±ط³ط§طھ ظˆط§ظ„ط·ظ„ط§ط¨ ظˆط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ ظˆط§ظ„ط¥ظٹط±ط§ط¯ط§طھ ظˆط¬ظ…ظٹط¹ ط§ظ„طھظ‚ط§ط±ظٹط±.",
+    description: "حساب تجريبي للمدرس مع صلاحية الوصول الكامل للوحة التحكم وإدارة الكورسات والطلاب والامتحانات والإيرادات وجميع التقارير.",
   },
   {
     id: "student",
-    name: "ط·ط§ظ„ط¨",
+    name: "طالب",
     icon: HiBookOpen,
     gradient: "from-emerald-500 to-teal-600",
     email: "student@teacher-os.com",
     password: "123456",
-    description: "ط­ط³ط§ط¨ طھط¬ط±ظٹط¨ظٹ ظ„ظ„ط·ط§ظ„ط¨ ظ„ظ…ط´ط§ظ‡ط¯ط© ط§ظ„ظƒظˆط±ط³ط§طھ ط§ظ„ظ…ط³ط¬ظ„ط© ظˆط­ط¶ظˆط± ط§ظ„ط¯ط±ظˆط³ ط§ظ„ظ…ط¨ط§ط´ط±ط© ظˆط£ط¯ط§ط، ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ ظˆط§ظ„ظˆط§ط¬ط¨ط§طھ ظˆظ…طھط§ط¨ط¹ط© ط§ظ„طھظ‚ط¯ظ….",
+    description: "حساب تجريبي للطالب لمشاهدة الكورسات المسجلة وحضور الدروس المباشرة وأداء الامتحانات والواجبات ومتابعة التقدم.",
   },
   {
     id: "parent",
-    name: "ظˆظ„ظٹ ط£ظ…ط±",
+    name: "ولي أمر",
     icon: HiUserGroup,
     gradient: "from-amber-500 to-orange-600",
     email: "parent@teacher-os.com",
     password: "123456",
-    description: "ط­ط³ط§ط¨ طھط¬ط±ظٹط¨ظٹ ظ„ظˆظ„ظٹ ط§ظ„ط£ظ…ط± ظ„ظ…طھط§ط¨ط¹ط© ط£ط¯ط§ط، ط§ظ„ط£ط¨ظ†ط§ط، ط§ظ„ط¯ط±ط§ط³ظٹ ظˆط§ظ„ط§ط·ظ„ط§ط¹ ط¹ظ„ظ‰ ط§ظ„طھظ‚ط§ط±ظٹط± ط§ظ„ط´ظ‡ط±ظٹط© ظˆط§ظ„ظ…ط¯ظپظˆط¹ط§طھ ظˆط§ظ„ط¥ط´ط¹ط§ط±ط§طھ.",
+    description: "حساب تجريبي لولي الأمر لمتابعة أداء الأبناء الدراسي والاطلاع على التقارير الشهرية والمدفوعات والإشعارات.",
   },
   {
     id: "staff",
-    name: "ظ…ظˆط¸ظپ",
+    name: "موظف",
     icon: HiUserCircle,
     gradient: "from-purple-500 to-pink-600",
     email: "staff@teacher-os.com",
     password: "123456",
-    description: "ط­ط³ط§ط¨ طھط¬ط±ظٹط¨ظٹ ظ„ط£ط¹ط¶ط§ط، ظپط±ظٹظ‚ ط§ظ„ط¹ظ…ظ„ ظ…ط¹ طµظ„ط§ط­ظٹط§طھ ط¥ط¯ط§ط±ط© ظ…ط­ط¯ط¯ط© ط­ط³ط¨ ط§ظ„ط¯ظˆط± ط§ظ„ظˆط¸ظٹظپظٹ ظ„ظƒظ„ ظ…ظˆط¸ظپ.",
+    description: "حساب تجريبي لأعضاء فريق العمل مع صلاحيات إدارة محددة حسب الدور الوظيفي لكل موظف.",
   },
 ]
 
@@ -73,7 +73,7 @@ export default function DemoPage() {
 
   const handleCopy = async (email: string, password: string, id: string) => {
     try {
-      await navigator.clipboard.writeText(`ط§ظ„ط¨ط±ظٹط¯: ${email}\nظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±: ${password}`)
+      await navigator.clipboard.writeText(`البريد: ${email}\nكلمة المرور: ${password}`)
       setCopied(id)
       setTimeout(() => setCopied(null), 2500)
     } catch {
@@ -97,7 +97,7 @@ export default function DemoPage() {
         </div>
         <Link href="/login" className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-primary transition-colors pointer-events-auto">
           <HiArrowLeft className="w-4 h-4" />
-          ط§ظ„ط¹ظˆط¯ط© ظ„طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„
+          العودة لتسجيل الدخول
         </Link>
       </div>
 
@@ -121,9 +121,9 @@ export default function DemoPage() {
           >
             <HiShieldCheck className="w-8 h-8" />
           </motion.div>
-          <h1 className="text-3xl font-bold text-text mb-2">ط¨ظٹط§ظ†ط§طھ ط§ظ„طھط¬ط±ط¨ط©</h1>
+          <h1 className="text-3xl font-bold text-text mb-2">بيانات التجربة</h1>
           <p className="text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            ط§ط³طھط®ط¯ظ… ط­ط³ط§ط¨ط§طھ ط§ظ„طھط¬ط±ط¨ط© ط£ط¯ظ†ط§ظ‡ ظ„طھط¬ط±ط¨ط© ط§ظ„ظ…ظ†طµط© ط¨ط´ظƒظ„ ظ…ط¨ط§ط´ط±. ظƒظ„ ط­ط³ط§ط¨ ظ„ط¯ظٹظ‡ طµظ„ط§ط­ظٹط§طھ ظˆط£ط¯ظˆط§ط± ظ…ط®طھظ„ظپط© طھطھظٹط­ ظ„ظƒ ط§ط³طھظƒط´ط§ظپ ط¬ظ…ظٹط¹ ظ…ط²ط§ظٹط§ TeacherOS ظ‚ط¨ظ„ ط¥ظ†ط´ط§ط، ط­ط³ط§ط¨ ط­ظ‚ظٹظ‚ظٹ.
+            استخدم حسابات التجربة أدناه لتجربة المنصة بشكل مباشر. كل حساب لديه صلاحيات وأدوار مختلفة تتيح لك استكشاف جميع مزايا TeacherOS قبل إنشاء حساب حقيقي.
           </p>
         </motion.div>
 
@@ -131,9 +131,9 @@ export default function DemoPage() {
           <div className="flex items-start gap-3">
             <HiInformationCircle className="w-5 h-5 shrink-0 mt-0.5" />
             <div>
-              <p className="font-medium text-sm">طھظ†ط¨ظٹظ‡ ظ…ظ‡ظ…</p>
+              <p className="font-medium text-sm">تنبيه مهم</p>
               <p className="text-sm opacity-90 mt-1">
-                ظ‡ط°ظ‡ ط¨ظٹط§ظ†ط§طھ طھط¬ط±ظٹط¨ظٹط© ظ„ظ„ط¹ط±ط¶ ظپظ‚ط·. ط£ظٹ طھط؛ظٹظٹط±ط§طھ طھظ‚ظˆظ… ط¨ظ‡ط§ ظ„ظ† ظٹطھظ… ط­ظپط¸ظ‡ط§ ط¨ط´ظƒظ„ ط¯ط§ط¦ظ… ظˆظ„ط§ طھط¤ط«ط± ط¹ظ„ظ‰ ط§ظ„ظ†ط¸ط§ظ… ط§ظ„ظپط¹ظ„ظٹ. ظٹظڈظ†طµط­ ط¨ط¥ظ†ط´ط§ط، ط­ط³ط§ط¨ ط­ظ‚ظٹظ‚ظٹ ظ„ظ„ط§ط³طھظپط§ط¯ط© ط§ظ„ظƒط§ظ…ظ„ط© ظ…ظ† ط¬ظ…ظٹط¹ ظ…ظٹط²ط§طھ ط§ظ„ظ…ظ†طµط© ظ…ط¹ ط­ظپط¸ ط¨ظٹط§ظ†ط§طھظƒ ط¨ط´ظƒظ„ ط¢ظ…ظ†.
+                هذه بيانات تجريبية للعرض فقط. ط£ظٹ تغييرات تقوم بها لن ظٹطھظ… حفظها بشكل دائم ولا تؤثر على النظام الفعلي. يُنصح بإنشاء حساب حقيقي للاستفادة الكاملة من جميع ميزات المنصة مع حفظ بياناتك بشكل آمن.
               </p>
             </div>
           </div>
@@ -162,14 +162,14 @@ export default function DemoPage() {
                       <div className="flex items-center justify-between text-sm p-3 rounded-lg bg-surface-secondary">
                         <span className="text-text-tertiary flex items-center gap-2">
                           <HiAcademicCap className="w-4 h-4" />
-                          ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ
+                          البريد الإلكتروني
                         </span>
                         <Badge variant="primary" size="sm" className="font-mono ltr">{account.email}</Badge>
                       </div>
                       <div className="flex items-center justify-between text-sm p-3 rounded-lg bg-surface-secondary">
                         <span className="text-text-tertiary flex items-center gap-2">
                           <HiShieldCheck className="w-4 h-4" />
-                          ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±
+                          كلمة المرور
                         </span>
                         <Badge variant="neutral" size="sm" className="font-mono tracking-wider">{account.password}</Badge>
                       </div>
@@ -183,19 +183,19 @@ export default function DemoPage() {
                         {copied === account.id ? (
                           <span className="text-success flex items-center gap-1.5 font-medium">
                             <HiCheckCircle className="w-4 h-4" />
-                            طھظ… ط§ظ„ظ†ط³ط®
+                            طھظ… النسخ
                           </span>
                         ) : (
                           <>
                             <HiClipboardCopy className="w-4 h-4" />
-                            <span>ظ†ط³ط® ط§ظ„ط¨ظٹط§ظ†ط§طھ</span>
+                            <span>نسخ البيانات</span>
                           </>
                         )}
                       </button>
                       <Link href="/login" className="flex-[2]">
                         <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-dark transition-all duration-200 shadow-sm shadow-primary/20 active:scale-[0.98]">
                           <HiLogin className="w-4 h-4" />
-                          <span>طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„ ظƒظ€ {account.name}</span>
+                          <span>تسجيل الدخول ظƒظ€ {account.name}</span>
                         </button>
                       </Link>
                     </div>
@@ -214,24 +214,24 @@ export default function DemoPage() {
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-secondary border border-border text-sm">
             <HiCheckCircle className="w-5 h-5 text-success" />
-            <span className="text-text-secondary">ط¬ظ…ظٹط¹ ط§ظ„ط­ط³ط§ط¨ط§طھ ط§ظ„طھط¬ط±ظٹط¨ظٹط© ط¬ط§ظ‡ط²ط© ظ„ظ„ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظپظˆط±ظٹ</span>
+            <span className="text-text-secondary">جميع الحسابات التجريبية جاهزة للاستخدام الفوري</span>
           </div>
 
           <div className="mt-4">
             <p className="text-sm text-text-secondary">
-              ظ‡ظ„ طھط±ظٹط¯ ط¥ظ†ط´ط§ط، ط­ط³ط§ط¨ ط­ظ‚ظٹظ‚ظٹ ظˆط§ظ„ط§ط­طھظپط§ط¸ ط¨ط¨ظٹط§ظ†ط§طھظƒطں{" "}
+              هل تريد إنشاء حساب حقيقي والاحتفاظ ببياناتك؟{" "}
               <Link href="/register" className="text-primary hover:text-primary-dark font-semibold transition-colors">
-                ط³ط¬ظ„ ط§ظ„ط¢ظ†
+                سجل الآن
               </Link>
-              {" "}ط£ظˆ{" "}
+              {" "}أو{" "}
               <Link href="/login" className="text-primary hover:text-primary-dark font-semibold transition-colors">
-                ط³ط¬ظ„ ط¯ط®ظˆظ„
+                سجل دخول
               </Link>
             </p>
           </div>
 
           <p className="text-xs text-text-tertiary mt-6">
-            &copy; {new Date().getFullYear()} TeacherOS. ط¬ظ…ظٹط¹ ط§ظ„ط­ظ‚ظˆظ‚ ظ…ط­ظپظˆط¸ط©. ظ‡ط°ظ‡ ط§ظ„ظ…ظ†طµط© ظ…ط®طµطµط© ظ„ظ„ط£ط؛ط±ط§ط¶ ط§ظ„طھط¹ظ„ظٹظ…ظٹط© ظˆط§ظ„طھط¬ط±ظٹط¨ظٹط©.
+            &copy; {new Date().getFullYear()} TeacherOS. جميع الحقوق محفوظة. هذه المنصة مخصصة للأغراض التعليمية والتجريبية.
           </p>
         </motion.div>
       </motion.div>

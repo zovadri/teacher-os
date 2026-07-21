@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -31,14 +31,14 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 
-const daysOfWeek = ["ط·آ§ط¸â€‍ط·آ³ط·آ¨ط·ع¾", "ط·آ§ط¸â€‍ط·آ£ط·آ­ط·آ¯", "ط·آ§ط¸â€‍ط·آ¥ط·آ«ط¸â€ ط¸ظ¹ط¸â€ ", "ط·آ§ط¸â€‍ط·آ«ط¸â€‍ط·آ§ط·آ«ط·آ§ط·طŒ", "ط·آ§ط¸â€‍ط·آ£ط·آ±ط·آ¨ط·آ¹ط·آ§ط·طŒ", "ط·آ§ط¸â€‍ط·آ®ط¸â€¦ط¸ظ¹ط·آ³", "ط·آ§ط¸â€‍ط·آ¬ط¸â€¦ط·آ¹ط·آ©"]
+const daysOfWeek = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"]
 
 const mockScheduledLessons = [
-  { id: "sched-1", courseId: "c-1", courseName: "ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط¸ث†ط·آ§ط¸â€‍ط·آµط·آ±ط¸ظ¾", lessonName: "ط·آ¯ط·آ±ط·آ³ 1: ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ¯ط¸â€¦ط·آ©", date: new Date(2025, 6, 20), time: "10:00", duration: 45, notes: "ط¸â€¦ط·آ±ط·آ§ط·آ¬ط·آ¹ط·آ© ط·آ³ط·آ±ط¸ظ¹ط·آ¹ط·آ© ط¸â€‍ط¸â€‍ط·آ¯ط·آ±ط·آ³ ط·آ§ط¸â€‍ط·آ³ط·آ§ط·آ¨ط¸â€ڑ", autoPublish: true },
-  { id: "sched-2", courseId: "c-1", courseName: "ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط¸ث†ط·آ§ط¸â€‍ط·آµط·آ±ط¸ظ¾", lessonName: "ط·آ¯ط·آ±ط·آ³ 2: ط·آ§ط¸â€‍ط·آ´ط·آ±ط·آ­", date: new Date(2025, 6, 22), time: "10:00", duration: 45, notes: "", autoPublish: false },
-  { id: "sched-3", courseId: "c-2", courseName: "ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ© ط¸ث†ط·آ§ط¸â€‍ط·آ£ط·آ¯ط·آ¨", lessonName: "ط·آ¯ط·آ±ط·آ³ 1: ط·آ§ط¸â€‍ط¸â€¦ط¸â€ڑط·آ¯ط¸â€¦ط·آ©", date: new Date(2025, 6, 21), time: "14:00", duration: 60, notes: "ط·ع¾ط·آ¬ط¸â€،ط¸ظ¹ط·آ² ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ¯ط¸ظ¹ط¸â€¦ط¸ظ¹", autoPublish: true },
-  { id: "sched-4", courseId: "c-6", courseName: "ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ¨ط¸ظ¹ط·آ± ط¸ث†ط·آ§ط¸â€‍ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ", lessonName: "ط·آ¯ط·آ±ط·آ³ 3: ط·آ§ط¸â€‍ط·ع¾ط·آ·ط·آ¨ط¸ظ¹ط¸â€ڑ", date: new Date(2025, 6, 23), time: "12:00", duration: 30, notes: "", autoPublish: true },
-  { id: "sched-5", courseId: "c-4", courseName: "ط¸â€ڑط¸ث†ط·آ§ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦", lessonName: "ط·آ¯ط·آ±ط·آ³ 1: ط¸â€¦ط¸â€ڑط·آ¯ط¸â€¦ط·آ©", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ± ط¸â€ڑط·آµط¸ظ¹ط·آ± ط¸ظ¾ط¸ظ¹ ط¸â€ ط¸â€،ط·آ§ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³", autoPublish: false },
+  { id: "sched-1", courseId: "c-1", courseName: "النحو والصرف", lessonName: "درس 1: المقدمة", date: new Date(2025, 6, 20), time: "10:00", duration: 45, notes: "مراجعة سريعة للدرس السابق", autoPublish: true },
+  { id: "sched-2", courseId: "c-1", courseName: "النحو والصرف", lessonName: "درس 2: الشرح", date: new Date(2025, 6, 22), time: "10:00", duration: 45, notes: "", autoPublish: false },
+  { id: "sched-3", courseId: "c-2", courseName: "البلاغة والأدب", lessonName: "درس 1: المقدمة", date: new Date(2025, 6, 21), time: "14:00", duration: 60, notes: "تجهيز العرض التقديمي", autoPublish: true },
+  { id: "sched-4", courseId: "c-6", courseName: "التعبير والإنشاء", lessonName: "درس 3: التطبيق", date: new Date(2025, 6, 23), time: "12:00", duration: 30, notes: "", autoPublish: true },
+  { id: "sched-5", courseId: "c-4", courseName: "قواعد النحو المتقدم", lessonName: "درس 1: مقدمة", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "اختبار قصير ظپظٹ نهاية الدرس", autoPublish: false },
 ]
 
 export default function SchedulePage() {
@@ -80,14 +80,14 @@ export default function SchedulePage() {
       notes: newLesson.notes,
       autoPublish: autoPublish,
     }])
-    toast.success("طھظ…طھ ط¥ط¶ط§ظپط© ط§ظ„ط¯ط±ط³ ط¥ظ„ظ‰ ط§ظ„ط¬ط¯ظˆظ„ط© ط¨ظ†ط¬ط§ط­")
+    toast.success("طھظ…طھ إضافة الدرس إلى الجدولة بنجاح")
     setShowAddModal(false)
     setNewLesson({ courseId: "", lessonName: "", date: "", time: "", duration: 45, notes: "" })
   }
 
   const deleteLesson = (id: string) => {
     setSchedule((prev) => prev.filter((s) => s.id !== id))
-    toast.success("طھظ… ط­ط°ظپ ط§ظ„ط¯ط±ط³ ظ…ظ† ط§ظ„ط¬ط¯ظˆظ„ط©")
+    toast.success("طھظ… حذف الدرس من الجدولة")
   }
 
   const courseOptions = mockCourses.map((c) => ({ value: c.id, label: c.title }))
@@ -98,13 +98,13 @@ export default function SchedulePage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", href: "/teacher/courses" }, { label: "ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" }]} />
-      <DashboardHeader title="ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³" subtitle="ط·ع¾ط·آ®ط·آ·ط¸ظ¹ط·آ· ط¸ث†ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط¸â€‍ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨" />
+      <Breadcrumb items={[{ label: "الكورسات", href: "/teacher/courses" }, { label: "جدول الكورسات" }]} />
+      <DashboardHeader title="جدولة الدروس" subtitle="تخطيط وجدولة الدروس للطلاب" />
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Badge variant="info" size="md">{schedule.length} ط·آ¯ط·آ±ط·آ³ ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍</Badge>
-          <Badge variant="success" size="md">{upcomingLessons.length} ط¸â€ڑط·آ§ط·آ¯ط¸â€¦</Badge>
+          <Badge variant="info" size="md">{schedule.length} درس مجدول</Badge>
+          <Badge variant="success" size="md">{upcomingLessons.length} قادم</Badge>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 p-1 bg-surface border border-border rounded-xl">
@@ -112,17 +112,17 @@ export default function SchedulePage() {
               onClick={() => setViewMode("list")}
               className={cn("px-3 py-1.5 text-xs rounded-lg transition-colors", viewMode === "list" ? "bg-primary text-white" : "text-text-secondary")}
             >
-              ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ©
+              قائمة
             </button>
             <button type="button"
               onClick={() => setViewMode("grid")}
               className={cn("px-3 py-1.5 text-xs rounded-lg transition-colors", viewMode === "grid" ? "bg-primary text-white" : "text-text-secondary")}
             >
-              ط·ع¾ط¸â€ڑط¸ث†ط¸ظ¹ط¸â€¦
+              تقويم
             </button>
           </div>
           <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-            ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ¯ط·آ±ط·آ³ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯
+            جدولة درس جديد
           </Button>
         </div>
       </div>
@@ -176,16 +176,16 @@ export default function SchedulePage() {
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle>ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</CardTitle>
-            <CardDescription>ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط¸ث†ط·آ³ ط·آ­ط·آ³ط·آ¨ ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</CardDescription>
+            <CardTitle>الدروس المجدولة</CardTitle>
+            <CardDescription>جميع الدروس حسب تاريخ الجدولة</CardDescription>
           </CardHeader>
           <CardContent>
             {sortedSchedule.length === 0 ? (
               <EmptyState
                 icon={HiOutlineCalendar}
-                title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¯ط·آ±ط¸ث†ط·آ³ ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©"
-                description="ط¸â€ڑط¸â€¦ ط·آ¨ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ£ط¸ث†ط¸â€‍ ط·آ¯ط·آ±ط·آ³ ط·آ§ط¸â€‍ط·آ¢ط¸â€ "
-                action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowAddModal(true)}>ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ¯ط·آ±ط·آ³</Button>}
+                title="لا توجد دروس مجدولة"
+                description="قم بجدولة أول درس الآن"
+                action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowAddModal(true)}>جدولة درس</Button>}
               />
             ) : (
               <div className="space-y-2">
@@ -210,12 +210,12 @@ export default function SchedulePage() {
                       </div>
                       <div className="flex items-center gap-3 mt-1 text-xs text-text-tertiary">
                         <span className="flex items-center gap-1"><HiOutlineClock className="w-3 h-3" />{s.time}</span>
-                        <span>{s.duration} ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑط·آ©</span>
+                        <span>{s.duration} دقيقة</span>
                         {s.notes && <span className="truncate max-w-[200px]">ط¢آ· {s.notes}</span>}
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant={s.autoPublish ? "success" : "warning"} size="sm">{s.autoPublish ? "ط¸â€ ط·آ´ط·آ± ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹" : "ط¸ظ¹ط·آ¯ط¸ث†ط¸ظ¹"}</Badge>
+                      <Badge variant={s.autoPublish ? "success" : "warning"} size="sm">{s.autoPublish ? "نشر تلقائي" : "يدوي"}</Badge>
                       <button type="button" className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={14} /></button>
                       <button type="button" onClick={() => deleteLesson(s.id)} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={14} /></button>
                     </div>
@@ -231,14 +231,14 @@ export default function SchedulePage() {
         <CardHeader>
           <div className="flex items-center gap-2">
             <HiOutlineEye className="w-5 h-5 text-primary" />
-            <CardTitle>ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹</CardTitle>
+            <CardTitle>النشر التلقائي</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-text">ط·آ§ط¸â€‍ط¸â€ ط·آ´ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ ط·آ¹ط¸â€ ط·آ¯ ط·آ­ط¸â€‍ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¹ط·آ¯</p>
-              <p className="text-xs text-text-tertiary">ط·آ¹ط¸â€ ط·آ¯ ط·ع¾ط¸ظ¾ط·آ¹ط¸ظ¹ط¸â€‍ط¸â€،ط·إ’ ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط¸â€ ط·آ´ط·آ± ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³ ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹ط·آ§ط¸â€¹ ط¸â€‍ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط¸ث†ط¸â€¦ط¸ظ¹ط·آ¹ط·آ§ط·آ¯ ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</p>
+              <p className="text-sm font-medium text-text">النشر التلقائي عند حلول الموعد</p>
+              <p className="text-xs text-text-tertiary">عند تفعيله، سيتم نشر الدرس تلقائياً للطلاب ظپظٹ تاريخ وميعاد الجدولة</p>
             </div>
             <button type="button"
               onClick={() => setAutoPublish(!autoPublish)}
@@ -250,30 +250,30 @@ export default function SchedulePage() {
         </CardContent>
       </Card>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·آ¯ط·آ±ط·آ³ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="lg">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="جدولة درس جديد" size="lg">
         <div className="space-y-4">
           <Select
-            label="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
+            label="اختر الكورس"
             options={courseOptions}
             value={newLesson.courseId}
             onChange={(e) => setNewLesson({ ...newLesson, courseId: e.target.value })}
-            placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
+            placeholder="اختر الكورس"
           />
           <Input
-            label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³"
+            label="اسم الدرس"
             value={newLesson.lessonName}
             onChange={(e) => setNewLesson({ ...newLesson, lessonName: e.target.value })}
-            placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ¯ط·آ±ط·آ³ 4: ط·آ§ط¸â€‍ط·ع¾ط·آ·ط·آ¨ط¸ظ¹ط¸â€ڑط·آ§ط·ع¾"
+            placeholder="مثال: درس 4: التطبيقات"
           />
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®"
+              label="التاريخ"
               type="date"
               value={newLesson.date}
               onChange={(e) => setNewLesson({ ...newLesson, date: e.target.value })}
             />
             <Input
-              label="ط·آ§ط¸â€‍ط¸ث†ط¸â€ڑط·ع¾"
+              label="الوقت"
               type="time"
               value={newLesson.time}
               onChange={(e) => setNewLesson({ ...newLesson, time: e.target.value })}
@@ -281,14 +281,14 @@ export default function SchedulePage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ© (ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑط·آ©)"
+              label="المدة (دقيقة)"
               type="number"
               value={newLesson.duration}
               onChange={(e) => setNewLesson({ ...newLesson, duration: Number(e.target.value) })}
             />
             <div className="flex items-end pb-3">
               <div className="flex items-center gap-3">
-                <span className="text-sm text-text-secondary">ط¸â€ ط·آ´ط·آ± ط·ع¾ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸ظ¹</span>
+                <span className="text-sm text-text-secondary">نشر تلقائي</span>
                 <button type="button"
                   onClick={() => setAutoPublish(!autoPublish)}
                   className={cn("w-10 h-5 rounded-full transition-colors relative", autoPublish ? "bg-primary" : "bg-surface-tertiary")}
@@ -299,17 +299,17 @@ export default function SchedulePage() {
             </div>
           </div>
           <Input
-            label="ط¸â€¦ط¸â€‍ط·آ§ط·آ­ط·آ¸ط·آ§ط·ع¾ (ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ±ط¸ظ¹)"
+            label="ملاحظات (اختياري)"
             value={newLesson.notes}
             onChange={(e) => setNewLesson({ ...newLesson, notes: e.target.value })}
-            placeholder="ط¸â€¦ط¸â€‍ط·آ§ط·آ­ط·آ¸ط·آ§ط·ع¾ ط¸â€‍ط¸â€‍ط·آ¯ط·آ±ط·آ³..."
+            placeholder="ملاحظات للدرس..."
           />
           <div className="flex gap-3 pt-2">
             <Button variant="primary" className="flex-1" leftIcon={<HiOutlineCheck className="w-4 h-4" />} onClick={addLesson}>
-              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¥ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍
+              إضافة إلى الجدول
             </Button>
             <Button variant="secondary" leftIcon={<HiOutlineX className="w-4 h-4" />} onClick={() => setShowAddModal(false)}>
-              ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ
+              إلغاء
             </Button>
           </div>
         </div>

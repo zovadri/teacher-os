@@ -38,8 +38,8 @@ import {
 } from "@/lib/mock/data"
 
 const dayMap: Record<string, string> = {
-  saturday: "ط§ظ„ط³ط¨طھ", sunday: "ط§ظ„ط£ط­ط¯", monday: "ط§ظ„ط¥ط«ظ†ظٹظ†",
-  tuesday: "ط§ظ„ط«ظ„ط§ط«ط§ط،", wednesday: "ط§ظ„ط£ط±ط¨ط¹ط§ط،", thursday: "ط§ظ„ط®ظ…ظٹط³", friday: "ط§ظ„ط¬ظ…ط¹ط©",
+  saturday: "السبت", sunday: "الأحد", monday: "الإثنين",
+  tuesday: "الثلاثاء", wednesday: "الأربعاء", thursday: "الخميس", friday: "الجمعة",
 }
 
 export default function GroupDetailPage() {
@@ -76,8 +76,8 @@ export default function GroupDetailPage() {
   if (!group) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط§ظ„ظ…ط¬ظ…ظˆط¹ط© ط؛ظٹط± ظ…ظˆط¬ظˆط¯ط©" />
-        <EmptyState icon={HiOutlineUsers} title="ط§ظ„ظ…ط¬ظ…ظˆط¹ط© ط؛ظٹط± ظ…ظˆط¬ظˆط¯ط©" description="ظ„ظ… ظٹطھظ… ط§ظ„ط¹ط«ظˆط± ط¹ظ„ظ‰ ط§ظ„ظ…ط¬ظ…ظˆط¹ط© ط§ظ„ظ…ط·ظ„ظˆط¨ط©" action={<Button onClick={() => router.push("/teacher/groups")}>ط§ظ„ط¹ظˆط¯ط© ظ„ظ„ظ…ط¬ظ…ظˆط¹ط§طھ</Button>} />
+        <PageHeader title="المجموعة غير موجودة" />
+        <EmptyState icon={HiOutlineUsers} title="المجموعة غير موجودة" description="لم ظٹطھظ… العثور على المجموعة المطلوبة" action={<Button onClick={() => router.push("/teacher/groups")}>العودة للمجموعات</Button>} />
       </div>
     )
   }
@@ -99,7 +99,7 @@ export default function GroupDetailPage() {
 
   const handleAddStudent = () => {
     if (!selectedStudentId) return
-    toast.success("طھظ… ط¥ط¶ط§ظپط© ط§ظ„ط·ط§ظ„ط¨ ط¥ظ„ظ‰ ط§ظ„ظ…ط¬ظ…ظˆط¹ط©")
+    toast.success("طھظ… إضافة الطالب إلى المجموعة")
     setShowAddModal(false)
     setSelectedStudentId("")
     setAddStudentSearch("")
@@ -107,14 +107,14 @@ export default function GroupDetailPage() {
 
   const handleMoveStudent = () => {
     if (!targetGroupId) return
-    toast.success("طھظ… ظ†ظ‚ظ„ ط§ظ„ط·ط§ظ„ط¨ ط¥ظ„ظ‰ ط§ظ„ظ…ط¬ظ…ظˆط¹ط© ط¨ظ†ط¬ط§ط­")
+    toast.success("طھظ… نقل الطالب إلى المجموعة بنجاح")
     setShowMoveModal(false)
     setMoveStudentId("")
     setTargetGroupId("")
   }
 
   const handleFreeze = () => {
-    toast.success("طھظ… طھط¬ظ…ظٹط¯ ط§ط´طھط±ط§ظƒ ط§ظ„ط·ط§ظ„ط¨")
+    toast.success("طھظ… تجميد اشتراك الطالب")
     setShowFreezeModal(false)
     setFreezeStudentId("")
     setFreezeStart("")
@@ -123,13 +123,13 @@ export default function GroupDetailPage() {
   }
 
   const handleRecover = () => {
-    toast.success("طھظ… طھط¹ظˆظٹط¶ ط§ظ„ط¯ط±ط³ ظ„ظ„ط·ط§ظ„ط¨")
+    toast.success("طھظ… تعويض الدرس للطالب")
     setShowRecoverModal(false)
     setRecoverStudentId("")
   }
 
   const handleRemoveStudent = (name: string) => {
-    toast.success(`طھظ… ط­ط°ظپ ${name} ظ…ظ† ط§ظ„ظ…ط¬ظ…ظˆط¹ط©`)
+    toast.success(`طھظ… حذف ${name} من المجموعة`)
   }
 
   const handleRetry = () => {
@@ -156,7 +156,7 @@ export default function GroupDetailPage() {
         description={`${group.courseName} - ${group.classroom}`}
         actions={
           <Button variant="outline" onClick={() => router.push("/teacher/groups")} leftIcon={<HiOutlineChevronRight className="w-4 h-4" />}>
-            ط§ظ„ط¹ظˆط¯ط©
+            العودة
           </Button>
         }
       />
@@ -169,26 +169,26 @@ export default function GroupDetailPage() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <Badge variant={group.status === "active" ? "success" : group.status === "completed" ? "neutral" : "warning"} size="md">
-                  {group.status === "active" ? "ظ†ط´ط·" : group.status === "completed" ? "ظ…ظƒطھظ…ظ„" : "ط؛ظٹط± ظ†ط´ط·"}
+                  {group.status === "active" ? "نشط" : group.status === "completed" ? "مكتمل" : "غير نشط"}
                 </Badge>
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="p-4 rounded-xl bg-surface-secondary border border-border">
-                <p className="text-xs text-text-tertiary mb-1">ط§ظ„ط³ط¹ط©</p>
+                <p className="text-xs text-text-tertiary mb-1">السعة</p>
                 <p className="text-lg font-bold text-text">{group.enrolledCount}/{group.capacity}</p>
                 <Progress value={group.enrolledCount} max={group.capacity} variant={capacityPct >= 90 ? "warning" : "primary"} size="sm" className="mt-2" />
               </div>
               <div className="p-4 rounded-xl bg-surface-secondary border border-border">
-                <p className="text-xs text-text-tertiary mb-1">ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ظ†طھط¸ط±ظˆظ†</p>
+                <p className="text-xs text-text-tertiary mb-1">الطلاب المنتظرون</p>
                 <p className="text-lg font-bold text-text">{group.waitingCount}</p>
               </div>
               <div className="p-4 rounded-xl bg-surface-secondary border border-border">
-                <p className="text-xs text-text-tertiary mb-1">ط§ظ„ظ‚ط§ط¹ط©</p>
+                <p className="text-xs text-text-tertiary mb-1">القاعة</p>
                 <p className="text-lg font-bold text-text">{group.classroom}</p>
               </div>
               <div className="p-4 rounded-xl bg-surface-secondary border border-border">
-                <p className="text-xs text-text-tertiary mb-1">ط§ظ„ظ…ظˆط¹ط¯</p>
+                <p className="text-xs text-text-tertiary mb-1">الموعد</p>
                 <p className="text-sm font-bold text-text">
                   {group.schedule.map(s => `${dayMap[s.day]} ${s.startTime}-${s.endTime}`).join(" - ")}
                 </p>
@@ -202,22 +202,22 @@ export default function GroupDetailPage() {
         <StatsSkeleton count={3} />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <StatsCard title="ط§ظ„ط·ظ„ط§ط¨ ط§ظ„ظ…ط³ط¬ظ„ظˆظ†" value={groupStudents.length} icon={HiOutlineUsers} color="primary" />
-          <StatsCard title="ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±" value={groupWaiting.length} icon={HiOutlineClock} color="warning" />
-          <StatsCard title="ظ†ط³ط¨ط© ط§ظ„ط¥ط´ط؛ط§ظ„" value={`${capacityPct}%`} icon={HiOutlineAcademicCap} color={capacityPct >= 90 ? "error" : "success"} />
+          <StatsCard title="الطلاب المسجلون" value={groupStudents.length} icon={HiOutlineUsers} color="primary" />
+          <StatsCard title="قائمة الانتظار" value={groupWaiting.length} icon={HiOutlineClock} color="warning" />
+          <StatsCard title="نسبة الإشغال" value={`${capacityPct}%`} icon={HiOutlineAcademicCap} color={capacityPct >= 90 ? "error" : "success"} />
         </div>
       )}
 
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
-            <CardTitle>ط§ظ„ط·ظ„ط§ط¨</CardTitle>
+            <CardTitle>الطلاب</CardTitle>
             <Badge variant="primary">{filteredStudents.length}</Badge>
           </div>
           <div className="flex items-center gap-3">
-            <SearchInput value={studentSearch} onChange={setStudentSearch} placeholder="ط¨ط­ط« ط¹ظ† ط·ط§ظ„ط¨..." className="w-64" />
+            <SearchInput value={studentSearch} onChange={setStudentSearch} placeholder="بحث عن طالب..." className="w-64" />
             <Button onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus className="w-4 h-4" />}>
-              ط¥ط¶ط§ظپط© ط·ط§ظ„ط¨
+              إضافة طالب
             </Button>
           </div>
         </CardHeader>
@@ -225,16 +225,16 @@ export default function GroupDetailPage() {
           {loading ? (
             <TableSkeleton rows={5} columns={5} />
           ) : filteredStudents.length === 0 ? (
-            <EmptyState icon={HiOutlineUsers} title="ظ„ط§ ظٹظˆط¬ط¯ ط·ظ„ط§ط¨" description={studentSearch ? "ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬ ظ„ظ„ط¨ط­ط«" : "ظ‡ط°ظ‡ ط§ظ„ظ…ط¬ظ…ظˆط¹ط© ظ„ط§ طھط­طھظˆظٹ ط¹ظ„ظ‰ ط·ظ„ط§ط¨"} action={<Button onClick={() => setShowAddModal(true)}>ط¥ط¶ط§ظپط© ط·ط§ظ„ط¨</Button>} />
+            <EmptyState icon={HiOutlineUsers} title="لا يوجد طلاب" description={studentSearch ? "لا توجد نتائج للبحث" : "هذه المجموعة لا تحتوي على طلاب"} action={<Button onClick={() => setShowAddModal(true)}>إضافة طالب</Button>} />
           ) : (
             <div className="overflow-x-auto rounded-xl border border-border">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-surface-secondary border-b border-border">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط·ط§ظ„ط¨</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط±ظ‚ظ… ط§ظ„ظ…ظ‚ط¹ط¯</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط­ط§ظ„ط©</th>
-                    <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">الطالب</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">رقم المقعد</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">الحالة</th>
+                    <th className="text-center px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">الإجراءات</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -254,19 +254,19 @@ export default function GroupDetailPage() {
                       <td className="px-4 py-3 text-text-secondary">{idx + 1}</td>
                       <td className="px-4 py-3">
                         <Badge variant={s.status === "active" ? "success" : s.status === "expired" ? "error" : "warning"}>
-                          {s.status === "active" ? "ظ†ط´ط·" : s.status === "expired" ? "ظ…ظ†طھظ‡ظٹ" : "ط؛ظٹط± ظ†ط´ط·"}
+                          {s.status === "active" ? "نشط" : s.status === "expired" ? "منتهي" : "غير نشط"}
                         </Badge>
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-center gap-2">
                           <Button variant="outline" size="xs" leftIcon={<HiOutlineSwitchHorizontal className="w-3.5 h-3.5" />} onClick={() => { setMoveStudentId(s.id); setShowMoveModal(true) }}>
-                            ظ†ظ‚ظ„
+                            نقل
                           </Button>
                           <Button variant="outline" size="xs" leftIcon={<HiOutlinePause className="w-3.5 h-3.5" />} onClick={() => { setFreezeStudentId(s.id); setShowFreezeModal(true) }}>
-                            طھط¬ظ…ظٹط¯
+                            تجميد
                           </Button>
                           <Button variant="ghost" size="xs" leftIcon={<HiOutlineTrash className="w-3.5 h-3.5 text-error" />} onClick={() => handleRemoveStudent(s.name)}>
-                            ط­ط°ظپ
+                            حذف
                           </Button>
                         </div>
                       </td>
@@ -282,14 +282,14 @@ export default function GroupDetailPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظ†طھط¸ط§ط±</CardTitle>
+            <CardTitle>قائمة الانتظار</CardTitle>
             <Badge variant="warning">{groupWaiting.length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <Skeleton className="h-32" />
             ) : groupWaiting.length === 0 ? (
-              <EmptyState icon={HiOutlineClock} title="ظ„ط§ ظٹظˆط¬ط¯ ط·ظ„ط§ط¨ ظ…ظ†طھط¸ط±ظˆظ†" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب منتظرون" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {groupWaiting.map((w) => (
@@ -299,7 +299,7 @@ export default function GroupDetailPage() {
                       <p className="text-xs text-text-tertiary">{w.joinedAt.toLocaleDateString("ar-EG")}</p>
                     </div>
                     <Badge variant={w.priority === 1 ? "error" : w.priority === 2 ? "warning" : "info"}>
-                      ط£ظˆظ„ظˆظٹط© {w.priority}
+                      أولوية {w.priority}
                     </Badge>
                   </div>
                 ))}
@@ -310,14 +310,14 @@ export default function GroupDetailPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>ط§ظ„ط¯ط±ظˆط³ ط§ظ„ظ…ظپظ‚ظˆط¯ط©</CardTitle>
+            <CardTitle>الدروس المفقودة</CardTitle>
             <Badge variant="error">{missedForGroup.length}</Badge>
           </CardHeader>
           <CardContent>
             {loading ? (
               <Skeleton className="h-32" />
             ) : missedForGroup.length === 0 ? (
-              <EmptyState icon={HiOutlineRefresh} title="ظ„ط§ طھظˆط¬ط¯ ط¯ط±ظˆط³ ظ…ظپظ‚ظˆط¯ط©" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineRefresh} title="لا توجد دروس مفقودة" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {missedForGroup.slice(0, 5).map((m) => (
@@ -327,7 +327,7 @@ export default function GroupDetailPage() {
                       <p className="text-xs text-text-tertiary">{m.lessonTitle} - {m.date.toLocaleDateString("ar-EG")}</p>
                     </div>
                     <Button variant="primary" size="xs" leftIcon={<HiOutlineRefresh className="w-3.5 h-3.5" />} onClick={() => { setRecoverStudentId(m.studentId); setShowRecoverModal(true) }}>
-                      طھط¹ظˆظٹط¶
+                      تعويض
                     </Button>
                   </div>
                 ))}
@@ -337,9 +337,9 @@ export default function GroupDetailPage() {
         </Card>
       </div>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط¥ط¶ط§ظپط© ط·ط§ظ„ط¨ ط¥ظ„ظ‰ ط§ظ„ظ…ط¬ظ…ظˆط¹ط©" size="lg">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="إضافة طالب إلى المجموعة" size="lg">
         <div className="space-y-4">
-          <SearchInput value={addStudentSearch} onChange={setAddStudentSearch} placeholder="ط¨ط­ط« ط¹ظ† ط·ط§ظ„ط¨ ط¨ط§ظ„ط§ط³ظ… ط£ظˆ ط§ظ„ظ‡ط§طھظپ..." />
+          <SearchInput value={addStudentSearch} onChange={setAddStudentSearch} placeholder="بحث عن طالب بالاسم أو الهاتف..." />
           <div className="max-h-64 overflow-y-auto space-y-2">
             {availableStudents.filter(s => s.name.includes(addStudentSearch) || s.phone.includes(addStudentSearch)).map((s) => (
               <div
@@ -360,41 +360,41 @@ export default function GroupDetailPage() {
                 <input type="radio" name="addStudent" checked={selectedStudentId === s.id} readOnly className="text-primary" />
               </div>
             ))}
-            {availableStudents.length === 0 && <p className="text-center text-text-tertiary py-4">ظ„ط§ ظٹظˆط¬ط¯ ط·ظ„ط§ط¨ ظ…طھط§ط­ظˆظ†</p>}
+            {availableStudents.length === 0 && <p className="text-center text-text-tertiary py-4">لا يوجد طلاب متاحون</p>}
           </div>
           <div className="flex gap-3 pt-2">
-            <Button variant="secondary" onClick={() => setShowAddModal(false)} className="flex-1">ط¥ظ„ط؛ط§ط،</Button>
-            <Button onClick={handleAddStudent} disabled={!selectedStudentId} className="flex-1">ط¥ط¶ط§ظپط©</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)} className="flex-1">إلغاء</Button>
+            <Button onClick={handleAddStudent} disabled={!selectedStudentId} className="flex-1">إضافة</Button>
           </div>
         </div>
       </Modal>
 
-      <Modal isOpen={showMoveModal} onClose={() => setShowMoveModal(false)} title="ظ†ظ‚ظ„ ط·ط§ظ„ط¨ ط¥ظ„ظ‰ ظ…ط¬ظ…ظˆط¹ط© ط£ط®ط±ظ‰" size="md">
+      <Modal isOpen={showMoveModal} onClose={() => setShowMoveModal(false)} title="نقل طالب إلى مجموعة أخرى" size="md">
         <div className="space-y-4">
-          <Select label="ط§ظ„ظ…ط¬ظ…ظˆط¹ط© ط§ظ„ظ…ط³طھظ‡ط¯ظپط©" options={mockClassGroups.filter(g => g.id !== group.id).map(g => ({ value: g.id, label: `${g.name} - ${g.courseName}` }))} value={targetGroupId} onChange={(e) => setTargetGroupId(e.target.value)} placeholder="ط§ط®طھط± ط§ظ„ظ…ط¬ظ…ظˆط¹ط©" />
+          <Select label="المجموعة المستهدفة" options={mockClassGroups.filter(g => g.id !== group.id).map(g => ({ value: g.id, label: `${g.name} - ${g.courseName}` }))} value={targetGroupId} onChange={(e) => setTargetGroupId(e.target.value)} placeholder="اختر المجموعة" />
           <div className="flex gap-3 pt-2">
-            <Button variant="secondary" onClick={() => setShowMoveModal(false)} className="flex-1">ط¥ظ„ط؛ط§ط،</Button>
-            <Button onClick={handleMoveStudent} disabled={!targetGroupId} className="flex-1">ظ†ظ‚ظ„</Button>
+            <Button variant="secondary" onClick={() => setShowMoveModal(false)} className="flex-1">إلغاء</Button>
+            <Button onClick={handleMoveStudent} disabled={!targetGroupId} className="flex-1">نقل</Button>
           </div>
         </div>
       </Modal>
 
-      <Modal isOpen={showFreezeModal} onClose={() => setShowFreezeModal(false)} title="طھط¬ظ…ظٹط¯ ط§ط´طھط±ط§ظƒ ط§ظ„ط·ط§ظ„ط¨" size="md">
+      <Modal isOpen={showFreezeModal} onClose={() => setShowFreezeModal(false)} title="تجميد اشتراك الطالب" size="md">
         <div className="space-y-4">
-          <Input label="طھط§ط±ظٹط® ط§ظ„ط¨ط¯ط§ظٹط©" type="date" value={freezeStart} onChange={(e) => setFreezeStart(e.target.value)} />
-          <Input label="طھط§ط±ظٹط® ط§ظ„ظ†ظ‡ط§ظٹط©" type="date" value={freezeEnd} onChange={(e) => setFreezeEnd(e.target.value)} />
-          <Input label="ط§ظ„ط³ط¨ط¨" value={freezeReason} onChange={(e) => setFreezeReason(e.target.value)} placeholder="ط§ط®طھظٹط§ط±ظٹ" />
+          <Input label="تاريخ البداية" type="date" value={freezeStart} onChange={(e) => setFreezeStart(e.target.value)} />
+          <Input label="تاريخ النهاية" type="date" value={freezeEnd} onChange={(e) => setFreezeEnd(e.target.value)} />
+          <Input label="السبب" value={freezeReason} onChange={(e) => setFreezeReason(e.target.value)} placeholder="اختياري" />
           <div className="flex gap-3 pt-2">
-            <Button variant="secondary" onClick={() => setShowFreezeModal(false)} className="flex-1">ط¥ظ„ط؛ط§ط،</Button>
-            <Button onClick={handleFreeze} disabled={!freezeStart || !freezeEnd} className="flex-1">طھط¬ظ…ظٹط¯</Button>
+            <Button variant="secondary" onClick={() => setShowFreezeModal(false)} className="flex-1">إلغاء</Button>
+            <Button onClick={handleFreeze} disabled={!freezeStart || !freezeEnd} className="flex-1">تجميد</Button>
           </div>
         </div>
       </Modal>
 
-      <Modal isOpen={showRecoverModal} onClose={() => setShowRecoverModal(false)} title="طھط¹ظˆظٹط¶ ط¯ط±ط³ ظ…ظپظ‚ظˆط¯" size="md">
+      <Modal isOpen={showRecoverModal} onClose={() => setShowRecoverModal(false)} title="تعويض درس مفقود" size="md">
         <div className="space-y-4">
           {missedForGroup.filter(m => m.studentId === recoverStudentId || !recoverStudentId).length === 0 ? (
-            <p className="text-center text-text-tertiary py-4">ظ„ط§ طھظˆط¬ط¯ ط¯ط±ظˆط³ ظ…ظپظ‚ظˆط¯ط© ظ„ظ‡ط°ط§ ط§ظ„ط·ط§ظ„ط¨</p>
+            <p className="text-center text-text-tertiary py-4">لا توجد دروس مفقودة لهذا الطالب</p>
           ) : (
             <div className="space-y-2 max-h-60 overflow-y-auto">
               {missedForGroup.filter(m => m.studentId === recoverStudentId || !recoverStudentId).map((m) => (
@@ -404,14 +404,14 @@ export default function GroupDetailPage() {
                     <p className="text-xs text-text-tertiary">{m.date.toLocaleDateString("ar-EG")}</p>
                   </div>
                   <Button variant="primary" size="xs" leftIcon={<HiOutlineRefresh className="w-3.5 h-3.5" />} onClick={handleRecover}>
-                    طھط¹ظˆظٹط¶
+                    تعويض
                   </Button>
                 </div>
               ))}
             </div>
           )}
           <div className="flex gap-3 pt-2">
-            <Button variant="secondary" onClick={() => setShowRecoverModal(false)} className="flex-1">ط¥ط؛ظ„ط§ظ‚</Button>
+            <Button variant="secondary" onClick={() => setShowRecoverModal(false)} className="flex-1">إغلاق</Button>
           </div>
         </div>
       </Modal>

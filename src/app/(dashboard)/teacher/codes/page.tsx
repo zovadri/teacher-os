@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -36,9 +36,9 @@ const statusBadge: Record<string, "success" | "warning" | "error" | "neutral"> =
 }
 
 const statusLabels: Record<string, string> = {
-  new: "ط¬ط¯ظٹط¯",
-  used: "ظ…ط³طھط®ط¯ظ…",
-  expired: "ظ…ظ†طھظ‡ظٹ",
+  new: "جديد",
+  used: "مستخدم",
+  expired: "منتهي",
 }
 
 export default function CodesPage() {
@@ -80,33 +80,33 @@ export default function CodesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط¥ط¯ط§ط±ط© ط§ظ„ط£ظƒظˆط§ط¯" subtitle="ط¥ظ†ط´ط§ط، ظˆط¥ط¯ط§ط±ط© ط£ظƒظˆط§ط¯ ط§ظ„ط§ط´طھط±ط§ظƒ" />
+      <DashboardHeader title="إدارة الأكواد" subtitle="إنشاء وإدارة أكواد الاشتراك" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط£ظƒظˆط§ط¯" value={stats.total} icon={HiOutlineTag} color="primary" />
-        <StatsCard title="ط§ظ„ظ…طھط§ط­" value={stats.available} icon={HiOutlineCheckCircle} color="success" />
-        <StatsCard title="ط§ظ„ظ…ط³طھط®ط¯ظ…" value={stats.used} icon={HiOutlineClock} color="warning" />
-        <StatsCard title="ظ…ظ†طھظ‡ظٹ ط§ظ„طµظ„ط§ط­ظٹط©" value={stats.expired} icon={HiOutlineXCircle} color="error" />
+        <StatsCard title="إجمالي الأكواد" value={stats.total} icon={HiOutlineTag} color="primary" />
+        <StatsCard title="المتاح" value={stats.available} icon={HiOutlineCheckCircle} color="success" />
+        <StatsCard title="المستخدم" value={stats.used} icon={HiOutlineClock} color="warning" />
+        <StatsCard title="منتهي الصلاحية" value={stats.expired} icon={HiOutlineXCircle} color="error" />
       </div>
 
       <div className="flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
         <div className="flex flex-1 gap-3 w-full">
           <div className="flex-1">
-            <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¨ط§ظ„ظƒظˆط¯ ط£ظˆ ط§ظ„ط¨ط§ظ‚ط©..." />
+            <SearchInput value={search} onChange={setSearch} placeholder="بحث بالكود أو الباقة..." />
           </div>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
             className="px-3 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer"
           >
-            <option value="all">ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ</option>
-            <option value="new">ط¬ط¯ظٹط¯</option>
-            <option value="used">ظ…ط³طھط®ط¯ظ…</option>
-            <option value="expired">ظ…ظ†طھظ‡ظٹ</option>
+            <option value="all">جميع الحالات</option>
+            <option value="new">جديد</option>
+            <option value="used">مستخدم</option>
+            <option value="expired">منتهي</option>
           </select>
         </div>
         <Button leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreateModal(true)}>
-          ط¥ظ†ط´ط§ط، ط£ظƒظˆط§ط¯ ط¬ط¯ظٹط¯ط©
+          إنشاء أكواد جديدة
         </Button>
       </div>
 
@@ -119,7 +119,7 @@ export default function CodesPage() {
       ) : (
         <Table
           columns={[
-            { key: "code", header: "ط§ظ„ظƒظˆط¯", render: (c) => (
+            { key: "code", header: "الكود", render: (c) => (
               <div className="flex items-center gap-2">
                 <span className="font-mono text-sm font-bold text-text cursor-pointer hover:text-primary transition-colors" dir="ltr" onClick={() => router.push(`/teacher/codes/${c.code}`)}>{c.code}</span>
                 <button type="button" className="p-1 text-text-tertiary hover:text-primary transition-colors" title="QR Code" onClick={() => toast.success("تم عرض رمز QR")}>
@@ -127,23 +127,23 @@ export default function CodesPage() {
                 </button>
               </div>
             )},
-            { key: "planName", header: "ط§ظ„ط¨ط§ظ‚ط©" },
-            { key: "courseName", header: "ط§ظ„ظƒظˆط±ط³", render: (c) => (
-              <span className="text-sm text-text-secondary cursor-pointer hover:text-primary transition-colors" onClick={() => router.push(`/teacher/courses`)}>{c.courseName || "ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ"}</span>
+            { key: "planName", header: "الباقة" },
+            { key: "courseName", header: "الكورس", render: (c) => (
+              <span className="text-sm text-text-secondary cursor-pointer hover:text-primary transition-colors" onClick={() => router.push(`/teacher/courses`)}>{c.courseName || "جميع الكورسات"}</span>
             )},
-            { key: "batchId", header: "ط§ظ„ط¯ظپط¹ط©", render: (c) => (
+            { key: "batchId", header: "الدفعة", render: (c) => (
               <Badge variant="neutral" size="sm">{c.batchId}</Badge>
             )},
-            { key: "status", header: "ط§ظ„ط­ط§ظ„ط©", render: (c) => (
+            { key: "status", header: "الحالة", render: (c) => (
               <Badge variant={statusBadge[c.status]}>{statusLabels[c.status]}</Badge>
             )},
-            { key: "usedBy", header: "ط§ظ„ظ…ط³طھط®ط¯ظ…", render: (c) => (
+            { key: "usedBy", header: "المستخدم", render: (c) => (
               <span className="text-sm text-text-secondary">{c.usedBy || "â€"}</span>
             )},
-            { key: "price", header: "ط§ظ„ط³ط¹ط±", render: (c) => (
+            { key: "price", header: "السعر", render: (c) => (
               <span className="text-sm font-medium">{formatCurrency(c.price)}</span>
             )},
-            { key: "createdAt", header: "طھط§ط±ظٹط® ط§ظ„ط¥ظ†ط´ط§ط،", render: (c) => (
+            { key: "createdAt", header: "تاريخ الإنشاء", render: (c) => (
               <span className="text-xs text-text-tertiary">{formatDate(c.createdAt)}</span>
             )},
           ]}
@@ -153,7 +153,7 @@ export default function CodesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>ظ…ظ„ط®طµ ط§ظ„ط¯ظپط¹ط§طھ</CardTitle>
+          <CardTitle>ملخص الدفعات</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
@@ -161,20 +161,20 @@ export default function CodesPage() {
               <div key={bg.batch} className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary border border-border">
                 <div>
                   <p className="text-sm font-medium text-text">{bg.batch}</p>
-                  <p className="text-xs text-text-tertiary">ط¥ط¬ظ…ط§ظ„ظٹ {bg.total} ظƒظˆط¯</p>
+                  <p className="text-xs text-text-tertiary">إجمالي {bg.total} كود</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="text-center">
                     <p className="text-sm font-bold text-success">{bg.available}</p>
-                    <p className="text-xs text-text-tertiary">ظ…طھط§ط­</p>
+                    <p className="text-xs text-text-tertiary">متاح</p>
                   </div>
                   <div className="text-center">
                     <p className="text-sm font-bold text-warning">{bg.used}</p>
-                    <p className="text-xs text-text-tertiary">ظ…ط³طھط®ط¯ظ…</p>
+                    <p className="text-xs text-text-tertiary">مستخدم</p>
                   </div>
                   <div className="text-center">
                     <p className="text-sm font-bold text-text">{formatCurrency(bg.totalValue)}</p>
-                    <p className="text-xs text-text-tertiary">ط§ظ„ظ‚ظٹظ…ط©</p>
+                    <p className="text-xs text-text-tertiary">القيمة</p>
                   </div>
                 </div>
               </div>
@@ -185,51 +185,51 @@ export default function CodesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>ط¥ط­طµط§ط¦ظٹط§طھ ط§ظ„ط£ظƒظˆط§ط¯</CardTitle>
+          <CardTitle>إحصائيات الأكواد</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-4 rounded-xl bg-surface-secondary border border-border">
               <p className="text-2xl font-bold text-text">{stats.total}</p>
-              <p className="text-xs text-text-tertiary mt-1">ط¥ط¬ظ…ط§ظ„ظٹ</p>
+              <p className="text-xs text-text-tertiary mt-1">إجمالي</p>
             </div>
             <div className="text-center p-4 rounded-xl bg-success/10 border border-success/20">
               <p className="text-2xl font-bold text-success">{stats.available}</p>
-              <p className="text-xs text-text-tertiary mt-1">ظ…طھط§ط­</p>
+              <p className="text-xs text-text-tertiary mt-1">متاح</p>
             </div>
             <div className="text-center p-4 rounded-xl bg-warning/10 border border-warning/20">
               <p className="text-2xl font-bold text-warning">{stats.used}</p>
-              <p className="text-xs text-text-tertiary mt-1">ظ…ط³طھط®ط¯ظ…</p>
+              <p className="text-xs text-text-tertiary mt-1">مستخدم</p>
             </div>
             <div className="text-center p-4 rounded-xl bg-error/10 border border-error/20">
               <p className="text-2xl font-bold text-error">{stats.expired}</p>
-              <p className="text-xs text-text-tertiary mt-1">ظ…ظ†طھظ‡ظٹ</p>
+              <p className="text-xs text-text-tertiary mt-1">منتهي</p>
             </div>
           </div>
           <div className="mt-4 p-3 rounded-xl bg-primary-50/50 dark:bg-primary-900/10 border border-primary/20 text-sm text-text-secondary text-center">
-            ط¥ط¬ظ…ط§ظ„ظٹ ظ‚ظٹظ…ط© ط§ظ„ط£ظƒظˆط§ط¯ ط§ظ„ظ…طھط§ط­ط©: {formatCurrency(mockCenterCodes.filter((c) => c.status === "new").reduce((s, c) => s + c.price, 0))}
+            إجمالي قيمة الأكواد المتاحة: {formatCurrency(mockCenterCodes.filter((c) => c.status === "new").reduce((s, c) => s + c.price, 0))}
           </div>
         </CardContent>
       </Card>
 
-      <Modal isOpen={showCreateModal} onClose={() => setShowCreateModal(false)} title="ط¥ظ†ط´ط§ط، ط£ظƒظˆط§ط¯ ط¬ط¯ظٹط¯ط©" subtitle="ط£ط¯ط®ظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ ظ„ط¥ظ†ط´ط§ط، ظ…ط¬ظ…ظˆط¹ط© ط¬ط¯ظٹط¯ط© ظ…ظ† ط§ظ„ط£ظƒظˆط§ط¯" size="lg">
+      <Modal isOpen={showCreateModal} onClose={() => setShowCreateModal(false)} title="إنشاء أكواد جديدة" subtitle="أدخل البيانات لإنشاء مجموعة جديدة من الأكواد" size="lg">
         <div className="space-y-4">
-          <Input label="ط¹ط¯ط¯ ط§ظ„ط£ظƒظˆط§ط¯" type="number" placeholder="ظ…ط«ط§ظ„: 50" />
+          <Input label="عدد الأكواد" type="number" placeholder="مثال: 50" />
           <Select
-            label="ط§ظ„ط¨ط§ظ‚ط©"
+            label="الباقة"
             options={mockSubscriptionPlans.map((p) => ({ value: p.id, label: `${p.name} - ${formatCurrency(p.price)}` }))}
-            placeholder="ط§ط®طھط± ط§ظ„ط¨ط§ظ‚ط©"
+            placeholder="اختر الباقة"
           />
           <Select
-            label="ط§ظ„ظƒظˆط±ط³ (ط§ط®طھظٹط§ط±ظٹ)"
+            label="الكورس (اختياري)"
             options={mockCourses.map((c) => ({ value: c.id, label: c.title }))}
-            placeholder="ط§ط®طھط± ط§ظ„ظƒظˆط±ط³ (ط§ط®طھظٹط§ط±ظٹ)"
+            placeholder="اختر الكورس (اختياري)"
           />
-          <Input label="ط§ط³ظ… ط§ظ„ط¯ظپط¹ط©" placeholder="ظ…ط«ط§ظ„: ط§ظ„ط¯ظپط¹ط© ط§ظ„ط£ظˆظ„ظ‰ 2025" />
-          <Input label="طھط§ط±ظٹط® ط§ظ†طھظ‡ط§ط، ط§ظ„طµظ„ط§ط­ظٹط©" type="date" />
+          <Input label="اسم الدفعة" placeholder="مثال: الدفعة الأولى 2025" />
+          <Input label="تاريخ انتهاء الصلاحية" type="date" />
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إنشاء الأكواد بنجاح"); setShowCreateModal(false); }}>ط¥ظ†ط´ط§ط، ط§ظ„ط£ظƒظˆط§ط¯</Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowCreateModal(false)}>ط¥ظ„ط؛ط§ط،</Button>
+            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إنشاء الأكواد بنجاح"); setShowCreateModal(false); }}>إنشاء الأكواد</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowCreateModal(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>

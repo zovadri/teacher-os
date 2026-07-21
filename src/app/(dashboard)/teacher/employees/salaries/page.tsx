@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -25,16 +25,16 @@ import { cn } from "@/lib/utils"
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog"
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" }> = {
-  paid: { label: "ط¸â€¦ط·آ¯ط¸ظ¾ط¸ث†ط·آ¹", variant: "success" },
-  pending: { label: "ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑ", variant: "warning" },
-  cancelled: { label: "ط¸â€¦ط¸â€‍ط·ط›ط¸ظ¹", variant: "error" },
+  paid: { label: "مدفوع", variant: "success" },
+  pending: { label: "معلق", variant: "warning" },
+  cancelled: { label: "ملغي", variant: "error" },
 }
 
 const months = [
-  { value: "1", label: "ط¸ظ¹ط¸â€ ط·آ§ط¸ظ¹ط·آ±" }, { value: "2", label: "ط¸ظ¾ط·آ¨ط·آ±ط·آ§ط¸ظ¹ط·آ±" }, { value: "3", label: "ط¸â€¦ط·آ§ط·آ±ط·آ³" },
-  { value: "4", label: "ط·آ¥ط·آ¨ط·آ±ط¸ظ¹ط¸â€‍" }, { value: "5", label: "ط¸â€¦ط·آ§ط¸ظ¹ط¸ث†" }, { value: "6", label: "ط¸ظ¹ط¸ث†ط¸â€ ط¸ظ¹ط¸ث†" },
-  { value: "7", label: "ط¸ظ¹ط¸ث†ط¸â€‍ط¸ظ¹ط¸ث†" }, { value: "8", label: "ط·آ£ط·ط›ط·آ³ط·آ·ط·آ³" }, { value: "9", label: "ط·آ³ط·آ¨ط·ع¾ط¸â€¦ط·آ¨ط·آ±" },
-  { value: "10", label: "ط·آ£ط¸ئ’ط·ع¾ط¸ث†ط·آ¨ط·آ±" }, { value: "11", label: "ط¸â€ ط¸ث†ط¸ظ¾ط¸â€¦ط·آ¨ط·آ±" }, { value: "12", label: "ط·آ¯ط¸ظ¹ط·آ³ط¸â€¦ط·آ¨ط·آ±" },
+  { value: "1", label: "يناير" }, { value: "2", label: "فبراير" }, { value: "3", label: "مارس" },
+  { value: "4", label: "إبريل" }, { value: "5", label: "مايو" }, { value: "6", label: "يونيو" },
+  { value: "7", label: "يوليو" }, { value: "8", label: "أغسطس" }, { value: "9", label: "سبتمبر" },
+  { value: "10", label: "أكتوبر" }, { value: "11", label: "نوفمبر" }, { value: "12", label: "ديسمبر" },
 ]
 
 export default function SalariesPage() {
@@ -74,7 +74,7 @@ export default function SalariesPage() {
       }
       return s
     }))
-    toast.success("ط·ع¾ط¸â€¦ ط·آµط·آ±ط¸ظ¾ ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
+    toast.success("طھظ… صرف جميع الرواتب بنجاح")
     setShowPayAllConfirm(false)
   }
 
@@ -85,7 +85,7 @@ export default function SalariesPage() {
     updated.deductions += deductionAmount
     updated.netSalary = updated.baseSalary + updated.bonuses - updated.deductions
     setSalaries((prev) => prev.map((s) => s.id === updated.id ? updated : s))
-    toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
+    toast.success("طھظ… تحديث الراتب بنجاح")
     setEditModal({ open: false, salary: null })
     setBonusAmount(0)
     setDeductionAmount(0)
@@ -94,7 +94,7 @@ export default function SalariesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨ ط¸ث†ط·آ§ط¸â€‍ط·آ£ط·آ¬ط¸ث†ط·آ±" />
+        <DashboardHeader title="الرواتب" subtitle="إدارة الرواتب والأجور" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -102,28 +102,28 @@ export default function SalariesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <Breadcrumb items={[{ label: "ط§ظ„ظ…ظˆط¸ظپظٹظ†", href: "/teacher/employees" }, { label: "ط§ظ„ظ…ط±طھط¨ط§طھ" }]} />
-      <DashboardHeader title="ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨ ط¸ث†ط·آ§ط¸â€‍ط·آ£ط·آ¬ط¸ث†ط·آ±" />
+      <Breadcrumb items={[{ label: "الموظفين", href: "/teacher/employees" }, { label: "المرتبات" }]} />
+      <DashboardHeader title="الرواتب" subtitle="إدارة الرواتب والأجور" />
 
       {isLoading ? (
         <StatsSkeleton count={3} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨" value={formatCurrency(stats.totalPayroll)} icon={HiOutlineCurrencyDollar} color="primary" />
-          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط¸ئ’ط·آ§ط¸ظ¾ط·آ¢ط·ع¾" value={formatCurrency(stats.totalBonuses)} icon={HiOutlinePlus} color="success" />
-          <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ®ط·آµط¸â€¦ط·آ§ط·ع¾" value={formatCurrency(stats.totalDeductions)} icon={HiOutlineMinus} color="error" />
+          <StatsCard title="إجمالي الرواتب" value={formatCurrency(stats.totalPayroll)} icon={HiOutlineCurrencyDollar} color="primary" />
+          <StatsCard title="إجمالي المكافآت" value={formatCurrency(stats.totalBonuses)} icon={HiOutlinePlus} color="success" />
+          <StatsCard title="إجمالي الخصمات" value={formatCurrency(stats.totalDeductions)} icon={HiOutlineMinus} color="error" />
         </motion.div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle>ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨ ط·آ´ط¸â€،ط·آ± {months.find((m) => m.value === month)?.label} {year}</CardTitle>
+          <CardTitle>رواتب شهر {months.find((m) => m.value === month)?.label} {year}</CardTitle>
           <div className="flex items-center gap-3">
             <Select options={months} value={month} onChange={(e) => setMonth(e.target.value)} className="w-28" />
             <Select options={[{ value: "2026", label: "2026" }, { value: "2025", label: "2025" }]} value={year} onChange={(e) => setYear(e.target.value)} className="w-20" />
             {stats.pending > 0 && (
               <Button variant="success" size="sm" leftIcon={<HiOutlineCash className="w-4 h-4" />} onClick={() => setShowPayAllConfirm(true)}>
-                ط·آµط·آ±ط¸ظ¾ ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨ ({stats.pending})
+                صرف الرواتب ({stats.pending})
               </Button>
             )}
           </div>
@@ -132,18 +132,18 @@ export default function SalariesPage() {
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : monthSalaries.length === 0 ? (
-            <EmptyState icon={HiOutlineCurrencyDollar} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨" description="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨ ط¸â€‍ط¸â€‍ط·آ´ط¸â€،ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ¯ط·آ¯" />
+            <EmptyState icon={HiOutlineCurrencyDollar} title="لا توجد رواتب" description="لا توجد بيانات رواتب للشهر المحدد" />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ§ط·آ³ط¸ظ¹</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط¸ئ’ط·آ§ط¸ظ¾ط·آ¢ط·ع¾</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ®ط·آµط¸â€¦ط·آ§ط·ع¾</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آµط·آ§ط¸ظ¾ط¸ظ¹</th>
-                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الموظف</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الأساسي</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">المكافآت</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الخصمات</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الصافي</th>
+                    <th className="text-right px-4 py-3 font-semibold text-text-secondary">الحالة</th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary"></th>
                   </tr>
                 </thead>
@@ -164,7 +164,7 @@ export default function SalariesPage() {
                         {sal.status === "pending" && (
                           <Button variant="ghost" size="xs" leftIcon={<HiOutlineAdjustments className="w-3.5 h-3.5" />}
                             onClick={() => { setEditModal({ open: true, salary: sal }); setBonusAmount(0); setDeductionAmount(0) }}>
-                            ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍
+                            تعديل
                           </Button>
                         )}
                       </td>
@@ -181,14 +181,14 @@ export default function SalariesPage() {
         isOpen={showPayAllConfirm}
         onClose={() => setShowPayAllConfirm(false)}
         onConfirm={handlePayAll}
-        title="ط·ع¾ط·آ£ط¸ئ’ط¸ظ¹ط·آ¯ ط·آµط·آ±ط¸ظ¾ ط·آ§ط¸â€‍ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨"
-        message={`ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط·آµط·آ±ط¸ظ¾ ط·آ±ط¸ث†ط·آ§ط·ع¾ط·آ¨ ${stats.pending} ط¸â€¦ط¸ث†ط·آ¸ط¸ظ¾ ط¸â€¦ط·آ¹ط¸â€‍ط¸â€ڑط·آ©. ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ط·ع؛`}
-        confirmText="ط·ع¾ط·آ£ط¸ئ’ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آµط·آ±ط¸ظ¾"
-        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
+        title="تأكيد صرف الرواتب"
+        message={`سيتم صرف رواتب ${stats.pending} موظف معلقة. هل أنت متأكد؟`}
+        confirmText="تأكيد الصرف"
+        cancelText="إلغاء"
         variant="info"
       />
 
-      <Modal isOpen={editModal.open} onClose={() => setEditModal({ open: false, salary: null })} title="ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ±ط·آ§ط·ع¾ط·آ¨" size="sm">
+      <Modal isOpen={editModal.open} onClose={() => setEditModal({ open: false, salary: null })} title="تعديل الراتب" size="sm">
         <div className="space-y-4">
           {editModal.salary && (
             <>
@@ -196,15 +196,15 @@ export default function SalariesPage() {
                 <p className="text-sm text-text-secondary">{editModal.salary.employeeName}</p>
                 <p className="text-lg font-bold text-text">{formatCurrency(editModal.salary.netSalary)}</p>
               </div>
-              <Input label="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ئ’ط·آ§ط¸ظ¾ط·آ£ط·آ©" type="number" value={String(bonusAmount)} onChange={(e) => setBonusAmount(Number(e.target.value))} placeholder="0" />
-              <Input label="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ®ط·آµط¸â€¦" type="number" value={String(deductionAmount)} onChange={(e) => setDeductionAmount(Number(e.target.value))} placeholder="0" />
+              <Input label="إضافة مكافأة" type="number" value={String(bonusAmount)} onChange={(e) => setBonusAmount(Number(e.target.value))} placeholder="0" />
+              <Input label="إضافة خصم" type="number" value={String(deductionAmount)} onChange={(e) => setDeductionAmount(Number(e.target.value))} placeholder="0" />
               <div className="p-3 rounded-lg bg-primary-50 text-sm">
-                <span className="text-text-secondary">ط·آ§ط¸â€‍ط·آµط·آ§ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸ث†ط¸â€ڑط·آ¹: </span>
+                <span className="text-text-secondary">الصافي المتوقع: </span>
                 <span className="font-bold text-primary">{formatCurrency(editModal.salary.baseSalary + editModal.salary.bonuses + bonusAmount - editModal.salary.deductions - deductionAmount)}</span>
               </div>
               <div className="flex gap-3 pt-2">
-                <Button variant="primary" className="flex-1" onClick={handleEditSalary}>ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ط·آ§ط·ع¾</Button>
-                <Button variant="secondary" onClick={() => setEditModal({ open: false, salary: null })}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+                <Button variant="primary" className="flex-1" onClick={handleEditSalary}>حفظ التعديلات</Button>
+                <Button variant="secondary" onClick={() => setEditModal({ open: false, salary: null })}>إلغاء</Button>
               </div>
             </>
           )}

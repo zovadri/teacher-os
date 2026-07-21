@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
@@ -31,38 +31,38 @@ const statusBadge: Record<string, "success" | "error" | "neutral"> = {
 }
 
 const statusLabels: Record<string, string> = {
-  active: "ظ†ط´ط·",
-  closed: "ظ…ط؛ظ„ظ‚",
-  draft: "ظ…ط³ظˆط¯ط©",
+  active: "نشط",
+  closed: "مغلق",
+  draft: "مسودة",
 }
 
 const stats = [
-  { title: "ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", value: mockExams.length, icon: HiOutlineClipboardCheck, color: "primary" as const },
-  { title: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ ط§ظ„ظ†ط´ط·ط©", value: mockExams.filter((e) => e.status === "active").length, icon: HiOutlineChartSquareBar, color: "success" as const },
-  { title: "ظ…طھظˆط³ط· ط§ظ„ط¯ط±ط¬ط§طھ", value: `${mockExams.reduce((s, e) => s + e.analytics.averageGrade, 0) / mockExams.length}%`, icon: HiOutlineAcademicCap, color: "info" as const },
-  { title: "ظ…طھظˆط³ط· ط§ظ„ظ…ط¯ط©", value: `${Math.round(mockExams.reduce((s, e) => s + e.duration, 0) / mockExams.length)} ط¯`, icon: HiOutlineClock, color: "warning" as const },
+  { title: "إجمالي الامتحانات", value: mockExams.length, icon: HiOutlineClipboardCheck, color: "primary" as const },
+  { title: "الامتحانات النشطة", value: mockExams.filter((e) => e.status === "active").length, icon: HiOutlineChartSquareBar, color: "success" as const },
+  { title: "متوسط الدرجات", value: `${mockExams.reduce((s, e) => s + e.analytics.averageGrade, 0) / mockExams.length}%`, icon: HiOutlineAcademicCap, color: "info" as const },
+  { title: "متوسط المدة", value: `${Math.round(mockExams.reduce((s, e) => s + e.duration, 0) / mockExams.length)} د`, icon: HiOutlineClock, color: "warning" as const },
 ]
 
-const statuses = ["ط§ظ„ظƒظ„", "active", "draft", "closed"]
+const statuses = ["الكل", "active", "draft", "closed"]
 
 export default function ExamsPage() {
   const router = useRouter()
   const [search, setSearch] = useState("")
-  const [statusFilter, setStatusFilter] = useState("ط§ظ„ظƒظ„")
+  const [statusFilter, setStatusFilter] = useState("الكل")
 
   const courses = useMemo(() => [...new Set(mockExams.map((e) => mockExams.find((ex) => ex.id === e.id)?.title).filter(Boolean))], [])
 
   const filtered = useMemo(() => {
     return mockExams.filter((e) => {
       const matchSearch = e.title.includes(search)
-      const matchStatus = statusFilter === "ط§ظ„ظƒظ„" || e.status === statusFilter
+      const matchStatus = statusFilter === "الكل" || e.status === statusFilter
       return matchSearch && matchStatus
     })
   }, [search, statusFilter])
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ ظˆط§ظ„ط§ط®طھط¨ط§ط±ط§طھ" />
+      <DashboardHeader title="الامتحانات" subtitle="إدارة الامتحانات والاختبارات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s, i) => (
@@ -74,7 +74,7 @@ export default function ExamsPage() {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1">
-          <SearchInput value={search} onChange={setSearch} placeholder="ط¨ط­ط« ط¹ظ† ط§ظ…طھط­ط§ظ†..." />
+          <SearchInput value={search} onChange={setSearch} placeholder="بحث عن امتحان..." />
         </div>
         <div className="flex gap-3">
           <select
@@ -83,12 +83,12 @@ export default function ExamsPage() {
             className="px-4 py-2 bg-surface border border-border rounded-xl text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer"
           >
             {statuses.map((s) => (
-              <option key={s} value={s}>{s === "ط§ظ„ظƒظ„" ? "ط¬ظ…ظٹط¹ ط§ظ„ط­ط§ظ„ط§طھ" : statusLabels[s]}</option>
+              <option key={s} value={s}>{s === "الكل" ? "جميع الحالات" : statusLabels[s]}</option>
             ))}
           </select>
           <Link href="/teacher/exams/create">
             <Button variant="primary" size="md" leftIcon={<HiOutlinePlus size={18} />}>
-              ط¥ط¶ط§ظپط© ط§ظ…طھط­ط§ظ†
+              إضافة امتحان
             </Button>
           </Link>
         </div>
@@ -97,7 +97,7 @@ export default function ExamsPage() {
       {filtered.length === 0 ? (
         <div className="text-center py-16">
           <HiOutlineClipboardCheck size={48} className="mx-auto text-text-tertiary/50 mb-4" />
-          <p className="text-text-secondary font-medium">ظ„ط§ طھظˆط¬ط¯ ط§ظ…طھط­ط§ظ†ط§طھ ظ…ط·ط§ط¨ظ‚ط© ظ„ظ„ط¨ط­ط«</p>
+          <p className="text-text-secondary font-medium">لا توجد امتحانات مطابقة للبحث</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -119,35 +119,35 @@ export default function ExamsPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-text mb-0.5 line-clamp-1">{exam.title}</h3>
-                      <p className="text-xs text-text-tertiary">{mockExams.find((c) => c.id === exam.courseId)?.title || "ظƒظˆط±ط³ ط¹ط§ظ…"}</p>
+                      <p className="text-xs text-text-tertiary">{mockExams.find((c) => c.id === exam.courseId)?.title || "كورس عام"}</p>
                     </div>
                     <div className="grid grid-cols-3 gap-3 text-center text-xs">
                       <div className="p-2 rounded-lg bg-surface-secondary">
                         <p className="font-bold text-text">{exam.duration}</p>
-                        <p className="text-text-tertiary">ط¯ظ‚ظٹظ‚ط©</p>
+                        <p className="text-text-tertiary">دقيقة</p>
                       </div>
                       <div className="p-2 rounded-lg bg-surface-secondary">
                         <p className="font-bold text-text">{exam.totalGrade}</p>
-                        <p className="text-text-tertiary">ط¯ط±ط¬ط©</p>
+                        <p className="text-text-tertiary">درجة</p>
                       </div>
                       <div className="p-2 rounded-lg bg-surface-secondary">
                         <p className="font-bold text-text">{exam.questions.length}</p>
-                        <p className="text-text-tertiary">ط³ط¤ط§ظ„</p>
+                        <p className="text-text-tertiary">سؤال</p>
                       </div>
                     </div>
                     <div className="flex items-center justify-between pt-2 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="flex items-center gap-1">
-                        <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/exams/${exam.id}`) }} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="ط¹ط±ط¶">
+                        <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/exams/${exam.id}`) }} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="عرض">
                           <HiOutlineEye size={16} />
                         </button>
-                        <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/exams/${exam.id}`) }} className="p-1.5 text-text-tertiary hover:text-warning hover:bg-warning/5 rounded-lg transition-colors" title="طھط¹ط¯ظٹظ„">
+                        <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/exams/${exam.id}`) }} className="p-1.5 text-text-tertiary hover:text-warning hover:bg-warning/5 rounded-lg transition-colors" title="تعديل">
                           <HiOutlinePencil size={16} />
                         </button>
-                        <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("طھظ… ظ†ط³ط® ط§ظ„ط§ظ…طھط­ط§ظ† ط¨ظ†ط¬ط§ط­") }} className="p-1.5 text-text-tertiary hover:text-info hover:bg-info/5 rounded-lg transition-colors" title="ظ†ط³ط®">
+                        <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("طھظ… نسخ الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-info hover:bg-info/5 rounded-lg transition-colors" title="نسخ">
                           <HiOutlineDuplicate size={16} />
                         </button>
                       </div>
-                      <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("طھظ… ط­ط°ظپ ط§ظ„ط§ظ…طھط­ط§ظ† ط¨ظ†ط¬ط§ط­") }} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="ط­ط°ظپ">
+                      <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("طھظ… حذف الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="حذف">
                         <HiOutlineTrash size={16} />
                       </button>
                     </div>

@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo, useEffect } from "react"
 import { motion } from "framer-motion"
@@ -58,21 +58,21 @@ export default function StudentIDCardsPage() {
   }, [gradeFilter, groupFilter])
 
   const handlePrint = () => {
-    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آ­ط·آ¶ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط¸â€‍ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©", { position: "top-left" })
+    toast.success("جارٍ تحضير البطاقات للطباعة", { position: "top-left" })
     setTimeout(() => window.print(), 500)
   }
 
   const handleDownloadPDF = () => {
-    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸â€¦ط¸â€‍ط¸ظ¾ PDF", { position: "top-left" })
-    setTimeout(() => toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸â€¦ط¸â€‍ط¸ظ¾ PDF ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­", { position: "top-left" }), 2000)
+    toast.success("جارٍ إنشاء ملف PDF", { position: "top-left" })
+    setTimeout(() => toast.success("طھظ… إنشاء ملف PDF بنجاح", { position: "top-left" }), 2000)
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6">
         <ErrorState
-          title="ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£ ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾"
-          message="ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ© ط¸â€¦ط·آ±ط·آ© ط·آ£ط·آ®ط·آ±ط¸â€°"
+          title="حدث خطأ ظپظٹ تحميل البطاقات"
+          message="يرجى المحاولة مرة أخرى"
           onRetry={() => { setHasError(false); setIsLoading(true); setTimeout(() => setIsLoading(false), 1200) }}
         />
       </div>
@@ -82,17 +82,17 @@ export default function StudentIDCardsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Toaster />
-      <Breadcrumb items={[{ label: "ط§ظ„ط·ظ„ط§ط¨", href: "/teacher/students" }, { label: "ط¨ط·ط§ظ‚ط§طھ ط§ظ„ط·ظ„ط§ط¨" }]} />
+      <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: "بطاقات الطلاب" }]} />
       <PageHeader
-        title="ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ±ط¸ظ¹ط¸ظ¾ط¸ظ¹ط·آ©"
-        description="ط·آ¹ط·آ±ط·آ¶ ط¸ث†ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ© ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط·ع¾ط·آ¹ط·آ±ط¸ظ¹ط¸ظ¾ط¸ظ¹ط·آ©"
+        title="بطاقات الطالب التعريفية"
+        description="عرض وطباعة بطاقات الطلاب التعريفية"
         actions={
           <div className="flex items-center gap-2">
             <Button variant="secondary" size="sm" leftIcon={<HiOutlinePrinter className="w-4 h-4" />} onClick={handlePrint}>
-              ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©
+              طباعة
             </Button>
             <Button variant="primary" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleDownloadPDF}>
-              PDF ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍
+              PDF تحميل
             </Button>
           </div>
         }
@@ -106,7 +106,7 @@ export default function StudentIDCardsPage() {
                 value={gradeFilter}
                 onChange={(e) => setGradeFilter(e.target.value)}
                 options={[
-                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آµط¸ظ¾ط¸ث†ط¸ظ¾" },
+                  { value: "all", label: "جميع الصفوف" },
                   ...grades.map((g) => ({ value: g, label: g })),
                 ]}
               />
@@ -116,14 +116,14 @@ export default function StudentIDCardsPage() {
                 value={groupFilter}
                 onChange={(e) => setGroupFilter(e.target.value)}
                 options={[
-                  { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ§ط·ع¾" },
+                  { value: "all", label: "جميع المجموعات" },
                   ...groups.map((g) => ({ value: g, label: g })),
                 ]}
               />
             </div>
             <div className="flex items-center text-sm text-text-tertiary">
               <HiOutlineIdentification className="w-4 h-4 ml-1" />
-              {filtered.length} ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ©
+              {filtered.length} بطاقة
             </div>
           </div>
         </CardContent>
@@ -148,11 +148,11 @@ export default function StudentIDCardsPage() {
       ) : filtered.length === 0 ? (
         <EmptyState
           icon={HiOutlineIdentification}
-          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾"
-          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ¨ط·آ·ط·آ§ط¸â€ڑط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸ظ¾ط¸â€‍ط·ع¾ط·آ±ط·آ©"
+          title="لا توجد بطاقات"
+          description="لم ظٹطھظ… العثور على بطاقات تطابق معايير الفلترة"
           action={
             <Button variant="secondary" onClick={() => { setGradeFilter("all"); setGroupFilter("all") }}>
-              ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط¸â€‍ط·ع¾ط·آ±ط·آ©
+              إعادة تعيين الفلترة
             </Button>
           }
         />
@@ -178,35 +178,35 @@ export default function StudentIDCardsPage() {
                     className="mt-2"
                     dot
                   >
-                    {card.enrollmentStatus === "active" ? "ط¸â€ ط·آ´ط·آ·" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€ ط·آ´ط·آ·"}
+                    {card.enrollmentStatus === "active" ? "نشط" : "غير نشط"}
                   </Badge>
                 </div>
                 <div className="p-4 space-y-2">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineAcademicCap className="w-3.5 h-3.5" />
-                      ط·آ§ط¸â€‍ط·آµط¸ظ¾
+                      الصف
                     </span>
                     <span className="text-text font-medium">{card.grade}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineUserGroup className="w-3.5 h-3.5" />
-                      ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط¸â€¦ط¸ث†ط·آ¹ط·آ©
+                      المجموعة
                     </span>
                     <span className="text-text font-medium">{card.group}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineCalendar className="w-3.5 h-3.5" />
-                      ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ¥ط·آµط·آ¯ط·آ§ط·آ±
+                      تاريخ الإصدار
                     </span>
                     <span className="text-text font-medium">{formatDate(card.issuedAt)}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-text-tertiary flex items-center gap-1">
                       <HiOutlineBadgeCheck className="w-3.5 h-3.5" />
-                      ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ
+                      تاريخ الانتهاء
                     </span>
                     <span className="text-text font-medium">{formatDate(card.expiresAt)}</span>
                   </div>

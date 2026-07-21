@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import Link from "next/link"
 import { HiBell, HiMoon, HiSun, HiSearch } from "react-icons/hi"

@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -49,10 +49,10 @@ const initialForm: FormData = {
 }
 
 const homeworkTypes: { type: HomeworkType; label: string; description: string }[] = [
-  { type: "quiz", label: "ط§ط®طھط¨ط§ط± ظ‚طµظٹط±", description: "ط£ط³ط¦ظ„ط© طھظپط§ط¹ظ„ظٹط© ظ„ظ„ط·ظ„ط§ط¨" },
-  { type: "pdf", label: "ظ…ظ„ظپ PDF", description: "ط±ظپط¹ ظ…ظ„ظپ PDF ظ„ظ„ط¥ط¬ط§ط¨ط© ط¹ظ„ظٹظ‡" },
-  { type: "writing", label: "ظˆط§ط¬ط¨ ظƒطھط§ط¨ظٹ", description: "ط¥ط¬ط§ط¨ط© ظƒطھط§ط¨ظٹط© ظٹظ‚ط¯ظ…ظ‡ط§ ط§ظ„ط·ط§ظ„ط¨" },
-  { type: "mixed", label: "ظ…طھظ†ظˆط¹", description: "ظ…ط²ظٹط¬ ظ…ظ† ط§ظ„ط£ظ†ظˆط§ط¹ ط§ظ„ظ…ط®طھظ„ظپط©" },
+  { type: "quiz", label: "اختبار قصير", description: "أسئلة تفاعلية للطلاب" },
+  { type: "pdf", label: "ملف PDF", description: "رفع ملف PDF للإجابة عليه" },
+  { type: "writing", label: "واجب كتابي", description: "إجابة كتابية يقدمها الطالب" },
+  { type: "mixed", label: "متنوع", description: "مزيج من الأنواع المختلفة" },
 ]
 
 export default function CreateHomeworkPage() {
@@ -71,7 +71,7 @@ export default function CreateHomeworkPage() {
     setSubmitting(true)
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
-    toast.success("طھظ… ط­ظپط¸ ط§ظ„ظˆط§ط¬ط¨ ط¨ظ†ط¬ط§ط­!")
+    toast.success("طھظ… حفظ الواجب بنجاح!")
     router.push("/teacher/homework")
   }
 
@@ -86,24 +86,24 @@ export default function CreateHomeworkPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط§ظ„ظˆط§ط¬ط¨ط§طھ", href: "/teacher/homework" }, { label: "ط¥ظ†ط´ط§ط، ظˆط§ط¬ط¨ ط¬ط¯ظٹط¯" }]} />
-      <DashboardHeader title="ط¥ظ†ط´ط§ط، ظˆط§ط¬ط¨ ط¬ط¯ظٹط¯" subtitle="ط£ط¶ظپ ظˆط§ط¬ط¨ط§ظ‹ ط¬ط¯ظٹط¯ط§ظ‹ ظ„ظ„ط·ظ„ط§ط¨" />
+      <Breadcrumb items={[{ label: "الواجبات", href: "/teacher/homework" }, { label: "إنشاء واجب جديد" }]} />
+      <DashboardHeader title="إنشاء واجب جديد" subtitle="أضف واجباً جديداً للطلاب" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <Card>
               <CardHeader>
-                <CardTitle>ط§ظ„ظ…ط¹ظ„ظˆظ…ط§طھ ط§ظ„ط£ط³ط§ط³ظٹط©</CardTitle>
+                <CardTitle>المعلومات الأساسية</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Input label="ط¹ظ†ظˆط§ظ† ط§ظ„ظˆط§ط¬ط¨" value={form.title} onChange={(e) => update("title", e.target.value)} placeholder="ظ…ط«ط§ظ„: ظˆط§ط¬ط¨ ط§ظ„ظ†ط­ظˆ ط§ظ„ط£ط³ط¨ظˆط¹ظٹ" />
-                <Textarea label="ط§ظ„ظˆطµظپ" value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="ظˆطµظپ ط§ظ„ظˆط§ط¬ط¨ ظˆطھط¹ظ„ظٹظ…ط§طھ ط§ظ„ط¥ط¬ط§ط¨ط©..." />
+                <Input label="عنوان الواجب" value={form.title} onChange={(e) => update("title", e.target.value)} placeholder="مثال: واجب النحو الأسبوعي" />
+                <Textarea label="الوصف" value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="وصف الواجب وتعليمات الإجابة..." />
                 <div className="grid grid-cols-2 gap-4">
-                  <Select label="ط§ظ„ظƒظˆط±ط³" value={form.courseId} onChange={(e) => { update("courseId", e.target.value); update("chapterId", ""); update("lessonId", "") }} options={mockCourses.map((c) => ({ value: c.id, label: c.title }))} placeholder="ط§ط®طھط± ظƒظˆط±ط³ط§ظ‹" />
-                  <Select label="ط§ظ„ظپطµظ„" value={form.chapterId} onChange={(e) => { update("chapterId", e.target.value); update("lessonId", "") }} options={selectedCourse?.chapters.map((ch) => ({ value: ch.id, label: ch.title })) || []} placeholder="ط§ط®طھط± ظپطµظ„ط§ظ‹" />
+                  <Select label="الكورس" value={form.courseId} onChange={(e) => { update("courseId", e.target.value); update("chapterId", ""); update("lessonId", "") }} options={mockCourses.map((c) => ({ value: c.id, label: c.title }))} placeholder="اختر كورساً" />
+                  <Select label="الفصل" value={form.chapterId} onChange={(e) => { update("chapterId", e.target.value); update("lessonId", "") }} options={selectedCourse?.chapters.map((ch) => ({ value: ch.id, label: ch.title })) || []} placeholder="اختر فصلاً" />
                 </div>
-                <Select label="ط§ظ„ط¯ط±ط³" value={form.lessonId} onChange={(e) => update("lessonId", e.target.value)} options={selectedChapter?.lessons.map((ls) => ({ value: ls.id, label: ls.title })) || []} placeholder="ط§ط®طھط± ط¯ط±ط³ط§ظ‹" />
+                <Select label="الدرس" value={form.lessonId} onChange={(e) => update("lessonId", e.target.value)} options={selectedChapter?.lessons.map((ls) => ({ value: ls.id, label: ls.title })) || []} placeholder="اختر درساً" />
               </CardContent>
             </Card>
           </motion.div>
@@ -111,7 +111,7 @@ export default function CreateHomeworkPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <Card>
               <CardHeader>
-                <CardTitle>ظ†ظˆط¹ ط§ظ„ظˆط§ط¬ط¨</CardTitle>
+                <CardTitle>نوع الواجب</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -131,17 +131,17 @@ export default function CreateHomeworkPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <Card>
               <CardHeader>
-                <CardTitle>ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ</CardTitle>
+                <CardTitle>الإعدادات</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <Input label="ط§ظ„ط¯ط±ط¬ط© ط§ظ„ظ†ظ‡ط§ط¦ظٹط©" type="number" value={form.totalGrade} onChange={(e) => update("totalGrade", e.target.value)} />
-                  <Input label="ظ…ظˆط¹ط¯ ط§ظ„طھط³ظ„ظٹظ…" type="date" value={form.deadline} onChange={(e) => update("deadline", e.target.value)} />
+                  <Input label="الدرجة النهائية" type="number" value={form.totalGrade} onChange={(e) => update("totalGrade", e.target.value)} />
+                  <Input label="موعد التسليم" type="date" value={form.deadline} onChange={(e) => update("deadline", e.target.value)} />
                 </div>
                 <div className="flex items-center justify-between p-4 rounded-xl bg-surface-secondary border border-border">
                   <div>
-                    <p className="text-sm font-medium text-text">ط§ظ„ط³ظ…ط§ط­ ط¨ط¥ط¹ط§ط¯ط© ط§ظ„طھظ‚ط¯ظٹظ…</p>
-                    <p className="text-xs text-text-tertiary">ظٹظ…ظƒظ† ظ„ظ„ط·ط§ظ„ط¨ ط¥ط¹ط§ط¯ط© ط±ظپط¹ ط§ظ„ط­ظ„ ط¨ط¹ط¯ ط§ظ„طھطµط­ظٹط­</p>
+                    <p className="text-sm font-medium text-text">السماح بإعادة التقديم</p>
+                    <p className="text-xs text-text-tertiary">يمكن للطالب إعادة رفع الحل بعد التصحيح</p>
                   </div>
                   <button type="button" onClick={() => update("allowResubmit", !form.allowResubmit)}
                     className={`relative w-11 h-6 rounded-full transition-colors ${form.allowResubmit ? "bg-primary" : "bg-surface-tertiary"}`}>
@@ -149,12 +149,12 @@ export default function CreateHomeworkPage() {
                   </button>
                 </div>
                 {form.allowResubmit && (
-                  <Select label="ط¹ط¯ط¯ ظ…ط±ط§طھ ط¥ط¹ط§ط¯ط© ط§ظ„طھظ‚ط¯ظٹظ… ط§ظ„ظ…ط³ظ…ظˆط­ط©" value={form.maxResubmitCount} onChange={(e) => update("maxResubmitCount", e.target.value)} options={[
-                    { value: "1", label: "ظ…ط±ط© ظˆط§ط­ط¯ط©" },
-                    { value: "2", label: "ظ…ط±طھط§ظ†" },
-                    { value: "3", label: "3 ظ…ط±ط§طھ" },
-                    { value: "5", label: "5 ظ…ط±ط§طھ" },
-                    { value: "10", label: "10 ظ…ط±ط§طھ" },
+                  <Select label="عدد مرات إعادة التقديم المسموحة" value={form.maxResubmitCount} onChange={(e) => update("maxResubmitCount", e.target.value)} options={[
+                    { value: "1", label: "مرة واحدة" },
+                    { value: "2", label: "مرتان" },
+                    { value: "3", label: "3 مرات" },
+                    { value: "5", label: "5 مرات" },
+                    { value: "10", label: "10 مرات" },
                   ]} />
                 )}
               </CardContent>
@@ -166,36 +166,36 @@ export default function CreateHomeworkPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
             <Card>
               <CardHeader>
-                <CardTitle>ظ…ظ„ط®طµ ط§ظ„ظˆط§ط¬ط¨</CardTitle>
+                <CardTitle>ملخص الواجب</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="p-4 rounded-xl bg-surface-secondary border border-border">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ط¹ظ†ظˆط§ظ†</span>
-                      <span className="text-text font-medium">{form.title || "ظ„ظ… ظٹظڈط­ط¯ط¯"}</span>
+                      <span className="text-text-tertiary">العنوان</span>
+                      <span className="text-text font-medium">{form.title || "لم يُحدد"}</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ظƒظˆط±ط³</span>
-                      <span className="text-text font-medium">{selectedCourse?.title || "ظ„ظ… ظٹظڈط­ط¯ط¯"}</span>
+                      <span className="text-text-tertiary">الكورس</span>
+                      <span className="text-text font-medium">{selectedCourse?.title || "لم يُحدد"}</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ظ†ظˆط¹</span>
+                      <span className="text-text-tertiary">النوع</span>
                       <Badge variant="primary" size="sm">{homeworkTypes.find((t) => t.type === form.type)?.label}</Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ط¯ط±ط¬ط©</span>
-                      <span className="text-text font-medium">{form.totalGrade} ط¯ط±ط¬ط©</span>
+                      <span className="text-text-tertiary">الدرجة</span>
+                      <span className="text-text font-medium">{form.totalGrade} درجة</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط¥ط¹ط§ط¯ط© ط§ظ„طھظ‚ط¯ظٹظ…</span>
-                      <span className="text-text font-medium">{form.allowResubmit ? `ظ…ط³ظ…ظˆط­ (${form.maxResubmitCount} ظ…ط±ط§طھ)` : "ط؛ظٹط± ظ…ط³ظ…ظˆط­"}</span>
+                      <span className="text-text-tertiary">إعادة التقديم</span>
+                      <span className="text-text font-medium">{form.allowResubmit ? `مسموح (${form.maxResubmitCount} مرات)` : "غير مسموح"}</span>
                     </div>
                   </div>
                 </div>
 
                 <Button variant="success" size="lg" className="w-full" leftIcon={<HiOutlineSave size={18} />} isLoading={submitting} onClick={handleSubmit}>
-                  ط­ظپط¸ ط§ظ„ظˆط§ط¬ط¨
+                  حفظ الواجب
                 </Button>
               </CardContent>
             </Card>

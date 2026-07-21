@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import Link from "next/link"
@@ -37,14 +37,14 @@ interface CalendarEvent {
 type ViewMode = "month" | "week" | "day" | "agenda"
 
 const EVENT_TYPE_CONFIG: Record<EventType, { variant: "primary" | "warning" | "success" | "info" | "neutral"; icon: React.ElementType; label: string }> = {
-  exam: { variant: "primary", icon: HiOutlineAcademicCap, label: "ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ±" },
-  homework: { variant: "warning", icon: HiOutlinePencilAlt, label: "ط¸ث†ط·آ§ط·آ¬ط·آ¨" },
-  class: { variant: "success", icon: HiOutlineUsers, label: "ط·آ­ط·آµط·آ©" },
-  meeting: { variant: "info", icon: HiOutlineClipboardCheck, label: "ط·آ§ط·آ¬ط·ع¾ط¸â€¦ط·آ§ط·آ¹" },
-  event: { variant: "neutral", icon: HiOutlineCalendar, label: "ط·آ­ط·آ¯ط·آ«" },
+  exam: { variant: "primary", icon: HiOutlineAcademicCap, label: "اختبار" },
+  homework: { variant: "warning", icon: HiOutlinePencilAlt, label: "واجب" },
+  class: { variant: "success", icon: HiOutlineUsers, label: "حصة" },
+  meeting: { variant: "info", icon: HiOutlineClipboardCheck, label: "اجتماع" },
+  event: { variant: "neutral", icon: HiOutlineCalendar, label: "حدث" },
 }
 
-const DAY_NAMES = ["ط·آ§ط¸â€‍ط·آ£ط·آ­ط·آ¯", "ط·آ§ط¸â€‍ط·آ¥ط·آ«ط¸â€ ط¸ظ¹ط¸â€ ", "ط·آ§ط¸â€‍ط·آ«ط¸â€‍ط·آ§ط·آ«ط·آ§ط·طŒ", "ط·آ§ط¸â€‍ط·آ£ط·آ±ط·آ¨ط·آ¹ط·آ§ط·طŒ", "ط·آ§ط¸â€‍ط·آ®ط¸â€¦ط¸ظ¹ط·آ³", "ط·آ§ط¸â€‍ط·آ¬ط¸â€¦ط·آ¹ط·آ©", "ط·آ§ط¸â€‍ط·آ³ط·آ¨ط·ع¾"]
+const DAY_NAMES = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"]
 
 function getMonthDays(year: number, month: number): (Date | null)[][] {
   const firstDay = new Date(year, month, 1)
@@ -101,10 +101,10 @@ function formatTime(date: Date): string {
 }
 
 const viewModeOptions: { id: ViewMode; label: string; icon: React.ElementType }[] = [
-  { id: "month", label: "ط·آ´ط¸â€،ط·آ±ط¸ظ¹", icon: HiOutlineViewGrid },
-  { id: "week", label: "ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹", icon: HiOutlineViewBoards },
-  { id: "day", label: "ط¸ظ¹ط¸ث†ط¸â€¦ط¸ظ¹", icon: HiOutlineViewList },
-  { id: "agenda", label: "ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ©", icon: HiOutlineCalendar },
+  { id: "month", label: "شهري", icon: HiOutlineViewGrid },
+  { id: "week", label: "أسبوعي", icon: HiOutlineViewBoards },
+  { id: "day", label: "يومي", icon: HiOutlineViewList },
+  { id: "agenda", label: "قائمة", icon: HiOutlineCalendar },
 ]
 
 function getEventRoute(event: CalendarEvent): string | null {
@@ -142,7 +142,7 @@ export default function CalendarPage() {
           type: "exam",
           date: exam.startDate,
           endDate: exam.endDate,
-          description: `${exam.duration} ط·آ¯ط¸â€ڑط¸ظ¹ط¸â€ڑط·آ© أ¢â‚¬آ¢ ${exam.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ©`,
+          description: `${exam.duration} دقيقة â€¢ ${exam.totalGrade} درجة`,
           courseId: exam.courseId,
         })
       })
@@ -155,22 +155,22 @@ export default function CalendarPage() {
           title: hw.title,
           type: "homework",
           date: hw.deadline,
-          description: "ط·آ¢ط·آ®ط·آ± ط¸â€¦ط¸ث†ط·آ¹ط·آ¯ ط¸â€‍ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦",
+          description: "آخر موعد للتسليم",
           courseId: hw.courseId,
         })
       })
 
     const classTitles = [
-      "ط¸â€ڑط¸ث†ط·آ§ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦ط·آ©", "ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط¸â€ ط·آµط¸ث†ط·آµ ط·آ§ط¸â€‍ط·آ£ط·آ¯ط·آ¨ط¸ظ¹ط·آ©", "ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ© ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¨ط¸ظ¹ط·آ©",
-      "ط·آ´ط·آ±ط·آ­ ط·آ£ط¸â€‍ط¸ظ¾ط¸ظ¹ط·آ© ط·آ§ط·آ¨ط¸â€  ط¸â€¦ط·آ§ط¸â€‍ط¸ئ’", "ط·آ§ط¸â€‍ط¸â€ ط¸â€ڑط·آ¯ ط·آ§ط¸â€‍ط·آ£ط·آ¯ط·آ¨ط¸ظ¹ ط·آ§ط¸â€‍ط·آ­ط·آ¯ط¸ظ¹ط·آ«", "ط¸â€¦ط¸â€،ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ¥ط¸â€¦ط¸â€‍ط·آ§ط·طŒ",
+      "قواعد النحو المتقدمة", "تحليل النصوص الأدبية", "البلاغة العربية",
+      "شرح ألفية ابن مالك", "النقد الأدبي الحديث", "مهارات الإملاء",
     ]
     const meetingTitles = [
-      "ط·آ§ط·آ¬ط·ع¾ط¸â€¦ط·آ§ط·آ¹ ط·آ£ط¸ث†ط¸â€‍ط¸ظ¹ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ£ط¸â€¦ط¸ث†ط·آ±", "ط·آ§ط·آ¬ط·ع¾ط¸â€¦ط·آ§ط·آ¹ ط¸â€،ط¸ظ¹ط·آ¦ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ¯ط·آ±ط¸ظ¹ط·آ³", "ط¸ث†ط·آ±ط·آ´ط·آ© ط·ع¾ط·آ·ط¸ث†ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·آ§ط¸â€،ط·آ¬",
-      "ط·آ§ط·آ¬ط·ع¾ط¸â€¦ط·آ§ط·آ¹ ط·ع¾ط¸â€ ط·آ³ط¸ظ¹ط¸â€ڑ ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط¸ظ¹",
+      "اجتماع أولياء الأمور", "اجتماع هيئة التدريس", "ورشة تطوير المناهج",
+      "اجتماع تنسيق الجدول الدراسي",
     ]
     const eventTitles = [
-      "ط·آ¨ط·آ¯ط·آ§ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط¸ظ¾ط·آµط¸â€‍ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط¸ظ¹", "ط·آ¥ط·آ¬ط·آ§ط·آ²ط·آ© ط¸â€¦ط¸â€ ط·ع¾ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط·ع¾ط·آ±ط¸â€¦", "ط¸ظ¹ط¸ث†ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط¸ظ¹ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ±ط¸ظ¹",
-      "ط¸â€¦ط¸â€‍ط·ع¾ط¸â€ڑط¸â€° ط·آ§ط¸â€‍ط¸â€‍ط·ط›ط·آ© ط·آ§ط¸â€‍ط·آ¹ط·آ±ط·آ¨ط¸ظ¹ط·آ©", "ط·آ­ط¸ظ¾ط¸â€‍ ط·ع¾ط¸ئ’ط·آ±ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸ظ¾ط¸ث†ط¸â€ڑط¸ظ¹ط¸â€ ",
+      "بداية الفصل الدراسي", "إجازة منتصف الترم", "يوم التقييم الشهري",
+      "ملتقى اللغة العربية", "حفل تكريم المتفوقين",
     ]
 
     for (let i = 0; i < 3; i++) {
@@ -181,7 +181,7 @@ export default function CalendarPage() {
         type: "class",
         date: classDate,
         endDate: new Date(classDate.getTime() + 2 * 60 * 60 * 1000),
-        description: `ط·آ­ط·آµط·آ© ${i + 1} أ¢â‚¬آ¢ ط¸â€¦ط¸â€  ${formatTime(classDate)}`,
+        description: `حصة ${i + 1} â€¢ من ${formatTime(classDate)}`,
         courseId: mockCourses[i % mockCourses.length]?.id,
       })
     }
@@ -194,7 +194,7 @@ export default function CalendarPage() {
         type: "meeting",
         date: meetingDate,
         endDate: new Date(meetingDate.getTime() + 1.5 * 60 * 60 * 1000),
-        description: `ط¸â€¦ط·آ¯ط·آ© ط·آ§ط¸â€‍ط·آ§ط·آ¬ط·ع¾ط¸â€¦ط·آ§ط·آ¹: ط·آ³ط·آ§ط·آ¹ط·آ© ط¸ث†ط¸â€ ط·آµط¸ظ¾`,
+        description: `مدة الاجتماع: ساعة ونصف`,
       })
     }
 
@@ -205,7 +205,7 @@ export default function CalendarPage() {
         title: eventTitles[i % eventTitles.length],
         type: "event",
         date: eventDate,
-        description: `ط¸ظ¾ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ© ط·آ¹ط·آ§ط¸â€¦ط·آ© ط·آ±ط¸â€ڑط¸â€¦ ${i + 1}`,
+        description: `فعالية عامة رقم ${i + 1}`,
       })
     }
 
@@ -364,7 +364,7 @@ export default function CalendarPage() {
                 {selectedEvent.endDate && (
                   <div className="flex items-center gap-1.5">
                     <HiOutlineCalendar className="w-3.5 h-3.5" />
-                    <span>ط·آ¥ط¸â€‍ط¸â€° {formatDate(selectedEvent.endDate)}</span>
+                    <span>إلى {formatDate(selectedEvent.endDate)}</span>
                   </div>
                 )}
                 <div className="flex items-center gap-1.5">
@@ -385,7 +385,7 @@ export default function CalendarPage() {
                   onClick={closeEventPopover}
                   className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary hover:text-primary-dark transition-colors"
                 >
-                  ط¹ط±ط¶ ط§ظ„طھظپط§طµظٹظ„
+                  عرض التفاصيل
                   <HiOutlineChevronLeft className="w-3 h-3" />
                 </Link>
               )}
@@ -489,7 +489,7 @@ export default function CalendarPage() {
                 </div>
               ))}
               {dayEvents.length === 0 && (
-                <p className="text-[10px] text-text-tertiary text-center mt-4">ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آ­ط·آ¯ط·آ§ط·آ«</p>
+                <p className="text-[10px] text-text-tertiary text-center mt-4">لا توجد أحداث</p>
               )}
             </div>
           </div>
@@ -515,7 +515,7 @@ export default function CalendarPage() {
               </div>
               {today && (
                 <Badge variant="primary" dot>
-                  ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦
+                  اليوم
                 </Badge>
               )}
             </div>
@@ -525,8 +525,8 @@ export default function CalendarPage() {
           <Card>
             <CardContent className="p-12 text-center">
               <HiOutlineCalendar className="w-12 h-12 mx-auto text-text-tertiary mb-3" />
-              <p className="text-text-secondary font-medium">ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آ­ط·آ¯ط·آ§ط·آ« ط¸ظ¾ط¸ظ¹ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦</p>
-              <p className="text-sm text-text-tertiary mt-1">ط¸â€ڑط¸â€¦ ط·آ¨ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ£ط·آ­ط·آ¯ط·آ§ط·آ« ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ© ط¸â€‍ط¸â€‍ط·آ¸ط¸â€،ط¸ث†ط·آ± ط¸â€،ط¸â€ ط·آ§</p>
+              <p className="text-text-secondary font-medium">لا توجد أحداث ظپظٹ هذا اليوم</p>
+              <p className="text-sm text-text-tertiary mt-1">قم بإضافة أحداث جديدة للظهور هنا</p>
             </CardContent>
           </Card>
         ) : (
@@ -575,7 +575,7 @@ export default function CalendarPage() {
                               {event.endDate && (
                                 <span className="flex items-center gap-1">
                                   <HiOutlineCalendar className="w-3.5 h-3.5" />
-                                  ط·آ­ط·ع¾ط¸â€° {formatTime(event.endDate)}
+                                  حتى {formatTime(event.endDate)}
                                 </span>
                               )}
                             </div>
@@ -605,7 +605,7 @@ export default function CalendarPage() {
         <Card>
           <CardContent className="p-12 text-center">
             <HiOutlineCalendar className="w-12 h-12 mx-auto text-text-tertiary mb-3" />
-            <p className="text-text-secondary font-medium">ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آ­ط·آ¯ط·آ§ط·آ« ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</p>
+            <p className="text-text-secondary font-medium">لا توجد أحداث مجدولة</p>
           </CardContent>
         </Card>
       ) : (
@@ -635,7 +635,7 @@ export default function CalendarPage() {
                   </p>
                   <p className="text-xs text-text-secondary">{formatDate(group.date)}</p>
                 </div>
-                {today && <Badge variant="primary" size="sm" dot>ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦</Badge>}
+                {today && <Badge variant="primary" size="sm" dot>اليوم</Badge>}
               </div>
               <div className="space-y-2 mr-13">
                 {group.events.map((event) => {
@@ -689,7 +689,7 @@ export default function CalendarPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط¸ث†ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ§ط·آ³ط¸ظ¹" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط¸ث†ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ£ط·آ­ط·آ¯ط·آ§ط·آ« ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ط·آ¹ط¸ظ¹ط·آ¯" />
+      <DashboardHeader title="التقويم الدراسي" subtitle="إدارة ومتابعة الأحداث والمواعيد" />
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-2 bg-surface-secondary rounded-xl p-1">
@@ -715,7 +715,7 @@ export default function CalendarPage() {
 
         <div className="flex items-center gap-2">
           <Button variant="secondary" size="sm" onClick={navigateToToday}>
-            ط·آ§ط¸â€‍ط¸ظ¹ط¸ث†ط¸â€¦
+            اليوم
           </Button>
           <div className="flex items-center gap-1">
             <Button variant="ghost" size="xs" onClick={() => navigate("next")}>
@@ -751,9 +751,9 @@ export default function CalendarPage() {
         <Card>
           <CardHeader>
             <CardTitle>
-              ط·آ£ط·آ­ط·آ¯ط·آ§ط·آ« ط¸ظ¹ط¸ث†ط¸â€¦ {formatDate(selectedDate)}
+              أحداث يوم {formatDate(selectedDate)}
             </CardTitle>
-            <Badge variant="primary">{selectedDayEvents.length} ط·آ£ط·آ­ط·آ¯ط·آ§ط·آ«</Badge>
+            <Badge variant="primary">{selectedDayEvents.length} أحداث</Badge>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">

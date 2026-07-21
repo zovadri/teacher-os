@@ -49,9 +49,9 @@ const statusBadge: Record<string, "success" | "warning" | "error" | "neutral"> =
 }
 
 const statusLabels: Record<string, string> = {
-  submitted: "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦",
-  graded: "ط¸â€¦ط·آµط·آ­ط·آ­",
-  late: "ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±",
+  submitted: "طھظ… التسليم",
+  graded: "مصحح",
+  late: "متأخر",
 }
 
 const hwStatusBadge: Record<string, "success" | "warning" | "error" | "neutral"> = {
@@ -61,16 +61,16 @@ const hwStatusBadge: Record<string, "success" | "warning" | "error" | "neutral">
 }
 
 const hwStatusLabels: Record<string, string> = {
-  active: "ط¸â€ ط·آ´ط·آ·",
-  closed: "ط¸â€¦ط·ط›ط¸â€‍ط¸â€ڑ",
-  draft: "ط¸â€¦ط·آ³ط¸ث†ط·آ¯ط·آ©",
+  active: "نشط",
+  closed: "مغلق",
+  draft: "مسودة",
 }
 
 const hwTypeLabels: Record<string, string> = {
-  quiz: "ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ±",
+  quiz: "اختبار",
   pdf: "PDF",
-  writing: "ط¸ئ’ط·ع¾ط·آ§ط·آ¨ط¸ظ¹",
-  mixed: "ط¸â€¦ط·ع¾ط¸â€ ط¸ث†ط·آ¹",
+  writing: "كتابي",
+  mixed: "متنوع",
 }
 
 export default function HomeworkDetailPage() {
@@ -105,10 +105,10 @@ export default function HomeworkDetailPage() {
   if (!homework) {
     return (
       <div className="p-4 md:p-6 text-center py-20">
-        <h2 className="text-xl font-bold text-text mb-2">ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸ث†ط·آ¬ط¸ث†ط·آ¯</h2>
-        <p className="text-sm text-text-tertiary mb-4">ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·آ§ط¸â€‍ط¸â€¦ط·آ·ط¸â€‍ط¸ث†ط·آ¨</p>
+        <h2 className="text-xl font-bold text-text mb-2">الواجب غير موجود</h2>
+        <p className="text-sm text-text-tertiary mb-4">لم ظٹطھظ… العثور على الواجب المطلوب</p>
         <Link href="/teacher/homework">
-          <Button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">ط·آ§ط¸â€‍ط·آ¹ط¸ث†ط·آ¯ط·آ© ط¸â€‍ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾</Button>
+          <Button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">العودة للواجبات</Button>
         </Link>
       </div>
     )
@@ -123,9 +123,9 @@ export default function HomeworkDetailPage() {
     : 0
 
   const tabs = [
-    { id: "summary", label: "ط¸â€¦ط¸â€‍ط·آ®ط·آµ" },
-    { id: "submissions", label: "ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ط·آ§ط·ع¾", count: homework.submissions.length },
-    { id: "settings", label: "ط·آ§ط¸â€‍ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾" },
+    { id: "summary", label: "ملخص" },
+    { id: "submissions", label: "التسليمات", count: homework.submissions.length },
+    { id: "settings", label: "الإعدادات" },
   ]
 
   const barData = [
@@ -140,11 +140,11 @@ export default function HomeworkDetailPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾", href: "/teacher/homework" }, { label: homework.title }]} />
+      <Breadcrumb items={[{ label: "الواجبات", href: "/teacher/homework" }, { label: homework.title }]} />
 
       <DashboardHeader
         title={homework.title}
-        subtitle={`${course?.title || "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·آ­ط·آ¯ط·آ¯"} ط¢آ· ${homework.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ© ط¢آ· ${hwTypeLabels[homework.type]} ط¢آ· ${homework.submissions.length} ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦`}
+        subtitle={`${course?.title || "غير محدد"} ط¢آ· ${homework.totalGrade} درجة ط¢آ· ${hwTypeLabels[homework.type]} ط¢آ· ${homework.submissions.length} تسليم`}
       />
 
       <div className="bg-surface rounded-xl border border-border p-6">
@@ -159,32 +159,32 @@ export default function HomeworkDetailPage() {
                 <Badge variant={hwStatusBadge[homework.status]}>{hwStatusLabels[homework.status]}</Badge>
               </div>
               <div className="flex items-center gap-3 text-xs text-text-tertiary">
-                <span>{course?.title || "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·آ­ط·آ¯ط·آ¯"}</span>
+                <span>{course?.title || "غير محدد"}</span>
                 <span className="w-1 h-1 rounded-full bg-text-tertiary" />
-                <span>{homework.totalGrade} ط·آ¯ط·آ±ط·آ¬ط·آ©</span>
+                <span>{homework.totalGrade} درجة</span>
                 <span className="w-1 h-1 rounded-full bg-text-tertiary" />
                 <span>{hwTypeLabels[homework.type]}</span>
                 <span className="w-1 h-1 rounded-full bg-text-tertiary" />
-                <span>ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¹ط·آ¯: {homework.deadline.toLocaleDateString("ar-EG")}</span>
+                <span>الموعد: {homework.deadline.toLocaleDateString("ar-EG")}</span>
               </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Button className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-border text-sm text-text-secondary hover:bg-surface-secondary transition-colors">
-              <HiOutlinePencil size={16} /> ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍
+              <HiOutlinePencil size={16} /> تعديل
             </Button>
             <Button className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-border text-error text-sm hover:bg-error/5 transition-colors">
-              <HiOutlineTrash size={16} /> ط·آ­ط·آ°ط¸ظ¾
+              <HiOutlineTrash size={16} /> حذف
             </Button>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦" value={submittedCount} icon={HiOutlineUsers} color="success" />
-        <StatsCard title="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·آ³ط¸â€‍ط¸â€¦" value={notSubmittedCount} icon={HiOutlineExclamationCircle} color="error" />
-        <StatsCard title="ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±" value={lateCount} icon={HiOutlineClock} color="warning" />
-        <StatsCard title="ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ§ط·ع¾" value={`${avgGrade}%`} icon={HiOutlineChartBar} color="primary" />
+        <StatsCard title="طھظ… التسليم" value={submittedCount} icon={HiOutlineUsers} color="success" />
+        <StatsCard title="لم يسلم" value={notSubmittedCount} icon={HiOutlineExclamationCircle} color="error" />
+        <StatsCard title="متأخر" value={lateCount} icon={HiOutlineClock} color="warning" />
+        <StatsCard title="متوسط الدرجات" value={`${avgGrade}%`} icon={HiOutlineChartBar} color="primary" />
       </div>
 
       <Tabs tabs={tabs} defaultTab="summary">
@@ -193,16 +193,16 @@ export default function HomeworkDetailPage() {
             <TabPanel id="summary" activeTab={activeTab}>
               <div className="space-y-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <StatsCard title="ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦" value={submittedCount} icon={HiOutlineUsers} color="success" delay={0} />
-                  <StatsCard title="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·آ³ط¸â€‍ط¸â€¦" value={notSubmittedCount} icon={HiOutlineExclamationCircle} color="error" delay={0.1} />
-                  <StatsCard title="ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±" value={lateCount} icon={HiOutlineClock} color="warning" delay={0.2} />
-                  <StatsCard title="ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ§ط·ع¾" value={`${avgGrade}%`} icon={HiOutlineChartBar} color="primary" delay={0.3} />
+                  <StatsCard title="طھظ… التسليم" value={submittedCount} icon={HiOutlineUsers} color="success" delay={0} />
+                  <StatsCard title="لم يسلم" value={notSubmittedCount} icon={HiOutlineExclamationCircle} color="error" delay={0.1} />
+                  <StatsCard title="متأخر" value={lateCount} icon={HiOutlineClock} color="warning" delay={0.2} />
+                  <StatsCard title="متوسط الدرجات" value={`${avgGrade}%`} icon={HiOutlineChartBar} color="primary" delay={0.3} />
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-6">
                   <Card>
                     <CardHeader>
-                      <CardTitle>ط·ع¾ط¸ث†ط·آ²ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ§ط·ع¾</CardTitle>
+                      <CardTitle>توزيع الدرجات</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
@@ -228,42 +228,42 @@ export default function HomeworkDetailPage() {
 
                   <Card>
                     <CardHeader>
-                      <CardTitle>ط¸â€¦ط·آ¹ط¸â€‍ط¸ث†ط¸â€¦ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨</CardTitle>
+                      <CardTitle>معلومات الواجب</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="flex items-center gap-3">
                         <HiOutlineBookOpen className="w-5 h-5 text-text-tertiary" />
                         <div>
-                          <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³</p>
-                          <p className="text-sm font-medium text-text">{course?.title || "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·آ­ط·آ¯ط·آ¯"}</p>
+                          <p className="text-xs text-text-tertiary">الكورس</p>
+                          <p className="text-sm font-medium text-text">{course?.title || "غير محدد"}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
                         <HiOutlineCalendar className="w-5 h-5 text-text-tertiary" />
                         <div>
-                          <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€ ط¸â€،ط·آ§ط·آ¦ط¸ظ¹</p>
+                          <p className="text-xs text-text-tertiary">الموعد النهائي</p>
                           <p className="text-sm font-medium text-text">{homework.deadline.toLocaleDateString("ar-EG")}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
                         <HiOutlineStar className="w-5 h-5 text-text-tertiary" />
                         <div>
-                          <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ© ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ط¸ظ¹ط·آ©</p>
+                          <p className="text-xs text-text-tertiary">الدرجة الكلية</p>
                           <p className="text-sm font-medium text-text">{homework.totalGrade}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
                         <HiOutlineAcademicCap className="w-5 h-5 text-text-tertiary" />
                         <div>
-                          <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط¸â€ ط¸ث†ط·آ¹</p>
+                          <p className="text-xs text-text-tertiary">النوع</p>
                           <p className="text-sm font-medium text-text">{hwTypeLabels[homework.type]}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
                         <HiOutlineClipboardCheck className="w-5 h-5 text-text-tertiary" />
                         <div>
-                          <p className="text-xs text-text-tertiary">ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦</p>
-                          <p className="text-sm font-medium text-text">{homework.allowResubmit ? `ط¸â€¦ط·آ³ط¸â€¦ط¸ث†ط·آ­ (${homework.maxResubmitCount} ط¸â€¦ط·آ±ط·آ§ط·ع¾)` : "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·آ³ط¸â€¦ط¸ث†ط·آ­"}</p>
+                          <p className="text-xs text-text-tertiary">إعادة التسليم</p>
+                          <p className="text-sm font-medium text-text">{homework.allowResubmit ? `مسموح (${homework.maxResubmitCount} مرات)` : "غير مسموح"}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -272,7 +272,7 @@ export default function HomeworkDetailPage() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>ط¸ث†ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨</CardTitle>
+                    <CardTitle>وصف الواجب</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-text-secondary leading-relaxed">{homework.description}</p>
@@ -284,26 +284,26 @@ export default function HomeworkDetailPage() {
             <TabPanel id="submissions" activeTab={activeTab}>
               <div className="space-y-4">
                 <div className="flex items-center justify-between gap-4">
-                  <SearchInput value={searchQuery} onChange={setSearchQuery} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ·ط·آ§ط¸â€‍ط·آ¨..." className="max-w-xs" />
-                  <span className="text-sm text-text-tertiary">{filteredSubmissions.length} ط¸â€¦ط¸â€  {homework.submissions.length} ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦</span>
+                  <SearchInput value={searchQuery} onChange={setSearchQuery} placeholder="بحث عن طالب..." className="max-w-xs" />
+                  <span className="text-sm text-text-tertiary">{filteredSubmissions.length} من {homework.submissions.length} تسليم</span>
                 </div>
                 <Card>
                   <CardContent className="p-0">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="bg-surface-secondary border-b border-border">
-                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨</th>
-                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ® ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦</th>
-                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©</th>
-                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€¦ط¸â€‍ط·آ§ط·آ­ط·آ¸ط·آ§ط·ع¾</th>
-                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©</th>
+                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">الطالب</th>
+                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">تاريخ التسليم</th>
+                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">الدرجة</th>
+                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">الملاحظات</th>
+                          <th className="text-right px-4 py-3 font-semibold text-text-secondary">الحالة</th>
                           <th className="text-right px-4 py-3 font-semibold text-text-secondary" />
                         </tr>
                       </thead>
                       <tbody>
                         {filteredSubmissions.length === 0 ? (
                           <tr>
-                            <td colSpan={6} className="text-center py-12 text-text-tertiary">ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ط·آ§ط·ع¾</td>
+                            <td colSpan={6} className="text-center py-12 text-text-tertiary">لا توجد تسليمات</td>
                           </tr>
                         ) : (
                           filteredSubmissions.map((sub) => (
@@ -372,32 +372,32 @@ export default function HomeworkDetailPage() {
             <TabPanel id="settings" activeTab={activeTab}>
               <Card>
                 <CardHeader>
-                  <CardTitle>ط·آ¥ط·آ¹ط·آ¯ط·آ§ط·آ¯ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨</CardTitle>
+                  <CardTitle>إعدادات الواجب</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6 max-w-2xl">
-                  <Input label="ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨" defaultValue={homework.title} />
+                  <Input label="عنوان الواجب" defaultValue={homework.title} />
                   <div className="space-y-1.5">
-                    <label className="block text-sm font-medium text-text">ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾</label>
+                    <label className="block text-sm font-medium text-text">الوصف</label>
                     <Textarea defaultValue={homework.description} rows={4} />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <Input label="ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ© ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ط¸ظ¹ط·آ©" type="number" defaultValue={homework.totalGrade} />
-                    <Input label="ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¹ط·آ¯ ط·آ§ط¸â€‍ط¸â€ ط¸â€،ط·آ§ط·آ¦ط¸ظ¹" type="date" defaultValue={homework.deadline.toISOString().split("T")[0]} />
+                    <Input label="الدرجة الكلية" type="number" defaultValue={homework.totalGrade} />
+                    <Input label="الموعد النهائي" type="date" defaultValue={homework.deadline.toISOString().split("T")[0]} />
                   </div>
                   <Select
-                    label="ط·آ§ط¸â€‍ط¸â€ ط¸ث†ط·آ¹"
+                    label="النوع"
                     options={[
-                      { value: "quiz", label: "ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ±" },
+                      { value: "quiz", label: "اختبار" },
                       { value: "pdf", label: "PDF" },
-                      { value: "writing", label: "ط¸ئ’ط·ع¾ط·آ§ط·آ¨ط¸ظ¹" },
-                      { value: "mixed", label: "ط¸â€¦ط·ع¾ط¸â€ ط¸ث†ط·آ¹" },
+                      { value: "writing", label: "كتابي" },
+                      { value: "mixed", label: "متنوع" },
                     ]}
                     defaultValue={homework.type}
                   />
                   <div className="flex items-center justify-between py-3 border-b border-border">
                     <div>
-                      <p className="text-sm font-medium text-text">ط·آ§ط¸â€‍ط·آ³ط¸â€¦ط·آ§ط·آ­ ط·آ¨ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦</p>
-                      <p className="text-xs text-text-tertiary">ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط¸â€‍ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨</p>
+                      <p className="text-sm font-medium text-text">السماح بإعادة التسليم</p>
+                      <p className="text-xs text-text-tertiary">يمكن للطلاب إعادة تسليم الواجب</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" defaultChecked={homework.allowResubmit} className="sr-only peer" />
@@ -406,8 +406,8 @@ export default function HomeworkDetailPage() {
                   </div>
                   <div className="flex items-center justify-between py-3 border-b border-border">
                     <div>
-                      <p className="text-sm font-medium text-text">ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦</p>
-                      <p className="text-xs text-text-tertiary">ط·آ§ط¸â€‍ط·آ³ط¸â€¦ط·آ§ط·آ­ ط¸â€‍ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ¨ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨</p>
+                      <p className="text-sm font-medium text-text">إعادة التسليم</p>
+                      <p className="text-xs text-text-tertiary">السماح للطلاب بإعادة تسليم الواجب</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" defaultChecked={homework.allowResubmit} className="sr-only peer" />
@@ -415,8 +415,8 @@ export default function HomeworkDetailPage() {
                     </label>
                   </div>
                   <div className="flex items-center gap-3 pt-4">
-                    <Button variant="primary" leftIcon={<HiOutlineSave className="w-4 h-4" />}>ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·ط›ط¸ظ¹ط¸ظ¹ط·آ±ط·آ§ط·ع¾</Button>
-                    <Button variant="secondary">ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+                    <Button variant="primary" leftIcon={<HiOutlineSave className="w-4 h-4" />}>حفظ التغييرات</Button>
+                    <Button variant="secondary">إلغاء</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -428,7 +428,7 @@ export default function HomeworkDetailPage() {
       <Modal
         isOpen={!!gradingSubmission}
         onClose={() => setGradingSubmission(null)}
-        title="ط·ع¾ط·آµط·آ­ط¸ظ¹ط·آ­ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨"
+        title="تصحيح الواجب"
         subtitle={gradingSubmission?.studentName}
         size="md"
       >
@@ -438,23 +438,23 @@ export default function HomeworkDetailPage() {
               <HiOutlineUsers className="w-5 h-5 text-text-tertiary" />
               <div>
                 <p className="text-sm font-medium text-text">{gradingSubmission.studentName}</p>
-                <p className="text-xs text-text-tertiary">ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦: {gradingSubmission.submittedAt.toLocaleDateString("ar-EG")}</p>
+                <p className="text-xs text-text-tertiary">طھظ… التسليم: {gradingSubmission.submittedAt.toLocaleDateString("ar-EG")}</p>
               </div>
             </div>
             <Input
-              label="ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©"
+              label="الدرجة"
               type="number"
               value={gradeInput}
               onChange={(e) => setGradeInput(e.target.value)}
               max={homework.totalGrade}
             />
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-text">ط·آ§ط¸â€‍ط¸â€¦ط¸â€‍ط·آ§ط·آ­ط·آ¸ط·آ§ط·ع¾</label>
+              <label className="block text-sm font-medium text-text">الملاحظات</label>
               <Textarea
                 value={feedbackInput}
                 onChange={(e) => setFeedbackInput(e.target.value)}
                 rows={4}
-                placeholder="ط·آ£ط·آ¶ط¸ظ¾ ط¸â€¦ط¸â€‍ط·آ§ط·آ­ط·آ¸ط·آ§ط·ع¾ط¸ئ’ ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦..."
+                placeholder="أضف ملاحظاتك على التسليم..."
               />
             </div>
             <div className="flex items-center gap-3 pt-2">
@@ -462,9 +462,9 @@ export default function HomeworkDetailPage() {
                 leftIcon={<HiOutlineSave className="w-4 h-4" />}
                 onClick={() => setGradingSubmission(null)}
               >
-                ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ­ط¸ظ¹ط·آ­
+                حفظ التصحيح
               </Button>
-              <Button variant="ghost" onClick={() => setGradingSubmission(null)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+              <Button variant="ghost" onClick={() => setGradingSubmission(null)}>إلغاء</Button>
             </div>
           </div>
         )}

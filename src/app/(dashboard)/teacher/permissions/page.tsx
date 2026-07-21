@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -22,8 +22,8 @@ import { mockPermissionRoles } from "@/lib/mock/data"
 
 const actions = ["canView", "canCreate", "canEdit", "canDelete", "canPrint", "canExport", "canApprove", "canManage"] as const
 const actionLabels: Record<string, string> = {
-  canView: "ط·آ¹ط·آ±ط·آ¶", canCreate: "ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ", canEdit: "ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍", canDelete: "ط·آ­ط·آ°ط¸ظ¾",
-  canPrint: "ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©", canExport: "ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±", canApprove: "ط·آ§ط·آ¹ط·ع¾ط¸â€¦ط·آ§ط·آ¯", canManage: "ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ©",
+  canView: "عرض", canCreate: "إنشاء", canEdit: "تعديل", canDelete: "حذف",
+  canPrint: "طباعة", canExport: "تصدير", canApprove: "اعتماد", canManage: "إدارة",
 }
 
 export default function PermissionsPage() {
@@ -63,7 +63,7 @@ export default function PermissionsPage() {
         },
       }
     }))
-    toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ©")
+    toast.success("طھظ… تحديث الصلاحية")
   }
 
   const handleAddRole = () => {
@@ -83,13 +83,13 @@ export default function PermissionsPage() {
     setRoles((prev) => [...prev, role])
     setShowAddModal(false)
     setNewRole({ name: "", description: "" })
-    toast.success("ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­")
+    toast.success("طھظ… إضافة الدور بنجاح")
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" />
+        <DashboardHeader title="الصلاحيات" subtitle="إدارة أدوار الصلاحيات" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -97,17 +97,17 @@ export default function PermissionsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾" />
+      <DashboardHeader title="الصلاحيات" subtitle="إدارة أدوار الصلاحيات" />
       <div className="flex justify-end">
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
-          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¯ط¸ث†ط·آ±
+          إضافة دور
         </Button>
       </div>
 
       {isLoading ? (
         <CardSkeleton count={3} />
       ) : roles.length === 0 ? (
-        <EmptyState icon={HiOutlineShieldCheck} title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ±" description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ£ط¸ظ¹ ط·آ£ط·آ¯ط¸ث†ط·آ§ط·آ± ط·آµط¸â€‍ط·آ§ط·آ­ط¸ظ¹ط·آ§ط·ع¾ ط·آ¨ط·آ¹ط·آ¯" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¯ط¸ث†ط·آ±</Button>} />
+        <EmptyState icon={HiOutlineShieldCheck} title="لا توجد أدوار" description="لم ظٹطھظ… إضافة ط£ظٹ أدوار صلاحيات بعد" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة دور</Button>} />
       ) : (
         <div className="grid grid-cols-1 gap-4">
           {roles.map((role) => (
@@ -124,7 +124,7 @@ export default function PermissionsPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge variant={role.isSystem ? "premium" : "neutral"} size="sm">{role.isSystem ? "ط¸â€ ط·آ¸ط·آ§ط¸â€¦" : "ط¸â€¦ط·آ®ط·آµط·آµ"}</Badge>
+                    <Badge variant={role.isSystem ? "premium" : "neutral"} size="sm">{role.isSystem ? "نظام" : "مخصص"}</Badge>
                     <div className="flex items-center gap-1 text-sm text-text-tertiary">
                       <HiOutlineUserGroup className="w-4 h-4" />
                       <span>{role.userCount}</span>
@@ -140,7 +140,7 @@ export default function PermissionsPage() {
                       <table className="w-full text-sm border-collapse">
                         <thead>
                           <tr>
-                            <th className="text-right px-3 py-2 font-semibold text-text-secondary border-b border-border whitespace-nowrap">ط·آ§ط¸â€‍ط¸ث†ط·آ­ط·آ¯ط·آ©</th>
+                            <th className="text-right px-3 py-2 font-semibold text-text-secondary border-b border-border whitespace-nowrap">الوحدة</th>
                             {actions.map((action) => (
                               <th key={action} className="text-center px-2 py-2 font-semibold text-text-secondary border-b border-border whitespace-nowrap text-xs">{actionLabels[action]}</th>
                             ))}
@@ -184,13 +184,13 @@ export default function PermissionsPage() {
         </div>
       )}
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ¯ط¸ث†ط·آ± ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="إضافة دور جديد" size="md">
         <div className="space-y-4">
-          <Input label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±" value={newRole.name} onChange={(e) => setNewRole({ ...newRole, name: e.target.value })} placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±" />
-          <Input label="ط·آ§ط¸â€‍ط¸ث†ط·آµط¸ظ¾" value={newRole.description} onChange={(e) => setNewRole({ ...newRole, description: e.target.value })} placeholder="ط¸ث†ط·آµط¸ظ¾ ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±" />
+          <Input label="اسم الدور" value={newRole.name} onChange={(e) => setNewRole({ ...newRole, name: e.target.value })} placeholder="أدخل اسم الدور" />
+          <Input label="الوصف" value={newRole.description} onChange={(e) => setNewRole({ ...newRole, description: e.target.value })} placeholder="وصف الدور" />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1" onClick={handleAddRole} disabled={!newRole.name}>ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±</Button>
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <Button variant="primary" className="flex-1" onClick={handleAddRole} disabled={!newRole.name}>إضافة الدور</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>

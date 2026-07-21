@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -46,93 +46,93 @@ interface ArchiveItem {
 }
 
 const tabConfig: { id: ArchiveTab; label: string; icon: React.ReactNode }[] = [
-  { id: "students", label: "ط§ظ„ط·ظ„ط§ط¨", icon: <HiOutlineUserGroup className="w-4 h-4" /> },
-  { id: "courses", label: "ط§ظ„ظƒظˆط±ط³ط§طھ", icon: <HiOutlineBookOpen className="w-4 h-4" /> },
-  { id: "exams", label: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", icon: <HiOutlineAcademicCap className="w-4 h-4" /> },
-  { id: "invoices", label: "ط§ظ„ظپظˆط§طھظٹط±", icon: <HiOutlineDocumentText className="w-4 h-4" /> },
-  { id: "messages", label: "ط§ظ„ط±ط³ط§ط¦ظ„", icon: <HiOutlineMail className="w-4 h-4" /> },
+  { id: "students", label: "الطلاب", icon: <HiOutlineUserGroup className="w-4 h-4" /> },
+  { id: "courses", label: "الكورسات", icon: <HiOutlineBookOpen className="w-4 h-4" /> },
+  { id: "exams", label: "الامتحانات", icon: <HiOutlineAcademicCap className="w-4 h-4" /> },
+  { id: "invoices", label: "الفواتير", icon: <HiOutlineDocumentText className="w-4 h-4" /> },
+  { id: "messages", label: "الرسائل", icon: <HiOutlineMail className="w-4 h-4" /> },
 ]
 
 const names: Record<ArchiveTab, string[]> = {
   students: [
-    "ط£ط­ظ…ط¯ ط®ط§ظ„ط¯ ط¹ط¨ط¯ ط§ظ„ظ„ظ‡",
-    "ظ…ط±ظˆط§ظ† ط³ط§ظ…ظٹ ط¹ط§ط¯ظ„",
-    "ظ„ظٹظ„ظ‰ ظ…ط­ظ…ط¯ ط­ط³ظ†",
-    "ظ†ظˆط± ط¹ط¨ط¯ ط§ظ„ط±ط­ظ…ظ† ط¹ظ„ظٹ",
-    "ظٹظˆط³ظپ ط¹ظ…ط±ظˆ ط¥ط¨ط±ط§ظ‡ظٹظ…",
-    "ط³ط§ط±ط© ط£ط­ظ…ط¯ ظ…ط­ظ…ظˆط¯",
-    "ط¹ظ…ط± ظ‡ط§ظ†ظٹ ط¹ط«ظ…ط§ظ†",
-    "ط¯ظٹظ†ط§ ظˆظ„ظٹط¯ ظƒظ…ط§ظ„",
-    "ط®ط§ظ„ط¯ ظ…طµط·ظپظ‰ ط´ط±ظٹظپ",
-    "ط±ظٹظ… ط¬ظ…ط§ظ„ ط§ظ„ط¯ظٹظ†",
+    "أحمد خالد عبد الله",
+    "مروان سامي عادل",
+    "ليلى محمد حسن",
+    "نور عبد الرحمن علي",
+    "يوسف عمرو إبراهيم",
+    "سارة أحمد محمود",
+    "عمر هاني عثمان",
+    "دينا وليد كمال",
+    "خالد مصطفى شريف",
+    "ريم جمال الدين",
   ],
   courses: [
-    "ط§ظ„ظ†ط­ظˆ ط§ظ„ظ…طھظ‚ط¯ظ… - طھط±ظ… ط«ط§ظ†",
-    "ط§ظ„ط¨ظ„ط§ط؛ط© ظ„ظ„ظ†ط¸ط§ظ… ط§ظ„ط­ط¯ظٹط«",
-    "ط§ظ„ظ†طµظˆطµ ط§ظ„ط£ط¯ط¨ظٹط© ط«ط§ظ†ظٹط© ط«ط§ظ†ظˆظٹ",
-    "ظ‚ظˆط§ط¹ط¯ ط§ظ„ط¥ظ…ظ„ط§ط، ظˆط§ظ„ط®ط·",
-    "ط§ظ„طھط¹ط¨ظٹط± ط§ظ„ط¥ط¨ط¯ط§ط¹ظٹ",
-    "ط§ظ„ظ…ط±ط§ط¬ط¹ط© ط§ظ„ظ†ظ‡ط§ط¦ظٹط© ط§ظ„ط´ط§ظ…ظ„ط©",
-    "ط§ظ„ظ†ط­ظˆ ط§ظ„طھط·ط¨ظٹظ‚ظٹ",
-    "ظپظ‚ظ‡ ط§ظ„ظ„ط؛ط© ط§ظ„ط¹ط±ط¨ظٹط©",
-    "ط§ظ„ط£ط¯ط¨ ط§ظ„ط­ط¯ظٹط« ظˆط§ظ„ظ…ط¹ط§طµط±",
-    "ط§ظ„ظ†ظ‚ط¯ ط§ظ„ط£ط¯ط¨ظٹ",
+    "النحو المتقدم - ترم ثان",
+    "البلاغة للنظام الحديث",
+    "النصوص الأدبية ثانية ثانوي",
+    "قواعد الإملاء والخط",
+    "التعبير الإبداعي",
+    "المراجعة النهائية الشاملة",
+    "النحو التطبيقي",
+    "فقه اللغة العربية",
+    "الأدب الحديث والمعاصر",
+    "النقد الأدبي",
   ],
   exams: [
-    "ط§ط®طھط¨ط§ط± ط§ظ„ظ†ط­ظˆ ط§ظ„ط´ظ‡ط±ظٹ - ظ…ط§ط±ط³",
-    "ط§ظ…طھط­ط§ظ† ط§ظ„ط¨ظ„ط§ط؛ط© ظ…ظ†طھطµظپ ط§ظ„طھط±ظ…",
-    "ط§ط®طھط¨ط§ط± ط§ظ„ظ†طµظˆطµ ط§ظ„ط£ط¯ط¨ظٹط©",
-    "ط§ظ…طھط­ط§ظ† ط§ظ„طھط¹ط¨ظٹط± ط§ظ„ظ†ظ‡ط§ط¦ظٹ",
-    "ط§ط®طھط¨ط§ط± ط§ظ„ط¥ظ…ظ„ط§ط، ط§ظ„طھظ‚ظٹظٹظ…ظٹ",
-    "ط§ظ…طھط­ط§ظ† ط§ظ„ظ…ط±ط§ط¬ط¹ط© ط§ظ„ط£ظˆظ„ظ‰",
-    "ط§ط®طھط¨ط§ط± ط§ظ„ظپطµظ„ ط§ظ„ط¯ط±ط§ط³ظٹ ط§ظ„ط£ظˆظ„",
-    "ط§ظ…طھط­ط§ظ† طھط¬ط±ظٹط¨ظٹ 3",
-    "ط§ط®طھط¨ط§ط± ط§ظ„طھظ‚ظٹظٹظ… ط§ظ„ط£ط³ط¨ظˆط¹ظٹ",
-    "ط§ظ…طھط­ط§ظ† ظ†ظ‡ط§ظٹط© ط§ظ„طھط±ظ…",
+    "اختبار النحو الشهري - مارس",
+    "امتحان البلاغة منتصف الترم",
+    "اختبار النصوص الأدبية",
+    "امتحان التعبير النهائي",
+    "اختبار الإملاء التقييمي",
+    "امتحان المراجعة الأولى",
+    "اختبار الفصل الدراسي الأول",
+    "امتحان تجريبي 3",
+    "اختبار التقييم الأسبوعي",
+    "امتحان نهاية الترم",
   ],
   invoices: [
-    "ظپط§طھظˆط±ط© ط§ط´طھط±ط§ظƒ ط£ط­ظ…ط¯ ط®ط§ظ„ط¯",
-    "ظپط§طھظˆط±ط© طھط¬ط¯ظٹط¯ ظ„ظٹظ„ظ‰ ظ…ط­ظ…ط¯",
-    "ظپط§طھظˆط±ط© ظƒظˆط±ط³ ط§ظ„ظ†ط­ظˆ ظ„ظٹظˆط³ظپ",
-    "ظپط§طھظˆط±ط© ط¨ط§ظ‚ط© ط¹ظ…ط± ط§ظ„ط³ظ†ظˆظٹط©",
-    "ظپط§طھظˆط±ط© ط§ط´طھط±ط§ظƒ ط¯ظٹظ†ط§ ظˆظ„ظٹط¯",
-    "ظپط§طھظˆط±ط© ظƒظˆط±ط³ ط§ظ„ط¨ظ„ط§ط؛ط© ظ„ظ†ظˆط±",
-    "ظپط§طھظˆط±ط© طھط¬ط¯ظٹط¯ ظ…ط±ظˆط§ظ† ط³ط§ظ…ظٹ",
-    "ظپط§طھظˆط±ط© ط¨ط§ظ‚ط© ط³ط§ط±ط© ط§ظ„ط«ظ„ط§ط«ظٹط©",
-    "ظپط§طھظˆط±ط© ط§ط´طھط±ط§ظƒ ط®ط§ظ„ط¯ ظ…طµط·ظپظ‰",
-    "ظپط§طھظˆط±ط© ظƒظˆط±ط³ ط§ظ„طھط¹ط¨ظٹط± ظ„ط±ظٹظ…",
+    "فاتورة اشتراك أحمد خالد",
+    "فاتورة تجديد ليلى محمد",
+    "فاتورة كورس النحو ليوسف",
+    "فاتورة باقة عمر السنوية",
+    "فاتورة اشتراك دينا وليد",
+    "فاتورة كورس البلاغة لنور",
+    "فاتورة تجديد مروان سامي",
+    "فاتورة باقة سارة الثلاثية",
+    "فاتورة اشتراك خالد مصطفى",
+    "فاتورة كورس التعبير لريم",
   ],
   messages: [
-    "ط§ط³طھظپط³ط§ط± ط¹ظ† ظ†طھظٹط¬ط© ط§ظ„ط§ظ…طھط­ط§ظ†",
-    "ط·ظ„ط¨ طھط£ط¬ظٹظ„ ظˆط§ط¬ط¨ ط§ظ„ظ†ط­ظˆ",
-    "ط´ظƒظˆظ‰ ظ…ظ† ظ…ط­طھظˆظ‰ ط§ظ„ظپظٹط¯ظٹظˆ",
-    "ط§ط³طھظپط³ط§ط± ط¹ظ† ظ…ظˆط¹ط¯ ط§ظ„ظ…ط­ط§ط¶ط±ط©",
-    "ط·ظ„ط¨ ظ…ط±ط§ط¬ط¹ط© ط§ظ„ط¯ط±ط³ ط§ظ„ط«ط§ظ„ط«",
-    "ط´ظƒط± ظˆطھظ‚ط¯ظٹط± ظ„ظ„ظ…ط¯ط±ط³",
-    "ظ…ط´ظƒظ„ط© ظپظٹ طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„",
-    "ط·ظ„ط¨ ط¥ط¹ط§ط¯ط© طھطµط­ظٹط­ ط§ظ„ط§ظ…طھط­ط§ظ†",
-    "ط§ط³طھظپط³ط§ط± ط¹ظ† ط¬ط¯ظˆظ„ ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ",
-    "ط·ظ„ط¨ طھط­ظˆظٹظ„ ظ…ط¬ظ…ظˆط¹ط©",
+    "استفسار عن نتيجة الامتحان",
+    "طلب تأجيل واجب النحو",
+    "شكوى من محتوى الفيديو",
+    "استفسار عن موعد المحاضرة",
+    "طلب مراجعة الدرس الثالث",
+    "شكر وتقدير للمدرس",
+    "مشكلة ظپظٹ تسجيل الدخول",
+    "طلب إعادة تصحيح الامتحان",
+    "استفسار عن جدول الامتحانات",
+    "طلب تحويل مجموعة",
   ],
 }
 
 const staffNames = [
-  "ط£ط­ظ…ط¯ ظ…ط­ظ…ط¯ (ظ…ط¯ظٹط± ط§ظ„ظ†ط¸ط§ظ…)",
-  "ظ†ظˆط±ط§ ط­ط³ظ† (ط¯ط¹ظ… ظپظ†ظٹ)",
-  "ظ…ط­ظ…ط¯ ط¹ظ„ظٹ (ظ…ط´ط±ظپ)",
-  "ط³ط§ظ…ظٹ ط¹ط¨ط¯ ط§ظ„ظ„ظ‡ (ظ…ط­ط§ط³ط¨)",
-  "ظ‡ظ†ط¯ ظ…طµط·ظپظ‰ (ظ…ط´ط±ظپ ظ…ط­طھظˆظ‰)",
+  "أحمد محمد (مدير النظام)",
+  "نورا حسن (دعم فني)",
+  "محمد علي (مشرف)",
+  "سامي عبد الله (محاسب)",
+  "هند مصطفى (مشرف محتوى)",
 ]
 
 const reasons = [
-  "ط؛ظٹط± ظ†ط´ط· ظ„ظ…ط¯ط© 6 ط£ط´ظ‡ط±",
-  "ط§ظ†طھظ‡ط§ط، ط§ظ„ط§ط´طھط±ط§ظƒ",
-  "ط·ظ„ط¨ ط­ط°ظپ ط§ظ„ط­ط³ط§ط¨",
-  "ط¨ظٹط§ظ†ط§طھ ظ…ظƒط±ط±ط©",
-  "ط§ظ†طھظ‡ط§ط، ط¯ظˆط±ط© ط§ظ„ظƒظˆط±ط³",
-  "ط·ظ„ط¨ ط§ظ„ظ…ط¹ظ„ظ…",
-  "طھط¬ط§ظˆط² ط§ظ„ظ…ط¯ط© ط§ظ„ظ‚ط§ظ†ظˆظ†ظٹط©",
-  "ط¥ظ„ط؛ط§ط، ط§ظ„ط§ط´طھط±ط§ظƒ",
+  "غير نشط لمدة 6 أشهر",
+  "انتهاء الاشتراك",
+  "طلب حذف الحساب",
+  "بيانات مكررة",
+  "انتهاء دورة الكورس",
+  "طلب المعلم",
+  "تجاوز المدة القانونية",
+  "إلغاء الاشتراك",
 ]
 
 function generateArchiveData(tab: ArchiveTab): ArchiveItem[] {
@@ -153,10 +153,10 @@ function generateArchiveData(tab: ArchiveTab): ArchiveItem[] {
         : `MSG-${String(i + 1).padStart(4, "0")}`,
       archivedDate: new Date(year, month - 1, day),
       archivedBy: staffNames[i % staffNames.length],
-      size: tab === "messages" ? `${Math.floor(det() * 50) + 5} ظƒظٹظ„ظˆط¨ط§ظٹطھ`
-        : tab === "exams" ? `${Math.floor(det() * 10) + 5} ط£ط³ط¦ظ„ط©`
-        : tab === "invoices" ? `${Math.floor(det() * 2000) + 500} ط±.ط³`
-        : `${Math.floor(det() * 500) + 50} ظ…ظٹط¬ط§ط¨ط§ظٹطھ`,
+      size: tab === "messages" ? `${Math.floor(det() * 50) + 5} كيلوبايت`
+        : tab === "exams" ? `${Math.floor(det() * 10) + 5} أسئلة`
+        : tab === "invoices" ? `${Math.floor(det() * 2000) + 500} ر.س`
+        : `${Math.floor(det() * 500) + 50} ميجابايت`,
       reason: reasons[i % reasons.length],
     })
   }
@@ -172,16 +172,16 @@ const allArchiveData: Record<ArchiveTab, ArchiveItem[]> = {
 }
 
 const autoArchiveRules = [
-  { label: "ط£ط±ط´ظپط© طھظ„ظ‚ط§ط¦ظٹط© ظ„ظ„ط·ظ„ط§ط¨ ط؛ظٹط± ط§ظ„ظ†ط´ط·ظٹظ†", value: "6 ط£ط´ظ‡ط±", icon: HiOutlineUserGroup },
-  { label: "ط£ط±ط´ظپط© ط§ظ„ظƒظˆط±ط³ط§طھ ط§ظ„ظ…ظ†طھظ‡ظٹط©", value: "ط´ظ‡ط± ط¨ط¹ط¯ ط§ظ„ط§ظ†طھظ‡ط§ط،", icon: HiOutlineBookOpen },
-  { label: "ط£ط±ط´ظپط© ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ ط§ظ„ظ‚ط¯ظٹظ…ط©", value: "ط³ظ†ط© ظˆط§ط­ط¯ط©", icon: HiOutlineAcademicCap },
-  { label: "ط£ط±ط´ظپط© ط§ظ„ظپظˆط§طھظٹط± ط§ظ„ظ…ط¯ظپظˆط¹ط© ظ‚ط¯ظٹظ…ط§ظ‹", value: "ط³ظ†طھط§ظ†", icon: HiOutlineDocumentText },
-  { label: "ط£ط±ط´ظپط© ط§ظ„ط±ط³ط§ظ„ط© ط§ظ„ظ…ظ‚ط±ظˆط،ط©", value: "3 ط£ط´ظ‡ط±", icon: HiOutlineMail },
+  { label: "أرشفة تلقائية للطلاب غير النشطين", value: "6 أشهر", icon: HiOutlineUserGroup },
+  { label: "أرشفة الكورسات المنتهية", value: "شهر بعد الانتهاء", icon: HiOutlineBookOpen },
+  { label: "أرشفة الامتحانات القديمة", value: "سنة واحدة", icon: HiOutlineAcademicCap },
+  { label: "أرشفة الفواتير المدفوعة قديماً", value: "سنتان", icon: HiOutlineDocumentText },
+  { label: "أرشفة الرسالة المقروءة", value: "3 أشهر", icon: HiOutlineMail },
 ]
 
 const monthNames = [
-  "ظٹظ†ط§ظٹط±", "ظپط¨ط±ط§ظٹط±", "ظ…ط§ط±ط³", "ط£ط¨ط±ظٹظ„", "ظ…ط§ظٹظˆ", "ظٹظˆظ†ظٹظˆ",
-  "ظٹظˆظ„ظٹظˆ", "ط£ط؛ط³ط·ط³", "ط³ط¨طھظ…ط¨ط±", "ط£ظƒطھظˆط¨ط±", "ظ†ظˆظپظ…ط¨ط±", "ط¯ظٹط³ظ…ط¨ط±",
+  "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+  "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر",
 ]
 
 export default function ArchivePage() {
@@ -248,8 +248,8 @@ export default function ArchivePage() {
     if (!restoreTarget) return
     addToast({
       type: "success",
-      title: "طھظ…طھ ط§ظ„ط§ط³طھط¹ط§ط¯ط© ط¨ظ†ط¬ط§ط­",
-      message: `طھظ…طھ ط§ط³طھط¹ط§ط¯ط© "${restoreTarget.name}" ظ…ظ† ط§ظ„ط£ط±ط´ظٹظپ`,
+      title: "طھظ…طھ الاستعادة بنجاح",
+      message: `طھظ…طھ استعادة "${restoreTarget.name}" من الأرشيف`,
     })
     setRestoreTarget(null)
   }
@@ -257,7 +257,7 @@ export default function ArchivePage() {
   const columns = [
     {
       key: "name",
-      header: "ط§ظ„ط§ط³ظ… / ط§ظ„ظ…ط¹ط±ظپ",
+      header: "الاسم / المعرف",
       render: (item: ArchiveItem) => (
         <div>
           <p className="font-medium text-text">{item.name}</p>
@@ -267,28 +267,28 @@ export default function ArchivePage() {
     },
     {
       key: "archivedDate",
-      header: "طھط§ط±ظٹط® ط§ظ„ط£ط±ط´ظپط©",
+      header: "تاريخ الأرشفة",
       render: (item: ArchiveItem) => (
         <span className="text-sm text-text-secondary">{formatDate(item.archivedDate)}</span>
       ),
     },
     {
       key: "archivedBy",
-      header: "ط¨ظˆط§ط³ط·ط©",
+      header: "بواسطة",
       render: (item: ArchiveItem) => (
         <span className="text-sm text-text-secondary">{item.archivedBy}</span>
       ),
     },
     {
       key: "size",
-      header: activeTab === "exams" ? "ط¹ط¯ط¯ ط§ظ„ط£ط³ط¦ظ„ط©" : activeTab === "invoices" ? "ط§ظ„ظ…ط¨ظ„ط؛" : "ط§ظ„ط­ط¬ظ…",
+      header: activeTab === "exams" ? "عدد الأسئلة" : activeTab === "invoices" ? "المبلغ" : "الحجم",
       render: (item: ArchiveItem) => (
         <Badge variant="neutral" size="sm">{item.size}</Badge>
       ),
     },
     {
       key: "reason",
-      header: "ط³ط¨ط¨ ط§ظ„ط£ط±ط´ظپط©",
+      header: "سبب الأرشفة",
       render: (item: ArchiveItem) => (
         <Badge variant="info" size="sm">{item.reason}</Badge>
       ),
@@ -306,7 +306,7 @@ export default function ArchivePage() {
               setRestoreTarget(item)
             }}
           >
-            ط§ط³طھط¹ط§ط¯ط©
+            استعادة
           </Button>
         </div>
       ),
@@ -315,7 +315,7 @@ export default function ArchivePage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ظ…ط±ظƒط² ط§ظ„ط£ط±ط´ظٹظپ" subtitle="ط¥ط¯ط§ط±ط© ط§ظ„ط¹ظ†ط§طµط± ط§ظ„ظ…ط¤ط±ط´ظپط© ظˆط§ط³طھط¹ط§ط¯طھظ‡ط§" />
+      <DashboardHeader title="مركز الأرشيف" subtitle="إدارة العناصر المؤرشفة واستعادتها" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -323,29 +323,29 @@ export default function ArchivePage() {
         className="grid grid-cols-2 lg:grid-cols-4 gap-4"
       >
         <StatsCard
-          title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ط¤ط±ط´ظپ"
+          title="إجمالي المؤرشف"
           value={totalArchived}
           icon={HiOutlineArchive}
           color="primary"
           delay={0}
         />
         <StatsCard
-          title="ظ…ط¤ط±ط´ظپ ظ‡ط°ط§ ط§ظ„ط´ظ‡ط±"
+          title="مؤرشف هذا الشهر"
           value={archivedThisMonth}
           icon={HiOutlineCalendar}
           color="warning"
           delay={0.1}
         />
         <StatsCard
-          title="طھظ…طھ ط§ظ„ط§ط³طھط¹ط§ط¯ط©"
+          title="طھظ…طھ الاستعادة"
           value={Math.floor(det() * 30) + 15}
           icon={HiOutlineRefresh}
           color="success"
           delay={0.2}
         />
         <StatsCard
-          title="ط§ظ„ظ…ط³ط§ط­ط© ط§ظ„ظ…ط³طھط®ط¯ظ…ط©"
-          value={`${Math.floor(det() * 8) + 4} ط¬ظٹط¬ط§ط¨ط§ظٹطھ`}
+          title="المساحة المستخدمة"
+          value={`${Math.floor(det() * 8) + 4} جيجابايت`}
           icon={HiOutlineDatabase}
           color="info"
           delay={0.3}
@@ -392,7 +392,7 @@ export default function ArchivePage() {
               <SearchInput
                 value={searchQuery}
                 onChange={setSearchQuery}
-                placeholder="ط¨ط­ط« ظپظٹ ط§ظ„ط¹ظ†ط§طµط± ط§ظ„ظ…ط¤ط±ط´ظپط©..."
+                placeholder="بحث ظپظٹ العناصر المؤرشفة..."
               />
             </div>
             <div className="flex items-center gap-2">
@@ -407,7 +407,7 @@ export default function ArchivePage() {
                 )}
               >
                 <HiOutlineFilter className="w-4 h-4" />
-                <span className="text-sm">طھطµظپظٹط© ط¨ط§ظ„طھط§ط±ظٹط®</span>
+                <span className="text-sm">تصفية بالتاريخ</span>
               </button>
               <button
                 type="button"
@@ -415,7 +415,7 @@ export default function ArchivePage() {
                 className="flex items-center gap-2 p-2.5 rounded-xl border border-border text-text-secondary hover:bg-surface-secondary transition-all duration-200"
               >
                 <HiOutlineShieldCheck className="w-4 h-4" />
-                <span className="text-sm hidden sm:inline">ط¥ط¹ط¯ط§ط¯ط§طھ ط§ظ„ط£ط±ط´ظپط©</span>
+                <span className="text-sm hidden sm:inline">إعدادات الأرشفة</span>
               </button>
             </div>
           </div>
@@ -429,7 +429,7 @@ export default function ArchivePage() {
             >
               <div className="flex items-center gap-2">
                 <HiOutlineCalendar className="w-4 h-4 text-text-tertiary" />
-                <span className="text-sm text-text-secondary">ظ…ظ†:</span>
+                <span className="text-sm text-text-secondary">من:</span>
                 <input
                   type="date"
                   value={dateFrom}
@@ -439,7 +439,7 @@ export default function ArchivePage() {
               </div>
               <div className="flex items-center gap-2">
                 <HiOutlineCalendar className="w-4 h-4 text-text-tertiary" />
-                <span className="text-sm text-text-secondary">ط¥ظ„ظ‰:</span>
+                <span className="text-sm text-text-secondary">إلى:</span>
                 <input
                   type="date"
                   value={dateTo}
@@ -454,7 +454,7 @@ export default function ArchivePage() {
                   className="flex items-center gap-1 text-sm text-error hover:text-red-400 transition-colors"
                 >
                   <HiOutlineX className="w-4 h-4" />
-                  ظ…ط³ط­ ط§ظ„طھطµظپظٹط©
+                  مسح التصفية
                 </button>
               )}
             </motion.div>
@@ -463,8 +463,8 @@ export default function ArchivePage() {
           {currentData.length === 0 ? (
             <EmptyState
               icon={Inbox}
-              title="ظ„ط§ طھظˆط¬ط¯ ط¹ظ†ط§طµط± ظ…ط¤ط±ط´ظپط©"
-              description={searchQuery || dateFrom || dateTo ? "ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬ طھط·ط§ط¨ظ‚ ظ…ط¹ط§ظٹظٹط± ط§ظ„ط¨ط­ط«" : `ظ„ط§ طھظˆط¬ط¯ ط¹ظ†ط§طµط± ظ…ط¤ط±ط´ظپط© ظپظٹ ظ‚ط³ظ… ${tabConfig.find((t) => t.id === activeTab)?.label}`}
+              title="لا توجد عناصر مؤرشفة"
+              description={searchQuery || dateFrom || dateTo ? "لا توجد نتائج تطابق معايير البحث" : `لا توجد عناصر مؤرشفة ظپظٹ قسم ${tabConfig.find((t) => t.id === activeTab)?.label}`}
               withBackground={false}
               className="py-12"
             />
@@ -474,19 +474,19 @@ export default function ArchivePage() {
                 <thead>
                   <tr className="bg-surface-secondary border-b border-border">
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">
-                      ط§ظ„ط§ط³ظ… / ط§ظ„ظ…ط¹ط±ظپ
+                      الاسم / المعرف
                     </th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">
-                      طھط§ط±ظٹط® ط§ظ„ط£ط±ط´ظپط©
+                      تاريخ الأرشفة
                     </th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">
-                      ط¨ظˆط§ط³ط·ط©
+                      بواسطة
                     </th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">
-                      {activeTab === "exams" ? "ط¹ط¯ط¯ ط§ظ„ط£ط³ط¦ظ„ط©" : activeTab === "invoices" ? "ط§ظ„ظ…ط¨ظ„ط؛" : "ط§ظ„ط­ط¬ظ…"}
+                      {activeTab === "exams" ? "عدد الأسئلة" : activeTab === "invoices" ? "المبلغ" : "الحجم"}
                     </th>
                     <th className="text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap">
-                      ط³ط¨ط¨ ط§ظ„ط£ط±ط´ظپط©
+                      سبب الأرشفة
                     </th>
                     <th className="px-4 py-3 font-semibold text-text-secondary whitespace-nowrap w-24" />
                   </tr>
@@ -532,7 +532,7 @@ export default function ArchivePage() {
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border-2 border-primary text-primary hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-200"
                           >
                             <RotateCcw className="w-3.5 h-3.5" />
-                            ط§ط³طھط¹ط§ط¯ط©
+                            استعادة
                           </button>
                         </div>
                       </td>
@@ -555,10 +555,10 @@ export default function ArchivePage() {
             <CardTitle>
               <div className="flex items-center gap-2">
                 <HiOutlineShieldCheck className="w-5 h-5 text-primary" />
-                ظ‚ظˆط§ط¹ط¯ ط§ظ„ط£ط±ط´ظپط© ط§ظ„طھظ„ظ‚ط§ط¦ظٹط©
+                قواعد الأرشفة التلقائية
               </div>
             </CardTitle>
-            <Badge variant="primary" size="sm" dot>ظ†ط´ط·</Badge>
+            <Badge variant="primary" size="sm" dot>نشط</Badge>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -575,7 +575,7 @@ export default function ArchivePage() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-text">{rule.label}</p>
-                    <p className="text-xs text-text-tertiary mt-1">ط¨ط¹ط¯ {rule.value}</p>
+                    <p className="text-xs text-text-tertiary mt-1">بعد {rule.value}</p>
                   </div>
                   <div className="mr-auto">
                     <label className="relative inline-flex items-center cursor-pointer">
@@ -588,7 +588,7 @@ export default function ArchivePage() {
             </div>
             <div className="mt-4 p-3 rounded-xl bg-warning/10 border border-warning/20 text-xs text-warning flex items-center gap-2">
               <HiOutlineSwitchHorizontal className="w-4 h-4 shrink-0" />
-              ط³ظٹطھظ… طھط·ط¨ظٹظ‚ ظ‚ظˆط§ط¹ط¯ ط§ظ„ط£ط±ط´ظپط© ط§ظ„طھظ„ظ‚ط§ط¦ظٹط© ظپظٹ ظ…ظ†طھطµظپ ظƒظ„ ط´ظ‡ط± ظˆظپظ‚ط§ظ‹ ظ„ظ„ط¥ط¹ط¯ط§ط¯ط§طھ ط£ط¹ظ„ط§ظ‡
+              سيتم تطبيق قواعد الأرشفة التلقائية ظپظٹ منتصف كل شهر وفقاً للإعدادات أعلاه
             </div>
           </CardContent>
         </Card>
@@ -597,7 +597,7 @@ export default function ArchivePage() {
       <Modal
         isOpen={restoreTarget !== null}
         onClose={() => setRestoreTarget(null)}
-        title="طھط£ظƒظٹط¯ ط§ط³طھط¹ط§ط¯ط© ط§ظ„ط¹ظ†طµط±"
+        title="تأكيد استعادة العنصر"
         subtitle={`${tabConfig.find((t) => t.id === restoreTab)?.label} - ${restoreTarget?.name || ""}`}
         size="sm"
       >
@@ -605,27 +605,27 @@ export default function ArchivePage() {
           <div className="p-4 rounded-xl bg-surface-secondary border border-border">
             <div className="space-y-2 text-sm">
               <div className="flex items-center justify-between">
-                <span className="text-text-secondary">ط§ظ„ط§ط³ظ…:</span>
+                <span className="text-text-secondary">الاسم:</span>
                 <span className="font-medium text-text">{restoreTarget?.name}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-text-secondary">ط§ظ„ظ…ط¹ط±ظپ:</span>
+                <span className="text-text-secondary">المعرف:</span>
                 <span className="font-medium text-text">{restoreTarget?.identifier}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-text-secondary">طھط§ط±ظٹط® ط§ظ„ط£ط±ط´ظپط©:</span>
+                <span className="text-text-secondary">تاريخ الأرشفة:</span>
                 <span className="font-medium text-text">
                   {restoreTarget ? formatDate(restoreTarget.archivedDate) : ""}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-text-secondary">ط³ط¨ط¨ ط§ظ„ط£ط±ط´ظپط©:</span>
+                <span className="text-text-secondary">سبب الأرشفة:</span>
                 <span className="font-medium text-text">{restoreTarget?.reason}</span>
               </div>
             </div>
           </div>
           <p className="text-sm text-text-secondary">
-            ط³ظٹطھظ… ط§ط³طھط¹ط§ط¯ط© ظ‡ط°ط§ ط§ظ„ط¹ظ†طµط± ظ…ظ† ط§ظ„ط£ط±ط´ظٹظپ ظˆط¥ط¹ط§ط¯طھظ‡ ط¥ظ„ظ‰ ط­ط§ظ„طھظ‡ ط§ظ„ظ†ط´ط·ط©. ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯ ظ…ظ† ط§ظ„ظ…طھط§ط¨ط¹ط©طں
+            سيتم استعادة هذا العنصر من الأرشيف وإعادته إلى حالته النشطة. هل أنت متأكد من المتابعة؟
           </p>
           <div className="flex gap-3 pt-2">
             <button
@@ -634,14 +634,14 @@ export default function ArchivePage() {
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl bg-primary text-white hover:bg-primary-dark shadow-sm transition-all duration-200"
             >
               <RotateCcw className="w-4 h-4" />
-              طھط£ظƒظٹط¯ ط§ظ„ط§ط³طھط¹ط§ط¯ط©
+              تأكيد الاستعادة
             </button>
             <button
               type="button"
               onClick={() => setRestoreTarget(null)}
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl bg-surface-secondary text-text border border-border hover:bg-surface-tertiary transition-all duration-200"
             >
-              ط¥ظ„ط؛ط§ط،
+              إلغاء
             </button>
           </div>
         </div>
@@ -650,8 +650,8 @@ export default function ArchivePage() {
       <Modal
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}
-        title="ط¥ط¹ط¯ط§ط¯ط§طھ ط§ظ„ط£ط±ط´ظپط© ط§ظ„طھظ„ظ‚ط§ط¦ظٹط©"
-        subtitle="طھط®طµظٹطµ ظ‚ظˆط§ط¹ط¯ ظˆظ…ط¯ط© ط§ظ„ط£ط±ط´ظپط© ط§ظ„طھظ„ظ‚ط§ط¦ظٹط©"
+        title="إعدادات الأرشفة التلقائية"
+        subtitle="تخصيص قواعد ومدة الأرشفة التلقائية"
         size="lg"
       >
         <div className="space-y-5">
@@ -666,12 +666,12 @@ export default function ArchivePage() {
                   defaultValue={rule.value}
                   className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/30"
                 >
-                  <option value="1 ط´ظ‡ط±">ط´ظ‡ط± ظˆط§ط­ط¯</option>
-                  <option value="3 ط£ط´ظ‡ط±">3 ط£ط´ظ‡ط±</option>
-                  <option value="6 ط£ط´ظ‡ط±">6 ط£ط´ظ‡ط±</option>
-                  <option value="ط³ظ†ط© ظˆط§ط­ط¯ط©">ط³ظ†ط© ظˆط§ط­ط¯ط©</option>
-                  <option value="ط³ظ†طھط§ظ†">ط³ظ†طھط§ظ†</option>
-                  <option value="5 ط³ظ†ظˆط§طھ">5 ط³ظ†ظˆط§طھ</option>
+                  <option value="1 شهر">شهر واحد</option>
+                  <option value="3 أشهر">3 أشهر</option>
+                  <option value="6 أشهر">6 أشهر</option>
+                  <option value="سنة واحدة">سنة واحدة</option>
+                  <option value="سنتان">سنتان</option>
+                  <option value="5 سنوات">5 سنوات</option>
                 </select>
               </div>
               <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-2">
@@ -685,18 +685,18 @@ export default function ArchivePage() {
               type="button"
               onClick={() => {
                 setShowSettings(false)
-                addToast({ type: "success", title: "طھظ… ط­ظپط¸ ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ", message: "طھظ… طھط­ط¯ظٹط« ط¥ط¹ط¯ط§ط¯ط§طھ ط§ظ„ط£ط±ط´ظپط© ط§ظ„طھظ„ظ‚ط§ط¦ظٹط© ط¨ظ†ط¬ط§ط­" })
+                addToast({ type: "success", title: "طھظ… حفظ الإعدادات", message: "طھظ… تحديث إعدادات الأرشفة التلقائية بنجاح" })
               }}
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl bg-primary text-white hover:bg-primary-dark shadow-sm transition-all duration-200"
             >
-              ط­ظپط¸ ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ
+              حفظ الإعدادات
             </button>
             <button
               type="button"
               onClick={() => setShowSettings(false)}
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl bg-surface-secondary text-text border border-border hover:bg-surface-tertiary transition-all duration-200"
             >
-              ط¥ظ„ط؛ط§ط،
+              إلغاء
             </button>
           </div>
         </div>

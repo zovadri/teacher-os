@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -31,18 +31,18 @@ import { mockAnalytics, mockStats, mockPayments } from "@/lib/mock/data"
 import { formatCurrency, formatDate } from "@/lib/utils"
 
 const reportTypes = [
-  { id: "summary", label: "ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط¸â€¦ط¸â€‍ط·آ®ط·آµ", icon: HiOutlineDocumentReport, color: "primary", desc: "ط¸â€¦ط¸â€‍ط·آ®ط·آµ ط·آ´ط·آ§ط¸â€¦ط¸â€‍ ط¸â€‍ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط¸â€¦ط¸â€ ط·آµط·آ©" },
-  { id: "students", label: "ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨", icon: HiOutlineUsers, color: "info", desc: "ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ£ط·آ¯ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ث†ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦ط¸â€،ط¸â€¦" },
-  { id: "revenue", label: "ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾", icon: HiOutlineCash, color: "success", desc: "ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط·آ¨ط¸ظ¹ط·آ¹ط·آ§ط·ع¾" },
-  { id: "attendance", label: "ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±", icon: HiOutlineAcademicCap, color: "warning", desc: "ط·آ¥ط·آ­ط·آµط·آ§ط·آ¦ط¸ظ¹ط·آ§ط·ع¾ ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨" },
-  { id: "exams", label: "ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾", icon: HiOutlineChartSquareBar, color: "error", desc: "ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾" },
+  { id: "summary", label: "تقرير ملخص", icon: HiOutlineDocumentReport, color: "primary", desc: "ملخص شامل لأداء المنصة" },
+  { id: "students", label: "أداء الطلاب", icon: HiOutlineUsers, color: "info", desc: "تحليل أداء الطلاب وتقدمهم" },
+  { id: "revenue", label: "الإيرادات", icon: HiOutlineCash, color: "success", desc: "تقرير الإيرادات والمبيعات" },
+  { id: "attendance", label: "الحضور", icon: HiOutlineAcademicCap, color: "warning", desc: "إحصائيات حضور الطلاب" },
+  { id: "exams", label: "تحليل الامتحانات", icon: HiOutlineChartSquareBar, color: "error", desc: "تحليل نتائج الامتحانات" },
 ]
 
 const dateRangeOptions = [
-  { value: "7", label: "ط·آ¢ط·آ®ط·آ± 7 ط·آ£ط¸ظ¹ط·آ§ط¸â€¦" },
-  { value: "30", label: "ط·آ¢ط·آ®ط·آ± 30 ط¸ظ¹ط¸ث†ط¸â€¦" },
-  { value: "90", label: "ط·آ¢ط·آ®ط·آ± 3 ط·آ£ط·آ´ط¸â€،ط·آ±" },
-  { value: "365", label: "ط·آ¢ط·آ®ط·آ± ط·آ³ط¸â€ ط·آ©" },
+  { value: "7", label: "آخر 7 أيام" },
+  { value: "30", label: "آخر 30 يوم" },
+  { value: "90", label: "آخر 3 أشهر" },
+  { value: "365", label: "آخر سنة" },
 ]
 
 const formatOptions = [
@@ -77,17 +77,17 @@ export default function ReportsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±" subtitle="ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸ث†ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±" />
+      <DashboardHeader title="التقارير" subtitle="إنشاء وتصدير التقارير" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
-        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾" value={formatCurrency(mockAnalytics.monthlyRevenue.reduce((s, m) => s + m.revenue, 0))} icon={HiOutlineCash} color="success" />
-        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨" value={mockStats.totalStudents} icon={HiOutlineUsers} color="primary" />
-        <StatsCard title="ط·آ§ط¸â€‍ط¸â€¦ط·آ¹ط·آ§ط¸â€¦ط¸â€‍ط·آ§ط·ع¾" value={mockPayments.length} icon={HiOutlineChartSquareBar} color="info" />
+        <StatsCard title="إجمالي الإيرادات" value={formatCurrency(mockAnalytics.monthlyRevenue.reduce((s, m) => s + m.revenue, 0))} icon={HiOutlineCash} color="success" />
+        <StatsCard title="إجمالي الطلاب" value={mockStats.totalStudents} icon={HiOutlineUsers} color="primary" />
+        <StatsCard title="المعاملات" value={mockPayments.length} icon={HiOutlineChartSquareBar} color="info" />
       </motion.div>
 
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="lg:w-72 space-y-2">
-          <h3 className="text-sm font-semibold text-text mb-3">ط·آ£ط¸â€ ط¸ث†ط·آ§ط·آ¹ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±</h3>
+          <h3 className="text-sm font-semibold text-text mb-3">أنواع التقارير</h3>
           {reportTypes.map((rt) => {
             const Icon = rt.icon
             return (
@@ -116,19 +116,19 @@ export default function ReportsPage() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <CardTitle>ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±</CardTitle>
+                <CardTitle>معاينة التقرير</CardTitle>
                 <Badge variant="primary" size="sm">{reportTypes.find((r) => r.id === selectedReport)?.label}</Badge>
               </div>
-              <CardDescription>ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸â€ ط·آ© ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾ ط¸â€ڑط·آ¨ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±</CardDescription>
+              <CardDescription>معاينة البيانات قبل التصدير</CardDescription>
             </CardHeader>
             <CardContent>
               {selectedReport === "summary" && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
-                    { label: "ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨", value: mockStats.totalStudents, icon: HiOutlineUsers, color: "text-primary" },
-                    { label: "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾", value: mockStats.totalCourses, icon: HiOutlineAcademicCap, color: "text-info" },
-                    { label: "ط·آ§ط¸â€‍ط·آ¥ط¸ظ¹ط·آ±ط·آ§ط·آ¯ط·آ§ط·ع¾", value: formatCurrency(mockStats.monthlyRevenue), icon: HiOutlineCash, color: "text-success" },
-                    { label: "ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾", value: mockStats.totalExams, icon: HiOutlineChartSquareBar, color: "text-warning" },
+                    { label: "الطلاب", value: mockStats.totalStudents, icon: HiOutlineUsers, color: "text-primary" },
+                    { label: "الكورسات", value: mockStats.totalCourses, icon: HiOutlineAcademicCap, color: "text-info" },
+                    { label: "الإيرادات", value: formatCurrency(mockStats.monthlyRevenue), icon: HiOutlineCash, color: "text-success" },
+                    { label: "الامتحانات", value: mockStats.totalExams, icon: HiOutlineChartSquareBar, color: "text-warning" },
                   ].map((s) => (
                     <div key={s.label} className="p-4 rounded-xl bg-surface-secondary border border-border">
                       <div className="flex items-center gap-2 mb-2">
@@ -169,7 +169,7 @@ export default function ReportsPage() {
                       <XAxis dataKey="examName" tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                       <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
                       <Tooltip />
-                      <Bar dataKey="passRate" fill="#10B981" radius={[4, 4, 0, 0]} name="ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ¬ط·آ§ط·آ­" />
+                      <Bar dataKey="passRate" fill="#10B981" radius={[4, 4, 0, 0]} name="نسبة النجاح" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -193,15 +193,15 @@ export default function ReportsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ®ط¸ظ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±</CardTitle>
+              <CardTitle>خيارات التصدير</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap items-end gap-4">
                 <div className="w-44">
-                  <Select label="ط¸â€ ط·آ·ط·آ§ط¸â€ڑ ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®" options={dateRangeOptions} value={dateRange} onChange={(e) => setDateRange(e.target.value)} />
+                  <Select label="نطاق التاريخ" options={dateRangeOptions} value={dateRange} onChange={(e) => setDateRange(e.target.value)} />
                 </div>
                 <div className="w-36">
-                  <Select label="ط·آ§ط¸â€‍ط·آµط¸ظ¹ط·ط›ط·آ©" options={formatOptions} value={exportFormat} onChange={(e) => setExportFormat(e.target.value)} />
+                  <Select label="الصيغة" options={formatOptions} value={exportFormat} onChange={(e) => setExportFormat(e.target.value)} />
                 </div>
                 <Button type="button"
 variant="primary"
@@ -211,12 +211,12 @@ variant="primary"
                   onClick={handleExport}
                   className="min-w-[140px]"
                 >
-                  {isExporting ? "ط·آ¬ط·آ§ط·آ±ط¸ظ¹ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±..." : exportDone ? "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ±!" : "ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±"}
+                  {isExporting ? "جاري التصدير..." : exportDone ? "طھظ… التصدير!" : "تصدير التقرير"}
                 </Button>
                 {exportDone && (
                   <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 text-success text-sm font-medium">
                     <HiOutlineCheck className="w-4 h-4" />
-                    ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­
+                    طھظ… التصدير بنجاح
                   </motion.div>
                 )}
               </div>
@@ -225,30 +225,30 @@ variant="primary"
 
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</CardTitle>
+              <CardTitle>التقارير المجدولة</CardTitle>
               <Button type="button" size="sm" variant="primary" leftIcon={<HiOutlinePlus className="w-3 h-3" />} onClick={() => setShowScheduleModal(true)}>
-                ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±
+                جدولة تقرير
               </Button>
             </CardHeader>
             <CardContent>
               <EmptyState
                 icon={HiOutlineClock}
-                title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط¸â€¦ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©"
-                description="ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€ ط¸ئ’ ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ¯ط¸ث†ط·آ±ط¸ظ¹ط·آ© ط¸â€‍ط·ع¾ط·آµط¸â€‍ط¸ئ’ ط·آ¹ط¸â€‍ط¸â€° ط·آ¨ط·آ±ط¸ظ¹ط·آ¯ط¸ئ’ ط·آ§ط¸â€‍ط·آ¥ط¸â€‍ط¸ئ’ط·ع¾ط·آ±ط¸ث†ط¸â€ ط¸ظ¹"
+                title="لا توجد تقارير مجدولة"
+                description="يمكنك جدولة تقارير دورية لتصلك على بريدك الإلكتروني"
               />
             </CardContent>
           </Card>
         </div>
       </div>
 
-      <Modal isOpen={showScheduleModal} onClose={() => setShowScheduleModal(false)} title="ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ© ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¯ط¸ث†ط·آ±ط¸ظ¹" size="md">
+      <Modal isOpen={showScheduleModal} onClose={() => setShowScheduleModal(false)} title="جدولة تقرير دوري" size="md">
         <div className="space-y-4">
-          <Select label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±" options={reportTypes.map((r) => ({ value: r.id, label: r.label }))} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ±" />
-          <Select label="ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±ط¸ظ¹ط·آ©" options={[{ value: "daily", label: "ط¸ظ¹ط¸ث†ط¸â€¦ط¸ظ¹" }, { value: "weekly", label: "ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹" }, { value: "monthly", label: "ط·آ´ط¸â€،ط·آ±ط¸ظ¹" }]} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±ط¸ظ¹ط·آ©" />
-          <Select label="ط·آ§ط¸â€‍ط·آµط¸ظ¹ط·ط›ط·آ©" options={formatOptions} placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آµط¸ظ¹ط·ط›ط·آ©" />
+          <Select label="نوع التقرير" options={reportTypes.map((r) => ({ value: r.id, label: r.label }))} placeholder="اختر نوع التقرير" />
+          <Select label="الدورية" options={[{ value: "daily", label: "يومي" }, { value: "weekly", label: "أسبوعي" }, { value: "monthly", label: "شهري" }]} placeholder="اختر الدورية" />
+          <Select label="الصيغة" options={formatOptions} placeholder="اختر الصيغة" />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1">ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ط·آ©</Button>
-            <Button variant="secondary" onClick={() => setShowScheduleModal(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <Button variant="primary" className="flex-1">جدولة</Button>
+            <Button variant="secondary" onClick={() => setShowScheduleModal(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>

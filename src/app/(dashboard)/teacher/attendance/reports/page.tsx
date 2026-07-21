@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -101,17 +101,17 @@ export default function AttendanceReportsPage() {
   const totalPages = Math.ceil(filtered.length / pageSize)
 
   const handleExportPDF = () => {
-    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط·آµط¸ظ¹ط·ط›ط·آ© PDF", { position: "top-left" })
-    setTimeout(() => toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­", { position: "top-left" }), 1500)
+    toast.success("جارٍ تصدير التقرير بصيغة PDF", { position: "top-left" })
+    setTimeout(() => toast.success("طھظ… تصدير التقرير بنجاح", { position: "top-left" }), 1500)
   }
 
   const handleExportExcel = () => {
-    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط·آµط¸ظ¹ط·ط›ط·آ© Excel", { position: "top-left" })
-    setTimeout(() => toast.success("ط·ع¾ط¸â€¦ ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­", { position: "top-left" }), 1500)
+    toast.success("جارٍ تصدير التقرير بصيغة Excel", { position: "top-left" })
+    setTimeout(() => toast.success("طھظ… تصدير التقرير بنجاح", { position: "top-left" }), 1500)
   }
 
   const handlePrint = () => {
-    toast.success("ط·آ¬ط·آ§ط·آ±ط¸ع† ط·ع¾ط·آ­ط·آ¶ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط¸â€‍ط¸â€‍ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©", { position: "top-left" })
+    toast.success("جارٍ تحضير التقرير للطباعة", { position: "top-left" })
     setTimeout(() => window.print(), 500)
   }
 
@@ -119,8 +119,8 @@ export default function AttendanceReportsPage() {
     return (
       <div className="p-4 md:p-6">
         <ErrorState
-          title="ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£ ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ­ط¸â€¦ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ±"
-          message="ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ© ط¸â€¦ط·آ±ط·آ© ط·آ£ط·آ®ط·آ±ط¸â€°"
+          title="حدث خطأ ظپظٹ تحميل التقارير"
+          message="يرجى المحاولة مرة أخرى"
           onRetry={() => setHasError(false)}
         />
       </div>
@@ -130,10 +130,10 @@ export default function AttendanceReportsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Toaster />
-      <Breadcrumb items={[{ label: "ط§ظ„ط­ط¶ظˆط±", href: "/teacher/attendance" }, { label: "طھظ‚ط§ط±ظٹط± ط§ظ„ط­ط¶ظˆط±" }]} />
+      <Breadcrumb items={[{ label: "الحضور", href: "/teacher/attendance" }, { label: "تقارير الحضور" }]} />
       <PageHeader
-        title="ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±"
-        description="ط·آ¹ط·آ±ط·آ¶ ط¸ث†ط·ع¾ط·آ­ط¸â€‍ط¸ظ¹ط¸â€‍ ط·آ¥ط·آ­ط·آµط·آ§ط·آ¦ط¸ظ¹ط·آ§ط·ع¾ ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨"
+        title="تقارير الحضور"
+        description="عرض وتحليل إحصائيات حضور الطلاب"
         actions={
           <div className="flex items-center gap-2">
             <Button variant="secondary" size="sm" leftIcon={<HiOutlineDocumentText className="w-4 h-4" />} onClick={handleExportPDF}>
@@ -143,7 +143,7 @@ export default function AttendanceReportsPage() {
               Excel
             </Button>
             <Button variant="primary" size="sm" leftIcon={<HiOutlinePrinter className="w-4 h-4" />} onClick={handlePrint}>
-              ط·آ·ط·آ¨ط·آ§ط·آ¹ط·آ©
+              طباعة
             </Button>
           </div>
         }
@@ -153,26 +153,26 @@ export default function AttendanceReportsPage() {
         <StatsSkeleton count={5} />
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          <StatsCard title="ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹" value={stats.total} icon={HiOutlineChartSquareBar} color="primary" />
-          <StatsCard title="ط·آ­ط·آ§ط·آ¶ط·آ±" value={stats.present} icon={HiOutlineCheckCircle} color="success" />
-          <StatsCard title="ط·ط›ط·آ§ط·آ¦ط·آ¨" value={stats.absent} icon={HiOutlineXCircle} color="error" />
-          <StatsCard title="ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±" value={stats.late} icon={HiOutlineClock} color="warning" />
-          <StatsCard title="ط¸â€¦ط·آ¹ط·آ°ط·آ±" value={stats.excused} icon={HiOutlineExclamation} color="info" />
+          <StatsCard title="الإجمالي" value={stats.total} icon={HiOutlineChartSquareBar} color="primary" />
+          <StatsCard title="حاضر" value={stats.present} icon={HiOutlineCheckCircle} color="success" />
+          <StatsCard title="غائب" value={stats.absent} icon={HiOutlineXCircle} color="error" />
+          <StatsCard title="متأخر" value={stats.late} icon={HiOutlineClock} color="warning" />
+          <StatsCard title="معذر" value={stats.excused} icon={HiOutlineExclamation} color="info" />
         </div>
       )}
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <Card className="xl:col-span-2">
           <CardHeader>
-            <CardTitle>ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ­ط·آ³ط·آ¨ ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</CardTitle>
+            <CardTitle>نسبة الحضور حسب التاريخ</CardTitle>
             <Badge variant="primary" size="sm">{stats.rate}%</Badge>
           </CardHeader>
           <CardContent>
             {chartData.length === 0 ? (
               <EmptyState
                 icon={HiOutlineChartSquareBar}
-                title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾"
-                description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط·آ­ط·آ¶ط¸ث†ط·آ± ط¸â€‍ط¸â€‍ط¸ظ¾ط·ع¾ط·آ±ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ¯ط·آ¯ط·آ©"
+                title="لا توجد بيانات"
+                description="لم ظٹطھظ… العثور على سجلات حضور للفترة المحددة"
                 withBackground={false}
               />
             ) : (
@@ -193,7 +193,7 @@ export default function AttendanceReportsPage() {
                     />
                     <Legend
                       formatter={(value: string) => {
-                        const labels: Record<string, string> = { present: "ط·آ­ط·آ§ط·آ¶ط·آ±", absent: "ط·ط›ط·آ§ط·آ¦ط·آ¨", late: "ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±", excused: "ط¸â€¦ط·آ¹ط·آ°ط·آ±" }
+                        const labels: Record<string, string> = { present: "حاضر", absent: "غائب", late: "متأخر", excused: "معذر" }
                         return labels[value] || value
                       }}
                     />
@@ -210,39 +210,39 @@ export default function AttendanceReportsPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>ط·ع¾ط·آµط¸ظ¾ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط·آ¨ط¸ظ¹ط·آ§ط¸â€ ط·آ§ط·ع¾</CardTitle>
+            <CardTitle>تصفية البيانات</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-text mb-1.5">ط¸â€¦ط¸â€  ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</label>
+              <label className="block text-sm font-medium text-text mb-1.5">من تاريخ</label>
               <Input type="date" value={fromDate} onChange={(e) => { setFromDate(e.target.value); setCurrentPage(1) }} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-text mb-1.5">ط·آ¥ط¸â€‍ط¸â€° ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®</label>
+              <label className="block text-sm font-medium text-text mb-1.5">إلى تاريخ</label>
               <Input type="date" value={toDate} onChange={(e) => { setToDate(e.target.value); setCurrentPage(1) }} />
             </div>
             <Select
-              label="ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
+              label="الكورس"
               value={courseFilter}
               onChange={(e) => { setCourseFilter(e.target.value); setCurrentPage(1) }}
               options={[
-                { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" },
+                { value: "all", label: "جميع الكورسات" },
                 ...mockCourses.map((c) => ({ value: c.id, label: c.title })),
               ]}
             />
             <Select
-              label="ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©"
+              label="الحالة"
               value={statusFilter}
               onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1) }}
               options={[
-                { value: "all", label: "ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ§ط·ع¾" },
-                { value: "present", label: "ط·آ­ط·آ§ط·آ¶ط·آ±" },
-                { value: "absent", label: "ط·ط›ط·آ§ط·آ¦ط·آ¨" },
-                { value: "late", label: "ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±" },
-                { value: "excused", label: "ط¸â€¦ط·آ¹ط·آ°ط·آ±" },
+                { value: "all", label: "جميع الحالات" },
+                { value: "present", label: "حاضر" },
+                { value: "absent", label: "غائب" },
+                { value: "late", label: "متأخر" },
+                { value: "excused", label: "معذر" },
               ]}
             />
-            <SearchInput value={searchTerm} onChange={(v) => { setSearchTerm(v); setCurrentPage(1) }} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¨ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨..." />
+            <SearchInput value={searchTerm} onChange={(v) => { setSearchTerm(v); setCurrentPage(1) }} placeholder="بحث باسم الطالب..." />
           </CardContent>
         </Card>
       </div>
@@ -252,11 +252,11 @@ export default function AttendanceReportsPage() {
       ) : paginated.length === 0 ? (
         <EmptyState
           icon={HiOutlineFilter}
-          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬"
-          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ³ط·آ¬ط¸â€‍ط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«"
+          title="لا توجد نتائج"
+          description="لم ظٹطھظ… العثور على سجلات تطابق معايير البحث"
           action={
             <Button variant="secondary" onClick={() => { setSearchTerm(""); setCourseFilter("all"); setStatusFilter("all"); setFromDate(""); setToDate("") }}>
-              ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط·آ§ط¸â€‍ط¸ظ¾ط¸â€‍ط·ع¾ط·آ±ط·آ©
+              إعادة تعيين الفلترة
             </Button>
           }
         />
@@ -265,32 +265,32 @@ export default function AttendanceReportsPage() {
           <CardContent className="p-0">
             <Table
               columns={[
-                { key: "studentName", header: "ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ·ط·آ§ط¸â€‍ط·آ¨", render: (a) => (
+                { key: "studentName", header: "اسم الطالب", render: (a) => (
                   <span className="font-medium text-text">{a.studentName}</span>
                 )},
-                { key: "courseName", header: "ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³" },
-                { key: "date", header: "ط·آ§ط¸â€‍ط·ع¾ط·آ§ط·آ±ط¸ظ¹ط·آ®", render: (a) => (
+                { key: "courseName", header: "الكورس" },
+                { key: "date", header: "التاريخ", render: (a) => (
                   <span className="text-text-secondary">{formatDate(a.date)}</span>
                 )},
-                { key: "status", header: "ط·آ§ط¸â€‍ط·آ­ط·آ§ط¸â€‍ط·آ©", render: (a) => {
+                { key: "status", header: "الحالة", render: (a) => {
                   const colors: Record<string, string> = {
                     present: "bg-emerald-100 text-emerald-700 border-emerald-200",
                     absent: "bg-red-100 text-red-700 border-red-200",
                     late: "bg-amber-100 text-amber-700 border-amber-200",
                     excused: "bg-blue-100 text-blue-700 border-blue-200",
                   }
-                  const labels: Record<string, string> = { present: "ط·آ­ط·آ§ط·آ¶ط·آ±", absent: "ط·ط›ط·آ§ط·آ¦ط·آ¨", late: "ط¸â€¦ط·ع¾ط·آ£ط·آ®ط·آ±", excused: "ط¸â€¦ط·آ¹ط·آ°ط·آ±" }
+                  const labels: Record<string, string> = { present: "حاضر", absent: "غائب", late: "متأخر", excused: "معذر" }
                   return (
                     <span className={cn("inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border", colors[a.status])}>
                       {labels[a.status]}
                     </span>
                   )
                 }},
-                { key: "checkIn", header: "ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±", render: (a) => (
-                  <span className="text-text-secondary" dir="ltr">{a.checkIn || "أ¢â‚¬â€‌"}</span>
+                { key: "checkIn", header: "الحضور", render: (a) => (
+                  <span className="text-text-secondary" dir="ltr">{a.checkIn || "â€”"}</span>
                 )},
-                { key: "checkOut", header: "ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·آµط·آ±ط·آ§ط¸ظ¾", render: (a) => (
-                  <span className="text-text-secondary" dir="ltr">{a.checkOut || "أ¢â‚¬â€‌"}</span>
+                { key: "checkOut", header: "الانصراف", render: (a) => (
+                  <span className="text-text-secondary" dir="ltr">{a.checkOut || "â€”"}</span>
                 )},
               ]}
               data={paginated}

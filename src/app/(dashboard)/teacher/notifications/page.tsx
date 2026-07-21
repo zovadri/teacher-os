@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import toast from "react-hot-toast"
@@ -37,9 +37,9 @@ import { formatRelativeTime, cn } from "@/lib/utils"
 const notificationCategories = ["all", "system", "academic", "financial", "student", "exam", "homework", "attendance"] as const
 
 const priorityLabels: Record<string, string> = {
-  high: "ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©",
-  medium: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·ط·آ©",
-  low: "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶ط·آ©",
+  high: "عالية",
+  medium: "متوسطة",
+  low: "منخفضة",
 }
 
 const priorityColors: Record<string, string> = {
@@ -63,20 +63,20 @@ const typeColors: Record<string, string> = {
 }
 
 const typeLabels: Record<string, string> = {
-  info: "ط¸â€¦ط·آ¹ط¸â€‍ط¸ث†ط¸â€¦ط·آ©",
-  success: "ط¸â€ ط·آ¬ط·آ§ط·آ­",
-  warning: "ط·ع¾ط¸â€ ط·آ¨ط¸ظ¹ط¸â€،",
-  error: "ط·آ®ط·آ·ط·آ£",
+  info: "معلومة",
+  success: "نجاح",
+  warning: "تنبيه",
+  error: "خطأ",
 }
 
 const categoryLabels: Record<string, string> = {
-  system: "ط·آ§ط¸â€‍ط¸â€ ط·آ¸ط·آ§ط¸â€¦",
-  academic: "ط·آ£ط¸ئ’ط·آ§ط·آ¯ط¸ظ¹ط¸â€¦ط¸ظ¹",
-  financial: "ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹",
-  student: "ط·آ·ط¸â€‍ط·آ§ط·آ¨",
-  exam: "ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾",
-  homework: "ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾",
-  attendance: "ط·آ­ط·آ¶ط¸ث†ط·آ±",
+  system: "النظام",
+  academic: "أكاديمي",
+  financial: "مالي",
+  student: "طلاب",
+  exam: "امتحانات",
+  homework: "واجبات",
+  attendance: "حضور",
 }
 
 interface ExtendedNotification {
@@ -102,8 +102,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-7",
     type: "warning",
-    title: "ط·ع¾ط·آ£ط·آ®ط¸ظ¹ط·آ± ط¸ظ¾ط¸ظ¹ ط·ع¾ط·آ³ط¸â€‍ط¸ظ¹ط¸â€¦ ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾",
-    message: "ط¸â€،ط¸â€ ط·آ§ط¸ئ’ 8 ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸â€‍ط¸â€¦ ط¸ظ¹ط·آ³ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ§ط·آ¶ط¸ظ¹. ط¸ظ¹ط¸عˆط·آ±ط·آ¬ط¸â€° ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·ع¾ط¸â€،ط¸â€¦ ط¸ث†ط·آ§ط·ع¾ط·آ®ط·آ§ط·آ° ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€‍ط·آ§ط·آ²ط¸â€¦ط·آ©.",
+    title: "تأخير ظپظٹ تسليم الواجبات",
+    message: "هناك 8 طلاب لم يسلموا واجب الأسبوع الماضي. يُرجى متابعتهم واتخاذ الإجراءات اللازمة.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 45),
     link: "/dashboard/teacher/homework",
@@ -114,8 +114,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-8",
     type: "info",
-    title: "ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ",
-    message: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹. ط¸ظ¹ط¸عˆط·آ±ط·آ¬ط¸â€° ط¸â€¦ط·آ±ط·آ§ط·آ¬ط·آ¹ط·آ© ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ ط·آ¹ط¸â€‍ط¸â€° ط¸â€‍ط¸ث†ط·آ­ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ­ط¸ئ’ط¸â€¦.",
+    title: "تحديث جدول الحصص",
+    message: "طھظ… تعديل جدول الحصص الأسبوعي. يُرجى مراجعة الجدول الجديد على لوحة التحكم.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 90),
     priority: "low",
@@ -125,8 +125,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-9",
     type: "success",
-    title: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ 3 ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³",
-    message: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍ 3 ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ¬ط·آ¯ط·آ¯ ط¸ظ¾ط¸ظ¹ ط¸ئ’ط¸ث†ط·آ±ط·آ³ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦. ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط·آ§ط¸â€‍ط·آ¢ط¸â€  45 ط·آ·ط·آ§ط¸â€‍ط·آ¨ط·آ§ط¸â€¹.",
+    title: "طھظ… تسجيل 3 طلاب ظپظٹ الكورس",
+    message: "طھظ… تسجيل 3 طلاب جدد ظپظٹ كورس النحو المتقدم. إجمالي الطلاب الآن 45 طالباً.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 200),
     link: "/dashboard/teacher/courses",
@@ -137,8 +137,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-10",
     type: "error",
-    title: "ط¸â€¦ط·آ´ط¸ئ’ط¸â€‍ط·آ© ط¸ظ¾ط¸ظ¹ ط¸â€ ط·آ¸ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ظ¾ط·آ¹",
-    message: "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¥ط·آ¨ط¸â€‍ط·آ§ط·ط› ط·آ¹ط¸â€  ط·آ®ط¸â€‍ط¸â€‍ ط¸ظ¾ط¸ظ¹ ط¸â€ ط·آ¸ط·آ§ط¸â€¦ ط·آ§ط¸â€‍ط·آ¯ط¸ظ¾ط·آ¹ ط·آ§ط¸â€‍ط·آ¥ط¸â€‍ط¸ئ’ط·ع¾ط·آ±ط¸ث†ط¸â€ ط¸ظ¹. ط¸ظ¾ط·آ±ط¸ظ¹ط¸â€ڑ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط¸â€ ط¸ظ¹ط·آ© ط¸ظ¹ط·آ¹ط¸â€¦ط¸â€‍ ط·آ¹ط¸â€‍ط¸â€° ط·آ­ط¸â€‍ ط·آ§ط¸â€‍ط¸â€¦ط·آ´ط¸ئ’ط¸â€‍ط·آ©.",
+    title: "مشكلة ظپظٹ نظام الدفع",
+    message: "طھظ… الإبلاغ عن خلل ظپظٹ نظام الدفع الإلكتروني. فريق التقنية يعمل على حل المشكلة.",
     read: true,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 3),
     priority: "high",
@@ -148,8 +148,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-11",
     type: "info",
-    title: "ط·ع¾ط¸â€ڑط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹",
-    message: "ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ­ط·آ¶ط¸ث†ط·آ± ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ 92%. ط¸â€،ط¸â€ ط·آ§ط¸ئ’ ط·ع¾ط·آ­ط·آ³ط¸â€  ط¸â€¦ط¸â€‍ط·آ­ط¸ث†ط·آ¸ ط¸â€¦ط¸â€ڑط·آ§ط·آ±ط¸â€ ط·آ© ط·آ¨ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ§ط·آ¶ط¸ظ¹.",
+    title: "تقرير الحضور الأسبوعي",
+    message: "نسبة حضور الطلاب هذا الأسبوع 92%. هناك تحسن ملحوظ مقارنة بالأسبوع الماضي.",
     read: true,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5),
     link: "/dashboard/teacher/attendance",
@@ -160,8 +160,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-12",
     type: "success",
-    title: "ط·آ§ط¸ئ’ط·ع¾ط¸â€¦ط·آ§ط¸â€‍ ط·ع¾ط·آµط·آ­ط¸ظ¹ط·آ­ ط·آ§ط¸â€‍ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾",
-    message: "ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ§ط¸â€ ط·ع¾ط¸â€،ط·آ§ط·طŒ ط¸â€¦ط¸â€  ط·ع¾ط·آµط·آ­ط¸ظ¹ط·آ­ ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€ ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ± ط¸â€‍ط¸â€¦ط·آ§ط·آ¯ط·آ© ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث†. ط·آ§ط¸â€‍ط¸â€ ط·ع¾ط·آ§ط·آ¦ط·آ¬ ط·آ¬ط·آ§ط¸â€،ط·آ²ط·آ© ط¸â€‍ط¸â€‍ط¸â€ ط·آ´ط·آ±.",
+    title: "اكتمال تصحيح الامتحانات",
+    message: "طھظ… الانتهاء من تصحيح امتحانات الشهر لمادة النحو. النتائج جاهزة للنشر.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 8),
     link: "/dashboard/teacher/exams",
@@ -172,8 +172,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-13",
     type: "warning",
-    title: "ط·آ§ط¸â€ڑط·ع¾ط·آ±ط·آ§ط·آ¨ ط¸â€¦ط¸ث†ط·آ¹ط·آ¯ ط·آ¯ط¸ث†ط·آ±ط·آ© ط·ع¾ط·آ¯ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ©",
-    message: "ط·آ§ط¸â€‍ط·آ¯ط¸ث†ط·آ±ط·آ© ط·آ§ط¸â€‍ط·ع¾ط·آ¯ط·آ±ط¸ظ¹ط·آ¨ط¸ظ¹ط·آ© ط¸â€‍ط¸â€‍ط¸â€¦ط·آ¹ط¸â€‍ط¸â€¦ط¸ظ¹ط¸â€  ط·آ³ط·ع¾ط·آ¨ط·آ¯ط·آ£ ط·آ¨ط·آ¹ط·آ¯ ط¸ظ¹ط¸ث†ط¸â€¦ط¸ظ¹ط¸â€ . ط¸ظ¹ط¸عˆط·آ±ط·آ¬ط¸â€° ط·ع¾ط·آ£ط¸ئ’ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ­ط·آ¶ط¸ث†ط·آ±.",
+    title: "اقتراب موعد دورة تدريبية",
+    message: "الدورة التدريبية للمعلمين ستبدأ بعد يومين. يُرجى تأكيد الحضور.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 12),
     priority: "medium",
@@ -183,8 +183,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-14",
     type: "info",
-    title: "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ظ¹ط·آ²ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©",
-    message: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط¸â€¦ط¸ظ¹ط·آ²ط·آ© ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط·آ®ط·آµط·آµط·آ©. ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€ ط¸ئ’ ط·آ§ط¸â€‍ط·آ¢ط¸â€  ط·ع¾ط·آµط·آ¯ط¸ظ¹ط·آ± ط·ع¾ط¸â€ڑط·آ§ط·آ±ط¸ظ¹ط·آ± ط¸â€¦ط·آ®ط·آµط·آµط·آ© ط·آ­ط·آ³ط·آ¨ ط·آ§ط·آ­ط·ع¾ط¸ظ¹ط·آ§ط·آ¬ط¸ئ’.",
+    title: "إضافة ميزة جديدة",
+    message: "طھظ… إضافة ميزة إنشاء التقارير المخصصة. يمكنك الآن تصدير تقارير مخصصة حسب احتياجك.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24),
     link: "/dashboard/teacher/analytics",
@@ -254,12 +254,12 @@ export default function NotificationsPage() {
 
   const markAsRead = (id: string) => {
     setReadIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
-    toast.success("طھظ… طھط¹ظٹظٹظ† ط§ظ„ط¥ط´ط¹ط§ط± ظƒظ…ظ‚ط±ظˆط،")
+    toast.success("طھظ… تعيين الإشعار كمقروء")
   }
 
   const markAsUnread = (id: string) => {
     setReadIds((prev) => prev.filter((rid) => rid !== id))
-    toast.success("طھظ… طھط¹ظٹظٹظ† ط§ظ„ط¥ط´ط¹ط§ط± ظƒط؛ظٹط± ظ…ظ‚ط±ظˆط،")
+    toast.success("طھظ… تعيين الإشعار كغير مقروء")
   }
 
   const toggleRead = (id: string) => {
@@ -272,12 +272,12 @@ export default function NotificationsPage() {
       const unreadIds = filtered.filter((n) => !prev.includes(n.id)).map((n) => n.id)
       return [...prev, ...unreadIds]
     })
-    toast.success("طھظ… طھط¹ظٹظٹظ† ط§ظ„ظƒظ„ ظƒظ…ظ‚ط±ظˆط،")
+    toast.success("طھظ… تعيين الكل كمقروء")
   }
 
   const archiveSingle = (id: string) => {
     setArchivedIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
-    toast.success("طھظ… ط£ط±ط´ظپط© ط§ظ„ط¥ط´ط¹ط§ط±")
+    toast.success("طھظ… أرشفة الإشعار")
   }
 
   const bulkArchive = (ids: string[]) => {
@@ -286,7 +286,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`طھظ… ط£ط±ط´ظپط© ${ids.length} ط¥ط´ط¹ط§ط±`)
+    toast.success(`طھظ… أرشفة ${ids.length} إشعار`)
   }
 
   const bulkDelete = (ids: string[]) => {
@@ -295,7 +295,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`طھظ… ط­ط°ظپ ${ids.length} ط¥ط´ط¹ط§ط±`)
+    toast.success(`طھظ… حذف ${ids.length} إشعار`)
   }
 
   const bulkMarkRead = (ids: string[]) => {
@@ -304,7 +304,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`طھظ… طھط¹ظٹظٹظ† ${ids.length} ط¥ط´ط¹ط§ط± ظƒظ…ظ‚ط±ظˆط،`)
+    toast.success(`طھظ… تعيين ${ids.length} إشعار كمقروء`)
   }
 
   const toggleSelect = (id: string) => {
@@ -330,32 +330,32 @@ export default function NotificationsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط¸â€¦ط·آ±ط¸ئ’ط·آ² ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ¬ط¸â€¦ط¸ظ¹ط·آ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·ع¾ط¸â€ ط·آ¨ط¸ظ¹ط¸â€،ط·آ§ط·ع¾" />
+      <DashboardHeader title="مركز الإشعارات المتقدم" subtitle="إدارة جميع الإشعارات والتنبيهات" />
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatsCard
-          title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
+          title="إجمالي الإشعارات"
           value={stats.total}
           icon={HiOutlineBell}
           color="primary"
           delay={0}
         />
         <StatsCard
-          title="ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"
+          title="غير مقروء"
           value={stats.unread}
           icon={HiOutlineMailOpen}
           color="info"
           delay={0.1}
         />
         <StatsCard
-          title="ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ© ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©"
+          title="أولوية عالية"
           value={stats.highPriority}
           icon={HiOutlineFlag}
           color="error"
           delay={0.2}
         />
         <StatsCard
-          title="ط¸â€¦ط·آ¤ط·آ±ط·آ´ط¸ظ¾"
+          title="مؤرشف"
           value={stats.archived}
           icon={HiOutlineArchive}
           color="warning"
@@ -368,7 +368,7 @@ export default function NotificationsPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="ط·آ§ط·آ¨ط·آ­ط·آ« ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾..."
+            placeholder="ابحث ظپظٹ الإشعارات..."
             className="w-full md:w-64"
           />
           <Select
@@ -376,7 +376,7 @@ export default function NotificationsPage() {
             onChange={(e) => setCategoryFilter(e.target.value)}
             options={notificationCategories.map((cat) => ({
               value: cat,
-              label: cat === "all" ? "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾" : categoryLabels[cat] || cat,
+              label: cat === "all" ? "كل التصنيفات" : categoryLabels[cat] || cat,
             }))}
             className="w-full md:w-40"
           />
@@ -384,18 +384,18 @@ export default function NotificationsPage() {
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
             options={[
-              { value: "all", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ§ط·ع¾" },
-              { value: "high", label: "ط·آ¹ط·آ§ط¸â€‍ط¸ظ¹ط·آ©" },
-              { value: "medium", label: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·ط·آ©" },
-              { value: "low", label: "ط¸â€¦ط¸â€ ط·آ®ط¸ظ¾ط·آ¶ط·آ©" },
+              { value: "all", label: "كل الأولويات" },
+              { value: "high", label: "عالية" },
+              { value: "medium", label: "متوسطة" },
+              { value: "low", label: "منخفضة" },
             ]}
             className="w-full md:w-36"
           />
           <div className="flex items-center gap-1 p-1 bg-surface border border-border rounded-xl">
             {[
-              { value: null, label: "ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍" },
-              { value: false, label: "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" },
-              { value: true, label: "ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" },
+              { value: null, label: "الكل" },
+              { value: false, label: "غير مقروء" },
+              { value: true, label: "مقروء" },
             ].map((f) => (
               <button type="button"
                 key={String(f.value)}
@@ -417,14 +417,14 @@ export default function NotificationsPage() {
       {unreadCount > 0 && filtered.length > 0 && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-text-secondary">
-            {unreadCount} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ± ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ
+            {unreadCount} إشعار غير مقروء
           </p>
           <Button variant="outline"
             size="sm"
             leftIcon={<HiOutlineMailOpen size={16} />}
             onClick={markAllAsRead}
           >
-            ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍ ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ ({unreadCount})
+            تحديد الكل كمقروء ({unreadCount})
           </Button>
         </div>
       )}
@@ -436,34 +436,34 @@ export default function NotificationsPage() {
           className="flex items-center gap-2 p-3 bg-primary/5 border border-primary/20 rounded-xl"
         >
           <span className="text-sm font-medium text-text ml-2">
-            ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ {selectedIds.length} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±
+            طھظ… تحديد {selectedIds.length} إشعار
           </span>
           <Button variant="secondary"
             size="xs"
             leftIcon={<HiOutlineMailOpen size={14} />}
             onClick={() => setConfirmAction({ type: "markRead", ids: selectedIds })}
           >
-            ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ
+            تعيين مقروء
           </Button>
           <Button variant="secondary"
             size="xs"
             leftIcon={<HiOutlineArchive size={14} />}
             onClick={() => setConfirmAction({ type: "archive", ids: selectedIds })}
           >
-            ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ©
+            أرشفة
           </Button>
           <Button variant="danger"
             size="xs"
             leftIcon={<HiOutlineTrash size={14} />}
             onClick={() => setConfirmAction({ type: "delete", ids: selectedIds })}
           >
-            ط·آ­ط·آ°ط¸ظ¾
+            حذف
           </Button>
           <Button variant="ghost"
             size="xs"
             onClick={() => setSelectedIds([])}
           >
-            ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯
+            إلغاء التحديد
           </Button>
         </motion.div>
       )}
@@ -471,15 +471,15 @@ export default function NotificationsPage() {
       {filtered.length === 0 ? (
         <EmptyState
           icon={HiOutlineBell}
-          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
+          title="لا توجد إشعارات"
           description={
             search || categoryFilter !== "all" || priorityFilter !== "all" || showRead !== null
-              ? "ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«"
+              ? "لم ظٹطھظ… العثور على إشعارات تطابق معايير البحث"
               : showRead === true
-                ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒط·آ©"
+                ? "لا توجد إشعارات مقروءة"
                 : showRead === false
-                  ? "ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒط·آ©"
-                  : "ط¸â€‍ط¸ظ¹ط·آ³ ط¸â€‍ط·آ¯ط¸ظ¹ط¸ئ’ ط·آ£ط¸ظ¹ ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ­ط·ع¾ط¸â€° ط·آ§ط¸â€‍ط·آ¢ط¸â€ "
+                  ? "لا توجد إشعارات غير مقروءة"
+                  : "ليس لديك ط£ظٹ إشعارات حتى الآن"
           }
         />
       ) : (
@@ -488,12 +488,12 @@ export default function NotificationsPage() {
             <button type="button"
 onClick={toggleSelectAll}
               className="p-1 rounded hover:bg-surface-tertiary text-text-tertiary transition-colors"
-              title="ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍"
+              title="تحديد الكل"
             >
               <HiOutlineSelector size={18} />
             </button>
             <span className="text-xs text-text-tertiary">
-              {filtered.length} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±
+              {filtered.length} إشعار
             </span>
           </div>
           <AnimatePresence>
@@ -596,28 +596,28 @@ onClick={toggleSelectAll}
                         href={notif.link || "#"}
                         onClick={(e) => { if (!notif.link) e.preventDefault() }}
                         className="p-1.5 rounded-lg hover:bg-surface-tertiary text-text-tertiary hover:text-primary transition-colors"
-                        title="ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍أکآµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ±ط·ع¾ط·آ¨ط·آ·ط·آ©"
+                        title="عرض الصفحة المرتبطة"
                       >
                         <HiOutlineExternalLink size={16} />
                       </Link>
                       <button type="button"
                         onClick={() => toggleRead(notif.id)}
                         className="p-1.5 rounded-lg hover:bg-surface-tertiary text-text-tertiary hover:text-text transition-colors"
-                        title={isUnread ? "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" : "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"}
+                        title={isUnread ? "تعيين كمقروء" : "تعيين كغير مقروء"}
                       >
                         {isUnread ? <HiOutlineEye size={16} /> : <HiOutlineEyeOff size={16} />}
                       </button>
                       <button type="button"
                         onClick={() => archiveSingle(notif.id)}
                         className="p-1.5 rounded-lg hover:bg-surface-tertiary text-text-tertiary hover:text-text transition-colors"
-                        title="ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ©"
+                        title="أرشفة"
                       >
                         <HiOutlineArchive size={16} />
                       </button>
                       <button type="button"
                         onClick={() => setConfirmAction({ type: "delete", ids: [notif.id] })}
                         className="p-1.5 rounded-lg hover:bg-error/10 text-text-tertiary hover:text-error transition-colors"
-                        title="ط·آ­ط·آ°ط¸ظ¾"
+                        title="حذف"
                       >
                         <HiOutlineTrash size={16} />
                       </button>
@@ -633,7 +633,7 @@ onClick={toggleSelectAll}
       {archivedList.length > 0 && categoryFilter === "all" && priorityFilter === "all" && showRead === null && !search && (
         <details className="mt-6">
           <summary className="text-sm font-medium text-text-secondary cursor-pointer hover:text-text transition-colors">
-            ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ¤ط·آ±ط·آ´ط¸ظ¾ط·آ© ({archivedList.length})
+            الإشعارات المؤرشفة ({archivedList.length})
           </summary>
           <div className="mt-3 space-y-2">
             {archivedList.map((notif) => {
@@ -659,7 +659,7 @@ onClick={toggleSelectAll}
 
       <div className="text-center">
         <p className="text-xs text-text-tertiary">
-          ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ {notifications.length} ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ± ط¢آ· {stats.unread} ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ ط¢آ· {stats.archived} ط¸â€¦ط·آ¤ط·آ±ط·آ´ط¸ظ¾
+          إجمالي {notifications.length} إشعار ط¢آ· {stats.unread} غير مقروء ط¢آ· {stats.archived} مؤرشف
         </p>
       </div>
 
@@ -710,11 +710,11 @@ onClick={toggleSelectAll}
               </div>
               <div className="flex items-center gap-1.5">
                 <HiOutlineFlag size={14} />
-                <span>ط·آ£ط¸ث†ط¸â€‍ط¸ث†ط¸ظ¹ط·آ© {priorityLabels[detailNotif.priority]}</span>
+                <span>أولوية {priorityLabels[detailNotif.priority]}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <HiOutlineEye size={14} />
-                <span>{readIds.includes(detailNotif.id) ? "ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" : "ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"}</span>
+                <span>{readIds.includes(detailNotif.id) ? "مقروء" : "غير مقروء"}</span>
               </div>
             </div>
 
@@ -725,7 +725,7 @@ onClick={toggleSelectAll}
                       size="sm"
                       leftIcon={<HiOutlineExternalLink size={16} />}
                     >
-                      ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍أکآµط¸ظ¾ط·آ­ط·آ©
+                      عرض الصفحة
                     </Button>
                   </Link>
                 )}
@@ -736,7 +736,7 @@ onClick={toggleSelectAll}
                     toggleRead(detailNotif.id)
                   }}
                 >
-                  {readIds.includes(detailNotif.id) ? "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ" : "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"}
+                  {readIds.includes(detailNotif.id) ? "تعيين كغير مقروء" : "تعيين كمقروء"}
                 </Button>
               <Button variant="secondary"
                 size="sm"
@@ -746,7 +746,7 @@ onClick={toggleSelectAll}
                   setDetailNotif(null)
                 }}
               >
-                ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ©
+                أرشفة
               </Button>
               <Button variant="danger"
                 size="sm"
@@ -756,7 +756,7 @@ onClick={toggleSelectAll}
                   setConfirmAction({ type: "delete", ids: [detailNotif.id] })
                 }}
               >
-                ط·آ­ط·آ°ط¸ظ¾
+                حذف
               </Button>
             </div>
           </div>
@@ -769,21 +769,21 @@ onClick={toggleSelectAll}
         onConfirm={handleConfirmAction}
         title={
           confirmAction?.type === "delete"
-            ? "ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
+            ? "حذف الإشعارات"
             : confirmAction?.type === "archive"
-              ? "ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾"
-              : "ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ"
+              ? "أرشفة الإشعارات"
+              : "تعيين كمقروء"
         }
         message={
           confirmAction?.type === "delete"
-            ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ­ط·آ°ط¸ظ¾ ${confirmAction.ids.length === 1 ? "ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±" : `ط¸â€،ط·آ°ط¸â€، ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ (${confirmAction.ids.length})`}ط·ع؛`
+            ? `هل أنت متأكد من حذف ${confirmAction.ids.length === 1 ? "هذا الإشعار" : `هذه الإشعارات (${confirmAction.ids.length})`}طں`
             : confirmAction?.type === "archive"
-              ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ£ط·آ±ط·آ´ط¸ظ¾ط·آ© ${confirmAction.ids.length === 1 ? "ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±" : `ط¸â€،ط·آ°ط¸â€، ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ (${confirmAction.ids.length})`}ط·ع؛`
-              : `ط·آ³ط¸ظ¹ط·ع¾ط¸â€¦ ط·ع¾ط·آ¹ط¸ظ¹ط¸ظ¹ط¸â€  ${confirmAction?.ids.length === 1 ? "ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±" : `ط¸â€،ط·آ°ط¸â€، ط·آ§ط¸â€‍ط·آ¥ط·آ´ط·آ¹ط·آ§ط·آ±ط·آ§ط·ع¾ (${confirmAction?.ids.length})`} ط¸ئ’ط¸â€¦ط¸â€ڑط·آ±ط¸ث†ط·طŒ`
+              ? `هل أنت متأكد من أرشفة ${confirmAction.ids.length === 1 ? "هذا الإشعار" : `هذه الإشعارات (${confirmAction.ids.length})`}طں`
+              : `سيتم تعيين ${confirmAction?.ids.length === 1 ? "هذا الإشعار" : `هذه الإشعارات (${confirmAction?.ids.length})`} كمقروء`
         }
         variant={confirmAction?.type === "delete" ? "danger" : "info"}
-        confirmText="ط·ع¾ط·آ£ط¸ئ’ط¸ظ¹ط·آ¯"
-        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
+        confirmText="تأكيد"
+        cancelText="إلغاء"
       />
     </div>
   )

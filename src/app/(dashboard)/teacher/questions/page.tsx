@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -16,12 +16,12 @@ import { useNotificationStore } from "@/lib/notification-store"
 import { generateId, truncate } from "@/lib/utils"
 
 const typeLabels: Record<Question["type"], string> = {
-  "multiple-choice": "ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط¸â€¦ط¸â€  ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯",
-  "true-false": "ط·آµط·آ­/ط·آ®ط·آ·ط·آ£",
-  "fill-blank": "ط¸â€¦ط¸â€‍ط·طŒ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ§ط·ط›",
-  ordering: "ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨",
-  matching: "ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©",
-  essay: "ط¸â€¦ط¸â€ڑط·آ§ط¸â€‍ط¸ظ¹",
+  "multiple-choice": "اختيار من متعدد",
+  "true-false": "صح/خطأ",
+  "fill-blank": "ملء الفراغ",
+  ordering: "ترتيب",
+  matching: "مطابقة",
+  essay: "مقالي",
 }
 
 const typeVariants: Record<Question["type"], "primary" | "info" | "warning" | "secondary" | "premium" | "neutral"> = {
@@ -33,22 +33,22 @@ const typeVariants: Record<Question["type"], "primary" | "info" | "warning" | "s
   essay: "neutral",
 }
 
-const difficultyLabels: Record<string, string> = { easy: "ط·آ³ط¸â€،ط¸â€‍", medium: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·", hard: "ط·آµط·آ¹ط·آ¨" }
+const difficultyLabels: Record<string, string> = { easy: "سهل", medium: "متوسط", hard: "صعب" }
 const difficultyVariants: Record<string, "success" | "warning" | "error"> = { easy: "success", medium: "warning", hard: "error" }
 
 const typeOptions = [
-  { value: "multiple-choice", label: "ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ± ط¸â€¦ط¸â€  ط¸â€¦ط·ع¾ط·آ¹ط·آ¯ط·آ¯" },
-  { value: "true-false", label: "ط·آµط·آ­/ط·آ®ط·آ·ط·آ£" },
-  { value: "fill-blank", label: "ط¸â€¦ط¸â€‍ط·طŒ ط·آ§ط¸â€‍ط¸ظ¾ط·آ±ط·آ§ط·ط›" },
-  { value: "ordering", label: "ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨" },
-  { value: "matching", label: "ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©" },
-  { value: "essay", label: "ط¸â€¦ط¸â€ڑط·آ§ط¸â€‍ط¸ظ¹" },
+  { value: "multiple-choice", label: "اختيار من متعدد" },
+  { value: "true-false", label: "صح/خطأ" },
+  { value: "fill-blank", label: "ملء الفراغ" },
+  { value: "ordering", label: "ترتيب" },
+  { value: "matching", label: "مطابقة" },
+  { value: "essay", label: "مقالي" },
 ]
 
 const difficultyOptions = [
-  { value: "easy", label: "ط·آ³ط¸â€،ط¸â€‍" },
-  { value: "medium", label: "ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ·" },
-  { value: "hard", label: "ط·آµط·آ¹ط·آ¨" },
+  { value: "easy", label: "سهل" },
+  { value: "medium", label: "متوسط" },
+  { value: "hard", label: "صعب" },
 ]
 
 interface QuestionForm {
@@ -114,8 +114,8 @@ function buildQuestionFromForm(form: QuestionForm): Question {
   if (form.type === "multiple-choice" || form.type === "true-false") {
     base.choices = form.type === "true-false"
       ? [
-          { id: "true", text: "ط·آµط·آ­", isCorrect: form.tfCorrect },
-          { id: "false", text: "ط·آ®ط·آ·ط·آ£", isCorrect: !form.tfCorrect },
+          { id: "true", text: "صح", isCorrect: form.tfCorrect },
+          { id: "false", text: "خطأ", isCorrect: !form.tfCorrect },
         ]
       : form.mcqChoices
   }
@@ -221,7 +221,7 @@ export default function QuestionsPage() {
 
   const handleSave = () => {
     if (!form.text.trim()) {
-      addToast({ type: "error", title: "ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط¸â€¦ط·آ·ط¸â€‍ط¸ث†ط·آ¨" })
+      addToast({ type: "error", title: "نص السؤال مطلوب" })
       return
     }
     if (editingQuestion) {
@@ -230,10 +230,10 @@ export default function QuestionsPage() {
           q.id === editingQuestion.id ? { ...buildQuestionFromForm(form), id: q.id, stats: q.stats } : q
         )
       )
-      addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
+      addToast({ type: "success", title: "طھظ… تحديث السؤال بنجاح" })
     } else {
       setQuestions((prev) => [...prev, buildQuestionFromForm(form)])
-      addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
+      addToast({ type: "success", title: "طھظ… إضافة السؤال بنجاح" })
     }
     setCreateModalOpen(false)
   }
@@ -241,13 +241,13 @@ export default function QuestionsPage() {
   const handleDelete = () => {
     if (!deleteTarget) return
     setQuestions((prev) => prev.filter((q) => q.id !== deleteTarget.id))
-    addToast({ type: "success", title: "ط·ع¾ط¸â€¦ ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­" })
+    addToast({ type: "success", title: "طھظ… حذف السؤال بنجاح" })
     setDeleteTarget(null)
   }
 
   const handleBulkDelete = () => {
     setQuestions((prev) => prev.filter((q) => !selectedIds.has(q.id)))
-    addToast({ type: "success", title: `ط·ع¾ط¸â€¦ ط·آ­ط·آ°ط¸ظ¾ ${selectedIds.size} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط·آ¨ط¸â€ ط·آ¬ط·آ§ط·آ­` })
+    addToast({ type: "success", title: `طھظ… حذف ${selectedIds.size} أسئلة بنجاح` })
     setSelectedIds(new Set())
     setBulkDeleteOpen(false)
   }
@@ -270,50 +270,50 @@ export default function QuestionsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="ط·آ¨ط¸â€ ط¸ئ’ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©" subtitle="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط·آ§ط·آ®ط·ع¾ط·آ¨ط·آ§ط·آ±ط·آ§ط·ع¾" />
+      <DashboardHeader title="بنك الأسئلة" subtitle="إدارة أسئلة الكورسات والاختبارات" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©" value={stats.total} icon={HiOutlineBookOpen} color="primary" />
-        <StatsCard title="ط¸â€¦ط·ع¾ط¸ث†ط·آ³ط·آ· ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ©" value={stats.avgDifficulty} icon={HiOutlineFilter} color="warning" />
+        <StatsCard title="إجمالي الأسئلة" value={stats.total} icon={HiOutlineBookOpen} color="primary" />
+        <StatsCard title="متوسط الصعوبة" value={stats.avgDifficulty} icon={HiOutlineFilter} color="warning" />
         <StatsCard
-          title="ط·آ§ط¸â€‍ط·آ£ط¸ئ’ط·آ«ط·آ± ط·آ§ط·آ³ط·ع¾ط·آ®ط·آ¯ط·آ§ط¸â€¦ط·آ§ط¸â€¹"
+          title="الأكثر استخداماً"
           value={stats.mostUsed ? truncate(stats.mostUsed.text, 20) : "-"}
           icon={HiOutlineChartBar}
           color="info"
         />
-        <StatsCard title="ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©" value={`${stats.avgCorrect}%`} icon={HiOutlineClipboardList} color="success" />
+        <StatsCard title="نسبة الإجابة الصحيحة" value={`${stats.avgCorrect}%`} icon={HiOutlineClipboardList} color="success" />
       </div>
 
       <Card>
         <div className="p-4 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ³ط·آ¤ط·آ§ط¸â€‍..." className="min-w-[200px] flex-1" />
+            <SearchInput value={search} onChange={setSearch} placeholder="بحث عن سؤال..." className="min-w-[200px] flex-1" />
             <Select
               value={courseFilter}
               onChange={(e) => setCourseFilter(e.target.value)}
-              options={[{ value: "", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط·ع¾" }, ...courseOptions]}
+              options={[{ value: "", label: "كل الكورسات" }, ...courseOptions]}
               className="min-w-[180px]"
             />
             <Select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              options={[{ value: "", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·آ£ط¸â€ ط¸ث†ط·آ§ط·آ¹" }, ...typeOptions]}
+              options={[{ value: "", label: "كل الأنواع" }, ...typeOptions]}
               className="min-w-[160px]"
             />
             <Select
               value={difficultyFilter}
               onChange={(e) => setDifficultyFilter(e.target.value)}
-              options={[{ value: "", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ§ط·ع¾" }, ...difficultyOptions]}
+              options={[{ value: "", label: "كل الصعوبات" }, ...difficultyOptions]}
               className="min-w-[140px]"
             />
             <Select
               value={tagFilter}
               onChange={(e) => setTagFilter(e.target.value)}
-              options={[{ value: "", label: "ط¸ئ’ط¸â€‍ ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸ث†ط¸â€¦" }, ...tagOptions]}
+              options={[{ value: "", label: "كل الوسوم" }, ...tagOptions]}
               className="min-w-[140px]"
             />
             <Button variant="primary" onClick={openCreate} leftIcon={<HiOutlinePlus size={18} />}>
-              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ³ط·آ¤ط·آ§ط¸â€‍
+              إضافة سؤال
             </Button>
           </div>
         </div>
@@ -321,20 +321,20 @@ export default function QuestionsPage() {
 
       {selectedIds.size > 0 && (
         <div className="flex items-center gap-2 px-1">
-          <span className="text-sm text-text-secondary">{selectedIds.size} ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط¸â€¦ط·آ­ط·آ¯ط·آ¯</span>
+          <span className="text-sm text-text-secondary">{selectedIds.size} سؤال محدد</span>
           <Button variant="danger" size="sm" leftIcon={<HiOutlineTrash size={16} />} onClick={() => setBulkDeleteOpen(true)}>
-            ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ¯ط·آ¯
+            حذف المحدد
           </Button>
         </div>
       )}
 
       {filtered.items.length === 0 ? (
         <EmptyState
-          title="ط¸â€‍ط·آ§ ط·ع¾ط¸ث†ط·آ¬ط·آ¯ ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©"
-          description="ط¸â€‍ط¸â€¦ ط¸ظ¹ط·ع¾ط¸â€¦ ط·آ§ط¸â€‍ط·آ¹ط·آ«ط¸ث†ط·آ± ط·آ¹ط¸â€‍ط¸â€° ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط·ع¾ط·آ·ط·آ§ط·آ¨ط¸â€ڑ ط¸â€¦ط·آ¹ط·آ§ط¸ظ¹ط¸ظ¹ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«. ط·آ£ط·آ¶ط¸ظ¾ ط·آ³ط·آ¤ط·آ§ط¸â€‍ط·آ§ط¸â€¹ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ§ط¸â€¹ ط·آ£ط¸ث† ط·آ¹ط·آ¯ط¸â€کط¸â€‍ ط¸ظ¾ط¸â€‍ط·ع¾ط·آ± ط·آ§ط¸â€‍ط·آ¨ط·آ­ط·آ«."
+          title="لا توجد أسئلة"
+          description="لم ظٹطھظ… العثور على أسئلة تطابق معايير البحث. أضف سؤالاً جديداً أو عدّل فلتر البحث."
           action={
             <Button variant="primary" onClick={openCreate} leftIcon={<HiOutlinePlus size={18} />}>
-              ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ³ط·آ¤ط·آ§ط¸â€‍
+              إضافة سؤال
             </Button>
           }
         />
@@ -351,13 +351,13 @@ export default function QuestionsPage() {
                     className="rounded border-border"
                   />
                 </th>
-                <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍</th>
-                <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸â€ ط¸ث†ط·آ¹</th>
-                <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ©</th>
-                <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©</th>
-                <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸ث†ط¸â€¦</th>
-                <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط·آ§ط¸â€‍ط·آ§ط·آ³ط·ع¾ط·آ®ط·آ¯ط·آ§ط¸â€¦</th>
-                <th className="text-right px-4 py-3 font-semibold text-text-secondary">ط¸â€ ط·آ³ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط·آ©</th>
+                <th className="text-right px-4 py-3 font-semibold text-text-secondary">نص السؤال</th>
+                <th className="text-right px-4 py-3 font-semibold text-text-secondary">النوع</th>
+                <th className="text-right px-4 py-3 font-semibold text-text-secondary">الصعوبة</th>
+                <th className="text-right px-4 py-3 font-semibold text-text-secondary">الدرجة</th>
+                <th className="text-right px-4 py-3 font-semibold text-text-secondary">الوسوم</th>
+                <th className="text-right px-4 py-3 font-semibold text-text-secondary">الاستخدام</th>
+                <th className="text-right px-4 py-3 font-semibold text-text-secondary">نسبة الصحة</th>
                 <th className="text-right px-4 py-3 font-semibold text-text-secondary w-24"></th>
               </tr>
             </thead>
@@ -406,21 +406,21 @@ export default function QuestionsPage() {
                       <button type="button"
                         onClick={() => openDetail(q)}
                         className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
-                        title="ط·آ¹ط·آ±ط·آ¶"
+                        title="عرض"
                       >
                         <HiOutlineEye size={16} />
                       </button>
                       <button type="button"
                         onClick={() => openEdit(q)}
                         className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
-                        title="ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍"
+                        title="تعديل"
                       >
                         <HiOutlineFilter size={16} />
                       </button>
                       <button type="button"
                         onClick={() => setDeleteTarget(q)}
                         className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"
-                        title="ط·آ­ط·آ°ط¸ظ¾"
+                        title="حذف"
                       >
                         <HiOutlineTrash size={16} />
                       </button>
@@ -436,32 +436,32 @@ export default function QuestionsPage() {
       <Modal
         isOpen={detailModalOpen}
         onClose={() => setDetailModalOpen(false)}
-        title="ط·ع¾ط¸ظ¾ط·آ§ط·آµط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍"
+        title="تفاصيل السؤال"
         size="lg"
       >
         {selectedQuestion && (
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍</label>
+              <label className="block text-sm font-medium text-text-secondary mb-1">نص السؤال</label>
               <p className="text-text bg-surface-secondary rounded-lg p-3 leading-relaxed">{selectedQuestion.text}</p>
             </div>
             <div className="flex flex-wrap gap-4">
               <div>
-                <span className="text-sm text-text-secondary ml-2">ط·آ§ط¸â€‍ط¸â€ ط¸ث†ط·آ¹:</span>
+                <span className="text-sm text-text-secondary ml-2">النوع:</span>
                 <Badge variant={typeVariants[selectedQuestion.type]}>{typeLabels[selectedQuestion.type]}</Badge>
               </div>
               <div>
-                <span className="text-sm text-text-secondary ml-2">ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ©:</span>
+                <span className="text-sm text-text-secondary ml-2">الصعوبة:</span>
                 <Badge variant={difficultyVariants[selectedQuestion.difficulty]}>{difficultyLabels[selectedQuestion.difficulty]}</Badge>
               </div>
               <div>
-                <span className="text-sm text-text-secondary ml-2">ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©:</span>
+                <span className="text-sm text-text-secondary ml-2">الدرجة:</span>
                 <span className="font-mono text-text">{selectedQuestion.grade}</span>
               </div>
             </div>
             {(selectedQuestion.type === "multiple-choice" || selectedQuestion.type === "true-false") && selectedQuestion.choices && (
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-2">ط·آ§ط¸â€‍ط·آ®ط¸ظ¹ط·آ§ط·آ±ط·آ§ط·ع¾</label>
+                <label className="block text-sm font-medium text-text-secondary mb-2">الخيارات</label>
                 <div className="space-y-2">
                   {selectedQuestion.choices.map((c) => (
                     <div
@@ -471,7 +471,7 @@ export default function QuestionsPage() {
                       <div className="flex items-center gap-2">
                         <span className={`w-2 h-2 rounded-full ${c.isCorrect ? "bg-success" : "bg-text-tertiary"}`} />
                         <span className="text-text">{c.text}</span>
-                        {c.isCorrect && <Badge variant="success" size="sm">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©</Badge>}
+                        {c.isCorrect && <Badge variant="success" size="sm">الإجابة الصحيحة</Badge>}
                       </div>
                     </div>
                   ))}
@@ -480,19 +480,19 @@ export default function QuestionsPage() {
             )}
             {selectedQuestion.correctAnswer && (
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©</label>
+                <label className="block text-sm font-medium text-text-secondary mb-1">الإجابة الصحيحة</label>
                 <p className="text-text font-medium">{selectedQuestion.correctAnswer}</p>
               </div>
             )}
             {selectedQuestion.explanation && (
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">ط·آ§ط¸â€‍ط·آ´ط·آ±ط·آ­</label>
+                <label className="block text-sm font-medium text-text-secondary mb-1">الشرح</label>
                 <p className="text-text-secondary text-sm leading-relaxed">{selectedQuestion.explanation}</p>
               </div>
             )}
             {selectedQuestion.orderingItems && (
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-2">ط·آ¹ط¸â€ ط·آ§ط·آµط·آ± ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨</label>
+                <label className="block text-sm font-medium text-text-secondary mb-2">عناصر الترتيب</label>
                 <div className="space-y-1">
                   {[...selectedQuestion.orderingItems]
                     .sort((a, b) => a.correctOrder - b.correctOrder)
@@ -509,7 +509,7 @@ export default function QuestionsPage() {
             )}
             {selectedQuestion.matchingLeft && selectedQuestion.matchingRight && (
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-2">ط·آ§ط¸â€‍ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©</label>
+                <label className="block text-sm font-medium text-text-secondary mb-2">المطابقة</label>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     {selectedQuestion.matchingLeft.map((m) => (
@@ -526,26 +526,26 @@ export default function QuestionsPage() {
             )}
             {selectedQuestion.stats && (
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-2">ط·آ§ط¸â€‍ط·آ¥ط·آ­ط·آµط·آ§ط·آ¦ط¸ظ¹ط·آ§ط·ع¾</label>
+                <label className="block text-sm font-medium text-text-secondary mb-2">الإحصائيات</label>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="bg-surface-secondary rounded-lg p-3 text-center">
                     <p className="text-2xl font-bold text-text">{selectedQuestion.stats.timesUsed}</p>
-                    <p className="text-xs text-text-tertiary">ط¸â€¦ط·آ±ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ§ط·آ³ط·ع¾ط·آ®ط·آ¯ط·آ§ط¸â€¦</p>
+                    <p className="text-xs text-text-tertiary">مرات الاستخدام</p>
                   </div>
                   <div className="bg-surface-secondary rounded-lg p-3 text-center">
                     <p className="text-2xl font-bold text-success">{selectedQuestion.stats.correctRate}%</p>
-                    <p className="text-xs text-text-tertiary">ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ§ط·ع¾ ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©</p>
+                    <p className="text-xs text-text-tertiary">إجابات صحيحة</p>
                   </div>
                   <div className="bg-surface-secondary rounded-lg p-3 text-center">
                     <p className="text-2xl font-bold text-error">{selectedQuestion.stats.incorrectRate}%</p>
-                    <p className="text-xs text-text-tertiary">ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ§ط·ع¾ ط·آ®ط·آ§ط·آ·ط·آ¦ط·آ©</p>
+                    <p className="text-xs text-text-tertiary">إجابات خاطئة</p>
                   </div>
                 </div>
               </div>
             )}
             {selectedQuestion.tags && selectedQuestion.tags.length > 0 && (
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸ث†ط¸â€¦</label>
+                <label className="block text-sm font-medium text-text-secondary mb-1">الوسوم</label>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedQuestion.tags.map((t) => (
                     <Badge key={t} variant="neutral">{t}</Badge>
@@ -560,25 +560,25 @@ export default function QuestionsPage() {
       <Modal
         isOpen={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
-        title={editingQuestion ? "ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ³ط·آ¤ط·آ§ط¸â€‍" : "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯"}
+        title={editingQuestion ? "تعديل سؤال" : "إضافة سؤال جديد"}
         size="xl"
       >
         <div className="space-y-4 max-h-[65vh] overflow-y-auto px-0.5">
           <Textarea
-            label="ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍"
+            label="نص السؤال"
             value={form.text}
             onChange={(e) => setForm((p) => ({ ...p, text: e.target.value }))}
-            placeholder="ط·آ§ط¸ئ’ط·ع¾ط·آ¨ ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍ ط¸â€،ط¸â€ ط·آ§..."
+            placeholder="اكتب نص السؤال هنا..."
           />
           <div className="grid grid-cols-2 gap-4">
             <Select
-              label="ط¸â€ ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍"
+              label="نوع السؤال"
               value={form.type}
               onChange={(e) => setForm((p) => ({ ...p, type: e.target.value as Question["type"] }))}
               options={typeOptions}
             />
             <Select
-              label="ط¸â€¦ط·آ³ط·ع¾ط¸ث†ط¸â€° ط·آ§ط¸â€‍ط·آµط·آ¹ط¸ث†ط·آ¨ط·آ©"
+              label="مستوى الصعوبة"
               value={form.difficulty}
               onChange={(e) => setForm((p) => ({ ...p, difficulty: e.target.value as "easy" | "medium" | "hard" }))}
               options={difficultyOptions}
@@ -586,34 +586,34 @@ export default function QuestionsPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input
-              label="ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ¬ط·آ©"
+              label="الدرجة"
               type="number"
               value={form.grade}
               onChange={(e) => setForm((p) => ({ ...p, grade: e.target.value }))}
             />
             <Select
-              label="ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³"
+              label="الكورس"
               value={form.courseId}
               onChange={(e) => setForm((p) => ({ ...p, courseId: e.target.value }))}
-              options={[{ value: "", label: "ط·آ§ط·آ®ط·ع¾ط·آ± ط¸ئ’ط¸ث†ط·آ±ط·آ³ط·آ§ط¸â€¹" }, ...courseOptions]}
+              options={[{ value: "", label: "اختر كورساً" }, ...courseOptions]}
             />
           </div>
           <Input
-            label="ط·آ§ط¸â€‍ط¸ث†ط·آ³ط¸ث†ط¸â€¦ (ط¸â€¦ط¸ظ¾ط·آµط¸ث†ط¸â€‍ط·آ© ط·آ¨ط¸ظ¾ط¸ث†ط·آ§ط·آµط¸â€‍)"
+            label="الوسوم (مفصولة بفواصل)"
             value={form.tags}
             onChange={(e) => setForm((p) => ({ ...p, tags: e.target.value }))}
-            placeholder="ط¸â€ ط·آ­ط¸ث†, ط·آµط·آ±ط¸ظ¾, ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ©"
+            placeholder="نحو, صرف, بلاغة"
           />
           <Input
-            label="ط·آ§ط¸â€‍ط·آ´ط·آ±ط·آ­ (ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ±ط¸ظ¹)"
+            label="الشرح (اختياري)"
             value={form.explanation}
             onChange={(e) => setForm((p) => ({ ...p, explanation: e.target.value }))}
-            placeholder="ط·آ´ط·آ±ط·آ­ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©"
+            placeholder="شرح الإجابة الصحيحة"
           />
 
           {(form.type === "multiple-choice") && (
             <div className="space-y-3">
-              <label className="block text-sm font-medium text-text">ط·آ§ط¸â€‍ط·آ®ط¸ظ¹ط·آ§ط·آ±ط·آ§ط·ع¾</label>
+              <label className="block text-sm font-medium text-text">الخيارات</label>
               {form.mcqChoices.map((c, i) => (
                 <div key={c.id} className="flex items-center gap-3">
                   <input
@@ -638,10 +638,10 @@ export default function QuestionsPage() {
                         ),
                       }))
                     }
-                    placeholder={`ط·آ§ط¸â€‍ط·آ®ط¸ظ¹ط·آ§ط·آ± ${i + 1}`}
+                    placeholder={`الخيار ${i + 1}`}
                     className="flex-1"
                   />
-                  {c.isCorrect && <Badge variant="success" size="sm">ط·آµط·آ­ط¸ظ¹ط·آ­</Badge>}
+                  {c.isCorrect && <Badge variant="success" size="sm">صحيح</Badge>}
                 </div>
               ))}
             </div>
@@ -649,7 +649,7 @@ export default function QuestionsPage() {
 
           {form.type === "true-false" && (
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-text">ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©</label>
+              <label className="block text-sm font-medium text-text">الإجابة الصحيحة</label>
               <div className="flex items-center gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -659,7 +659,7 @@ export default function QuestionsPage() {
                     onChange={() => setForm((p) => ({ ...p, tfCorrect: true }))}
                     className="accent-primary"
                   />
-                  <span className="text-text">ط·آµط·آ­</span>
+                  <span className="text-text">صح</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -669,7 +669,7 @@ export default function QuestionsPage() {
                     onChange={() => setForm((p) => ({ ...p, tfCorrect: false }))}
                     className="accent-primary"
                   />
-                  <span className="text-text">ط·آ®ط·آ·ط·آ£</span>
+                  <span className="text-text">خطأ</span>
                 </label>
               </div>
             </div>
@@ -677,16 +677,16 @@ export default function QuestionsPage() {
 
           {form.type === "fill-blank" && (
             <Input
-              label="ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©"
+              label="الإجابة الصحيحة"
               value={form.correctAnswer}
               onChange={(e) => setForm((p) => ({ ...p, correctAnswer: e.target.value }))}
-              placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ§ط·آ¨ط·آ© ط·آ§ط¸â€‍ط·آµط·آ­ط¸ظ¹ط·آ­ط·آ©"
+              placeholder="أدخل الإجابة الصحيحة"
             />
           )}
 
           {form.type === "ordering" && (
             <div className="space-y-3">
-              <label className="block text-sm font-medium text-text">ط·آ¹ط¸â€ ط·آ§ط·آµط·آ± ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·ع¾ط¸ظ¹ط·آ¨</label>
+              <label className="block text-sm font-medium text-text">عناصر الترتيب</label>
               {form.orderingItems.map((item, i) => (
                 <div key={item.id} className="flex items-center gap-3">
                   <span className="w-8 h-8 rounded-full bg-primary/10 text-primary text-sm flex items-center justify-center font-bold shrink-0">
@@ -702,7 +702,7 @@ export default function QuestionsPage() {
                         ),
                       }))
                     }
-                    placeholder={`ط·آ§ط¸â€‍ط·آ¹ط¸â€ ط·آµط·آ± ${i + 1}`}
+                    placeholder={`العنصر ${i + 1}`}
                     className="flex-1"
                   />
                 </div>
@@ -712,7 +712,7 @@ export default function QuestionsPage() {
 
           {form.type === "matching" && (
             <div className="space-y-4">
-              <label className="block text-sm font-medium text-text">ط·آ£ط·آ²ط¸ث†ط·آ§ط·آ¬ ط·آ§ط¸â€‍ط¸â€¦ط·آ·ط·آ§ط·آ¨ط¸â€ڑط·آ©</label>
+              <label className="block text-sm font-medium text-text">أزواج المطابقة</label>
               {form.matchingLeft.map((m, i) => (
                 <div key={m.id} className="grid grid-cols-2 gap-3 items-center">
                   <Input
@@ -725,7 +725,7 @@ export default function QuestionsPage() {
                         ),
                       }))
                     }
-                    placeholder={`ط·آ§ط¸â€‍ط·آ¹ط¸â€¦ط¸ث†ط·آ¯ ط·آ§ط¸â€‍ط·آ£ط¸ث†ط¸â€‍ - ${i + 1}`}
+                    placeholder={`العمود الأول - ${i + 1}`}
                   />
                   <Input
                     value={form.matchingRight.find((r) => r.matchId === m.id)?.text ?? ""}
@@ -737,7 +737,7 @@ export default function QuestionsPage() {
                         ),
                       }))
                     }
-                    placeholder={`ط·آ§ط¸â€‍ط·آ¹ط¸â€¦ط¸ث†ط·آ¯ ط·آ§ط¸â€‍ط·آ«ط·آ§ط¸â€ ط¸ظ¹ - ${i + 1}`}
+                    placeholder={`العمود الثاني - ${i + 1}`}
                   />
                 </div>
               ))}
@@ -746,10 +746,10 @@ export default function QuestionsPage() {
 
           <div className="flex items-center gap-3 pt-4 border-t border-border">
             <Button variant="primary" onClick={handleSave} className="flex-1">
-              {editingQuestion ? "ط·آ­ط¸ظ¾ط·آ¸ ط·آ§ط¸â€‍ط·ع¾ط·ط›ط¸ظ¹ط¸ظ¹ط·آ±ط·آ§ط·ع¾" : "ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍"}
+              {editingQuestion ? "حفظ التغييرات" : "إضافة السؤال"}
             </Button>
             <Button variant="secondary" onClick={() => setCreateModalOpen(false)} className="flex-1">
-              ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ
+              إلغاء
             </Button>
           </div>
         </div>
@@ -759,10 +759,10 @@ export default function QuestionsPage() {
         isOpen={!!deleteTarget}
         onClose={() => setDeleteTarget(null)}
         onConfirm={handleDelete}
-        title="ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍"
-        message={deleteTarget ? `ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ­ط·آ°ط¸ظ¾ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ³ط·آ¤ط·آ§ط¸â€‍ط·ع؛ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ ط¸â€‍ط·آ§ ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·آ§ط·آ¬ط·آ¹ ط·آ¹ط¸â€ ط¸â€،.` : ""}
-        confirmText="ط·آ­ط·آ°ط¸ظ¾"
-        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
+        title="حذف السؤال"
+        message={deleteTarget ? `هل أنت متأكد من حذف هذا السؤال؟ هذا الإجراء لا يمكن التراجع عنه.` : ""}
+        confirmText="حذف"
+        cancelText="إلغاء"
         variant="danger"
       />
 
@@ -770,10 +770,10 @@ export default function QuestionsPage() {
         isOpen={bulkDeleteOpen}
         onClose={() => setBulkDeleteOpen(false)}
         onConfirm={handleBulkDelete}
-        title="ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ¯ط·آ¯ط·آ©"
-        message={`ط¸â€،ط¸â€‍ ط·آ£ط¸â€ ط·ع¾ ط¸â€¦ط·ع¾ط·آ£ط¸ئ’ط·آ¯ ط¸â€¦ط¸â€  ط·آ­ط·آ°ط¸ظ¾ ${selectedIds.size} ط·آ£ط·آ³ط·آ¦ط¸â€‍ط·آ©ط·ع؛ ط¸â€،ط·آ°ط·آ§ ط·آ§ط¸â€‍ط·آ¥ط·آ¬ط·آ±ط·آ§ط·طŒ ط¸â€‍ط·آ§ ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط·آ§ط¸â€‍ط·ع¾ط·آ±ط·آ§ط·آ¬ط·آ¹ ط·آ¹ط¸â€ ط¸â€،.`}
-        confirmText="ط·آ­ط·آ°ط¸ظ¾ ط·آ§ط¸â€‍ط¸ئ’ط¸â€‍"
-        cancelText="ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ"
+        title="حذف الأسئلة المحددة"
+        message={`هل أنت متأكد من حذف ${selectedIds.size} أسئلة؟ هذا الإجراء لا يمكن التراجع عنه.`}
+        confirmText="حذف الكل"
+        cancelText="إلغاء"
         variant="danger"
       />
     </div>

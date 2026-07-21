@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -35,11 +35,11 @@ interface ParentMessage {
 }
 
 const mockParentMessages: ParentMessage[] = [
-  { id: "pm-1", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·ع¾ط¸â€ڑط·آ¯ط¸â€¦ ط·آ§ط·آ¨ط¸â€ ط¸ئ’", content: "ط·آ£ط¸ث†ط·آ¯ ط·آ¥ط·آ¹ط¸â€‍ط·آ§ط¸â€¦ط¸ئ’ط¸â€¦ ط·آ¨ط·آ£ط¸â€  ط·آ§ط·آ¨ط¸â€ ط¸ئ’ط¸â€¦ ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸ظ¹ط¸â€ڑط¸ث†ط¸â€¦ ط·آ¨ط·آ¹ط¸â€¦ط¸â€‍ ط¸â€¦ط¸â€¦ط·ع¾ط·آ§ط·آ² ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط¸â€¦ط·ع¾ط·آ§ط·آ¨ط·آ¹ط·آ© ط·آ§ط¸â€‍ط¸ث†ط·آ§ط·آ¬ط·آ¨ط·آ§ط·ع¾ ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ط¸ظ¹ط·آ©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
-  { id: "pm-2", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط¸â€ ط·ع¾ط¸ظ¹ط·آ¬ط·آ© ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث†", content: "ط·آ­ط·آµط¸â€‍ ط·آ§ط·آ¨ط¸â€ ط¸ئ’ط¸â€¦ ط·آ¹ط¸â€‍ط¸â€° 90% ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€¦ط·ع¾ط·آ­ط·آ§ط¸â€  ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ§ط¸â€‍ط·آ´ط¸â€،ط·آ±ط¸ظ¹. ط·آ£ط·آ¯ط·آ§ط·طŒ ط¸â€¦ط¸â€¦ط·ع¾ط·آ§ط·آ² ط¸ث†ط¸ظ¹ط·آ­ط·ع¾ط·آ§ط·آ¬ ط¸â€‍ط¸â€¦ط·آ±ط·آ§ط·آ¬ط·آ¹ط·آ© ط·آ¨ط·آ¹ط·آ¶ ط·آ§ط¸â€‍ط¸â€ ط¸â€ڑط·آ§ط·آ· ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ©.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
-  { id: "pm-3", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط·آ·ط¸â€‍ط·آ¨ ط·ع¾ط·آ£ط·آ¬ط¸ظ¹ط¸â€‍ ط¸ث†ط·آ§ط·آ¬ط·آ¨", content: "ط·ع¾ط¸â€¦ط·ع¾ ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ط¸ظ¾ط¸â€ڑط·آ© ط·آ¹ط¸â€‍ط¸â€° ط·آ·ط¸â€‍ط·آ¨ ط·ع¾ط·آ£ط·آ¬ط¸ظ¹ط¸â€‍ ط¸ث†ط·آ§ط·آ¬ط·آ¨ ط·آ§ط¸â€‍ط¸â€ ط·آ­ط¸ث† ط·آ­ط·ع¾ط¸â€° ط¸â€ ط¸â€،ط·آ§ط¸ظ¹ط·آ© ط·آ§ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
-  { id: "pm-4", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط·آ§ط·آ³ط·ع¾ط¸ظ¾ط·آ³ط·آ§ط·آ± ط·آ¹ط¸â€  ط·آ§ط¸â€‍ط·آ¯ط·آ±ط·آ³", content: "ط¸â€ ط·آ¹ط¸â€¦ط·إ’ ط·آ¯ط·آ±ط·آ³ ط·آ§ط¸â€‍ط·آ¨ط¸â€‍ط·آ§ط·ط›ط·آ© ط¸â€¦ط·ع¾ط·آ§ط·آ­ ط¸â€‍ط¸â€‍ط·ع¾ط·آ³ط·آ¬ط¸ظ¹ط¸â€‍. ط¸ظ¹ط¸â€¦ط¸ئ’ط¸â€  ط¸â€‍ط·آ§ط·آ¨ط¸â€ ط¸ئ’ ط¸â€¦ط·آ´ط·آ§ط¸â€،ط·آ¯ط·ع¾ط¸â€، ط¸â€¦ط¸â€  ط·آµط¸ظ¾ط·آ­ط·آ© ط·آ§ط¸â€‍ط¸ئ’ط¸ث†ط·آ±ط·آ³.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), isTeacher: true },
-  { id: "pm-5", senderName: "ط·آ£ط·آ­ط¸â€¦ط·آ¯ ط¸â€¦ط·آ­ط¸â€¦ط·آ¯", senderRole: "ط¸â€¦ط·آ¯ط·آ±ط·آ³", subject: "ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ", content: "ط·ع¾ط¸â€¦ ط·ع¾ط·آ­ط·آ¯ط¸ظ¹ط·آ« ط·آ¬ط·آ¯ط¸ث†ط¸â€‍ ط·آ§ط¸â€‍ط·آ­ط·آµط·آµ ط¸â€‍ط¸â€‍ط·آ£ط·آ³ط·آ¨ط¸ث†ط·آ¹ ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¯ط¸â€¦. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط·آ§ط·آ·ط¸â€‍ط·آ§ط·آ¹ ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ§ط·آ¹ط¸ظ¹ط·آ¯ ط·آ§ط¸â€‍ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
+  { id: "pm-1", senderName: "أحمد محمد", senderRole: "مدرس", subject: "متابعة تقدم ابنك", content: "أود إعلامكم بأن ابنكم أحمد يقوم بعمل ممتاز ظپظٹ الكورس. يرجى متابعة الواجبات الأسبوعية.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
+  { id: "pm-2", senderName: "أحمد محمد", senderRole: "مدرس", subject: "نتيجة امتحان النحو", content: "حصل ابنكم على 90% ظپظٹ امتحان النحو الشهري. أداء ممتاز ويحتاج لمراجعة بعض النقاط ظپظٹ البلاغة.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
+  { id: "pm-3", senderName: "أحمد محمد", senderRole: "مدرس", subject: "طلب تأجيل واجب", content: "طھظ…طھ الموافقة على طلب تأجيل واجب النحو حتى نهاية الأسبوع.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
+  { id: "pm-4", senderName: "أحمد محمد", senderRole: "مدرس", subject: "استفسار عن الدرس", content: "نعم، درس البلاغة متاح للتسجيل. يمكن لابنك مشاهدته من صفحة الكورس.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), isTeacher: true },
+  { id: "pm-5", senderName: "أحمد محمد", senderRole: "مدرس", subject: "تحديث جدول الحصص", content: "طھظ… تحديث جدول الحصص للأسبوع القادم. يرجى الاطلاع على المواعيد الجديدة.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
 ]
 
 export default function ParentMessagesPage() {
@@ -57,7 +57,7 @@ export default function ParentMessagesPage() {
 
   return (
     <div className="p-4 md:p-6 h-[calc(100vh-4rem)]">
-      <DashboardHeader title="ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط·آ¦ط¸â€‍" subtitle="ط·آ§ط¸â€‍ط·ع¾ط¸ث†ط·آ§ط·آµط¸â€‍ ط¸â€¦ط·آ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³" />
+      <DashboardHeader title="الرسائل" subtitle="التواصل مع المدرس" />
 
       <div className="flex gap-4 h-[calc(100%-5rem)] mt-4">
         <div className={cn(
@@ -67,10 +67,10 @@ export default function ParentMessagesPage() {
           <div className="p-3 border-b border-border space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex-1">
-                <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط·آ¦ط¸â€‍..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="بحث ظپظٹ الرسائل..." />
               </div>
               <Button size="sm" variant="primary" onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
+                جديدة
               </Button>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function ParentMessagesPage() {
                       {msg.isTeacher ? (
                         <HiOutlineUser className="w-5 h-5 text-primary" />
                       ) : (
-                        <span className="text-sm font-bold text-primary">ط¸ث†</span>
+                        <span className="text-sm font-bold text-primary">و</span>
                       )}
                     </div>
                     {!msg.read && <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary rounded-full border-2 border-surface" />}
@@ -143,19 +143,19 @@ export default function ParentMessagesPage() {
                     <p className="text-sm text-text leading-relaxed">{selectedMessage.content}</p>
                   </div>
                   <div className="p-4 rounded-xl bg-primary-50/50 dark:bg-primary-900/10 border border-primary/20">
-                    <p className="text-sm text-text font-medium mb-2">ط·آ§ط¸â€‍ط·آ±ط·آ¯ ط·آ¹ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©</p>
+                    <p className="text-sm text-text font-medium mb-2">الرد على الرسالة</p>
                     <textarea
-                      placeholder="ط·آ§ط¸ئ’ط·ع¾ط·آ¨ ط·آ±ط·آ¯ط¸ئ’ ط¸â€،ط¸â€ ط·آ§..."
+                      placeholder="اكتب ردك هنا..."
                       rows={4}
                       className="w-full bg-surface border border-border rounded-xl px-4 py-3 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
                     />
                     <div className="flex items-center justify-between mt-3">
                       <button type="button" className="flex items-center gap-1 text-sm text-text-tertiary hover:text-primary transition-colors">
                         <HiOutlinePaperClip className="w-4 h-4" />
-                        <span>ط·آ¥ط·آ±ط¸ظ¾ط·آ§ط¸â€ڑ ط¸â€¦ط¸â€‍ط¸ظ¾</span>
+                        <span>إرفاق ملف</span>
                       </button>
                       <Button type="button" size="sm" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-                        ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍ ط·آ§ط¸â€‍ط·آ±ط·آ¯
+                        إرسال الرد
                       </Button>
                     </div>
                   </div>
@@ -166,11 +166,11 @@ export default function ParentMessagesPage() {
             <div className="flex-1 flex items-center justify-center">
               <EmptyState
                 icon={HiOutlineChat}
-                title="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©"
-                description="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط¸â€¦ط¸â€  ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط¸â€‍ط·آ¹ط·آ±ط·آ¶ ط¸â€¦ط·آ­ط·ع¾ط¸ث†ط·آ§ط¸â€،ط·آ§"
+                title="اختر رسالة"
+                description="اختر رسالة من القائمة لعرض محتواها"
                 action={
                   <Button onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                    ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍ ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
+                    إرسال رسالة جديدة
                   </Button>
                 }
               />
@@ -179,19 +179,19 @@ export default function ParentMessagesPage() {
         </div>
       </div>
 
-      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ© ط·آ¥ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³" subtitle="ط·آ£ط·آ±ط·آ³ط¸â€‍ ط·آ§ط·آ³ط·ع¾ط¸ظ¾ط·آ³ط·آ§ط·آ±ط·آ§ط¸â€¹ ط·آ£ط¸ث† ط·آ·ط¸â€‍ط·آ¨ط·آ§ط¸â€¹ ط·آ¥ط¸â€‍ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ¯ط·آ±ط·آ³" size="lg">
+      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="رسالة جديدة إلى المدرس" subtitle="أرسل استفساراً أو طلباً إلى المدرس" size="lg">
         <div className="space-y-4">
-          <Input label="ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¶ط¸ث†ط·آ¹" placeholder="ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©" />
-          <Textarea label="ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©" placeholder="ط·آ§ط¸ئ’ط·ع¾ط·آ¨ ط·آ±ط·آ³ط·آ§ط¸â€‍ط·ع¾ط¸ئ’ ط¸â€،ط¸â€ ط·آ§..." rows={5} />
+          <Input label="الموضوع" placeholder="عنوان الرسالة" />
+          <Textarea label="نص الرسالة" placeholder="اكتب رسالتك هنا..." rows={5} />
           <div className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary border border-border cursor-pointer hover:bg-surface-tertiary transition-colors">
             <HiOutlinePaperClip className="w-4 h-4 text-text-tertiary" />
-            <span className="text-sm text-text-tertiary">ط·آ¥ط·آ±ط¸ظ¾ط·آ§ط¸â€ڑ ط¸â€¦ط¸â€‍ط¸ظ¾ (ط·آ§ط·آ®ط·ع¾ط¸ظ¹ط·آ§ط·آ±ط¸ظ¹)</span>
+            <span className="text-sm text-text-tertiary">إرفاق ملف (اختياري)</span>
           </div>
           <div className="pt-4 flex gap-3">
             <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />}>
-              ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍
+              إرسال
             </Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>

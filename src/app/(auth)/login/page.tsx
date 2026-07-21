@@ -70,10 +70,10 @@ function LoginForm() {
         const user = useAuthStore.getState().user
         router.replace(user ? roleRoutes[user.role] : "/teacher")
       } else {
-        setError("ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ ط£ظˆ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط± ط؛ظٹط± طµط­ظٹط­ط©")
+        setError("البريد الإلكتروني أو كلمة المرور غير صحيحة")
       }
     } catch {
-      setError("ط­ط¯ط« ط®ط·ط£ ط£ط«ظ†ط§ط، طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„. ظٹط±ط¬ظ‰ ط§ظ„ظ…ط­ط§ظˆظ„ط© ظ…ط±ط© ط£ط®ط±ظ‰.")
+      setError("حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مرة أخرى.")
     } finally {
       setIsLoading(false)
     }
@@ -104,7 +104,7 @@ function LoginForm() {
           <span className="font-semibold text-text">TeacherOS</span>
         </div>
         <Link href="/" className="text-sm text-text-secondary hover:text-primary transition-colors pointer-events-auto">
-          ط§ظ„ط¹ظˆط¯ط© ظ„ظ„ط±ط¦ظٹط³ظٹط©
+          العودة للرئيسية
         </Link>
       </div>
 
@@ -129,7 +129,7 @@ function LoginForm() {
             transition={{ delay: 0.25 }}
             className="text-2xl font-bold text-text"
           >
-            طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„ ط¥ظ„ظ‰ TeacherOS
+            تسجيل الدخول إلى TeacherOS
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -137,7 +137,7 @@ function LoginForm() {
             transition={{ delay: 0.3 }}
             className="text-text-secondary mt-2 text-sm"
           >
-            ط£ط¯ط®ظ„ ط¨ظٹط§ظ†ط§طھ ط­ط³ط§ط¨ظƒ ظ„ظ„ظˆطµظˆظ„ ط¥ظ„ظ‰ ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… ظˆط¥ط¯ط§ط±ط© ظ…ظ†طµطھظƒ ط§ظ„طھط¹ظ„ظٹظ…ظٹط©
+            أدخل بيانات حسابك للوصول إلى لوحة التحكم وإدارة منصتك التعليمية
           </motion.p>
         </div>
 
@@ -151,7 +151,7 @@ function LoginForm() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 {sessionExpired && (
                   <div className="p-3 rounded-xl bg-warning/10 border border-warning/20 text-sm text-warning">
-                    ط§ظ†طھظ‡طھ طµظ„ط§ط­ظٹط© ط§ظ„ط¬ظ„ط³ط©. ظٹط±ط¬ظ‰ طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„ ظ…ط±ط© ط£ط®ط±ظ‰.
+                    انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى.
                   </div>
                 )}
                 {error && (
@@ -160,11 +160,11 @@ function LoginForm() {
                   </div>
                 )}
                 <Input
-                  label="ط§ظ„ط¨ط±ظٹط¯ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ"
+                  label="البريد الإلكتروني"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="ط£ط¯ط®ظ„ ط¨ط±ظٹط¯ظƒ ط§ظ„ط¥ظ„ظƒطھط±ظˆظ†ظٹ"
+                  placeholder="أدخل بريدك الإلكتروني"
                   leftIcon={<HiMail className="w-5 h-5" />}
                   required
                   dir="auto"
@@ -172,11 +172,11 @@ function LoginForm() {
 
                 <div className="relative">
                   <Input
-                    label="ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±"
+                    label="كلمة المرور"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="ط£ط¯ط®ظ„ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±"
+                    placeholder="أدخل كلمة المرور"
                     leftIcon={<HiLockClosed className="w-5 h-5" />}
                     required
                   />
@@ -198,18 +198,18 @@ function LoginForm() {
                       onChange={(e) => setRemember(e.target.checked)}
                       className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer transition-colors"
                     />
-                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">طھط°ظƒط±ظ†ظٹ</span>
+                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">تذكرني</span>
                   </label>
                   <Link
                     href="/forgot-password"
                     className="text-sm text-primary hover:text-primary-dark transition-colors font-medium"
                   >
-                    ظ†ط³ظٹطھ ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±طں
+                    نسيت كلمة المرور؟
                   </Link>
                 </div>
 
                 <Button type="submit" isLoading={isLoading} className="w-full shadow-md shadow-primary/20" size="lg">
-                  {isLoading ? "ط¬ط§ط±ظٹ طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„..." : "طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„"}
+                  {isLoading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
                 </Button>
               </form>
 
@@ -218,7 +218,7 @@ function LoginForm() {
                   <div className="w-full border-t border-border" />
                 </div>
                 <div className="relative flex justify-center">
-                  <span className="bg-surface px-4 text-sm text-text-tertiary">ط£ظˆ ط§ظ„ط¯ط®ظˆظ„ ط¹ط¨ط±</span>
+                  <span className="bg-surface px-4 text-sm text-text-tertiary">أو الدخول عبر</span>
                 </div>
               </div>
 
@@ -242,9 +242,9 @@ function LoginForm() {
 
               <div className="mt-6 text-center space-y-3">
                 <p className="text-sm text-text-secondary">
-                  ظ„ظٹط³ ظ„ط¯ظٹظƒ ط­ط³ط§ط¨طں{" "}
+                  ليس لديك حساب؟{" "}
                   <Link href="/register" className="text-primary hover:text-primary-dark font-semibold transition-colors">
-                    ط³ط¬ظ„ ط§ظ„ط¢ظ†
+                    سجل الآن
                   </Link>
                 </p>
                 <div className="h-px bg-border/50 w-12 mx-auto" />
@@ -253,7 +253,7 @@ function LoginForm() {
                   className="inline-flex items-center gap-1.5 text-sm text-primary/70 hover:text-primary transition-colors font-medium"
                 >
                   <HiShieldCheck className="w-4 h-4" />
-                  ط¨ظٹط§ظ†ط§طھ طھط¬ط±ط¨ط©
+                  بيانات تجربة
                 </Link>
               </div>
             </CardContent>
@@ -266,7 +266,7 @@ function LoginForm() {
           transition={{ delay: 0.6 }}
           className="text-center mt-8 text-xs text-text-tertiary"
         >
-          &copy; {new Date().getFullYear()} TeacherOS. ط¬ظ…ظٹط¹ ط§ظ„ط­ظ‚ظˆظ‚ ظ…ط­ظپظˆط¸ط©.
+          &copy; {new Date().getFullYear()} TeacherOS. جميع الحقوق محفوظة.
         </motion.p>
       </motion.div>
     </div>
@@ -279,7 +279,7 @@ export default function LoginPage() {
       <div className="min-h-screen flex items-center justify-center bg-surface-secondary">
         <div className="text-center space-y-3">
           <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-text-secondary text-sm">ط¬ط§ط±ظٹ ط§ظ„طھط­ظ…ظٹظ„...</p>
+          <p className="text-text-secondary text-sm">جاري التحميل...</p>
         </div>
       </div>
     }>

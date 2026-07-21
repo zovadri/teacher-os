@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -27,40 +27,40 @@ export default function StudentSubscriptionPage() {
 
   return (
     <div>
-      <DashboardHeader title="ط§ط´طھط±ط§ظƒظٹ" subtitle="ط¥ط¯ط§ط±ط© ط§ط´طھط±ط§ظƒظƒ ظˆط¹ط±ط¶ ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ" />
+      <DashboardHeader title="اشتراكي" subtitle="إدارة اشتراكك وعرض المدفوعات" />
 
       <div className="p-4 md:p-6 space-y-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <Card className="relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1.5 bg-success" />
             <CardHeader>
-              <CardTitle>ط§ظ„ط§ط´طھط±ط§ظƒ ط§ظ„ط­ط§ظ„ظٹ</CardTitle>
-              <Badge variant="success" size="md" dot>ظ†ط´ط·</Badge>
+              <CardTitle>الاشتراك الحالي</CardTitle>
+              <Badge variant="success" size="md" dot>نشط</Badge>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div>
-                  <p className="text-sm text-text-secondary mb-1">ط§ظ„ط¨ط§ظ‚ط©</p>
+                  <p className="text-sm text-text-secondary mb-1">الباقة</p>
                   <p className="text-lg font-bold text-text">{currentPlan.name}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-text-secondary mb-1">طھط§ط±ظٹط® ط§ظ„ط¨ط¯ط،</p>
+                  <p className="text-sm text-text-secondary mb-1">تاريخ البدء</p>
                   <p className="text-lg font-bold text-text">{formatDate(startDate)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-text-secondary mb-1">طھط§ط±ظٹط® ط§ظ„ط§ظ†طھظ‡ط§ط،</p>
+                  <p className="text-sm text-text-secondary mb-1">تاريخ الانتهاء</p>
                   <p className="text-lg font-bold text-text">{formatDate(endDate)}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-text-secondary mb-1">ط§ظ„ظ…طھط¨ظ‚ظٹ</p>
-                  <p className="text-lg font-bold text-text text-success">{daysRemaining} ظٹظˆظ…</p>
+                  <p className="text-sm text-text-secondary mb-1">المتبقي</p>
+                  <p className="text-lg font-bold text-text text-success">{daysRemaining} يوم</p>
                 </div>
               </div>
               <div className="mt-4">
                 <Progress value={daysUsed} max={totalDays} size="md" variant="success" showLabel />
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                {["ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ", "ط§ظ…طھط­ط§ظ†ط§طھ ط؛ظٹط± ظ…ط­ط¯ظˆط¯ط©", "ط¯ط¹ظ… ظپظ†ظٹ", "ط´ظ‡ط§ط¯ط§طھ ظ…ط¹طھظ…ط¯ط©"].map((f) => (
+                {["جميع الكورسات", "امتحانات غير محدودة", "دعم فني", "شهادات معتمدة"].map((f) => (
                   <div key={f} className="flex items-center gap-1.5 text-sm text-text-secondary">
                     <HiCheck className="w-4 h-4 text-success" />
                     <span>{f}</span>
@@ -69,17 +69,17 @@ export default function StudentSubscriptionPage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="outline">طھط¬ط¯ظٹط¯ ط§ظ„ط§ط´طھط±ط§ظƒ</Button>
-              <Button variant="ghost">ط¥ظ„ط؛ط§ط، ط§ظ„ط§ط´طھط±ط§ظƒ</Button>
+              <Button variant="outline">تجديد الاشتراك</Button>
+              <Button variant="ghost">إلغاء الاشتراك</Button>
             </CardFooter>
           </Card>
         </motion.div>
 
         <Tabs
           tabs={[
-            { id: "current", label: "ط§ظ„ط¨ط§ظ‚ط© ط§ظ„ط­ط§ظ„ظٹط©", icon: <HiCreditCard className="w-4 h-4" /> },
-            { id: "plans", label: "ط§ظ„ط¨ط§ظ‚ط§طھ ط§ظ„ظ…طھط§ط­ط©", icon: <HiCalendar className="w-4 h-4" /> },
-            { id: "payments", label: "ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ", icon: <HiClock className="w-4 h-4" /> },
+            { id: "current", label: "الباقة الحالية", icon: <HiCreditCard className="w-4 h-4" /> },
+            { id: "plans", label: "الباقات المتاحة", icon: <HiCalendar className="w-4 h-4" /> },
+            { id: "payments", label: "المدفوعات", icon: <HiClock className="w-4 h-4" /> },
           ]}
           defaultTab="current"
           onChange={setActiveTab}
@@ -89,24 +89,24 @@ export default function StudentSubscriptionPage() {
               <TabPanel id="current" activeTab={tab}>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <Card>
-                    <CardHeader><CardTitle>ط§ظ„ظˆطµظ„ ظ„ظ„ظƒظˆط±ط³ط§طھ</CardTitle></CardHeader>
+                    <CardHeader><CardTitle>الوصل للكورسات</CardTitle></CardHeader>
                     <CardContent>
-                      <p className="text-3xl font-bold text-text mb-2">ط؛ظٹط± ظ…ط­ط¯ظˆط¯</p>
-                      <p className="text-sm text-text-secondary">ط¬ظ…ظٹط¹ ظƒظˆط±ط³ط§طھ ط§ظ„ظ…ظ†طµط©</p>
+                      <p className="text-3xl font-bold text-text mb-2">غير محدود</p>
+                      <p className="text-sm text-text-secondary">جميع كورسات المنصة</p>
                     </CardContent>
                   </Card>
                   <Card>
-                    <CardHeader><CardTitle>ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ</CardTitle></CardHeader>
+                    <CardHeader><CardTitle>الامتحانات</CardTitle></CardHeader>
                     <CardContent>
-                      <p className="text-3xl font-bold text-text mb-2">ط؛ظٹط± ظ…ط­ط¯ظˆط¯</p>
-                      <p className="text-sm text-text-secondary">ط¬ظ…ظٹط¹ ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ ظˆط§ظ„ط§ط®طھط¨ط§ط±ط§طھ</p>
+                      <p className="text-3xl font-bold text-text mb-2">غير محدود</p>
+                      <p className="text-sm text-text-secondary">جميع الامتحانات والاختبارات</p>
                     </CardContent>
                   </Card>
                   <Card>
-                    <CardHeader><CardTitle>ط§ظ„ط´ظ‡ط§ط¯ط§طھ</CardTitle></CardHeader>
+                    <CardHeader><CardTitle>الشهادات</CardTitle></CardHeader>
                     <CardContent>
-                      <p className="text-3xl font-bold text-text mb-2">ظ…ط¯ظپظˆط¹ط©</p>
-                      <p className="text-sm text-text-secondary">ط´ظ‡ط§ط¯ط© ظ„ظƒظ„ ظƒظˆط±ط³ ظ…ظƒطھظ…ظ„</p>
+                      <p className="text-3xl font-bold text-text mb-2">مدفوعة</p>
+                      <p className="text-sm text-text-secondary">شهادة لكل كورس مكتمل</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -124,20 +124,20 @@ export default function StudentSubscriptionPage() {
                           <div className="space-y-3 text-right">
                             <div className="flex items-center gap-2 text-sm text-text-secondary">
                               <HiCheck className="w-4 h-4 text-success shrink-0" />
-                              <span>{plan.allCourses ? "ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط±ط³ط§طھ" : `${plan.coursesCount} ظƒظˆط±ط³ط§طھ`}</span>
+                              <span>{plan.allCourses ? "جميع الكورسات" : `${plan.coursesCount} كورسات`}</span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-text-secondary">
                               <HiCheck className="w-4 h-4 text-success shrink-0" />
-                              <span>ظ…ط¯ط© ط§ظ„ط§ط´طھط±ط§ظƒ: {plan.duration} {plan.durationUnit === "month" ? "ط´ظ‡ظˆط±" : "ط£ظٹط§ظ…"}</span>
+                              <span>مدة الاشتراك: {plan.duration} {plan.durationUnit === "month" ? "شهور" : "أيام"}</span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-text-secondary">
                               <HiCheck className="w-4 h-4 text-success shrink-0" />
-                              <span>ط¯ط¹ظ… ظپظ†ظٹ ظ…طھط§ط­</span>
+                              <span>دعم فني متاح</span>
                             </div>
                           </div>
                         </CardContent>
                         <CardFooter className="justify-center">
-                          <Button variant={i === 0 ? "primary" : "outline"}>ط§ظ„طھط±ظ‚ظٹط© ظ„ظ‡ط°ظ‡ ط§ظ„ط¨ط§ظ‚ط©</Button>
+                          <Button variant={i === 0 ? "primary" : "outline"}>الترقية لهذه الباقة</Button>
                         </CardFooter>
                       </Card>
                     </motion.div>
@@ -147,25 +147,25 @@ export default function StudentSubscriptionPage() {
 
               <TabPanel id="payments" activeTab={tab}>
                 <Card>
-                  <CardHeader><CardTitle>ط³ط¬ظ„ ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ</CardTitle></CardHeader>
+                  <CardHeader><CardTitle>سجل المدفوعات</CardTitle></CardHeader>
                   <CardContent>
                     <Table
                       columns={[
-                        { key: "transactionId", header: "ط±ظ‚ظ… ط§ظ„ط¹ظ…ظ„ظٹط©" },
-                        { key: "amount", header: "ط§ظ„ظ…ط¨ظ„ط؛", render: (p) => <span className="font-semibold">{formatCurrency(p.amount)}</span> },
-                        { key: "method", header: "ط·ط±ظٹظ‚ط© ط§ظ„ط¯ظپط¹", render: (p) => ({ cash: "ظ†ظ‚ط¯ط§ظ‹", fawry: "ظپظˆط±ظٹ", code: "ظƒظˆط¯" })[p.method] },
-                        { key: "status", header: "ط§ظ„ط­ط§ظ„ط©", render: (p) => (
+                        { key: "transactionId", header: "رقم العملية" },
+                        { key: "amount", header: "المبلغ", render: (p) => <span className="font-semibold">{formatCurrency(p.amount)}</span> },
+                        { key: "method", header: "طريقة الدفع", render: (p) => ({ cash: "نقداً", fawry: "فوري", code: "كود" })[p.method] },
+                        { key: "status", header: "الحالة", render: (p) => (
                           <Badge variant={p.status === "completed" ? "success" : p.status === "pending" ? "warning" : "error"}>
-                            {p.status === "completed" ? "ظ…ظƒطھظ…ظ„" : p.status === "pending" ? "ظ‚ظٹط¯ ط§ظ„ط§ظ†طھط¸ط§ط±" : "ظپط´ظ„"}
+                            {p.status === "completed" ? "مكتمل" : p.status === "pending" ? "قيد الانتظار" : "فشل"}
                           </Badge>
                         )},
-                        { key: "createdAt", header: "ط§ظ„طھط§ط±ظٹط®", render: (p) => formatDate(p.createdAt) },
-                        { key: "invoiceId", header: "ط§ظ„ظپط§طھظˆط±ط©", render: (p) => (
-                          <Button size="xs" variant="ghost">طھط­ظ…ظٹظ„</Button>
+                        { key: "createdAt", header: "التاريخ", render: (p) => formatDate(p.createdAt) },
+                        { key: "invoiceId", header: "الفاتورة", render: (p) => (
+                          <Button size="xs" variant="ghost">تحميل</Button>
                         )},
                       ]}
                       data={studentPayments}
-                      emptyMessage="ظ„ط§ طھظˆط¬ط¯ ظ…ط¯ظپظˆط¹ط§طھ ط³ط§ط¨ظ‚ط©"
+                      emptyMessage="لا توجد مدفوعات سابقة"
                     />
                   </CardContent>
                 </Card>

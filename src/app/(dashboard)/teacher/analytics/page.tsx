@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect, useMemo, Fragment } from "react"
 import { motion } from "framer-motion"
@@ -43,17 +43,17 @@ const colors = {
 const PIE_COLORS = [colors.primary, colors.success, colors.warning, colors.cyan, colors.purple, colors.pink]
 
 const tabConfig = [
-  { id: "overview", label: "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¸ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ©", icon: HiOutlinePresentationChartLine },
-  { id: "courses", label: "ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¹آ¾", icon: HiOutlineAcademicCap },
-  { id: "videos", label: "ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ¸ط«â€ ", icon: HiOutlineVideoCamera },
-  { id: "exams", label: "ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾", icon: HiOutlineClipboardList },
-  { id: "financial", label: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ·ط¢آ©", icon: HiOutlineCurrencyDollar },
+  { id: "overview", label: "نظرة عامة", icon: HiOutlinePresentationChartLine },
+  { id: "courses", label: "تحليل الكورسات", icon: HiOutlineAcademicCap },
+  { id: "videos", label: "تحليل الفيديو", icon: HiOutlineVideoCamera },
+  { id: "exams", label: "تحليل الامتحانات", icon: HiOutlineClipboardList },
+  { id: "financial", label: "التقارير المالية", icon: HiOutlineCurrencyDollar },
 ]
 
 const statusConfig: Record<string, { label: string; variant: "success" | "warning" | "error" | "info" }> = {
-  active: { label: "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ´ط·آ·ط¢آ·", variant: "success" },
-  draft: { label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ¸ط«â€ ط·آ·ط¢آ¯ط·آ·ط¢آ©", variant: "warning" },
-  closed: { label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط·â€؛ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘", variant: "error" },
+  active: { label: "نشط", variant: "success" },
+  draft: { label: "مسودة", variant: "warning" },
+  closed: { label: "مغلق", variant: "error" },
 }
 
 const containerVariants = {
@@ -101,14 +101,14 @@ function RevenueCustomTooltip({ active, payload, label }: { active?: boolean; pa
 }
 
 const recentActivity = [
-  { action: "ط·آ·ط¹آ¾ط·آ·ط¢آ³ط·آ·ط¢آ¬ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯", user: "ط·آ·ط¢آ£ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° 5 ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬ع‘", type: "student" },
-  { action: "ط·آ·ط¢آ¥ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ", user: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° 15 ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©", type: "exam" },
-  { action: "ط·آ·ط¢آ§ط·آ·ط¢آ´ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ¸ط¦â€™ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯", user: "ط·آ·ط¢آ®ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ ط·آ·ط¢آ­ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ ", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° 32 ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©", type: "subscription" },
-  { action: "ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³", user: "ط·آ¸أ¢â‚¬آ ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ§ ط·آ·ط¢آ£ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ©", type: "course" },
-  { action: "ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯", user: "ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ط·آ·ط¢آ¯", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ", type: "rating" },
-  { action: "ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ¸ط«â€ ", user: "ط·آ·ط¢آ£ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° 3 ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾", type: "video" },
-  { action: "ط·آ·ط¢آ¥ط·آ·ط¢آµط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ©", user: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¯ ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° 4 ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾", type: "certificate" },
-  { action: "ط·آ·ط¢آ¥ط·آ·ط¢آ±ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ¥ط·آ·ط¢آ´ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¢آ±", user: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¸ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦", time: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ° 5 ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾", type: "notification" },
+  { action: "تسجيل طالب جديد", user: "أحمد محمد", time: "منذ 5 دقائق", type: "student" },
+  { action: "إتمام امتحان", user: "مريم علي", time: "منذ 15 دقيقة", type: "exam" },
+  { action: "اشتراك جديد", user: "خالد حسن", time: "منذ 32 دقيقة", type: "subscription" },
+  { action: "إضافة كورس", user: "نورا أحمد", time: "منذ ساعة", type: "course" },
+  { action: "تقييم جديد", user: "سارة محمود", time: "منذ ساعتين", type: "rating" },
+  { action: "تحميل فيديو", user: "أحمد محمد", time: "منذ 3 ساعات", type: "video" },
+  { action: "إصدار شهادة", user: "محمد سامي", time: "منذ 4 ساعات", type: "certificate" },
+  { action: "إرسال إشعار", user: "النظام", time: "منذ 5 ساعات", type: "notification" },
 ]
 
 const activityTypeColors: Record<string, string> = {
@@ -155,7 +155,7 @@ export default function AnalyticsPage() {
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <ErrorState title="ط·آ·ط¢آ­ط·آ·ط¢آ¯ط·آ·ط¢آ« ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£ ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾" message="ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ·ط¢آ£ط·آ·ط¢آ®ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ°" onRetry={() => setError(null)} />
+        <ErrorState title="حدث خطأ ظپظٹ تحميل التحليلات" message="يرجى المحاولة مرة أخرى" onRetry={() => setError(null)} />
       </div>
     )
   }
@@ -176,7 +176,7 @@ export default function AnalyticsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <PageHeader title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ©" description="ط·آ·ط¢آ¥ط·آ·ط¢آ­ط·آ·ط¢آµط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸ط«â€ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط·إ’ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آµط·آ·ط¢آ©" />
+      <PageHeader title="التحليلات المتقدمة" description="إحصائيات وتحليلات شاملة لأداء المنصة" />
 
       <Tabs tabs={tabConfig}>
         {(activeTab) => (
@@ -207,17 +207,17 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
   const { overview } = data
 
   const statsCards = [
-    { title: "ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨", value: overview.totalStudents, icon: HiOutlineUsers, color: "primary" as const, change: { value: overview.studentGrowth, isPositive: true } },
-    { title: "ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾", value: formatCurrency(overview.totalRevenue), icon: HiOutlineCash, color: "success" as const, change: { value: overview.revenueGrowth, isPositive: true } },
-    { title: "ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¹آ¾", value: overview.totalCourses, icon: HiOutlineAcademicCap, color: "info" as const },
-    { title: "ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾", value: overview.totalExams, icon: HiOutlineClipboardList, color: "warning" as const },
-    { title: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ", value: `%${overview.completionRate}`, icon: HiOutlineTrendingUp, color: "success" as const },
-    { title: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦", value: overview.averageRating.toFixed(1), icon: HiOutlineStar, color: "warning" as const },
+    { title: "إجمالي الطلاب", value: overview.totalStudents, icon: HiOutlineUsers, color: "primary" as const, change: { value: overview.studentGrowth, isPositive: true } },
+    { title: "إجمالي الإيرادات", value: formatCurrency(overview.totalRevenue), icon: HiOutlineCash, color: "success" as const, change: { value: overview.revenueGrowth, isPositive: true } },
+    { title: "إجمالي الكورسات", value: overview.totalCourses, icon: HiOutlineAcademicCap, color: "info" as const },
+    { title: "إجمالي الامتحانات", value: overview.totalExams, icon: HiOutlineClipboardList, color: "warning" as const },
+    { title: "معدل الإكمال", value: `%${overview.completionRate}`, icon: HiOutlineTrendingUp, color: "success" as const },
+    { title: "متوسط التقييم", value: overview.averageRating.toFixed(1), icon: HiOutlineStar, color: "warning" as const },
   ]
 
-  const monthlyRevenueData = data.financialReports.map(r => ({ month: r.month, "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾": r.revenue }))
+  const monthlyRevenueData = data.financialReports.map(r => ({ month: r.month, "الإيرادات": r.revenue }))
   const studentGrowthData = data.monthlyRevenue.map((_, i) => ({
-    month: data.financialReports[i]?.month || `ط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ± ${i + 1}`,
+    month: data.financialReports[i]?.month || `شهر ${i + 1}`,
     newStudents: Math.floor(det() * 40) + 20 + i * 3,
   }))
 
@@ -237,15 +237,15 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ©</CardTitle>
-              <CardDescription>ط·آ·ط¹آ¾ط·آ·ط¢آ·ط·آ¸ط«â€ ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ®ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦</CardDescription>
+              <CardTitle>الإيرادات الشهرية</CardTitle>
+              <CardDescription>تطور الإيرادات خلال العام</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-2 mb-4">
                 <Badge variant="success" size="md">
                   <span className="flex items-center gap-1">
                     <HiOutlineTrendingUp className="w-3.5 h-3.5" />
-                    ط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€  ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© {overview.revenueGrowth}%
+                    نمو بنسبة {overview.revenueGrowth}%
                   </span>
                 </Badge>
               </div>
@@ -262,7 +262,7 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
                     <XAxis dataKey="month" tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                     <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                     <Tooltip content={<RevenueCustomTooltip />} />
-                    <Area type="monotone" dataKey="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" stroke={colors.primary} fill="url(#overviewRevenueGrad)" strokeWidth={2} name="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
+                    <Area type="monotone" dataKey="الإيرادات" stroke={colors.primary} fill="url(#overviewRevenueGrad)" strokeWidth={2} name="الإيرادات" />
                   </AreaChart>
                 </ResponsiveContainer>
               </ChartContainer>
@@ -273,8 +273,8 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨</CardTitle>
-              <CardDescription>ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹</CardDescription>
+              <CardTitle>نمو الطلاب</CardTitle>
+              <CardDescription>عدد الطلاب الجدد شهرياً</CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer>
@@ -284,7 +284,7 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
                     <XAxis dataKey="month" tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                     <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="newStudents" fill={colors.success} radius={[4, 4, 0, 0]} name="ط·آ·ط¢آ·ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ·ط¢آ¯" />
+                    <Bar dataKey="newStudents" fill={colors.success} radius={[4, 4, 0, 0]} name="طلاب جدد" />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartContainer>
@@ -297,8 +297,8 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ·ط¢آ£ط·آ¸ط¸آ¾ط·آ·ط¢آ¶ط·آ¸أ¢â‚¬â€چ 5 ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾</CardTitle>
-              <CardDescription>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ° ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹ ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾</CardDescription>
+              <CardTitle>أفضل 5 كورسات بالإيرادات</CardTitle>
+              <CardDescription>الكورسات الأعلى تحقيقاً للإيرادات</CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer>
@@ -308,7 +308,7 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
                     <XAxis type="number" tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                     <YAxis dataKey="name" type="category" width={130} tick={{ fill: "#475569", fontSize: 11 }} axisLine={false} tickLine={false} />
                     <Tooltip content={<RevenueCustomTooltip />} />
-                    <Bar dataKey="revenue" fill={colors.primary} radius={[0, 4, 4, 0]} name="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
+                    <Bar dataKey="revenue" fill={colors.primary} radius={[0, 4, 4, 0]} name="الإيرادات" />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartContainer>
@@ -319,8 +319,8 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ®ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ©</CardTitle>
-              <CardDescription>ط·آ·ط¢آ£ط·آ·ط¢آ­ط·آ·ط¢آ¯ط·آ·ط¢آ« ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ ط·آ·ط¢آµط·آ·ط¢آ©</CardDescription>
+              <CardTitle>النشاطات الأخيرة</CardTitle>
+              <CardDescription>أحدث النشاطات على المنصة</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -335,7 +335,7 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
                     <ActivityIcon type={activity.type} />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-text truncate">{activity.action}</p>
-                      <p className="text-xs text-text-tertiary">{activity.user} ط·آ¢ط¢آ· {activity.time}</p>
+                      <p className="text-xs text-text-tertiary">{activity.user} ط¢آ· {activity.time}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -373,7 +373,7 @@ function CourseAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }
   }
 
   const handleExportCSV = () => {
-    const headers = "ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³,ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ,ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾,ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦,ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ,ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ·ط¢آ³,ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©"
+    const headers = "اسم الكورس,المشتركين,الإيرادات,متوسط التقييم,نسبة الإكمال,عدد الدروس,الحالة"
     const rows = filteredCourses.map(c =>
       `${c.name},${c.enrolled},${c.revenue},${c.rating},%${c.completionRate},${c.lessons},${statusConfig[c.status]?.label || c.status}`
     )
@@ -387,21 +387,21 @@ function CourseAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }
   }
 
   const chapterStats = [
-    { name: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ©", students: 235, avgGrade: 82, completionRate: 90 },
-    { name: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾", students: 228, avgGrade: 78, completionRate: 85 },
-    { name: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ³ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬آ¦", students: 210, avgGrade: 74, completionRate: 72 },
-    { name: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¹آ¾", students: 195, avgGrade: 80, completionRate: 78 },
-    { name: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ¹ط·آ·ط¢آ©", students: 180, avgGrade: 88, completionRate: 92 },
+    { name: "المقدمة", students: 235, avgGrade: 82, completionRate: 90 },
+    { name: "الأساسيات", students: 228, avgGrade: 78, completionRate: 85 },
+    { name: "المستوى المتقدم", students: 210, avgGrade: 74, completionRate: 72 },
+    { name: "التطبيقات", students: 195, avgGrade: 80, completionRate: 78 },
+    { name: "المراجعة", students: 180, avgGrade: 88, completionRate: 92 },
   ]
 
   const columns = [
-    { key: "name", header: "ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³" },
-    { key: "enrolled", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ¸ط¦â€™ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ " },
-    { key: "revenue", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾", render: (c: Record<string, unknown>) => formatCurrency(c.revenue) },
-    { key: "rating", header: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ¦", render: (c: Record<string, unknown>) => `${c.rating}/5` },
-    { key: "completionRate", header: "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ", render: (c: Record<string, unknown>) => `%${c.completionRate}` },
-    { key: "lessons", header: "ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ·ط¢آ³" },
-    { key: "status", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©", render: (c: Record<string, unknown>) => {
+    { key: "name", header: "اسم الكورس" },
+    { key: "enrolled", header: "المشتركين" },
+    { key: "revenue", header: "الإيرادات", render: (c: Record<string, unknown>) => formatCurrency(c.revenue) },
+    { key: "rating", header: "متوسط التقييم", render: (c: Record<string, unknown>) => `${c.rating}/5` },
+    { key: "completionRate", header: "نسبة الإكمال", render: (c: Record<string, unknown>) => `%${c.completionRate}` },
+    { key: "lessons", header: "عدد الدروس" },
+    { key: "status", header: "الحالة", render: (c: Record<string, unknown>) => {
       const config = statusConfig[c.status]
       return config ? <Badge variant={config.variant}>{config.label}</Badge> : <Badge>{c.status}</Badge>
     }},
@@ -414,7 +414,7 @@ function CourseAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }
           <HiOutlineSearch className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
           <input
             type="text"
-            placeholder="ط·آ·ط¢آ¨ط·آ·ط¢آ­ط·آ·ط¢آ« ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬آ  ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³..."
+            placeholder="بحث عن كورس..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-surface border border-border rounded-lg pr-10 px-3.5 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
@@ -433,12 +433,12 @@ function CourseAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }
                   : "bg-surface-secondary text-text-secondary hover:text-text border border-border"
               )}
             >
-              {status === "all" ? "ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ¹" : statusConfig[status]?.label || status}
+              {status === "all" ? "جميع" : statusConfig[status]?.label || status}
             </button>
           ))}
         </div>
         <Button variant="outline" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleExportCSV}>
-          ط·آ·ط¹آ¾ط·آ·ط¢آµط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ± CSV
+          تصدير CSV
         </Button>
       </motion.div>
 
@@ -458,7 +458,7 @@ function CourseAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }
             {filteredCourses.length === 0 ? (
               <tr>
                 <td colSpan={columns.length + 1} className="text-center py-12 text-text-tertiary">
-                  <EmptyState title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¹آ¾" description="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ·ط¢آ¬ ط·آ·ط¹آ¾ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬ع‘ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ط·آ·ط¢آ­ط·آ·ط¢آ«" withBackground={false} />
+                  <EmptyState title="لا توجد كورسات" description="لا توجد نتائج تطابق معايير البحث" withBackground={false} />
                 </td>
               </tr>
             ) : (
@@ -491,15 +491,15 @@ function CourseAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }
                     <tr className="bg-surface-secondary/50">
                       <td colSpan={columns.length + 1} className="p-4">
                         <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="space-y-3">
-                          <h4 className="text-sm font-semibold text-text mb-2">ط·آ·ط¢آ¥ط·آ·ط¢آ­ط·آ·ط¢آµط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آµط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸ط¸آ¹ط·آ·ط¢آ©</h4>
+                          <h4 className="text-sm font-semibold text-text mb-2">إحصائيات الفصول الدراسية</h4>
                           <div className="overflow-x-auto rounded-lg border border-border">
                             <table className="w-full text-sm">
                               <thead>
                                 <tr className="bg-surface border-b border-border">
-                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آµط·آ¸أ¢â‚¬â€چ</th>
-                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨</th>
-                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾</th>
-                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ</th>
+                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">اسم الفصل</th>
+                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">الطلاب</th>
+                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">متوسط الدرجات</th>
+                                  <th className="text-right px-4 py-2 font-semibold text-text-secondary">نسبة الإكمال</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -578,30 +578,30 @@ function VideoAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed })
   }
 
   const videoColumns = [
-    { key: "name", header: "ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ¸ط«â€ " },
-    { key: "course", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³" },
-    { key: "views", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾", sortable: true },
-    { key: "avgWatchTime", header: "ط·آ¸ط«â€ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ©" },
-    { key: "completionRate", header: "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ" },
-    { key: "likes", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ·ط¢آ¹ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¹آ¾" },
-    { key: "comments", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¹آ¾" },
-    { key: "uploadDate", header: "ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ¸ط¸آ¾ط·آ·ط¢آ¹" },
+    { key: "name", header: "اسم الفيديو" },
+    { key: "course", header: "الكورس" },
+    { key: "views", header: "المشاهدات", sortable: true },
+    { key: "avgWatchTime", header: "وقت المشاهدة" },
+    { key: "completionRate", header: "نسبة الإكمال" },
+    { key: "likes", header: "الإعجابات" },
+    { key: "comments", header: "التعليقات" },
+    { key: "uploadDate", header: "تاريخ الرفع" },
   ]
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
       <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¹آ¾" value={data.videoAnalytics.length} icon={HiOutlineVideoCamera} color="primary" />
-        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={totalViews.toLocaleString("ar-EG")} icon={HiOutlineTrendingUp} color="success" change={{ value: 15, isPositive: true }} />
-        <StatsCard title="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ¸ط«â€ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ©" value={`${avgWatchMinutes} ط·آ·ط¢آ¯`} icon={HiOutlineClock} color="info" />
-        <StatsCard title="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¦â€™ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ" value={`%${avgCompletion}`} icon={HiOutlineAcademicCap} color="warning" />
+        <StatsCard title="إجمالي الفيديوهات" value={data.videoAnalytics.length} icon={HiOutlineVideoCamera} color="primary" />
+        <StatsCard title="إجمالي المشاهدات" value={totalViews.toLocaleString("ar-EG")} icon={HiOutlineTrendingUp} color="success" change={{ value: 15, isPositive: true }} />
+        <StatsCard title="متوسط وقت المشاهدة" value={`${avgWatchMinutes} د`} icon={HiOutlineClock} color="info" />
+        <StatsCard title="معدل الإكمال" value={`%${avgCompletion}`} icon={HiOutlineAcademicCap} color="warning" />
       </motion.div>
 
       <motion.div variants={itemVariants} className="grid lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ¸ط¦â€™ط·آ·ط¢آ«ط·آ·ط¢آ± ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ©</CardTitle>
-            <CardDescription>ط·آ·ط¢آ£ط·آ¸ط¸آ¾ط·آ·ط¢آ¶ط·آ¸أ¢â‚¬â€چ 5 ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ­ط·آ¸ط¸آ¹ط·آ·ط¢آ« ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾</CardDescription>
+            <CardTitle>الأكثر مشاهدة</CardTitle>
+            <CardDescription>أفضل 5 فيديوهات من حيث المشاهدات</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -616,7 +616,7 @@ function VideoAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed })
                   </div>
                   <div className="text-left">
                     <p className="text-sm font-semibold text-text">{video.views.toLocaleString("ar-EG")}</p>
-                    <p className="text-xs text-text-tertiary">ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ©</p>
+                    <p className="text-xs text-text-tertiary">مشاهدة</p>
                   </div>
                 </div>
               ))}
@@ -626,8 +626,8 @@ function VideoAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed })
 
         <Card>
           <CardHeader>
-            <CardTitle>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬â€چ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ©</CardTitle>
-            <CardDescription>ط·آ·ط¢آ£ط·آ¸أ¢â‚¬ع‘ط·آ¸أ¢â‚¬â€چ 5 ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ­ط·آ¸ط¸آ¹ط·آ·ط¢آ« ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾</CardDescription>
+            <CardTitle>الأقل مشاهدة</CardTitle>
+            <CardDescription>أقل 5 فيديوهات من حيث المشاهدات</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -642,7 +642,7 @@ function VideoAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed })
                   </div>
                   <div className="text-left">
                     <p className="text-sm font-semibold text-text">{video.views.toLocaleString("ar-EG")}</p>
-                    <p className="text-xs text-text-tertiary">ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ¯ط·آ·ط¢آ©</p>
+                    <p className="text-xs text-text-tertiary">مشاهدة</p>
                   </div>
                 </div>
               ))}
@@ -676,7 +676,7 @@ function VideoAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed })
             {sortedVideos.length === 0 ? (
               <tr>
                 <td colSpan={videoColumns.length} className="text-center py-12 text-text-tertiary">
-                  <EmptyState title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ¸ط«â€ ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ§ط·آ·ط¹آ¾" withBackground={false} />
+                  <EmptyState title="لا توجد فيديوهات" withBackground={false} />
                 </td>
               </tr>
             ) : (
@@ -713,7 +713,7 @@ function ExamAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }) 
 
   const courseOptions = useMemo(() => {
     const courses = [...new Set(examAnalytics.map(e => e.course))]
-    return [{ value: "all", label: "ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³ط·آ·ط¢آ§ط·آ·ط¹آ¾" }, ...courses.map(c => ({ value: c, label: c }))]
+    return [{ value: "all", label: "جميع الكورسات" }, ...courses.map(c => ({ value: c, label: c }))]
   }, [examAnalytics])
 
   const filteredExams = useMemo(() => {
@@ -727,18 +727,18 @@ function ExamAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }) 
   const avgPassRate = Math.round(examAnalytics.reduce((s, e) => s + e.passRate, 0) / examAnalytics.length)
 
   const passFailData = [
-    { name: "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ­", value: avgPassRate },
-    { name: "ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ·ط¢آ¨", value: 100 - avgPassRate },
+    { name: "ناجح", value: avgPassRate },
+    { name: "راسب", value: 100 - avgPassRate },
   ]
 
   const examColumns = [
-    { key: "name", header: "ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " },
-    { key: "course", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸ط«â€ ط·آ·ط¢آ±ط·آ·ط¢آ³" },
-    { key: "students", header: "ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ·ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¢آ¨" },
-    { key: "avgGrade", header: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©" },
-    { key: "highestGrade", header: "ط·آ·ط¢آ£ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©" },
-    { key: "lowestGrade", header: "ط·آ·ط¢آ£ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©" },
-    { key: "passRate", header: "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ­", render: (e: Record<string, unknown>) => (
+    { key: "name", header: "اسم الامتحان" },
+    { key: "course", header: "الكورس" },
+    { key: "students", header: "عدد الطلاب" },
+    { key: "avgGrade", header: "متوسط الدرجة" },
+    { key: "highestGrade", header: "أعلى درجة" },
+    { key: "lowestGrade", header: "أدنى درجة" },
+    { key: "passRate", header: "نسبة النجاح", render: (e: Record<string, unknown>) => (
       <div className="flex items-center gap-2">
         <div className="w-12 h-1.5 bg-surface-tertiary rounded-full overflow-hidden">
           <div className={cn("h-full rounded-full", e.passRate >= 80 ? "bg-success" : e.passRate >= 60 ? "bg-warning" : "bg-error")} style={{ width: `${e.passRate}%` }} />
@@ -746,24 +746,24 @@ function ExamAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }) 
         <span className="text-xs text-text-secondary">%{e.passRate}</span>
       </div>
     )},
-    { key: "attempts", header: "ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾" },
+    { key: "attempts", header: "عدد المحاولات" },
   ]
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
       <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={totalExams} icon={HiOutlineClipboardList} color="primary" />
-        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ·ط¹آ¾" value={totalAttempts.toLocaleString("ar-EG")} icon={HiOutlineTrendingUp} color="info" change={{ value: 12, isPositive: true }} />
-        <StatsCard title="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={avgGradeAll} icon={HiOutlineAcademicCap} color="success" />
-        <StatsCard title="ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ­" value={`%${avgPassRate}`} icon={HiOutlineStar} color="warning" />
+        <StatsCard title="إجمالي الامتحانات" value={totalExams} icon={HiOutlineClipboardList} color="primary" />
+        <StatsCard title="إجمالي المحاولات" value={totalAttempts.toLocaleString("ar-EG")} icon={HiOutlineTrendingUp} color="info" change={{ value: 12, isPositive: true }} />
+        <StatsCard title="متوسط الدرجات" value={avgGradeAll} icon={HiOutlineAcademicCap} color="success" />
+        <StatsCard title="معدل النجاح" value={`%${avgPassRate}`} icon={HiOutlineStar} color="warning" />
       </motion.div>
 
       <div className="grid lg:grid-cols-2 gap-6">
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ·ط¢آ¬ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾</CardTitle>
-              <CardDescription>ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸أ¢â‚¬â€چط·آ¸ط¦â€™ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ </CardDescription>
+              <CardTitle>مقارنة نتائج الامتحانات</CardTitle>
+              <CardDescription>متوسط الدرجات لكل امتحان</CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer>
@@ -773,7 +773,7 @@ function ExamAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }) 
                     <XAxis dataKey="name" tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} angle={-20} textAnchor="end" height={80} />
                     <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} domain={[0, 100]} />
                     <Tooltip content={<CustomTooltip />} />
-                    <Legend formatter={(value) => value === "avgGrade" ? "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ· ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©" : value === "passRate" ? "ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ­" : value} />
+                    <Legend formatter={(value) => value === "avgGrade" ? "متوسط الدرجة" : value === "passRate" ? "نسبة النجاح" : value} />
                     <Bar dataKey="avgGrade" fill={colors.primary} radius={[4, 4, 0, 0]} name="avgGrade" />
                     <Bar dataKey="passRate" fill={colors.success} radius={[4, 4, 0, 0]} name="passRate" />
                   </BarChart>
@@ -786,8 +786,8 @@ function ExamAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }) 
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ­ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦</CardTitle>
-              <CardDescription>ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¢آ¬ط·آ·ط¢آ­ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ³ط·آ·ط¢آ¨ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ </CardDescription>
+              <CardTitle>معدل النجاح العام</CardTitle>
+              <CardDescription>نسبة الناجحين مقابل الراسبين</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-center h-72" dir="ltr">
@@ -815,7 +815,7 @@ function ExamAnalyticsSection({ data }: { data: typeof mockAnalyticsDetailed }) 
       </motion.div>
 
       <motion.div variants={itemVariants}>
-        <Table columns={examColumns} data={filteredExams} emptyMessage="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©" />
+        <Table columns={examColumns} data={filteredExams} emptyMessage="لا توجد امتحانات متطابقة" />
       </motion.div>
     </motion.div>
   )
@@ -843,43 +843,43 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
   }, [financialReports, dateRange])
 
   const reportColumns = [
-    { key: "month", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±" },
-    { key: "revenue", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾", render: (r: Record<string, unknown>) => formatCurrency(r.revenue) },
-    { key: "expenses", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾", render: (r: Record<string, unknown>) => formatCurrency(r.expenses) },
-    { key: "netProfit", header: "ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ­", render: (r: Record<string, unknown>) => (
+    { key: "month", header: "الشهر" },
+    { key: "revenue", header: "الإيرادات", render: (r: Record<string, unknown>) => formatCurrency(r.revenue) },
+    { key: "expenses", header: "المصروفات", render: (r: Record<string, unknown>) => formatCurrency(r.expenses) },
+    { key: "netProfit", header: "صافي الربح", render: (r: Record<string, unknown>) => (
       <span className={r.netProfit >= 0 ? "text-success" : "text-error"}>{formatCurrency(r.netProfit)}</span>
     )},
-    { key: "growth", header: "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ¸أ¢â‚¬آ¦ط·آ¸ط«â€ ", render: (r: Record<string, unknown>) => (
+    { key: "growth", header: "النمو", render: (r: Record<string, unknown>) => (
       <span className={cn("flex items-center gap-1", r.growth >= 0 ? "text-success" : "text-error")}>
-        {r.growth >= 0 ? "ط£آ¢أ¢â‚¬آ أ¢â‚¬ع©" : "ط£آ¢أ¢â‚¬آ أ¢â‚¬إ“"} %{Math.abs(r.growth)}
+        {r.growth >= 0 ? "أ¢â€ â€ک" : "أ¢â€ â€œ"} %{Math.abs(r.growth)}
       </span>
     )},
   ]
 
   const dateRangeOptions = [
-    { value: "month", label: "ط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±" },
-    { value: "quarter", label: "3 ط·آ·ط¢آ£ط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±" },
-    { value: "half", label: "6 ط·آ·ط¢آ£ط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±" },
-    { value: "year", label: "ط·آ·ط¢آ³ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ©" },
-    { value: "all", label: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ®ط·آ·ط¢آµط·آ·ط¢آµ" },
+    { value: "month", label: "شهر" },
+    { value: "quarter", label: "3 أشهر" },
+    { value: "half", label: "6 أشهر" },
+    { value: "year", label: "سنة" },
+    { value: "all", label: "مخصص" },
   ]
 
   const monthlyComparisonData = useMemo(() => {
     return filteredReports.map(r => ({
       month: r.month,
-      "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾": r.revenue,
-      "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾": r.expenses,
-      "ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ­": r.netProfit,
+      "الإيرادات": r.revenue,
+      "المصروفات": r.expenses,
+      "صافي الربح": r.netProfit,
     }))
   }, [filteredReports])
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
       <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={formatCurrency(totalRevenue)} icon={HiOutlineCash} color="success" change={{ value: avgGrowth > 0 ? Math.round(avgGrowth) : 5, isPositive: avgGrowth > 0 }} />
-        <StatsCard title="ط·آ·ط¢آ¥ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾" value={formatCurrency(totalExpenses)} icon={HiOutlineCash} color="error" />
-        <StatsCard title="ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ­" value={formatCurrency(totalNetProfit)} icon={HiOutlineTrendingUp} color="primary" />
-        <StatsCard title="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¹ط·آ·ط¢آ©" value={formatCurrency(expectedRevenue)} icon={HiOutlineChartSquareBar} color="info" subtitle="ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ¸أ¢â‚¬آ¦" />
+        <StatsCard title="إجمالي الإيرادات" value={formatCurrency(totalRevenue)} icon={HiOutlineCash} color="success" change={{ value: avgGrowth > 0 ? Math.round(avgGrowth) : 5, isPositive: avgGrowth > 0 }} />
+        <StatsCard title="إجمالي المصروفات" value={formatCurrency(totalExpenses)} icon={HiOutlineCash} color="error" />
+        <StatsCard title="صافي الربح" value={formatCurrency(totalNetProfit)} icon={HiOutlineTrendingUp} color="primary" />
+        <StatsCard title="الإيرادات المتوقعة" value={formatCurrency(expectedRevenue)} icon={HiOutlineChartSquareBar} color="info" subtitle="تقدير الشهر القادم" />
       </motion.div>
 
       <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -912,11 +912,11 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
       {dateRange === "all" && (
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3">
           <div>
-            <label className="block text-xs text-text-secondary mb-1">ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ </label>
+            <label className="block text-xs text-text-secondary mb-1">من</label>
             <input type="date" value={customFrom} onChange={(e) => setCustomFrom(e.target.value)} className="bg-surface border border-border rounded-lg px-3 py-2 text-sm text-text" />
           </div>
           <div>
-            <label className="block text-xs text-text-secondary mb-1">ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ°</label>
+            <label className="block text-xs text-text-secondary mb-1">إلى</label>
             <input type="date" value={customTo} onChange={(e) => setCustomTo(e.target.value)} className="bg-surface border border-border rounded-lg px-3 py-2 text-sm text-text" />
           </div>
         </motion.div>
@@ -926,8 +926,8 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ²ط·آ¸ط¸آ¹ط·آ·ط¢آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾</CardTitle>
-              <CardDescription>ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ©</CardDescription>
+              <CardTitle>توزيع الإيرادات</CardTitle>
+              <CardDescription>مصادر الإيرادات المختلفة</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-center h-72" dir="ltr">
@@ -950,8 +950,8 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
         <motion.div variants={itemVariants}>
           <Card>
             <CardHeader>
-              <CardTitle>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ©</CardTitle>
-              <CardDescription>ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾</CardDescription>
+              <CardTitle>الإيرادات الشهرية</CardTitle>
+              <CardDescription>مقارنة الإيرادات بالمصروفات</CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer>
@@ -961,10 +961,10 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
                     <XAxis dataKey="month" tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                     <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                     <Tooltip content={<RevenueCustomTooltip />} />
-                    <Legend formatter={(value) => value === "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" ? "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" : value === "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾" ? "ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾" : "ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ­"} />
-                    <Bar dataKey="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" fill={colors.success} radius={[4, 4, 0, 0]} name="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
-                    <Bar dataKey="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾" fill={colors.error} radius={[4, 4, 0, 0]} name="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾" />
-                    <Bar dataKey="ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ­" fill={colors.primary} radius={[4, 4, 0, 0]} name="ط·آ·ط¢آµط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ¸ط¸آ¹ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ­" />
+                    <Legend formatter={(value) => value === "الإيرادات" ? "الإيرادات" : value === "المصروفات" ? "المصروفات" : "صافي الربح"} />
+                    <Bar dataKey="الإيرادات" fill={colors.success} radius={[4, 4, 0, 0]} name="الإيرادات" />
+                    <Bar dataKey="المصروفات" fill={colors.error} radius={[4, 4, 0, 0]} name="المصروفات" />
+                    <Bar dataKey="صافي الربح" fill={colors.primary} radius={[4, 4, 0, 0]} name="صافي الربح" />
                   </BarChart>
                 </ResponsiveContainer>
               </ChartContainer>
@@ -976,11 +976,11 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
       <motion.div variants={itemVariants}>
         <Card>
           <CardHeader>
-            <CardTitle>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ´ط·آ¸أ¢â‚¬طŒط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ©</CardTitle>
-            <CardDescription>ط·آ·ط¹آ¾ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¥ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آµط·آ·ط¢آ±ط·آ¸ط«â€ ط·آ¸ط¸آ¾ط·آ·ط¢آ§ط·آ·ط¹آ¾ ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ±ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ­</CardDescription>
+            <CardTitle>التقارير المالية الشهرية</CardTitle>
+            <CardDescription>تفاصيل الإيرادات والمصروفات والأرباح</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table columns={reportColumns} data={filteredReports} emptyMessage="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ط·آ·ط¢آ± ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹ط·آ·ط¢آ©" />
+            <Table columns={reportColumns} data={filteredReports} emptyMessage="لا توجد تقارير مالية" />
           </CardContent>
         </Card>
       </motion.div>

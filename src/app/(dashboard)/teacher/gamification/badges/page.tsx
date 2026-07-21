@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
@@ -33,9 +33,9 @@ const allBadges = mockGamificationConfig.badgeCategories.flatMap((cat) =>
     category: cat.name,
     categoryIcon: cat.icon,
     xpReward: [150, 200, 100, 250, 80][bi % 5],
-    criteria: ["ط·آ¥ط¸ئ’ط¸â€¦ط·آ§ط¸â€‍ 10 ط·آ¯ط·آ±ط¸ث†ط·آ³", "ط·آ§ط¸â€‍ط·آ­ط·آµط¸ث†ط¸â€‍ ط·آ¹ط¸â€‍ط¸â€° 95%", "ط·آ§ط¸â€‍ط¸â€¦ط·آ´ط·آ§ط·آ±ط¸ئ’ط·آ© ط¸ظ¾ط¸ظ¹ 5 ط¸â€¦ط¸â€ ط·آ§ط¸â€ڑط·آ´ط·آ§ط·ع¾", "ط·ع¾ط·آ³ط¸â€‍ط·آ³ط¸â€‍ 20 ط¸ظ¹ط¸ث†ط¸â€¦"][bi % 4],
+    criteria: ["إكمال 10 دروس", "الحصول على 95%", "المشاركة ظپظٹ 5 مناقشات", "تسلسل 20 يوم"][bi % 4],
     studentsCount: [15, 22, 30, 8, 18][bi % 5],
-    icon: ["ظ‹ع؛â€œâ€“", "ظ‹ع؛â€œâ€¦", "ظ‹ع؛عکآ¯", "ظ‹ع؛آ¤â€Œ", "ظ‹ع؛â€کâ€ک"][bi % 5],
+    icon: ["ًں“–", "ًں“…", "ظ‹ع؛عکآ¯", "🤝", "ًں‘‘"][bi % 5],
   }))
 )
 
@@ -50,23 +50,23 @@ allBadges.forEach((b, bi) => {
 })
 
 const iconOptions = [
-  { value: "ظ‹ع؛â€œâ€“", label: "ظ‹ع؛â€œâ€“ ط¸ئ’ط·ع¾ط·آ§ط·آ¨" },
-  { value: "ظ‹ع؛â€œâ€¦", label: "ظ‹ع؛â€œâ€¦ ط·ع¾ط¸â€ڑط¸ث†ط¸ظ¹ط¸â€¦" },
-  { value: "ظ‹ع؛عکآ¯", label: "ظ‹ع؛عکآ¯ ط¸â€،ط·آ¯ط¸ظ¾" },
-  { value: "ظ‹ع؛آ¤â€Œ", label: "ظ‹ع؛آ¤â€Œ ط¸â€¦ط·آµط·آ§ط¸ظ¾ط·آ­ط·آ©" },
-  { value: "ظ‹ع؛â€کâ€ک", label: "ظ‹ع؛â€کâ€ک ط·ع¾ط·آ§ط·آ¬" },
-  { value: "ظ‹ع؛â€‌آ¥", label: "ظ‹ع؛â€‌آ¥ ط¸â€ ط·آ§ط·آ±" },
-  { value: "أ¢آ­ع¯", label: "أ¢آ­ع¯ ط¸â€ ط·آ¬ط¸â€¦ط·آ©" },
-  { value: "ظ‹ع؛â€™ع¾", label: "ظ‹ع؛â€™ع¾ ط¸â€ڑط¸ث†ط·آ©" },
-  { value: "ظ‹ع؛عˆâ€¦", label: "ظ‹ع؛عˆâ€¦ ط¸ث†ط·آ³ط·آ§ط¸â€¦" },
-  { value: "ظ‹ع؛ع‘â‚¬", label: "ظ‹ع؛ع‘â‚¬ ط·آµط·آ§ط·آ±ط¸ث†ط·آ®" },
+  { value: "ًں“–", label: "ًں“– كتاب" },
+  { value: "ًں“…", label: "ًں“… تقويم" },
+  { value: "ظ‹ع؛عکآ¯", label: "ظ‹ع؛عکآ¯ هدف" },
+  { value: "🤝", label: "🤝 مصافحة" },
+  { value: "ًں‘‘", label: "ًں‘‘ تاج" },
+  { value: "ًں”¥", label: "ًں”¥ نار" },
+  { value: "أ¢آ­ع¯", label: "أ¢آ­ع¯ نجمة" },
+  { value: "ًں’ھ", label: "ًں’ھ قوة" },
+  { value: "ًںڈ…", label: "ًںڈ… وسام" },
+  { value: "ًںڑ€", label: "ًںڑ€ صاروخ" },
 ]
 
 export default function BadgesPage() {
   const [search, setSearch] = useState("")
   const [showCreate, setShowCreate] = useState(false)
   const [expandedBadge, setExpandedBadge] = useState<string | null>(null)
-  const [newBadge, setNewBadge] = useState({ name: "", icon: "ظ‹ع؛عˆâ€¦", category: "ط·آ£ط¸ئ’ط·آ§ط·آ¯ط¸ظ¹ط¸â€¦ط¸ظ¹", xpReward: 100, criteria: "" })
+  const [newBadge, setNewBadge] = useState({ name: "", icon: "ًںڈ…", category: "أكاديمي", xpReward: 100, criteria: "" })
 
   const stats = useMemo(() => ({
     total: allBadges.length,
@@ -81,19 +81,19 @@ export default function BadgesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط§ظ„ط£ظ„ط¹ط§ط¨", href: "/teacher/gamification" }, { label: "ط§ظ„ط´ط§ط±ط§طھ" }]} />
-      <DashboardHeader title="ط·آ¥ط·آ¯ط·آ§ط·آ±ط·آ© ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ§ط·ع¾" subtitle="ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط¸ث†ط·ع¾ط·آ¹ط·آ¯ط¸ظ¹ط¸â€‍ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ§ط·ع¾ ط¸ث†ط·آ§ط¸â€‍ط¸â€¦ط¸ئ’ط·آ§ط¸ظ¾ط·آ¢ط·ع¾" />
+      <Breadcrumb items={[{ label: "الألعاب", href: "/teacher/gamification" }, { label: "الشارات" }]} />
+      <DashboardHeader title="إدارة الشارات" subtitle="إنشاء وتعديل الشارات والمكافآت" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
-        <StatsCard title="ط·آ¥ط·آ¬ط¸â€¦ط·آ§ط¸â€‍ط¸ظ¹ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ§ط·ع¾" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />
-        <StatsCard title="ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾ط·آ§ط·ع¾" value={stats.categories} icon={HiOutlineCollection} color="info" />
-        <StatsCard title="ط·ع¾ط¸â€¦ ط·آ¥ط·آµط·آ¯ط·آ§ط·آ±ط¸â€،ط·آ§" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
+        <StatsCard title="إجمالي الشارات" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />
+        <StatsCard title="التصنيفات" value={stats.categories} icon={HiOutlineCollection} color="info" />
+        <StatsCard title="طھظ… إصدارها" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
       </motion.div>
 
       <div className="flex items-center justify-between">
-        <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط·آ¹ط¸â€  ط·آ´ط·آ§ط·آ±ط·آ©..." className="max-w-xs" />
+        <SearchInput value={search} onChange={setSearch} placeholder="بحث عن شارة..." className="max-w-xs" />
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowCreate(true)}>
-          ط·آ¥ط·آ¶ط·آ§ط¸ظ¾ط·آ© ط·آ´ط·آ§ط·آ±ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
+          إضافة شارة جديدة
         </Button>
       </div>
 
@@ -118,8 +118,8 @@ export default function BadgesPage() {
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button type="button" onClick={() => toast.success("طھظ… طھط¹ط¯ظٹظ„ ط§ظ„ط´ط§ط±ط© ط¨ظ†ط¬ط§ط­")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
-                  <button type="button" onClick={() => toast.success("طھظ… ط­ط°ظپ ط§ظ„ط´ط§ط±ط© ط¨ظ†ط¬ط§ط­")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
+                  <button type="button" onClick={() => toast.success("طھظ… تعديل الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
+                  <button type="button" onClick={() => toast.success("طھظ… حذف الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
                 </div>
               </div>
 
@@ -132,12 +132,12 @@ export default function BadgesPage() {
               </div>
 
               <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
-                <span className="text-xs text-text-secondary"><HiOutlineUsers className="w-3.5 h-3.5 inline ml-1" />{badge.studentsCount} ط·آ·ط·آ§ط¸â€‍ط·آ¨</span>
+                <span className="text-xs text-text-secondary"><HiOutlineUsers className="w-3.5 h-3.5 inline ml-1" />{badge.studentsCount} طالب</span>
                 <button type="button"
                   onClick={() => setExpandedBadge(expandedBadge === badge.id ? null : badge.id)}
                   className="flex items-center gap-1 text-xs text-primary hover:text-primary-dark transition-colors"
                 >
-                  ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·آ­ط·آ§ط·آµط¸â€‍ط¸ظ¹ط¸â€ 
+                  عرض الحاصلين
                   <HiOutlineChevronDown className={cn("w-3 h-3 transition-transform", expandedBadge === badge.id && "rotate-180")} />
                 </button>
               </div>
@@ -159,41 +159,41 @@ export default function BadgesPage() {
         ))}
       </div>
 
-      <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط·آ´ط·آ§ط·آ±ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©" size="lg">
+      <Modal isOpen={showCreate} onClose={() => setShowCreate(false)} title="إنشاء شارة جديدة" size="lg">
         <div className="space-y-4">
           <Input
-            label="ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ©"
+            label="اسم الشارة"
             value={newBadge.name}
             onChange={(e) => setNewBadge({ ...newBadge, name: e.target.value })}
-            placeholder="ط·آ£ط·آ¯ط·آ®ط¸â€‍ ط·آ§ط·آ³ط¸â€¦ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ©"
+            placeholder="أدخل اسم الشارة"
           />
           <Select
-            label="ط·آ§ط¸â€‍ط·آ£ط¸ظ¹ط¸â€ڑط¸ث†ط¸â€ ط·آ©"
+            label="الأيقونة"
             options={iconOptions}
             value={newBadge.icon}
             onChange={(e) => setNewBadge({ ...newBadge, icon: e.target.value })}
           />
           <Select
-            label="ط·آ§ط¸â€‍ط·ع¾ط·آµط¸â€ ط¸ظ¹ط¸ظ¾"
+            label="التصنيف"
             options={mockGamificationConfig.badgeCategories.map((c) => ({ value: c.name, label: `${c.icon} ${c.name}` }))}
             value={newBadge.category}
             onChange={(e) => setNewBadge({ ...newBadge, category: e.target.value })}
           />
           <Input
-            label="ط¸â€¦ط¸ئ’ط·آ§ط¸ظ¾ط·آ£ط·آ© XP"
+            label="مكافأة XP"
             type="number"
             value={newBadge.xpReward}
             onChange={(e) => setNewBadge({ ...newBadge, xpReward: Number(e.target.value) })}
           />
           <Input
-            label="ط¸â€¦ط·آ¹ط¸ظ¹ط·آ§ط·آ± ط·آ§ط¸â€‍ط·آ­ط·آµط¸ث†ط¸â€‍"
+            label="معيار الحصول"
             value={newBadge.criteria}
             onChange={(e) => setNewBadge({ ...newBadge, criteria: e.target.value })}
-            placeholder="ط¸â€¦ط·آ«ط·آ§ط¸â€‍: ط·آ¥ط¸ئ’ط¸â€¦ط·آ§ط¸â€‍ 10 ط·آ¯ط·آ±ط¸ث†ط·آ³"
+            placeholder="مثال: إكمال 10 دروس"
           />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1" onClick={() => { setShowCreate(false); toast.success("طھظ… ط¥ظ†ط´ط§ط، ط§ظ„ط´ط§ط±ط© ط¨ظ†ط¬ط§ط­") }}>ط·آ¥ط¸â€ ط·آ´ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ´ط·آ§ط·آ±ط·آ©</Button>
-            <Button variant="secondary" onClick={() => setShowCreate(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <Button variant="primary" className="flex-1" onClick={() => { setShowCreate(false); toast.success("طھظ… إنشاء الشارة بنجاح") }}>إنشاء الشارة</Button>
+            <Button variant="secondary" onClick={() => setShowCreate(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>

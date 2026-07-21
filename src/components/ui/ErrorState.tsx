@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
@@ -16,8 +16,8 @@ interface ErrorStateProps {
 }
 
 export function ErrorState({
-  title = "ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£",
-  message = "ط·آ¹ط·آ°ط·آ±ط·آ§ط¸â€¹ط·إ’ ط·آ­ط·آ¯ط·آ« ط·آ®ط·آ·ط·آ£ ط·ط›ط¸ظ¹ط·آ± ط¸â€¦ط·ع¾ط¸ث†ط¸â€ڑط·آ¹. ط¸ظ¹ط·آ±ط·آ¬ط¸â€° ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ© ط¸â€¦ط·آ±ط·آ© ط·آ£ط·آ®ط·آ±ط¸â€°.",
+  title = "حدث خطأ",
+  message = "عذراً، حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
   error,
   onRetry,
   className,
@@ -46,7 +46,7 @@ export function ErrorState({
       )}
       {onRetry && (
         <Button variant="primary" onClick={onRetry} leftIcon={<RefreshCw className="w-4 h-4" />}>
-          ط·آ¥ط·آ¹ط·آ§ط·آ¯ط·آ© ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط¸ث†ط¸â€‍ط·آ©
+          إعادة المحاولة
         </Button>
       )}
     </motion.div>

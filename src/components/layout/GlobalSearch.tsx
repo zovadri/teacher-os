@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { useRouter } from "next/navigation"
@@ -65,42 +65,42 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
     ;(mockStudents || []).filter((s) => s.name?.includes(q)).slice(0, 3).forEach((s) => {
       items.push({
         id: s.id, label: s.name, description: `${s.grade} آ· ${s.governorate}`,
-        icon: HiOutlineUser, href: `/teacher/students?id=${s.id}`, section: "ط§ظ„ط·ظ„ط§ط¨",
+        icon: HiOutlineUser, href: `/teacher/students?id=${s.id}`, section: "الطلاب",
       })
     })
 
     ;(mockParents || []).filter((p) => p.name?.includes(q) || p.children?.some((c) => c.grade?.includes(q))).slice(0, 3).forEach((p) => {
       items.push({
-        id: p.id, label: p.name, description: `ظˆظ„ظٹ ط£ظ…ط± آ· ${p.children?.length || 0} ط£ط¨ظ†ط§ط،`,
-        icon: HiOutlineUserGroup, href: `/teacher/parents?id=${p.id}`, section: "ط£ظˆظ„ظٹط§ط، ط§ظ„ط£ظ…ظˆط±",
+        id: p.id, label: p.name, description: `ولي أمر آ· ${p.children?.length || 0} أبناء`,
+        icon: HiOutlineUserGroup, href: `/teacher/parents?id=${p.id}`, section: "أولياء الأمور",
       })
     })
 
     ;(mockStaffMembers || []).filter((s) => s.name?.includes(q)).slice(0, 3).forEach((s) => {
       items.push({
         id: s.id, label: s.name, description: s.jobTitle,
-        icon: HiOutlineBriefcase, href: `/teacher/staff?id=${s.id}`, section: "ط§ظ„ظ…ظˆط¸ظپظˆظ†",
+        icon: HiOutlineBriefcase, href: `/teacher/staff?id=${s.id}`, section: "الموظفون",
       })
     })
 
     ;(mockCourses || []).filter((c) => c.title?.includes(q)).slice(0, 3).forEach((c) => {
       items.push({
         id: c.id, label: c.title, description: c.shortDescription,
-        icon: HiOutlineBookOpen, href: `/teacher/courses/${c.id}`, section: "ط§ظ„ظƒظˆط±ط³ط§طھ",
+        icon: HiOutlineBookOpen, href: `/teacher/courses/${c.id}`, section: "الكورسات",
       })
     })
 
     ;(mockExams || []).filter((e) => e.title?.includes(q)).slice(0, 3).forEach((e) => {
       items.push({
-        id: e.id, label: e.title, description: `${e.duration} ط¯ظ‚ظٹظ‚ط©`,
-        icon: HiOutlineClipboardCheck, href: `/teacher/exams/${e.id}`, section: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ",
+        id: e.id, label: e.title, description: `${e.duration} دقيقة`,
+        icon: HiOutlineClipboardCheck, href: `/teacher/exams/${e.id}`, section: "الامتحانات",
       })
     })
 
     ;(mockHomework || []).filter((h) => h.title?.includes(q)).slice(0, 3).forEach((h) => {
       items.push({
         id: h.id, label: h.title, description: h.description,
-        icon: HiOutlinePencilAlt, href: `/teacher/homework/${h.id}`, section: "ط§ظ„ظˆط§ط¬ط¨ط§طھ",
+        icon: HiOutlinePencilAlt, href: `/teacher/homework/${h.id}`, section: "الواجبات",
       })
     })
 
@@ -109,56 +109,56 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
         id: qs.id, label: qs.text, description: qs.type,
         icon: HiOutlineQuestionMarkCircle,
         href: `/teacher/questions?search=${encodeURIComponent(q)}`,
-        section: "ط¨ظ†ظƒ ط§ظ„ط£ط³ط¦ظ„ط©",
+        section: "بنك الأسئلة",
       })
     })
 
     ;(mockVideoLibrary || []).filter((v) => v.title?.includes(q)).slice(0, 3).forEach((v) => {
       items.push({
         id: v.id, label: v.title, description: v.courseName || "",
-        icon: HiOutlineFilm, href: "/teacher/videos", section: "ط§ظ„ظپظٹط¯ظٹظˆظ‡ط§طھ",
+        icon: HiOutlineFilm, href: "/teacher/videos", section: "الفيديوهات",
       })
     })
 
     ;(mockCertificates || []).filter((c) => c.studentName?.includes(q)).slice(0, 3).forEach((c) => {
       items.push({
         id: c.id, label: c.studentName, description: c.courseName,
-        icon: HiOutlineBriefcase, href: "/teacher/certificates", section: "ط§ظ„ط´ظ‡ط§ط¯ط§طھ",
+        icon: HiOutlineBriefcase, href: "/teacher/certificates", section: "الشهادات",
       })
     })
 
     ;(mockPayments || []).filter((p) => p.studentName?.includes(q)).slice(0, 3).forEach((p) => {
       items.push({
-        id: p.id, label: p.studentName, description: `${p.amount} ط¬ظ†ظٹظ‡ آ· ${p.status}`,
-        icon: HiOutlineCash, href: "/teacher/subscriptions", section: "ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ",
+        id: p.id, label: p.studentName, description: `${p.amount} جنيه آ· ${p.status}`,
+        icon: HiOutlineCash, href: "/teacher/subscriptions", section: "المدفوعات",
       })
     })
 
     ;(mockEnrollments || []).filter((e) => e.studentName?.includes(q) || e.courseName?.includes(q)).slice(0, 3).forEach((e) => {
       items.push({
         id: e.id, label: e.studentName, description: e.courseName,
-        icon: HiOutlineUserAdd, href: "/teacher/enrollments", section: "ط§ظ„طھط³ط¬ظٹظ„ط§طھ",
+        icon: HiOutlineUserAdd, href: "/teacher/enrollments", section: "التسجيلات",
       })
     })
 
     ;(mockCenterCodes || []).filter((c) => c.code?.includes(q)).slice(0, 3).forEach((c) => {
       items.push({
         id: c.id, label: c.code, description: `${c.type || ""} آ· ${c.value || ""}`,
-        icon: HiOutlineKey, href: "/teacher/codes", section: "ط§ظ„ط£ظƒظˆط§ط¯",
+        icon: HiOutlineKey, href: "/teacher/codes", section: "الأكواد",
       })
     })
 
     ;(mockBundles || []).filter((b) => b.name?.includes(q)).slice(0, 3).forEach((b) => {
       items.push({
         id: b.id, label: b.name, description: b.description,
-        icon: HiOutlineCollection, href: "/teacher/enrollments/bundles", section: "ط§ظ„ط¨ط§ظ‚ط§طھ",
+        icon: HiOutlineCollection, href: "/teacher/enrollments/bundles", section: "الباقات",
       })
     })
 
     ;(mockMessages || []).filter((m) => m.subject?.includes(q)).slice(0, 3).forEach((m) => {
       items.push({
-        id: m.id, label: m.subject, description: `ظ…ظ† ${m.senderName}`,
-        icon: HiOutlineChat, href: `/teacher/messages?conv=${m.conversationId}`, section: "ط§ظ„ط±ط³ط§ط¦ظ„",
+        id: m.id, label: m.subject, description: `من ${m.senderName}`,
+        icon: HiOutlineChat, href: `/teacher/messages?conv=${m.conversationId}`, section: "الرسائل",
       })
     })
 
@@ -246,21 +246,21 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="ط§ط¨ط­ط« ظپظٹ ط§ظ„ظ†ط¸ط§ظ…..."
+                placeholder="ابحث ظپظٹ النظام..."
                 className="w-full bg-transparent text-base text-text placeholder:text-text-tertiary focus:outline-none"
               />
             </div>
             <div className="max-h-80 overflow-y-auto p-2">
               {query.trim() && sections.length === 0 ? (
                 <div className="text-center py-10 text-text-tertiary text-sm">
-                  ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬ ظ„ظ€ &ldquo;{query}&rdquo;
+                  لا توجد نتائج لـ &ldquo;{query}&rdquo;
                 </div>
               ) : query.trim() ? (
                 sections.map(([section, items]) => (
                   <div key={section}>
                     <div className="px-3 py-2 text-xs font-semibold text-text-tertiary uppercase tracking-wider flex items-center justify-between">
                       <span>{section}</span>
-                      <span className="text-text-tertiary/70">{items.length} ظ†طھظٹط¬ط©</span>
+                      <span className="text-text-tertiary/70">{items.length} نتيجة</span>
                     </div>
                     {items.map((item) => {
                       currentFlatIndex++
@@ -291,14 +291,14 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                 ))
               ) : (
                 <div className="text-center py-10 text-text-tertiary text-sm">
-                  ط§ط¨ط¯ط£ ط§ظ„ظƒطھط§ط¨ط© ظ„ظ„ط¨ط­ط« ظپظٹ ط§ظ„ظ†ط¸ط§ظ…
+                  ابدأ الكتابة للبحث ظپظٹ النظام
                 </div>
               )}
             </div>
             <div className="p-3 border-t border-border flex items-center gap-4 text-xs text-text-tertiary">
-              <span>â†‘â†“ ظ„ظ„طھظ†ظ‚ظ„</span>
-              <span>â†µ ظ„ظ„ط§ط®طھظٹط§ط±</span>
-              <span>Esc ظ„ظ„ط¥ط؛ظ„ط§ظ‚</span>
+              <span>â†‘â†“ للتنقل</span>
+              <span>â†µ للاختيار</span>
+              <span>Esc للإغلاق</span>
             </div>
           </motion.div>
         </div>

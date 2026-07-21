@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
@@ -35,7 +35,7 @@ function useLoadVersions() {
         if (det() > 0.1) {
           setData(mockExamVersions)
         } else {
-          throw new Error("ط·آ¸ط¸آ¾ط·آ·ط¢آ´ط·آ¸أ¢â‚¬â€چ ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬â€چ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®")
+          throw new Error("فشل تحميل النسخ")
         }
       } catch (e) {
         setError((e as Error).message)
@@ -51,12 +51,12 @@ function useLoadVersions() {
 }
 
 const typeLabels: Record<string, string> = {
-  "multiple-choice": "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯",
-  "true-false": "ط·آ·ط¢آµط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¨/ط·آ·ط¢آ®ط·آ·ط¢آ·ط·آ·ط¢آ£",
-  "fill-blank": "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط·إ’ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¾ط·آ·ط¢آ±ط·آ·ط¢آ§ط·آ·ط·â€؛",
-  essay: "ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط¸آ¹",
-  ordering: "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨",
-  matching: "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ·ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ©",
+  "multiple-choice": "اختيار من متعدد",
+  "true-false": "صواب/خطأ",
+  "fill-blank": "ملء الفراغ",
+  essay: "مقالي",
+  ordering: "ترتيب",
+  matching: "مطابقة",
 }
 
 const difficultyColors: Record<string, "success" | "warning" | "error"> = {
@@ -75,7 +75,7 @@ export default function ExamVersionsPage() {
   const [showAddModal, setShowAddModal] = useState(false)
 
   const examOptions = useMemo(() => [
-    { value: "", label: "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ..." },
+    { value: "", label: "اختر الامتحان..." },
     ...mockExams.map((e) => ({ value: e.id, label: e.title })),
   ], [])
 
@@ -93,7 +93,7 @@ export default function ExamVersionsPage() {
   }, [versions, selectedExamId])
 
   const compareOptions = useMemo(() => [
-    { value: "", label: "ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ±..." },
+    { value: "", label: "اختر..." },
     ...versionForCompare.map((v) => ({ value: v.id, label: v.label })),
   ], [versionForCompare])
 
@@ -106,18 +106,18 @@ export default function ExamVersionsPage() {
   }, [compareVersionA, compareVersionB, versions])
 
   const handleAddVersion = () => {
-    toast.success("ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¨ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ­")
+    toast.success("طھظ…طھ إضافة النسخة بنجاح")
     setShowAddModal(false)
   }
 
   const handlePrintVersion = (label: string) => {
-    toast.success(`ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸ط¸آ¹ ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ${label}`)
+    toast.success(`جاري طباعة ${label}`)
   }
 
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <PageHeader title="ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " description="ط·آ·ط¢آ¥ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ " />
+        <PageHeader title="نسخ الامتحان" description="إدارة نسخ متعددة للامتحان" />
         <ErrorState error={error} onRetry={retry} />
       </div>
     )
@@ -125,17 +125,17 @@ export default function ExamVersionsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <Breadcrumb items={[{ label: "ط§ظ„ط§ظ…طھط­ط§ظ†ط§طھ", href: "/teacher/exams" }, { label: "ط¥طµط¯ط§ط±ط§طھ ظ…طھط¹ط¯ط¯ط©" }]} />
+      <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "إصدارات متعددة" }]} />
       <PageHeader
-        title="ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ "
-        description="ط·آ·ط¢آ¥ط·آ·ط¢آ¯ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ "
+        title="نسخ الامتحان"
+        description="إدارة نسخ متعددة للامتحان"
         actions={
           <div className="flex gap-2">
             <Button variant="outline" onClick={() => setShowCompare(true)} rightIcon={<HiOutlineScale size={18} />}>
-              ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®
+              مقارنة النسخ
             </Button>
             <Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>
-              ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ©
+              إضافة نسخة
             </Button>
           </div>
         }
@@ -144,7 +144,7 @@ export default function ExamVersionsPage() {
       <Card>
         <CardContent className="space-y-4">
           <Select
-            label="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ "
+            label="اختر الامتحان"
             options={examOptions}
             value={selectedExamId}
             onChange={(e) => setSelectedExamId(e.target.value)}
@@ -152,7 +152,7 @@ export default function ExamVersionsPage() {
           {selectedExam && (
             <div className="text-sm text-text-secondary">
               <span className="font-medium text-text">{selectedExam.title}</span>
-              {" | "}{selectedExam.questions.length} ط·آ·ط¢آ³ط·آ·ط¢آ¤ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چ | {selectedExam.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©
+              {" | "}{selectedExam.questions.length} سؤال | {selectedExam.totalGrade} درجة
             </div>
           )}
         </CardContent>
@@ -179,17 +179,17 @@ export default function ExamVersionsPage() {
       {!loading && !selectedExamId && (
         <EmptyState
           icon={HiOutlineTemplate}
-          title="ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¹"
-          description="ط·آ¸ط¸آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ¸أ¢â‚¬آ° ط·آ·ط¢آ§ط·آ·ط¢آ®ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ§ط·آ·ط¢آ± ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ  ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ© ط·آ·ط¢آ£ط·آ·ط¢آ¹ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬طŒ ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¹ط·آ·ط¢آ±ط·آ·ط¢آ¶ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ§ط·آ·ط¢آ­ط·آ·ط¢آ©"
+          title="اختر امتحاناً"
+          description="يرجى اختيار امتحان من القائمة أعلاه لعرض النسخ المتاحة"
         />
       )}
 
       {!loading && selectedExamId && filteredVersions.length === 0 && (
         <EmptyState
           icon={HiOutlineDocumentDuplicate}
-          title="ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ¬ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®"
-          description="ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ ط·آ¸ط¸آ¹ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط·إ’ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ® ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬طŒط·آ·ط¢آ°ط·آ·ط¢آ§ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ¨ط·آ·ط¢آ¹ط·آ·ط¢آ¯. ط·آ·ط¢آ£ط·آ·ط¢آ¶ط·آ¸ط¸آ¾ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¨ط·آ·ط¢آ¯ط·آ·ط·إ’."
-          action={<Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ©</Button>}
+          title="لا توجد نسخ"
+          description="لم ظٹطھظ… إنشاء نسخ لهذا الامتحان بعد. أضف نسخة جديدة للبدء."
+          action={<Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>إضافة نسخة</Button>}
         />
       )}
 
@@ -211,27 +211,27 @@ export default function ExamVersionsPage() {
                       </div>
                       <div>
                         <h3 className="font-semibold text-text">{version.label}</h3>
-                        <p className="text-xs text-text-tertiary">{version.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©</p>
+                        <p className="text-xs text-text-tertiary">{version.questions.length} أسئلة</p>
                       </div>
                     </div>
-                    <Badge variant="primary">{version.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©</Badge>
+                    <Badge variant="primary">{version.totalGrade} درجة</Badge>
                   </div>
                   <div className="flex items-center gap-3 text-xs text-text-secondary">
                     <span className="flex items-center gap-1">
                       <HiOutlineStatusOffline size={14} />
-                      {version.shuffleQuestions ? "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨ ط·آ·ط¢آ¹ط·آ·ط¢آ´ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸ط¸آ¹" : "ط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨ ط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ·ط¢آ¨ط·آ·ط¹آ¾"}
+                      {version.shuffleQuestions ? "ترتيب عشوائي" : "ترتيب ثابت"}
                     </span>
                     <span className={cn("px-2 py-0.5 rounded-full", version.shuffleQuestions ? "bg-success/10 text-success" : "bg-surface-tertiary text-text-tertiary")}>
-                      {version.shuffleQuestions ? "ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©" : "ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ©"} {version.shuffleQuestions ? "ط·آ·ط¢آ¹ط·آ·ط¢آ´ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ·ط¢آ¦ط·آ¸ط¸آ¹ط·آ·ط¢آ©" : "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ·ط¢آ¨ط·آ·ط¢آ©"}
+                      {version.shuffleQuestions ? "أسئلة" : "أسئلة"} {version.shuffleQuestions ? "عشوائية" : "مرتبة"}
                     </span>
                   </div>
                   <div className="pt-2 border-t border-border">
                     <div className="flex flex-wrap gap-2">
                       <Button variant="outline" size="sm" onClick={() => setPreviewVersion(version)} rightIcon={<HiOutlineEye size={16} />}>
-                        ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ©
+                        معاينة
                       </Button>
                       <Button variant="secondary" size="sm" onClick={() => handlePrintVersion(version.label)} rightIcon={<HiOutlinePrinter size={16} />}>
-                        ط·آ·ط¢آ·ط·آ·ط¢آ¨ط·آ·ط¢آ§ط·آ·ط¢آ¹ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ©
+                        طباعة النسخة
                       </Button>
                     </div>
                   </div>
@@ -242,7 +242,7 @@ export default function ExamVersionsPage() {
         </div>
       )}
 
-      <Modal isOpen={!!previewVersion} onClose={() => setPreviewVersion(null)} title={`ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ط·آ·ط¢آ§ط·آ¸ط¸آ¹ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ©: ${previewVersion?.label}`} size="xl">
+      <Modal isOpen={!!previewVersion} onClose={() => setPreviewVersion(null)} title={`معاينة: ${previewVersion?.label}`} size="xl">
         {previewVersion && (
           <div className="space-y-4 max-h-[70vh] overflow-y-auto">
             {previewVersion.questions.map((q, idx) => (
@@ -255,13 +255,13 @@ export default function ExamVersionsPage() {
                     </div>
                     <div className="flex gap-1 shrink-0">
                       <Badge variant="info" size="sm">{typeLabels[q.type]}</Badge>
-                      <Badge variant={difficultyColors[q.difficulty]} size="sm">{q.difficulty === "easy" ? "ط·آ·ط¢آ³ط·آ¸أ¢â‚¬طŒط·آ¸أ¢â‚¬â€چ" : q.difficulty === "medium" ? "ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ·ط¢آ·" : "ط·آ·ط¢آµط·آ·ط¢آ¹ط·آ·ط¢آ¨"}</Badge>
+                      <Badge variant={difficultyColors[q.difficulty]} size="sm">{q.difficulty === "easy" ? "سهل" : q.difficulty === "medium" ? "متوسط" : "صعب"}</Badge>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 text-xs text-text-secondary">
-                    <span>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©: {q.grade}</span>
-                    <span>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ¸أ¢â‚¬ع‘ط·آ·ط¹آ¾: {q.suggestedTime} ط·آ·ط¢آ¯</span>
-                    {q.tags.length > 0 && <span>ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸ط«â€ ط·آ·ط¢آ³ط·آ¸ط«â€ ط·آ¸أ¢â‚¬آ¦: {q.tags.join(", ")}</span>}
+                    <span>الدرجة: {q.grade}</span>
+                    <span>الوقت: {q.suggestedTime} د</span>
+                    {q.tags.length > 0 && <span>الوسوم: {q.tags.join(", ")}</span>}
                   </div>
                   {q.choices && (
                     <div className="grid grid-cols-2 gap-2">
@@ -279,18 +279,18 @@ export default function ExamVersionsPage() {
         )}
       </Modal>
 
-      <Modal isOpen={showCompare} onClose={() => setShowCompare(false)} title="ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬ع‘ط·آ·ط¢آ§ط·آ·ط¢آ±ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®" size="xl">
+      <Modal isOpen={showCompare} onClose={() => setShowCompare(false)} title="مقارنة النسخ" size="xl">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <Select label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ¸ط«â€ ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ°" options={compareOptions} value={compareVersionA} onChange={(e) => setCompareVersionA(e.target.value)} />
-            <Select label="ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ«ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ·ط¢آ©" options={compareOptions} value={compareVersionB} onChange={(e) => setCompareVersionB(e.target.value)} />
+            <Select label="النسخة الأولى" options={compareOptions} value={compareVersionA} onChange={(e) => setCompareVersionA(e.target.value)} />
+            <Select label="النسخة الثانية" options={compareOptions} value={compareVersionB} onChange={(e) => setCompareVersionB(e.target.value)} />
           </div>
           {comparedVersions && (
             <div className="grid grid-cols-2 gap-4">
               <Card>
                 <CardHeader>
                   <CardTitle>{comparedVersions.a.label}</CardTitle>
-                  <CardDescription>{comparedVersions.a.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© - {comparedVersions.a.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©</CardDescription>
+                  <CardDescription>{comparedVersions.a.questions.length} أسئلة - {comparedVersions.a.totalGrade} درجة</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2 max-h-80 overflow-y-auto">
                   {comparedVersions.a.questions.map((q, idx) => (
@@ -299,7 +299,7 @@ export default function ExamVersionsPage() {
                       <span className="text-text-secondary">{q.text}</span>
                       <div className="flex gap-1 mt-1">
                         <Badge size="sm" variant="info">{typeLabels[q.type]}</Badge>
-                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾</Badge>
+                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} درجات</Badge>
                       </div>
                     </div>
                   ))}
@@ -308,7 +308,7 @@ export default function ExamVersionsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>{comparedVersions.b.label}</CardTitle>
-                  <CardDescription>{comparedVersions.b.questions.length} ط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© - {comparedVersions.b.totalGrade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ©</CardDescription>
+                  <CardDescription>{comparedVersions.b.questions.length} أسئلة - {comparedVersions.b.totalGrade} درجة</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2 max-h-80 overflow-y-auto">
                   {comparedVersions.b.questions.map((q, idx) => (
@@ -317,7 +317,7 @@ export default function ExamVersionsPage() {
                       <span className="text-text-secondary">{q.text}</span>
                       <div className="flex gap-1 mt-1">
                         <Badge size="sm" variant="info">{typeLabels[q.type]}</Badge>
-                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} ط·آ·ط¢آ¯ط·آ·ط¢آ±ط·آ·ط¢آ¬ط·آ·ط¢آ§ط·آ·ط¹آ¾</Badge>
+                        <Badge size="sm" variant={difficultyColors[q.difficulty]}>{q.grade} درجات</Badge>
                       </div>
                     </div>
                   ))}
@@ -328,12 +328,12 @@ export default function ExamVersionsPage() {
         </div>
       </Modal>
 
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ©" size="md">
+      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="إضافة نسخة جديدة" size="md">
         <div className="space-y-4">
-          <p className="text-sm text-text-secondary">ط·آ·ط¢آ³ط·آ¸ط¸آ¹ط·آ·ط¹آ¾ط·آ¸أ¢â‚¬آ¦ ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ´ط·آ·ط¢آ§ط·آ·ط·إ’ ط·آ¸أ¢â‚¬آ ط·آ·ط¢آ³ط·آ·ط¢آ®ط·آ·ط¢آ© ط·آ·ط¢آ¬ط·آ·ط¢آ¯ط·آ¸ط¸آ¹ط·آ·ط¢آ¯ط·آ·ط¢آ© ط·آ¸أ¢â‚¬آ¦ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ¦ط·آ·ط¹آ¾ط·آ·ط¢آ­ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ  ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ­ط·آ·ط¢آ¯ط·آ·ط¢آ¯ ط·آ¸أ¢â‚¬آ¦ط·آ·ط¢آ¹ ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬آ¦ط·آ¸ط¦â€™ط·آ·ط¢آ§ط·آ¸أ¢â‚¬آ ط·آ¸ط¸آ¹ط·آ·ط¢آ© ط·آ·ط¹آ¾ط·آ·ط¢آ®ط·آ·ط¢آµط·آ¸ط¸آ¹ط·آ·ط¢آµ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ£ط·آ·ط¢آ³ط·آ·ط¢آ¦ط·آ¸أ¢â‚¬â€چط·آ·ط¢آ© ط·آ¸ط«â€ ط·آ·ط¢آ§ط·آ¸أ¢â‚¬â€چط·آ·ط¹آ¾ط·آ·ط¢آ±ط·آ·ط¹آ¾ط·آ¸ط¸آ¹ط·آ·ط¢آ¨.</p>
+          <p className="text-sm text-text-secondary">سيتم إنشاء نسخة جديدة من الامتحان المحدد مع إمكانية تخصيص الأسئلة والترتيب.</p>
           <div className="flex gap-3 justify-end">
-            <Button variant="secondary" onClick={() => setShowAddModal(false)}>ط·آ·ط¢آ¥ط·آ¸أ¢â‚¬â€چط·آ·ط·â€؛ط·آ·ط¢آ§ط·آ·ط·إ’</Button>
-            <Button variant="primary" onClick={handleAddVersion} rightIcon={<HiOutlinePlus size={18} />}>ط·آ·ط¢آ¥ط·آ·ط¢آ¶ط·آ·ط¢آ§ط·آ¸ط¸آ¾ط·آ·ط¢آ©</Button>
+            <Button variant="secondary" onClick={() => setShowAddModal(false)}>إلغاء</Button>
+            <Button variant="primary" onClick={handleAddVersion} rightIcon={<HiOutlinePlus size={18} />}>إضافة</Button>
           </div>
         </div>
       </Modal>

@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -19,38 +19,38 @@ import Button from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge"
 
 const typeOptions = [
-  { value: "info", label: "ظ…ط¹ظ„ظˆظ…ط§طھ" },
-  { value: "warning", label: "طھظ†ط¨ظٹظ‡" },
-  { value: "success", label: "ظ†ط¬ط§ط­" },
-  { value: "emergency", label: "ط·ط§ط±ط¦" },
+  { value: "info", label: "معلومات" },
+  { value: "warning", label: "تنبيه" },
+  { value: "success", label: "نجاح" },
+  { value: "emergency", label: "طارئ" },
 ]
 
 const targetOptions = [
-  { value: "all", label: "ط§ظ„ط¬ظ…ظٹط¹" },
-  { value: "students", label: "ط§ظ„ط·ظ„ط§ط¨" },
-  { value: "teachers", label: "ط§ظ„ظ…ط¹ظ„ظ…ظٹظ†" },
-  { value: "parents", label: "ط£ظˆظ„ظٹط§ط، ط§ظ„ط£ظ…ظˆط±" },
-  { value: "staff", label: "ط§ظ„ظ…ظˆط¸ظپظٹظ†" },
+  { value: "all", label: "الجميع" },
+  { value: "students", label: "الطلاب" },
+  { value: "teachers", label: "المعلمين" },
+  { value: "parents", label: "أولياء الأمور" },
+  { value: "staff", label: "الموظفين" },
 ]
 
 const priorityOptions = [
-  { value: "high", label: "ط¹ط§ظ„ظٹ" },
-  { value: "medium", label: "ظ…طھظˆط³ط·" },
-  { value: "low", label: "ظ…ظ†ط®ظپط¶" },
+  { value: "high", label: "عالي" },
+  { value: "medium", label: "متوسط" },
+  { value: "low", label: "منخفض" },
 ]
 
 const courseOptions = [
-  { value: "c-1", label: "ط§ظ„ط±ظٹط§ط¶ظٹط§طھ" },
-  { value: "c-2", label: "ط§ظ„ط¹ظ„ظˆظ…" },
-  { value: "c-3", label: "ط§ظ„ظ„ط؛ط© ط§ظ„ط¹ط±ط¨ظٹط©" },
-  { value: "c-4", label: "ط§ظ„ظ„ط؛ط© ط§ظ„ط¥ظ†ط¬ظ„ظٹط²ظٹط©" },
-  { value: "c-5", label: "ط§ظ„ط¯ط±ط§ط³ط§طھ ط§ظ„ط§ط¬طھظ…ط§ط¹ظٹط©" },
+  { value: "c-1", label: "الرياضيات" },
+  { value: "c-2", label: "العلوم" },
+  { value: "c-3", label: "اللغة العربية" },
+  { value: "c-4", label: "اللغة الإنجليزية" },
+  { value: "c-5", label: "الدراسات الاجتماعية" },
 ]
 
 const gradeOptions = [
-  { value: "ط£ظˆظ„ظ‰ ط«ط§ظ†ظˆظٹ", label: "ط£ظˆظ„ظ‰ ط«ط§ظ†ظˆظٹ" },
-  { value: "ط«ط§ظ†ظٹط© ط«ط§ظ†ظˆظٹ", label: "ط«ط§ظ†ظٹط© ط«ط§ظ†ظˆظٹ" },
-  { value: "ط«ط§ظ„ط«ط© ط«ط§ظ†ظˆظٹ", label: "ط«ط§ظ„ط«ط© ط«ط§ظ†ظˆظٹ" },
+  { value: "أولى ثانوي", label: "أولى ثانوي" },
+  { value: "ثانية ثانوي", label: "ثانية ثانوي" },
+  { value: "ثالثة ثانوي", label: "ثالثة ثانوي" },
 ]
 
 const typeBadge: Record<string, "primary" | "warning" | "success" | "error"> = {
@@ -111,34 +111,34 @@ export default function CreateAnnouncementPage() {
     setSubmitting(true)
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
-    toast.success(`طھظ… ${status === "published" ? "ظ†ط´ط±" : "ط­ظپط¸"} ط§ظ„ط¥ط¹ظ„ط§ظ† ط¨ظ†ط¬ط§ط­!`)
+    toast.success(`طھظ… ${status === "published" ? "نشر" : "حفظ"} الإعلان بنجاح!`)
     router.push("/teacher/announcements")
   }
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <Breadcrumb items={[{ label: "ط§ظ„ط¥ط¹ظ„ط§ظ†ط§طھ", href: "/teacher/announcements" }, { label: "ط¥ظ†ط´ط§ط، ط¥ط¹ظ„ط§ظ†" }]} />
-      <DashboardHeader title="ط¥ظ†ط´ط§ط، ط¥ط¹ظ„ط§ظ† ط¬ط¯ظٹط¯" subtitle="ط£ظ†ط´ط¦ ط¥ط¹ظ„ط§ظ†ط§ظ‹ ظˆط£ط±ط³ظ„ظ‡ ظ„ظ„ط·ظ„ط§ط¨ ط£ظˆ ط£ظˆظ„ظٹط§ط، ط§ظ„ط£ظ…ظˆط± ط£ظˆ ط§ظ„ظ…ط¹ظ„ظ…ظٹظ†" />
+      <Breadcrumb items={[{ label: "الإعلانات", href: "/teacher/announcements" }, { label: "إنشاء إعلان" }]} />
+      <DashboardHeader title="إنشاء إعلان جديد" subtitle="أنشئ إعلاناً وأرسله للطلاب أو أولياء الأمور أو المعلمين" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <Card>
               <CardHeader>
-                <CardTitle>ظ…ط¹ظ„ظˆظ…ط§طھ ط§ظ„ط¥ط¹ظ„ط§ظ†</CardTitle>
+                <CardTitle>معلومات الإعلان</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Input
-                  label="ط¹ظ†ظˆط§ظ† ط§ظ„ط¥ط¹ظ„ط§ظ†"
+                  label="عنوان الإعلان"
                   value={form.title}
                   onChange={(e) => update("title", e.target.value)}
-                  placeholder="ط£ط¯ط®ظ„ ط¹ظ†ظˆط§ظ† ط§ظ„ط¥ط¹ظ„ط§ظ†"
+                  placeholder="أدخل عنوان الإعلان"
                 />
                 <Textarea
-                  label="ط§ظ„ظ…ط­طھظˆظ‰"
+                  label="المحتوى"
                   value={form.content}
                   onChange={(e) => update("content", e.target.value)}
-                  placeholder="ط£ط¯ط®ظ„ ظ†طµ ط§ظ„ط¥ط¹ظ„ط§ظ†..."
+                  placeholder="أدخل نص الإعلان..."
                   className="min-h-[140px]"
                 />
               </CardContent>
@@ -148,18 +148,18 @@ export default function CreateAnnouncementPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <Card>
               <CardHeader>
-                <CardTitle>ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ</CardTitle>
+                <CardTitle>الإعدادات</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <Select
-                    label="ط§ظ„ظ†ظˆط¹"
+                    label="النوع"
                     value={form.type}
                     onChange={(e) => update("type", e.target.value)}
                     options={typeOptions}
                   />
                   <Select
-                    label="ط§ظ„ظ…ط³طھظ‡ط¯ظپ"
+                    label="المستهدف"
                     value={form.target}
                     onChange={(e) => { update("target", e.target.value); if (e.target.value !== "students") update("courseId", "") }}
                     options={targetOptions}
@@ -167,23 +167,23 @@ export default function CreateAnnouncementPage() {
                 </div>
                 {form.target === "students" && (
                   <Select
-                    label="ط§ظ„ظƒظˆط±ط³ (ط§ط®طھظٹط§ط±ظٹ)"
+                    label="الكورس (اختياري)"
                     value={form.courseId}
                     onChange={(e) => update("courseId", e.target.value)}
                     options={courseOptions}
-                    placeholder="ط§ط®طھط± ظƒظˆط±ط³ط§ظ‹"
+                    placeholder="اختر كورساً"
                   />
                 )}
                 <div className="grid grid-cols-2 gap-4">
                   <Select
-                    label="ط§ظ„طµظپ (ط§ط®طھظٹط§ط±ظٹ)"
+                    label="الصف (اختياري)"
                     value={form.grade}
                     onChange={(e) => update("grade", e.target.value)}
                     options={gradeOptions}
-                    placeholder="ط§ط®طھط± طµظپط§ظ‹"
+                    placeholder="اختر صفاً"
                   />
                   <Select
-                    label="ط§ظ„ط£ظˆظ„ظˆظٹط©"
+                    label="الأولوية"
                     value={form.priority}
                     onChange={(e) => update("priority", e.target.value)}
                     options={priorityOptions}
@@ -191,8 +191,8 @@ export default function CreateAnnouncementPage() {
                 </div>
                 <div className="flex items-center justify-between p-4 rounded-xl bg-surface-secondary border border-border">
                   <div>
-                    <p className="text-sm font-medium text-text">ط¬ط¯ظˆظ„ط© ط§ظ„ط¥ط¹ظ„ط§ظ†</p>
-                    <p className="text-xs text-text-tertiary">طھط­ط¯ظٹط¯ طھط§ط±ظٹط® ظˆظˆظ‚طھ ط§ظ„ظ†ط´ط±</p>
+                    <p className="text-sm font-medium text-text">جدولة الإعلان</p>
+                    <p className="text-xs text-text-tertiary">تحديد تاريخ ووقت النشر</p>
                   </div>
                   <button type="button"
                     onClick={() => update("scheduleEnabled", !form.scheduleEnabled)}
@@ -203,7 +203,7 @@ export default function CreateAnnouncementPage() {
                 </div>
                 {form.scheduleEnabled && (
                   <Input
-                    label="طھط§ط±ظٹط® ط§ظ„ظ†ط´ط±"
+                    label="تاريخ النشر"
                     type="datetime-local"
                     value={form.scheduleDate}
                     onChange={(e) => update("scheduleDate", e.target.value)}
@@ -218,38 +218,38 @@ export default function CreateAnnouncementPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
             <Card>
               <CardHeader>
-                <CardTitle>ظ…ظ„ط®طµ ط§ظ„ط¥ط¹ظ„ط§ظ†</CardTitle>
+                <CardTitle>ملخص الإعلان</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="p-4 rounded-xl bg-surface-secondary border border-border">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ط¹ظ†ظˆط§ظ†</span>
-                      <span className="text-text font-medium">{form.title || "ظ„ظ… ظٹظڈط­ط¯ط¯"}</span>
+                      <span className="text-text-tertiary">العنوان</span>
+                      <span className="text-text font-medium">{form.title || "لم يُحدد"}</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ظ†ظˆط¹</span>
+                      <span className="text-text-tertiary">النوع</span>
                       <Badge variant={typeBadge[form.type]} size="sm">{typeOptions.find((o) => o.value === form.type)?.label}</Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ظ…ط³طھظ‡ط¯ظپ</span>
+                      <span className="text-text-tertiary">المستهدف</span>
                       <Badge variant={targetBadge[form.target]} size="sm">{targetOptions.find((o) => o.value === form.target)?.label}</Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط§ظ„ط£ظˆظ„ظˆظٹط©</span>
+                      <span className="text-text-tertiary">الأولوية</span>
                       <Badge variant={priorityBadge[form.priority]} size="sm">{priorityOptions.find((o) => o.value === form.priority)?.label}</Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-tertiary">ط¬ط¯ظˆظ„ط©</span>
-                      <span className="text-text font-medium">{form.scheduleEnabled ? "ظ…ظپط¹ظ„ط©" : "ط؛ظٹط± ظ…ظپط¹ظ„ط©"}</span>
+                      <span className="text-text-tertiary">جدولة</span>
+                      <span className="text-text font-medium">{form.scheduleEnabled ? "مفعلة" : "غير مفعلة"}</span>
                     </div>
                   </div>
                 </div>
                 <Button variant="success" size="lg" className="w-full" leftIcon={<HiOutlineCheck size={18} />} isLoading={submitting} onClick={() => handleSubmit("published")}>
-                  ظ†ط´ط± ط§ظ„ط¥ط¹ظ„ط§ظ†
+                  نشر الإعلان
                 </Button>
                 <Button variant="secondary" size="lg" className="w-full" leftIcon={<HiOutlinePencilAlt size={18} />} isLoading={submitting} onClick={() => handleSubmit("draft")}>
-                  ط­ظپط¸ ظƒظ…ط³ظˆط¯ط©
+                  حفظ كمسودة
                 </Button>
               </CardContent>
             </Card>

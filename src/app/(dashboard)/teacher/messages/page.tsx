@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo } from "react"
 import toast from "react-hot-toast"
@@ -86,7 +86,7 @@ export default function MessagesPage() {
 
   return (
     <div className="p-4 md:p-6 h-[calc(100vh-4rem)]">
-      <DashboardHeader title="ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط·آ¦ط¸â€‍" subtitle="ط·آ§ط¸â€‍ط·ع¾ط¸ث†ط·آ§ط·آµط¸â€‍ ط¸â€¦ط·آ¹ ط·آ§ط¸â€‍ط·آ·ط¸â€‍ط·آ§ط·آ¨ ط¸ث†ط·آ£ط¸ث†ط¸â€‍ط¸ظ¹ط·آ§ط·طŒ ط·آ§ط¸â€‍ط·آ£ط¸â€¦ط¸ث†ط·آ±" />
+      <DashboardHeader title="الرسائل" subtitle="التواصل مع الطلاب وأولياء الأمور" />
 
       <div className="flex gap-4 h-[calc(100%-5rem)] mt-4">
         <div className={cn(
@@ -96,10 +96,10 @@ export default function MessagesPage() {
           <div className="p-3 border-b border-border space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex-1">
-                <SearchInput value={search} onChange={setSearch} placeholder="ط·آ¨ط·آ­ط·آ« ط¸ظ¾ط¸ظ¹ ط·آ§ط¸â€‍ط¸â€¦ط·آ­ط·آ§ط·آ¯ط·آ«ط·آ§ط·ع¾..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="بحث ظپظٹ المحادثات..." />
               </div>
               <Button size="sm" variant="primary" onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
+                جديدة
               </Button>
             </div>
           </div>
@@ -107,8 +107,8 @@ export default function MessagesPage() {
             {filtered.length === 0 ? (
               <EmptyState
                 icon={HiOutlineMail}
-                title="ظ„ط§ ظٹظˆط¬ط¯ ط±ط³ط§ط¦ظ„"
-                description="ظ„ظ… ظٹطھظ… طھط¨ط§ط¯ظ„ ط£ظٹ ط±ط³ط§ط¦ظ„ ط¨ط¹ط¯"
+                title="لا يوجد رسائل"
+                description="لم ظٹطھظ… تبادل ط£ظٹ رسائل بعد"
               />
             ) : (
               filtered.map((conv) => (
@@ -166,14 +166,14 @@ export default function MessagesPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-text">{activeConversation.participantName}</p>
-                    <p className="text-xs text-text-tertiary">ط¸â€¦ط·ع¾ط·آµط¸â€‍ ط·آ§ط¸â€‍ط·آ¢ط¸â€ </p>
+                    <p className="text-xs text-text-tertiary">متصل الآن</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  <button type="button" onClick={() => toast.success("طھظ… طھط­ط¯ظٹط« ط§ظ„ط­ط§ظ„ط©")} className="p-2 text-text-tertiary hover:text-warning rounded-lg hover:bg-surface-secondary transition-colors">
+                  <button type="button" onClick={() => toast.success("طھظ… تحديث الحالة")} className="p-2 text-text-tertiary hover:text-warning rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlineStar className="w-4 h-4" />
                   </button>
-                  <button type="button" onClick={() => toast.success("طھظ… ط­ط°ظپ ط§ظ„ظ…ط­ط§ط¯ط«ط©")} className="p-2 text-text-tertiary hover:text-error rounded-lg hover:bg-surface-secondary transition-colors">
+                  <button type="button" onClick={() => toast.success("طھظ… حذف المحادثة")} className="p-2 text-text-tertiary hover:text-error rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlineTrash className="w-4 h-4" />
                   </button>
                 </div>
@@ -207,14 +207,14 @@ export default function MessagesPage() {
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
-                    placeholder="ط·آ§ط¸ئ’ط·ع¾ط·آ¨ ط·آ±ط·آ³ط·آ§ط¸â€‍ط·ع¾ط¸ئ’..."
+                    placeholder="اكتب رسالتك..."
                     className="flex-1 bg-surface-secondary border border-border rounded-xl px-4 py-2.5 text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
                   />
                   <button type="button" className="p-2.5 text-text-tertiary hover:text-primary rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlinePaperClip className="w-5 h-5" />
                   </button>
-                  <Button type="button" size="md" variant="primary" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => toast.success("طھظ… ط¥ط±ط³ط§ظ„ ط§ظ„ط±ط³ط§ظ„ط©")}>
-                    ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍
+                  <Button type="button" size="md" variant="primary" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => toast.success("طھظ… إرسال الرسالة")}>
+                    إرسال
                   </Button>
                 </div>
               </div>
@@ -223,10 +223,10 @@ export default function MessagesPage() {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <HiOutlinePaperAirplane className="w-16 h-16 mx-auto text-text-tertiary mb-4" />
-                <h3 className="text-lg font-semibold text-text mb-2">ط·آ§ط·آ®ط·ع¾ط·آ± ط¸â€¦ط·آ­ط·آ§ط·آ¯ط·آ«ط·آ©</h3>
-                <p className="text-sm text-text-secondary mb-6">ط·آ§ط·آ®ط·ع¾ط·آ± ط¸â€¦ط·آ­ط·آ§ط·آ¯ط·آ«ط·آ© ط¸â€¦ط¸â€  ط·آ§ط¸â€‍ط¸â€ڑط·آ§ط·آ¦ط¸â€¦ط·آ© ط¸â€‍ط·آ¹ط·آ±ط·آ¶ ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط·آ¦ط¸â€‍</p>
+                <h3 className="text-lg font-semibold text-text mb-2">اختر محادثة</h3>
+                <p className="text-sm text-text-secondary mb-6">اختر محادثة من القائمة لعرض الرسائل</p>
                 <Button onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
-                  ط·آ¨ط·آ¯ط·طŒ ط¸â€¦ط·آ­ط·آ§ط·آ¯ط·آ«ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©
+                  بدء محادثة جديدة
                 </Button>
               </div>
             </div>
@@ -234,24 +234,24 @@ export default function MessagesPage() {
         </div>
       </div>
 
-      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط·آ¬ط·آ¯ط¸ظ¹ط·آ¯ط·آ©" subtitle="ط·آ£ط·آ±ط·آ³ط¸â€‍ ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ© ط·آ¥ط¸â€‍ط¸â€° ط·آ·ط·آ§ط¸â€‍ط·آ¨ ط·آ£ط¸ث† ط¸ث†ط¸â€‍ط¸ظ¹ ط·آ£ط¸â€¦ط·آ±" size="lg">
+      <Modal isOpen={showCompose} onClose={() => setShowCompose(false)} title="رسالة جديدة" subtitle="أرسل رسالة إلى طالب أو ولي أمر" size="lg">
         <div className="space-y-4">
           <Select
-            label="ط·آ¥ط¸â€‍ط¸â€°"
+            label="إلى"
             options={mockStudents.slice(0, 20).map((s) => ({ value: s.id, label: s.name }))}
-            placeholder="ط·آ§ط·آ®ط·ع¾ط·آ± ط·آ§ط¸â€‍ط¸â€¦ط·آ³ط·ع¾ط¸â€‍ط¸â€¦"
+            placeholder="اختر المستلم"
           />
-          <Input label="ط·آ§ط¸â€‍ط¸â€¦ط¸ث†ط·آ¶ط¸ث†ط·آ¹" placeholder="ط·آ¹ط¸â€ ط¸ث†ط·آ§ط¸â€  ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©" />
-          <Textarea label="ط¸â€ ط·آµ ط·آ§ط¸â€‍ط·آ±ط·آ³ط·آ§ط¸â€‍ط·آ©" placeholder="ط·آ§ط¸ئ’ط·ع¾ط·آ¨ ط·آ±ط·آ³ط·آ§ط¸â€‍ط·ع¾ط¸ئ’ ط¸â€،ط¸â€ ط·آ§..." rows={5} />
-          <div onClick={() => toast.success("ظ‚ط±ظٹط¨ط§ظ‹...")} className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary border border-border cursor-pointer hover:bg-surface-tertiary transition-colors">
+          <Input label="الموضوع" placeholder="عنوان الرسالة" />
+          <Textarea label="نص الرسالة" placeholder="اكتب رسالتك هنا..." rows={5} />
+          <div onClick={() => toast.success("قريباً...")} className="flex items-center gap-2 p-3 rounded-xl bg-surface-secondary border border-border cursor-pointer hover:bg-surface-tertiary transition-colors">
             <HiOutlinePaperClip className="w-4 h-4 text-text-tertiary" />
-            <span className="text-sm text-text-tertiary">ط·آ¥ط·آ±ط¸ظ¾ط·آ§ط¸â€ڑ ط¸â€¦ط¸â€‍ط¸ظ¾</span>
+            <span className="text-sm text-text-tertiary">إرفاق ملف</span>
           </div>
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => { toast.success("طھظ… ط¥ط±ط³ط§ظ„ ط§ظ„ط±ط³ط§ظ„ط©"); setShowCompose(false) }}>
-              ط·آ¥ط·آ±ط·آ³ط·آ§ط¸â€‍
+            <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => { toast.success("طھظ… إرسال الرسالة"); setShowCompose(false) }}>
+              إرسال
             </Button>
-            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>ط·آ¥ط¸â€‍ط·ط›ط·آ§ط·طŒ</Button>
+            <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>إلغاء</Button>
           </div>
         </div>
       </Modal>

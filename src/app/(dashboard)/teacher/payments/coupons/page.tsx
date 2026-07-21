@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -24,11 +24,11 @@ const coupons: Coupon[] = [
 ]
 
 const columns = [
-  { key: "code", label: "ط§ظ„ظƒظˆط¯", render: (r: Coupon) => <span className="text-sm font-mono font-bold text-primary">{r.code}</span> },
-  { key: "discount", label: "ط§ظ„ط®طµظ…", render: (r: Coupon) => <span className="text-sm text-text">{r.type === "percentage" ? `${r.discount}%` : `${r.discount} ط¬.ظ…`}</span> },
-  { key: "usage", label: "ط§ظ„ط§ط³طھط®ط¯ط§ظ…", render: (r: Coupon) => <span className="text-xs text-text-tertiary">{r.usageCount}/{r.maxUsage}</span> },
-  { key: "expires", label: "ظٹظ†طھظ‡ظٹ", render: (r: Coupon) => <span className="text-xs text-text-tertiary">{r.expiresAt}</span> },
-  { key: "active", label: "ط§ظ„ط­ط§ظ„ط©", render: (r: Coupon) => <Badge variant={r.active ? "success" : "error"} size="sm">{r.active ? "ظ†ط´ط·" : "ظ…ظ†طھظ‡ظٹ"}</Badge> },
+  { key: "code", label: "الكود", render: (r: Coupon) => <span className="text-sm font-mono font-bold text-primary">{r.code}</span> },
+  { key: "discount", label: "الخصم", render: (r: Coupon) => <span className="text-sm text-text">{r.type === "percentage" ? `${r.discount}%` : `${r.discount} ج.ظ…`}</span> },
+  { key: "usage", label: "الاستخدام", render: (r: Coupon) => <span className="text-xs text-text-tertiary">{r.usageCount}/{r.maxUsage}</span> },
+  { key: "expires", label: "ينتهي", render: (r: Coupon) => <span className="text-xs text-text-tertiary">{r.expiresAt}</span> },
+  { key: "active", label: "الحالة", render: (r: Coupon) => <Badge variant={r.active ? "success" : "error"} size="sm">{r.active ? "نشط" : "منتهي"}</Badge> },
 ]
 
 const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.05 } } }
@@ -40,8 +40,8 @@ export default function CouponsPage() {
   const [newType, setNewType] = useState<"percentage" | "fixed">("percentage")
 
   const handleCreate = () => {
-    if (!newCode.trim() || !newDiscount.trim()) { toast.error("ط§ظ„ط±ط¬ط§ط، ط¥ط¯ط®ط§ظ„ ط§ظ„ظƒظˆط¯ ظˆط§ظ„ط®طµظ…"); return }
-    toast.success(`طھظ… ط¥ظ†ط´ط§ط، ط§ظ„ظƒظˆط¯ ${newCode.trim()} ط¨ظ†ط¬ط§ط­`)
+    if (!newCode.trim() || !newDiscount.trim()) { toast.error("الرجاء إدخال الكود والخصم"); return }
+    toast.success(`طھظ… إنشاء الكود ${newCode.trim()} بنجاح`)
     setNewCode(""); setNewDiscount("")
   }
 
@@ -50,41 +50,41 @@ export default function CouponsPage() {
 
   return (
     <div className="min-h-screen">
-      <Breadcrumb items={[{ label: "ط§ظ„ظ…ط¯ظپظˆط¹ط§طھ", href: "/teacher/payments/installments" }, { label: "ط§ظ„ظƒظˆط¨ظˆظ†ط§طھ" }]} />
-      <DashboardHeader title="ظƒظˆط¨ظˆظ†ط§طھ ط§ظ„ط®طµظ…" subtitle="ط¥ط¯ط§ط±ط© ط£ظƒظˆط§ط¯ ط§ظ„ط®طµظ… ظˆط§ظ„ط¹ط±ظˆط¶" />
+      <Breadcrumb items={[{ label: "المدفوعات", href: "/teacher/payments/installments" }, { label: "الكوبونات" }]} />
+      <DashboardHeader title="كوبونات الخصم" subtitle="إدارة أكواد الخصم والعروض" />
       <div className="p-4 md:p-6 space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-            <StatsCard title="ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظƒظˆط¨ظˆظ†ط§طھ" value={coupons.length} icon={HiOutlineTicket} color="primary" />
-            <StatsCard title="ظ†ط´ط·ط©" value={active} icon={HiOutlineCheckCircle} color="success" />
-            <StatsCard title="ظ…ظ†طھظ‡ظٹط©" value={coupons.length - active} icon={HiOutlineXCircle} color="error" />
-            <StatsCard title="ظ…ط±ط§طھ ط§ظ„ط§ط³طھط®ط¯ط§ظ…" value={totalUsage} icon={HiOutlineSelector} color="info" />
+            <StatsCard title="إجمالي الكوبونات" value={coupons.length} icon={HiOutlineTicket} color="primary" />
+            <StatsCard title="نشطة" value={active} icon={HiOutlineCheckCircle} color="success" />
+            <StatsCard title="منتهية" value={coupons.length - active} icon={HiOutlineXCircle} color="error" />
+            <StatsCard title="مرات الاستخدام" value={totalUsage} icon={HiOutlineSelector} color="info" />
           </motion.div>
           <motion.div variants={itemVariants}>
             <Card>
-              <CardHeader><CardTitle>ط¥ظ†ط´ط§ط، ظƒظˆط¨ظˆظ† ط¬ط¯ظٹط¯</CardTitle></CardHeader>
+              <CardHeader><CardTitle>إنشاء كوبون جديد</CardTitle></CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-3 items-end">
                   <div className="space-y-1">
-                    <label className="text-xs text-text-tertiary">ط§ظ„ظƒظˆط¯</label>
-                    <input type="text" value={newCode} onChange={(e) => setNewCode(e.target.value)} placeholder="ظ…ط«ط§ظ„: OFFER20" className="w-36 bg-surface border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                    <label className="text-xs text-text-tertiary">الكود</label>
+                    <input type="text" value={newCode} onChange={(e) => setNewCode(e.target.value)} placeholder="مثال: OFFER20" className="w-36 bg-surface border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-xs text-text-tertiary">ط§ظ„ظ‚ظٹظ…ط©</label>
+                    <label className="text-xs text-text-tertiary">القيمة</label>
                     <input type="number" value={newDiscount} onChange={(e) => setNewDiscount(e.target.value)} placeholder="20" className="w-24 bg-surface border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-xs text-text-tertiary">ط§ظ„ظ†ظˆط¹</label>
+                    <label className="text-xs text-text-tertiary">النوع</label>
                     <div className="flex gap-2">
                       {(["percentage", "fixed"] as const).map((t) => (
                         <button type="button" key={t} onClick={() => setNewType(t)}
                           className={`px-3 py-2 rounded-lg text-xs font-medium border transition-all ${newType === t ? "border-primary bg-primary/10 text-primary" : "border-border text-text-tertiary"}`}
-                        >{t === "percentage" ? "ظ†ط³ط¨ط© %" : "ظ‚ظٹظ…ط© ط«ط§ط¨طھط©"}</button>
+                        >{t === "percentage" ? "نسبة %" : "قيمة ثابتة"}</button>
                       ))}
                     </div>
                   </div>
                   <button type="button" onClick={handleCreate} className="px-4 py-2 bg-primary text-white rounded-lg text-xs font-medium hover:bg-primary-dark transition-all">
-                    <HiOutlinePlus className="w-4 h-4 inline ml-1" />ط¥ظ†ط´ط§ط،
+                    <HiOutlinePlus className="w-4 h-4 inline ml-1" />إنشاء
                   </button>
                 </div>
               </CardContent>
@@ -92,7 +92,7 @@ export default function CouponsPage() {
           </motion.div>
           <motion.div variants={itemVariants}>
             <Card>
-              <CardHeader><CardTitle>ط¬ظ…ظٹط¹ ط§ظ„ظƒظˆط¨ظˆظ†ط§طھ</CardTitle></CardHeader>
+              <CardHeader><CardTitle>جميع الكوبونات</CardTitle></CardHeader>
               <CardContent><DataTable columns={columns} data={coupons} searchable /></CardContent>
             </Card>
           </motion.div>
