@@ -204,7 +204,7 @@ function LoginForm() {
                     href="/forgot-password"
                     className="text-sm text-primary hover:text-primary-dark transition-colors font-medium"
                   >
-                    نسيت كلمة المروѿ
+                    نسيت كلمة المرور؟
                   </Link>
                 </div>
 
@@ -242,7 +242,7 @@ function LoginForm() {
 
               <div className="mt-6 text-center space-y-3">
                 <p className="text-sm text-text-secondary">
-                  ليس لديك حساȿ{" "}
+                  ليس لديك حساب؟{" "}
                   <Link href="/register" className="text-primary hover:text-primary-dark font-semibold transition-colors">
                     سجل الآن
                   </Link>

@@ -12,8 +12,9 @@ export function Card({ className, children, hover, onClick }: CardProps) {
     <div
       onClick={onClick}
       className={cn(
-        "bg-surface border border-border rounded-xl p-6 transition-all duration-200",
-        hover && "hover:shadow-lg hover:-translate-y-0.5 cursor-pointer",
+        "bg-surface border border-border/60 rounded-2xl p-6 transition-all duration-300",
+        "shadow-sm hover:shadow-lg",
+        hover && "hover:-translate-y-1 hover:border-primary/20 cursor-pointer",
         onClick && "cursor-pointer",
         className
       )}
@@ -28,11 +29,11 @@ export function CardHeader({ className, children }: { className?: string; childr
 }
 
 export function CardTitle({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <h3 className={cn("text-lg font-semibold text-text", className)}>{children}</h3>
+  return <h3 className={cn("text-lg font-bold text-text", className)}>{children}</h3>
 }
 
 export function CardDescription({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <p className={cn("text-sm text-text-secondary mt-1", className)}>{children}</p>
+  return <p className={cn("text-sm text-text-secondary mt-1 leading-relaxed", className)}>{children}</p>
 }
 
 export function CardContent({ className, children }: { className?: string; children: React.ReactNode }) {
@@ -40,5 +41,5 @@ export function CardContent({ className, children }: { className?: string; child
 }
 
 export function CardFooter({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <div className={cn("flex items-center justify-end gap-3 mt-4 pt-4 border-t border-border", className)}>{children}</div>
+  return <div className={cn("flex items-center justify-end gap-3 mt-4 pt-4 border-t border-border/60", className)}>{children}</div>
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import {
   HiAcademicCap,
@@ -14,19 +15,22 @@ import {
   HiShieldCheck,
   HiArrowLeft,
   HiCheckCircle,
+  HiArrowSmRight,
 } from "react-icons/hi"
 import { Card, CardContent } from "@/components/ui/Card"
 import { Alert } from "@/components/ui/Alert"
 import { Badge } from "@/components/ui/Badge"
+import { useAuthStore } from "@/lib/auth"
 
 const demoAccounts = [
   {
     id: "teacher",
     name: "مدرس",
     icon: HiAcademicCap,
-    gradient: "from-primary-500 to-indigo-600",
+    gradient: "from-indigo-600 to-purple-600",
     email: "ahmed@teacher-os.com",
     password: "123456",
+    role: "teacher" as const,
     description: "حساب تجريبي للمدرس مع صلاحية الوصول الكامل للوحة التحكم وإدارة الكورسات والطلاب والامتحانات والإيرادات وجميع التقارير.",
   },
   {
@@ -36,6 +40,7 @@ const demoAccounts = [
     gradient: "from-emerald-500 to-teal-600",
     email: "student@teacher-os.com",
     password: "123456",
+    role: "student" as const,
     description: "حساب تجريبي للطالب لمشاهدة الكورسات المسجلة وحضور الدروس المباشرة وأداء الامتحانات والواجبات ومتابعة التقدم.",
   },
   {
@@ -45,6 +50,7 @@ const demoAccounts = [
     gradient: "from-amber-500 to-orange-600",
     email: "parent@teacher-os.com",
     password: "123456",
+    role: "parent" as const,
     description: "حساب تجريبي لولي الأمر لمتابعة أداء الأبناء الدراسي والاطلاع على التقارير الشهرية والمدفوعات والإشعارات.",
   },
   {
@@ -54,6 +60,7 @@ const demoAccounts = [
     gradient: "from-purple-500 to-pink-600",
     email: "staff@teacher-os.com",
     password: "123456",
+    role: "staff" as const,
     description: "حساب تجريبي لأعضاء فريق العمل مع صلاحيات إدارة محددة حسب الدور الوظيفي لكل موظف.",
   },
 ]
@@ -68,8 +75,18 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
+const roleRoutes: Record<string, string> = {
+  teacher: "/teacher",
+  student: "/student",
+  parent: "/parent",
+  staff: "/staff",
+}
+
 export default function DemoPage() {
+  const router = useRouter()
+  const loginAs = useAuthStore((s) => s.loginAs)
   const [copied, setCopied] = useState<string | null>(null)
+  const [loggingIn, setLoggingIn] = useState<string | null>(null)
 
   const handleCopy = async (email: string, password: string, id: string) => {
     try {
@@ -79,6 +96,14 @@ export default function DemoPage() {
     } catch {
       // fallback
     }
+  }
+
+  const handleDirectLogin = (role: string, id: string) => {
+    setLoggingIn(id)
+    loginAs(role as any)
+    setTimeout(() => {
+      router.push(roleRoutes[role] || "/teacher")
+    }, 300)
   }
 
   return (
@@ -192,12 +217,18 @@ export default function DemoPage() {
                           </>
                         )}
                       </button>
-                      <Link href="/login" className="flex-[2]">
-                        <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-dark transition-all duration-200 shadow-sm shadow-primary/20 active:scale-[0.98]">
-                          <HiLogin className="w-4 h-4" />
-                          <span>تسجيل الدخول كـ {account.name}</span>
-                        </button>
-                      </Link>
+                      <button type="button"
+                        onClick={() => handleDirectLogin(account.role, account.id)}
+                        disabled={loggingIn === account.id}
+                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-primary to-indigo-600 text-white rounded-xl text-sm font-medium hover:from-primary-dark hover:to-indigo-700 transition-all duration-200 shadow-lg shadow-primary/25 active:scale-[0.98] disabled:opacity-70"
+                      >
+                        {loggingIn === account.id ? (
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <HiArrowSmRight className="w-4 h-4" />
+                        )}
+                        <span>{loggingIn === account.id ? "جاري تسجيل الدخول..." : `الدخول كـ ${account.name}`}</span>
+                      </button>
                     </div>
                   </CardContent>
                 </Card>
