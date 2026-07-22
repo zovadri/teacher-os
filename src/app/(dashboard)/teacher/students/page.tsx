@@ -99,7 +99,7 @@ export default function StudentsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-bold text-[#F8FAFC]">الطلاب</h1>
+      <h1 className="text-xl font-bold text-text">الطلاب</h1>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="إجمالي الطلاب" value={stats.total} icon={HiOutlineUsers} color="primary" />
@@ -140,8 +140,8 @@ export default function StudentsPage() {
             className={cn(
               "px-4 py-1.5 rounded-full text-xs font-medium transition-all border",
               activeChip === chip
-                ? "bg-[#6366F1] text-white border-[#6366F1]"
-                : "bg-transparent text-[#94A3B8] border-[rgba(255,255,255,0.06)] hover:border-[#6366F1]/30 hover:text-[#F8FAFC]"
+                ? "bg-primary text-white border-primary"
+                : "bg-transparent text-text-secondary border-border hover:border-primary/30 hover:text-text"
             )}
           >
             {chip}
@@ -149,15 +149,15 @@ export default function StudentsPage() {
         ))}
         <div className="w-px h-5 bg-[rgba(255,255,255,0.06)] mx-1" />
         <select value={gradeFilter} onChange={(e) => { setGradeFilter(e.target.value); setPage(1) }}
-          className="px-3 py-1.5 bg-transparent border border-[rgba(255,255,255,0.06)] rounded-full text-xs text-[#94A3B8] focus:outline-none cursor-pointer hover:border-[#6366F1]/30">
+          className="px-3 py-1.5 bg-transparent border border-border rounded-full text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30">
           {grades.map((g) => <option key={g} value={g}>{g === "الكل" ? "جميع الصفوف" : g}</option>)}
         </select>
         <select value={groupFilter} onChange={(e) => { setGroupFilter(e.target.value); setPage(1) }}
-          className="px-3 py-1.5 bg-transparent border border-[rgba(255,255,255,0.06)] rounded-full text-xs text-[#94A3B8] focus:outline-none cursor-pointer hover:border-[#6366F1]/30">
+          className="px-3 py-1.5 bg-transparent border border-border rounded-full text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30">
           {groups.map((g) => <option key={g} value={g}>{g === "الكل" ? "جميع المجموعات" : g}</option>)}
         </select>
         <select value={govFilter} onChange={(e) => { setGovFilter(e.target.value); setPage(1) }}
-          className="px-3 py-1.5 bg-transparent border border-[rgba(255,255,255,0.06)] rounded-full text-xs text-[#94A3B8] focus:outline-none cursor-pointer hover:border-[#6366F1]/30">
+          className="px-3 py-1.5 bg-transparent border border-border rounded-full text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30">
           {governorates.map((g) => <option key={g} value={g}>{g === "الكل" ? "جميع المحافظات" : g}</option>)}
         </select>
       </div>

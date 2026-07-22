@@ -17,8 +17,8 @@
   --color-surface: #111827;
   --color-surface-secondary: #1A1D2E;
   --color-surface-tertiary: #222539;
-  --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-light: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-light: rgba(255, 255, 255, 0.12);
   --color-text: #F8FAFC;
   --color-text-secondary: #94A3B8;
   --color-text-tertiary: #64748B;

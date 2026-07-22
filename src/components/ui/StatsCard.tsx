@@ -13,20 +13,20 @@ interface StatsCardProps {
   delay?: number
 }
 
-const iconColors = {
-  primary: "text-[#6366F1]",
-  success: "text-[#22C55E]",
-  warning: "text-[#F59E0B]",
-  error: "text-[#EF4444]",
-  info: "text-[#3B82F6]",
+const iconColors: Record<string, string> = {
+  primary: "text-primary",
+  success: "text-success",
+  warning: "text-warning",
+  error: "text-error",
+  info: "text-info",
 }
 
-const iconBgColors = {
-  primary: "bg-[#6366F1]/10",
-  success: "bg-[#22C55E]/10",
-  warning: "bg-[#F59E0B]/10",
-  error: "bg-[#EF4444]/10",
-  info: "bg-[#3B82F6]/10",
+const iconBgColors: Record<string, string> = {
+  primary: "bg-primary/10",
+  success: "bg-success/10",
+  warning: "bg-warning/10",
+  error: "bg-error/10",
+  info: "bg-info/10",
 }
 
 export function StatsCard({ title, value, icon: Icon, description, color = "primary", className, delay = 0 }: StatsCardProps) {
@@ -34,16 +34,16 @@ export function StatsCard({ title, value, icon: Icon, description, color = "prim
     <motion.div
       initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
-      className={cn("bg-[#111827] border border-[rgba(255,255,255,0.06)] rounded-[20px] p-5 transition-all duration-200 hover:border-primary/30 hover:shadow-sm", className)}
+      className={cn("bg-surface border border-border rounded-[20px] p-5 transition-all duration-200 hover:border-primary/30", className)}
     >
       <div className="flex items-start gap-4">
         <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center shrink-0", iconBgColors[color])}>
           <Icon className={cn("w-6 h-6", iconColors[color])} />
         </div>
         <div className="min-w-0">
-          <p className="text-sm text-[#94A3B8]">{title}</p>
-          <p className="text-2xl font-bold text-[#F8FAFC] mt-0.5">{typeof value === "number" ? value.toLocaleString("ar-EG") : value}</p>
-          {description && <p className="text-xs text-[#64748B] mt-1">{description}</p>}
+          <p className="text-sm text-text-secondary">{title}</p>
+          <p className="text-2xl font-bold text-text mt-0.5">{typeof value === "number" ? value.toLocaleString("ar-EG") : value}</p>
+          {description && <p className="text-xs text-text-tertiary mt-1">{description}</p>}
         </div>
       </div>
     </motion.div>
