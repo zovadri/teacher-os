@@ -66,7 +66,7 @@ export default function AboutPage() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-[20px] overflow-hidden shadow-2xl">
                 <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=85" alt="TeacherOS" className="w-full h-auto" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
@@ -77,7 +77,7 @@ export default function AboutPage() {
 
       <section className="py-16 bg-surface-secondary">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {statsData.map((stat, i) => (
               <motion.div key={stat.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="text-center">
                 <stat.icon className="text-primary mx-auto mb-2" size={28} />
@@ -93,7 +93,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeUp}>
-              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=85" alt="رؤيتنا" className="rounded-2xl shadow-lg w-full" />
+              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=85" alt="رؤيتنا" className="rounded-[20px] shadow-lg w-full" />
             </motion.div>
             <motion.div {...fadeUp}>
               <span className="text-primary text-sm font-medium mb-2 block">نبذة عنا</span>
@@ -112,11 +112,11 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">المبادئ التي نقوم عليها</h2>
             <p className="text-text-secondary max-w-2xl mx-auto">قيم راسخة توجه مسيرتنا نحو التميز والابتكار في التعليم.</p>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {mockCmsContent.aboutValues.map((value, i) => {
               const Icon = valuesIcons[i % valuesIcons.length]
               return (
-                <motion.div key={value.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group p-6 rounded-xl border border-border bg-surface text-center hover:shadow-lg hover:border-primary/30 transition-all">
+                <motion.div key={value.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group p-5 rounded-[20px] border border-border bg-surface shadow-[0_2px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_24px_rgba(99,102,241,0.1)] text-center hover:border-primary/30 transition-all">
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
                     <Icon className="text-primary" size={28} />
                   </div>
@@ -136,9 +136,9 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">تعرف على فريقنا</h2>
             <p className="text-text-secondary max-w-xl mx-auto">نخبة من المحترفين يعملون معاً لتقديم أفضل تجربة تعليمية.</p>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {mockTeamMembers.map((member, i) => (
-              <motion.div key={member.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="p-6 rounded-xl border border-border bg-surface text-center hover:shadow-lg hover:border-primary/30 transition-all group">
+              <motion.div key={member.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="p-5 rounded-[20px] border border-border bg-surface shadow-[0_2px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_24px_rgba(99,102,241,0.1)] text-center hover:border-primary/30 transition-all group">
                 <img src={member.image} alt={member.name} className="w-20 h-20 rounded-full mx-auto mb-4 bg-surface-tertiary object-cover" />
                 <h3 className="font-semibold mb-1">{member.name}</h3>
                 <p className="text-xs text-primary font-medium mb-3">{member.role}</p>
@@ -151,12 +151,12 @@ export default function AboutPage() {
 
       <section className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-8 md:p-16 text-center text-white overflow-hidden">
+          <motion.div {...fadeUp} className="relative rounded-[20px] bg-gradient-to-br from-primary to-primary-dark p-5 md:p-12 text-center text-white overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.15),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">مستعد لبدء رحلة التعلم؟</h2>
               <p className="text-white/80 mb-8 max-w-xl mx-auto">انضم إلى آلاف الطلاب وابدأ رحلتك نحو التفوق مع TeacherOS.</p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-5">
                 <Link href="/courses" className="px-8 py-3 bg-white text-primary font-medium rounded-xl hover:bg-white/90 transition-all">تصفح الكورسات</Link>
                 <Link href="/contact" className="px-8 py-3 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-all">تواصل معنا</Link>
               </div>
