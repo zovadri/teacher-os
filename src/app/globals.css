@@ -32,14 +32,21 @@
   --color-info: #5B7CFF;
   --color-info-bg: rgba(91, 124, 255, 0.1);
   --color-students: #5B7CFF;
+  --color-students-bg: rgba(91, 124, 255, 0.1);
   --color-finance: #16C784;
+  --color-finance-bg: rgba(22, 199, 132, 0.1);
   --color-exams: #8B5CF6;
+  --color-exams-bg: rgba(139, 92, 246, 0.1);
   --color-attendance: #F5B301;
+  --color-attendance-bg: rgba(245, 179, 1, 0.1);
   --color-analytics: #FFFFFF;
+  --color-analytics-bg: rgba(255, 255, 255, 0.1);
   --font-sans: "Alexandria", "Inter", system-ui, -apple-system, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
   --font-mono: "JetBrains Mono", "IBM Plex Sans Arabic", monospace;
   --width-sidebar: 17.5rem;
+  --text-hero: 3.5rem;
+  --text-hero-lineheight: 1.05;
 }
 
 * {

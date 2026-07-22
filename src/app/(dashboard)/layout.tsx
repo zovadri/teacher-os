@@ -23,10 +23,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   ])
 
   return (
-    <div className="min-h-screen bg-[#0B1120]">
-      <div className="flex min-h-screen">
+    <div className="min-h-screen bg-[#080B12]">
+      <div className="min-h-screen">
         <DashboardSidebar />
-        <div className="flex-1 min-w-0 p-6 lg:p-8">
+        <div className="pr-[64px] lg:pr-[64px] min-h-screen p-6 lg:p-8 transition-all duration-300">
           <DemoBanner />
           {children}
         </div>

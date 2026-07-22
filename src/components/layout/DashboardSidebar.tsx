@@ -11,8 +11,8 @@ import {
   HiCreditCard, HiChartBar, HiCog, HiQuestionMarkCircle, HiSupport,
   HiStar, HiPhotograph, HiBell, HiChevronDown, HiMenu, HiX, HiLogout,
   HiChevronRight, HiDocumentReport, HiClock, HiShieldCheck, HiCash,
-  HiOfficeBuilding, HiCollection, HiCube, HiClipboard, HiTemplate,
-  HiArchive, HiSearch, HiSwitchHorizontal, HiUpload, HiServer, HiCheckCircle,
+  HiOfficeBuilding, HiCollection, HiClipboard,
+  HiArchive, HiSearch, HiUpload, HiCheckCircle,
 } from "react-icons/hi"
 
 interface NavItem {
@@ -243,16 +243,10 @@ const staffNavItems: NavItem[] = [
   { label: "إدارة", icon: HiCog, href: "/staff/manage" },
 ]
 
-const otherLinks = [
-  { label: "لوحة الطالب", icon: HiAcademicCap, href: "/student" },
-  { label: "لوحة ولي الأمر", icon: HiUserGroup, href: "/parent" },
-  { label: "لوحة الموظفين", icon: HiStar, href: "/staff" },
-]
-
 export default function DashboardSidebar() {
   const pathname = usePathname()
   const { user } = useAuthStore()
-  const [collapsed, setCollapsed] = useState(false)
+  const [hovered, setHovered] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [expandedMenus, setExpandedMenus] = useState<string[]>([])
 
@@ -272,10 +266,85 @@ export default function DashboardSidebar() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/")
 
-  const NavLink = ({ item, depth = 0 }: { item: NavItem; depth?: number }) => {
+  function DesktopNavLink({ item, depth = 0 }: { item: NavItem; depth?: number }) {
     const active = isActive(item.href)
     const hasChildren = item.children && item.children.length > 0
-    const expanded = expandedMenus.includes(item.label)
+    const isExpanded = expandedMenus.includes(item.label)
+    const showLabel = hovered
+
+    return (
+      <div className="relative group/nav">
+        <Link
+          href={hasChildren ? "#" : item.href}
+          onClick={(e) => { if (hasChildren) { e.preventDefault(); toggleMenu(item.label) } }}
+          className={cn(
+            "flex items-center justify-center gap-3 rounded-[16px] transition-all duration-250 group",
+            showLabel ? "px-4 py-3 w-full" : "w-12 h-12 mx-auto",
+            active ? "bg-primary/10 text-primary" : "text-text-secondary hover:bg-card hover:text-text",
+            depth > 0 && "mr-3"
+          )}
+        >
+          <motion.div
+            whileHover={{ scale: 1.15 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+          >
+            <item.icon className="w-5 h-5 shrink-0" />
+          </motion.div>
+          {showLabel && (
+            <>
+              <span className="flex-1 truncate text-sm font-medium text-right">{item.label}</span>
+              {hasChildren && (
+                <HiChevronDown className={cn("w-4 h-4 shrink-0 transition-transform duration-200", isExpanded && "rotate-180")} />
+              )}
+            </>
+          )}
+        </Link>
+
+        {showLabel && hasChildren && (
+          <AnimatePresence>
+            {isExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden"
+              >
+                {item.children!.map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    className={cn(
+                      "flex items-center gap-3 pr-12 px-3 py-2 rounded-[16px] text-sm transition-all duration-200",
+                      pathname === child.href
+                        ? "bg-primary/10 text-primary"
+                        : "text-text-tertiary hover:bg-card hover:text-text-secondary"
+                    )}
+                  >
+                    <HiChevronRight className="w-3 h-3 shrink-0" />
+                    <span className="truncate">{child.label}</span>
+                  </Link>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        )}
+
+        {!showLabel && (
+          <div className="absolute right-16 top-1/2 -translate-y-1/2 z-50 pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200">
+            <div className="bg-surface/90 backdrop-blur-xl border border-border rounded-[12px] px-3 py-1.5 text-sm font-medium text-text whitespace-nowrap shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+              {item.label}
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  function MobileNavLink({ item, depth = 0 }: { item: NavItem; depth?: number }) {
+    const active = isActive(item.href)
+    const hasChildren = item.children && item.children.length > 0
+    const isExpanded = expandedMenus.includes(item.label)
 
     return (
       <div>
@@ -283,29 +352,25 @@ export default function DashboardSidebar() {
           href={hasChildren ? "#" : item.href}
           onClick={(e) => { if (hasChildren) { e.preventDefault(); toggleMenu(item.label) } else { setMobileOpen(false) } }}
           className={cn(
-            "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group",
-            active
-              ? "bg-primary/10 text-primary"
-              : "text-text-secondary hover:bg-surface-secondary/50 hover:text-text",
+            "flex items-center gap-3 px-4 py-3 rounded-[16px] text-sm font-medium transition-all duration-200",
+            active ? "bg-primary/10 text-primary" : "text-text-secondary hover:bg-card hover:text-text",
+            depth > 0 && "mr-3"
           )}
-          style={{ paddingRight: depth > 0 ? `${depth * 16 + 12}px` : undefined }}
         >
           <item.icon className="w-5 h-5 shrink-0" />
-          {!collapsed && (
-            <>
-              <span className="flex-1 truncate">{item.label}</span>
-              {hasChildren && (
-                <HiChevronDown className={cn("w-4 h-4 transition-transform duration-200", expanded && "rotate-180")} />
-              )}
-            </>
+          <span className="flex-1 truncate">{item.label}</span>
+          {hasChildren && (
+            <HiChevronDown className={cn("w-4 h-4 shrink-0 transition-transform duration-200", isExpanded && "rotate-180")} />
           )}
         </Link>
-        {hasChildren && !collapsed && (
+        {hasChildren && (
           <AnimatePresence>
-            {expanded && (
+            {isExpanded && (
               <motion.div
-                initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 className="overflow-hidden"
               >
                 {item.children!.map((child) => (
@@ -314,14 +379,14 @@ export default function DashboardSidebar() {
                     href={child.href}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
-                      "flex items-center gap-3 pr-8 px-3 py-2 rounded-xl text-sm transition-all duration-200 mr-3",
+                      "flex items-center gap-3 pr-12 px-3 py-2 rounded-[16px] text-sm transition-all duration-200",
                       pathname === child.href
                         ? "bg-primary/10 text-primary"
-                        : "text-text-tertiary hover:bg-surface-secondary/50 hover:text-text-secondary"
+                        : "text-text-tertiary hover:bg-card hover:text-text-secondary"
                     )}
                   >
-                    <HiChevronRight className="w-3 h-3" />
-                    {child.label}
+                    <HiChevronRight className="w-3 h-3 shrink-0" />
+                    <span className="truncate">{child.label}</span>
                   </Link>
                 ))}
               </motion.div>
@@ -332,60 +397,11 @@ export default function DashboardSidebar() {
     )
   }
 
-  const sidebarContent = (
-    <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
-        <button type="button" onClick={() => setMobileOpen(false)} className="lg:hidden ml-2 p-1 rounded-lg hover:bg-surface-secondary/50 transition-colors">
-          <HiX className="w-5 h-5 text-text-secondary" />
-        </button>
-        <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-sm">T</div>
-        {!collapsed && <span className="font-bold text-text text-lg">TeacherOS</span>}
-      </div>
-
-      <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-        {roleNavItems.map((item) => (<NavLink key={item.href} item={item} />))}
-
-        {!collapsed && user?.role === "teacher" && (
-          <>
-            <div className="pt-6 mt-6 border-t border-border">
-              <p className="px-3 text-xs font-medium text-text-tertiary mb-2">روابط أخرى</p>
-              {otherLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
-                      isActive(item.href)
-                        ? "bg-primary/10 text-primary"
-                        : "text-text-secondary hover:bg-surface-secondary/50 hover:text-text",
-                    )}
-                >
-                  <item.icon className="w-5 h-5 shrink-0" />
-                  <span className="truncate">{item.label}</span>
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
-      </nav>
-
-      <div className="p-4 border-t border-border">
-        <button type="button" className={cn(
-          "flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-text-tertiary hover:bg-surface-secondary/50 hover:text-error transition-all",
-        )}>
-          <HiLogout className="w-5 h-5 shrink-0" />
-          {!collapsed && <span>تسجيل خروج</span>}
-        </button>
-      </div>
-    </div>
-  )
-
   return (
     <>
       <button type="button"
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl bg-surface border border-border shadow-md"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-[16px] bg-surface/60 backdrop-blur-xl border border-border shadow-md"
       >
         {mobileOpen ? <HiX className="w-5 h-5" /> : <HiMenu className="w-5 h-5" />}
       </button>
@@ -405,19 +421,79 @@ export default function DashboardSidebar() {
         initial={false}
         animate={{ x: mobileOpen ? 0 : "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="lg:hidden fixed top-0 right-0 z-50 h-screen w-[280px] bg-surface border-l border-border shadow-2xl"
+        className="lg:hidden fixed top-0 right-0 z-50 h-screen w-[300px] bg-surface/90 backdrop-blur-xl border-l border-border shadow-2xl"
       >
-        {sidebarContent}
+        <div className="flex flex-col h-full">
+          <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
+            <button type="button" onClick={() => setMobileOpen(false)} className="ml-2 p-1 rounded-[16px] hover:bg-card transition-colors">
+              <HiX className="w-5 h-5 text-text-secondary" />
+            </button>
+            <div className="w-9 h-9 rounded-[16px] bg-primary flex items-center justify-center text-white font-bold text-sm">T</div>
+            <span className="font-bold text-text text-lg">TeacherOS</span>
+          </div>
+          <nav className="flex-1 overflow-y-auto p-4 space-y-0.5">
+            {roleNavItems.map((item) => (<MobileNavLink key={item.href} item={item} />))}
+          </nav>
+          <div className="p-4 border-t border-border">
+            <button type="button" className="flex items-center gap-3 w-full px-4 py-3 rounded-[16px] text-sm font-medium text-text-tertiary hover:bg-card hover:text-error transition-all">
+              <HiLogout className="w-5 h-5 shrink-0" />
+              <span>تسجيل خروج</span>
+            </button>
+          </div>
+        </div>
       </motion.aside>
 
       <aside
-        onMouseEnter={() => setCollapsed(false)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => { setHovered(false); setExpandedMenus([]) }}
         className={cn(
-          "hidden lg:flex flex-col bg-surface border-l border-border transition-all duration-300 min-h-screen shrink-0",
-          collapsed ? "w-[72px]" : "w-[280px]"
+          "hidden lg:flex flex-col fixed right-0 top-0 h-screen z-30 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-surface/60 backdrop-blur-xl border-l border-border",
+          hovered ? "w-[240px]" : "w-[64px]"
         )}
       >
-        {sidebarContent}
+        <div className={cn(
+          "flex items-center border-b border-border transition-all duration-300",
+          hovered ? "px-5 py-5 justify-start gap-3" : "px-0 py-5 justify-center"
+        )}>
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: -5 }}
+            transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            className="w-9 h-9 rounded-[16px] bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-[0_0_20px_rgba(91,124,255,0.2)]"
+          >
+            T
+          </motion.div>
+          <AnimatePresence>
+            {hovered && (
+              <motion.span
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                className="font-bold text-text text-lg whitespace-nowrap"
+              >
+                TeacherOS
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <nav className={cn(
+          "flex-1 overflow-y-auto overflow-x-hidden transition-all duration-300",
+          hovered ? "p-3 space-y-0.5" : "p-3 space-y-1"
+        )}>
+          {roleNavItems.map((item) => (<DesktopNavLink key={item.href} item={item} />))}
+        </nav>
+
+        <div className="border-t border-border p-3">
+          <button type="button" className={cn(
+            "flex items-center transition-all duration-200 rounded-[16px] text-text-tertiary hover:bg-card hover:text-error group",
+            hovered ? "gap-3 w-full px-4 py-3 text-sm font-medium" : "justify-center w-12 h-12 mx-auto"
+          )}>
+            <motion.div whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 300, damping: 15 }}>
+              <HiLogout className="w-5 h-5 shrink-0" />
+            </motion.div>
+            {hovered && <span className="truncate">تسجيل خروج</span>}
+          </button>
+        </div>
       </aside>
     </>
   )

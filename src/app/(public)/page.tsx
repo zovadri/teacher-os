@@ -28,7 +28,7 @@ export default function HomePage() {
               <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full mb-8 backdrop-blur border border-primary/20">
                 <HiAcademicCap size={14} /> Enterprise Education Platform
               </span>
-              <h1 className="text-[52px] sm:text-5xl lg:text-6xl font-bold leading-[1.05] mb-3 tracking-tight">
+              <h1 className="text-[56px] sm:text-5xl lg:text-6xl font-bold leading-[1.05] mb-3 tracking-tight">
                 TeacherOS
               </h1>
               <p className="text-lg text-text-secondary font-normal mb-3 max-w-xl">
