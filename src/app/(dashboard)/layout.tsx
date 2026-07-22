@@ -10,6 +10,7 @@ import { useSearchStore } from "@/lib/store/useSearchStore"
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
+  const [sidebarHovered, setSidebarHovered] = useState(false)
 
   const openCommandPalette = useCallback(() => setCommandPaletteOpen(true), [])
   const closeCommandPalette = useCallback(() => setCommandPaletteOpen(false), [])
@@ -25,8 +26,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen bg-[#080B12]">
       <div className="min-h-screen">
-        <DashboardSidebar />
-        <div className="pr-[64px] lg:pr-[64px] min-h-screen p-6 lg:p-8 transition-all duration-300">
+        <DashboardSidebar onHoverChange={setSidebarHovered} />
+        <div className={`${sidebarHovered ? "pr-[240px]" : "pr-[64px]"} min-h-screen p-6 lg:p-8 transition-all duration-300`}>
           <DemoBanner />
           {children}
         </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -243,12 +243,14 @@ const staffNavItems: NavItem[] = [
   { label: "إدارة", icon: HiCog, href: "/staff/manage" },
 ]
 
-export default function DashboardSidebar() {
+export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h: boolean) => void }) {
   const pathname = usePathname()
   const { user } = useAuthStore()
   const [hovered, setHovered] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [expandedMenus, setExpandedMenus] = useState<string[]>([])
+
+  useEffect(() => { onHoverChange?.(hovered) }, [hovered, onHoverChange])
 
   const roleNavItems = useMemo(() => {
     if (!user) return []
