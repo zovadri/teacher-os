@@ -400,7 +400,7 @@ export default function DashboardSidebar() {
       <motion.aside
         initial={{ x: "100%" }} animate={{ x: mobileOpen ? 0 : "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="lg:hidden fixed top-0 left-0 z-40 h-full w-[280px] bg-[#09090B] border-l border-border shadow-2xl overflow-hidden"
+        className="lg:hidden fixed top-0 left-0 z-40 h-screen w-[280px] bg-[#09090B] border-l border-border shadow-2xl"
       >
         {sidebarContent}
       </motion.aside>
@@ -408,7 +408,7 @@ export default function DashboardSidebar() {
       <aside
         onMouseEnter={() => setCollapsed(false)}
         className={cn(
-          "hidden lg:flex flex-col fixed right-0 top-0 h-full bg-[#09090B] border-l border-border z-30 transition-all duration-300 overflow-hidden",
+          "hidden lg:flex flex-col fixed right-0 top-0 h-screen bg-[#09090B] border-l border-border z-30 transition-all duration-300",
           collapsed ? "w-[72px]" : "w-[280px]"
         )}
       >

@@ -23,9 +23,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   ])
 
   return (
-    <div className="flex min-h-screen bg-surface-secondary">
+    <div className="min-h-screen bg-[#09090B]">
       <DashboardSidebar />
-      <div className="flex-1 lg:mr-[280px] min-w-0">
+      <div className="lg:mr-[280px] min-h-screen overflow-y-auto">
         <DemoBanner />
         {children}
       </div>
