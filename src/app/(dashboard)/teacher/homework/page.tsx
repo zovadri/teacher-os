@@ -185,7 +185,7 @@ export default function HomeworkPage() {
                         </div>
                         <div className="p-2 rounded-lg bg-surface-secondary">
                           <p className="font-bold text-text">{submitted}/{totalStudents}</p>
-                          <p className="text-text-tertiary">طھظ… التسليم</p>
+                          <p className="text-text-tertiary">تم التسليم</p>
                         </div>
                         <div className="p-2 rounded-lg bg-surface-secondary">
                           <p className="font-bold text-text">{hw.analytics.averageGrade}</p>

@@ -145,10 +145,10 @@ function getStudentExtended(studentId: string) {
     title: [
       "تسجيل دخول إلى المنصة",
       `أدى امتحان ${mockCourses[i % mockCourses.length].title}`,
-      `اشترك ظپظٹ ${mockCourses[i % mockCourses.length].title}`,
+      `اشترك في ${mockCourses[i % mockCourses.length].title}`,
       "سلم واجب النحو",
       "حصل على شهادة إتمام",
-      "طھظ… تجديد الاشتراك",
+      "تم تجديد الاشتراك",
     ][i % 6],
     description: i % 2 === 0 ? undefined : "تفاصيل إضافية عن النشاط",
     date: new Date(Date.now() - 1000 * 60 * 60 * (i * 12)).toLocaleDateString("ar-EG"),
@@ -187,7 +187,7 @@ export default function StudentDetailPage() {
     return (
       <div className="p-4 md:p-6 text-center py-20">
         <h2 className="text-xl font-bold text-text mb-2">الطالب غير موجود</h2>
-        <p className="text-sm text-text-tertiary mb-4">لم ظٹطھظ… العثور على الطالب المطلوب</p>
+        <p className="text-sm text-text-tertiary mb-4">لم يتم العثور على الطالب المطلوب</p>
         <Link href="/teacher/students">
           <Button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">العودة للطلاب</Button>
         </Link>
@@ -480,7 +480,7 @@ export default function StudentDetailPage() {
                   <CardContent>
                     <div className="text-center py-12 text-text-tertiary">
                       <p className="text-lg font-medium mb-1">لا توجد شهادات</p>
-                      <p className="text-sm">لم يحصل الطالب على ط£ظٹ شهادات حتى الآن</p>
+                      <p className="text-sm">لم يحصل الطالب على أي شهادات حتى الآن</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -499,7 +499,7 @@ export default function StudentDetailPage() {
                         </div>
                         <div>
                           <p className="font-medium text-text">{cert.courseName}</p>
-                          <p className="text-xs text-text-secondary mt-0.5">صادرة ظپظٹ {cert.issuedAt.toLocaleDateString("ar-EG")}</p>
+                          <p className="text-xs text-text-secondary mt-0.5">صادرة في {cert.issuedAt.toLocaleDateString("ar-EG")}</p>
                         </div>
                         <div className="flex items-center justify-between pt-2 border-t border-border">
                           <span className="text-sm font-bold text-text">{cert.grade}%</span>

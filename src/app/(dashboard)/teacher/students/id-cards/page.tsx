@@ -64,14 +64,14 @@ export default function StudentIDCardsPage() {
 
   const handleDownloadPDF = () => {
     toast.success("جارٍ إنشاء ملف PDF", { position: "top-left" })
-    setTimeout(() => toast.success("طھظ… إنشاء ملف PDF بنجاح", { position: "top-left" }), 2000)
+    setTimeout(() => toast.success("تم إنشاء ملف PDF بنجاح", { position: "top-left" }), 2000)
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6">
         <ErrorState
-          title="حدث خطأ ظپظٹ تحميل البطاقات"
+          title="حدث خطأ في تحميل البطاقات"
           message="يرجى المحاولة مرة أخرى"
           onRetry={() => { setHasError(false); setIsLoading(true); setTimeout(() => setIsLoading(false), 1200) }}
         />
@@ -149,7 +149,7 @@ export default function StudentIDCardsPage() {
         <EmptyState
           icon={HiOutlineIdentification}
           title="لا توجد بطاقات"
-          description="لم ظٹطھظ… العثور على بطاقات تطابق معايير الفلترة"
+          description="لم يتم العثور على بطاقات تطابق معايير الفلترة"
           action={
             <Button variant="secondary" onClick={() => { setGradeFilter("all"); setGroupFilter("all") }}>
               إعادة تعيين الفلترة

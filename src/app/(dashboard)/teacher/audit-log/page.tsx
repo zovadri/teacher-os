@@ -123,7 +123,7 @@ export default function AuditLogPage() {
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineClipboardList} title="لا توجد سجلات" description="لم ظٹطھظ… العثور على سجلات مطابقة للبحث" />
+            <EmptyState icon={HiOutlineClipboardList} title="لا توجد سجلات" description="لم يتم العثور على سجلات مطابقة للبحث" />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">

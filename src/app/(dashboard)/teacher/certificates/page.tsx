@@ -107,7 +107,7 @@ export default function CertificatesPage() {
         <EmptyState
           icon={HiOutlineDocumentText}
           title="لا يوجد شهادات"
-          description="لم ظٹطھظ… إصدار ط£ظٹ شهادات بعد"
+          description="لم يتم إصدار أي شهادات بعد"
         />
       ) : (
         <Table
@@ -143,11 +143,11 @@ export default function CertificatesPage() {
                 <button type="button" onClick={() => toast.success("جاري تحميل الشهادة...")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="تحميل">
                   <HiOutlineDownload size={16} />
                 </button>
-                <button type="button" onClick={() => toast.success("طھظ… إنشاء رمز QR")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="QR">
+                <button type="button" onClick={() => toast.success("تم إنشاء رمز QR")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="QR">
                   <HiOutlineQrcode size={16} />
                 </button>
                 {c.status === "active" && (
-                  <button type="button" onClick={() => toast.success("طھظ… إلغاء الشهادة بنجاح")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="إلغاء الشهادة">
+                  <button type="button" onClick={() => toast.success("تم إلغاء الشهادة بنجاح")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="إلغاء الشهادة">
                     <HiOutlineTrash size={16} />
                   </button>
                 )}
@@ -239,7 +239,7 @@ export default function CertificatesPage() {
             سيتم إنشاء رقم شهادة فريد ورمز QR تلقائياً
           </Alert>
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("طھظ… إصدار الشهادة بنجاح"); setShowIssueModal(false); }}>إصدار الشهادة</Button>
+            <Button variant="primary" size="lg" className="flex-1" onClick={() => { toast.success("تم إصدار الشهادة بنجاح"); setShowIssueModal(false); }}>إصدار الشهادة</Button>
             <Button variant="secondary" size="lg" onClick={() => setShowIssueModal(false)}>إلغاء</Button>
           </div>
         </div>

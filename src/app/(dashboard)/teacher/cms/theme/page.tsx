@@ -43,7 +43,7 @@ const radiusOptions = [
 
 const animationOptions = [
   { value: "none", label: "بدون حركة" },
-  { value: "subtle", label: "ط®ظپظٹظپ" },
+  { value: "subtle", label: "خفيف" },
   { value: "smooth", label: "ناعم" },
   { value: "dynamic", label: "ديناميكي" },
   { value: "playful", label: "مرح" },
@@ -79,7 +79,7 @@ export default function ThemePage() {
   const handleSave = () => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
-    toast.success("طھظ… حفظ المظهر بنجاح")
+    toast.success("تم حفظ المظهر بنجاح")
   }
 
   const handleReset = () => {
@@ -198,13 +198,13 @@ export default function ThemePage() {
                   </div>
                 </div>
                 <div className={`p-3 text-center text-xs ${theme.footerStyle === "dark" ? "bg-gray-900 text-white" : theme.footerStyle === "colored" ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-600"}`}>
-                  ط¢آ© 2025 TeacherOS. جميع الحقوق محفوظة.
+                  © 2025 TeacherOS. جميع الحقوق محفوظة.
                 </div>
               </div>
             </CardContent>
             <CardFooter className="flex gap-3">
               <Button variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
-                {saved ? "طھظ… الحفظ!" : "حفظ التغييرات"}
+                {saved ? "تم الحفظ!" : "حفظ التغييرات"}
               </Button>
               <Button variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
                 إعادة تعيين

@@ -27,9 +27,9 @@ import { cn } from "@/lib/utils"
 
 const categories = [
   { value: "technical", label: "مشكلة تقنية" },
-  { value: "billing", label: "مشكلة ظپظٹ الدفع" },
-  { value: "account", label: "مشكلة ظپظٹ الحساب" },
-  { value: "course", label: "مشكلة ظپظٹ الكورس" },
+  { value: "billing", label: "مشكلة في الدفع" },
+  { value: "account", label: "مشكلة في الحساب" },
+  { value: "course", label: "مشكلة في الكورس" },
   { value: "other", label: "أخرى" },
 ]
 
@@ -55,10 +55,10 @@ const priorityLabels: Record<string, string> = {
 }
 
 const previousTickets = [
-  { id: "tkt-1", subject: "مشكلة ظپظٹ رفع الفيديو", category: "technical", status: "closed", priority: "medium", createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), lastUpdate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
+  { id: "tkt-1", subject: "مشكلة في رفع الفيديو", category: "technical", status: "closed", priority: "medium", createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), lastUpdate: new Date(Date.now() - 1000 * 60 * 60 * 24) },
   { id: "tkt-2", subject: "استفسار عن باقة الاشتراك", category: "billing", status: "open", priority: "low", createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), lastUpdate: new Date(Date.now() - 1000 * 60 * 30) },
   { id: "tkt-3", subject: "طلب إضافة ميزة التقارير", category: "other", status: "open", priority: "high", createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), lastUpdate: new Date(Date.now() - 1000 * 60 * 60 * 12) },
-  { id: "tkt-4", subject: "خطأ ظپظٹ عرض النتائج", category: "technical", status: "closed", priority: "urgent", createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7), lastUpdate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5) },
+  { id: "tkt-4", subject: "خطأ في عرض النتائج", category: "technical", status: "closed", priority: "urgent", createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7), lastUpdate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5) },
 ]
 
 export default function SupportPage() {
@@ -74,7 +74,7 @@ export default function SupportPage() {
     await new Promise((r) => setTimeout(r, 2000))
     setSubmitting(false)
     setSubmitted(true)
-    toast.success("طھظ… إرسال طلب الدعم بنجاح")
+    toast.success("تم إرسال طلب الدعم بنجاح")
   }
 
   if (submitted) {
@@ -86,9 +86,9 @@ export default function SupportPage() {
             <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
               <HiOutlineCheckCircle size={32} className="text-success" />
             </div>
-            <h3 className="text-xl font-bold text-text mb-2">طھظ… إرسال طلب الدعم</h3>
+            <h3 className="text-xl font-bold text-text mb-2">تم إرسال طلب الدعم</h3>
             <p className="text-sm text-text-tertiary text-center max-w-md mb-6">
-              شكراً لتواصلك معنا. طھظ… استلام طلبك وسيتم الرد عليك ظپظٹ أقرب وقت ممكن عبر البريد الإلكتروني.
+              شكراً لتواصلك معنا. تم استلام طلبك وسيتم الرد عليك في أقرب وقت ممكن عبر البريد الإلكتروني.
             </p>
             <Button variant="primary" onClick={() => { setSubmitted(false); setForm({ subject: "", category: "", priority: "medium", message: "" }); toast.success("يمكنك إرسال طلب دعم جديد") }}>
               إرسال طلب آخر
@@ -108,7 +108,7 @@ export default function SupportPage() {
           <Card>
             <CardHeader>
               <CardTitle>إرسال طلب دعم</CardTitle>
-              <CardDescription>املأ النموذج أدناه وسيتم الرد عليك ظپظٹ أقرب وقت</CardDescription>
+              <CardDescription>املأ النموذج أدناه وسيتم الرد عليك في أقرب وقت</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">

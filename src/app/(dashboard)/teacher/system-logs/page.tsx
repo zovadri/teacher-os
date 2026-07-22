@@ -87,16 +87,16 @@ function generateErrorData() {
     { message: "فشل تحميل الصورة - الحجم يتجاوز الحد المسموح", source: "FileUpload.tsx", line: 234, severity: "warning" as const },
     { message: "تحذير: انتهاء صلاحية الجلسة", source: "SessionManager.ts", line: 89, severity: "warning" as const },
     { message: "طلبات API بطيئة - متوسط الاستجابة 5.2s", source: "ApiGateway.ts", line: 45, severity: "warning" as const },
-    { message: "طھظ… تسجيل دخول مشبوه من عنوان IP غير معروف", source: "SecurityAudit.ts", line: 198, severity: "critical" as const },
+    { message: "تم تسجيل دخول مشبوه من عنوان IP غير معروف", source: "SecurityAudit.ts", line: 198, severity: "critical" as const },
     { message: "ذاكرة التخزين المؤقت ممتلئة بنسبة 95%", source: "CacheManager.ts", line: 311, severity: "warning" as const },
-    { message: "تحديث الملف الشخصي - طھظ… بنجاح", source: "ProfileService.ts", line: 56, severity: "info" as const },
+    { message: "تحديث الملف الشخصي - تم بنجاح", source: "ProfileService.ts", line: 56, severity: "info" as const },
     { message: "مزامنة البيانات مع الخدمة السحابية", source: "SyncService.ts", line: 123, severity: "info" as const },
     { message: "فشل إرسال الإشعار - push token غير صالح", source: "NotificationService.ts", line: 77, severity: "error" as const },
-    { message: "حقل الاسم مطلوب ولم ظٹطھظ… توفيره", source: "ValidationRules.ts", line: 34, severity: "warning" as const },
-    { message: "طھظ… تحميل التقرير بنجاح", source: "ReportGenerator.ts", line: 210, severity: "info" as const },
+    { message: "حقل الاسم مطلوب ولم يتم توفيره", source: "ValidationRules.ts", line: 34, severity: "warning" as const },
+    { message: "تم تحميل التقرير بنجاح", source: "ReportGenerator.ts", line: 210, severity: "info" as const },
     { message: "استثناء غير متوقع - index out of bounds", source: "GradeCalculator.ts", line: 88, severity: "critical" as const },
     { message: "فشل الاتصال بخدمة البريد الإلكتروني", source: "MailService.ts", line: 155, severity: "error" as const },
-    { message: "طھظ… إنشاء نسخة احتياطية جديدة", source: "BackupService.ts", line: 42, severity: "info" as const },
+    { message: "تم إنشاء نسخة احتياطية جديدة", source: "BackupService.ts", line: 42, severity: "info" as const },
   ]
   const now = Date.now()
   return errors.map((e, i) => ({
@@ -192,12 +192,12 @@ export default function SystemLogsPage() {
   }, [autoRefresh])
 
   const handleExport = useCallback(() => {
-    addToast({ type: "success", title: "طھظ… تصدير CSV", message: "جاري تحميل ملف السجل" })
+    addToast({ type: "success", title: "تم تصدير CSV", message: "جاري تحميل ملف السجل" })
   }, [addToast])
 
   const handleManualRefresh = useCallback(() => {
     setRefreshKey((k) => k + 1)
-    addToast({ type: "info", title: "تحديث البيانات", message: "طھظ… تحديث السجلات" })
+    addToast({ type: "info", title: "تحديث البيانات", message: "تم تحديث السجلات" })
   }, [addToast])
 
   const filterByDate = <T extends { time?: Date; timestamp?: Date; date?: Date }>(items: T[]): T[] => {
@@ -329,7 +329,7 @@ export default function SystemLogsPage() {
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
             <div className="flex items-center gap-3 flex-wrap">
-              <SearchInput value={search} onChange={setSearch} placeholder="بحث ظپظٹ السجلات..." className="w-64" />
+              <SearchInput value={search} onChange={setSearch} placeholder="بحث في السجلات..." className="w-64" />
               <div className="flex items-center gap-2 bg-surface border border-border rounded-lg px-3 py-2 text-sm">
                 <HiOutlineCalendar className="w-4 h-4 text-text-tertiary" />
                 <select value={dateRange} onChange={(e) => setDateRange(e.target.value)}

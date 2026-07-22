@@ -106,7 +106,7 @@ export default function ExamVersionsPage() {
   }, [compareVersionA, compareVersionB, versions])
 
   const handleAddVersion = () => {
-    toast.success("طھظ…طھ إضافة النسخة بنجاح")
+    toast.success("تمت إضافة النسخة بنجاح")
     setShowAddModal(false)
   }
 
@@ -188,7 +188,7 @@ export default function ExamVersionsPage() {
         <EmptyState
           icon={HiOutlineDocumentDuplicate}
           title="لا توجد نسخ"
-          description="لم ظٹطھظ… إنشاء نسخ لهذا الامتحان بعد. أضف نسخة جديدة للبدء."
+          description="لم يتم إنشاء نسخ لهذا الامتحان بعد. أضف نسخة جديدة للبدء."
           action={<Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>إضافة نسخة</Button>}
         />
       )}

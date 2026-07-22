@@ -46,7 +46,7 @@ const statusLabels: Record<string, string> = {
   draft: "مسودة",
   "coming-soon": "قريباً",
   archived: "مؤرشف",
-  hidden: "ظ…ط®ظپظٹ",
+  hidden: "مخفي",
 }
 
 type LessonStatusType = 'available' | 'locked' | 'coming-soon' | 'completed' | 'in-progress'
@@ -79,7 +79,7 @@ export default function CourseDetailPage() {
     return (
       <div className="p-4 md:p-6 text-center py-20">
         <h2 className="text-xl font-bold text-text mb-2">الكورس غير موجود</h2>
-        <p className="text-sm text-text-tertiary mb-4">لم ظٹطھظ… العثور على الكورس المطلوب</p>
+        <p className="text-sm text-text-tertiary mb-4">لم يتم العثور على الكورس المطلوب</p>
         <Link href="/teacher/courses">
           <Button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">العودة للكورسات</Button>
         </Link>
@@ -104,7 +104,7 @@ export default function CourseDetailPage() {
     await new Promise((r) => setTimeout(r, 1000))
     setDuplicating(false)
     setDuplicateModalOpen(false)
-    addToast({ type: 'success', title: 'طھظ… نسخ الكورس بنجاح', message: `طھظ… إنشاء "${duplicateName}"` })
+    addToast({ type: 'success', title: 'تم نسخ الكورس بنجاح', message: `تم إنشاء "${duplicateName}"` })
   }
 
   const enrolledStudents = mockStudents.slice(0, 8)

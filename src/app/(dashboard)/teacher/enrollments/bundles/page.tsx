@@ -105,13 +105,13 @@ export default function BundlesPage() {
             : b
         )
       )
-      addToast({ type: "success", title: "طھظ… تحديث الباقة بنجاح" })
+      addToast({ type: "success", title: "تم تحديث الباقة بنجاح" })
     } else {
       setBundles((prev) => [
         ...prev,
         { id: generateId(), name: form.name, description: form.description, courses: form.courseIds, price: form.price, discount: form.discount, status: form.status, createdAt: new Date() },
       ])
-      addToast({ type: "success", title: "طھظ… إضافة الباقة بنجاح" })
+      addToast({ type: "success", title: "تم إضافة الباقة بنجاح" })
     }
     setModalOpen(false)
   }
@@ -119,7 +119,7 @@ export default function BundlesPage() {
   const handleDelete = () => {
     if (!deleteTarget) return
     setBundles((prev) => prev.filter((b) => b.id !== deleteTarget.id))
-    addToast({ type: "success", title: `طھظ… حذف الباقة "${deleteTarget.name}" بنجاح` })
+    addToast({ type: "success", title: `تم حذف الباقة "${deleteTarget.name}" بنجاح` })
     setDeleteTarget(null)
   }
 
@@ -161,7 +161,7 @@ export default function BundlesPage() {
       {bundles.length === 0 ? (
         <EmptyState
           title="لا توجد باقات"
-          description="لم ظٹطھظ… إضافة ط£ظٹ باقات بعد. أضف باقة جديدة للبدء."
+          description="لم يتم إضافة أي باقات بعد. أضف باقة جديدة للبدء."
           action={
             <Button variant="primary" onClick={openCreateModal}>
               إضافة باقة جديدة

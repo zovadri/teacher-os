@@ -96,7 +96,7 @@ export default function MessagesPage() {
           <div className="p-3 border-b border-border space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex-1">
-                <SearchInput value={search} onChange={setSearch} placeholder="بحث ظپظٹ المحادثات..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="بحث في المحادثات..." />
               </div>
               <Button size="sm" variant="primary" onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
                 جديدة
@@ -108,7 +108,7 @@ export default function MessagesPage() {
               <EmptyState
                 icon={HiOutlineMail}
                 title="لا يوجد رسائل"
-                description="لم ظٹطھظ… تبادل ط£ظٹ رسائل بعد"
+                description="لم يتم تبادل أي رسائل بعد"
               />
             ) : (
               filtered.map((conv) => (
@@ -170,10 +170,10 @@ export default function MessagesPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  <button type="button" onClick={() => toast.success("طھظ… تحديث الحالة")} className="p-2 text-text-tertiary hover:text-warning rounded-lg hover:bg-surface-secondary transition-colors">
+                  <button type="button" onClick={() => toast.success("تم تحديث الحالة")} className="p-2 text-text-tertiary hover:text-warning rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlineStar className="w-4 h-4" />
                   </button>
-                  <button type="button" onClick={() => toast.success("طھظ… حذف المحادثة")} className="p-2 text-text-tertiary hover:text-error rounded-lg hover:bg-surface-secondary transition-colors">
+                  <button type="button" onClick={() => toast.success("تم حذف المحادثة")} className="p-2 text-text-tertiary hover:text-error rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlineTrash className="w-4 h-4" />
                   </button>
                 </div>
@@ -213,7 +213,7 @@ export default function MessagesPage() {
                   <button type="button" className="p-2.5 text-text-tertiary hover:text-primary rounded-lg hover:bg-surface-secondary transition-colors">
                     <HiOutlinePaperClip className="w-5 h-5" />
                   </button>
-                  <Button type="button" size="md" variant="primary" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => toast.success("طھظ… إرسال الرسالة")}>
+                  <Button type="button" size="md" variant="primary" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => toast.success("تم إرسال الرسالة")}>
                     إرسال
                   </Button>
                 </div>
@@ -248,7 +248,7 @@ export default function MessagesPage() {
             <span className="text-sm text-text-tertiary">إرفاق ملف</span>
           </div>
           <div className="pt-4 flex gap-3">
-            <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => { toast.success("طھظ… إرسال الرسالة"); setShowCompose(false) }}>
+            <Button variant="primary" size="lg" className="flex-1" leftIcon={<HiOutlinePaperAirplane className="w-4 h-4" />} onClick={() => { toast.success("تم إرسال الرسالة"); setShowCompose(false) }}>
               إرسال
             </Button>
             <Button variant="secondary" size="lg" onClick={() => setShowCompose(false)}>إلغاء</Button>

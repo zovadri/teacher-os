@@ -35,11 +35,11 @@ interface ParentMessage {
 }
 
 const mockParentMessages: ParentMessage[] = [
-  { id: "pm-1", senderName: "أحمد محمد", senderRole: "مدرس", subject: "متابعة تقدم ابنك", content: "أود إعلامكم بأن ابنكم أحمد يقوم بعمل ممتاز ظپظٹ الكورس. يرجى متابعة الواجبات الأسبوعية.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
-  { id: "pm-2", senderName: "أحمد محمد", senderRole: "مدرس", subject: "نتيجة امتحان النحو", content: "حصل ابنكم على 90% ظپظٹ امتحان النحو الشهري. أداء ممتاز ويحتاج لمراجعة بعض النقاط ظپظٹ البلاغة.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
-  { id: "pm-3", senderName: "أحمد محمد", senderRole: "مدرس", subject: "طلب تأجيل واجب", content: "طھظ…طھ الموافقة على طلب تأجيل واجب النحو حتى نهاية الأسبوع.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
+  { id: "pm-1", senderName: "أحمد محمد", senderRole: "مدرس", subject: "متابعة تقدم ابنك", content: "أود إعلامكم بأن ابنكم أحمد يقوم بعمل ممتاز في الكورس. يرجى متابعة الواجبات الأسبوعية.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), isTeacher: true },
+  { id: "pm-2", senderName: "أحمد محمد", senderRole: "مدرس", subject: "نتيجة امتحان النحو", content: "حصل ابنكم على 90% في امتحان النحو الشهري. أداء ممتاز ويحتاج لمراجعة بعض النقاط في البلاغة.", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), isTeacher: true },
+  { id: "pm-3", senderName: "أحمد محمد", senderRole: "مدرس", subject: "طلب تأجيل واجب", content: "تمت الموافقة على طلب تأجيل واجب النحو حتى نهاية الأسبوع.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), isTeacher: true },
   { id: "pm-4", senderName: "أحمد محمد", senderRole: "مدرس", subject: "استفسار عن الدرس", content: "نعم، درس البلاغة متاح للتسجيل. يمكن لابنك مشاهدته من صفحة الكورس.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), isTeacher: true },
-  { id: "pm-5", senderName: "أحمد محمد", senderRole: "مدرس", subject: "تحديث جدول الحصص", content: "طھظ… تحديث جدول الحصص للأسبوع القادم. يرجى الاطلاع على المواعيد الجديدة.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
+  { id: "pm-5", senderName: "أحمد محمد", senderRole: "مدرس", subject: "تحديث جدول الحصص", content: "تم تحديث جدول الحصص للأسبوع القادم. يرجى الاطلاع على المواعيد الجديدة.", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), isTeacher: true },
 ]
 
 export default function ParentMessagesPage() {
@@ -67,7 +67,7 @@ export default function ParentMessagesPage() {
           <div className="p-3 border-b border-border space-y-3">
             <div className="flex items-center gap-2">
               <div className="flex-1">
-                <SearchInput value={search} onChange={setSearch} placeholder="بحث ظپظٹ الرسائل..." />
+                <SearchInput value={search} onChange={setSearch} placeholder="بحث في الرسائل..." />
               </div>
               <Button size="sm" variant="primary" onClick={() => setShowCompose(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
                 جديدة

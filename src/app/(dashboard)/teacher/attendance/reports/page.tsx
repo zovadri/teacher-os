@@ -102,12 +102,12 @@ export default function AttendanceReportsPage() {
 
   const handleExportPDF = () => {
     toast.success("جارٍ تصدير التقرير بصيغة PDF", { position: "top-left" })
-    setTimeout(() => toast.success("طھظ… تصدير التقرير بنجاح", { position: "top-left" }), 1500)
+    setTimeout(() => toast.success("تم تصدير التقرير بنجاح", { position: "top-left" }), 1500)
   }
 
   const handleExportExcel = () => {
     toast.success("جارٍ تصدير التقرير بصيغة Excel", { position: "top-left" })
-    setTimeout(() => toast.success("طھظ… تصدير التقرير بنجاح", { position: "top-left" }), 1500)
+    setTimeout(() => toast.success("تم تصدير التقرير بنجاح", { position: "top-left" }), 1500)
   }
 
   const handlePrint = () => {
@@ -119,7 +119,7 @@ export default function AttendanceReportsPage() {
     return (
       <div className="p-4 md:p-6">
         <ErrorState
-          title="حدث خطأ ظپظٹ تحميل التقارير"
+          title="حدث خطأ في تحميل التقارير"
           message="يرجى المحاولة مرة أخرى"
           onRetry={() => setHasError(false)}
         />
@@ -172,7 +172,7 @@ export default function AttendanceReportsPage() {
               <EmptyState
                 icon={HiOutlineChartSquareBar}
                 title="لا توجد بيانات"
-                description="لم ظٹطھظ… العثور على سجلات حضور للفترة المحددة"
+                description="لم يتم العثور على سجلات حضور للفترة المحددة"
                 withBackground={false}
               />
             ) : (
@@ -253,7 +253,7 @@ export default function AttendanceReportsPage() {
         <EmptyState
           icon={HiOutlineFilter}
           title="لا توجد نتائج"
-          description="لم ظٹطھظ… العثور على سجلات تطابق معايير البحث"
+          description="لم يتم العثور على سجلات تطابق معايير البحث"
           action={
             <Button variant="secondary" onClick={() => { setSearchTerm(""); setCourseFilter("all"); setStatusFilter("all"); setFromDate(""); setToDate("") }}>
               إعادة تعيين الفلترة

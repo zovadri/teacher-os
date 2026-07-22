@@ -133,7 +133,7 @@ export default function DemoPage() {
             <div>
               <p className="font-medium text-sm">تنبيه مهم</p>
               <p className="text-sm opacity-90 mt-1">
-                هذه بيانات تجريبية للعرض فقط. ط£ظٹ تغييرات تقوم بها لن ظٹطھظ… حفظها بشكل دائم ولا تؤثر على النظام الفعلي. يُنصح بإنشاء حساب حقيقي للاستفادة الكاملة من جميع ميزات المنصة مع حفظ بياناتك بشكل آمن.
+                هذه بيانات تجريبية للعرض فقط. أي تغييرات تقوم بها لن يتم حفظها بشكل دائم ولا تؤثر على النظام الفعلي. يُنصح بإنشاء حساب حقيقي للاستفادة الكاملة من جميع ميزات المنصة مع حفظ بياناتك بشكل آمن.
               </p>
             </div>
           </div>
@@ -183,7 +183,7 @@ export default function DemoPage() {
                         {copied === account.id ? (
                           <span className="text-success flex items-center gap-1.5 font-medium">
                             <HiCheckCircle className="w-4 h-4" />
-                            طھظ… النسخ
+                            تم النسخ
                           </span>
                         ) : (
                           <>
@@ -195,7 +195,7 @@ export default function DemoPage() {
                       <Link href="/login" className="flex-[2]">
                         <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:bg-primary-dark transition-all duration-200 shadow-sm shadow-primary/20 active:scale-[0.98]">
                           <HiLogin className="w-4 h-4" />
-                          <span>تسجيل الدخول ظƒظ€ {account.name}</span>
+                          <span>تسجيل الدخول كـ {account.name}</span>
                         </button>
                       </Link>
                     </div>
@@ -219,7 +219,7 @@ export default function DemoPage() {
 
           <div className="mt-4">
             <p className="text-sm text-text-secondary">
-              هل تريد إنشاء حساب حقيقي والاحتفاظ ببياناتك؟{" "}
+              هل تريد إنشاء حساب حقيقي والاحتفاظ ببيانات߿{" "}
               <Link href="/register" className="text-primary hover:text-primary-dark font-semibold transition-colors">
                 سجل الآن
               </Link>

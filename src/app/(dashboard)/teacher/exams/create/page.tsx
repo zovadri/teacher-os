@@ -124,7 +124,7 @@ export default function CreateExamPage() {
     setSubmitting(true)
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
-    toast.success("طھظ… حفظ الامتحان بنجاح!")
+    toast.success("تم حفظ الامتحان بنجاح!")
     router.push("/teacher/exams")
   }
 
@@ -225,7 +225,7 @@ export default function CreateExamPage() {
               {bankQuestions.length > 0 && (
                 <details className="bg-surface-secondary rounded-xl border border-border">
                   <summary className="px-4 py-3 text-sm font-medium text-text cursor-pointer hover:bg-surface-tertiary rounded-xl transition-colors">
-                    الأسئلة الموجودة ظپظٹ بنك الأسئلة ({bankQuestions.length})
+                    الأسئلة الموجودة في بنك الأسئلة ({bankQuestions.length})
                   </summary>
                   <div className="divide-y divide-border max-h-60 overflow-y-auto">
                     {bankQuestions.map((q) => (
@@ -252,7 +252,7 @@ export default function CreateExamPage() {
             {questions.length === 0 && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-12 text-center text-text-secondary rounded-xl border border-dashed border-border">
                 <HiOutlineClipboardCheck size={48} className="mx-auto mb-3 text-text-tertiary/50" />
-                <p>لم تقم بإضافة ط£ظٹ أسئلة بعد</p>
+                <p>لم تقم بإضافة أي أسئلة بعد</p>
                 <p className="text-xs mt-1">اختر نوع السؤال من الأزرار أعلاه أو من بنك الأسئلة</p>
               </motion.div>
             )}
@@ -313,7 +313,7 @@ export default function CreateExamPage() {
 
                   {q.type === "essay" && (
                     <div className="p-4 rounded-xl bg-surface-secondary border border-border">
-                      <p className="text-sm text-text-secondary">سيقوم الطالب بكتابة إجابة نصية - ظٹطھظ… التصحيح يدوياً</p>
+                      <p className="text-sm text-text-secondary">سيقوم الطالب بكتابة إجابة نصية - يتم التصحيح يدوياً</p>
                     </div>
                   )}
 

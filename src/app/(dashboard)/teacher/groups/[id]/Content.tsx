@@ -77,7 +77,7 @@ export default function GroupDetailPage() {
     return (
       <div className="p-4 md:p-6">
         <PageHeader title="المجموعة غير موجودة" />
-        <EmptyState icon={HiOutlineUsers} title="المجموعة غير موجودة" description="لم ظٹطھظ… العثور على المجموعة المطلوبة" action={<Button onClick={() => router.push("/teacher/groups")}>العودة للمجموعات</Button>} />
+        <EmptyState icon={HiOutlineUsers} title="المجموعة غير موجودة" description="لم يتم العثور على المجموعة المطلوبة" action={<Button onClick={() => router.push("/teacher/groups")}>العودة للمجموعات</Button>} />
       </div>
     )
   }
@@ -99,7 +99,7 @@ export default function GroupDetailPage() {
 
   const handleAddStudent = () => {
     if (!selectedStudentId) return
-    toast.success("طھظ… إضافة الطالب إلى المجموعة")
+    toast.success("تم إضافة الطالب إلى المجموعة")
     setShowAddModal(false)
     setSelectedStudentId("")
     setAddStudentSearch("")
@@ -107,14 +107,14 @@ export default function GroupDetailPage() {
 
   const handleMoveStudent = () => {
     if (!targetGroupId) return
-    toast.success("طھظ… نقل الطالب إلى المجموعة بنجاح")
+    toast.success("تم نقل الطالب إلى المجموعة بنجاح")
     setShowMoveModal(false)
     setMoveStudentId("")
     setTargetGroupId("")
   }
 
   const handleFreeze = () => {
-    toast.success("طھظ… تجميد اشتراك الطالب")
+    toast.success("تم تجميد اشتراك الطالب")
     setShowFreezeModal(false)
     setFreezeStudentId("")
     setFreezeStart("")
@@ -123,13 +123,13 @@ export default function GroupDetailPage() {
   }
 
   const handleRecover = () => {
-    toast.success("طھظ… تعويض الدرس للطالب")
+    toast.success("تم تعويض الدرس للطالب")
     setShowRecoverModal(false)
     setRecoverStudentId("")
   }
 
   const handleRemoveStudent = (name: string) => {
-    toast.success(`طھظ… حذف ${name} من المجموعة`)
+    toast.success(`تم حذف ${name} من المجموعة`)
   }
 
   const handleRetry = () => {

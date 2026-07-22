@@ -33,9 +33,9 @@ const allBadges = mockGamificationConfig.badgeCategories.flatMap((cat) =>
     category: cat.name,
     categoryIcon: cat.icon,
     xpReward: [150, 200, 100, 250, 80][bi % 5],
-    criteria: ["إكمال 10 دروس", "الحصول على 95%", "المشاركة ظپظٹ 5 مناقشات", "تسلسل 20 يوم"][bi % 4],
+    criteria: ["إكمال 10 دروس", "الحصول على 95%", "المشاركة في 5 مناقشات", "تسلسل 20 يوم"][bi % 4],
     studentsCount: [15, 22, 30, 8, 18][bi % 5],
-    icon: ["ًں“–", "ًں“…", "ظ‹ع؛عکآ¯", "🤝", "ًں‘‘"][bi % 5],
+    icon: ["📖", "📅", "🎯", "🤝", "👑"][bi % 5],
   }))
 )
 
@@ -50,15 +50,15 @@ allBadges.forEach((b, bi) => {
 })
 
 const iconOptions = [
-  { value: "ًں“–", label: "ًں“– كتاب" },
-  { value: "ًں“…", label: "ًں“… تقويم" },
-  { value: "ظ‹ع؛عکآ¯", label: "ظ‹ع؛عکآ¯ هدف" },
+  { value: "📖", label: "📖 كتاب" },
+  { value: "📅", label: "📅 تقويم" },
+  { value: "🎯", label: "🎯 هدف" },
   { value: "🤝", label: "🤝 مصافحة" },
-  { value: "ًں‘‘", label: "ًں‘‘ تاج" },
-  { value: "ًں”¥", label: "ًں”¥ نار" },
-  { value: "أ¢آ­ع¯", label: "أ¢آ­ع¯ نجمة" },
-  { value: "ًں’ھ", label: "ًں’ھ قوة" },
-  { value: "ًںڈ…", label: "ًںڈ… وسام" },
+  { value: "👑", label: "👑 تاج" },
+  { value: "🔥", label: "🔥 نار" },
+  { value: "⭐", label: "⭐ نجمة" },
+  { value: "💪", label: "💪 قوة" },
+  { value: "🏅", label: "🏅 وسام" },
   { value: "ًںڑ€", label: "ًںڑ€ صاروخ" },
 ]
 
@@ -66,7 +66,7 @@ export default function BadgesPage() {
   const [search, setSearch] = useState("")
   const [showCreate, setShowCreate] = useState(false)
   const [expandedBadge, setExpandedBadge] = useState<string | null>(null)
-  const [newBadge, setNewBadge] = useState({ name: "", icon: "ًںڈ…", category: "أكاديمي", xpReward: 100, criteria: "" })
+  const [newBadge, setNewBadge] = useState({ name: "", icon: "🏅", category: "أكاديمي", xpReward: 100, criteria: "" })
 
   const stats = useMemo(() => ({
     total: allBadges.length,
@@ -87,7 +87,7 @@ export default function BadgesPage() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
         <StatsCard title="إجمالي الشارات" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />
         <StatsCard title="التصنيفات" value={stats.categories} icon={HiOutlineCollection} color="info" />
-        <StatsCard title="طھظ… إصدارها" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
+        <StatsCard title="تم إصدارها" value={stats.totalIssued} icon={HiOutlineUsers} color="success" />
       </motion.div>
 
       <div className="flex items-center justify-between">
@@ -118,8 +118,8 @@ export default function BadgesPage() {
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button type="button" onClick={() => toast.success("طھظ… تعديل الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
-                  <button type="button" onClick={() => toast.success("طھظ… حذف الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
+                  <button type="button" onClick={() => toast.success("تم تعديل الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"><HiOutlinePencil size={15} /></button>
+                  <button type="button" onClick={() => toast.success("تم حذف الشارة بنجاح")} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors"><HiOutlineTrash size={15} /></button>
                 </div>
               </div>
 
@@ -192,7 +192,7 @@ export default function BadgesPage() {
             placeholder="مثال: إكمال 10 دروس"
           />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1" onClick={() => { setShowCreate(false); toast.success("طھظ… إنشاء الشارة بنجاح") }}>إنشاء الشارة</Button>
+            <Button variant="primary" className="flex-1" onClick={() => { setShowCreate(false); toast.success("تم إنشاء الشارة بنجاح") }}>إنشاء الشارة</Button>
             <Button variant="secondary" onClick={() => setShowCreate(false)}>إلغاء</Button>
           </div>
         </div>

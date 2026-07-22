@@ -55,13 +55,13 @@ export default function VideoProtectionPage() {
 
   const handleEndSession = (sessionId: string) => {
     setSessions((prev) => prev.map((s) => s.id === sessionId ? { ...s, active: false } : s))
-    toast.success("طھظ… إنهاء الجلسة بنجاح")
+    toast.success("تم إنهاء الجلسة بنجاح")
   }
 
   const handleToggleTrust = (deviceId: string) => {
     setDevices((prev) => prev.map((d) => d.id === deviceId ? { ...d, trusted: !d.trusted } : d))
     const device = devices.find((d) => d.id === deviceId)
-    toast.success(device?.trusted ? "طھظ… حظر الجهاز" : "طھظ… السماح للجهاز")
+    toast.success(device?.trusted ? "تم حظر الجهاز" : "تم السماح للجهاز")
   }
 
   const filteredSessions = useMemo(() => {
@@ -149,7 +149,7 @@ export default function VideoProtectionPage() {
               {tabLoading.devices ? (
                 <CardSkeleton count={2} />
               ) : devices.length === 0 ? (
-                <EmptyState icon={HiOutlineDeviceMobile} title="لا توجد أجهزة" description="لم ظٹطھظ… تسجيل ط£ظٹ أجهزة بعد" />
+                <EmptyState icon={HiOutlineDeviceMobile} title="لا توجد أجهزة" description="لم يتم تسجيل أي أجهزة بعد" />
               ) : (
                 <div className="space-y-3">
                   {devices.map((device) => (
@@ -161,7 +161,7 @@ export default function VideoProtectionPage() {
                             <Badge variant="neutral" size="sm">{deviceTypeLabels[device.type] || device.type}</Badge>
                             <Badge variant={device.trusted ? "success" : "error"} size="sm">{device.trusted ? "موثوق" : "محظور"}</Badge>
                           </div>
-                          <p className="text-xs text-text-tertiary">{device.os} ط¢آ· {device.browser}</p>
+                          <p className="text-xs text-text-tertiary">{device.os} · {device.browser}</p>
                           <p className="text-xs text-text-tertiary">آخر استخدام: {formatRelativeTime(device.lastUsed)}</p>
                         </div>
                         <Button type="button"
@@ -249,7 +249,7 @@ variant={device.trusted ? "outline" : "primary"}
                       <label className="block text-sm text-text mb-1">مهلة الجلسة (دقائق)</label>
                       <input type="number" value={sessionTimeout} onChange={(e) => setSessionTimeout(Number(e.target.value))} className="w-full bg-surface border border-border rounded-lg px-3.5 py-2.5 text-sm text-text" />
                     </div>
-                    <Button variant="primary" onClick={() => toast.success("طھظ… حفظ الإعدادات")}>حفظ الإعدادات</Button>
+                    <Button variant="primary" onClick={() => toast.success("تم حفظ الإعدادات")}>حفظ الإعدادات</Button>
                   </CardContent>
                 </Card>
               )}

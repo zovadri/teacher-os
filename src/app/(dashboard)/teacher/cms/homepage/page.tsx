@@ -137,7 +137,7 @@ export default function HomepageBuilderPage() {
                     </button>
                   </div>
                   <div className="w-10 h-10 rounded-xl bg-surface-secondary border border-border flex items-center justify-center text-lg">
-                    {section.type === "hero" ? "ًںڈ " : section.type === "features" ? "أ¢إ“آ¨" : section.type === "stats" ? "ًں“ٹ" : section.type === "courses" ? "ًں“ڑ" : section.type === "testimonials" ? "💬" : section.type === "pricing" ? "ًں’°" : section.type === "faq" ? "❓" : "ًں”‌"}
+                    {section.type === "hero" ? "🏠" : section.type === "features" ? "✨" : section.type === "stats" ? "📊" : section.type === "courses" ? "📚" : section.type === "testimonials" ? "💬" : section.type === "pricing" ? "💰" : section.type === "faq" ? "❓" : "ًں”‌"}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -176,7 +176,7 @@ export default function HomepageBuilderPage() {
               <Button variant="primary" className="flex-1" onClick={() => {
                 setSections((prev) => prev.map((s) => s.id === editSection.id ? editSection : s))
                 setEditSection(null)
-                toast.success("طھظ… حفظ الصفحة الرئيسية بنجاح")
+                toast.success("تم حفظ الصفحة الرئيسية بنجاح")
               }}>حفظ التغييرات</Button>
               <Button variant="secondary" onClick={() => setEditSection(null)}>إلغاء</Button>
             </div>

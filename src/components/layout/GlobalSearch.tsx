@@ -246,7 +246,7 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="ابحث ظپظٹ النظام..."
+                placeholder="ابحث في النظام..."
                 className="w-full bg-transparent text-base text-text placeholder:text-text-tertiary focus:outline-none"
               />
             </div>
@@ -291,7 +291,7 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                 ))
               ) : (
                 <div className="text-center py-10 text-text-tertiary text-sm">
-                  ابدأ الكتابة للبحث ظپظٹ النظام
+                  ابدأ الكتابة للبحث في النظام
                 </div>
               )}
             </div>

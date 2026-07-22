@@ -26,7 +26,7 @@ const statusBadge: Record<string, "warning" | "info" | "success" | "error"> = {
 
 const statusLabels: Record<string, string> = {
   pending: "قيد الانتظار",
-  submitted: "طھظ… التسليم",
+  submitted: "تم التسليم",
   graded: "مصحح",
   late: "متأخر",
 }
@@ -44,7 +44,7 @@ export default function StudentHomeworkDetailPage() {
       <div className="p-4 md:p-6 text-center py-20">
         <HiOutlineDocumentText className="mx-auto w-16 h-16 text-text-tertiary mb-4" />
         <h2 className="text-xl font-bold text-text mb-2">الواجب غير موجود</h2>
-        <p className="text-sm text-text-tertiary mb-4">لم ظٹطھظ… العثور على الواجب المطلوب</p>
+        <p className="text-sm text-text-tertiary mb-4">لم يتم العثور على الواجب المطلوب</p>
         <Link href="/student/homework">
           <Button variant="primary" rightIcon={<HiOutlineArrowRight className="w-4 h-4" />}>العودة للواجبات</Button>
         </Link>
@@ -121,7 +121,7 @@ export default function StudentHomeworkDetailPage() {
                 <CardHeader>
                   <CardTitle>تفاصيل التسليم</CardTitle>
                   <Badge variant={homework.status === "graded" ? "success" : "info"}>
-                    {homework.status === "graded" ? "طھظ… التصحيح" : "بانتظار التصحيح"}
+                    {homework.status === "graded" ? "تم التصحيح" : "بانتظار التصحيح"}
                   </Badge>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -215,8 +215,8 @@ export default function StudentHomeworkDetailPage() {
                 className="p-8 rounded-xl bg-success/5 border border-success/20 text-center"
               >
                 <HiOutlineCheckCircle className="mx-auto w-12 h-12 text-success mb-3" />
-                <h3 className="text-lg font-bold text-text mb-1">طھظ… تسليم الواجب بنجاح!</h3>
-                <p className="text-sm text-text-secondary mb-4">سيتم تصحيح الواجب ظپظٹ أقرب وقت ممكن</p>
+                <h3 className="text-lg font-bold text-text mb-1">تم تسليم الواجب بنجاح!</h3>
+                <p className="text-sm text-text-secondary mb-4">سيتم تصحيح الواجب في أقرب وقت ممكن</p>
                 <Link href="/student/homework">
                   <Button variant="outline" rightIcon={<HiOutlineArrowRight className="w-4 h-4" />}>العودة للواجبات</Button>
                 </Link>

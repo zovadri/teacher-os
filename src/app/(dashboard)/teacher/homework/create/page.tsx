@@ -71,7 +71,7 @@ export default function CreateHomeworkPage() {
     setSubmitting(true)
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
-    toast.success("طھظ… حفظ الواجب بنجاح!")
+    toast.success("تم حفظ الواجب بنجاح!")
     router.push("/teacher/homework")
   }
 

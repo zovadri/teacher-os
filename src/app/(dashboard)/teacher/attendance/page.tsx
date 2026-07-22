@@ -101,7 +101,7 @@ export default function AttendanceHubPage() {
       return
     }
     setScannedStudent(student)
-    toast.success("طھظ… مسح QR بنجاح", { position: "top-left" })
+    toast.success("تم مسح QR بنجاح", { position: "top-left" })
   }
 
   const handleQrConfirm = () => {
@@ -112,7 +112,7 @@ export default function AttendanceHubPage() {
     }
     setRecordedIds((prev) => new Set(prev).add(scannedStudent.id))
     setScannedStudent(null)
-    toast.success(`طھظ… تسجيل حضور ${scannedStudent.name}`, { position: "top-left" })
+    toast.success(`تم تسجيل حضور ${scannedStudent.name}`, { position: "top-left" })
   }
 
   const handleCodeSearch = () => {
@@ -124,7 +124,7 @@ export default function AttendanceHubPage() {
       (s) => s.id === codeInput.trim() || s.phone.includes(codeInput.trim())
     )
     if (!student) {
-      toast.error("لم ظٹطھظ… العثور على طالب بهذا الكود", { position: "top-left" })
+      toast.error("لم يتم العثور على طالب بهذا الكود", { position: "top-left" })
       setCodeResult(null)
       return
     }
@@ -134,13 +134,13 @@ export default function AttendanceHubPage() {
       return
     }
     setCodeResult(student)
-    toast.success("طھظ… العثور على الطالب", { position: "top-left" })
+    toast.success("تم العثور على الطالب", { position: "top-left" })
   }
 
   const handleCodeConfirm = () => {
     if (!codeResult) return
     setRecordedIds((prev) => new Set(prev).add(codeResult.id))
-    toast.success(`طھظ… تسجيل حضور ${codeResult.name}`, { position: "top-left" })
+    toast.success(`تم تسجيل حضور ${codeResult.name}`, { position: "top-left" })
     setCodeInput("")
     setCodeResult(null)
   }
@@ -156,18 +156,18 @@ export default function AttendanceHubPage() {
     }
     setRecordedIds((prev) => new Set(prev).add(manualStudent))
     const student = mockStudents.find((s) => s.id === manualStudent)
-    toast.success(`طھظ… تسجيل ${student?.name || "الطالب"} ظƒظ€ ${statusColors[manualStatus].label}`, { position: "top-left" })
+    toast.success(`تم تسجيل ${student?.name || "الطالب"} ظƒظ€ ${statusColors[manualStatus].label}`, { position: "top-left" })
     setManualStudent("")
   }
 
   const handleEmployeeCheckIn = (empId: string) => {
     if (employeeCheckIn[empId]) {
-      toast.error("طھظ… تسجيل دخول هذا الموظف بالفعل", { position: "top-left" })
+      toast.error("تم تسجيل دخول هذا الموظف بالفعل", { position: "top-left" })
       return
     }
     setEmployeeCheckIn((prev) => ({ ...prev, [empId]: true }))
     const emp = mockEmployees.find((e) => e.id === empId)
-    toast.success(`طھظ… تسجيل دخول ${emp?.name || "الموظف"}`, { position: "top-left" })
+    toast.success(`تم تسجيل دخول ${emp?.name || "الموظف"}`, { position: "top-left" })
   }
 
   const handleEmployeeCheckOut = (empId: string) => {
@@ -176,19 +176,19 @@ export default function AttendanceHubPage() {
       return
     }
     if (employeeCheckOut[empId]) {
-      toast.error("طھظ… تسجيل خروج هذا الموظف بالفعل", { position: "top-left" })
+      toast.error("تم تسجيل خروج هذا الموظف بالفعل", { position: "top-left" })
       return
     }
     setEmployeeCheckOut((prev) => ({ ...prev, [empId]: true }))
     const emp = mockEmployees.find((e) => e.id === empId)
-    toast.success(`طھظ… تسجيل خروج ${emp?.name || "الموظف"}`, { position: "top-left" })
+    toast.success(`تم تسجيل خروج ${emp?.name || "الموظف"}`, { position: "top-left" })
   }
 
   if (hasError) {
     return (
       <div className="p-4 md:p-6">
         <ErrorState
-          title="حدث خطأ ظپظٹ تحميل صفحة الحضور"
+          title="حدث خطأ في تحميل صفحة الحضور"
           message="يرجى المحاولة مرة أخرى"
           onRetry={() => { setHasError(false); setIsLoading(true); setTimeout(() => setIsLoading(false), 1000) }}
         />
@@ -302,7 +302,7 @@ export default function AttendanceHubPage() {
                       <p className="text-sm text-text-secondary">{codeResult.grade} - {codeResult.group}</p>
                       <p className="text-xs text-text-tertiary mt-0.5">رقم: {codeResult.phone}</p>
                     </div>
-                    <Badge variant="success" size="sm">طھظ… العثور</Badge>
+                    <Badge variant="success" size="sm">تم العثور</Badge>
                   </div>
                   <div className="flex gap-3 mt-4">
                     <Button type="button" onClick={handleCodeConfirm} variant="success" size="sm" leftIcon={<HiOutlineCheck className="w-4 h-4" />}>
@@ -380,7 +380,7 @@ export default function AttendanceHubPage() {
                 <EmptyState
                   icon={HiOutlineBriefcase}
                   title="لا يوجد موظفون"
-                  description="لم ظٹطھظ… إضافة ط£ظٹ موظفين بعد"
+                  description="لم يتم إضافة أي موظفين بعد"
                 />
               ) : (
                 <div className="space-y-3">

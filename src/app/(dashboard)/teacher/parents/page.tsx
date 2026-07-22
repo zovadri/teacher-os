@@ -66,7 +66,7 @@ const msgTypeColors: Record<string, string> = {
 
 const msgStatusLabels: Record<string, string> = {
   sent: "مرسل",
-  delivered: "طھظ… التسليم",
+  delivered: "تم التسليم",
   read: "مقروء",
   failed: "فشل",
 }
@@ -96,7 +96,7 @@ function buildCommData() {
   const msgStatuses: ("sent" | "delivered" | "read" | "failed")[] = ["sent", "delivered", "read", "failed"]
   const callNotes = ["مناقشة تقدم الطالب", "تأكيد موعد", "استفسار عن الامتحان", "متابعة تحصيل", ""]
   const msgPreviews = ["تذكير بموعد الامتحان", "نتيجة اختبار الطالب", "طلب اجتماع", "متابعة الحضور", "إشعار بالدفع"]
-  const noteContents = ["ولي الأمر متعاون جداً", "طھظ… حل مشكلة الدفع", "يحتاج متابعة حضور", "طلب تأجيل القسط"]
+  const noteContents = ["ولي الأمر متعاون جداً", "تم حل مشكلة الدفع", "يحتاج متابعة حضور", "طلب تأجيل القسط"]
   const calls: { parentId: string; records: CallRecord[] }[] = []
   const messages: { parentId: string; records: MessageRecord[] }[] = []
   const notes: { parentId: string; records: ParentNote[] }[] = []
@@ -189,7 +189,7 @@ export default function ParentsPage() {
       { id: `local-note-${Date.now()}`, date: new Date(), content: noteText.trim() },
     ])
     setNoteText("")
-    toast.success("طھظ… إضافة الملاحظة بنجاح")
+    toast.success("تم إضافة الملاحظة بنجاح")
   }, [noteText, commParent])
 
   const chartMonths = ["يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو"]
@@ -252,7 +252,7 @@ export default function ParentsPage() {
               <EmptyState
                 icon={HiOutlineUserGroup}
                 title="لا يوجد أولياء أمور"
-                description="لم ظٹطھظ… العثور على أولياء أمور"
+                description="لم يتم العثور على أولياء أمور"
               />
             ) : (
               <Table
@@ -297,14 +297,14 @@ export default function ParentsPage() {
                         <HiOutlinePhone size={16} />
                       </button>
                       <button type="button"
-                        onClick={(e) => { e.stopPropagation(); toast.success(`طھظ… إرسال رسالة إلى ${p.name}`) }}
+                        onClick={(e) => { e.stopPropagation(); toast.success(`تم إرسال رسالة إلى ${p.name}`) }}
                         className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
                         title="رسالة"
                       >
                         <HiOutlineChat size={16} />
                       </button>
                       <button type="button"
-                        onClick={(e) => { e.stopPropagation(); toast.success(`طھظ… إرسال بريد إلكتروني إلى ${p.email}`) }}
+                        onClick={(e) => { e.stopPropagation(); toast.success(`تم إرسال بريد إلكتروني إلى ${p.email}`) }}
                         className="p-1.5 text-text-tertiary hover:text-amber-500 hover:bg-amber-500/5 rounded-lg transition-colors"
                         title="بريد"
                       >
@@ -437,7 +437,7 @@ export default function ParentsPage() {
                     <HiOutlinePhone size={18} />
                   </button>
                   <button type="button"
-                    onClick={() => toast.success(`طھظ… إرسال رسالة إلى ${commParent.name}`)}
+                    onClick={() => toast.success(`تم إرسال رسالة إلى ${commParent.name}`)}
                     className="p-2 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors"
                     title="رسالة"
                   >

@@ -65,7 +65,7 @@ export default function AccountingPage() {
                 <CardHeader><CardTitle>دفتر اليومية</CardTitle></CardHeader>
                 <CardContent>
                   {entries.length === 0 ? (
-                    <EmptyState icon={HiOutlineCash} title="لا يوجد قيود محاسبية" description="لم ظٹطھظ… تسجيل ط£ظٹ قيود محاسبية بعد" />
+                    <EmptyState icon={HiOutlineCash} title="لا يوجد قيود محاسبية" description="لم يتم تسجيل أي قيود محاسبية بعد" />
                   ) : (
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
@@ -127,8 +127,8 @@ export default function AccountingPage() {
                   <div className="flex items-center justify-between">
                     <CardTitle>سندات القبض والصرف</CardTitle>
                     <div className="flex gap-2">
-                      <button type="button" onClick={() => toast.success("طھظ… إنشاء سند قبض جديد")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-success/10 text-success text-xs font-medium hover:bg-success/20 transition-all"><HiOutlinePlus className="w-3.5 h-3.5" /> سند قبض</button>
-                      <button type="button" onClick={() => toast.success("طھظ… إنشاء سند صرف جديد")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error/10 text-error text-xs font-medium hover:bg-error/20 transition-all"><HiOutlinePlus className="w-3.5 h-3.5" /> سند صرف</button>
+                      <button type="button" onClick={() => toast.success("تم إنشاء سند قبض جديد")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-success/10 text-success text-xs font-medium hover:bg-success/20 transition-all"><HiOutlinePlus className="w-3.5 h-3.5" /> سند قبض</button>
+                      <button type="button" onClick={() => toast.success("تم إنشاء سند صرف جديد")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error/10 text-error text-xs font-medium hover:bg-error/20 transition-all"><HiOutlinePlus className="w-3.5 h-3.5" /> سند صرف</button>
                     </div>
                   </div>
                 </CardHeader>

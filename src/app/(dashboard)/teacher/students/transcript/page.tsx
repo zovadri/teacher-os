@@ -39,7 +39,7 @@ const attendance: AttendanceSummary = { present: 42, absent: 2, late: 1, total: 
 
 const certificates: Certificate[] = [
   { id: "c1", name: "شهادة إتمام الكيمياء - المستوى المتقدم", date: "2026-06-15", serial: "TOS-2026-0001" },
-  { id: "c2", name: "شهادة التفوق ظپظٹ الفيزياء", date: "2026-05-20", serial: "TOS-2026-0002" },
+  { id: "c2", name: "شهادة التفوق في الفيزياء", date: "2026-05-20", serial: "TOS-2026-0002" },
   { id: "c3", name: "شهادة إتمام دورة الرياضيات", date: "2026-04-10", serial: "TOS-2026-0003" },
 ]
 
@@ -155,7 +155,7 @@ export default function TranscriptPage() {
                   </div>
                   <p className="text-xs text-text-tertiary mb-1">رمز التحقق:</p>
                   <p className="text-sm font-mono font-bold text-primary">TOS-VRFY-{selected.id.toUpperCase()}-2026</p>
-                  <button type="button" onClick={() => toast.success("طھظ… نسخ رمز التحقق")} className="mt-2 text-xs text-primary hover:underline">نسخ الرمز</button>
+                  <button type="button" onClick={() => toast.success("تم نسخ رمز التحقق")} className="mt-2 text-xs text-primary hover:underline">نسخ الرمز</button>
                 </div>
               </CardContent>
             </Card>

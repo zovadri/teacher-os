@@ -102,7 +102,7 @@ export default function VideosPage() {
           </div>
           {selectedVideos.size > 0 && (
             <div className="flex items-center gap-2">
-              <span className="text-sm text-text-secondary">طھظ… اختيار {selectedVideos.size}</span>
+              <span className="text-sm text-text-secondary">تم اختيار {selectedVideos.size}</span>
               <Button type="button" size="sm" variant="danger" leftIcon={<HiOutlineTrash className="w-4 h-4" />} onClick={() => setShowBulkModal(true)}>
                 حذف المحدد
               </Button>

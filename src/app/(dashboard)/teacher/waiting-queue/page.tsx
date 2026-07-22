@@ -51,7 +51,7 @@ export default function WaitingQueuePage() {
     const interval = setInterval(() => {
       const availableSeats = mockClassGroups.filter(g => g.enrolledCount < g.capacity).length
       if (availableSeats > 0 && mockWaitingStudents.some(w => w.status === "waiting")) {
-        toast.success(`طھظ… العثور على ${availableSeats} مقعد شاغر - جاري إخطار الطلاب المنتظرين`)
+        toast.success(`تم العثور على ${availableSeats} مقعد شاغر - جاري إخطار الطلاب المنتظرين`)
       }
       setLastCheck(new Date())
     }, 30000)
@@ -70,14 +70,14 @@ export default function WaitingQueuePage() {
   const handleNotify = async (id: string) => {
     setNotifyingId(id)
     await new Promise(r => setTimeout(r, 800))
-    toast.success("طھظ… إرسال الإشعار للطالب بنجاح")
+    toast.success("تم إرسال الإشعار للطالب بنجاح")
     setNotifyingId(null)
   }
 
   const handleEnroll = async (id: string) => {
     setEnrollingId(id)
     await new Promise(r => setTimeout(r, 1000))
-    toast.success("طھظ… تسجيل الطالب ظپظٹ المجموعة")
+    toast.success("تم تسجيل الطالب في المجموعة")
     setEnrollingId(null)
   }
 
@@ -103,7 +103,7 @@ export default function WaitingQueuePage() {
 variant={autoNotify ? "success" : "outline"}
               size="sm"
               leftIcon={<HiOutlineBell className="w-4 h-4" />}
-              onClick={() => { setAutoNotify(!autoNotify); toast.success(autoNotify ? "طھظ… إيقاف الإخطار التلقائي" : "طھظ… تفعيل الإخطار التلقائي كل 30 ثانية") }}
+              onClick={() => { setAutoNotify(!autoNotify); toast.success(autoNotify ? "تم إيقاف الإخطار التلقائي" : "تم تفعيل الإخطار التلقائي كل 30 ثانية") }}
             >
               {autoNotify ? "الإخطار التلقائي مفعل" : "تفعيل الإخطار التلقائي"}
             </Button>
@@ -120,8 +120,8 @@ variant={autoNotify ? "success" : "outline"}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <StatsCard title="إجمالي المنتظرين" value={stats.totalWaiting} icon={HiOutlineUsers} color="warning" />
           <StatsCard title="متوسط أيام الانتظار" value={stats.averageWaitDays} icon={HiOutlineClock} color="info" subtitle="يوم" />
-          <StatsCard title="طھظ… الإخطار اليوم" value={stats.notifiedToday} icon={HiOutlineBell} color="primary" />
-          <StatsCard title="طھظ… التسجيل اليوم" value={stats.enrolledToday} icon={HiOutlineUserAdd} color="success" />
+          <StatsCard title="تم الإخطار اليوم" value={stats.notifiedToday} icon={HiOutlineBell} color="primary" />
+          <StatsCard title="تم التسجيل اليوم" value={stats.enrolledToday} icon={HiOutlineUserAdd} color="success" />
         </div>
       )}
 
@@ -169,7 +169,7 @@ variant={autoNotify ? "success" : "outline"}
                 options={[
                   { value: "all", label: "جميع الحالات" },
                   { value: "waiting", label: "بانتظار" },
-                  { value: "offered", label: "طھظ… العرض" },
+                  { value: "offered", label: "تم العرض" },
                   { value: "enrolled", label: "مسجل" },
                   { value: "cancelled", label: "ملغي" },
                 ]}
@@ -184,7 +184,7 @@ variant={autoNotify ? "success" : "outline"}
           ) : filtered.length === 0 ? (
             <EmptyState
               icon={HiOutlineUsers}
-              title="لا يوجد طلاب ظپظٹ قائمة الانتظار"
+              title="لا يوجد طلاب في قائمة الانتظار"
               description={search || groupFilter !== "all" || statusFilter !== "all" ? "لا توجد نتائج للتصفية" : "قائمة الانتظار فارغة حالياً"}
             />
           ) : (
@@ -215,7 +215,7 @@ variant={autoNotify ? "success" : "outline"}
                       </td>
                       <td className="px-4 py-3">
                         <Badge variant={w.status === "waiting" ? "warning" : w.status === "offered" ? "info" : w.status === "enrolled" ? "success" : "error"}>
-                          {w.status === "waiting" ? "بانتظار" : w.status === "offered" ? "طھظ… العرض" : w.status === "enrolled" ? "مسجل" : "ملغي"}
+                          {w.status === "waiting" ? "بانتظار" : w.status === "offered" ? "تم العرض" : w.status === "enrolled" ? "مسجل" : "ملغي"}
                         </Badge>
                       </td>
                       <td className="px-4 py-3">
@@ -227,7 +227,7 @@ variant={w.notified ? "secondary" : "outline"}
                             onClick={() => handleNotify(w.id)}
                             disabled={notifyingId === w.id}
                           >
-                            {w.notified ? "طھظ… الإخطار" : "إخطار"}
+                            {w.notified ? "تم الإخطار" : "إخطار"}
                           </Button>
                           <Button type="button"
 variant="success"

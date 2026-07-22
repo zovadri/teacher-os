@@ -157,7 +157,7 @@ export default function TeacherDashboard() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-bold text-text mb-2">{pendingHomework}</p>
-                  <p className="text-sm text-text-secondary mb-4">واجب ظپظٹ انتظار التصحيح</p>
+                  <p className="text-sm text-text-secondary mb-4">واجب في انتظار التصحيح</p>
                   <Link href="/teacher/homework" className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark transition-colors font-medium">
                     عرض الواجبات
                     <span aria-hidden="true">&larr;</span>

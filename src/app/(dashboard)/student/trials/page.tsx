@@ -34,7 +34,7 @@ const trialLessons: TrialLesson[] = [
   { id: 2, title: "الفيزياء - الفصل الأول: التيار الكهربي", subject: "فيزياء", teacher: "ط£. أحمد سمير", duration: 40, views: 2, maxViews: 5, rating: 4.8, watched: false, category: "video", description: "قوانين التيار الكهربي وطرق حسابه", color: "from-blue-400 to-blue-600" },
   { id: 3, title: "التفاضل - النهايات والاتصال", subject: "رياضيات", teacher: "ط£. نبيل إبراهيم", duration: 35, views: 1, maxViews: 5, rating: 4.7, watched: false, category: "interactive", description: "تمارين تفاعلية على النهايات", color: "from-purple-400 to-purple-600" },
   { id: 4, title: "النحو - المبتدأ والخبر", subject: "عربي", teacher: "ط£. محمد صلاح", duration: 30, views: 4, maxViews: 5, rating: 4.9, watched: true, category: "video", description: "قواعد المبتدأ والخبر مع الأمثلة", color: "from-amber-400 to-amber-600" },
-  { id: 5, title: "Grammar - Present Tenses", subject: "إنجليزي", teacher: "ط£. أحمد فريد", duration: 25, views: 0, maxViews: 5, rating: 4.5, watched: false, category: "interactive", description: "الأزمنة الحالية ظپظٹ اللغة الإنجليزية", color: "from-rose-400 to-rose-600" },
+  { id: 5, title: "Grammar - Present Tenses", subject: "إنجليزي", teacher: "ط£. أحمد فريد", duration: 25, views: 0, maxViews: 5, rating: 4.5, watched: false, category: "interactive", description: "الأزمنة الحالية في اللغة الإنجليزية", color: "from-rose-400 to-rose-600" },
   { id: 6, title: "الكيمياء - الإتزان الكيميائي", subject: "كيمياء", teacher: "ط£. محمود جلال", duration: 50, views: 2, maxViews: 3, rating: 4.6, watched: false, category: "pdf", description: "ملخص تفاعلات الإتزان مع التمارين", color: "from-cyan-400 to-cyan-600" },
   { id: 7, title: "الفيزياء الحديثة - مقدمة", subject: "فيزياء", teacher: "ط£. مينا مجدي", duration: 30, views: 1, maxViews: 5, rating: 4.7, watched: false, category: "video", description: "نظريات الفيزياء الحديثة", color: "from-indigo-400 to-indigo-600" },
   { id: 8, title: "الأحياء - الخلية", subject: "أحياء", teacher: "ط£. هاني جمعة", duration: 35, views: 0, maxViews: 5, rating: 4.4, watched: false, category: "interactive", description: "تركيب الخلية ووظائفها", color: "from-green-400 to-green-600" },
@@ -69,7 +69,7 @@ export default function TrialsPage() {
     setTimeout(() => {
       setLessons((prev) => prev.map((l) => l.id === id ? { ...l, views: l.views + 1, watched: true } : l))
       setPlaying(null)
-      toast.success("طھظ… مشاهدة الحصة التجريبية! متبقي " + (lessons.find((l) => l.id === id)?.maxViews! - lessons.find((l) => l.id === id)?.views! - 1) + " مشاهدة")
+      toast.success("تم مشاهدة الحصة التجريبية! متبقي " + (lessons.find((l) => l.id === id)?.maxViews! - lessons.find((l) => l.id === id)?.views! - 1) + " مشاهدة")
     }, 2000)
   }
 
@@ -80,7 +80,7 @@ export default function TrialsPage() {
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <StatsCard title="الحصص المتاحة" value={lessons.length} icon={HiOutlinePlusCircle} color="primary" />
-            <StatsCard title="طھظ… المشاهدة" value={lessons.filter((l) => l.watched).length} icon={HiOutlineEye} color="success" />
+            <StatsCard title="تم المشاهدة" value={lessons.filter((l) => l.watched).length} icon={HiOutlineEye} color="success" />
             <StatsCard title="الحصص المتبقية" value={lessonsLeft} icon={HiOutlineLockOpen} color="warning" />
             <StatsCard title="التقييم" value={`${avgRating}/5`} icon={HiOutlineStar} color="info" />
           </motion.div>
@@ -116,7 +116,7 @@ export default function TrialsPage() {
                     </Badge>
                     {lesson.watched && (
                       <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-success/80 text-white text-[10px] px-2 py-0.5 rounded-full">
-                        <HiOutlineCheckCircle className="w-3 h-3" /> طھظ…طھ المشاهدة
+                        <HiOutlineCheckCircle className="w-3 h-3" /> تمت المشاهدة
                       </div>
                     )}
                   </div>
@@ -164,7 +164,7 @@ export default function TrialsPage() {
           {filtered.length === 0 && (
             <div className="text-center py-16 text-text-tertiary">
               <HiOutlinePlusCircle className="w-16 h-16 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">لا توجد حصص تجريبية ظپظٹ هذا التصنيف</p>
+              <p className="text-sm">لا توجد حصص تجريبية في هذا التصنيف</p>
             </div>
           )}
         </motion.div>

@@ -211,12 +211,12 @@ variant="primary"
                   onClick={handleExport}
                   className="min-w-[140px]"
                 >
-                  {isExporting ? "جاري التصدير..." : exportDone ? "طھظ… التصدير!" : "تصدير التقرير"}
+                  {isExporting ? "جاري التصدير..." : exportDone ? "تم التصدير!" : "تصدير التقرير"}
                 </Button>
                 {exportDone && (
                   <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 text-success text-sm font-medium">
                     <HiOutlineCheck className="w-4 h-4" />
-                    طھظ… التصدير بنجاح
+                    تم التصدير بنجاح
                   </motion.div>
                 )}
               </div>

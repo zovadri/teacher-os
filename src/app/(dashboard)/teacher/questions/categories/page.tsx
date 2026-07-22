@@ -118,13 +118,13 @@ export default function CategoriesPage() {
             : c
         )
       )
-      addToast({ type: "success", title: "طھظ… تحديث التصنيف بنجاح" })
+      addToast({ type: "success", title: "تم تحديث التصنيف بنجاح" })
     } else {
       setCategories((prev) => [
         ...prev,
         { id: generateId(), name: form.name, subject: form.subject, questionCount: 0, color: form.color },
       ])
-      addToast({ type: "success", title: "طھظ… إضافة التصنيف بنجاح" })
+      addToast({ type: "success", title: "تم إضافة التصنيف بنجاح" })
     }
     setModalOpen(false)
   }
@@ -132,7 +132,7 @@ export default function CategoriesPage() {
   const handleDelete = () => {
     if (!deleteTarget) return
     setCategories((prev) => prev.filter((c) => c.id !== deleteTarget.id))
-    addToast({ type: "success", title: `طھظ… حذف تصنيف "${deleteTarget.name}" بنجاح` })
+    addToast({ type: "success", title: `تم حذف تصنيف "${deleteTarget.name}" بنجاح` })
     setDeleteTarget(null)
   }
 

@@ -83,7 +83,7 @@ export default function ReportsPage() {
   }
 
   const handleCreateReport = () => {
-    toast.success(`طھظ… إنشاء تقرير ${reportTypes.find((r) => r.type === selectedReportType)?.label} بصيغة ${formatLabels[reportFormat]}`)
+    toast.success(`تم إنشاء تقرير ${reportTypes.find((r) => r.type === selectedReportType)?.label} بصيغة ${formatLabels[reportFormat]}`)
     setShowCreateModal(false)
   }
 
@@ -155,7 +155,7 @@ export default function ReportsPage() {
                 <CardDescription>تفاصيل وعرض التقارير</CardDescription>
               </CardHeader>
               <CardContent>
-                <EmptyState icon={HiOutlineDocumentReport} title="لا توجد تقارير بعد" description="لم ظٹطھظ… إنشاء ط£ظٹ تقارير من هذا النوع بعد" />
+                <EmptyState icon={HiOutlineDocumentReport} title="لا توجد تقارير بعد" description="لم يتم إنشاء أي تقارير من هذا النوع بعد" />
               </CardContent>
             </Card>
           )}
@@ -166,7 +166,7 @@ export default function ReportsPage() {
             </CardHeader>
             <CardContent>
               {recentReports.length === 0 ? (
-                <EmptyState icon={HiOutlineDocumentReport} title="لا توجد تقارير" description="لم ظٹطھظ… إنشاء ط£ظٹ تقارير بعد" />
+                <EmptyState icon={HiOutlineDocumentReport} title="لا توجد تقارير" description="لم يتم إنشاء أي تقارير بعد" />
               ) : (
                 <div className="space-y-2">
                   {recentReports.map((r) => {

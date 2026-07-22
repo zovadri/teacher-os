@@ -220,7 +220,7 @@ export default function ChallengesPage() {
       status: "waiting",
     }
     setActiveChallenges((prev) => [newChallenge, ...prev])
-    toast.success("طھظ… إنشاء التحدي بنجاح! ظپظٹ انتظار قبول الخصم.")
+    toast.success("تم إنشاء التحدي بنجاح! في انتظار قبول الخصم.")
   }, [createForm])
 
   const handleQuickChallenge = useCallback(() => {
@@ -253,7 +253,7 @@ export default function ChallengesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
-      <DashboardHeader title="تحديات الطلاب" subtitle="تنافس مع زملائك ظپظٹ مسابقات تعليمية" />
+      <DashboardHeader title="تحديات الطلاب" subtitle="تنافس مع زملائك في مسابقات تعليمية" />
       <div className="p-4 md:p-6 lg:p-8 max-w-5xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -383,7 +383,7 @@ export default function ChallengesPage() {
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
                             {challenge.status === "waiting" && (
-                              <Badge variant="neutral" size="sm">ظپظٹ انتظار القبول</Badge>
+                              <Badge variant="neutral" size="sm">في انتظار القبول</Badge>
                             )}
                             {challenge.status === "finished" && challenge.result && (
                               <Badge variant={resultVariants[challenge.result]} size="sm">{resultLabels[challenge.result]}</Badge>

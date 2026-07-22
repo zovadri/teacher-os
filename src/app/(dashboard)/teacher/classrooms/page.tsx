@@ -78,7 +78,7 @@ export default function ClassroomsPage() {
     setClassrooms((prev) => [classroom, ...prev])
     setShowAddModal(false)
     setNewClassroom({ name: "", branchId: "", capacity: 25, equipment: "" })
-    toast.success("طھظ… إضافة القاعة بنجاح")
+    toast.success("تم إضافة القاعة بنجاح")
   }
 
   const getBranchName = (branchId: string) => mockBranches.find((b) => b.id === branchId)?.name || branchId
@@ -149,7 +149,7 @@ export default function ClassroomsPage() {
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineAcademicCap} title="لا توجد قاعات" description="لم ظٹطھظ… العثور على قاعات مطابقة للبحث" />
+            <EmptyState icon={HiOutlineAcademicCap} title="لا توجد قاعات" description="لم يتم العثور على قاعات مطابقة للبحث" />
           ) : viewMode === "grid" ? (
             <div className="p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
               {filtered.map((classroom) => (
@@ -247,7 +247,7 @@ export default function ClassroomsPage() {
             value={newClassroom.branchId} onChange={(e) => setNewClassroom({ ...newClassroom, branchId: e.target.value })}
           />
           <Input label="السعة" type="number" value={String(newClassroom.capacity)} onChange={(e) => setNewClassroom({ ...newClassroom, capacity: Number(e.target.value) })} />
-          <Input label="التجهيزات (مفصولة بفواصل)" value={newClassroom.equipment} onChange={(e) => setNewClassroom({ ...newClassroom, equipment: e.target.value })} placeholder="مثال: سبورة ط°ظƒظٹط©, بروجيكتور" />
+          <Input label="التجهيزات (مفصولة بفواصل)" value={newClassroom.equipment} onChange={(e) => setNewClassroom({ ...newClassroom, equipment: e.target.value })} placeholder="مثال: سبورة ط°ظƒية, بروجيكتور" />
           <div className="flex gap-3 pt-2">
             <Button variant="primary" className="flex-1" onClick={handleAddClassroom} disabled={!newClassroom.name}>إضافة القاعة</Button>
             <Button variant="secondary" onClick={() => setShowAddModal(false)}>إلغاء</Button>

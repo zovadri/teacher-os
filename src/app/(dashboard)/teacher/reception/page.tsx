@@ -60,7 +60,7 @@ export default function ReceptionPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setLastRefresh(new Date())
-      toast.success("طھظ… تحديث البيانات تلقائياً")
+      toast.success("تم تحديث البيانات تلقائياً")
     }, 60000)
     return () => clearInterval(interval)
   }, [])
@@ -98,7 +98,7 @@ export default function ReceptionPage() {
     setTimeout(() => {
       setLoading(false)
       setLastRefresh(new Date())
-      toast.success("طھظ… تحديث البيانات")
+      toast.success("تم تحديث البيانات")
     }, 600)
   }
 
@@ -142,7 +142,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : todayClasses.length === 0 ? (
-              <EmptyState icon={HiOutlineAcademicCap} title="لا توجد حصص اليوم" description="ليس لديك ط£ظٹ حصص مجدولة اليوم" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineAcademicCap} title="لا توجد حصص اليوم" description="ليس لديك أي حصص مجدولة اليوم" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {todayClasses.map((g) => {
@@ -180,7 +180,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : currentAttendance.filter(a => a.checkedIn).length === 0 ? (
-              <EmptyState icon={HiOutlineUsers} title="لا يوجد حضور حالياً" description="لم ظٹطھظ… تسجيل ط£ظٹ حضور حتى الآن" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineUsers} title="لا يوجد حضور حالياً" description="لم يتم تسجيل أي حضور حتى الآن" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {currentAttendance.filter(a => a.checkedIn).map((a) => (
@@ -282,7 +282,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : todayRegistrations.length === 0 ? (
-              <EmptyState icon={HiOutlineUserAdd} title="لا توجد تسجيلات اليوم" description="لم ظٹطھظ… تسجيل ط£ظٹ طالب جديد اليوم" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineUserAdd} title="لا توجد تسجيلات اليوم" description="لم يتم تسجيل أي طالب جديد اليوم" bordered withBackground={false} />
             ) : (
               <div className="space-y-3">
                 {todayRegistrations.map((e) => (

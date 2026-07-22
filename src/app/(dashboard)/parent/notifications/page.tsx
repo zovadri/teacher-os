@@ -31,14 +31,14 @@ interface ParentNotification {
 }
 
 const mockParentNotifications: ParentNotification[] = [
-  { id: "pn-1", type: "success", title: "تفوق أحمد ظپظٹ الامتحان", message: "حصل ابنك أحمد على 95% ظپظٹ امتحان النحو الشهري", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 30), icon: HiOutlineStar },
+  { id: "pn-1", type: "success", title: "تفوق أحمد في الامتحان", message: "حصل ابنك أحمد على 95% في امتحان النحو الشهري", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 30), icon: HiOutlineStar },
   { id: "pn-2", type: "warning", title: "تذكير بواجب النحو", message: "باقي يوم على موعد تسليم واجب النحو الأسبوعي", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 120), icon: HiOutlineCalendar },
-  { id: "pn-3", type: "info", title: "طھظ… إضافة محتوى جديد", message: "طھظ… إضافة فيديو شرح جديد لكورس البلاغة", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 180), icon: HiOutlineInformationCircle },
+  { id: "pn-3", type: "info", title: "تم إضافة محتوى جديد", message: "تم إضافة فيديو شرح جديد لكورس البلاغة", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 180), icon: HiOutlineInformationCircle },
   { id: "pn-4", type: "error", title: "غياب أحمد", message: "لم يحضر ابنك أحمد جلسة اليوم لكورس النحو", read: false, createdAt: new Date(Date.now() - 1000 * 60 * 300), icon: HiOutlineExclamation },
-  { id: "pn-5", type: "info", title: "تقرير الأداء الشهري", message: "طھظ… تحديث تقرير أداء ابنك للشهر الحالي", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), icon: HiOutlineChartBar },
+  { id: "pn-5", type: "info", title: "تقرير الأداء الشهري", message: "تم تحديث تقرير أداء ابنك للشهر الحالي", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24), icon: HiOutlineChartBar },
   { id: "pn-6", type: "success", title: "إتمام كورس النحو", message: "أكمل ابنك أحمد بنجاح كورس النحو والصرف", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48), icon: HiOutlineAcademicCap },
   { id: "pn-7", type: "info", title: "موعد امتحان جديد", message: "سيتم عقد امتحان البلاغة يوم الخميس القادم", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 72), icon: HiOutlineCalendar },
-  { id: "pn-8", type: "warning", title: "اقتراب انتهاء الاشتراك", message: "باقي 5 أيام على انتهاء اشتراك ابنك ظپظٹ الباقة الثلاثية", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), icon: HiOutlineExclamation },
+  { id: "pn-8", type: "warning", title: "اقتراب انتهاء الاشتراك", message: "باقي 5 أيام على انتهاء اشتراك ابنك في الباقة الثلاثية", read: true, createdAt: new Date(Date.now() - 1000 * 60 * 60 * 96), icon: HiOutlineExclamation },
 ]
 
 const typeConfig: Record<string, { bg: string; border: string }> = {
@@ -169,7 +169,7 @@ export default function ParentNotificationsPage() {
         <EmptyState
           icon={HiOutlineBell}
           title="لا توجد إشعارات"
-          description={filter === "unread" ? "لا توجد إشعارات غير مقروءة" : "ليس لديك ط£ظٹ إشعارات حتى الآن"}
+          description={filter === "unread" ? "لا توجد إشعارات غير مقروءة" : "ليس لديك أي إشعارات حتى الآن"}
         />
       ) : (
         <div className="space-y-3">

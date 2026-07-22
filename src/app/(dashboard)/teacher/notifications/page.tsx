@@ -102,7 +102,7 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-7",
     type: "warning",
-    title: "تأخير ظپظٹ تسليم الواجبات",
+    title: "تأخير في تسليم الواجبات",
     message: "هناك 8 طلاب لم يسلموا واجب الأسبوع الماضي. يُرجى متابعتهم واتخاذ الإجراءات اللازمة.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 45),
@@ -115,7 +115,7 @@ const extendedMockNotifications: ExtendedNotification[] = [
     id: "notif-8",
     type: "info",
     title: "تحديث جدول الحصص",
-    message: "طھظ… تعديل جدول الحصص الأسبوعي. يُرجى مراجعة الجدول الجديد على لوحة التحكم.",
+    message: "تم تعديل جدول الحصص الأسبوعي. يُرجى مراجعة الجدول الجديد على لوحة التحكم.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 90),
     priority: "low",
@@ -125,8 +125,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-9",
     type: "success",
-    title: "طھظ… تسجيل 3 طلاب ظپظٹ الكورس",
-    message: "طھظ… تسجيل 3 طلاب جدد ظپظٹ كورس النحو المتقدم. إجمالي الطلاب الآن 45 طالباً.",
+    title: "تم تسجيل 3 طلاب في الكورس",
+    message: "تم تسجيل 3 طلاب جدد في كورس النحو المتقدم. إجمالي الطلاب الآن 45 طالباً.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 200),
     link: "/dashboard/teacher/courses",
@@ -137,8 +137,8 @@ const extendedMockNotifications: ExtendedNotification[] = [
   {
     id: "notif-10",
     type: "error",
-    title: "مشكلة ظپظٹ نظام الدفع",
-    message: "طھظ… الإبلاغ عن خلل ظپظٹ نظام الدفع الإلكتروني. فريق التقنية يعمل على حل المشكلة.",
+    title: "مشكلة في نظام الدفع",
+    message: "تم الإبلاغ عن خلل في نظام الدفع الإلكتروني. فريق التقنية يعمل على حل المشكلة.",
     read: true,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 3),
     priority: "high",
@@ -161,7 +161,7 @@ const extendedMockNotifications: ExtendedNotification[] = [
     id: "notif-12",
     type: "success",
     title: "اكتمال تصحيح الامتحانات",
-    message: "طھظ… الانتهاء من تصحيح امتحانات الشهر لمادة النحو. النتائج جاهزة للنشر.",
+    message: "تم الانتهاء من تصحيح امتحانات الشهر لمادة النحو. النتائج جاهزة للنشر.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 8),
     link: "/dashboard/teacher/exams",
@@ -184,7 +184,7 @@ const extendedMockNotifications: ExtendedNotification[] = [
     id: "notif-14",
     type: "info",
     title: "إضافة ميزة جديدة",
-    message: "طھظ… إضافة ميزة إنشاء التقارير المخصصة. يمكنك الآن تصدير تقارير مخصصة حسب احتياجك.",
+    message: "تم إضافة ميزة إنشاء التقارير المخصصة. يمكنك الآن تصدير تقارير مخصصة حسب احتياجك.",
     read: false,
     createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24),
     link: "/dashboard/teacher/analytics",
@@ -254,12 +254,12 @@ export default function NotificationsPage() {
 
   const markAsRead = (id: string) => {
     setReadIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
-    toast.success("طھظ… تعيين الإشعار كمقروء")
+    toast.success("تم تعيين الإشعار كمقروء")
   }
 
   const markAsUnread = (id: string) => {
     setReadIds((prev) => prev.filter((rid) => rid !== id))
-    toast.success("طھظ… تعيين الإشعار كغير مقروء")
+    toast.success("تم تعيين الإشعار كغير مقروء")
   }
 
   const toggleRead = (id: string) => {
@@ -272,12 +272,12 @@ export default function NotificationsPage() {
       const unreadIds = filtered.filter((n) => !prev.includes(n.id)).map((n) => n.id)
       return [...prev, ...unreadIds]
     })
-    toast.success("طھظ… تعيين الكل كمقروء")
+    toast.success("تم تعيين الكل كمقروء")
   }
 
   const archiveSingle = (id: string) => {
     setArchivedIds((prev) => (prev.includes(id) ? prev : [...prev, id]))
-    toast.success("طھظ… أرشفة الإشعار")
+    toast.success("تم أرشفة الإشعار")
   }
 
   const bulkArchive = (ids: string[]) => {
@@ -286,7 +286,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`طھظ… أرشفة ${ids.length} إشعار`)
+    toast.success(`تم أرشفة ${ids.length} إشعار`)
   }
 
   const bulkDelete = (ids: string[]) => {
@@ -295,7 +295,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`طھظ… حذف ${ids.length} إشعار`)
+    toast.success(`تم حذف ${ids.length} إشعار`)
   }
 
   const bulkMarkRead = (ids: string[]) => {
@@ -304,7 +304,7 @@ export default function NotificationsPage() {
       return [...prev, ...newIds]
     })
     setSelectedIds([])
-    toast.success(`طھظ… تعيين ${ids.length} إشعار كمقروء`)
+    toast.success(`تم تعيين ${ids.length} إشعار كمقروء`)
   }
 
   const toggleSelect = (id: string) => {
@@ -368,7 +368,7 @@ export default function NotificationsPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="ابحث ظپظٹ الإشعارات..."
+            placeholder="ابحث في الإشعارات..."
             className="w-full md:w-64"
           />
           <Select
@@ -436,7 +436,7 @@ export default function NotificationsPage() {
           className="flex items-center gap-2 p-3 bg-primary/5 border border-primary/20 rounded-xl"
         >
           <span className="text-sm font-medium text-text ml-2">
-            طھظ… تحديد {selectedIds.length} إشعار
+            تم تحديد {selectedIds.length} إشعار
           </span>
           <Button variant="secondary"
             size="xs"
@@ -474,12 +474,12 @@ export default function NotificationsPage() {
           title="لا توجد إشعارات"
           description={
             search || categoryFilter !== "all" || priorityFilter !== "all" || showRead !== null
-              ? "لم ظٹطھظ… العثور على إشعارات تطابق معايير البحث"
+              ? "لم يتم العثور على إشعارات تطابق معايير البحث"
               : showRead === true
                 ? "لا توجد إشعارات مقروءة"
                 : showRead === false
                   ? "لا توجد إشعارات غير مقروءة"
-                  : "ليس لديك ط£ظٹ إشعارات حتى الآن"
+                  : "ليس لديك أي إشعارات حتى الآن"
           }
         />
       ) : (
@@ -659,7 +659,7 @@ onClick={toggleSelectAll}
 
       <div className="text-center">
         <p className="text-xs text-text-tertiary">
-          إجمالي {notifications.length} إشعار ط¢آ· {stats.unread} غير مقروء ط¢آ· {stats.archived} مؤرشف
+          إجمالي {notifications.length} إشعار · {stats.unread} غير مقروء · {stats.archived} مؤرشف
         </p>
       </div>
 

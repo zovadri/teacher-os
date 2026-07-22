@@ -34,7 +34,7 @@ const generateWeeklyReports = (studentId: string): WeeklyReport[] => Array.from(
   completedHomework: Math.floor(det() * 3 + 5),
   averageGrade: Math.floor(det() * 15 + 75),
   behavior: ["ممتاز", "جيد جداً", "جيد", "ممتاز"][i],
-  notes: ["تقدم ملحوظ ظپظٹ الأداء", "يحتاج مراجعة القواعد", "مشاركة فعالة ظپظٹ الحصة", "التزام بالحضور"][i],
+  notes: ["تقدم ملحوظ في الأداء", "يحتاج مراجعة القواعد", "مشاركة فعالة في الحصة", "التزام بالحضور"][i],
 }))
 
 export default function ParentReportsPage() {

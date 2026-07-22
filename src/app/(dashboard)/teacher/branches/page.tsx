@@ -62,7 +62,7 @@ export default function BranchesPage() {
     setBranches((prev) => [branch, ...prev])
     setShowAddModal(false)
     setNewBranch({ name: "", address: "", phone: "", email: "", manager: "", capacity: 100 })
-    toast.success("طھظ… إضافة الفرع بنجاح")
+    toast.success("تم إضافة الفرع بنجاح")
   }
 
   const handleRetry = useCallback(() => {
@@ -104,7 +104,7 @@ export default function BranchesPage() {
         <EmptyState
           icon={HiOutlineOfficeBuilding}
           title="لا توجد فروع"
-          description="لم ظٹطھظ… إضافة ط£ظٹ فروع بعد. أضف فرعاً جديداً للبدء."
+          description="لم يتم إضافة أي فروع بعد. أضف فرعاً جديداً للبدء."
           action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة فرع</Button>}
         />
       ) : (

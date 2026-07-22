@@ -111,7 +111,7 @@ export default function CreateAnnouncementPage() {
     setSubmitting(true)
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
-    toast.success(`طھظ… ${status === "published" ? "نشر" : "حفظ"} الإعلان بنجاح!`)
+    toast.success(`تم ${status === "published" ? "نشر" : "حفظ"} الإعلان بنجاح!`)
     router.push("/teacher/announcements")
   }
 

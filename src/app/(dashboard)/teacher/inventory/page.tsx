@@ -85,7 +85,7 @@ export default function InventoryPage() {
       }
       return i
     }))
-    toast.success("طھظ… تحديث المخزون بنجاح")
+    toast.success("تم تحديث المخزون بنجاح")
     setEditModal({ open: false, item: null })
   }
 
@@ -140,7 +140,7 @@ export default function InventoryPage() {
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineCube} title="لا توجد أصناف" description="لم ظٹطھظ… العثور على أصناف مطابقة" />
+            <EmptyState icon={HiOutlineCube} title="لا توجد أصناف" description="لم يتم العثور على أصناف مطابقة" />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">

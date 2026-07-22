@@ -78,7 +78,7 @@ export default function FilesPage() {
       <div className="flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
         <div className="flex flex-1 flex-wrap gap-3 w-full">
           <div className="flex-1 min-w-[200px]">
-            <SearchInput value={search} onChange={setSearch} placeholder="بحث ظپظٹ الفيديوهات..." />
+            <SearchInput value={search} onChange={setSearch} placeholder="بحث في الفيديوهات..." />
           </div>
           <select
             value={courseFilter}
@@ -169,7 +169,7 @@ export default function FilesPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-text truncate">{video.title}</p>
-                <p className="text-xs text-text-tertiary truncate"><Link href={`/teacher/courses/${video.courseId}`} className="hover:text-primary transition-colors">{video.courseName}</Link> ط¢آ· {video.resolution} ط¢آ· {video.format}</p>
+                <p className="text-xs text-text-tertiary truncate"><Link href={`/teacher/courses/${video.courseId}`} className="hover:text-primary transition-colors">{video.courseName}</Link> · {video.resolution} · {video.format}</p>
               </div>
               <div className="text-xs text-text-tertiary shrink-0">{video.duration} د</div>
               <Badge variant={statusConfig[video.status].variant} size="sm">{statusConfig[video.status].label}</Badge>

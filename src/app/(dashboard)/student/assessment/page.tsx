@@ -36,7 +36,7 @@ interface QItem {
 
 const questionPool: Record<string, QItem[]> = {
   chemistry: [
-    { id: 1, subject: "chemistry", text: "ما العنصر الأكثر وفرة في القشرة الأرضية؟", options: ["الأكسجين", "الحديد", "السيليكون", "الألومنيوم"], correct: 0, explanation: "الأكسجين هو العنصر الأكثر وفرة في القشرة الأرضية بنسبة 46.6%" },
+    { id: 1, subject: "chemistry", text: "ما العنصر الأكثر وفرة في القشرة الأرضيɿ", options: ["الأكسجين", "الحديد", "السيليكون", "الألومنيوم"], correct: 0, explanation: "الأكسجين هو العنصر الأكثر وفرة في القشرة الأرضية بنسبة 46.6%" },
     { id: 2, subject: "chemistry", text: "الرقم الهيدروجيني للماء النقي هو:", options: ["7", "5", "9", "3"], correct: 0, explanation: "الماء النقي متعادل ورقمه الهيدروجيني 7" },
     { id: 3, subject: "chemistry", text: "أي المركبات التالية يعتبر حمضاً قوياً؟", options: ["HCl", "CH₃COOH", "H₂CO₃", "NH₃"], correct: 0, explanation: "حمض الهيدروكلوريك HCl من الأحماض القوية" },
     { id: 4, subject: "chemistry", text: "عدد البروتونات في نواة ذرة الكربون هو:", options: ["6", "8", "4", "12"], correct: 0, explanation: "العدد الذري للكربون هو 6" },

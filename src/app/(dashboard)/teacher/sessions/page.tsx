@@ -69,7 +69,7 @@ export default function SessionsPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (det() > 0.95) {
-        setError("فشل ظپظٹ تحميل بيانات الجلسات")
+        setError("فشل في تحميل بيانات الجلسات")
       } else {
         setSessions(mockSessions as Session[])
       }
@@ -205,7 +205,7 @@ variant="danger"
                   <EmptyState
                     icon={HiOutlineLogout}
                     title={activeTab === "my" ? "لا توجد جلسات نشطة" : "لا توجد جلسات"}
-                    description={activeTab === "my" ? "ليس لديك ط£ظٹ جلسات نشطة حالياً" : "لا توجد ط£ظٹ جلسات مسجلة ظپظٹ النظام"}
+                    description={activeTab === "my" ? "ليس لديك أي جلسات نشطة حالياً" : "لا توجد أي جلسات مسجلة في النظام"}
                   />
                 ) : (
                   <div>

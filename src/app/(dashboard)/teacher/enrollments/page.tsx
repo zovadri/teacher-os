@@ -163,7 +163,7 @@ export default function EnrollmentsPage() {
       source: "admin",
     }
     setEnrollments((prev) => [newEnr, ...prev])
-    addToast({ type: "success", title: "طھظ… إضافة التسجيل بنجاح" })
+    addToast({ type: "success", title: "تم إضافة التسجيل بنجاح" })
     setCreateModalOpen(false)
     setCreateForm(emptyCreateForm)
   }
@@ -175,7 +175,7 @@ export default function EnrollmentsPage() {
         e.id === bulkEndTarget.id ? { ...e, status: "expired" as const } : e
       )
     )
-    addToast({ type: "success", title: `طھظ… إنهاء تسجيل "${bulkEndTarget.studentName}" بنجاح` })
+    addToast({ type: "success", title: `تم إنهاء تسجيل "${bulkEndTarget.studentName}" بنجاح` })
     setBulkEndTarget(null)
   }
 
@@ -188,7 +188,7 @@ export default function EnrollmentsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة التسجيلات" subtitle="إدارة تسجيلات الطلاب ظپظٹ الكورسات" />
+      <DashboardHeader title="إدارة التسجيلات" subtitle="إدارة تسجيلات الطلاب في الكورسات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {statsCards.map((s, i) => (
@@ -239,7 +239,7 @@ export default function EnrollmentsPage() {
       {filtered.length === 0 ? (
         <EmptyState
           title="لا توجد تسجيلات"
-          description="لم ظٹطھظ… العثور على تسجيلات تطابق معايير البحث"
+          description="لم يتم العثور على تسجيلات تطابق معايير البحث"
           action={
             <Button variant="primary" onClick={() => setCreateModalOpen(true)}>
               إضافة تسجيل جديد
@@ -470,7 +470,7 @@ export default function EnrollmentsPage() {
         onClose={() => setBulkEndTarget(null)}
         onConfirm={handleBulkEnd}
         title="إنهاء التسجيل"
-        message={bulkEndTarget ? `هل أنت متأكد من إنهاء تسجيل "${bulkEndTarget.studentName}" ظپظٹ كورس "${bulkEndTarget.courseName}"طں` : ""}
+        message={bulkEndTarget ? `هل أنت متأكد من إنهاء تسجيل "${bulkEndTarget.studentName}" في كورس "${bulkEndTarget.courseName}"طں` : ""}
         confirmText="إنهاء التسجيل"
         cancelText="إلغاء"
         variant="danger"

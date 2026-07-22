@@ -73,7 +73,7 @@ export default function GamificationPage() {
           <>
             {activeTab === "leaderboard" && (
               mockStudentXpData.length === 0 ? (
-                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم ظٹطھظ… تسجيل ط£ظٹ نشاط ألعاب بعد" />
+                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم يتم تسجيل أي نشاط ألعاب بعد" />
               ) : (
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -88,7 +88,7 @@ export default function GamificationPage() {
                           i === 0 ? "border-yellow-400 shadow-lg shadow-yellow-400/10" : i === 1 ? "border-gray-300" : "border-amber-600"
                         )}
                       >
-                        {i === 0 && <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">ًں‘‘</div>}
+                        {i === 0 && <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-2xl">👑</div>}
                         <div className="flex justify-center mb-3 mt-2">
                           <Avatar name={s.studentName} size="xl" />
                         </div>
@@ -166,7 +166,7 @@ export default function GamificationPage() {
 
             {activeTab === "badges" && (
               mockAchievements.length === 0 && mockGamificationConfig.badgeCategories.every((c) => c.badges.length === 0) ? (
-                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم ظٹطھظ… تسجيل ط£ظٹ نشاط ألعاب بعد" />
+                <EmptyState icon={HiOutlineStar} title="لا توجد بيانات ألعاب" description="لم يتم تسجيل أي نشاط ألعاب بعد" />
               ) : (
                 <div className="space-y-6">
                   <div className="flex items-center gap-6 text-sm">
@@ -292,7 +292,7 @@ export default function GamificationPage() {
                     leftIcon={<HiOutlineFire className="w-4 h-4" />}
                   />
                   <div className="pt-2">
-                    <Button variant="primary" onClick={() => toast.success("طھظ… حفظ إعدادات XP بنجاح")}>حفظ الإعدادات</Button>
+                    <Button variant="primary" onClick={() => toast.success("تم حفظ إعدادات XP بنجاح")}>حفظ الإعدادات</Button>
                   </div>
                 </CardContent>
               </Card>

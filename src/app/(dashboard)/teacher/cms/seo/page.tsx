@@ -46,7 +46,7 @@ export default function SeoPage() {
   const handleSave = () => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
-    toast.success("طھظ… حفظ إعدادات SEO بنجاح")
+    toast.success("تم حفظ إعدادات SEO بنجاح")
   }
 
   const handleReset = () => {
@@ -225,7 +225,7 @@ export default function SeoPage() {
               <div className="flex items-center gap-2">
                 <HiOutlineEye className="w-5 h-5 text-primary" />
                 <CardTitle>معاينة البحث</CardTitle>
-                <CardDescription>ظƒظٹظپ سيظهر موقعك ظپظٹ نتائج البحث</CardDescription>
+                <CardDescription>ظƒيف سيظهر موقعك في نتائج البحث</CardDescription>
               </div>
             </CardHeader>
             <CardContent>
@@ -240,7 +240,7 @@ export default function SeoPage() {
                 {keywords.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {keywords.slice(0, 4).map((kw) => (
-                      <span key={kw} className="text-xs text-text-tertiary">ط¢آ· {kw}</span>
+                      <span key={kw} className="text-xs text-text-tertiary">· {kw}</span>
                     ))}
                   </div>
                 )}
@@ -274,7 +274,7 @@ export default function SeoPage() {
             </CardContent>
             <CardFooter className="flex gap-3">
               <Button variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
-                {saved ? "طھظ… الحفظ!" : "حفظ"}
+                {saved ? "تم الحفظ!" : "حفظ"}
               </Button>
               <Button variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
                 إعادة

@@ -230,10 +230,10 @@ export default function QuestionsPage() {
           q.id === editingQuestion.id ? { ...buildQuestionFromForm(form), id: q.id, stats: q.stats } : q
         )
       )
-      addToast({ type: "success", title: "طھظ… تحديث السؤال بنجاح" })
+      addToast({ type: "success", title: "تم تحديث السؤال بنجاح" })
     } else {
       setQuestions((prev) => [...prev, buildQuestionFromForm(form)])
-      addToast({ type: "success", title: "طھظ… إضافة السؤال بنجاح" })
+      addToast({ type: "success", title: "تم إضافة السؤال بنجاح" })
     }
     setCreateModalOpen(false)
   }
@@ -241,13 +241,13 @@ export default function QuestionsPage() {
   const handleDelete = () => {
     if (!deleteTarget) return
     setQuestions((prev) => prev.filter((q) => q.id !== deleteTarget.id))
-    addToast({ type: "success", title: "طھظ… حذف السؤال بنجاح" })
+    addToast({ type: "success", title: "تم حذف السؤال بنجاح" })
     setDeleteTarget(null)
   }
 
   const handleBulkDelete = () => {
     setQuestions((prev) => prev.filter((q) => !selectedIds.has(q.id)))
-    addToast({ type: "success", title: `طھظ… حذف ${selectedIds.size} أسئلة بنجاح` })
+    addToast({ type: "success", title: `تم حذف ${selectedIds.size} أسئلة بنجاح` })
     setSelectedIds(new Set())
     setBulkDeleteOpen(false)
   }
@@ -331,7 +331,7 @@ export default function QuestionsPage() {
       {filtered.items.length === 0 ? (
         <EmptyState
           title="لا توجد أسئلة"
-          description="لم ظٹطھظ… العثور على أسئلة تطابق معايير البحث. أضف سؤالاً جديداً أو عدّل فلتر البحث."
+          description="لم يتم العثور على أسئلة تطابق معايير البحث. أضف سؤالاً جديداً أو عدّل فلتر البحث."
           action={
             <Button variant="primary" onClick={openCreate} leftIcon={<HiOutlinePlus size={18} />}>
               إضافة سؤال

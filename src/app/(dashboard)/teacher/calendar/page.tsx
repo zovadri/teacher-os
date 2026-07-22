@@ -525,7 +525,7 @@ export default function CalendarPage() {
           <Card>
             <CardContent className="p-12 text-center">
               <HiOutlineCalendar className="w-12 h-12 mx-auto text-text-tertiary mb-3" />
-              <p className="text-text-secondary font-medium">لا توجد أحداث ظپظٹ هذا اليوم</p>
+              <p className="text-text-secondary font-medium">لا توجد أحداث في هذا اليوم</p>
               <p className="text-sm text-text-tertiary mt-1">قم بإضافة أحداث جديدة للظهور هنا</p>
             </CardContent>
           </Card>

@@ -143,11 +143,11 @@ export default function ExamsPage() {
                         <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/exams/${exam.id}`) }} className="p-1.5 text-text-tertiary hover:text-warning hover:bg-warning/5 rounded-lg transition-colors" title="تعديل">
                           <HiOutlinePencil size={16} />
                         </button>
-                        <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("طھظ… نسخ الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-info hover:bg-info/5 rounded-lg transition-colors" title="نسخ">
+                        <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("تم نسخ الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-info hover:bg-info/5 rounded-lg transition-colors" title="نسخ">
                           <HiOutlineDuplicate size={16} />
                         </button>
                       </div>
-                      <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("طھظ… حذف الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="حذف">
+                      <button type="button" onClick={(e) => { e.stopPropagation(); toast.success("تم حذف الامتحان بنجاح") }} className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-colors" title="حذف">
                         <HiOutlineTrash size={16} />
                       </button>
                     </div>

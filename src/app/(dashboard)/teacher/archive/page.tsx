@@ -109,7 +109,7 @@ const names: Record<ArchiveTab, string[]> = {
     "استفسار عن موعد المحاضرة",
     "طلب مراجعة الدرس الثالث",
     "شكر وتقدير للمدرس",
-    "مشكلة ظپظٹ تسجيل الدخول",
+    "مشكلة في تسجيل الدخول",
     "طلب إعادة تصحيح الامتحان",
     "استفسار عن جدول الامتحانات",
     "طلب تحويل مجموعة",
@@ -248,8 +248,8 @@ export default function ArchivePage() {
     if (!restoreTarget) return
     addToast({
       type: "success",
-      title: "طھظ…طھ الاستعادة بنجاح",
-      message: `طھظ…طھ استعادة "${restoreTarget.name}" من الأرشيف`,
+      title: "تمت الاستعادة بنجاح",
+      message: `تمت استعادة "${restoreTarget.name}" من الأرشيف`,
     })
     setRestoreTarget(null)
   }
@@ -337,7 +337,7 @@ export default function ArchivePage() {
           delay={0.1}
         />
         <StatsCard
-          title="طھظ…طھ الاستعادة"
+          title="تمت الاستعادة"
           value={Math.floor(det() * 30) + 15}
           icon={HiOutlineRefresh}
           color="success"
@@ -392,7 +392,7 @@ export default function ArchivePage() {
               <SearchInput
                 value={searchQuery}
                 onChange={setSearchQuery}
-                placeholder="بحث ظپظٹ العناصر المؤرشفة..."
+                placeholder="بحث في العناصر المؤرشفة..."
               />
             </div>
             <div className="flex items-center gap-2">
@@ -464,7 +464,7 @@ export default function ArchivePage() {
             <EmptyState
               icon={Inbox}
               title="لا توجد عناصر مؤرشفة"
-              description={searchQuery || dateFrom || dateTo ? "لا توجد نتائج تطابق معايير البحث" : `لا توجد عناصر مؤرشفة ظپظٹ قسم ${tabConfig.find((t) => t.id === activeTab)?.label}`}
+              description={searchQuery || dateFrom || dateTo ? "لا توجد نتائج تطابق معايير البحث" : `لا توجد عناصر مؤرشفة في قسم ${tabConfig.find((t) => t.id === activeTab)?.label}`}
               withBackground={false}
               className="py-12"
             />
@@ -588,7 +588,7 @@ export default function ArchivePage() {
             </div>
             <div className="mt-4 p-3 rounded-xl bg-warning/10 border border-warning/20 text-xs text-warning flex items-center gap-2">
               <HiOutlineSwitchHorizontal className="w-4 h-4 shrink-0" />
-              سيتم تطبيق قواعد الأرشفة التلقائية ظپظٹ منتصف كل شهر وفقاً للإعدادات أعلاه
+              سيتم تطبيق قواعد الأرشفة التلقائية في منتصف كل شهر وفقاً للإعدادات أعلاه
             </div>
           </CardContent>
         </Card>
@@ -685,7 +685,7 @@ export default function ArchivePage() {
               type="button"
               onClick={() => {
                 setShowSettings(false)
-                addToast({ type: "success", title: "طھظ… حفظ الإعدادات", message: "طھظ… تحديث إعدادات الأرشفة التلقائية بنجاح" })
+                addToast({ type: "success", title: "تم حفظ الإعدادات", message: "تم تحديث إعدادات الأرشفة التلقائية بنجاح" })
               }}
               className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl bg-primary text-white hover:bg-primary-dark shadow-sm transition-all duration-200"
             >

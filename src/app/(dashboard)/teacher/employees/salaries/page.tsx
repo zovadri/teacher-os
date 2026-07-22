@@ -74,7 +74,7 @@ export default function SalariesPage() {
       }
       return s
     }))
-    toast.success("طھظ… صرف جميع الرواتب بنجاح")
+    toast.success("تم صرف جميع الرواتب بنجاح")
     setShowPayAllConfirm(false)
   }
 
@@ -85,7 +85,7 @@ export default function SalariesPage() {
     updated.deductions += deductionAmount
     updated.netSalary = updated.baseSalary + updated.bonuses - updated.deductions
     setSalaries((prev) => prev.map((s) => s.id === updated.id ? updated : s))
-    toast.success("طھظ… تحديث الراتب بنجاح")
+    toast.success("تم تحديث الراتب بنجاح")
     setEditModal({ open: false, salary: null })
     setBonusAmount(0)
     setDeductionAmount(0)

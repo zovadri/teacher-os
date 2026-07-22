@@ -89,7 +89,7 @@ export default function ExpensesPage() {
     setExpenses((prev) => [exp, ...prev])
     setShowAddModal(false)
     setNewExpense({ category: "", description: "", amount: 0, branchId: "", paidBy: "" })
-    toast.success("طھظ… إضافة المصروف بنجاح")
+    toast.success("تم إضافة المصروف بنجاح")
   }
 
   const getBranchName = (branchId: string) => mockBranches.find((b) => b.id === branchId)?.name || branchId
@@ -142,7 +142,7 @@ export default function ExpensesPage() {
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineCash} title="لا توجد مصروفات" description="لم ظٹطھظ… العثور على مصروفات مطابقة" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة مصروف</Button>} />
+            <EmptyState icon={HiOutlineCash} title="لا توجد مصروفات" description="لم يتم العثور على مصروفات مطابقة" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة مصروف</Button>} />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">

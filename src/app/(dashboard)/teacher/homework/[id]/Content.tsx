@@ -49,7 +49,7 @@ const statusBadge: Record<string, "success" | "warning" | "error" | "neutral"> =
 }
 
 const statusLabels: Record<string, string> = {
-  submitted: "طھظ… التسليم",
+  submitted: "تم التسليم",
   graded: "مصحح",
   late: "متأخر",
 }
@@ -106,7 +106,7 @@ export default function HomeworkDetailPage() {
     return (
       <div className="p-4 md:p-6 text-center py-20">
         <h2 className="text-xl font-bold text-text mb-2">الواجب غير موجود</h2>
-        <p className="text-sm text-text-tertiary mb-4">لم ظٹطھظ… العثور على الواجب المطلوب</p>
+        <p className="text-sm text-text-tertiary mb-4">لم يتم العثور على الواجب المطلوب</p>
         <Link href="/teacher/homework">
           <Button className="px-4 py-2 text-sm text-white bg-primary rounded-xl">العودة للواجبات</Button>
         </Link>
@@ -144,7 +144,7 @@ export default function HomeworkDetailPage() {
 
       <DashboardHeader
         title={homework.title}
-        subtitle={`${course?.title || "غير محدد"} ط¢آ· ${homework.totalGrade} درجة ط¢آ· ${hwTypeLabels[homework.type]} ط¢آ· ${homework.submissions.length} تسليم`}
+        subtitle={`${course?.title || "غير محدد"} · ${homework.totalGrade} درجة · ${hwTypeLabels[homework.type]} · ${homework.submissions.length} تسليم`}
       />
 
       <div className="bg-surface rounded-xl border border-border p-6">
@@ -181,7 +181,7 @@ export default function HomeworkDetailPage() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatsCard title="طھظ… التسليم" value={submittedCount} icon={HiOutlineUsers} color="success" />
+        <StatsCard title="تم التسليم" value={submittedCount} icon={HiOutlineUsers} color="success" />
         <StatsCard title="لم يسلم" value={notSubmittedCount} icon={HiOutlineExclamationCircle} color="error" />
         <StatsCard title="متأخر" value={lateCount} icon={HiOutlineClock} color="warning" />
         <StatsCard title="متوسط الدرجات" value={`${avgGrade}%`} icon={HiOutlineChartBar} color="primary" />
@@ -193,7 +193,7 @@ export default function HomeworkDetailPage() {
             <TabPanel id="summary" activeTab={activeTab}>
               <div className="space-y-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <StatsCard title="طھظ… التسليم" value={submittedCount} icon={HiOutlineUsers} color="success" delay={0} />
+                  <StatsCard title="تم التسليم" value={submittedCount} icon={HiOutlineUsers} color="success" delay={0} />
                   <StatsCard title="لم يسلم" value={notSubmittedCount} icon={HiOutlineExclamationCircle} color="error" delay={0.1} />
                   <StatsCard title="متأخر" value={lateCount} icon={HiOutlineClock} color="warning" delay={0.2} />
                   <StatsCard title="متوسط الدرجات" value={`${avgGrade}%`} icon={HiOutlineChartBar} color="primary" delay={0.3} />
@@ -438,7 +438,7 @@ export default function HomeworkDetailPage() {
               <HiOutlineUsers className="w-5 h-5 text-text-tertiary" />
               <div>
                 <p className="text-sm font-medium text-text">{gradingSubmission.studentName}</p>
-                <p className="text-xs text-text-tertiary">طھظ… التسليم: {gradingSubmission.submittedAt.toLocaleDateString("ar-EG")}</p>
+                <p className="text-xs text-text-tertiary">تم التسليم: {gradingSubmission.submittedAt.toLocaleDateString("ar-EG")}</p>
               </div>
             </div>
             <Input

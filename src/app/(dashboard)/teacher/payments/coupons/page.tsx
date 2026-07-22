@@ -41,7 +41,7 @@ export default function CouponsPage() {
 
   const handleCreate = () => {
     if (!newCode.trim() || !newDiscount.trim()) { toast.error("الرجاء إدخال الكود والخصم"); return }
-    toast.success(`طھظ… إنشاء الكود ${newCode.trim()} بنجاح`)
+    toast.success(`تم إنشاء الكود ${newCode.trim()} بنجاح`)
     setNewCode(""); setNewDiscount("")
   }
 

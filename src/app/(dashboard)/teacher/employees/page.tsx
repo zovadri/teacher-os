@@ -92,7 +92,7 @@ export default function EmployeesPage() {
     setEmployees((prev) => [emp, ...prev])
     setShowAddModal(false)
     setNewEmployee({ name: "", email: "", phone: "", jobTitle: "", department: "", salary: 0, branchId: "" })
-    toast.success("طھظ… إضافة الموظف بنجاح")
+    toast.success("تم إضافة الموظف بنجاح")
   }
 
   const getBranchName = (branchId: string) => mockBranches.find((b) => b.id === branchId)?.name || branchId
@@ -145,7 +145,7 @@ export default function EmployeesPage() {
           {isLoading ? (
             <div className="p-4"><CardSkeleton count={3} /></div>
           ) : filtered.length === 0 ? (
-            <EmptyState icon={HiOutlineUserGroup} title="لا يوجد موظفون" description="لم ظٹطھظ… العثور على موظفين مطابقين" action={search ? undefined : <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة موظف</Button>} />
+            <EmptyState icon={HiOutlineUserGroup} title="لا يوجد موظفون" description="لم يتم العثور على موظفين مطابقين" action={search ? undefined : <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة موظف</Button>} />
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">

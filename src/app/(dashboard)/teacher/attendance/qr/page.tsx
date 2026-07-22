@@ -58,7 +58,7 @@ export default function QRAttendancePage() {
       setDetectedStudent(student)
       setScanComplete(true)
       setIsScanning(false)
-      toast.success(`طھظ… التعرف على ${student.name}`, { position: "top-left" })
+      toast.success(`تم التعرف على ${student.name}`, { position: "top-left" })
     }, 3000)
 
     setTimeout(() => {
@@ -103,14 +103,14 @@ export default function QRAttendancePage() {
       },
       ...prev.slice(0, 9),
     ])
-    toast.success(`طھظ… تسجيل حضور ${detectedStudent.name}`, { position: "top-left" })
+    toast.success(`تم تسجيل حضور ${detectedStudent.name}`, { position: "top-left" })
   }
 
   const handleCancel = () => {
     setDetectedStudent(null)
     setScanComplete(false)
     setHasError(false)
-    toast("طھظ… إلغاء المسح", { position: "top-left" })
+    toast("تم إلغاء المسح", { position: "top-left" })
   }
 
   const handleRetry = () => {
@@ -170,7 +170,7 @@ variant="primary"
                 ) : hasError ? (
                   <ErrorState
                     title="فشل المسح"
-                    message="لم ظٹطھظ… التعرف على QR كود. حاول مرة أخرى."
+                    message="لم يتم التعرف على QR كود. حاول مرة أخرى."
                     onRetry={handleRetry}
                   />
                 ) : detectedStudent && !confirmed ? (
@@ -194,7 +194,7 @@ variant="primary"
                     <div className="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
                       <HiOutlineCheckCircle className="w-10 h-10 text-emerald-600" />
                     </div>
-                    <h3 className="text-xl font-bold text-text mb-1">طھظ… تسجيل الحضور بنجاح</h3>
+                    <h3 className="text-xl font-bold text-text mb-1">تم تسجيل الحضور بنجاح</h3>
                     <p className="text-text-secondary text-sm">{detectedStudent?.name}</p>
                     <Button type="button" onClick={startScan} variant="primary" className="mt-6" leftIcon={<HiOutlineQrcode className="w-4 h-4" />}>
                       مسح QR جديد
@@ -203,7 +203,7 @@ variant="primary"
                 ) : (
                   <EmptyState
                     icon={HiOutlineCamera}
-                    title="الكاميرا ظپظٹ وضع الاستعداد"
+                    title="الكاميرا في وضع الاستعداد"
                     description="اضغط على 'بدء المسح' لبدء مسح QR كود الطالب"
                     action={
                       <Button type="button" onClick={startScan} variant="primary" leftIcon={<HiOutlineQrcode className="w-4 h-4" />}>

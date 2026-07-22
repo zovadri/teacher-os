@@ -143,7 +143,7 @@ export default function CreateCoursePage() {
     await new Promise((r) => setTimeout(r, 1500))
     setSubmitting(false)
     setSubmitted(true)
-    toast.success("طھظ… إنشاء الكورس بنجاح!")
+    toast.success("تم إنشاء الكورس بنجاح!")
   }
 
   const addChapter = () => setChapters((prev) => [...prev, createChapter()])
@@ -181,8 +181,8 @@ export default function CreateCoursePage() {
           <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
             <HiOutlineCheck size={32} className="text-success" />
           </div>
-          <h2 className="text-xl font-bold text-text mb-2">طھظ… إنشاء الكورس بنجاح</h2>
-          <p className="text-sm text-text-tertiary mb-6">طھظ… حفظ الكورس &ldquo;{form.title}&rdquo; بنجاح</p>
+          <h2 className="text-xl font-bold text-text mb-2">تم إنشاء الكورس بنجاح</h2>
+          <p className="text-sm text-text-tertiary mb-6">تم حفظ الكورس &ldquo;{form.title}&rdquo; بنجاح</p>
           <div className="flex items-center gap-3">
             <Button variant="primary" onClick={() => { setSubmitted(false); setForm(initialForm); setChapters([]) }}>
               إنشاء كورس آخر
@@ -256,7 +256,7 @@ export default function CreateCoursePage() {
             </CardHeader>
             <CardContent className="space-y-4">
               {chapters.length === 0 && (
-                <p className="text-sm text-text-tertiary text-center py-4">لم ظٹطھظ… إضافة ط£ظٹ فصول بعد. أضف فصلاً للبدء.</p>
+                <p className="text-sm text-text-tertiary text-center py-4">لم يتم إضافة أي فصول بعد. أضف فصلاً للبدء.</p>
               )}
               {chapters.map((chapter) => (
                 <div key={chapter.id} className="border border-border rounded-xl overflow-hidden">

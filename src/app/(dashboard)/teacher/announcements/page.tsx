@@ -37,7 +37,7 @@ import Link from "next/link"
 
 const mockAnnouncements = Array.from({ length: 15 }, (_, i) => ({
   id: `ann-${i + 1}`,
-  title: ["تحديث هام ظپظٹ المنهج", "موعد الامتحانات النهائية", "تنبيه: بدء التسجيل", "إعلان نتائج الامتحانات", "جدول الحصص الأسبوعي", "اجتماع أولياء الأمور", "إجازة رسمية", "تحديث نظام الرسوم", "حملة التبرعات", "مسابقة الطالب المثالي", "تنويه: واجبات الأسبوع", "مبادرة النظافة", "دورة تدريبية للمعلمين", "رحلة مدرسية", "محاضرة توعوية"][i],
+  title: ["تحديث هام في المنهج", "موعد الامتحانات النهائية", "تنبيه: بدء التسجيل", "إعلان نتائج الامتحانات", "جدول الحصص الأسبوعي", "اجتماع أولياء الأمور", "إجازة رسمية", "تحديث نظام الرسوم", "حملة التبرعات", "مسابقة الطالب المثالي", "تنويه: واجبات الأسبوع", "مبادرة النظافة", "دورة تدريبية للمعلمين", "رحلة مدرسية", "محاضرة توعوية"][i],
   content: "نص الإعلان الكامل مع التفاصيل والمعلومات الهامة",
   type: (["info", "warning", "success", "emergency"] as const)[i % 4],
   target: (["all", "students", "teachers", "parents", "staff"] as const)[i % 5],
@@ -429,7 +429,7 @@ export default function AnnouncementsPage() {
               </div>
               {selectedAnnouncement.scheduledAt && (
                 <div>
-                  <p className="text-text-tertiary">مجدول ظپظٹ</p>
+                  <p className="text-text-tertiary">مجدول في</p>
                   <p className="text-text font-medium">{formatDate(selectedAnnouncement.scheduledAt)}</p>
                 </div>
               )}

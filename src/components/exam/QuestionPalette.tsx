@@ -54,7 +54,7 @@ export function QuestionPalette({
 
         <div className="mb-5 p-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-2 text-xs text-gray-500">
-            <span>طھظ…طھ الإجابة</span>
+            <span>تمت الإجابة</span>
             <span className="font-bold text-emerald-600">{answeredCount}/{questions.length}</span>
           </div>
           <div className="h-1.5 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
@@ -105,7 +105,7 @@ export function QuestionPalette({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded bg-emerald-500" />
-              <span className="text-gray-600 dark:text-gray-400">طھظ…طھ الإجابة</span>
+              <span className="text-gray-600 dark:text-gray-400">تمت الإجابة</span>
             </div>
             <span className="font-medium text-emerald-600">{answeredCount}</span>
           </div>
@@ -119,7 +119,7 @@ export function QuestionPalette({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded bg-gray-300 dark:bg-gray-600" />
-              <span className="text-gray-600 dark:text-gray-400">لم ظٹطھظ… الإجابة</span>
+              <span className="text-gray-600 dark:text-gray-400">لم يتم الإجابة</span>
             </div>
             <span className="font-medium text-red-600">{unansweredCount}</span>
           </div>

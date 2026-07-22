@@ -155,7 +155,7 @@ export default function AnalyticsPage() {
   if (error) {
     return (
       <div className="p-4 md:p-6">
-        <ErrorState title="حدث خطأ ظپظٹ تحميل التحليلات" message="يرجى المحاولة مرة أخرى" onRetry={() => setError(null)} />
+        <ErrorState title="حدث خطأ في تحميل التحليلات" message="يرجى المحاولة مرة أخرى" onRetry={() => setError(null)} />
       </div>
     )
   }
@@ -335,7 +335,7 @@ function OverviewSection({ data }: { data: typeof mockAnalyticsDetailed }) {
                     <ActivityIcon type={activity.type} />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-text truncate">{activity.action}</p>
-                      <p className="text-xs text-text-tertiary">{activity.user} ط¢آ· {activity.time}</p>
+                      <p className="text-xs text-text-tertiary">{activity.user} · {activity.time}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -851,7 +851,7 @@ function FinancialReportsSection({ data }: { data: typeof mockAnalyticsDetailed 
     )},
     { key: "growth", header: "النمو", render: (r: Record<string, unknown>) => (
       <span className={cn("flex items-center gap-1", r.growth >= 0 ? "text-success" : "text-error")}>
-        {r.growth >= 0 ? "أ¢†‘" : "↓"} %{Math.abs(r.growth)}
+        {r.growth >= 0 ? "↑" : "↓"} %{Math.abs(r.growth)}
       </span>
     )},
   ]

@@ -114,7 +114,7 @@ export default function StaffPage() {
             : t
         )
       )
-      toast.success("طھظ… تحديث القالب بنجاح")
+      toast.success("تم تحديث القالب بنجاح")
     } else {
       const newTemplate: PermissionTemplate = {
         id: `tmpl-${Date.now()}`,
@@ -125,7 +125,7 @@ export default function StaffPage() {
         permissions: data.permissions,
       }
       setTemplates((prev) => [...prev, newTemplate])
-      toast.success("طھظ… إنشاء القالب بنجاح")
+      toast.success("تم إنشاء القالب بنجاح")
     }
     setModalOpen(false)
     setEditingTemplate(null)
@@ -145,7 +145,7 @@ export default function StaffPage() {
     if (deleteConfirm) {
       setTemplates((prev) => prev.filter((t) => t.id !== deleteConfirm))
       setDeleteConfirm(null)
-      toast.success("طھظ… حذف القالب بنجاح")
+      toast.success("تم حذف القالب بنجاح")
     }
   }
 

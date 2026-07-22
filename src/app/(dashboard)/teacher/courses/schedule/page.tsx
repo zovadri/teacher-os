@@ -38,7 +38,7 @@ const mockScheduledLessons = [
   { id: "sched-2", courseId: "c-1", courseName: "النحو والصرف", lessonName: "درس 2: الشرح", date: new Date(2025, 6, 22), time: "10:00", duration: 45, notes: "", autoPublish: false },
   { id: "sched-3", courseId: "c-2", courseName: "البلاغة والأدب", lessonName: "درس 1: المقدمة", date: new Date(2025, 6, 21), time: "14:00", duration: 60, notes: "تجهيز العرض التقديمي", autoPublish: true },
   { id: "sched-4", courseId: "c-6", courseName: "التعبير والإنشاء", lessonName: "درس 3: التطبيق", date: new Date(2025, 6, 23), time: "12:00", duration: 30, notes: "", autoPublish: true },
-  { id: "sched-5", courseId: "c-4", courseName: "قواعد النحو المتقدم", lessonName: "درس 1: مقدمة", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "اختبار قصير ظپظٹ نهاية الدرس", autoPublish: false },
+  { id: "sched-5", courseId: "c-4", courseName: "قواعد النحو المتقدم", lessonName: "درس 1: مقدمة", date: new Date(2025, 6, 25), time: "09:00", duration: 50, notes: "اختبار قصير في نهاية الدرس", autoPublish: false },
 ]
 
 export default function SchedulePage() {
@@ -80,14 +80,14 @@ export default function SchedulePage() {
       notes: newLesson.notes,
       autoPublish: autoPublish,
     }])
-    toast.success("طھظ…طھ إضافة الدرس إلى الجدولة بنجاح")
+    toast.success("تمت إضافة الدرس إلى الجدولة بنجاح")
     setShowAddModal(false)
     setNewLesson({ courseId: "", lessonName: "", date: "", time: "", duration: 45, notes: "" })
   }
 
   const deleteLesson = (id: string) => {
     setSchedule((prev) => prev.filter((s) => s.id !== id))
-    toast.success("طھظ… حذف الدرس من الجدولة")
+    toast.success("تم حذف الدرس من الجدولة")
   }
 
   const courseOptions = mockCourses.map((c) => ({ value: c.id, label: c.title }))
@@ -211,7 +211,7 @@ export default function SchedulePage() {
                       <div className="flex items-center gap-3 mt-1 text-xs text-text-tertiary">
                         <span className="flex items-center gap-1"><HiOutlineClock className="w-3 h-3" />{s.time}</span>
                         <span>{s.duration} دقيقة</span>
-                        {s.notes && <span className="truncate max-w-[200px]">ط¢آ· {s.notes}</span>}
+                        {s.notes && <span className="truncate max-w-[200px]">· {s.notes}</span>}
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -238,7 +238,7 @@ export default function SchedulePage() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-text">النشر التلقائي عند حلول الموعد</p>
-              <p className="text-xs text-text-tertiary">عند تفعيله، سيتم نشر الدرس تلقائياً للطلاب ظپظٹ تاريخ وميعاد الجدولة</p>
+              <p className="text-xs text-text-tertiary">عند تفعيله، سيتم نشر الدرس تلقائياً للطلاب في تاريخ وميعاد الجدولة</p>
             </div>
             <button type="button"
               onClick={() => setAutoPublish(!autoPublish)}

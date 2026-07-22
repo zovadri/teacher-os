@@ -34,7 +34,7 @@ const groups: Group[] = [
       { id: "m1", user: "أحمد علي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=1", text: "حد عنده فكرة عن تفاعلات الباب الثالث؟", time: "منذ 10 دقائق", likes: 5 },
       { id: "m2", user: "مريم حسن", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=2", text: "هشرحلكم تفاعلات الاحلال البسيط بطريقة سهلة", time: "منذ 8 دقائق", likes: 12 },
       { id: "m3", user: "خالد صقر", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=3", text: "فيديو النهاردة عن الاتزان الكيميائي، يا ريت نشوفه", time: "منذ 5 دقائق", likes: 24 },
-      { id: "m4", user: "ندى سامي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=4", text: "ايه رأيكم ظپظٹ امتحان الأسبوع ده؟", time: "منذ 3 دقائق", likes: 3 },
+      { id: "m4", user: "ندى سامي", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=4", text: "ايه رأيكم في امتحان الأسبوع ده؟", time: "منذ 3 دقائق", likes: 3 },
     ],
   },
   {
@@ -53,7 +53,7 @@ const groups: Group[] = [
   {
     id: "g4", name: "العربي - النحو", members: 1103, lastActive: "منذ 10 دقائق", unread: 8,
     messages: [
-      { id: "m8", user: "ط¢ظٹط© كريم", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=8", text: "إعراب الجمل دي صعبة أوي!", time: "منذ 15 دقيقة", likes: 6 },
+      { id: "m8", user: "آية كريم", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=8", text: "إعراب الجمل دي صعبة أوي!", time: "منذ 15 دقيقة", likes: 6 },
       { id: "m9", user: "نور الدين", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=9", text: "شوفوا فيديو شرح كان وأخواتها هتظبط", time: "منذ 7 دقائق", likes: 11 },
     ],
   },
@@ -120,7 +120,7 @@ export default function CommunityPage() {
             <div className="relative">
               <HiSearch className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
               <input value={search} onChange={(e) => setSearch(e.target.value)}
-                placeholder="ابحث ظپظٹ المجموعات..."
+                placeholder="ابحث في المجموعات..."
                 className="w-full pr-10 pl-4 py-2.5 rounded-xl bg-surface border border-border text-sm text-text placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
             </div>
 
@@ -201,7 +201,7 @@ export default function CommunityPage() {
             ) : (
               <div className="h-[600px] flex flex-col items-center justify-center text-text-tertiary bg-surface rounded-2xl border border-border">
                 <HiOutlineChat className="w-16 h-16 mb-4 opacity-30" />
-                <p className="font-medium">اختر مجموعة للدخول ظپظٹ النقاش</p>
+                <p className="font-medium">اختر مجموعة للدخول في النقاش</p>
                 <p className="text-xs mt-1">شارك زملاءك الأسئلة والأفكار</p>
               </div>
             )}

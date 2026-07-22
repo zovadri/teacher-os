@@ -64,7 +64,7 @@ export default function BrandingPage() {
   const handleSave = () => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
-    toast.success("طھظ… حفظ العلامة التجارية بنجاح")
+    toast.success("تم حفظ العلامة التجارية بنجاح")
   }
 
   const handleReset = () => {
@@ -229,7 +229,7 @@ export default function BrandingPage() {
             </CardContent>
             <CardFooter className="flex gap-3">
               <Button variant="primary" className="flex-1" leftIcon={<HiOutlineSave className="w-4 h-4" />} onClick={handleSave}>
-                {saved ? "طھظ… الحفظ!" : "حفظ"}
+                {saved ? "تم الحفظ!" : "حفظ"}
               </Button>
               <Button variant="secondary" leftIcon={<HiOutlineRefresh className="w-4 h-4" />} onClick={handleReset}>
                 إعادة

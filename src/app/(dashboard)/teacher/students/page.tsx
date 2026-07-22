@@ -109,9 +109,9 @@ export default function StudentsPage() {
       <BulkActions
         selectedCount={selectedIds.size}
         onClear={() => setSelectedIds(new Set())}
-        onMoveToGroup={(g) => { toast.success(`طھظ… نقل ${selectedIds.size} طالب إلى المجموعة ${g}`); setSelectedIds(new Set()) }}
-        onChangeStatus={(s) => { toast.success(`طھظ… تغيير حالة ${selectedIds.size} طالب`); setSelectedIds(new Set()) }}
-        onSendMessage={() => toast.success("طھظ… إرسال الرسالة بنجاح")}
+        onMoveToGroup={(g) => { toast.success(`تم نقل ${selectedIds.size} طالب إلى المجموعة ${g}`); setSelectedIds(new Set()) }}
+        onChangeStatus={(s) => { toast.success(`تم تغيير حالة ${selectedIds.size} طالب`); setSelectedIds(new Set()) }}
+        onSendMessage={() => toast.success("تم إرسال الرسالة بنجاح")}
         onPrint={() => toast.success("جاري تجهيز الطباعة")}
         onExportExcel={() => toast.success("جاري تصدير البيانات")}
       />
@@ -147,7 +147,7 @@ export default function StudentsPage() {
         <EmptyState
           icon={HiOutlineUsers}
           title="لا يوجد طلاب"
-          description="لم ظٹطھظ… العثور على طلاب مطابقين لمعايير البحث"
+          description="لم يتم العثور على طلاب مطابقين لمعايير البحث"
         />
       ) : (
         <>
@@ -279,7 +279,7 @@ export default function StudentsPage() {
               setStudents((prev) => [newStudent, ...prev])
               setShowCreateModal(false)
               setCreateForm({ name: "", email: "", phone: "", grade: "", parentName: "", parentPhone: "" })
-              toast.success("طھظ… إضافة الطالب بنجاح")
+              toast.success("تم إضافة الطالب بنجاح")
             }}>
               إضافة طالب جديد
             </Button>

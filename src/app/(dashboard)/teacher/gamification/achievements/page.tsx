@@ -71,7 +71,7 @@ export default function AchievementsPage() {
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
         <StatsCard title="إجمالي الإنجازات" value={stats.total} icon={HiStar} color="primary" />
-        <StatsCard title="طھظ… منحها" value={stats.totalAwarded} icon={HiOutlineStar} color="warning" />
+        <StatsCard title="تم منحها" value={stats.totalAwarded} icon={HiOutlineStar} color="warning" />
         <StatsCard title="الطلاب الحاصلون" value={stats.awardedStudents} icon={HiOutlineUsers} color="success" />
       </motion.div>
 
@@ -165,7 +165,7 @@ size="xs"
             placeholder="اختر الطالب"
           />
           <div className="flex gap-3 pt-2">
-            <Button variant="primary" className="flex-1" disabled={!awardAchId || !awardStudentId} onClick={() => { setShowAward(false); toast.success("طھظ… منح الإنجاز للطالب بنجاح") }}>
+            <Button variant="primary" className="flex-1" disabled={!awardAchId || !awardStudentId} onClick={() => { setShowAward(false); toast.success("تم منح الإنجاز للطالب بنجاح") }}>
               <HiOutlineCheck className="w-4 h-4 ml-1" />
               منح الإنجاز
             </Button>

@@ -267,7 +267,7 @@ export default function CourseDetailPage() {
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">ابدأ رحلة التعلم الآن</h2>
               <p className="text-white/80 mb-8 max-w-xl mx-auto">انضم إلى {course.studentsCount}+ طالب واستفد من المحتوى التعليمي المتميز.</p>
-              <Button className="px-8 py-3 bg-white text-primary font-medium rounded-xl hover:bg-white/90 transition-all">اشترك ظپظٹ الكورس</Button>
+              <Button className="px-8 py-3 bg-white text-primary font-medium rounded-xl hover:bg-white/90 transition-all">اشترك في الكورس</Button>
             </div>
           </motion.div>
         </div>

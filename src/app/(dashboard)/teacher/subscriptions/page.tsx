@@ -93,7 +93,7 @@ export default function SubscriptionsPage() {
                   <EmptyState
                     icon={HiOutlineCreditCard}
                     title="لا يوجد اشتراكات"
-                    description="لم ظٹطھظ… تسجيل ط£ظٹ اشتراكات بعد"
+                    description="لم يتم تسجيل أي اشتراكات بعد"
                   />
                 ) : (
                   <Table
@@ -122,18 +122,18 @@ export default function SubscriptionsPage() {
                       { key: "actions", header: "الإجراءات", render: (s) => (
                         <div className="flex items-center gap-2">
                           {s.status === "active" ? (
-                            <Button type="button" size="sm" variant="danger" onClick={() => { toast.success("طھظ… إلغاء الاشتراك بنجاح") }}>
+                            <Button type="button" size="sm" variant="danger" onClick={() => { toast.success("تم إلغاء الاشتراك بنجاح") }}>
                               إلغاء
                             </Button>
                           ) : (
-                            <Button type="button" size="sm" variant="success" onClick={() => { toast.success("طھظ… تفعيل الاشتراك بنجاح") }}>
+                            <Button type="button" size="sm" variant="success" onClick={() => { toast.success("تم تفعيل الاشتراك بنجاح") }}>
                               تفعيل
                             </Button>
                           )}
-                          <Button type="button" size="sm" variant="primary" onClick={() => { toast.success("طھظ… ترقية الاشتراك بنجاح") }}>
+                          <Button type="button" size="sm" variant="primary" onClick={() => { toast.success("تم ترقية الاشتراك بنجاح") }}>
                             ترقية
                           </Button>
-                          <Button type="button" size="sm" variant="info" onClick={() => { toast.success("طھظ… تجديد الاشتراك بنجاح") }}>
+                          <Button type="button" size="sm" variant="info" onClick={() => { toast.success("تم تجديد الاشتراك بنجاح") }}>
                             تجديد
                           </Button>
                         </div>

@@ -63,7 +63,7 @@ export default function PermissionsPage() {
         },
       }
     }))
-    toast.success("طھظ… تحديث الصلاحية")
+    toast.success("تم تحديث الصلاحية")
   }
 
   const handleAddRole = () => {
@@ -83,7 +83,7 @@ export default function PermissionsPage() {
     setRoles((prev) => [...prev, role])
     setShowAddModal(false)
     setNewRole({ name: "", description: "" })
-    toast.success("طھظ… إضافة الدور بنجاح")
+    toast.success("تم إضافة الدور بنجاح")
   }
 
   if (hasError) {
@@ -107,7 +107,7 @@ export default function PermissionsPage() {
       {isLoading ? (
         <CardSkeleton count={3} />
       ) : roles.length === 0 ? (
-        <EmptyState icon={HiOutlineShieldCheck} title="لا توجد أدوار" description="لم ظٹطھظ… إضافة ط£ظٹ أدوار صلاحيات بعد" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة دور</Button>} />
+        <EmptyState icon={HiOutlineShieldCheck} title="لا توجد أدوار" description="لم يتم إضافة أي أدوار صلاحيات بعد" action={<Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>إضافة دور</Button>} />
       ) : (
         <div className="grid grid-cols-1 gap-4">
           {roles.map((role) => (

@@ -19,13 +19,13 @@ import { useNotificationStore } from "@/lib/notification-store"
 import { generateId } from "@/lib/utils"
 
 const iconOptions = [
-  { value: "ًں“گ", label: "ًں“گ مثلث" },
+  { value: "📐", label: "📐 مثلث" },
   { value: "🔬", label: "🔬 مجهر" },
   { value: "ًںŒچ", label: "ًںŒچ كرة أرضية" },
   { value: "ًں“œ", label: "ًں“œ لفافة" },
-  { value: "ًں’»", label: "ًں’» حاسوب" },
+  { value: "💻", label: "💻 حاسوب" },
   { value: "🎨", label: "🎨 لوحة" },
-  { value: "ًں“–", label: "ًں“– كتاب" },
+  { value: "📖", label: "📖 كتاب" },
   { value: "✏️", label: "✏️ قلم" },
   { value: "🧮", label: "🧮 عداد" },
   { value: "🔭", label: "🔭 تلسكوب" },
@@ -51,7 +51,7 @@ interface CategoryForm {
   color: string
 }
 
-const emptyForm: CategoryForm = { name: "", description: "", icon: "ًں“گ", color: "#6366F1" }
+const emptyForm: CategoryForm = { name: "", description: "", icon: "📐", color: "#6366F1" }
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState(mockCourseCategories)
@@ -96,13 +96,13 @@ export default function CategoriesPage() {
             : c
         )
       )
-      addToast({ type: "success", title: "طھظ… تحديث التصنيف بنجاح" })
+      addToast({ type: "success", title: "تم تحديث التصنيف بنجاح" })
     } else {
       setCategories((prev) => [
         ...prev,
         { id: generateId(), name: form.name, description: form.description, icon: form.icon, color: form.color, courseCount: 0 },
       ])
-      addToast({ type: "success", title: "طھظ… إضافة التصنيف بنجاح" })
+      addToast({ type: "success", title: "تم إضافة التصنيف بنجاح" })
     }
     setModalOpen(false)
   }
@@ -110,7 +110,7 @@ export default function CategoriesPage() {
   const handleDelete = () => {
     if (!deleteTarget) return
     setCategories((prev) => prev.filter((c) => c.id !== deleteTarget.id))
-    addToast({ type: "success", title: `طھظ… حذف تصنيف "${deleteTarget.name}" بنجاح` })
+    addToast({ type: "success", title: `تم حذف تصنيف "${deleteTarget.name}" بنجاح` })
     setDeleteTarget(null)
   }
 
@@ -140,7 +140,7 @@ export default function CategoriesPage() {
       ) : categories.length === 0 ? (
         <EmptyState
           title="لا توجد تصنيفات"
-          description="لم ظٹطھظ… إضافة ط£ظٹ تصنيفات بعد. أضف تصنيفاً جديداً للبدء."
+          description="لم يتم إضافة أي تصنيفات بعد. أضف تصنيفاً جديداً للبدء."
           action={
             <Button variant="primary" onClick={openCreateModal}>
               إضافة تصنيف جديد

@@ -80,17 +80,17 @@ export default function GroupsPage() {
   }), [])
 
   const handleAddGroup = () => {
-    toast.success(`طھظ… إضافة المجموعة ${addForm.name || "جديدة"} بنجاح`)
+    toast.success(`تم إضافة المجموعة ${addForm.name || "جديدة"} بنجاح`)
     setShowAddModal(false)
     setAddForm({ name: "", courseId: "", capacity: "25", classroom: "" })
   }
 
   const handleNotify = (id: string) => {
-    toast.success("طھظ… إرسال الإشعار للطالب")
+    toast.success("تم إرسال الإشعار للطالب")
   }
 
   const handleRecover = (id: string) => {
-    toast.success("طھظ… تعويض الدرس بنجاح")
+    toast.success("تم تعويض الدرس بنجاح")
   }
 
   const handleRetry = () => {
@@ -143,7 +143,7 @@ export default function GroupsPage() {
                   <EmptyState
                     icon={HiOutlineUserGroup}
                     title="لا توجد مجموعات"
-                    description={search ? "لا توجد نتائج للبحث" : "لم ظٹطھظ… إضافة ط£ظٹ مجموعات بعد"}
+                    description={search ? "لا توجد نتائج للبحث" : "لم يتم إضافة أي مجموعات بعد"}
                     action={<Button onClick={() => { setAddForm({ name: "", courseId: "", capacity: "25", classroom: "" }); setShowAddModal(true) }}>إضافة مجموعة</Button>}
                   />
                 ) : (
@@ -182,7 +182,7 @@ export default function GroupsPage() {
                               {group.waitingCount > 0 && (
                                 <div className="flex items-center gap-1.5 text-sm text-warning">
                                   <HiOutlineClock className="w-4 h-4" />
-                                  <span>{group.waitingCount} طالب ظپظٹ الانتظار</span>
+                                  <span>{group.waitingCount} طالب في الانتظار</span>
                                 </div>
                               )}
                             </CardContent>
@@ -212,7 +212,7 @@ export default function GroupsPage() {
               {loading ? (
                 <TableSkeleton rows={5} columns={5} />
               ) : mockWaitingStudents.length === 0 ? (
-                <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب ظپظٹ الانتظار" description="قائمة الانتظار فارغة حالياً" />
+                <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب في الانتظار" description="قائمة الانتظار فارغة حالياً" />
               ) : (
                 <div className="overflow-x-auto rounded-xl border border-border">
                   <table className="w-full text-sm">
@@ -241,7 +241,7 @@ export default function GroupsPage() {
                           </td>
                           <td className="px-4 py-3">
                             <Badge variant={w.status === "waiting" ? "warning" : w.status === "enrolled" ? "success" : w.status === "cancelled" ? "error" : "info"}>
-                              {w.status === "waiting" ? "بانتظار" : w.status === "offered" ? "طھظ… العرض" : w.status === "enrolled" ? "مسجل" : "ملغي"}
+                              {w.status === "waiting" ? "بانتظار" : w.status === "offered" ? "تم العرض" : w.status === "enrolled" ? "مسجل" : "ملغي"}
                             </Badge>
                           </td>
                           <td className="px-4 py-3">
@@ -305,7 +305,7 @@ export default function GroupsPage() {
               {loading ? (
                 <TableSkeleton rows={4} columns={5} />
               ) : mockMissedLessons.length === 0 ? (
-                <EmptyState icon={HiOutlineExclamation} title="لا توجد دروس مفقودة" description="جميع الدروس طھظ… تعويضها" />
+                <EmptyState icon={HiOutlineExclamation} title="لا توجد دروس مفقودة" description="جميع الدروس تم تعويضها" />
               ) : (
                 <div className="overflow-x-auto rounded-xl border border-border">
                   <table className="w-full text-sm">
@@ -326,7 +326,7 @@ export default function GroupsPage() {
                           <td className="px-4 py-3 text-text-secondary">{m.date.toLocaleDateString("ar-EG")}</td>
                           <td className="px-4 py-3">
                             <Badge variant={m.recovered ? "success" : "error"}>
-                              {m.recovered ? "طھظ… التعويض" : "مفقود"}
+                              {m.recovered ? "تم التعويض" : "مفقود"}
                             </Badge>
                           </td>
                           <td className="px-4 py-3">
