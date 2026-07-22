@@ -101,7 +101,7 @@ export default function DemoPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#09090B] px-4 py-12">
+    <div className="min-h-screen px-4 py-12">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-2 text-text-secondary text-sm">
@@ -191,7 +191,7 @@ export default function DemoPage() {
                       <button type="button"
                         onClick={() => handleDirectLogin(account.role, account.id)}
                         disabled={loggingIn === account.id}
-                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:bg-[#6D70FF] transition-all duration-200 active:scale-[0.97] disabled:opacity-70"
+                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:brightness-110 transition-all duration-200 active:scale-[0.97] disabled:opacity-70"
                       >
                         {loggingIn === account.id ? (
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

@@ -147,7 +147,7 @@ export default function StudentsPage() {
             {chip}
           </button>
         ))}
-        <div className="w-px h-5 bg-[rgba(255,255,255,0.06)] mx-1" />
+        <div className="w-px h-5 bg-border mx-1" />
         <select value={gradeFilter} onChange={(e) => { setGradeFilter(e.target.value); setPage(1) }}
           className="px-3 py-1.5 bg-transparent border border-border rounded-full text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30">
           {grades.map((g) => <option key={g} value={g}>{g === "الكل" ? "جميع الصفوف" : g}</option>)}
@@ -326,38 +326,38 @@ export default function StudentsPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">البريد الإلكتروني</p>
                 <p className="text-sm text-text font-medium" dir="ltr">{selectedStudent.email}</p>
               </div>
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">رقم الهاتف</p>
                 <p className="text-sm text-text font-medium" dir="ltr">{selectedStudent.phone}</p>
               </div>
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">المجموعة</p>
                 <p className="text-sm text-text font-medium">{selectedStudent.group}</p>
               </div>
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">المحافظة</p>
                 <p className="text-sm text-text font-medium">{selectedStudent.governorate}</p>
               </div>
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">باقة الاشتراك</p>
                 <p className="text-sm text-text font-medium">{selectedStudent.subscription.planName}</p>
               </div>
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">النقاط والمستوى</p>
                 <p className="text-sm text-text font-medium">{selectedStudent.xp} XP آ· مستوى {selectedStudent.level}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">تاريخ بداية الاشتراك</p>
                 <p className="text-sm text-text font-medium">{selectedStudent.subscription.startDate.toLocaleDateString("ar-EG")}</p>
               </div>
-              <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+              <div className="p-4 rounded-xl bg-surface-secondary border border-border shadow-[0_1px_6px_rgba(0,0,0,0.12)]">
                 <p className="text-xs text-text-tertiary mb-1">تاريخ نهاية الاشتراك</p>
                 <p className="text-sm text-text font-medium">{selectedStudent.subscription.endDate.toLocaleDateString("ar-EG")}</p>
               </div>

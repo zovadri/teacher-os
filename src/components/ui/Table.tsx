@@ -21,12 +21,12 @@ interface TableProps<T> {
 export function Table<T extends Record<string, any>>({ columns, data, className, onRowClick, emptyMessage = "لا توجد بيانات", mobileCard = true }: TableProps<T>) {
   return (
     <>
-      <div className="hidden md:block overflow-x-auto rounded-[20px] border border-[rgba(255,255,255,0.06)]">
+      <div className="hidden md:block overflow-x-auto rounded-[20px] border border-border shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
         <table className={cn("w-full text-sm", className)}>
           <thead>
-            <tr className="bg-white/[0.03]">
+            <tr className="bg-surface/50">
               {columns.map((col) => (
-                <th key={col.key} className={cn("text-right px-4 py-3 font-medium text-[#94A3B8] whitespace-nowrap text-xs tracking-wide", col.className)}>
+                <th key={col.key} className={cn("text-right px-4 py-3 font-medium text-text-secondary whitespace-nowrap text-xs tracking-wide", col.className)}>
                   {col.header}
                 </th>
               ))}
@@ -35,7 +35,7 @@ export function Table<T extends Record<string, any>>({ columns, data, className,
           <tbody>
             {data.length === 0 ? (
               <tr>
-                <td colSpan={columns.length} className="text-center py-12 text-[#64748B]">{emptyMessage}</td>
+                <td colSpan={columns.length} className="text-center py-12 text-text-tertiary">{emptyMessage}</td>
               </tr>
             ) : (
               data.map((item, idx) => (
@@ -43,12 +43,12 @@ export function Table<T extends Record<string, any>>({ columns, data, className,
                   key={item.id || idx}
                   onClick={() => onRowClick?.(item)}
                   className={cn(
-                    "border-t border-[rgba(255,255,255,0.06)] transition-colors",
-                    onRowClick && "cursor-pointer hover:bg-white/[0.02]"
+                    "border-t border-border transition-colors",
+                    onRowClick && "cursor-pointer hover:bg-surface-secondary/30"
                   )}
                 >
                   {columns.map((col) => (
-                    <td key={col.key} className={cn("px-4 py-3 text-[#F8FAFC]", col.className)}>
+                    <td key={col.key} className={cn("px-4 py-3 text-text", col.className)}>
                       {col.render ? col.render(item) : item[col.key]}
                     </td>
                   ))}
@@ -62,14 +62,14 @@ export function Table<T extends Record<string, any>>({ columns, data, className,
       {mobileCard && (
         <div className="md:hidden space-y-3">
           {data.length === 0 ? (
-            <p className="text-center py-12 text-[#64748B]">{emptyMessage}</p>
+            <p className="text-center py-12 text-text-tertiary">{emptyMessage}</p>
           ) : (
             data.map((item, idx) => (
               <div
                 key={item.id || idx}
                 onClick={() => onRowClick?.(item)}
                 className={cn(
-                  "bg-[#111827] border border-[rgba(255,255,255,0.06)] rounded-[20px] p-4",
+                  "bg-surface border border-border rounded-[20px] p-4 shadow-[0_2px_12px_rgba(0,0,0,0.15)]",
                   onRowClick && "cursor-pointer"
                 )}
               >
@@ -79,8 +79,8 @@ export function Table<T extends Record<string, any>>({ columns, data, className,
                   }
                   return (
                     <div key={col.key} className="flex items-center justify-between py-1.5">
-                      <span className="text-xs text-[#64748B]">{col.mobileLabel || col.header}</span>
-                      <span className="text-sm text-[#F8FAFC]">
+                      <span className="text-xs text-text-tertiary">{col.mobileLabel || col.header}</span>
+                      <span className="text-sm text-text">
                         {col.render ? col.render(item) : item[col.key]}
                       </span>
                     </div>

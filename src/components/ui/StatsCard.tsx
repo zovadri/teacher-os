@@ -34,7 +34,7 @@ export function StatsCard({ title, value, icon: Icon, description, color = "prim
     <motion.div
       initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
-      className={cn("bg-surface border border-border rounded-[20px] p-5 transition-all duration-200 hover:border-primary/30", className)}
+      className={cn("bg-surface border border-border rounded-[20px] p-5 transition-all duration-200 shadow-[0_2px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_24px_rgba(99,102,241,0.1)] hover:border-primary/30", className)}
     >
       <div className="flex items-start gap-4">
         <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center shrink-0", iconBgColors[color])}>
