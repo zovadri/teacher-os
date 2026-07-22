@@ -21,7 +21,7 @@ interface TableProps<T> {
 export function Table<T extends Record<string, any>>({ columns, data, className, onRowClick, emptyMessage = "لا توجد بيانات", mobileCard = true }: TableProps<T>) {
   return (
     <>
-      <div className="hidden md:block overflow-x-auto rounded-[20px] border border-border shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
+      <div className="hidden md:block overflow-x-auto rounded-[24px] border border-border shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
         <table className={cn("w-full text-sm", className)}>
           <thead>
             <tr className="bg-surface/50">

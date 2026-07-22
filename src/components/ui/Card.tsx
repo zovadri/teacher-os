@@ -12,8 +12,8 @@ export function Card({ className, children, hover, onClick }: CardProps) {
     <div
       onClick={onClick}
       className={cn(
-        "bg-surface border border-border rounded-[20px] p-5 transition-all duration-200 shadow-[0_2px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_24px_rgba(0,0,0,0.25)]",
-        hover && "hover:border-primary/30 hover:shadow-[0_4px_24px_rgba(99,102,241,0.1)] cursor-pointer",
+        "bg-card border border-border rounded-[24px] p-6 transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)]",
+        hover && "hover:border-primary/20 hover:-translate-y-0.5 cursor-pointer",
         onClick && "cursor-pointer",
         className
       )}

@@ -70,7 +70,7 @@ export default function TeacherDashboard() {
   return (
     <motion.div initial="hidden" animate="visible" className="space-y-6">
 
-      <motion.div variants={item} className="bg-surface border border-border rounded-[20px] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
+      <motion.div variants={item} className="bg-card border border-border rounded-[24px] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-xl font-bold text-text">
@@ -106,7 +106,7 @@ export default function TeacherDashboard() {
             { title: "الطلاب الجدد", value: mockStats.newStudents, icon: HiOutlineUserAdd, color: "text-info", bg: "bg-info/10", href: "/teacher/students" },
           ].map((card) => (
             <Link key={card.title} href={card.href}>
-              <div className="bg-surface border border-border rounded-[20px] p-5 transition-all duration-200 shadow-[0_2px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_24px_rgba(99,102,241,0.1)] hover:border-primary/30">
+              <div className="bg-card border border-border rounded-[24px] p-6 transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
                 <div className="flex items-start gap-4">
                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${card.bg} ${card.color}`}>
                     <card.icon className="w-6 h-6" />
@@ -124,7 +124,7 @@ export default function TeacherDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <motion.div variants={item} className="lg:col-span-2">
-          <div className="bg-surface border border-border rounded-[20px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
+          <div className="bg-surface border border-border rounded-[24px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-[15px] font-semibold text-text">الإيرادات الشهرية</h3>
               <Badge variant="primary" size="sm">2025</Badge>
@@ -153,7 +153,7 @@ export default function TeacherDashboard() {
         </motion.div>
 
         <motion.div variants={item}>
-          <div className="bg-surface border border-border rounded-[20px] p-5 h-full shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
+          <div className="bg-surface border border-border rounded-[24px] p-5 h-full shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-[15px] font-semibold text-text">الامتحانات القادمة</h3>
               <Link href="/teacher/exams" className="text-xs text-primary hover:text-primary-light transition-colors">عرض الكل</Link>
@@ -180,7 +180,7 @@ export default function TeacherDashboard() {
         </motion.div>
 
         <motion.div variants={item} className="lg:col-span-2">
-          <div className="bg-surface border border-border rounded-[20px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
+          <div className="bg-surface border border-border rounded-[24px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-[15px] font-semibold text-text">آخر النشاطات</h3>
               <span className="text-xs text-text-tertiary">تحديث تلقائي</span>
@@ -209,7 +209,7 @@ export default function TeacherDashboard() {
         </motion.div>
 
         <motion.div variants={item}>
-          <div className="bg-surface border border-border rounded-[20px] p-5 h-full shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
+          <div className="bg-surface border border-border rounded-[24px] p-5 h-full shadow-[0_2px_12px_rgba(0,0,0,0.15)]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-[15px] font-semibold text-text">حالة النظام</h3>
             </div>
