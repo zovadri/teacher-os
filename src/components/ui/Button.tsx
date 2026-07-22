@@ -12,21 +12,21 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<string, string> = {
-  primary: "bg-gradient-to-r from-primary to-primary-dark text-white hover:from-primary-dark hover:to-primary shadow-lg shadow-primary/20",
-  secondary: "bg-surface-secondary text-text border border-border/60 hover:bg-surface-tertiary hover:border-border",
-  outline: "border-2 border-primary/30 text-primary hover:bg-primary-50 hover:border-primary",
-  ghost: "text-text-secondary hover:bg-surface-tertiary hover:text-text",
-  danger: "bg-gradient-to-r from-error to-rose-600 text-white hover:from-rose-600 hover:to-error shadow-lg shadow-error/20",
-  success: "bg-gradient-to-r from-success to-emerald-600 text-white hover:from-emerald-600 hover:to-success shadow-lg shadow-success/20",
-  link: "text-primary hover:text-primary-dark underline-offset-4 hover:underline",
+  primary: "bg-primary text-white hover:bg-[#6D70FF]",
+  secondary: "bg-transparent text-text-secondary border border-border hover:bg-surface-tertiary hover:text-text",
+  outline: "border border-primary/50 text-primary hover:bg-primary/10",
+  ghost: "text-text-secondary hover:text-text",
+  danger: "bg-error text-white hover:bg-red-500",
+  success: "bg-success text-white hover:bg-emerald-500",
+  link: "text-primary hover:text-primary-light underline-offset-4 hover:underline",
 }
 
 const sizes: Record<string, string> = {
   xs: "px-2.5 py-1 text-xs rounded-lg",
-  sm: "px-3.5 py-1.5 text-sm rounded-xl",
+  sm: "px-3 py-1.5 text-sm rounded-xl",
   md: "px-4 py-2 text-sm rounded-xl",
   lg: "px-5 py-2.5 text-base rounded-xl",
-  xl: "px-6 py-3 text-base rounded-2xl",
+  xl: "px-6 py-3 text-base rounded-xl",
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -38,9 +38,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         className={cn(
           "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200",
-          "focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-1",
-          "disabled:opacity-50 disabled:cursor-not-allowed",
-          "active:scale-[0.97]",
+          "focus:outline-none focus:ring-2 focus:ring-primary/40",
+          "disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.97]",
           variants[variant],
           sizes[size],
           className

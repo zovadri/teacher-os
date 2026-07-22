@@ -18,10 +18,10 @@ interface TableProps<T> {
 
 export function Table<T extends Record<string, any>>({ columns, data, className, onRowClick, emptyMessage = "لا توجد بيانات" }: TableProps<T>) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-border">
+    <div className="overflow-x-auto rounded-2xl border border-border">
       <table className={cn("w-full text-sm", className)}>
         <thead>
-          <tr className="bg-surface-secondary border-b border-border">
+          <tr className="bg-surface-tertiary">
             {columns.map((col) => (
               <th key={col.key} className={cn("text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap", col.className)}>
                 {col.header}
@@ -40,8 +40,8 @@ export function Table<T extends Record<string, any>>({ columns, data, className,
                 key={item.id || idx}
                 onClick={() => onRowClick?.(item)}
                 className={cn(
-                  "border-b border-border last:border-0 transition-colors",
-                  onRowClick && "cursor-pointer hover:bg-surface-secondary"
+                  "border-b border-border/50 last:border-0 transition-colors",
+                  onRowClick && "cursor-pointer hover:bg-surface-tertiary/50"
                 )}
               >
                 {columns.map((col) => (
