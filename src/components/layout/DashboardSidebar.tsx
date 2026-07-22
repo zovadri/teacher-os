@@ -285,8 +285,8 @@ export default function DashboardSidebar() {
           className={cn(
             "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group",
             active
-              ? "bg-[#5B5FF6]/10 text-[#5B5FF6]"
-              : "text-text-secondary hover:bg-[#18181B] hover:text-text",
+              ? "bg-[#6366F1]/10 text-[#6366F1]"
+              : "text-[#94A3B8] hover:bg-white/[0.03] hover:text-[#F8FAFC]",
           )}
           style={{ paddingRight: depth > 0 ? `${depth * 16 + 12}px` : undefined }}
         >
@@ -316,8 +316,8 @@ export default function DashboardSidebar() {
                     className={cn(
                       "flex items-center gap-3 pr-8 px-3 py-2 rounded-xl text-sm transition-all duration-200 mr-3",
                       pathname === child.href
-                        ? "bg-[#5B5FF6]/10 text-[#5B5FF6]"
-                        : "text-text-tertiary hover:bg-[#18181B] hover:text-text-secondary"
+                        ? "bg-[#6366F1]/10 text-[#6366F1]"
+                        : "text-[#64748B] hover:bg-white/[0.03] hover:text-[#94A3B8]"
                     )}
                   >
                     <HiChevronRight className="w-3 h-3" />
@@ -334,12 +334,12 @@ export default function DashboardSidebar() {
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
-      <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
-        <button type="button" onClick={() => setMobileOpen(false)} className="lg:hidden ml-2 p-1 rounded-lg hover:bg-[#18181B] transition-colors">
-          <HiX className="w-5 h-5 text-text-secondary" />
+      <div className="flex items-center gap-3 px-6 py-5 border-b border-[rgba(255,255,255,0.06)]">
+        <button type="button" onClick={() => setMobileOpen(false)} className="lg:hidden ml-2 p-1 rounded-lg hover:bg-white/[0.03] transition-colors">
+          <HiX className="w-5 h-5 text-[#94A3B8]" />
         </button>
         <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-sm">T</div>
-        {!collapsed && <span className="font-bold text-text text-lg">TeacherOS</span>}
+        {!collapsed && <span className="font-bold text-[#F8FAFC] text-lg">TeacherOS</span>}
       </div>
 
       <nav className="flex-1 overflow-y-auto p-4 space-y-1">
@@ -347,19 +347,19 @@ export default function DashboardSidebar() {
 
         {!collapsed && user?.role === "teacher" && (
           <>
-            <div className="pt-6 mt-6 border-t border-border">
-              <p className="px-3 text-xs font-medium text-text-tertiary mb-2">روابط أخرى</p>
+            <div className="pt-6 mt-6 border-t border-[rgba(255,255,255,0.06)]">
+              <p className="px-3 text-xs font-medium text-[#64748B] mb-2">روابط أخرى</p>
               {otherLinks.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className={cn(
-                    "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
-                    isActive(item.href)
-                      ? "bg-[#5B5FF6]/10 text-[#5B5FF6]"
-                      : "text-text-secondary hover:bg-[#18181B] hover:text-text",
-                  )}
+                    className={cn(
+                      "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+                      isActive(item.href)
+                        ? "bg-[#6366F1]/10 text-[#6366F1]"
+                        : "text-[#94A3B8] hover:bg-white/[0.03] hover:text-[#F8FAFC]",
+                    )}
                 >
                   <item.icon className="w-5 h-5 shrink-0" />
                   <span className="truncate">{item.label}</span>
@@ -370,9 +370,9 @@ export default function DashboardSidebar() {
         )}
       </nav>
 
-      <div className="p-4 border-t border-border">
+      <div className="p-4 border-t border-[rgba(255,255,255,0.06)]">
         <button type="button" className={cn(
-          "flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-text-tertiary hover:bg-[#18181B] hover:text-error transition-all",
+          "flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-[#64748B] hover:bg-white/[0.03] hover:text-[#EF4444] transition-all",
         )}>
           <HiLogout className="w-5 h-5 shrink-0" />
           {!collapsed && <span>تسجيل خروج</span>}
@@ -405,7 +405,7 @@ export default function DashboardSidebar() {
         initial={false}
         animate={{ x: mobileOpen ? 0 : "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="lg:hidden fixed top-0 right-0 z-50 h-screen w-[280px] bg-[#09090B] border-l border-border shadow-2xl"
+        className="lg:hidden fixed top-0 right-0 z-50 h-screen w-[280px] bg-[#0B1120] border-l border-[rgba(255,255,255,0.06)] shadow-2xl"
       >
         {sidebarContent}
       </motion.aside>
@@ -413,7 +413,7 @@ export default function DashboardSidebar() {
       <aside
         onMouseEnter={() => setCollapsed(false)}
         className={cn(
-          "hidden lg:flex flex-col bg-[#09090B] border-l border-border transition-all duration-300 min-h-screen shrink-0",
+          "hidden lg:flex flex-col bg-[#0B1120] border-l border-[rgba(255,255,255,0.06)] transition-all duration-300 min-h-screen shrink-0",
           collapsed ? "w-[72px]" : "w-[280px]"
         )}
       >

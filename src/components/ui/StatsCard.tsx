@@ -7,44 +7,43 @@ interface StatsCardProps {
   title: string
   value: string | number
   icon: React.ElementType
-  change?: { value: number; isPositive: boolean }
+  description?: string
   color?: "primary" | "success" | "warning" | "error" | "info"
-  subtitle?: string
   className?: string
   delay?: number
 }
 
-const colors = {
-  primary: "bg-primary/10 text-primary",
-  success: "bg-emerald-500/10 text-emerald-400",
-  warning: "bg-amber-500/10 text-amber-400",
-  error: "bg-red-500/10 text-red-400",
-  info: "bg-blue-500/10 text-blue-400",
+const iconColors = {
+  primary: "text-[#6366F1]",
+  success: "text-[#22C55E]",
+  warning: "text-[#F59E0B]",
+  error: "text-[#EF4444]",
+  info: "text-[#3B82F6]",
 }
 
-export function StatsCard({ title, value, icon: Icon, change, color = "primary", subtitle, className, delay = 0 }: StatsCardProps) {
+const iconBgColors = {
+  primary: "bg-[#6366F1]/10",
+  success: "bg-[#22C55E]/10",
+  warning: "bg-[#F59E0B]/10",
+  error: "bg-[#EF4444]/10",
+  info: "bg-[#3B82F6]/10",
+}
+
+export function StatsCard({ title, value, icon: Icon, description, color = "primary", className, delay = 0 }: StatsCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
-      className={cn("bg-surface border border-border rounded-[24px] p-5 transition-all duration-200 hover:border-primary/50 hover:scale-[1.02]", className)}
+      className={cn("bg-[#111827] border border-[rgba(255,255,255,0.06)] rounded-[20px] p-5 transition-all duration-200 hover:border-primary/30 hover:shadow-sm", className)}
     >
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          <p className="text-sm text-text-secondary">{title}</p>
-          <p className="text-2xl font-bold text-text">{typeof value === "number" ? value.toLocaleString("ar-EG") : value}</p>
-          {change && (
-            <span className={cn(
-              "inline-flex items-center gap-0.5 text-xs font-medium",
-              change.isPositive ? "text-success" : "text-error"
-            )}>
-              {change.isPositive ? "↑" : "↓"} {Math.abs(change.value)}%
-            </span>
-          )}
-          {subtitle && <p className="text-xs text-text-tertiary">{subtitle}</p>}
+      <div className="flex items-start gap-4">
+        <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center shrink-0", iconBgColors[color])}>
+          <Icon className={cn("w-6 h-6", iconColors[color])} />
         </div>
-        <div className={cn("p-3 rounded-xl", colors[color])}>
-          <Icon className="w-5 h-5" />
+        <div className="min-w-0">
+          <p className="text-sm text-[#94A3B8]">{title}</p>
+          <p className="text-2xl font-bold text-[#F8FAFC] mt-0.5">{typeof value === "number" ? value.toLocaleString("ar-EG") : value}</p>
+          {description && <p className="text-xs text-[#64748B] mt-1">{description}</p>}
         </div>
       </div>
     </motion.div>
