@@ -58,7 +58,7 @@ export function Modal({ isOpen, onClose, title, subtitle, children, size = "md",
             initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              "relative bg-surface border border-border rounded-2xl shadow-xl w-full overflow-hidden",
+              "relative bg-card border border-border rounded-[24px] shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] w-full overflow-hidden",
               sizes[size],
               className
             )}

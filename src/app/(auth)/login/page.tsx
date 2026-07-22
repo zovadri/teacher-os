@@ -71,16 +71,20 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(91,124,255,0.08),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(91,124,255,0.03),transparent_50%)]" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
+      <div className="w-full max-w-sm relative z-10">
         <div className="text-center mb-8">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
-            className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary text-white mb-4"
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white mb-4 shadow-[0_0_30px_rgba(91,124,255,0.3)]"
           >
-            <HiAcademicCap className="w-6 h-6" />
+            <HiAcademicCap className="w-8 h-8" />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0 }}
@@ -109,12 +113,12 @@ function LoginForm() {
             <CardContent className="p-0">
               <form onSubmit={handleSubmit} className="space-y-5">
                 {sessionExpired && (
-                  <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-sm text-amber-400">
+                  <div className="p-4 rounded-[24px] bg-amber-500/10 border border-amber-500/20 text-sm text-amber-400 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
                     انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى.
                   </div>
                 )}
                 {error && (
-                  <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-400">
+                  <div className="p-4 rounded-[24px] bg-error/10 border border-error/20 text-sm text-error shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
                     {error}
                   </div>
                 )}
@@ -142,7 +146,7 @@ function LoginForm() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute left-3 top-[38px] text-text-tertiary hover:text-text-secondary transition-colors p-0.5 rounded-lg hover:bg-surface-tertiary"
+                    className="absolute left-3 top-[38px] text-text-tertiary hover:text-text-secondary transition-colors p-0.5 rounded-lg hover:bg-card"
                     tabIndex={-1}
                   >
                     {showPassword ? <HiEyeOff className="w-5 h-5" /> : <HiEye className="w-5 h-5" />}
@@ -177,12 +181,12 @@ function LoginForm() {
                   <div className="w-full border-t border-border" />
                 </div>
                 <div className="relative flex justify-center">
-                  <span className="bg-surface px-4 text-sm text-text-tertiary">أو الدخول عبر</span>
+                  <span className="bg-card px-4 text-sm text-text-tertiary">أو الدخول عبر</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-xl text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-colors group">
+                <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-all duration-200 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] group">
                   <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -191,7 +195,7 @@ function LoginForm() {
                   </svg>
                   <span>Google</span>
                 </button>
-                <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-xl text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-colors group">
+                <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-all duration-200 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] group">
                   <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#1877F2">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>

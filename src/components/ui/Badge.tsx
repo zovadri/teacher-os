@@ -3,13 +3,13 @@ import { cn } from "@/lib/utils"
 type BadgeVariant = "primary" | "success" | "warning" | "error" | "info" | "neutral" | "premium"
 
 const variants: Record<BadgeVariant, string> = {
-  primary: "bg-primary/10 text-primary-light",
-  success: "bg-success/10 text-success",
-  warning: "bg-warning/10 text-warning",
-  error: "bg-error/10 text-error",
-  info: "bg-info/10 text-info",
-  neutral: "bg-white/5 text-text-secondary",
-  premium: "bg-warning/10 text-warning",
+  primary: "bg-primary/10 text-primary-light border border-primary/20",
+  success: "bg-success/10 text-success border border-success/20",
+  warning: "bg-warning/10 text-warning border border-warning/20",
+  error: "bg-error/10 text-error border border-error/20",
+  info: "bg-info/10 text-info border border-info/20",
+  neutral: "bg-white/5 text-text-secondary border border-white/10",
+  premium: "bg-warning/10 text-warning border border-warning/20",
 }
 
 interface BadgeProps {

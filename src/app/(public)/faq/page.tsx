@@ -56,15 +56,15 @@ export default function FAQPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(99,102,241,0.08),transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 w-full">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6">
-              <HiAcademicCap size={14} /> الأسئلة الشائعة
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              <span className="text-primary">الأسئلة</span> الشائعة
-            </h1>
-            <p className="text-lg text-text-secondary leading-relaxed mb-8">
-              إجابات شاملة لأكثر الأسئلة شيوعاً حول المنصة والكورسات والمدفوعات والدعم الفني.
-            </p>
+             <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6 backdrop-blur border border-primary/20">
+                <HiAcademicCap size={14} /> الأسئلة الشائعة
+              </span>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+                <span className="text-primary">الأسئلة</span> الشائعة
+              </h1>
+              <p className="text-lg text-text-secondary leading-relaxed mb-8 max-w-2xl mx-auto">
+                إجابات شاملة لأكثر الأسئلة شيوعاً حول المنصة والكورسات والمدفوعات والدعم الفني.
+              </p>
             <div className="max-w-lg mx-auto">
               <SearchInput value={searchQuery} onChange={setSearchQuery} placeholder="ابحث عن إجابة لسؤالك..." />
             </div>
@@ -72,12 +72,12 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="sticky top-20 z-30 bg-surface/80 backdrop-blur border-b border-border">
+      <section className="sticky top-20 z-30 bg-[#080B12]/80 backdrop-blur border-b border-border">
         <div className="max-w-4xl mx-auto px-4 md:px-6 py-4 overflow-x-auto">
           <div className="flex items-center gap-2 whitespace-nowrap">
             <HiTag className="text-text-tertiary ml-2 shrink-0" size={16} />
             {categories.map((cat) => (
-              <button type="button" key={cat} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all ${activeCategory === cat ? "bg-primary text-white" : "bg-surface-tertiary text-text-secondary hover:bg-primary/10"}`}>
+              <button type="button" key={cat} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-[16px] transition-all ${activeCategory === cat ? "bg-primary text-white shadow-[0_0_12px_rgba(91,124,255,0.3)]" : "bg-card text-text-secondary border border-border hover:border-primary/20"}`}>
                 {cat}
               </button>
             ))}
@@ -107,13 +107,13 @@ export default function FAQPage() {
                       <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }}>
                         <button type="button"
                           onClick={() => toggleItem(faq.id)}
-                          className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 hover:shadow-sm transition-all flex items-center justify-between gap-4"
+                          className="w-full text-right p-5 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
                         >
                           <span className="font-medium text-sm">{faq.question}</span>
                           <HiChevronDown size={16} className={`text-text-tertiary transition-transform shrink-0 ${openItems.has(faq.id) ? "rotate-180" : ""}`} />
                         </button>
                         {openItems.has(faq.id) && (
-                          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="px-4 pb-4 pt-2 text-sm text-text-secondary leading-relaxed border-x border-b border-border rounded-b-xl">
+                          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="px-4 pb-4 pt-2 text-sm text-text-secondary leading-relaxed">
                             {faq.answer}
                           </motion.div>
                         )}
@@ -127,21 +127,21 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-surface-secondary">
+      <section className="py-16">
         <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
           <motion.div {...fadeUp}>
             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <HiAcademicCap className="text-primary" size={32} />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">لم تجد إجابة لسؤالك؟</h2>
-            <p className="text-text-secondary mb-8 max-w-lg mx-auto">
+            <h2 className="text-[28px] font-bold mb-4">لم تجد إجابة لسؤالك؟</h2>
+            <p className="text-text-secondary mb-8 max-w-lg mx-auto text-[15px]">
               فريق الدعم الفني جاهز لمساعدتك. تواصل معنا وسنرد عليك في أقرب وقت ممكن.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/contact" className="px-8 py-3 bg-primary text-white font-medium rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/25">
+              <Link href="/contact" className="px-6 py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(91,124,255,0.15)] hover:shadow-[0_0_30px_rgba(91,124,255,0.3)] hover:brightness-110 transition-all text-[15px]">
                 اتصل بنا
               </Link>
-              <a href="tel:+201000000000" className="px-8 py-3 border border-border text-text-secondary font-medium rounded-xl hover:bg-surface-tertiary transition-all inline-flex items-center gap-2">
+              <a href="tel:+201000000000" className="px-6 py-3 border border-border text-text-secondary font-medium rounded-[16px] hover:bg-surface-tertiary hover:text-text transition-all text-[15px] inline-flex items-center gap-2">
                 <HiPhone size={16} /> +20 100 000 0000
               </a>
             </div>

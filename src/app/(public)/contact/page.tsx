@@ -52,9 +52,9 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,102,241,0.08),transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 w-full">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6">
-              <HiAcademicCap size={14} /> تواصل معنا
-            </span>
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6 backdrop-blur border border-primary/20">
+                <HiAcademicCap size={14} /> تواصل معنا
+              </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               <span className="text-primary">تواصل</span> معنا
             </h1>
@@ -69,7 +69,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {contactInfo.map((info, i) => (
-              <motion.div key={info.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="p-5 rounded-[20px] border border-border bg-surface shadow-[0_2px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_24px_rgba(99,102,241,0.1)] text-center hover:border-primary/30 transition-all group">
+              <motion.div key={info.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-6 text-center transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
                 <info.icon className="text-primary mx-auto mb-4" size={32} />
                 <h3 className="font-semibold mb-2">{info.title}</h3>
                 {info.details.map((d, j) => <p key={j} className="text-sm text-text-secondary">{d}</p>)}
@@ -85,7 +85,7 @@ export default function ContactPage() {
             <motion.div {...fadeUp}>
               <h2 className="text-2xl font-bold mb-6">أرسل لنا رسالة</h2>
               {submitted ? (
-                <div className="p-5 rounded-[20px] border border-success/30 bg-success/5 text-center">
+                <div className="bg-card border border-success/30 rounded-[24px] p-6 text-center shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
                   <HiCheck className="text-success mx-auto mb-4" size={48} />
                   <h3 className="font-semibold text-lg mb-2">تم إرسال رسالتك بنجاح!</h3>
                   <p className="text-sm text-text-secondary">سنقوم بالرد عليك في أقرب وقت ممكن. شكراً لتواصلك معنا.</p>
@@ -108,7 +108,7 @@ export default function ContactPage() {
 
             <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }}>
               <h2 className="text-2xl font-bold mb-6">موقعنا</h2>
-              <div className="rounded-[20px] overflow-hidden border border-border shadow-[0_2px_12px_rgba(0,0,0,0.15)] h-[400px] md:h-full min-h-[400px] bg-surface-secondary relative">
+              <div className="rounded-[24px] overflow-hidden border border-border shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] h-[400px] md:h-full min-h-[400px] bg-card relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <HiLocationMarker className="text-primary mx-auto mb-3" size={48} />
@@ -126,16 +126,16 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-surface-secondary">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-10">
             <span className="text-primary text-sm font-medium mb-2 block">تابعنا</span>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">تواصل معنا عبر وسائل التواصل</h2>
-            <p className="text-text-secondary">تابعنا على منصات التواصل الاجتماعي لتصلك أحدث المقالات والعروض.</p>
+            <h2 className="text-[28px] font-bold mb-4">تواصل معنا عبر وسائل التواصل</h2>
+            <p className="text-text-secondary text-[15px]">تابعنا على منصات التواصل الاجتماعي لتصلك أحدث المقالات والعروض.</p>
           </motion.div>
           <div className="flex flex-wrap justify-center gap-5">
             {socialLinks.map((social) => (
-              <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-surface hover:border-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all group">
+              <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-[16px] border border-border bg-card hover:border-primary/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm group-hover:bg-primary group-hover:text-white transition-all">{social.icon}</div>
                 <span className="text-sm font-medium">{social.label}</span>
               </a>
@@ -147,13 +147,13 @@ export default function ContactPage() {
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">الأسئلة الشائعة</h2>
-            <p className="text-text-secondary">إجابات سريعة لأكثر الأسئلة شيوعاً.</p>
+            <h2 className="text-[28px] font-bold mb-4">الأسئلة الشائعة</h2>
+            <p className="text-text-secondary text-[15px]">إجابات سريعة لأكثر الأسئلة شيوعاً.</p>
           </motion.div>
           <div className="space-y-3">
             {contactFaq.map((faq, i) => (
               <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                <button type="button" onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)} className="w-full text-right p-4 rounded-[20px] border border-border bg-surface shadow-[0_1px_6px_rgba(0,0,0,0.12)] hover:shadow-[0_2px_12px_rgba(99,102,241,0.08)] hover:border-primary/30 transition-all flex items-center justify-between gap-4">
+                <button type="button" onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)} className="w-full text-right p-5 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4">
                   <span className="font-medium text-sm">{faq.question}</span>
                   <HiChevronDown size={16} className={`text-text-tertiary transition-transform shrink-0 ${faqOpen === faq.id ? "rotate-180" : ""}`} />
                 </button>

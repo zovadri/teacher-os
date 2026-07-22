@@ -134,7 +134,7 @@ export default function DemoPage() {
             </p>
           </div>
 
-          <Alert variant="info" className="mb-8 border-border/60 bg-surface">
+          <Alert variant="info" className="mb-8">
             <div className="flex items-start gap-3">
               <HiShieldCheck className="w-5 h-5 shrink-0 mt-0.5" />
               <div>
@@ -162,11 +162,11 @@ export default function DemoPage() {
                       </div>
                     </div>
                     <CardContent className="p-0 space-y-3 flex-1">
-                      <div className="flex items-center justify-between text-sm p-3 rounded-xl bg-[#18181B]">
+                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
                         <span className="text-text-tertiary">البريد الإلكتروني</span>
                         <Badge variant="primary" size="sm" className="font-mono ltr">{account.email}</Badge>
                       </div>
-                      <div className="flex items-center justify-between text-sm p-3 rounded-xl bg-[#18181B]">
+                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
                         <span className="text-text-tertiary">كلمة المرور</span>
                         <Badge variant="neutral" size="sm" className="font-mono tracking-wider">{account.password}</Badge>
                       </div>
@@ -174,7 +174,7 @@ export default function DemoPage() {
                     <div className="flex gap-3 mt-4">
                       <button type="button"
                         onClick={() => handleCopy(account.email, account.password, account.id)}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-xl text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-all duration-200"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-all duration-200 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]"
                       >
                         {copied === account.id ? (
                           <span className="text-success flex items-center gap-1.5 font-medium">
@@ -191,7 +191,7 @@ export default function DemoPage() {
                       <button type="button"
                         onClick={() => handleDirectLogin(account.role, account.id)}
                         disabled={loggingIn === account.id}
-                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-xl text-sm font-medium hover:brightness-110 transition-all duration-200 active:scale-[0.97] disabled:opacity-70"
+                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-[16px] text-sm font-medium hover:brightness-110 hover:shadow-[0_0_30px_rgba(91,124,255,0.3)] transition-all duration-200 active:scale-[0.97] disabled:opacity-70 shadow-[0_0_20px_rgba(91,124,255,0.15)]"
                       >
                         {loggingIn === account.id ? (
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -213,7 +213,7 @@ export default function DemoPage() {
             transition={{ delay: 0.5 }}
             className="mt-10 text-center space-y-3"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface border border-border text-sm">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border text-sm shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
               <HiCheckCircle className="w-5 h-5 text-success" />
               <span className="text-text-secondary">جميع الحسابات التجريبية جاهزة للاستخدام الفوري</span>
             </div>

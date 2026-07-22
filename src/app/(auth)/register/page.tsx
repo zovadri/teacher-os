@@ -55,12 +55,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-purple-50 dark:from-[#0F172A] dark:via-[#1E293B] dark:to-[#1E1B4B] px-4 py-12">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
-      </div>
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 py-12">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(91,124,255,0.08),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(91,124,255,0.03),transparent_50%)]" />
+      <div className="absolute top-1/3 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/3 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -73,7 +72,7 @@ export default function RegisterPage() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white mb-4 shadow-lg shadow-primary/30"
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white mb-4 shadow-[0_0_30px_rgba(91,124,255,0.3)]"
           >
             <HiUserCircle className="w-8 h-8" />
           </motion.div>
@@ -81,7 +80,7 @@ export default function RegisterPage() {
           <p className="text-text-secondary mt-2 text-sm">اختر نوع الحساب وأكمل البيانات</p>
         </div>
 
-        <Card className="p-8 shadow-xl border-border/50">
+        <Card className="p-8">
           <CardContent className="p-0">
             <Tabs tabs={roles} defaultTab="teacher" onChange={setActiveRole}>
               {(activeTab) => (
@@ -130,7 +129,7 @@ export default function RegisterPage() {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute left-3 top-[38px] text-text-tertiary hover:text-text-secondary transition-colors"
+                        className="absolute left-3 top-[38px] text-text-tertiary hover:text-text-secondary transition-colors p-0.5 rounded-lg hover:bg-surface-tertiary"
                       >
                         {showPassword ? <HiEyeOff className="w-5 h-5" /> : <HiEye className="w-5 h-5" />}
                       </button>
@@ -149,7 +148,7 @@ export default function RegisterPage() {
                       <button
                         type="button"
                         onClick={() => setShowConfirm(!showConfirm)}
-                        className="absolute left-3 top-[38px] text-text-tertiary hover:text-text-secondary transition-colors"
+                        className="absolute left-3 top-[38px] text-text-tertiary hover:text-text-secondary transition-colors p-0.5 rounded-lg hover:bg-surface-tertiary"
                       >
                         {showConfirm ? <HiEyeOff className="w-5 h-5" /> : <HiEye className="w-5 h-5" />}
                       </button>
@@ -213,7 +212,7 @@ export default function RegisterPage() {
                         type="checkbox"
                         checked={agreeTerms}
                         onChange={(e) => setAgreeTerms(e.target.checked)}
-                        className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 mt-0.5 cursor-pointer"
+                        className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 mt-0.5 cursor-pointer bg-card"
                       />
                       <span className="text-sm text-text-secondary leading-relaxed">
                         أوافق على{" "}

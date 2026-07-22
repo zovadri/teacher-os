@@ -64,15 +64,15 @@ export default function PricingPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(99,102,241,0.08),transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 w-full">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6">
-              <HiAcademicCap size={14} /> الباقات والأسعار
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              اختر <span className="text-primary">الباقة</span> المناسبة
-            </h1>
-            <p className="text-lg text-text-secondary leading-relaxed mb-8">
-              اشتراكات مرنة تناسب احتياجاتك التعليمية. اختر الباقة التي تناسبك وابدأ رحلة التعلم.
-            </p>
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6 backdrop-blur border border-primary/20">
+                <HiAcademicCap size={14} /> الباقات والأسعار
+              </span>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+                اختر <span className="text-primary">الباقة</span> المناسبة
+              </h1>
+              <p className="text-lg text-text-secondary leading-relaxed mb-8 max-w-2xl mx-auto">
+                اشتراكات مرنة تناسب احتياجاتك التعليمية. اختر الباقة التي تناسبك وابدأ رحلة التعلم.
+              </p>
           </motion.div>
         </div>
       </section>
@@ -104,7 +104,7 @@ export default function PricingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`relative p-8 rounded-2xl border-2 transition-all flex flex-col ${isPopular ? "border-primary bg-primary/5 shadow-lg shadow-primary/10 scale-105 md:scale-110" : "border-border hover:border-primary/30"}`}
+                  className={`relative p-8 rounded-[24px] border-2 transition-all duration-300 flex flex-col ${isPopular ? "border-primary bg-card shadow-[0_8px_32px_rgba(91,124,255,0.15)] scale-105 md:scale-110" : "border-border bg-card hover:border-primary/20 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5"}`}
                 >
                   {isPopular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-white text-xs font-medium rounded-full">الأكثر شيوعاً</div>}
                   <div className="mb-2">
@@ -132,7 +132,7 @@ export default function PricingPage() {
                   </ul>
                   <Link
                     href="/register"
-                    className={`block w-full text-center py-3 rounded-xl font-medium transition-all ${isPopular ? "bg-primary text-white hover:bg-primary-dark shadow-lg shadow-primary/25" : "border border-border hover:bg-surface-tertiary"}`}
+                    className={`block w-full text-center py-3 rounded-[16px] font-medium transition-all text-[15px] ${isPopular ? "bg-primary text-white shadow-[0_0_20px_rgba(91,124,255,0.15)] hover:shadow-[0_0_30px_rgba(91,124,255,0.3)] hover:brightness-110" : "border border-border text-text-secondary hover:bg-surface-tertiary hover:text-text"}`}
                   >
                     ابدأ الآن
                   </Link>
@@ -143,12 +143,12 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-surface-secondary">
+      <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 block">مقارنة الباقات</span>
-            <h2 className="text-3xl font-bold mb-4">قارن بين الباقات</h2>
-            <p className="text-text-secondary">تعرف على المميزات المتاحة في كل باقة.</p>
+            <h2 className="text-[28px] font-bold mb-4">قارن بين الباقات</h2>
+            <p className="text-text-secondary text-[15px]">تعرف على المميزات المتاحة في كل باقة.</p>
           </motion.div>
           <motion.div {...fadeUp} className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -163,7 +163,7 @@ export default function PricingPage() {
               </thead>
               <tbody>
                 {comparisonFeatures.map((feat) => (
-                  <tr key={feat.label} className="border-b border-border hover:bg-surface-tertiary/50 transition-colors">
+                  <tr key={feat.label} className="border-b border-border hover:bg-card/50 transition-colors">
                     <td className="py-3 px-4 text-text font-medium">{feat.label}</td>
                     {["free", "monthly", "quarterly", "yearly"].map((key) => {
                       const val = feat[key as keyof typeof feat]
@@ -187,15 +187,15 @@ export default function PricingPage() {
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 block">الأسئلة الشائعة</span>
-            <h2 className="text-3xl font-bold mb-4">استفسارات حول الباقات</h2>
-            <p className="text-text-secondary">إجابات لأكثر الأسئلة شيوعاً عن الباقات والاشتراكات.</p>
+            <h2 className="text-[28px] font-bold mb-4">استفسارات حول الباقات</h2>
+            <p className="text-text-secondary text-[15px]">إجابات لأكثر الأسئلة شيوعاً عن الباقات والاشتراكات.</p>
           </motion.div>
           <div className="space-y-3">
             {pricingFaq.map((faq, i) => (
               <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
                 <button type="button"
                   onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)}
-                  className="w-full text-right p-4 rounded-xl border border-border bg-surface hover:border-primary/30 transition-all flex items-center justify-between gap-4"
+                  className="w-full text-right p-5 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
                 >
                   <span className="font-medium text-sm">{faq.question}</span>
                   <HiChevronDown size={16} className={`text-text-tertiary transition-transform shrink-0 ${faqOpen === faq.id ? "rotate-180" : ""}`} />
@@ -209,16 +209,16 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-surface-secondary">
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-8 md:p-16 text-center text-white overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.15),transparent_50%)]" />
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-[#3B5FEF] p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(91,124,255,0.2)]">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_50%)]" />
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">مستعد للانضمام إلينا؟</h2>
-              <p className="text-white/80 mb-8 max-w-xl mx-auto">اختر باقتك المفضلة وابدأ رحلة التفوق في اللغة العربية اليوم.</p>
+              <h2 className="text-[28px] font-bold mb-4">مستعد للانضمام إلينا؟</h2>
+              <p className="text-white/70 mb-8 max-w-xl mx-auto text-[15px]">اختر باقتك المفضلة وابدأ رحلة التفوق في اللغة العربية اليوم.</p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Link href="/register" className="px-8 py-3 bg-white text-primary font-medium rounded-xl hover:bg-white/90 transition-all">إنشاء حساب جديد</Link>
-                <Link href="/contact" className="px-8 py-3 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-all">تواصل معنا</Link>
+                <Link href="/register" className="px-6 py-3 bg-white text-primary font-medium rounded-[16px] hover:bg-white/90 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all text-[15px]">إنشاء حساب جديد</Link>
+                <Link href="/contact" className="px-6 py-3 border border-white/20 text-white font-medium rounded-[16px] hover:bg-white/10 transition-all text-[15px]">تواصل معنا</Link>
               </div>
             </div>
           </motion.div>

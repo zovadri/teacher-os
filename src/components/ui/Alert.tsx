@@ -21,7 +21,7 @@ interface AlertProps {
 export function Alert({ variant = "info", title, children, className, onClose }: AlertProps) {
   const { icon: Icon, className: variantClass } = config[variant]
   return (
-    <div className={cn("flex items-start gap-3 p-4 rounded-2xl border", variantClass, className)}>
+    <div className={cn("flex items-start gap-3 p-4 rounded-[24px] border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]", variantClass, className)}>
       <Icon className="w-5 h-5 shrink-0 mt-0.5" />
       <div className="flex-1 min-w-0">
         {title && <p className="font-medium text-sm mb-1">{title}</p>}

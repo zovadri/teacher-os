@@ -33,7 +33,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
       <button type="button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 rounded-lg hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
+        className="p-2 rounded-[16px] hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
       >
         <HiChevronRight className="w-5 h-5" />
       </button>
@@ -45,7 +45,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
             key={page}
             onClick={() => onPageChange(page as number)}
             className={cn(
-              "min-w-[36px] h-9 rounded-lg text-sm font-medium transition-colors",
+              "min-w-[36px] h-9 rounded-[16px] text-sm font-medium transition-colors",
               currentPage === page
                 ? "bg-primary text-white"
                 : "text-text-secondary hover:bg-surface-secondary"
@@ -58,7 +58,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, className }:
       <button type="button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-lg hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
+        className="p-2 rounded-[16px] hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
       >
         <HiChevronLeft className="w-5 h-5" />
       </button>
