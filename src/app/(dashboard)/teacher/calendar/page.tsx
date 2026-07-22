@@ -17,7 +17,7 @@ import {
   HiOutlineViewList,
   HiOutlineViewBoards,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from "@/components/ui"
 import { mockExams, mockHomework, mockCourses, mockEnrollments } from "@/lib/mock/data"
 import { formatDate, cn } from "@/lib/utils"
@@ -689,7 +689,7 @@ export default function CalendarPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="التقويم الدراسي" subtitle="إدارة ومتابعة الأحداث والمواعيد" />
+      <PageHeader title="التقويم الدراسي" description="إدارة ومتابعة الأحداث والمواعيد" />
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-2 bg-surface-secondary rounded-xl p-1">

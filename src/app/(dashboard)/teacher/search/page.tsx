@@ -10,7 +10,7 @@ import {
   HiOutlineUsers, HiOutlineShieldCheck, HiOutlineClock,
   HiOutlineChevronDown, HiOutlineX,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 
@@ -104,7 +104,7 @@ export default function AdvancedSearchPage() {
 
   return (
     <div className="min-h-screen">
-      <DashboardHeader title="البحث المتقدم" subtitle="ابحث في الطلاب، الكورسات، الامتحانات، الفواتير، الأكواد، أولياء الأمور، الموظفين" />
+      <PageHeader title="البحث المتقدم" description="ابحث في الطلاب، الكورسات، الامتحانات، الفواتير، الأكواد، أولياء الأمور، الموظفين" />
       <div className="p-4 md:p-6 max-w-5xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="relative max-w-2xl mx-auto w-full">
@@ -179,7 +179,7 @@ export default function AdvancedSearchPage() {
                                   <p className="text-xs text-text-tertiary truncate">{r.subtitle} - {r.detail}</p>
                                 </div>
                               </div>
-                              {r.status && <Badge variant="neutral" size="sm">{r.status}</Badge>}
+                              {r.status && <Badge variant="default" size="sm">{r.status}</Badge>}
                             </>
                           )
                           return route ? (

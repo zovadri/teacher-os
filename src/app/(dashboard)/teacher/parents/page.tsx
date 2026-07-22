@@ -14,7 +14,7 @@ import {
   HiOutlineCheck,
   HiOutlineX,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Badge } from "@/components/ui/Badge"
 import { Table } from "@/components/ui/Table"
 import { Modal } from "@/components/ui/Modal"
@@ -196,7 +196,7 @@ export default function ParentsPage() {
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible" className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة أولياء الأمور" subtitle="عرض وإدارة أولياء الأمور وأبنائهم المسجلين" />
+      <PageHeader title="إدارة أولياء الأمور" description="عرض وإدارة أولياء الأمور وأبنائهم المسجلين" />
 
       <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         <StatsCard title="إجمالي أولياء الأمور" value={stats.total} icon={HiOutlineUsers} color="primary" />

@@ -7,7 +7,7 @@ import {
   HiOutlineAdjustments, HiOutlineOfficeBuilding, HiOutlineTag,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -94,7 +94,7 @@ export default function InventoryPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="المخزون" subtitle="إدارة المخزون والمستودعات" />
+        <PageHeader title="المخزون" description="إدارة المخزون والمستودعات" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -102,7 +102,7 @@ export default function InventoryPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="المخزون" subtitle="إدارة المخزون والمستودعات" />
+      <PageHeader title="المخزون" description="إدارة المخزون والمستودعات" />
 
       {lowStockItems.length > 0 && (
         <Alert variant="warning" title="تنبيه المخزون المنخفض">

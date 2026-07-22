@@ -1,10 +1,8 @@
-"use client"
-
-import { forwardRef, SelectHTMLAttributes } from "react"
+import { forwardRef } from "react"
 import { cn } from "@/lib/utils"
 import { HiChevronDown } from "react-icons/hi"
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string
   error?: string
   options: { value: string; label: string }[]
@@ -12,25 +10,23 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, label, error, options, placeholder, id, ...props }, ref) => {
-    const selectId = id || label?.replace(/\s/g, "-").toLowerCase()
+  ({ label, error, options, placeholder, className, ...props }, ref) => {
     return (
       <div className="space-y-1.5">
         {label && (
-          <label htmlFor={selectId} className="block text-sm font-medium text-text">
-            {label}
-          </label>
+          <label className="block text-sm font-medium text-text-secondary">{label}</label>
         )}
         <div className="relative">
           <select
             ref={ref}
-            id={selectId}
             className={cn(
-              "w-full bg-surface border border-border rounded-lg px-3.5 py-2.5 text-sm text-text appearance-none transition-all duration-200",
-              "focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary",
-              "disabled:opacity-50 disabled:cursor-not-allowed",
-              error && "border-error focus:ring-error/30",
-              className
+              "w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none",
+              "shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]",
+              "transition-all duration-250",
+              "focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40",
+              "hover:border-border-light",
+              error && "border-error/50 focus:ring-error/20 focus:border-error/60",
+              className,
             )}
             {...props}
           >
@@ -39,12 +35,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
-          <HiChevronDown className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary pointer-events-none w-4 h-4" />
+          <HiChevronDown className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary pointer-events-none" />
         </div>
-        {error && <p className="text-xs text-error">{error}</p>}
+        {error && <p className="text-xs text-error pr-1">{error}</p>}
       </div>
     )
-  }
+  },
 )
 
 Select.displayName = "Select"

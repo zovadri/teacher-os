@@ -9,7 +9,7 @@ import {
   HiOutlineVideoCamera,
 } from "react-icons/hi"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line } from "recharts"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -68,7 +68,7 @@ export default function VideoAnalyticsPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "الفيديوهات", href: "/teacher/videos" }, { label: "تحليلات الفيديو" }]} />
-      <DashboardHeader title="تحليلات الفيديو" subtitle="إحصائيات مشاهدة ومتابعة الدروس المسجلة" />
+      <PageHeader title="تحليلات الفيديو" description="إحصائيات مشاهدة ومتابعة الدروس المسجلة" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-5 gap-3">

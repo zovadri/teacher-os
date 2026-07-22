@@ -12,7 +12,7 @@ import {
   HiOutlineTrash,
   HiOutlineEyeOff,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Table } from "@/components/ui/Table"
@@ -96,7 +96,7 @@ export default function HomepageBuilderPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "إدارة المحتوى", href: "/teacher/cms" }, { label: "الصفحة الرئيسية" }]} />
-      <DashboardHeader title="بناء الصفحة الرئيسية" subtitle="إضافة وترتيب وتعديل أقسام الصفحة الرئيسية" />
+      <PageHeader title="بناء الصفحة الرئيسية" description="إضافة وترتيب وتعديل أقسام الصفحة الرئيسية" />
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -142,7 +142,7 @@ export default function HomepageBuilderPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="font-semibold text-text">{section.title || sectionTypes.find((t) => t.value === section.type)?.label}</span>
-                      <Badge variant="neutral" size="sm">{sectionTypes.find((t) => t.value === section.type)?.label || section.type}</Badge>
+                      <Badge variant="default" size="sm">{sectionTypes.find((t) => t.value === section.type)?.label || section.type}</Badge>
                     </div>
                     {section.subtitle && <p className="text-xs text-text-tertiary mt-0.5 truncate">{section.subtitle}</p>}
                   </div>
@@ -201,7 +201,7 @@ export default function HomepageBuilderPage() {
         <div className="space-y-3">
           {sortedSections.filter((s) => s.active).map((s) => (
             <div key={s.id} className="p-6 rounded-xl bg-surface-secondary border border-border text-center">
-              <Badge variant="neutral" size="sm" className="mb-2">{sectionTypes.find((t) => t.value === s.type)?.label}</Badge>
+              <Badge variant="default" size="sm" className="mb-2">{sectionTypes.find((t) => t.value === s.type)?.label}</Badge>
               <h3 className="text-lg font-bold text-text">{s.title}</h3>
               {s.subtitle && <p className="text-sm text-text-secondary mt-1">{s.subtitle}</p>}
               {s.cta && <Button variant="primary" size="sm" className="mt-3">{s.cta}</Button>}

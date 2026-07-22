@@ -7,7 +7,7 @@ import {
   HiOutlineViewGrid, HiOutlineChevronDown, HiOutlineChevronUp, HiOutlineAcademicCap,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -86,7 +86,7 @@ export default function ClassroomsPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="قاعات الدراسة" subtitle="إدارة القاعات والفصول" />
+        <PageHeader title="قاعات الدراسة" description="إدارة القاعات والفصول" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -94,7 +94,7 @@ export default function ClassroomsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="قاعات الدراسة" subtitle="إدارة القاعات والفصول" />
+      <PageHeader title="قاعات الدراسة" description="إدارة القاعات والفصول" />
       <div className="flex justify-end">
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
           إضافة قاعة
@@ -170,7 +170,7 @@ export default function ClassroomsPage() {
                       </div>
                       <div className="flex flex-wrap gap-1 mt-3">
                         {classroom.equipment.map((eq, i) => (
-                          <Badge key={i} variant="neutral" size="sm">{eq}</Badge>
+                          <Badge key={i} variant="default" size="sm">{eq}</Badge>
                         ))}
                       </div>
                       <div className="flex items-center gap-1 mt-3 text-xs text-text-tertiary">
@@ -222,7 +222,7 @@ export default function ClassroomsPage() {
                       <td className="px-3 py-3">
                         <div className="flex flex-wrap gap-1">
                           {classroom.equipment.map((eq, i) => (
-                            <Badge key={i} variant="neutral" size="sm">{eq}</Badge>
+                            <Badge key={i} variant="default" size="sm">{eq}</Badge>
                           ))}
                         </div>
                       </td>

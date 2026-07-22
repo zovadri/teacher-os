@@ -2,209 +2,131 @@
 
 import { useState, useMemo } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import {
-  HiOutlinePlus,
-  HiOutlineBookOpen,
-  HiOutlineClipboardList,
-  HiOutlineClock,
-  HiOutlineXCircle,
-  HiOutlineDocumentText,
-  HiOutlineEye,
+  HiOutlinePlus, HiOutlineBookOpen, HiOutlineClipboardList, HiOutlineClock,
+  HiOutlineXCircle, HiOutlineDocumentText, HiOutlineEye,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
-import { Card, CardContent } from "@/components/ui/Card"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
 import { SearchInput } from "@/components/ui/SearchInput"
-import Button from "@/components/ui/Button"
-import Select from "@/components/ui/Select"
 import { EmptyState } from "@/components/ui/EmptyState"
+import Button from "@/components/ui/Button"
 import { mockHomework, mockCourses } from "@/lib/mock/data"
 
-const statusBadge: Record<string, "success" | "error" | "neutral"> = {
-  active: "success",
-  closed: "error",
-  draft: "neutral",
+const statusCfg: Record<string, { label: string; variant: "success" | "error" | "default" }> = {
+  active: { label: "نشط", variant: "success" },
+  closed: { label: "مغلق", variant: "error" },
+  draft: { label: "مسودة", variant: "default" },
 }
 
-const statusLabels: Record<string, string> = {
-  active: "نشط",
-  closed: "مغلق",
-  draft: "مسودة",
+const typeCfg: Record<string, { label: string; variant: "primary" | "info" | "warning" | "success" }> = {
+  quiz: { label: "اختبار", variant: "primary" },
+  pdf: { label: "PDF", variant: "info" },
+  image: { label: "صورة", variant: "warning" },
+  word: { label: "Word", variant: "info" },
+  video: { label: "فيديو", variant: "primary" },
+  zip: { label: "مضغوط", variant: "warning" },
+  writing: { label: "كتابي", variant: "success" },
+  mixed: { label: "متنوع", variant: "warning" },
 }
-
-const typeLabels: Record<string, string> = {
-  quiz: "اختبار",
-  pdf: "PDF",
-  image: "صورة",
-  word: "Word",
-  video: "فيديو",
-  zip: "مضغوط",
-  writing: "كتابي",
-  mixed: "متنوع",
-}
-
-const typeBadge: Record<string, "primary" | "info" | "warning" | "premium" | "neutral" | "success"> = {
-  quiz: "primary",
-  pdf: "info",
-  image: "warning",
-  word: "info",
-  video: "premium",
-  zip: "neutral",
-  writing: "primary",
-  mixed: "warning",
-}
-
-const typeOptions = Object.entries(typeLabels).map(([value, label]) => ({ value, label }))
-const statusOptions = [
-  { value: "all", label: "جميع الحالات" },
-  ...Object.entries(statusLabels).map(([value, label]) => ({ value, label })),
-]
-const courseOptions = [
-  { value: "all", label: "جميع الكورسات" },
-  ...mockCourses.map((c) => ({ value: c.id, label: c.title })),
-]
-
-const stats = [
-  { title: "إجمالي الواجبات", value: mockHomework.length, icon: HiOutlineBookOpen, color: "primary" as const },
-  { title: "نشط", value: mockHomework.filter((h) => h.status === "active").length, icon: HiOutlineClipboardList, color: "success" as const },
-  { title: "مغلق", value: mockHomework.filter((h) => h.status === "closed").length, icon: HiOutlineXCircle, color: "error" as const },
-  { title: "تحت الإعداد", value: mockHomework.filter((h) => h.status === "draft").length, icon: HiOutlineClock, color: "warning" as const },
-]
 
 export default function HomeworkPage() {
+  const router = useRouter()
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [courseFilter, setCourseFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
 
-  const filtered = useMemo(() => {
-    return mockHomework.filter((h) => {
-      const matchSearch = h.title.includes(search)
-      const matchStatus = statusFilter === "all" || h.status === statusFilter
-      const matchCourse = courseFilter === "all" || h.courseId === courseFilter
-      const matchType = typeFilter === "all" || h.type === typeFilter
-      return matchSearch && matchStatus && matchCourse && matchType
-    })
-  }, [search, statusFilter, courseFilter, typeFilter])
+  const filtered = useMemo(() =>
+    mockHomework.filter((h) => {
+      const q = search.toLowerCase()
+      return (h.title.includes(q)) &&
+        (statusFilter === "all" || h.status === statusFilter) &&
+        (courseFilter === "all" || h.courseId === courseFilter) &&
+        (typeFilter === "all" || h.type === typeFilter)
+    }), [search, statusFilter, courseFilter, typeFilter])
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="الواجبات" subtitle="إدارة الواجبات المنزلية ومتابعة تسليم الطلاب" />
+    <div className="space-y-6">
+      <PageHeader title="الواجبات" description="إدارة الواجبات المنزلية ومتابعة تسليم الطلاب"
+        breadcrumbs={[{ label: "لوحة التحكم", href: "/teacher" }, { label: "الواجبات" }]}
+        actions={<Link href="/teacher/homework/create"><Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />}>إضافة واجب</Button></Link>}
+      />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((s, i) => (
-          <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
-            <StatsCard title={s.title} value={s.value} icon={s.icon} color={s.color} />
-          </motion.div>
-        ))}
-      </div>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <StatsCard title="إجمالي الواجبات" value={mockHomework.length} icon={HiOutlineBookOpen} color="primary" trend={8} />
+        <StatsCard title="نشط" value={mockHomework.filter((h) => h.status === "active").length} icon={HiOutlineClipboardList} color="success" />
+        <StatsCard title="مغلق" value={mockHomework.filter((h) => h.status === "closed").length} icon={HiOutlineXCircle} color="error" />
+        <StatsCard title="تحت الإعداد" value={mockHomework.filter((h) => h.status === "draft").length} icon={HiOutlineClock} color="warning" />
+      </motion.div>
 
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="flex-1">
-          <SearchInput value={search} onChange={setSearch} placeholder="بحث عن واجب..." />
-        </div>
-        <div className="flex gap-3 flex-wrap">
-          <div className="w-40">
-            <Select
-              options={courseOptions}
-              value={courseFilter}
-              onChange={(e) => setCourseFilter(e.target.value)}
-            />
-          </div>
-          <div className="w-36">
-            <Select
-              options={[{ value: "all", label: "جميع الأنواع" }, ...typeOptions]}
-              value={typeFilter}
-              onChange={(e) => setTypeFilter(e.target.value)}
-            />
-          </div>
-          <div className="w-36">
-            <Select
-              options={statusOptions}
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            />
-          </div>
-          <Link href="/teacher/homework/create">
-            <Button variant="primary" size="md" leftIcon={<HiOutlinePlus size={18} />}>
-              إضافة واجب
-            </Button>
-          </Link>
-        </div>
+      <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
+        <SearchInput value={search} onChange={setSearch} placeholder="بحث عن واجب..." className="sm:max-w-xs flex-1" />
+        <select value={courseFilter} onChange={(e) => setCourseFilter(e.target.value)}
+          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          <option value="all">جميع الكورسات</option>
+          {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
+        </select>
+        <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}
+          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          <option value="all">جميع الأنواع</option>
+          {Object.entries(typeCfg).map(([v, c]) => <option key={v} value={v}>{c.label}</option>)}
+        </select>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
+          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          <option value="all">جميع الحالات</option>
+          {Object.entries(statusCfg).map(([v, c]) => <option key={v} value={v}>{c.label}</option>)}
+        </select>
       </div>
 
       {filtered.length === 0 ? (
-        <EmptyState
-          icon={HiOutlineDocumentText}
-          title="لا توجد واجبات مطابقة"
-          description="حاول تغيير معايير البحث أو إضافة واجب جديد"
-          action={
-            <Link href="/teacher/homework/create">
-              <Button variant="primary" leftIcon={<HiOutlinePlus size={18} />}>
-                إضافة واجب
-              </Button>
-            </Link>
-          }
-        />
+        <EmptyState icon={HiOutlineDocumentText} title="لا توجد واجبات" description="لم يتم العثور على واجبات مطابقة للبحث" actionLabel="إضافة واجب" onAction={() => router.push("/teacher/homework/create")} />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-          {filtered.map((hw, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {filtered.map((hw, i) => {
             const course = mockCourses.find((c) => c.id === hw.courseId)
             const submitted = hw.analytics.submitted
             const notSubmitted = hw.analytics.notSubmitted
-            const totalStudents = submitted + notSubmitted
+            const total = submitted + notSubmitted
             return (
-              <motion.div
-                key={hw.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.03 }}
-              >
-                <Link href={`/teacher/homework/${hw.id}`}>
-                  <Card className="hover:shadow-lg hover:border-primary/20 transition-all duration-300 group h-full">
-                    <CardContent className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                          <HiOutlineBookOpen className="text-primary" size={20} />
-                        </div>
-                        <div className="flex gap-1.5">
-                          <Badge variant={typeBadge[hw.type]} size="sm">{typeLabels[hw.type]}</Badge>
-                          <Badge variant={statusBadge[hw.status]} size="sm">{statusLabels[hw.status]}</Badge>
-                        </div>
+              <motion.div key={hw.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
+                <div className="group bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-5 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
+                  onClick={() => router.push(`/teacher/homework/${hw.id}`)}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-11 h-11 rounded-[16px] bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                      <HiOutlineBookOpen className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="flex gap-1.5">
+                      <Badge variant={typeCfg[hw.type]?.variant || "primary"} size="sm">{typeCfg[hw.type]?.label}</Badge>
+                      <Badge variant={statusCfg[hw.status]?.variant || "default"} size="sm">{statusCfg[hw.status]?.label}</Badge>
+                    </div>
+                  </div>
+                  <h3 className="font-semibold text-text mb-0.5 truncate">{hw.title}</h3>
+                  <p className="text-xs text-text-tertiary mb-4">{course?.title || "كورس عام"}</p>
+                  <div className="grid grid-cols-3 gap-3 mb-4">
+                    {[
+                      { label: "الموعد", value: hw.deadline.toLocaleDateString("ar-EG") },
+                      { label: "تم التسليم", value: `${submitted}/${total}` },
+                      { label: "متوسط الدرجة", value: hw.analytics.averageGrade },
+                    ].map((s) => (
+                      <div key={s.label} className="p-2.5 rounded-[14px] bg-card/40 border border-border text-center backdrop-blur">
+                        <p className="font-bold text-text text-sm">{s.value}</p>
+                        <p className="text-[10px] text-text-tertiary">{s.label}</p>
                       </div>
-                      <div>
-                        <h3 className="font-semibold text-text mb-0.5 line-clamp-1">{hw.title}</h3>
-                        <p className="text-xs text-text-tertiary">{course?.title || "كورس عام"}</p>
-                      </div>
-                      <div className="grid grid-cols-3 gap-3 text-center text-xs">
-                        <div className="p-2 rounded-lg bg-surface-secondary">
-                          <p className="font-bold text-text">{hw.deadline.toLocaleDateString("ar-EG")}</p>
-                          <p className="text-text-tertiary">الموعد النهائي</p>
-                        </div>
-                        <div className="p-2 rounded-lg bg-surface-secondary">
-                          <p className="font-bold text-text">{submitted}/{totalStudents}</p>
-                          <p className="text-text-tertiary">تم التسليم</p>
-                        </div>
-                        <div className="p-2 rounded-lg bg-surface-secondary">
-                          <p className="font-bold text-text">{hw.analytics.averageGrade}</p>
-                          <p className="text-text-tertiary">متوسط الدرجة</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between pt-2 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="flex items-center gap-1">
-                          <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/homework/${hw.id}`) }} className="p-1.5 text-text-tertiary hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" title="عرض">
-                            <HiOutlineEye size={16} />
-                          </button>
-                        </div>
-                        <Badge variant={hw.allowResubmit ? "info" : "neutral"} size="sm">
-                          {hw.allowResubmit ? `إعادة تسليم (${hw.maxResubmitCount})` : "تسليم مرة واحدة"}
-                        </Badge>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between pt-3 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity duration-250">
+                    <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/homework/${hw.id}`) }}
+                      className="p-1.5 rounded-[10px] text-text-tertiary hover:text-primary hover:bg-primary/10 transition-all"><HiOutlineEye className="w-4 h-4" /></button>
+                    <Badge variant={hw.allowResubmit ? "info" : "default"} size="sm">
+                      {hw.allowResubmit ? `إعادة تسليم (${hw.maxResubmitCount})` : "تسليم مرة واحدة"}
+                    </Badge>
+                  </div>
+                </div>
               </motion.div>
             )
           })}

@@ -17,7 +17,7 @@ import {
   HiOutlineExclamation,
   HiOutlineServer,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Badge } from "@/components/ui/Badge"
 import { Modal } from "@/components/ui/Modal"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -66,7 +66,7 @@ export default function FilesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="مكتبة الملفات" subtitle="إدارة الفيديوهات والملفات التعليمية" />
+      <PageHeader title="مكتبة الملفات" description="إدارة الفيديوهات والملفات التعليمية" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="إجمالي الفيديوهات" value={stats.total} icon={HiOutlineFilm} color="primary" />

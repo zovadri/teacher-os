@@ -8,7 +8,7 @@ import {
 } from "react-icons/hi"
 import toast from "react-hot-toast"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -94,7 +94,7 @@ export default function SalariesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="الرواتب" subtitle="إدارة الرواتب والأجور" />
+        <PageHeader title="الرواتب" description="إدارة الرواتب والأجور" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -103,7 +103,7 @@ export default function SalariesPage() {
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
       <Breadcrumb items={[{ label: "الموظفين", href: "/teacher/employees" }, { label: "المرتبات" }]} />
-      <DashboardHeader title="الرواتب" subtitle="إدارة الرواتب والأجور" />
+      <PageHeader title="الرواتب" description="إدارة الرواتب والأجور" />
 
       {isLoading ? (
         <StatsSkeleton count={3} />

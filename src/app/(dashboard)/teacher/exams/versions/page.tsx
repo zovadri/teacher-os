@@ -118,7 +118,7 @@ export default function ExamVersionsPage() {
     return (
       <div className="p-4 md:p-6">
         <PageHeader title="نسخ الامتحان" description="إدارة نسخ متعددة للامتحان" />
-        <ErrorState error={error} onRetry={retry} />
+        <ErrorState description={error} onRetry={retry} />
       </div>
     )
   }
@@ -131,7 +131,7 @@ export default function ExamVersionsPage() {
         description="إدارة نسخ متعددة للامتحان"
         actions={
           <div className="flex gap-2">
-            <Button variant="outline" onClick={() => setShowCompare(true)} rightIcon={<HiOutlineScale size={18} />}>
+            <Button variant="secondary" onClick={() => setShowCompare(true)} rightIcon={<HiOutlineScale size={18} />}>
               مقارنة النسخ
             </Button>
             <Button variant="primary" onClick={() => setShowAddModal(true)} rightIcon={<HiOutlinePlus size={18} />}>
@@ -227,7 +227,7 @@ export default function ExamVersionsPage() {
                   </div>
                   <div className="pt-2 border-t border-border">
                     <div className="flex flex-wrap gap-2">
-                      <Button variant="outline" size="sm" onClick={() => setPreviewVersion(version)} rightIcon={<HiOutlineEye size={16} />}>
+                      <Button variant="secondary" size="sm" onClick={() => setPreviewVersion(version)} rightIcon={<HiOutlineEye size={16} />}>
                         معاينة
                       </Button>
                       <Button variant="secondary" size="sm" onClick={() => handlePrintVersion(version.label)} rightIcon={<HiOutlinePrinter size={16} />}>

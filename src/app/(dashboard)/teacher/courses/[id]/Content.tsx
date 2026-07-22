@@ -18,7 +18,7 @@ import {
   HiOutlineLockClosed,
   HiOutlineDuplicate,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Tabs, TabPanel } from "@/components/ui/Tabs"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -295,7 +295,7 @@ export default function CourseDetailPage() {
                       { key: "duration", header: "المدة", render: (e) => <span>{e.duration} دقيقة</span> },
                       { key: "totalGrade", header: "الدرجة", render: (e) => <span className="font-medium">{e.totalGrade}</span> },
                       { key: "status", header: "الحالة", render: (e) => (
-                        <Badge variant={e.status === "active" ? "success" : e.status === "draft" ? "neutral" : "error"}>
+                        <Badge variant={e.status === "active" ? "success" : e.status === "draft" ? "default" : "error"}>
                           {e.status === "active" ? "نشط" : e.status === "draft" ? "مسودة" : "مغلق"}
                         </Badge>
                       )},

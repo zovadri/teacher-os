@@ -173,7 +173,6 @@ export default function AttendanceReportsPage() {
                 icon={HiOutlineChartSquareBar}
                 title="لا توجد بيانات"
                 description="لم يتم العثور على سجلات حضور للفترة المحددة"
-                withBackground={false}
               />
             ) : (
               <div dir="ltr" className="h-72">

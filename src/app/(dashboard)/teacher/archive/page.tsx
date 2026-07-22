@@ -20,7 +20,7 @@ import {
   HiOutlineX,
 } from "react-icons/hi"
 import { Archive, RotateCcw, Inbox } from "lucide-react"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Badge } from "@/components/ui/Badge"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -283,7 +283,7 @@ export default function ArchivePage() {
       key: "size",
       header: activeTab === "exams" ? "عدد الأسئلة" : activeTab === "invoices" ? "المبلغ" : "الحجم",
       render: (item: ArchiveItem) => (
-        <Badge variant="neutral" size="sm">{item.size}</Badge>
+        <Badge variant="default" size="sm">{item.size}</Badge>
       ),
     },
     {
@@ -298,7 +298,7 @@ export default function ArchivePage() {
       header: "",
       render: (item: ArchiveItem) => (
         <div className="flex justify-end">
-          <Button variant="outline"
+          <Button variant="secondary"
             size="xs"
             leftIcon={<RotateCcw className="w-3.5 h-3.5" />}
             onClick={() => {
@@ -315,7 +315,7 @@ export default function ArchivePage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="مركز الأرشيف" subtitle="إدارة العناصر المؤرشفة واستعادتها" />
+      <PageHeader title="مركز الأرشيف" description="إدارة العناصر المؤرشفة واستعادتها" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -465,7 +465,6 @@ export default function ArchivePage() {
               icon={Inbox}
               title="لا توجد عناصر مؤرشفة"
               description={searchQuery || dateFrom || dateTo ? "لا توجد نتائج تطابق معايير البحث" : `لا توجد عناصر مؤرشفة في قسم ${tabConfig.find((t) => t.id === activeTab)?.label}`}
-              withBackground={false}
               className="py-12"
             />
           ) : (
@@ -516,7 +515,7 @@ export default function ArchivePage() {
                         <span className="text-sm text-text-secondary">{item.archivedBy}</span>
                       </td>
                       <td className="px-4 py-3">
-                        <Badge variant="neutral" size="sm">{item.size}</Badge>
+                        <Badge variant="default" size="sm">{item.size}</Badge>
                       </td>
                       <td className="px-4 py-3">
                         <Badge variant="info" size="sm">{item.reason}</Badge>

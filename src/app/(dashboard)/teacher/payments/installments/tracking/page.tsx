@@ -9,7 +9,7 @@ import {
 } from "react-icons/hi"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -85,7 +85,7 @@ export default function InstallmentTrackingPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "المدفوعات", href: "/teacher/payments/installments" }, { label: "متابعة الأقساط", href: "/teacher/payments/installments/tracking" }]} />
-      <DashboardHeader title="متابعة الأقساط" subtitle="المتبقي - المتأخر - الغرامات - سجل السداد" />
+      <PageHeader title="متابعة الأقساط" description="المتبقي - المتأخر - الغرامات - سجل السداد" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">

@@ -1,52 +1,39 @@
-"use client"
-
 import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
-import { Inbox } from "lucide-react"
 import Button from "./Button"
 
 interface EmptyStateProps {
   icon?: React.ElementType
-  title: string
+  title?: string
   description?: string
-  action?: React.ReactNode
-  secondaryAction?: React.ReactNode
+  actionLabel?: string
+  onAction?: () => void
   className?: string
-  bordered?: boolean
-  withBackground?: boolean
 }
 
 export function EmptyState({
-  icon: Icon = Inbox,
-  title,
-  description,
-  action,
-  secondaryAction,
+  icon: Icon,
+  title = "لا توجد بيانات",
+  description = "لم يتم العثور على أي عناصر لعرضها.",
+  actionLabel,
+  onAction,
   className,
-  bordered = false,
-  withBackground = true,
 }: EmptyStateProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      className={cn(
-        "flex flex-col items-center justify-center py-16 px-4 text-center",
-        withBackground && "bg-white dark:bg-gray-800 rounded-xl",
-        bordered && "border-2 border-dashed border-gray-200 dark:border-gray-700",
-        className,
-      )}
-    >
-      <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-4">
-        <Icon className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+    <div className={cn("text-center py-16", className)}>
+      <div className="w-20 h-20 rounded-[24px] bg-card/60 backdrop-blur-xl border border-border flex items-center justify-center mx-auto mb-5 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
+        {Icon ? (
+          <Icon className="w-8 h-8 text-text-tertiary" />
+        ) : (
+          <svg className="w-8 h-8 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+          </svg>
+        )}
       </div>
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
-      {description && (
-        <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm mb-6">{description}</p>
+      <h3 className="text-lg font-semibold text-text mb-1">{title}</h3>
+      <p className="text-sm text-text-secondary max-w-sm mx-auto mb-6">{description}</p>
+      {actionLabel && onAction && (
+        <Button variant="primary" onClick={onAction}>{actionLabel}</Button>
       )}
-      {action && <div className="mb-3">{action}</div>}
-      {secondaryAction && <div>{secondaryAction}</div>}
-    </motion.div>
+    </div>
   )
 }

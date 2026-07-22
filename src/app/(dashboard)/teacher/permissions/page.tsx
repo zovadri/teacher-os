@@ -8,7 +8,7 @@ import {
   HiOutlineCheck, HiOutlineX,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Modal } from "@/components/ui/Modal"
@@ -89,7 +89,7 @@ export default function PermissionsPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="الصلاحيات" subtitle="إدارة أدوار الصلاحيات" />
+        <PageHeader title="الصلاحيات" description="إدارة أدوار الصلاحيات" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -97,7 +97,7 @@ export default function PermissionsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="الصلاحيات" subtitle="إدارة أدوار الصلاحيات" />
+      <PageHeader title="الصلاحيات" description="إدارة أدوار الصلاحيات" />
       <div className="flex justify-end">
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
           إضافة دور
@@ -124,7 +124,7 @@ export default function PermissionsPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge variant={role.isSystem ? "premium" : "neutral"} size="sm">{role.isSystem ? "نظام" : "مخصص"}</Badge>
+                    <Badge variant={role.isSystem ? "premium" : "default"} size="sm">{role.isSystem ? "نظام" : "مخصص"}</Badge>
                     <div className="flex items-center gap-1 text-sm text-text-tertiary">
                       <HiOutlineUserGroup className="w-4 h-4" />
                       <span>{role.userCount}</span>

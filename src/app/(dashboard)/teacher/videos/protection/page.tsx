@@ -8,7 +8,7 @@ import {
   HiOutlinePlay, HiOutlineStop, HiOutlineLockClosed,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -75,7 +75,7 @@ export default function VideoProtectionPage() {
     return (
       <div className="p-4 md:p-6 space-y-6">
         <Breadcrumb items={[{ label: "الفيديوهات", href: "/teacher/videos" }, { label: "حماية الفيديو" }]} />
-        <DashboardHeader title="حماية الفيديوهات" subtitle="نظام حماية المحتوى" />
+        <PageHeader title="حماية الفيديوهات" description="نظام حماية المحتوى" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -84,7 +84,7 @@ export default function VideoProtectionPage() {
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
       <Breadcrumb items={[{ label: "الفيديوهات", href: "/teacher/videos" }, { label: "حماية الفيديو" }]} />
-      <DashboardHeader title="حماية الفيديوهات" subtitle="نظام حماية المحتوى الرقمي" />
+      <PageHeader title="حماية الفيديوهات" description="نظام حماية المحتوى الرقمي" />
 
       {isLoading ? (
         <StatsSkeleton count={4} />
@@ -128,7 +128,7 @@ export default function VideoProtectionPage() {
                           <div className="flex items-center gap-2">
                             <span className={cn("w-2 h-2 rounded-full", session.active ? "bg-success" : "bg-text-tertiary")} />
                             <span className="font-medium text-text">{session.deviceName}</span>
-                            <Badge variant="neutral" size="sm">{deviceTypeLabels[session.deviceType] || session.deviceType}</Badge>
+                            <Badge variant="default" size="sm">{deviceTypeLabels[session.deviceType] || session.deviceType}</Badge>
                           </div>
                           <p className="text-xs text-text-tertiary">IP: {session.ip}</p>
                           <p className="text-xs text-text-tertiary">آخر نشاط: {formatRelativeTime(session.lastActiveAt)}</p>
@@ -158,7 +158,7 @@ export default function VideoProtectionPage() {
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-text">{device.name}</span>
-                            <Badge variant="neutral" size="sm">{deviceTypeLabels[device.type] || device.type}</Badge>
+                            <Badge variant="default" size="sm">{deviceTypeLabels[device.type] || device.type}</Badge>
                             <Badge variant={device.trusted ? "success" : "error"} size="sm">{device.trusted ? "موثوق" : "محظور"}</Badge>
                           </div>
                           <p className="text-xs text-text-tertiary">{device.os} · {device.browser}</p>

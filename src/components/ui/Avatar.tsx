@@ -1,34 +1,36 @@
-import { cn, getInitials } from "@/lib/utils"
-import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 interface AvatarProps {
   src?: string
-  name: string
+  alt?: string
+  name?: string
   size?: "sm" | "md" | "lg" | "xl"
   className?: string
-  status?: "online" | "offline" | "busy"
 }
 
-const sizes = { sm: "w-8 h-8 text-xs", md: "w-10 h-10 text-sm", lg: "w-12 h-12 text-base", xl: "w-16 h-16 text-lg" }
-const dotSizes = { sm: "w-2 h-2", md: "w-2.5 h-2.5", lg: "w-3 h-3", xl: "w-3.5 h-3.5" }
-const statusColors = { online: "bg-success", offline: "bg-text-tertiary", busy: "bg-warning" }
+const sizes = {
+  sm: "w-8 h-8 text-xs",
+  md: "w-10 h-10 text-sm",
+  lg: "w-14 h-14 text-lg",
+  xl: "w-20 h-20 text-2xl",
+}
 
-export function Avatar({ src, name, size = "md", className, status }: AvatarProps) {
+export function Avatar({ src, alt, name, size = "md", className }: AvatarProps) {
+  const initials = name
+    ? name.split(" ").slice(0, 2).map((n) => n[0]).join("").toUpperCase()
+    : "?"
+
   return (
-    <div className={cn("relative inline-flex shrink-0", className)}>
+    <div className={cn(
+      "relative rounded-full overflow-hidden shrink-0 flex items-center justify-center font-medium",
+      "bg-primary/10 border border-border text-text",
+      sizes[size],
+      className,
+    )}>
       {src ? (
-        <Image src={src} alt={name} width={64} height={64} className={cn("rounded-full object-cover", sizes[size])} />
+        <img src={src} alt={alt || name || ""} className="w-full h-full object-cover" />
       ) : (
-        <div className={cn("rounded-full bg-primary-100 text-primary-700 font-semibold flex items-center justify-center", sizes[size])}>
-          {getInitials(name)}
-        </div>
-      )}
-      {status && (
-        <span className={cn(
-          "absolute bottom-0 left-0 rounded-full ring-2 ring-surface",
-          dotSizes[size],
-          statusColors[status]
-        )} />
+        <span>{initials}</span>
       )}
     </div>
   )

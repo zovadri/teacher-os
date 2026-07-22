@@ -13,7 +13,7 @@ import {
   ResponsiveContainer, AreaChart, Area, Cell, Legend, PieChart, Pie,
 } from "recharts"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -110,7 +110,7 @@ export default function TeacherProgressPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: "متابعة التقدم" }]} />
-      <DashboardHeader title="متابعة تقدم الطلاب" subtitle="راقب أداء وتقدم طلابك في جميع المواد" />
+      <PageHeader title="متابعة تقدم الطلاب" description="راقب أداء وتقدم طلابك في جميع المواد" />
       <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="flex items-center gap-3 flex-wrap">

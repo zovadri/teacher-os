@@ -12,7 +12,7 @@ import {
   HiOutlineSave,
   HiOutlineClipboardCheck,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import Input from "@/components/ui/Input"
@@ -133,7 +133,7 @@ export default function CreateExamPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "إضافة امتحان جديد" }]} />
-      <DashboardHeader title="إضافة امتحان جديد" />
+      <PageHeader title="إضافة امتحان جديد" />
 
       <div className="flex items-center gap-2 md:gap-4 mb-8">
         {steps.map((s, i) => (
@@ -264,7 +264,7 @@ export default function CreateExamPage() {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <span className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">{idx + 1}</span>
-                    <Badge variant="neutral" size="sm">
+                    <Badge variant="default" size="sm">
                       {q.type === "multiple-choice" ? "اختيار من متعدد" : q.type === "true-false" ? "صح وخطأ" : "مقالي"}
                     </Badge>
                   </div>
@@ -348,7 +348,7 @@ export default function CreateExamPage() {
           </div>
 
           <div className="flex justify-between">
-            <Button variant="outline" size="lg" onClick={() => setStep(0)}>السابق</Button>
+            <Button variant="secondary" size="lg" onClick={() => setStep(0)}>السابق</Button>
             <Button variant="primary" size="lg" onClick={() => setStep(2)}>التالي: الإعدادات</Button>
           </div>
         </motion.div>
@@ -408,9 +408,9 @@ export default function CreateExamPage() {
           </Card>
 
           <div className="flex justify-between">
-            <Button variant="outline" size="lg" onClick={() => setStep(1)}>السابق</Button>
+            <Button variant="secondary" size="lg" onClick={() => setStep(1)}>السابق</Button>
             <div className="flex gap-3">
-              <Button variant="outline" size="lg" leftIcon={<HiOutlineEye size={18} />}>
+              <Button variant="secondary" size="lg" leftIcon={<HiOutlineEye size={18} />}>
                 معاينة
               </Button>
               <Button variant="success" size="lg" leftIcon={<HiOutlineSave size={18} />} isLoading={submitting} onClick={handleSubmit}>

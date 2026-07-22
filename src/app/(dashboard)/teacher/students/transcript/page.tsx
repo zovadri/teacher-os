@@ -10,7 +10,7 @@ import {
 } from "react-icons/hi"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
@@ -55,7 +55,7 @@ export default function TranscriptPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: "كشف الدرجات" }]} />
-      <DashboardHeader title="كشف الدرجات" subtitle="سجل أكاديمي كامل للطالب" />
+      <PageHeader title="كشف الدرجات" description="سجل أكاديمي كامل للطالب" />
       <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="flex flex-wrap gap-2">

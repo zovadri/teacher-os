@@ -17,7 +17,7 @@ import {
   HiOutlineTag,
   HiOutlineTemplate,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -188,7 +188,7 @@ export default function EnrollmentsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة التسجيلات" subtitle="إدارة تسجيلات الطلاب في الكورسات" />
+      <PageHeader title="إدارة التسجيلات" description="إدارة تسجيلات الطلاب في الكورسات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {statsCards.map((s, i) => (

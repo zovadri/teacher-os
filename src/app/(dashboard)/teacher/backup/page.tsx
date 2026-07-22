@@ -9,7 +9,7 @@ import {
   HiOutlineClock, HiOutlineTrash as HiOutlineDeletePermanent,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -102,7 +102,7 @@ export default function BackupPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="النسخ الاحتياطي" subtitle="إدارة النسخ الاحتياطية وسلة المحذوفات" />
+      <PageHeader title="النسخ الاحتياطي" description="إدارة النسخ الاحتياطية وسلة المحذوفات" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
@@ -313,7 +313,7 @@ variant="primary" size="lg"
                               <span className="font-medium text-text">{item.name}</span>
                             </td>
                             <td className="px-4 py-3">
-                              <Badge variant="neutral" size="sm">{item.type}</Badge>
+                              <Badge variant="default" size="sm">{item.type}</Badge>
                             </td>
                             <td className="px-4 py-3 text-text-secondary">{item.deletedBy}</td>
                             <td className="px-4 py-3 text-text-tertiary text-xs">{formatDate(item.deletedAt)}</td>

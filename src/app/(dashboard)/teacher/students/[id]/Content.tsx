@@ -29,7 +29,7 @@ import {
   HiOutlineCheck,
 } from "react-icons/hi"
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+
 import { det } from "@/lib/utils"
 import { Timeline } from "@/components/ui/Timeline"
 import { Tabs, TabPanel } from "@/components/ui/Tabs"
@@ -43,11 +43,11 @@ import { StudentQRModal } from "@/components/student/StudentQRModal"
 import { mockStudents, mockExams, mockAttendance, mockCertificates, mockCourses } from "@/lib/mock/data"
 import { cn, formatDate } from "@/lib/utils"
 
-const statusBadge: Record<string, "success" | "warning" | "error" | "neutral"> = {
+const statusBadge: Record<string, "success" | "warning" | "error" | "default"> = {
   active: "success",
   inactive: "warning",
   expired: "error",
-  suspended: "neutral",
+  suspended: "default",
 }
 
 const statusLabels: Record<string, string> = {
@@ -299,7 +299,7 @@ export default function StudentDetailPage() {
                   <StatsCard title="نسبة الحضور" value={`${extended.attSummary.present > 0 ? Math.round((extended.attSummary.present / extended.attSummary.total) * 100) : 90}%`} icon={HiOutlineCalendar} color="primary" />
                   <StatsCard title="متوسط الامتحانات" value={`${Math.floor(det() * 15) + 75}%`} icon={HiOutlineChartBar} color="success" />
                   <StatsCard title="متوسط الواجبات" value={`${Math.floor(det() * 15) + 80}%`} icon={HiOutlineClipboardCheck} color="warning" />
-                  <StatsCard title="الترتيب" value={`#${(Math.floor(det() * 20) + 1)}`} icon={HiOutlineStar} color="premium" subtitle="من بين 50 طالب" />
+                  <StatsCard title="الترتيب" value={`#${(Math.floor(det() * 20) + 1)}`} icon={HiOutlineStar} color="primary" />
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-6">
@@ -381,7 +381,7 @@ export default function StudentDetailPage() {
                         <span className="font-medium text-text">{c.grade}%</span>
                       )},
                       { key: "status", header: "الحالة", render: (c) => (
-                        <Badge variant={c.status === "completed" ? "success" : c.status === "in_progress" ? "primary" : "neutral"}>
+                        <Badge variant={c.status === "completed" ? "success" : c.status === "in_progress" ? "primary" : "default"}>
                           {courseStatusLabels[c.status]}
                         </Badge>
                       )},

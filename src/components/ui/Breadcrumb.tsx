@@ -1,24 +1,27 @@
-import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { HiChevronLeft } from "react-icons/hi"
+import Link from "next/link"
 
-interface Crumb {
+interface BreadcrumbItem {
   label: string
   href?: string
 }
 
-export function Breadcrumb({ items, className }: { items: Crumb[]; className?: string }) {
+interface BreadcrumbProps {
+  items: BreadcrumbItem[]
+  className?: string
+}
+
+export function Breadcrumb({ items, className }: BreadcrumbProps) {
   return (
-    <nav className={cn("flex items-center gap-1.5 text-sm text-text-tertiary", className)}>
-      {items.map((item, idx) => (
-        <span key={idx} className="flex items-center gap-1.5">
-          {idx > 0 && <HiChevronLeft className="w-3.5 h-3.5" />}
+    <nav className={cn("flex items-center gap-1.5 text-sm", className)}>
+      {items.map((item, i) => (
+        <span key={i} className="flex items-center gap-1.5">
+          {i > 0 && <HiChevronLeft className="w-3.5 h-3.5 text-text-tertiary" />}
           {item.href ? (
-            <Link href={item.href} className="hover:text-primary transition-colors">
-              {item.label}
-            </Link>
+            <Link href={item.href} className="text-text-tertiary hover:text-text transition-colors">{item.label}</Link>
           ) : (
-            <span className="text-text font-medium">{item.label}</span>
+            <span className="text-text-secondary font-medium">{item.label}</span>
           )}
         </span>
       ))}

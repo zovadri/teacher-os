@@ -12,7 +12,7 @@ import {
   HiOutlineBadgeCheck,
   HiOutlineChartSquareBar,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Tabs } from "@/components/ui/Tabs"
@@ -52,7 +52,7 @@ export default function GamificationPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="نظام التحديات والمكافآت" subtitle="XPطŒ المستويات، الشارات، والإنجازات" />
+      <PageHeader title="نظام التحديات والمكافآت" description="XPطŒ المستويات، الشارات، والإنجازات" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="إجمالي XP الممنوح" value={stats.totalXp.toLocaleString("ar-EG")} icon={HiOutlineStar} color="primary" />

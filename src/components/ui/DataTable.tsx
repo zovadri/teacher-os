@@ -1,16 +1,11 @@
 "use client"
 
-import { useState, useMemo, useCallback, memo } from "react"
+import { useState, useMemo, useCallback } from "react"
 import { cn } from "@/lib/utils"
-import Button from "./Button"
 import { SearchInput } from "./SearchInput"
-import { Pagination } from "./Pagination"
-import Select from "./Select"
-import { EmptyState } from "./EmptyState"
-import { Skeleton } from "./Skeleton"
-import { handleExport, type ExportFormat } from "@/lib/print-utils"
-import { HiFilter, HiX, HiChevronUp, HiChevronDown, HiEye } from "react-icons/hi"
-import { toast } from "react-hot-toast"
+import { Table } from "./Table"
+import { HiSortAscending, HiSortDescending, HiChevronRight, HiChevronLeft } from "react-icons/hi"
+import Button from "./Button"
 
 export interface DataColumn<T> {
   key: string
@@ -18,297 +13,119 @@ export interface DataColumn<T> {
   render?: (item: T) => React.ReactNode
   className?: string
   sortable?: boolean
-  hideable?: boolean
-  hidden?: boolean
-  width?: string
+  mobileLabel?: string
+  filterable?: boolean
 }
 
 export interface FilterOption {
   key: string
   label: string
   options: { value: string; label: string }[]
-  defaultValue?: string
 }
 
 interface DataTableProps<T> {
   columns: DataColumn<T>[]
   data: T[]
-  id?: string
-  pageSize?: number
+  className?: string
+  onRowClick?: (item: T) => void
+  emptyMessage?: string
   searchable?: boolean
   searchKeys?: string[]
   searchPlaceholder?: string
-  sortable?: boolean
-  selectable?: boolean
-  exportable?: boolean
-  printable?: boolean
+  pageSize?: number
   filters?: FilterOption[]
-  quickFilters?: { label: string; filter: (item: T) => boolean }[]
-  filename?: string
-  loading?: boolean
-  emptyMessage?: string
-  onRowClick?: (item: T) => void
-  onSelectionChange?: (selected: T[]) => void
-  bulkActions?: { label: string; icon?: React.ReactNode; onClick: (selected: T[]) => void; variant?: "primary" | "danger" | "ghost" }[]
-  stickyHeader?: boolean
-  skeletonRows?: number
-  noCard?: boolean
-  className?: string
+  mobileCard?: boolean
+  actions?: React.ReactNode
 }
 
-function DataTableInner<T extends Record<string, unknown>>({
-  columns: rawColumns, data, pageSize = 10, searchable = true, searchKeys, searchPlaceholder = "بحث...",
-  sortable = true, selectable = false, exportable = true, printable = true, filters, quickFilters,
-  filename = "export", loading, emptyMessage = "لا توجد بيانات", onRowClick,
-  onSelectionChange, bulkActions, stickyHeader = true, skeletonRows = 5,
-  noCard, className, id,
+export function DataTable<T extends Record<string, any>>({
+  columns, data, className, onRowClick, emptyMessage, searchable = false,
+  searchKeys, searchPlaceholder, pageSize = 10, filters, mobileCard = true, actions,
 }: DataTableProps<T>) {
   const [search, setSearch] = useState("")
-  const [currentPage, setCurrentPage] = useState(1)
   const [sortKey, setSortKey] = useState<string | null>(null)
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc")
-  const [selected, setSelected] = useState<Set<string>>(new Set())
+  const [currentPage, setCurrentPage] = useState(1)
   const [activeFilters, setActiveFilters] = useState<Record<string, string>>({})
-  const [quickFilter, setQuickFilter] = useState<number | null>(null)
-  const [showFilters, setShowFilters] = useState(false)
-  const [visibleColumns, setVisibleColumns] = useState<Set<string>>(
-    new Set(rawColumns.filter((c) => !c.hidden).map((c) => c.key))
-  )
-  const [showColumnMenu, setShowColumnMenu] = useState(false)
-
-  const columns = useMemo(() => rawColumns.filter((c) => visibleColumns.has(c.key)), [rawColumns, visibleColumns])
 
   const filtered = useMemo(() => {
-    let result = [...data]
+    let items = [...data]
     if (search && searchKeys) {
       const q = search.toLowerCase()
-      result = result.filter((item) => searchKeys.some((k) => String(item[k] ?? "").toLowerCase().includes(q)))
+      items = items.filter((item) => searchKeys.some((key) => String(item[key] || "").toLowerCase().includes(q)))
     }
-    Object.entries(activeFilters).forEach(([key, value]) => {
-      if (value) result = result.filter((item) => String(item[key] ?? "") === value)
+    Object.entries(activeFilters).forEach(([key, val]) => {
+      if (val) items = items.filter((item) => String(item[key]) === val)
     })
-    if (quickFilter !== null && quickFilters?.[quickFilter]) {
-      result = result.filter(quickFilters[quickFilter].filter)
+    if (sortKey) {
+      items.sort((a, b) => {
+        const av = a[sortKey], bv = b[sortKey]
+        if (typeof av === "number" && typeof bv === "number") return sortDir === "asc" ? av - bv : bv - av
+        return sortDir === "asc" ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av))
+      })
     }
-    return result
-  }, [data, search, searchKeys, activeFilters, quickFilter, quickFilters])
+    return items
+  }, [data, search, searchKeys, sortKey, sortDir, activeFilters])
 
-  const sorted = useMemo(() => {
-    if (!sortKey || !sortable) return filtered
-    return [...filtered].sort((a, b) => {
-      const va = a[sortKey], vb = b[sortKey]
-      if (va == null) return 1; if (vb == null) return -1
-      const cmp = typeof va === "number" ? va - vb : String(va).localeCompare(String(vb))
-      return sortDir === "asc" ? cmp : -cmp
-    })
-  }, [filtered, sortKey, sortDir, sortable])
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
+  const paginated = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize)
 
-  const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize))
-  const safePage = Math.min(currentPage, totalPages)
-  const pageData = sorted.slice((safePage - 1) * pageSize, safePage * pageSize)
-
-  const toggleSort = (key: string) => {
-    if (!sortable) return
-    if (sortKey === key) { setSortDir((d) => (d === "asc" ? "desc" : "asc")) }
+  const handleSort = useCallback((key: string) => {
+    if (sortKey === key) setSortDir((d) => (d === "asc" ? "desc" : "asc"))
     else { setSortKey(key); setSortDir("asc") }
-  }
+    setCurrentPage(1)
+  }, [sortKey])
 
-  const toggleSelect = (id: string) => {
-    const next = new Set(selected)
-    if (next.has(id)) { next.delete(id) } else { next.add(id) }
-    setSelected(next); onSelectionChange?.(data.filter((d) => next.has(String(d.id ?? ""))))
-  }
-  const toggleAll = () => {
-    if (selected.size === pageData.length) { setSelected(new Set()); onSelectionChange?.([]) }
-    else {
-      const ids = new Set(pageData.map((d) => String(d.id ?? "")))
-      setSelected(ids); onSelectionChange?.(pageData)
-    }
-  }
-
-  const resetFilters = () => { setActiveFilters({}); setQuickFilter(null); setSearch(""); setCurrentPage(1) }
-  const hasActiveFilters = Object.values(activeFilters).some(Boolean) || quickFilter !== null || search
-
-  const tableId = id || "data-table"
-
-  const exportData = useMemo(() => {
-    return sorted.map((row) => {
-      const obj: Record<string, unknown> = {}
-      columns.forEach((col) => { obj[col.header] = col.render ? "" : row[col.key] })
-      return obj
-    })
-  }, [sorted, columns])
-
-  const ExportButton = ({ format }: { format: ExportFormat }) => (
-    <button type="button" onClick={() => handleExport(format, exportData, tableId, filename)}
-      className="px-2 py-1 text-xs rounded-md border border-border hover:bg-surface-secondary transition-colors">
-      {format === "csv" ? "CSV" : format === "excel" ? "Excel" : format === "pdf" ? "PDF" : "طباعة"}
-    </button>
-  )
-
-  if (loading) {
-    return <Skeleton rows={skeletonRows} cols={columns.length} />
-  }
+  const sortableColumns = columns.map((col) => ({
+    ...col,
+    header: col.sortable ? (
+      <button type="button" onClick={() => handleSort(col.key)} className="flex items-center gap-1 hover:text-text transition-colors group">
+        {col.header}
+        {sortKey === col.key ? (
+          sortDir === "asc" ? <HiSortAscending className="w-3.5 h-3.5" /> : <HiSortDescending className="w-3.5 h-3.5" />
+        ) : (
+          <HiSortAscending className="w-3.5 h-3.5 opacity-0 group-hover:opacity-50" />
+        )}
+      </button>
+    ) : col.header,
+  }))
 
   return (
-    <div className={cn("space-y-4", className)} id={tableId}>
-      {searchable || filters || quickFilters || exportable || printable ? (
-        <div className="flex flex-wrap items-center gap-2">
-          {searchable ? (
-            <div className="flex-1 min-w-[200px]"><SearchInput value={search} onChange={setSearch} placeholder={searchPlaceholder} /></div>
-          ) : <div className="flex-1" />}
-          {quickFilters?.map((qf, i) => (
-            <button key={i} type="button" onClick={() => setQuickFilter(quickFilter === i ? null : i)}
-              className={cn("px-3 py-1.5 text-xs rounded-lg border transition-colors",
-                quickFilter === i ? "bg-primary text-white border-primary" : "border-border hover:bg-surface-secondary")}>
-              {qf.label}
-            </button>
+    <div className={cn("space-y-4", className)}>
+      {(searchable || (filters && filters.length > 0) || actions) && (
+        <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+          {searchable && (
+            <SearchInput value={search} onChange={(v) => { setSearch(v); setCurrentPage(1) }} placeholder={searchPlaceholder || "بحث..."} className="sm:max-w-xs" />
+          )}
+          {filters?.map((f) => (
+            <select key={f.key} value={activeFilters[f.key] || ""} onChange={(e) => { setActiveFilters((p) => ({ ...p, [f.key]: e.target.value })); setCurrentPage(1) }}
+              className="bg-card/60 backdrop-blur border border-border rounded-[16px] px-3.5 py-2.5 text-sm text-text appearance-none transition-all shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30"
+            >
+              <option value="">{f.label}</option>
+              {f.options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
           ))}
-          {filters && filters.length > 0 ? (
-            <button type="button" onClick={() => setShowFilters(!showFilters)}
-              className={cn("flex items-center gap-1 px-3 py-1.5 text-xs rounded-lg border transition-colors",
-                hasActiveFilters ? "bg-primary/10 border-primary text-primary" : "border-border hover:bg-surface-secondary")}>
-              <HiFilter className="w-3.5 h-3.5" /> فلتر {hasActiveFilters && <span className="w-1.5 h-1.5 rounded-full bg-primary" />}
-            </button>
-          ) : null}
-          {selectable && bulkActions && selected.size > 0 ? (
-            <span className="text-xs text-text-secondary px-2">{selected.size} محدد</span>
-          ) : null}
-          <div className="flex items-center gap-1 mr-auto">
-            <div className="relative">
-              <button type="button" onClick={() => setShowColumnMenu(!showColumnMenu)}
-                className="p-1.5 rounded-lg border border-border hover:bg-surface-secondary">
-                <HiEye className="w-4 h-4" />
-              </button>
-              {showColumnMenu ? (
-                <div className="absolute left-0 top-full mt-1 z-50 w-44 bg-surface border border-border rounded-xl shadow-xl p-2 space-y-1">
-                  {rawColumns.filter((c) => c.hideable).map((col) => (
-                    <label key={col.key} className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-surface-secondary text-xs cursor-pointer">
-                      <input type="checkbox" checked={visibleColumns.has(col.key)}
-                        onChange={() => {
-                          const next = new Set(visibleColumns)
-                          if (next.has(col.key)) { next.delete(col.key) } else { next.add(col.key) }
-                          setVisibleColumns(next)
-                        }} className="rounded border-border" />
-                      {col.header}
-                    </label>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-            {exportable ? (
-              <div className="flex items-center gap-1">
-                <ExportButton format="csv" />
-                <ExportButton format="excel" />
-                {printable ? <ExportButton format="print" /> : null}
-              </div>
-            ) : null}
-          </div>
+          {actions && <div className="sm:mr-auto">{actions}</div>}
         </div>
-      ) : null}
+      )}
 
-      {showFilters && filters ? (
-        <div className="flex flex-wrap gap-3 p-3 rounded-xl bg-surface-secondary border border-border">
-          {filters.map((f) => (
-            <div key={f.key} className="min-w-[150px]">
-              <Select
-                value={activeFilters[f.key] || f.defaultValue || ""}
-                onChange={(v) => { setActiveFilters((prev) => ({ ...prev, [f.key]: v })); setCurrentPage(1) }}
-                options={[{ value: "", label: `كل ${f.label}` }, ...f.options]}
-              />
-            </div>
-          ))}
-          {hasActiveFilters ? (
-            <button type="button" onClick={resetFilters}
-              className="flex items-center gap-1 px-3 py-1.5 text-xs text-error hover:bg-error/10 rounded-lg transition-colors">
-              <HiX className="w-3.5 h-3.5" /> إعادة تعيين
-            </button>
-          ) : null}
+      <Table columns={sortableColumns as any} data={paginated} onRowClick={onRowClick} emptyMessage={emptyMessage} mobileCard={mobileCard} />
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 pt-2">
+          <button type="button" onClick={() => setCurrentPage(Math.max(1, currentPage - 1))} disabled={currentPage === 1}
+            className="p-2 rounded-[12px] hover:bg-card disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary transition-all"
+          >
+            <HiChevronRight className="w-5 h-5" />
+          </button>
+          <span className="text-sm text-text-secondary">{currentPage} / {totalPages}</span>
+          <button type="button" onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages}
+            className="p-2 rounded-[12px] hover:bg-card disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary transition-all"
+          >
+            <HiChevronLeft className="w-5 h-5" />
+          </button>
         </div>
-      ) : null}
-
-      {selectable && selected.size > 0 && bulkActions ? (
-        <div className="flex items-center gap-2 p-2 bg-primary/5 rounded-xl border border-primary/20">
-          <span className="text-xs text-text-secondary px-2">{selected.size} محدد</span>
-          {bulkActions.map((action, i) => (
-            <Button key={i} size="sm" variant={action.variant || "ghost"} onClick={() => { action.onClick(data.filter((d) => selected.has(String(d.id ?? "")))); setSelected(new Set()) }}>
-              {action.icon} {action.label}
-            </Button>
-          ))}
-        </div>
-      ) : null}
-
-      <div className={cn("overflow-x-auto", stickyHeader && "max-h-[600px]")}>
-        <table className={cn("w-full text-sm border-collapse", noCard ? "" : "border border-border rounded-xl")}>
-          <thead>
-            <tr className={cn("bg-surface-secondary border-b border-border", stickyHeader && "sticky top-0 z-10")}>
-              {selectable ? (
-                <th className="px-3 py-3 w-10">
-                  <input type="checkbox" checked={selected.size === pageData.length && pageData.length > 0}
-                    onChange={toggleAll} className="rounded border-border" />
-                </th>
-              ) : null}
-              {columns.map((col) => (
-                <th key={col.key}
-                  onClick={() => col.sortable !== false && toggleSort(col.key)}
-                  className={cn(
-                    "text-right px-4 py-3 font-semibold text-text-secondary whitespace-nowrap",
-                    col.sortable !== false && sortable && "cursor-pointer select-none hover:text-text",
-                    col.className
-                  )}
-                  style={col.width ? { width: col.width } : undefined}
-                >
-                  <span className="flex items-center gap-1">
-                    {col.header}
-                    {sortKey === col.key ? (
-                      sortDir === "asc" ? <HiChevronUp className="w-3.5 h-3.5" /> : <HiChevronDown className="w-3.5 h-3.5" />
-                    ) : null}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {pageData.length === 0 ? (
-              <tr><td colSpan={columns.length + (selectable ? 1 : 0)} className="py-12"><EmptyState message={emptyMessage} /></td></tr>
-            ) : (
-              pageData.map((item, idx) => (
-                <tr key={String(item.id ?? idx)}
-                  onClick={() => onRowClick?.(item)}
-                  className={cn(
-                    "border-b border-border last:border-0 transition-colors",
-                    onRowClick && "cursor-pointer hover:bg-surface-secondary",
-                    selected.has(String(item.id ?? "")) && "bg-primary/5"
-                  )}
-                >
-                  {selectable ? (
-                    <td className="px-3 py-3">
-                      <input type="checkbox" checked={selected.has(String(item.id ?? ""))}
-                        onChange={() => toggleSelect(String(item.id ?? ""))}
-                        onClick={(e) => e.stopPropagation()} className="rounded border-border" />
-                    </td>
-                  ) : null}
-                  {columns.map((col) => (
-                    <td key={col.key} className={cn("px-4 py-3 text-text", col.className)}>
-                      {col.render ? col.render(item) : String(item[col.key] ?? "")}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {totalPages > 1 ? (
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-text-tertiary">{sorted.length} نتيجة</span>
-          <Pagination current={safePage} total={totalPages} onChange={setCurrentPage} />
-        </div>
-      ) : null}
+      )}
     </div>
   )
 }
-
-export const DataTable = memo(DataTableInner) as typeof DataTableInner & { displayName: string }
-DataTable.displayName = "DataTable"

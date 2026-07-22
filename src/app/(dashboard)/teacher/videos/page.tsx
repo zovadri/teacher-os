@@ -16,7 +16,7 @@ import {
   HiOutlineFilm,
   HiOutlineMenu,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Badge } from "@/components/ui/Badge"
 import { Table } from "@/components/ui/Table"
 import { Modal } from "@/components/ui/Modal"
@@ -83,7 +83,7 @@ export default function VideosPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة الفيديوهات" subtitle="عرض متقدم وتحكم شامل بالفيديوهات" />
+      <PageHeader title="إدارة الفيديوهات" description="عرض متقدم وتحكم شامل بالفيديوهات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="إجمالي الفيديوهات" value={stats.total} icon={HiOutlineFilm} color="primary" />
@@ -176,7 +176,7 @@ export default function VideosPage() {
                 </div>
               )},
               { key: "resolution", header: "الدقة", render: (v) => (
-                <Badge variant="neutral" size="sm">{v.resolution}</Badge>
+                <Badge variant="default" size="sm">{v.resolution}</Badge>
               )},
               { key: "size", header: "الحجم", render: (v) => (
                 <span className="text-sm text-text-secondary">{v.size} MB</span>

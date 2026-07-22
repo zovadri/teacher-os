@@ -18,7 +18,7 @@ import {
   HiOutlineArrowRight,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 
 type LessonStatus = "locked" | "available" | "completed"
@@ -401,10 +401,7 @@ export default function TeacherLearningPathPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "الكورسات", href: "/teacher/courses" }, { label: "مسار التعلم" }]} />
-      <DashboardHeader
-        title="مسارات التعلم"
-        subtitle="إنشاء وإدارة مسارات التعلم المتسلسلة للدروس"
-      />
+      <PageHeader title="مسارات التعلم" description="إنشاء وإدارة مسارات التعلم المتسلسلة للدروس" />
 
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div

@@ -21,7 +21,7 @@ import {
   HiOutlineTag,
   HiOutlineFlag,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import Button from "@/components/ui/Button"
@@ -330,7 +330,7 @@ export default function NotificationsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="مركز الإشعارات المتقدم" subtitle="إدارة جميع الإشعارات والتنبيهات" />
+      <PageHeader title="مركز الإشعارات المتقدم" description="إدارة جميع الإشعارات والتنبيهات" />
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatsCard
@@ -419,7 +419,7 @@ export default function NotificationsPage() {
           <p className="text-sm text-text-secondary">
             {unreadCount} إشعار غير مقروء
           </p>
-          <Button variant="outline"
+          <Button variant="secondary"
             size="sm"
             leftIcon={<HiOutlineMailOpen size={16} />}
             onClick={markAllAsRead}
@@ -571,8 +571,8 @@ onClick={toggleSelectAll}
                                 notif.category === "financial" ? "success" :
                                 notif.category === "student" ? "info" :
                                 notif.category === "exam" ? "warning" :
-                                notif.category === "homework" ? "neutral" :
-                                "neutral"
+                                notif.category === "homework" ? "default" :
+                                "default"
                               } size="sm">
                                 {categoryLabels[notif.category] || notif.category}
                               </Badge>
@@ -691,7 +691,7 @@ onClick={toggleSelectAll}
                 detailNotif.category === "financial" ? "success" :
                 detailNotif.category === "student" ? "info" :
                 detailNotif.category === "exam" ? "warning" :
-                "neutral"
+                "default"
               }>
                 {categoryLabels[detailNotif.category] || detailNotif.category}
               </Badge>

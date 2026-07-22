@@ -13,7 +13,7 @@ import {
   HiOutlineUpload,
   HiOutlineLink,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Avatar } from "@/components/ui/Avatar"
@@ -76,7 +76,7 @@ export default function BrandingPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "إدارة المحتوى", href: "/teacher/cms" }, { label: "العلامة التجارية" }]} />
-      <DashboardHeader title="العلامة التجارية" subtitle="إدارة الشعار والاسم والروابط الاجتماعية" />
+      <PageHeader title="العلامة التجارية" description="إدارة الشعار والاسم والروابط الاجتماعية" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
@@ -101,7 +101,7 @@ export default function BrandingPage() {
                     <div className="flex flex-col items-center gap-2">
                       <HiOutlineUpload className="w-8 h-8 text-text-tertiary" />
                       <p className="text-sm text-text-tertiary">انقر لرفع الشعار</p>
-                      <Badge variant="neutral" size="sm">PNG, SVG, JPG</Badge>
+                      <Badge variant="default" size="sm">PNG, SVG, JPG</Badge>
                     </div>
                   )}
                 </div>

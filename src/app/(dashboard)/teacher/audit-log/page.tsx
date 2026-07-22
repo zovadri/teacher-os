@@ -7,7 +7,7 @@ import {
   HiOutlineDownload, HiOutlineCalendar, HiOutlineUser, HiOutlineShieldCheck,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -79,7 +79,7 @@ export default function AuditLogPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="سجل التدقيق" subtitle="مراقبة نشاط النظام" />
+        <PageHeader title="سجل التدقيق" description="مراقبة نشاط النظام" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -87,7 +87,7 @@ export default function AuditLogPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="سجل التدقيق" subtitle="مراقبة نشاط النظام" />
+      <PageHeader title="سجل التدقيق" description="مراقبة نشاط النظام" />
       <div className="flex justify-end">
         <Button variant="secondary" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={handleExport}>
           تصدير
@@ -148,7 +148,7 @@ export default function AuditLogPage() {
                         </div>
                       </td>
                       <td className="px-4 py-3">
-                        <Badge variant={actionConfig[log.action]?.variant || "neutral"} size="sm">
+                        <Badge variant={actionConfig[log.action]?.variant || "default"} size="sm">
                           {actionConfig[log.action]?.label || log.action}
                         </Badge>
                       </td>

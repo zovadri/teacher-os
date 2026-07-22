@@ -10,7 +10,7 @@ import {
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie } from "recharts"
 import Link from "next/link"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -59,7 +59,7 @@ export default function CourseFinancePage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "المالية", href: "/teacher/finance" }, { label: "إحصائيات الكورسات" }]} />
-      <DashboardHeader title="إحصائيات مالية للكورسات" subtitle="الإيرادات والمصروفات والأرباح لكل كورس" />
+      <PageHeader title="إحصائيات مالية للكورسات" description="الإيرادات والمصروفات والأرباح لكل كورس" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="flex items-center gap-3">

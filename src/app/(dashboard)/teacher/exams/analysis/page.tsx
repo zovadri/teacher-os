@@ -166,7 +166,7 @@ export default function AnalysisPage() {
     return (
       <div className="p-4 md:p-6">
         <PageHeader title="تحليل الأسئلة" description="تحليل أداء الأسئلة والامتحانات" />
-        <ErrorState error={error} onRetry={retry} />
+        <ErrorState description={error} onRetry={retry} />
       </div>
     )
   }

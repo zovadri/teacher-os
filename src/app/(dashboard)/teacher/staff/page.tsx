@@ -17,7 +17,7 @@ import {
   HiOutlineTrash,
   HiOutlinePlus,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Badge } from "@/components/ui/Badge"
 import { Table } from "@/components/ui/Table"
 import { Tabs, TabPanel } from "@/components/ui/Tabs"
@@ -151,7 +151,7 @@ export default function StaffPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة الموظفين والصلاحيات" />
+      <PageHeader title="إدارة الموظفين والصلاحيات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="إجمالي الموظفين" value={stats.total} icon={HiOutlineUsers} color="primary" />
@@ -183,7 +183,7 @@ export default function StaffPage() {
                     <div className="flex flex-wrap gap-1">
                       {s.permissions.slice(0, 2).map((p: string) => {
                         const perm = mockPermissions.find((mp) => mp.key === p)
-                        return <Badge key={p} variant="neutral" size="sm">{perm?.label || p}</Badge>
+                        return <Badge key={p} variant="default" size="sm">{perm?.label || p}</Badge>
                       })}
                       {s.permissions.length > 2 && (
                         <Badge variant="primary" size="sm">+{s.permissions.length - 2}</Badge>
@@ -221,7 +221,7 @@ export default function StaffPage() {
                           <CardTitle>{template.name}</CardTitle>
                           <CardDescription>{template.description}</CardDescription>
                         </div>
-                        <Badge variant={roleBadgeColors[template.roleBadge] || "neutral"} size="sm">
+                        <Badge variant={roleBadgeColors[template.roleBadge] || "default"} size="sm">
                           {template.roleBadge}
                         </Badge>
                       </CardHeader>
@@ -258,7 +258,7 @@ export default function StaffPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge variant="primary" size="sm">{role.permissions.length} صلاحية</Badge>
-                        <Badge variant={role.userCount > 0 ? "info" : "neutral"} size="sm">
+                        <Badge variant={role.userCount > 0 ? "info" : "default"} size="sm">
                           {role.userCount} مستخدم
                         </Badge>
                       </div>
@@ -288,7 +288,7 @@ export default function StaffPage() {
                               {role.permissions.map((permKey) => {
                                 const perm = mockPermissions.find((p) => p.key === permKey)
                                 return (
-                                  <Badge key={permKey} variant="neutral" size="sm">
+                                  <Badge key={permKey} variant="default" size="sm">
                                     {perm?.label || permKey}
                                   </Badge>
                                 )

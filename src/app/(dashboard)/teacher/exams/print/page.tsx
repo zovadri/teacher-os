@@ -108,7 +108,7 @@ export default function PrintExamPage() {
     return (
       <div className="p-4 md:p-6">
         <PageHeader title="طباعة الامتحان" description="إعدادات طباعة الامتحانات والاختبارات" />
-        <ErrorState error={error} onRetry={retry} />
+        <ErrorState description={error} onRetry={retry} />
       </div>
     )
   }
@@ -127,7 +127,7 @@ export default function PrintExamPage() {
             <Button variant="primary" onClick={handlePrintAnswerSheet} rightIcon={<HiOutlineDocumentText size={18} />}>
               طباعة كراسة الإجابة
             </Button>
-            <Button variant="outline" onClick={() => setShowMultiPrint(true)} rightIcon={<HiOutlineDocumentDuplicate size={18} />}>
+            <Button variant="secondary" onClick={() => setShowMultiPrint(true)} rightIcon={<HiOutlineDocumentDuplicate size={18} />}>
               طباعة نسخ متعددة
             </Button>
           </div>

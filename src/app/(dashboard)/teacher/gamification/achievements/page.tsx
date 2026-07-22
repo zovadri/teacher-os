@@ -12,7 +12,7 @@ import {
   HiOutlineX,
 } from "react-icons/hi"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -67,7 +67,7 @@ export default function AchievementsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الألعاب", href: "/teacher/gamification" }, { label: "الإنجازات" }]} />
-      <DashboardHeader title="إدارة الإنجازات" subtitle="عرض وإدارة الإنجازات وتتبع تقدم الطلاب" />
+      <PageHeader title="إدارة الإنجازات" description="عرض وإدارة الإنجازات وتتبع تقدم الطلاب" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
         <StatsCard title="إجمالي الإنجازات" value={stats.total} icon={HiStar} color="primary" />
@@ -104,7 +104,7 @@ export default function AchievementsPage() {
               <p className="text-xs text-text-tertiary mt-1 line-clamp-2">{ach.description}</p>
               <div className="flex items-center gap-2 mt-3">
                 <Badge variant="warning" size="sm">+{ach.xpReward} XP</Badge>
-                <Badge variant="neutral" size="sm">{ach.criteria.type.replace("_", " ")}</Badge>
+                <Badge variant="default" size="sm">{ach.criteria.type.replace("_", " ")}</Badge>
               </div>
               <div className="mt-3">
                 <div className="flex items-center justify-between text-xs text-text-secondary mb-1">

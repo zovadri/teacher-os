@@ -15,7 +15,7 @@ import {
 } from "recharts"
 import toast from "react-hot-toast"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -158,7 +158,7 @@ export default function LearningReportsPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "التقارير", href: "/teacher/reports" }, { label: "تقارير التعلم" }]} />
-      <DashboardHeader title="تقارير التعلم" subtitle="تقرير شامل لكل طالب - الحضور والواجبات والامتحانات" />
+      <PageHeader title="تقارير التعلم" description="تقرير شامل لكل طالب - الحضور والواجبات والامتحانات" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="flex items-center gap-3 flex-wrap">

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import toast from "react-hot-toast"
 import { HiOutlineReceiptRefund, HiOutlineCheckCircle, HiOutlinePrinter, HiOutlineDownload, HiOutlineCash, HiOutlineDocumentText } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -32,7 +32,7 @@ export default function ReceiptsPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "المدفوعات", href: "/teacher/payments/installments" }, { label: "الإيصالات" }]} />
-      <DashboardHeader title="الإيصالات" subtitle="سجل الإيصالات والمبالغ المستلمة" />
+      <PageHeader title="الإيصالات" description="سجل الإيصالات والمبالغ المستلمة" />
       <div className="p-4 md:p-6 space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">

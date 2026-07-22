@@ -17,7 +17,7 @@ import {
   HiOutlineCheck,
   HiOutlineX,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -294,7 +294,7 @@ export default function AnnouncementsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="مركز الإعلانات" subtitle="إدارة وإرسال الإعلانات للطلاب وأولياء الأمور" />
+      <PageHeader title="مركز الإعلانات" description="إدارة وإرسال الإعلانات للطلاب وأولياء الأمور" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[

@@ -9,7 +9,7 @@ import {
   HiOutlinePencilAlt,
   HiOutlineMail,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import Input from "@/components/ui/Input"
@@ -118,7 +118,7 @@ export default function CreateAnnouncementPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الإعلانات", href: "/teacher/announcements" }, { label: "إنشاء إعلان" }]} />
-      <DashboardHeader title="إنشاء إعلان جديد" subtitle="أنشئ إعلاناً وأرسله للطلاب أو أولياء الأمور أو المعلمين" />
+      <PageHeader title="إنشاء إعلان جديد" description="أنشئ إعلاناً وأرسله للطلاب أو أولياء الأمور أو المعلمين" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">

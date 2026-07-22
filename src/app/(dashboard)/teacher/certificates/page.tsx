@@ -14,7 +14,7 @@ import {
   HiOutlineTrash,
   HiOutlineBadgeCheck,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { Table } from "@/components/ui/Table"
@@ -74,7 +74,7 @@ export default function CertificatesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="الشهادات" subtitle="إدارة شهادات إتمام الكورسات" />
+      <PageHeader title="الشهادات" description="إدارة شهادات إتمام الكورسات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="إجمالي الشهادات" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />

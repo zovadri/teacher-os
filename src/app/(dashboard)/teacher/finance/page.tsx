@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion"
 import { HiOutlineCash, HiOutlineTrendingUp, HiOutlineTrendingDown, HiOutlineExclamationCircle } from "react-icons/hi"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, AreaChart, Area, LineChart, Line } from "recharts"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, LineChart, Line } from "recharts"
 import Link from "next/link"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -33,8 +33,7 @@ const debtsData = [
   { name: "عمر حسن", amount: 500, days: 5, status: "pending" },
 ]
 
-const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.05 } } }
-const itemVariants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }
+const formatter = (value: number) => `${(value / 1000).toFixed(1)} ألف`
 
 export default function FinanceDashboardPage() {
   const currentMonth = monthlyData[monthlyData.length - 1]
@@ -44,91 +43,137 @@ export default function FinanceDashboardPage() {
   const overdueDebts = debtsData.filter((d) => d.status === "overdue").reduce((s, d) => s + d.amount, 0)
 
   return (
-    <div className="min-h-screen">
-      <DashboardHeader title="لوحة التحكم المالية" subtitle="الإيرادات والمصروفات والأرباح والديون" />
-      <div className="px-4 md:px-6 max-w-7xl mx-auto flex items-center gap-4 pb-2">
-        <Link href="/teacher/finance/courses" className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors">
-          تفاصيل الكورسات المالية
-        </Link>
-        <span className="text-gray-300 dark:text-gray-600">|</span>
-        <Link href="/teacher/accounting" className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors">
-          المحاسبة
-        </Link>
-      </div>
-      <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-5 gap-3">
-            <StatsCard title="إيرادات الشهر" value={`${(currentMonth.revenue / 1000).toFixed(1)} ألف`} icon={HiOutlineTrendingUp} color="success" />
-            <StatsCard title="مصروفات الشهر" value={`${(currentMonth.expenses / 1000).toFixed(1)} ألف`} icon={HiOutlineTrendingDown} color="error" />
-            <StatsCard title="صافي الربح" value={`${(currentMonth.profit / 1000).toFixed(1)} ألف`} icon={HiOutlineCash} color="primary" />
-            <StatsCard title="إجمالي الديون" value={`${(totalDebts / 1000).toFixed(1)} ألف`} icon={HiOutlineExclamationCircle} color="warning" />
-            <StatsCard title="ديون متأخرة" value={`${(overdueDebts / 1000).toFixed(1)} ألف`} icon={HiOutlineExclamationCircle} color="error" />
-          </motion.div>
+    <div className="space-y-6">
+      <PageHeader
+        title="لوحة التحكم المالية"
+        description="الإيرادات والمصروفات والأرباح والديون"
+        actions={
+          <div className="flex items-center gap-3">
+            <Link href="/teacher/finance/courses" className="text-sm text-primary hover:text-primary-light transition-colors">
+              تفاصيل الكورسات المالية
+            </Link>
+            <Link href="/teacher/accounting" className="text-sm text-primary hover:text-primary-light transition-colors">
+              المحاسبة
+            </Link>
+          </div>
+        }
+      />
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="lg:col-span-2">
-              <CardHeader><CardTitle>الإيرادات والمصروفات الشهرية</CardTitle></CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={250}>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}
+        className="space-y-6"
+      >
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+          className="grid grid-cols-1 sm:grid-cols-5 gap-3"
+        >
+          <StatsCard title="إيرادات الشهر" value={`${(currentMonth.revenue / 1000).toFixed(1)} ألف`} icon={HiOutlineTrendingUp} color="success" />
+          <StatsCard title="مصروفات الشهر" value={`${(currentMonth.expenses / 1000).toFixed(1)} ألف`} icon={HiOutlineTrendingDown} color="error" />
+          <StatsCard title="صافي الربح" value={`${(currentMonth.profit / 1000).toFixed(1)} ألف`} icon={HiOutlineCash} color="primary" />
+          <StatsCard title="إجمالي الديون" value={`${(totalDebts / 1000).toFixed(1)} ألف`} icon={HiOutlineExclamationCircle} color="warning" />
+          <StatsCard title="ديون متأخرة" value={`${(overdueDebts / 1000).toFixed(1)} ألف`} icon={HiOutlineExclamationCircle} color="error" />
+        </motion.div>
+
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+        >
+          <Card className="lg:col-span-2">
+            <CardHeader><CardTitle>الإيرادات والمصروفات الشهرية</CardTitle></CardHeader>
+            <CardContent>
+              <div dir="ltr" className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={monthlyData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                    <XAxis dataKey="month" tick={{ fontSize: 10, fill: "var(--color-text-secondary)" }} />
-                    <YAxis tick={{ fontSize: 10, fill: "var(--color-text-secondary)" }} />
-                    <Tooltip formatter={(value: number) => `${(value / 1000).toFixed(1)} ألف`} />
-                    <Bar dataKey="revenue" name="الإيرادات" radius={[4, 4, 0, 0]} fill="#10b981" />
-                    <Bar dataKey="expenses" name="المصروفات" radius={[4, 4, 0, 0]} fill="#e11d48" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
+                    <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#96A3B8" }} axisLine={{ stroke: "rgba(255,255,255,0.06)" }} tickLine={false} />
+                    <YAxis tick={{ fontSize: 11, fill: "#96A3B8" }} axisLine={false} tickLine={false} tickFormatter={formatter} />
+                    <Tooltip
+                      contentStyle={{ background: "#151D2F", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "16px", color: "#FFFFFF", fontSize: "13px", backdropFilter: "blur(12px)" }}
+                      formatter={(value: number) => [formatter(value), ""]}
+                    />
+                    <Bar dataKey="revenue" name="الإيرادات" radius={[6, 6, 0, 0]} fill="#16C784" />
+                    <Bar dataKey="expenses" name="المصروفات" radius={[6, 6, 0, 0]} fill="#FF5C74" />
                   </BarChart>
                 </ResponsiveContainer>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader><CardTitle>الإيرادات اليومية</CardTitle></CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={200}>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader><CardTitle>الإيرادات اليومية</CardTitle></CardHeader>
+            <CardContent>
+              <div dir="ltr" className="h-52">
+                <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={dailyRevenue}>
-                    <defs><linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#10b981" stopOpacity={0.2} /><stop offset="95%" stopColor="#10b981" stopOpacity={0} /></linearGradient></defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                    <XAxis dataKey="day" tick={{ fontSize: 10, fill: "var(--color-text-secondary)" }} />
-                    <YAxis tick={{ fontSize: 10, fill: "var(--color-text-secondary)" }} />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="value" stroke="#10b981" fill="url(#revGrad)" strokeWidth={2} />
+                    <defs>
+                      <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#16C784" stopOpacity={0.3} />
+                        <stop offset="95%" stopColor="#16C784" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
+                    <XAxis dataKey="day" tick={{ fontSize: 11, fill: "#96A3B8" }} axisLine={{ stroke: "rgba(255,255,255,0.06)" }} tickLine={false} />
+                    <YAxis tick={{ fontSize: 11, fill: "#96A3B8" }} axisLine={false} tickLine={false} />
+                    <Tooltip
+                      contentStyle={{ background: "#151D2F", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "16px", color: "#FFFFFF", fontSize: "13px", backdropFilter: "blur(12px)" }}
+                    />
+                    <Area type="monotone" dataKey="value" stroke="#16C784" fill="url(#revGrad)" strokeWidth={2} />
                   </AreaChart>
                 </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card>
-              <CardHeader><CardTitle>صافي الربح - اتجاه شهري</CardTitle></CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={200}>
+        <motion.div
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+        >
+          <Card>
+            <CardHeader><CardTitle>صافي الربح - اتجاه شهري</CardTitle></CardHeader>
+            <CardContent>
+              <div dir="ltr" className="h-52">
+                <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={monthlyData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-                    <XAxis dataKey="month" tick={{ fontSize: 10, fill: "var(--color-text-secondary)" }} />
-                    <YAxis tick={{ fontSize: 10, fill: "var(--color-text-secondary)" }} />
-                    <Tooltip formatter={(value: number) => `${(value / 1000).toFixed(1)} ألف`} />
-                    <Line type="monotone" dataKey="profit" stroke="#3b82f6" strokeWidth={2} dot={{ r: 4 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
+                    <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#96A3B8" }} axisLine={{ stroke: "rgba(255,255,255,0.06)" }} tickLine={false} />
+                    <YAxis tick={{ fontSize: 11, fill: "#96A3B8" }} axisLine={false} tickLine={false} tickFormatter={formatter} />
+                    <Tooltip
+                      contentStyle={{ background: "#151D2F", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "16px", color: "#FFFFFF", fontSize: "13px", backdropFilter: "blur(12px)" }}
+                      formatter={(value: number) => [formatter(value), "صافي الربح"]}
+                    />
+                    <Line type="monotone" dataKey="profit" stroke="#5B7CFF" strokeWidth={2} dot={{ r: 4, fill: "#5B7CFF" }} />
                   </LineChart>
                 </ResponsiveContainer>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader><CardTitle>الديون والأقساط المتأخرة</CardTitle></CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {debtsData.map((d, i) => (
-                    <div key={i} className="flex items-center justify-between p-2.5 rounded-lg bg-surface-secondary">
-                      <div><span className="text-sm font-medium text-text">{d.name}</span><span className="text-xs text-text-tertiary mr-2">{d.days} يوم</span></div>
-                      <div className="flex items-center gap-2"><span className="text-sm font-bold text-primary">{d.amount} ج.م</span><Badge variant={d.status === "overdue" ? "error" : "warning"} size="sm">{d.status === "overdue" ? "متأخرة" : "قيد الانتظار"}</Badge></div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader><CardTitle>الديون والأقساط المتأخرة</CardTitle></CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {debtsData.map((d, i) => (
+                  <div key={i} className="flex items-center justify-between p-3 rounded-[16px] bg-card/40 backdrop-blur border border-border">
+                    <div>
+                      <span className="text-sm font-medium text-text">{d.name}</span>
+                      <span className="text-xs text-text-tertiary mr-2">{d.days} يوم</span>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-text">{d.amount} ج.م</span>
+                      <Badge variant={d.status === "overdue" ? "error" : "warning"} size="sm">
+                        {d.status === "overdue" ? "متأخرة" : "قيد الانتظار"}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   )
 }

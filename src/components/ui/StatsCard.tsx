@@ -2,93 +2,90 @@
 
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
+import { HiTrendingUp, HiTrendingDown } from "react-icons/hi"
 
 interface StatsCardProps {
   title: string
   value: string | number
-  icon: React.ElementType
-  description?: string
-  trend?: { value: number; isPositive: boolean }
+  icon?: React.ElementType
+  trend?: number
+  sparkline?: number[]
   color?: "primary" | "success" | "warning" | "error" | "info"
+  description?: string
   className?: string
-  delay?: number
-  sparklineData?: number[]
+  formatValue?: (v: number) => string
 }
 
-const iconColors: Record<string, string> = {
-  primary: "text-primary",
-  success: "text-success",
-  warning: "text-warning",
-  error: "text-error",
-  info: "text-info",
+const colorMap = {
+  primary: { bg: "bg-primary/10", text: "text-primary", border: "border-primary/20", gradient: ["#5B7CFF", "#3B5FEF"] },
+  success: { bg: "bg-success/10", text: "text-success", border: "border-success/20", gradient: ["#16C784", "#0EA56A"] },
+  warning: { bg: "bg-warning/10", text: "text-warning", border: "border-warning/20", gradient: ["#F5B301", "#D49900"] },
+  error: { bg: "bg-error/10", text: "text-error", border: "border-error/20", gradient: ["#FF5C74", "#E04A60"] },
+  info: { bg: "bg-info/10", text: "text-info", border: "border-info/20", gradient: ["#5B7CFF", "#3B5FEF"] },
 }
 
-const iconBgColors: Record<string, string> = {
-  primary: "bg-primary/10",
-  success: "bg-success/10",
-  warning: "bg-warning/10",
-  error: "bg-error/10",
-  info: "bg-info/10",
-}
+export function StatsCard({ title, value, icon: Icon, trend, sparkline, color = "primary", description, className, formatValue }: StatsCardProps) {
+  const palette = colorMap[color]
 
-function Sparkline({ data, color = "#5B7CFF" }: { data: number[]; color?: string }) {
-  if (!data || data.length < 2) return null
-  const max = Math.max(...data)
-  const min = Math.min(...data)
-  const range = max - min || 1
-  const w = 64
-  const h = 24
-  const points = data.map((v, i) => {
-    const x = (i / (data.length - 1)) * w
-    const y = h - ((v - min) / range) * (h - 4) - 2
-    return `${x},${y}`
-  })
-  const pathD = `M${points.join(" L")}`
-  const fillD = `${pathD} L${w},${h} L0,${h} Z`
-
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="shrink-0">
-      <defs>
-        <linearGradient id={`sparkline-grad-${color.replace("#", "")}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="0.25" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={fillD} fill={`url(#sparkline-grad-${color.replace("#", "")})`} />
-      <path d={pathD} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-export function StatsCard({ title, value, icon: Icon, description, trend, color = "primary", className, delay = 0, sparklineData }: StatsCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay, ease: [0.25, 0.1, 0.25, 1] }}
-      className={cn("bg-card border border-border rounded-[24px] p-6 transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:border-primary/20", className)}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 200, damping: 25 }}
+      className={cn(
+        "bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-5",
+        "shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]",
+        "transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)]",
+        className,
+      )}
     >
       <div className="flex items-start justify-between mb-4">
-        <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center shrink-0", iconBgColors[color])}>
-          <Icon className={cn("w-6 h-6", iconColors[color])} />
+        <div className={cn("w-11 h-11 rounded-[16px] flex items-center justify-center backdrop-blur-xl border", palette.bg, palette.border)}>
+          {Icon && <Icon className={cn("w-5 h-5", palette.text)} />}
         </div>
-        {sparklineData && <Sparkline data={sparklineData} color={iconColors[color]?.replace("text-", "#") || "#5B7CFF"} />}
+        {trend !== undefined && (
+          <div className={cn(
+            "flex items-center gap-1 px-2 py-1 rounded-[10px] text-[11px] font-medium backdrop-blur-xl border",
+            trend >= 0
+              ? "bg-success/10 border-success/20 text-success"
+              : "bg-error/10 border-error/20 text-error",
+          )}>
+            {trend >= 0 ? <HiTrendingUp className="w-3.5 h-3.5" /> : <HiTrendingDown className="w-3.5 h-3.5" />}
+            {Math.abs(trend)}%
+          </div>
+        )}
       </div>
-      <div>
-        <p className="text-sm text-text-secondary mb-1">{title}</p>
-        <div className="flex items-end gap-3">
-          <p className="text-[28px] font-bold text-text leading-none">{typeof value === "number" ? value.toLocaleString("ar-EG") : value}</p>
-          {trend && (
-            <span className={cn(
-              "flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full mb-0.5",
-              trend.isPositive ? "bg-success/10 text-success" : "bg-error/10 text-error"
-            )}>
-              <span>{trend.isPositive ? "↑" : "↓"}</span>
-              {Math.abs(trend.value)}%
-            </span>
-          )}
+
+      <p className="text-sm text-text-secondary mb-1">{title}</p>
+      <p className={cn("text-[28px] font-bold text-text leading-tight", palette.text)}>
+        {value}
+      </p>
+      {description && <p className="text-xs text-text-tertiary mt-1.5">{description}</p>}
+
+      {sparkline && sparkline.length > 0 && (
+        <div className="mt-4 h-8">
+          <svg viewBox={`0 0 ${sparkline.length - 1} 32`} className="w-full h-full" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id={`grad-${color}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={palette.gradient[0]} stopOpacity="0.3" />
+                <stop offset="100%" stopColor={palette.gradient[0]} stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              d={sparkline.map((v, i) => `${i === 0 ? "M" : "L"}${i} ${32 - (v / Math.max(...sparkline)) * 28}`).join(" ")}
+              fill="none"
+              stroke={palette.gradient[0]}
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d={`${sparkline.map((v, i) => `${i === 0 ? "M" : "L"}${i} ${32 - (v / Math.max(...sparkline)) * 28}`).join(" ")} L${sparkline.length - 1} 32 L0 32 Z`}
+              fill={`url(#grad-${color})`}
+            />
+          </svg>
         </div>
-        {description && <p className="text-xs text-text-tertiary mt-2">{description}</p>}
-      </div>
+      )}
     </motion.div>
   )
 }

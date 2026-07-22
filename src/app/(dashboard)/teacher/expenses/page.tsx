@@ -7,7 +7,7 @@ import {
   HiOutlineTag, HiOutlineUser, HiOutlineFilter,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -97,7 +97,7 @@ export default function ExpensesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="المصروفات" subtitle="إدارة المصروفات" />
+        <PageHeader title="المصروفات" description="إدارة المصروفات" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -105,7 +105,7 @@ export default function ExpensesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="المصروفات" subtitle="إدارة مصروفات المركز" />
+      <PageHeader title="المصروفات" description="إدارة مصروفات المركز" />
       <div className="flex justify-end">
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
           إضافة مصروف
@@ -161,7 +161,7 @@ export default function ExpensesPage() {
                   {filtered.map((exp) => (
                     <tr key={exp.id} className="border-b border-border last:border-0 hover:bg-surface-secondary transition-colors">
                       <td className="px-4 py-3">
-                        <Badge variant="neutral" size="sm">{exp.category}</Badge>
+                        <Badge variant="default" size="sm">{exp.category}</Badge>
                       </td>
                       <td className="px-4 py-3">
                         <span className="text-text">{exp.description}</span>

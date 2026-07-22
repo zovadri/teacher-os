@@ -14,7 +14,7 @@ import {
   HiOutlineTemplate,
   HiOutlineEye,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { mockCmsPages } from "@/lib/mock/data"
@@ -92,7 +92,7 @@ const cmsCards = [
 export default function CmsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة المحتوى" subtitle="التحكم في محتوى الموقع والمظهر" />
+      <PageHeader title="إدارة المحتوى" description="التحكم في محتوى الموقع والمظهر" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cmsCards.map((item, idx) => {

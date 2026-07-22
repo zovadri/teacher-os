@@ -14,7 +14,7 @@ import {
   HiOutlineClock,
   HiOutlineCash,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Tabs, TabPanel } from "@/components/ui/Tabs"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -75,7 +75,7 @@ export default function SubscriptionsPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="الاشتراكات والمدفوعات" />
+      <PageHeader title="الاشتراكات والمدفوعات" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="الاشتراكات النشطة" value={stats.activeSubscriptions} icon={HiOutlineCheckCircle} color="success" />

@@ -13,7 +13,7 @@ import {
   HiOutlineSun,
   HiOutlineMoon,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import Input from "@/components/ui/Input"
@@ -89,7 +89,7 @@ export default function ThemePage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "إدارة المحتوى", href: "/teacher/cms" }, { label: "المظهر" }]} />
-      <DashboardHeader title="إعدادات المظهر" subtitle="تخصيص ألوان المنصة والخطوط والأنماط" />
+      <PageHeader title="إعدادات المظهر" description="تخصيص ألوان المنصة والخطوط والأنماط" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">

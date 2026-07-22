@@ -13,7 +13,7 @@ import {
   HiOutlineChevronDown,
 } from "react-icons/hi"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -82,7 +82,7 @@ export default function BadgesPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الألعاب", href: "/teacher/gamification" }, { label: "الشارات" }]} />
-      <DashboardHeader title="إدارة الشارات" subtitle="إنشاء وتعديل الشارات والمكافآت" />
+      <PageHeader title="إدارة الشارات" description="إنشاء وتعديل الشارات والمكافآت" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-3 gap-4">
         <StatsCard title="إجمالي الشارات" value={stats.total} icon={HiOutlineBadgeCheck} color="primary" />

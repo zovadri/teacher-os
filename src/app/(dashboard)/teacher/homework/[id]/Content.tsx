@@ -24,7 +24,7 @@ import {
   HiOutlineCalendar,
   HiOutlineBookOpen,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Tabs, TabPanel } from "@/components/ui/Tabs"
 import { StatsCard } from "@/components/ui/StatsCard"

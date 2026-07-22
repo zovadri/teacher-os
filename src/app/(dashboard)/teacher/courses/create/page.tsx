@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { HiOutlineCheck, HiOutlineCamera, HiOutlineSave, HiOutlinePlus, HiOutlineTrash, HiOutlineArrowRight } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import Input from "@/components/ui/Input"
@@ -187,7 +187,7 @@ export default function CreateCoursePage() {
             <Button variant="primary" onClick={() => { setSubmitted(false); setForm(initialForm); setChapters([]) }}>
               إنشاء كورس آخر
             </Button>
-            <Button variant="outline" onClick={() => router.push("/teacher/courses")} leftIcon={<HiOutlineArrowRight size={18} />}>
+            <Button variant="secondary" onClick={() => router.push("/teacher/courses")} leftIcon={<HiOutlineArrowRight size={18} />}>
               العودة إلى الكورسات
             </Button>
           </div>
@@ -199,7 +199,7 @@ export default function CreateCoursePage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الكورسات", href: "/teacher/courses" }, { label: "إضافة كورس جديد" }]} />
-      <DashboardHeader title="إضافة كورس جديد" />
+      <PageHeader title="إضافة كورس جديد" />
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
@@ -341,7 +341,7 @@ export default function CreateCoursePage() {
                   </div>
                 </div>
               ))}
-              <Button variant="outline"
+              <Button variant="secondary"
                 onClick={addChapter}
                 leftIcon={<HiOutlinePlus size={16} />}
               >

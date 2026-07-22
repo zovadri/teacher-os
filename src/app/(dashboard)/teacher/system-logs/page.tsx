@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from "react"
 import { motion } from "framer-motion"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -320,10 +320,7 @@ export default function SystemLogsPage() {
 
   return (
     <div className="min-h-screen">
-      <DashboardHeader
-        title="سجل النظام"
-        subtitle="مراقبة وتتبع جميع أحداث النظام"
-      />
+      <PageHeader title="سجل النظام" description="مراقبة وتتبع جميع أحداث النظام" />
 
       <div className="p-4 md:p-6 space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">

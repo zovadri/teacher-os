@@ -8,7 +8,7 @@ import {
   HiOutlinePause, HiOutlineFilter, HiOutlineSearch, HiOutlineEye,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -71,7 +71,7 @@ export default function ApprovalsPage() {
 
   return (
     <div className="min-h-screen">
-      <DashboardHeader title="الموافقات" subtitle="طلبات نقل مجموعة - تجميد كورس - استرداد مبلغ" />
+      <PageHeader title="الموافقات" description="طلبات نقل مجموعة - تجميد كورس - استرداد مبلغ" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">

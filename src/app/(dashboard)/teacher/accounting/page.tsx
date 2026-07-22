@@ -4,7 +4,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { HiOutlineCash, HiOutlineArrowUp, HiOutlineArrowDown, HiOutlinePlus } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -41,7 +41,7 @@ export default function AccountingPage() {
 
   return (
     <div className="min-h-screen">
-      <DashboardHeader title="المحاسبة" subtitle="دفتر اليومية - الصندوق - البنك - سندات القبض والصرف" />
+      <PageHeader title="المحاسبة" description="دفتر اليومية - الصندوق - البنك - سندات القبض والصرف" />
       <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">

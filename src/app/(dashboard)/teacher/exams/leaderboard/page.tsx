@@ -18,7 +18,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Avatar } from "@/components/ui/Avatar"
@@ -143,10 +143,7 @@ export default function LeaderboardPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "المتصدرون" }]} />
-      <DashboardHeader
-        title="لوحة المتصدرين"
-        subtitle="ترتيب الطلاب حسب أدائهم في الامتحانات"
-      />
+      <PageHeader title="لوحة المتصدرين" description="ترتيب الطلاب حسب أدائهم في الامتحانات" />
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="w-full sm:w-72">
@@ -267,7 +264,7 @@ export default function LeaderboardPage() {
                 </CardDescription>
               </div>
               {filteredEntries.length > 20 && (
-                <Button variant="outline" size="sm" onClick={() => setShowAll(!showAll)}>
+                <Button variant="secondary" size="sm" onClick={() => setShowAll(!showAll)}>
                   {showAll ? "عرض أقل" : "عرض الكل"}
                 </Button>
               )}

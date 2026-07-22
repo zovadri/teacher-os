@@ -10,7 +10,7 @@ import {
   HiOutlineDocumentText,
   HiOutlinePencil,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import Input from "@/components/ui/Input"
@@ -87,7 +87,7 @@ export default function CreateHomeworkPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الواجبات", href: "/teacher/homework" }, { label: "إنشاء واجب جديد" }]} />
-      <DashboardHeader title="إنشاء واجب جديد" subtitle="أضف واجباً جديداً للطلاب" />
+      <PageHeader title="إنشاء واجب جديد" description="أضف واجباً جديداً للطلاب" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">

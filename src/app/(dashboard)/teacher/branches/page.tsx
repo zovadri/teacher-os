@@ -7,7 +7,7 @@ import {
   HiOutlinePlus, HiOutlineChevronDown, HiOutlineChevronUp, HiOutlineExclamation,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -72,7 +72,7 @@ export default function BranchesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="الفروع" subtitle="إدارة فروع المركز" />
+        <PageHeader title="الفروع" description="إدارة فروع المركز" />
         <ErrorState onRetry={handleRetry} />
       </div>
     )
@@ -80,7 +80,7 @@ export default function BranchesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="الفروع" subtitle="إدارة فروع المركز" />
+      <PageHeader title="الفروع" description="إدارة فروع المركز" />
       <div className="flex justify-end">
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
           إضافة فرع
@@ -123,7 +123,7 @@ export default function BranchesPage() {
                         <p className="text-xs text-text-tertiary">{branch.manager}</p>
                       </div>
                     </div>
-                    <Badge variant={branch.status === "active" ? "success" : "neutral"}>{branch.status === "active" ? "نشط" : "غير نشط"}</Badge>
+                    <Badge variant={branch.status === "active" ? "success" : "default"}>{branch.status === "active" ? "نشط" : "غير نشط"}</Badge>
                   </div>
                   <div className="space-y-2 text-sm text-text-secondary">
                     <div className="flex items-center gap-2">

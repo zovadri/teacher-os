@@ -15,7 +15,7 @@ import {
   HiOutlineX,
   HiOutlineBookOpen,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import Button from "@/components/ui/Button"
@@ -99,7 +99,7 @@ export default function SchedulePage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الكورسات", href: "/teacher/courses" }, { label: "جدول الكورسات" }]} />
-      <DashboardHeader title="جدولة الدروس" subtitle="تخطيط وجدولة الدروس للطلاب" />
+      <PageHeader title="جدولة الدروس" description="تخطيط وجدولة الدروس للطلاب" />
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

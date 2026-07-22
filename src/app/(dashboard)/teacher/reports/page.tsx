@@ -9,7 +9,7 @@ import {
   HiOutlineDownload, HiOutlinePlus, HiOutlineDocumentText,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card"
 import { PageHeader } from "@/components/ui/PageHeader"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -24,7 +24,7 @@ import { ErrorState } from "@/components/ui/ErrorState"
 import { cn, det } from "@/lib/utils"
 import type { ReportType, ExportFormat } from "@/lib/types"
 
-const reportTypes: { type: ReportType; label: string; description: string; icon: React.ElementType; color: string }[] = [
+const reportTypes: { type: ReportType; label: string; description: string; icon: React.ElementType; color: "primary" | "success" | "warning" | "error" | "info" }[] = [
   { type: "student", label: "تقرير طالب", description: "تقرير مفصل عن أداء طالب معين", icon: HiOutlineUserGroup, color: "primary" },
   { type: "group", label: "تقرير مجموعة", description: "إحصائيات مجموعة دراسية كاملة", icon: HiOutlineUserGroup, color: "success" },
   { type: "teacher", label: "تقرير مدرس", description: "تقرير أداء المدرسين", icon: HiOutlineAcademicCap, color: "info" },
@@ -45,6 +45,21 @@ const recentReports = Array.from({ length: 8 }, (_, i) => ({
 }))
 
 const formatLabels: Record<ExportFormat, string> = { pdf: "PDF", excel: "Excel", print: "طباعة" }
+
+const colorMap: Record<string, string> = {
+  primary: "bg-primary/10 text-primary border-primary/20",
+  success: "bg-success/10 text-success border-success/20",
+  warning: "bg-warning/10 text-warning border-warning/20",
+  error: "bg-error/10 text-error border-error/20",
+  info: "bg-info/10 text-info border-info/20",
+}
+
+const badgeColorMap: Record<string, "primary" | "success" | "error" | "info"> = {
+  primary: "primary",
+  success: "success",
+  error: "error",
+  info: "info",
+}
 
 function useLoadReports() {
   const [loading, setLoading] = useState(true)
@@ -78,10 +93,6 @@ export default function ReportsPage() {
   const [dateTo, setDateTo] = useState("")
   const [detailType, setDetailType] = useState<ReportType | null>(null)
 
-  const typeColors: Record<string, "primary" | "success" | "warning" | "error" | "info"> = {
-    primary: "primary", success: "success", warning: "warning", error: "error", info: "info",
-  }
-
   const handleCreateReport = () => {
     toast.success(`تم إنشاء تقرير ${reportTypes.find((r) => r.type === selectedReportType)?.label} بصيغة ${formatLabels[reportFormat]}`)
     setShowCreateModal(false)
@@ -95,29 +106,33 @@ export default function ReportsPage() {
     return (
       <div className="p-4 md:p-6">
         <PageHeader title="مركز التقارير" description="إنشاء وعرض التقارير" />
-        <ErrorState error={error} onRetry={retry} />
+        <ErrorState description={error} onRetry={retry} />
       </div>
     )
   }
 
   return (
-    <div className="p-4 md:p-6 space-y-6" dir="rtl">
+    <div className="space-y-6">
       <PageHeader
         title="مركز التقارير"
         description="إنشاء وعرض جميع أنواع التقارير"
         actions={
-          <Button variant="primary" onClick={() => setShowCreateModal(true)} rightIcon={<HiOutlinePlus size={18} />}>
+          <Button variant="primary" onClick={() => setShowCreateModal(true)} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>
             إنشاء تقرير
           </Button>
         }
       />
 
       {loading && (
-        <>
-          <StatsSkeleton count={1} />
-          <CardSkeleton count={3} />
-          <div className="mt-6"><TableSkeleton rows={4} columns={3} /></div>
-        </>
+        <div className="space-y-6">
+          <Skeleton className="h-[100px] rounded-[24px]" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Skeleton key={i} className="h-[140px] rounded-[24px]" />
+            ))}
+          </div>
+          <TableSkeleton rows={4} cols={3} />
+        </div>
       )}
 
       {!loading && (
@@ -127,15 +142,14 @@ export default function ReportsPage() {
             value={recentReports.length}
             icon={HiOutlineDocumentReport}
             color="primary"
-            subtitle={`آخر تحديث: ${new Date().toLocaleDateString("ar-EG")}`}
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {reportTypes.map((rt, i) => (
               <motion.div key={rt.type} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
                 <Card hover className="h-full" onClick={() => setDetailType(rt.type)}>
-                  <CardContent className="space-y-3">
-                    <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center", `bg-${rt.color === "primary" ? "primary" : rt.color === "success" ? "emerald" : rt.color === "warning" ? "amber" : rt.color === "error" ? "red" : "blue"}-100 text-${rt.color === "primary" ? "primary" : rt.color === "success" ? "emerald" : rt.color === "warning" ? "amber" : rt.color === "error" ? "red" : "blue"}-600`)}>
+                  <CardContent className="space-y-4">
+                    <div className={cn("w-12 h-12 rounded-[16px] flex items-center justify-center backdrop-blur border", colorMap[rt.color])}>
                       <rt.icon size={24} />
                     </div>
                     <div>
@@ -152,7 +166,6 @@ export default function ReportsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>{reportTypes.find((r) => r.type === detailType)?.label}</CardTitle>
-                <CardDescription>تفاصيل وعرض التقارير</CardDescription>
               </CardHeader>
               <CardContent>
                 <EmptyState icon={HiOutlineDocumentReport} title="لا توجد تقارير بعد" description="لم يتم إنشاء أي تقارير من هذا النوع بعد" />
@@ -162,7 +175,7 @@ export default function ReportsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><HiOutlineDocumentText className="text-primary" size={20} />أحدث التقارير</CardTitle>
+              <CardTitle>أحدث التقارير</CardTitle>
             </CardHeader>
             <CardContent>
               {recentReports.length === 0 ? (
@@ -172,9 +185,9 @@ export default function ReportsPage() {
                   {recentReports.map((r) => {
                     const rt = reportTypes.find((t) => t.type === r.type)
                     return (
-                      <div key={r.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-surface-secondary transition-colors">
+                      <div key={r.id} className="flex items-center justify-between p-3 rounded-[16px] hover:bg-card/40 transition-all">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <div className="w-9 h-9 rounded-[12px] bg-primary/10 border border-primary/20 flex items-center justify-center">
                             {rt && <rt.icon className="text-primary" size={18} />}
                           </div>
                           <div>
@@ -183,8 +196,12 @@ export default function ReportsPage() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Badge variant={r.format === "pdf" ? "error" : r.format === "excel" ? "success" : "info"} size="sm">{formatLabels[r.format]}</Badge>
-                          <Button variant="ghost" size="sm" onClick={() => handleDownload(r.id)} rightIcon={<HiOutlineDownload size={16} />}>تحميل</Button>
+                          <Badge variant={r.format === "pdf" ? "error" : r.format === "excel" ? "success" : "info"} size="sm">
+                            {formatLabels[r.format]}
+                          </Badge>
+                          <Button variant="ghost" size="sm" leftIcon={<HiOutlineDownload className="w-4 h-4" />} onClick={() => handleDownload(r.id)}>
+                            تحميل
+                          </Button>
                         </div>
                       </div>
                     )
@@ -208,9 +225,9 @@ export default function ReportsPage() {
             { value: "excel", label: "Excel" },
             { value: "print", label: "طباعة" },
           ]} />
-          <div className="flex gap-3 justify-end pt-2">
+          <div className="flex gap-3 pt-2">
             <Button variant="secondary" onClick={() => setShowCreateModal(false)}>إلغاء</Button>
-            <Button variant="primary" onClick={handleCreateReport} rightIcon={<HiOutlinePlus size={18} />}>إنشاء التقرير</Button>
+            <Button variant="primary" onClick={handleCreateReport} leftIcon={<HiOutlinePlus className="w-4 h-4" />}>إنشاء التقرير</Button>
           </div>
         </div>
       </Modal>

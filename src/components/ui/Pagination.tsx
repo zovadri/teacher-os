@@ -1,6 +1,5 @@
 "use client"
 
-import { memo } from "react"
 import { cn } from "@/lib/utils"
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi"
 
@@ -14,53 +13,42 @@ interface PaginationProps {
 export function Pagination({ currentPage, totalPages, onPageChange, className }: PaginationProps) {
   if (totalPages <= 1) return null
 
-  const getPages = () => {
-    const pages: (number | "...")[] = []
-    if (totalPages <= 7) {
-      for (let i = 1; i <= totalPages; i++) pages.push(i)
-    } else {
-      pages.push(1)
-      if (currentPage > 3) pages.push("...")
-      for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) pages.push(i)
-      if (currentPage < totalPages - 2) pages.push("...")
-      pages.push(totalPages)
+  const pages: (number | "ellipsis")[] = []
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+      pages.push(i)
+    } else if (pages[pages.length - 1] !== "ellipsis") {
+      pages.push("ellipsis")
     }
-    return pages
   }
 
   return (
-    <div className={cn("flex items-center justify-center gap-1", className)}>
-      <button type="button"
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="p-2 rounded-[16px] hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
+    <div className={cn("flex items-center justify-center gap-1.5", className)}>
+      <button type="button" onClick={() => onPageChange(Math.max(1, currentPage - 1))} disabled={currentPage === 1}
+        className="p-2 rounded-[12px] hover:bg-card/60 disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary transition-all"
       >
-        <HiChevronRight className="w-5 h-5" />
+        <HiChevronRight className="w-4 h-4" />
       </button>
-      {getPages().map((page, idx) =>
-        page === "..." ? (
-          <span key={`dots-${idx}`} className="px-2 text-text-tertiary">...</span>
+      {pages.map((page, i) =>
+        page === "ellipsis" ? (
+          <span key={`e-${i}`} className="px-2 text-text-tertiary text-sm">...</span>
         ) : (
-          <button type="button"
-            key={page}
-            onClick={() => onPageChange(page as number)}
+          <button type="button" key={page} onClick={() => onPageChange(page)}
             className={cn(
-              "min-w-[36px] h-9 rounded-[16px] text-sm font-medium transition-colors",
-              currentPage === page
-                ? "bg-primary text-white"
-                : "text-text-secondary hover:bg-surface-secondary"
+              "min-w-[36px] h-9 rounded-[12px] text-sm font-medium transition-all",
+              page === currentPage
+                ? "bg-primary/20 border border-primary/30 text-primary"
+                : "text-text-secondary hover:bg-card/60 hover:text-text",
             )}
           >
             {page}
           </button>
-        )
+        ),
       )}
-      <button type="button"
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="p-2 rounded-[16px] hover:bg-surface-secondary disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary"
+      <button type="button" onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages}
+        className="p-2 rounded-[12px] hover:bg-card/60 disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary transition-all"
       >
-        <HiChevronLeft className="w-5 h-5" />
+        <HiChevronLeft className="w-4 h-4" />
       </button>
     </div>
   )

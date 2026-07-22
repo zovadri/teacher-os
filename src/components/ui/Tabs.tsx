@@ -32,7 +32,7 @@ export function Tabs({ tabs, defaultTab, onChange, children, className }: TabsPr
               "flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 -mb-px transition-all duration-200",
               activeTab === tab.id
                 ? "border-primary text-primary"
-                : "border-transparent text-text-tertiary hover:text-text-secondary hover:border-border"
+                : "border-transparent text-text-tertiary hover:text-text-secondary hover:border-border",
             )}
           >
             {tab.icon}
@@ -40,7 +40,7 @@ export function Tabs({ tabs, defaultTab, onChange, children, className }: TabsPr
             {tab.count !== undefined && (
               <span className={cn(
                 "text-xs px-2 py-0.5 rounded-full",
-                activeTab === tab.id ? "bg-primary-100 text-primary-700" : "bg-surface-tertiary text-text-tertiary"
+                activeTab === tab.id ? "bg-primary/10 text-primary" : "bg-card text-text-tertiary",
               )}>
                 {tab.count}
               </span>

@@ -142,7 +142,7 @@ export default function GroupDetailPage() {
     return (
       <div className="p-4 md:p-6">
         <PageHeader title={group.name} />
-        <ErrorState message={error} onRetry={handleRetry} />
+        <ErrorState description={error} onRetry={handleRetry} />
       </div>
     )
   }
@@ -155,7 +155,7 @@ export default function GroupDetailPage() {
         title={group.name}
         description={`${group.courseName} - ${group.classroom}`}
         actions={
-          <Button variant="outline" onClick={() => router.push("/teacher/groups")} leftIcon={<HiOutlineChevronRight className="w-4 h-4" />}>
+          <Button variant="secondary" onClick={() => router.push("/teacher/groups")} leftIcon={<HiOutlineChevronRight className="w-4 h-4" />}>
             العودة
           </Button>
         }
@@ -168,7 +168,7 @@ export default function GroupDetailPage() {
           <CardContent className="space-y-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
-                <Badge variant={group.status === "active" ? "success" : group.status === "completed" ? "neutral" : "warning"} size="md">
+                <Badge variant={group.status === "active" ? "success" : group.status === "completed" ? "default" : "warning"} size="md">
                   {group.status === "active" ? "نشط" : group.status === "completed" ? "مكتمل" : "غير نشط"}
                 </Badge>
               </div>
@@ -259,10 +259,10 @@ export default function GroupDetailPage() {
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-center gap-2">
-                          <Button variant="outline" size="xs" leftIcon={<HiOutlineSwitchHorizontal className="w-3.5 h-3.5" />} onClick={() => { setMoveStudentId(s.id); setShowMoveModal(true) }}>
+                          <Button variant="secondary" size="xs" leftIcon={<HiOutlineSwitchHorizontal className="w-3.5 h-3.5" />} onClick={() => { setMoveStudentId(s.id); setShowMoveModal(true) }}>
                             نقل
                           </Button>
-                          <Button variant="outline" size="xs" leftIcon={<HiOutlinePause className="w-3.5 h-3.5" />} onClick={() => { setFreezeStudentId(s.id); setShowFreezeModal(true) }}>
+                          <Button variant="secondary" size="xs" leftIcon={<HiOutlinePause className="w-3.5 h-3.5" />} onClick={() => { setFreezeStudentId(s.id); setShowFreezeModal(true) }}>
                             تجميد
                           </Button>
                           <Button variant="ghost" size="xs" leftIcon={<HiOutlineTrash className="w-3.5 h-3.5 text-error" />} onClick={() => handleRemoveStudent(s.name)}>
@@ -289,7 +289,7 @@ export default function GroupDetailPage() {
             {loading ? (
               <Skeleton className="h-32" />
             ) : groupWaiting.length === 0 ? (
-              <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب منتظرون" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب منتظرون" bordered />
             ) : (
               <div className="space-y-3">
                 {groupWaiting.map((w) => (
@@ -317,7 +317,7 @@ export default function GroupDetailPage() {
             {loading ? (
               <Skeleton className="h-32" />
             ) : missedForGroup.length === 0 ? (
-              <EmptyState icon={HiOutlineRefresh} title="لا توجد دروس مفقودة" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineRefresh} title="لا توجد دروس مفقودة" bordered />
             ) : (
               <div className="space-y-3">
                 {missedForGroup.slice(0, 5).map((m) => (

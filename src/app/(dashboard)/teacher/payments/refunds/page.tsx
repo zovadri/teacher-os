@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { HiOutlineRefresh, HiOutlineCheckCircle, HiOutlineXCircle, HiOutlineCash, HiOutlineClock } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -33,7 +33,7 @@ export default function RefundsPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "المدفوعات", href: "/teacher/payments/installments" }, { label: "المسترجع" }]} />
-      <DashboardHeader title="المسترجع" subtitle="إدارة طلب استرداد المبالغ المالية" />
+      <PageHeader title="المسترجع" description="إدارة طلب استرداد المبالغ المالية" />
       <div className="p-4 md:p-6 space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">

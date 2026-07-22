@@ -15,7 +15,7 @@ import {
   HiOutlineFilter,
   HiOutlineEye,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Badge } from "@/components/ui/Badge"
 import { Table } from "@/components/ui/Table"
 import { Modal } from "@/components/ui/Modal"
@@ -80,7 +80,7 @@ export default function CodesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="إدارة الأكواد" subtitle="إنشاء وإدارة أكواد الاشتراك" />
+      <PageHeader title="إدارة الأكواد" description="إنشاء وإدارة أكواد الاشتراك" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="إجمالي الأكواد" value={stats.total} icon={HiOutlineTag} color="primary" />
@@ -132,7 +132,7 @@ export default function CodesPage() {
               <span className="text-sm text-text-secondary cursor-pointer hover:text-primary transition-colors" onClick={() => router.push(`/teacher/courses`)}>{c.courseName || "جميع الكورسات"}</span>
             )},
             { key: "batchId", header: "الدفعة", render: (c) => (
-              <Badge variant="neutral" size="sm">{c.batchId}</Badge>
+              <Badge variant="default" size="sm">{c.batchId}</Badge>
             )},
             { key: "status", header: "الحالة", render: (c) => (
               <Badge variant={statusBadge[c.status]}>{statusLabels[c.status]}</Badge>

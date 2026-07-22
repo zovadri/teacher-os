@@ -7,7 +7,7 @@ import {
   HiOutlineCalendar, HiOutlineAcademicCap, HiOutlineStar, HiOutlineClipboardCheck,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -72,7 +72,7 @@ export default function ParentReportsPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="تقارير الأبناء" subtitle="متابعة المستوى الدراسي" />
+        <PageHeader title="تقارير الأبناء" description="متابعة المستوى الدراسي" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -81,7 +81,7 @@ export default function ParentReportsPage() {
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
       <Breadcrumb items={[{ label: "الامتحانات", href: "/teacher/exams" }, { label: "تفاصيل الامتحان" }]} />
-      <DashboardHeader title="تقارير الأبناء" subtitle="متابعة المستوى الدراسي" />
+      <PageHeader title="تقارير الأبناء" description="متابعة المستوى الدراسي" />
 
       <div className="max-w-xs">
         <Select

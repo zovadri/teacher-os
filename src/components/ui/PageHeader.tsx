@@ -1,52 +1,39 @@
-"use client"
-
-import { ReactNode } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { HiChevronLeft } from "react-icons/hi"
-
-interface BreadcrumbItem {
-  label: string
-  href?: string
-}
+import { HiChevronRight } from "react-icons/hi"
+import Link from "next/link"
 
 interface PageHeaderProps {
   title: string
   description?: string
-  actions?: ReactNode
-  breadcrumbs?: BreadcrumbItem[]
+  actions?: React.ReactNode
+  breadcrumbs?: { label: string; href?: string }[]
   className?: string
 }
 
 export function PageHeader({ title, description, actions, breadcrumbs, className }: PageHeaderProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={cn("mb-6", className)}
-    >
-      {breadcrumbs && breadcrumbs.length > 0 ? (
-        <nav className="flex items-center gap-1 text-xs text-text-tertiery mb-2">
-          {breadcrumbs.map((crumb, i) => (
-            <span key={i} className="flex items-center gap-1">
-              {i > 0 ? <HiChevronLeft className="w-3 h-3" /> : null}
-              {crumb.href ? (
-                <Link href={crumb.href} className="hover:text-primary transition-colors">{crumb.label}</Link>
+    <div className={cn("mb-8", className)}>
+      {breadcrumbs && breadcrumbs.length > 0 && (
+        <nav className="flex items-center gap-1.5 text-sm mb-3">
+          {breadcrumbs.map((item, i) => (
+            <span key={i} className="flex items-center gap-1.5">
+              {i > 0 && <HiChevronRight className="w-3.5 h-3.5 text-text-tertiary" />}
+              {item.href ? (
+                <Link href={item.href} className="text-text-tertiary hover:text-text transition-colors">{item.label}</Link>
               ) : (
-                <span className="text-text-secondary">{crumb.label}</span>
+                <span className="text-text-secondary font-medium">{item.label}</span>
               )}
             </span>
           ))}
         </nav>
-      ) : null}
+      )}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{title}</h1>
-          {description && <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{description}</p>}
+          <h1 className="text-[32px] sm:text-[40px] font-bold text-text leading-tight">{title}</h1>
+          {description && <p className="text-sm text-text-secondary mt-1.5">{description}</p>}
         </div>
-        {actions && <div className="flex items-center gap-3">{actions}</div>}
+        {actions && <div className="flex items-center gap-3 shrink-0">{actions}</div>}
       </div>
-    </motion.div>
+    </div>
   )
 }

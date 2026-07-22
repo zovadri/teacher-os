@@ -229,7 +229,6 @@ variant="primary"
                   icon={HiOutlineClock}
                   title="لا توجد عمليات مسح"
                   description="عمليات مسح QR ستظهر هنا"
-                  withBackground={false}
                 />
               ) : (
                 <div className="space-y-2">

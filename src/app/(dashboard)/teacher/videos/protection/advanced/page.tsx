@@ -4,7 +4,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { HiOutlineShieldCheck, HiOutlineDeviceTablet, HiOutlineBan, HiOutlineCheckCircle } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -36,7 +36,7 @@ export default function AdvancedVideoProtectionPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "الفيديوهات", href: "/teacher/videos" }, { label: "حماية الفيديو", href: "/teacher/videos/protection" }, { label: "حماية متقدمة" }]} />
-      <DashboardHeader title="حماية الفيديو المتقدمة" subtitle="إدارة الأجهزة والعلامات المائية والحظر" />
+      <PageHeader title="حماية الفيديو المتقدمة" description="إدارة الأجهزة والعلامات المائية والحظر" />
       <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">

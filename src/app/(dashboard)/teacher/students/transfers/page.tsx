@@ -8,7 +8,7 @@ import {
   HiOutlineFilter, HiOutlineChevronDown, HiOutlineCheck,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -291,7 +291,7 @@ export default function TransfersPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: "نقل الطلاب" }]} />
-      <DashboardHeader title="النقل والتحويلات" subtitle="إدارة نقل الطلاب والمجموعات والفروع والمدرسين" />
+      <PageHeader title="النقل والتحويلات" description="إدارة نقل الطلاب والمجموعات والفروع والمدرسين" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard title="تحويلات هذا الشهر" value={stats.thisMonth} icon={HiOutlineCalendar} color="primary" />

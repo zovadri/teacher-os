@@ -7,7 +7,7 @@ import {
   HiOutlineBriefcase, HiOutlineChevronDown, HiOutlineChevronUp, HiOutlineOfficeBuilding,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -100,7 +100,7 @@ export default function EmployeesPage() {
   if (hasError) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="الموظفون" subtitle="إدارة الموظفين" />
+        <PageHeader title="الموظفون" description="إدارة الموظفين" />
         <ErrorState onRetry={() => { setHasError(false); loadData() }} />
       </div>
     )
@@ -108,7 +108,7 @@ export default function EmployeesPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6" dir="rtl">
-      <DashboardHeader title="الموظفون" subtitle="إدارة بيانات الموظفين" />
+      <PageHeader title="الموظفون" description="إدارة بيانات الموظفين" />
       <div className="flex justify-end">
         <Button variant="primary" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => setShowAddModal(true)}>
           إضافة موظف

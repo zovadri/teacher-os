@@ -288,7 +288,7 @@ variant="outline"
                                 <td className="px-4 py-3 text-sm text-text-secondary">{s.lastActive}</td>
                                 <td className="px-4 py-3 text-sm text-text-secondary">{s.loginDate}</td>
                                 <td className="px-4 py-3">
-                                  <Badge variant={s.status === "active" ? "success" : "neutral"} size="sm" dot>
+                                  <Badge variant={s.status === "active" ? "success" : "default"} size="sm" dot>
                                     {s.status === "active" ? "نشط" : "منتهي"}
                                   </Badge>
                                 </td>

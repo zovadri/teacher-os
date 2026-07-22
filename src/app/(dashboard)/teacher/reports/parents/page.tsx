@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { HiDownload, HiPrinter, HiMail, HiUser, HiChartBar, HiCheckCircle, HiExclamationCircle, HiStar } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
 import { PageHeader } from "@/components/ui/PageHeader"
 import { toast } from "react-hot-toast"
 

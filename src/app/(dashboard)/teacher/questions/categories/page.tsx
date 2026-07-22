@@ -4,7 +4,7 @@ import { useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import { HiOutlinePlus, HiOutlinePencil, HiOutlineTrash, HiBookOpen, HiQuestionMarkCircle, HiChartBar } from "react-icons/hi"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardContent } from "@/components/ui/Card"
 import { StatsCard } from "@/components/ui/StatsCard"
 import { Badge } from "@/components/ui/Badge"
@@ -198,7 +198,7 @@ export default function CategoriesPage() {
   return (
     <div className="p-4 md:p-6 space-y-6">
       <Breadcrumb items={[{ label: "بنك الأسئلة", href: "/teacher/questions" }, { label: "التصنيفات" }]} />
-      <DashboardHeader title="تصنيفات الأسئلة" subtitle="إدارة تصنيفات ومواضيع الأسئلة" />
+      <PageHeader title="تصنيفات الأسئلة" description="إدارة تصنيفات ومواضيع الأسئلة" />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <StatsCard title="إجمالي التصنيفات" value={totalCategories} icon={HiBookOpen} color="primary" />

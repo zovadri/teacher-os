@@ -142,7 +142,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : todayClasses.length === 0 ? (
-              <EmptyState icon={HiOutlineAcademicCap} title="لا توجد حصص اليوم" description="ليس لديك أي حصص مجدولة اليوم" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineAcademicCap} title="لا توجد حصص اليوم" description="ليس لديك أي حصص مجدولة اليوم" bordered />
             ) : (
               <div className="space-y-3">
                 {todayClasses.map((g) => {
@@ -180,7 +180,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : currentAttendance.filter(a => a.checkedIn).length === 0 ? (
-              <EmptyState icon={HiOutlineUsers} title="لا يوجد حضور حالياً" description="لم يتم تسجيل أي حضور حتى الآن" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineUsers} title="لا يوجد حضور حالياً" description="لم يتم تسجيل أي حضور حتى الآن" bordered />
             ) : (
               <div className="space-y-3">
                 {currentAttendance.filter(a => a.checkedIn).map((a) => (
@@ -211,7 +211,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : waitingSummary.length === 0 ? (
-              <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب منتظرون" description="قائمة الانتظار فارغة حالياً" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب منتظرون" description="قائمة الانتظار فارغة حالياً" bordered />
             ) : (
               <div className="space-y-3">
                 {waitingSummary.slice(0, 5).map((w) => (
@@ -247,7 +247,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : pendingPayments.length === 0 ? (
-              <EmptyState icon={HiOutlineCash} title="لا توجد مدفوعات معلقة" description="جميع المدفوعات مسددة" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineCash} title="لا توجد مدفوعات معلقة" description="جميع المدفوعات مسددة" bordered />
             ) : (
               <div className="space-y-3">
                 {pendingPayments.slice(0, 5).map((p) => (
@@ -282,7 +282,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : todayRegistrations.length === 0 ? (
-              <EmptyState icon={HiOutlineUserAdd} title="لا توجد تسجيلات اليوم" description="لم يتم تسجيل أي طالب جديد اليوم" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineUserAdd} title="لا توجد تسجيلات اليوم" description="لم يتم تسجيل أي طالب جديد اليوم" bordered />
             ) : (
               <div className="space-y-3">
                 {todayRegistrations.map((e) => (
@@ -313,7 +313,7 @@ export default function ReceptionPage() {
             {loading ? (
               <SectionSkeleton />
             ) : mockAppointments.length === 0 ? (
-              <EmptyState icon={HiOutlineCalendar} title="لا توجد مواعيد اليوم" description="لا توجد مواعيد مجدولة لليوم" bordered withBackground={false} />
+              <EmptyState icon={HiOutlineCalendar} title="لا توجد مواعيد اليوم" description="لا توجد مواعيد مجدولة لليوم" bordered />
             ) : (
               <div className="space-y-3">
                 {mockAppointments.map((a) => (
@@ -327,7 +327,7 @@ export default function ReceptionPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-text-secondary">{a.time}</span>
-                      <Badge variant={a.status === "جاري" ? "success" : a.status === "قادم" ? "info" : "neutral"} size="sm">
+                      <Badge variant={a.status === "جاري" ? "success" : a.status === "قادم" ? "info" : "default"} size="sm">
                         {a.status}
                       </Badge>
                     </div>

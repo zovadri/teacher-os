@@ -9,7 +9,7 @@ import {
   HiOutlineDocumentText, HiOutlineEye, HiOutlineSearch, HiOutlineSupport,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -103,7 +103,7 @@ export default function CommunicationCenterPage() {
 
   return (
     <div className="min-h-screen">
-      <DashboardHeader title="مركز التواصل" subtitle="الرسائل - البريد الداخلي - واتساب - رسائل نصية - بريد إلكتروني" />
+      <PageHeader title="مركز التواصل" description="الرسائل - البريد الداخلي - واتساب - رسائل نصية - بريد إلكتروني" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-5 gap-3">
@@ -285,7 +285,7 @@ export default function CommunicationCenterPage() {
                               <p className="text-xs text-text-tertiary">من: {m.sender} - {m.date}</p>
                             </div>
                           </div>
-                          <Badge variant={m.read ? "neutral" : "primary"} size="sm">{m.read ? "مقروء" : "جديد"}</Badge>
+                          <Badge variant={m.read ? "default" : "primary"} size="sm">{m.read ? "مقروء" : "جديد"}</Badge>
                         </div>
                       ))}
                     </div>

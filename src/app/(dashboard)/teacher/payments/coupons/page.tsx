@@ -4,7 +4,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { HiOutlineTicket, HiOutlineCheckCircle, HiOutlineXCircle, HiOutlinePlus, HiOutlineSelector } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -51,7 +51,7 @@ export default function CouponsPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "المدفوعات", href: "/teacher/payments/installments" }, { label: "الكوبونات" }]} />
-      <DashboardHeader title="كوبونات الخصم" subtitle="إدارة أكواد الخصم والعروض" />
+      <PageHeader title="كوبونات الخصم" description="إدارة أكواد الخصم والعروض" />
       <div className="p-4 md:p-6 space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">

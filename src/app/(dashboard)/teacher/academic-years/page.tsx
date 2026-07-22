@@ -8,7 +8,7 @@ import {
   HiOutlineSwitchHorizontal, HiOutlinePlus,
 } from "react-icons/hi"
 import toast from "react-hot-toast"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -60,7 +60,7 @@ export default function AcademicYearsPage() {
 
   return (
     <div className="min-h-screen">
-      <DashboardHeader title="النظام الدراسي" subtitle="إدارة السنوات الدراسية - الترمين - الترحيل" />
+      <PageHeader title="النظام الدراسي" description="إدارة السنوات الدراسية - الترمين - الترحيل" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
@@ -130,7 +130,7 @@ export default function AcademicYearsPage() {
                       { key: "studentsCount", header: "الطلاب" },
                       { key: "coursesCount", header: "الكورسات" },
                       { key: "status", header: "الحالة", render: (y) => (
-                        <Badge variant={y.status === "active" ? "success" : "neutral"}>{y.status === "active" ? "نشطة" : "مؤرشفة"}</Badge>
+                        <Badge variant={y.status === "active" ? "success" : "default"}>{y.status === "active" ? "نشطة" : "مؤرشفة"}</Badge>
                       )},
                       { key: "actions", header: "", render: (y) => y.status === "active" ? (
                         <button type="button" onClick={() => archiveYear(y.id)}

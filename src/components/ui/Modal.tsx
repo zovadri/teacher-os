@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useCallback, useRef } from "react"
+import { useEffect, useCallback } from "react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 import { HiX } from "react-icons/hi"
@@ -9,74 +9,73 @@ interface ModalProps {
   isOpen: boolean
   onClose: () => void
   title?: string
-  subtitle?: string
   children: React.ReactNode
   size?: "sm" | "md" | "lg" | "xl" | "full"
-  className?: string
   showClose?: boolean
 }
 
-const sizes = {
+const sizeStyles = {
   sm: "max-w-sm",
   md: "max-w-lg",
   lg: "max-w-2xl",
   xl: "max-w-4xl",
-  full: "max-w-[95vw] max-h-[95vh]",
+  full: "max-w-[90vw]",
 }
 
-export function Modal({ isOpen, onClose, title, subtitle, children, size = "md", className, showClose = true }: ModalProps) {
-  const modalRef = useRef<HTMLDivElement>(null)
-
-  const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Escape") onClose()
-  }, [onClose])
+export function Modal({ isOpen, onClose, title, children, size = "md", showClose = true }: ModalProps) {
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose()
+    },
+    [onClose],
+  )
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener("keydown", handleEscape)
+      document.addEventListener("keydown", handleKeyDown)
       document.body.style.overflow = "hidden"
-      modalRef.current?.focus()
     }
     return () => {
-      document.removeEventListener("keydown", handleEscape)
+      document.removeEventListener("keydown", handleKeyDown)
       document.body.style.overflow = ""
     }
-  }, [isOpen, handleEscape])
+  }, [isOpen, handleKeyDown])
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label={title}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
           />
           <motion.div
-            ref={modalRef}
-            tabIndex={-1}
-            initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className={cn(
-              "relative bg-card border border-border rounded-[24px] shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] w-full overflow-hidden",
-              sizes[size],
-              className
+              "relative w-full bg-card/80 backdrop-blur-xl border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.5)]",
+              sizeStyles[size],
             )}
           >
             {(title || showClose) && (
-              <div className="flex items-start justify-between p-6 pb-4 border-b border-border">
-                <div>
-                  {title && <h2 className="text-lg font-semibold text-text">{title}</h2>}
-                  {subtitle && <p className="text-sm text-text-secondary mt-1">{subtitle}</p>}
-                </div>
+              <div className="flex items-center justify-between px-6 pt-6 pb-4">
+                {title && <h2 className="text-lg font-semibold text-text">{title}</h2>}
                 {showClose && (
-                  <button type="button" onClick={onClose} aria-label="إغلاق" className="p-1.5 rounded-lg hover:bg-surface-secondary text-text-tertiary hover:text-text transition-colors">
+                  <button type="button" onClick={onClose}
+                    className="p-1.5 rounded-[12px] text-text-tertiary hover:text-text hover:bg-card transition-all"
+                  >
                     <HiX className="w-5 h-5" />
                   </button>
                 )}
               </div>
             )}
-            <div className="p-6 overflow-y-auto max-h-[70vh]">{children}</div>
+            <div className="px-6 pb-6">{children}</div>
           </motion.div>
         </div>
       )}

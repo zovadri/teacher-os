@@ -87,7 +87,7 @@ export default function WaitingQueuePage() {
     return (
       <div className="p-4 md:p-6">
         <PageHeader title="إدارة قائمة الانتظار" description="متابعة الطلاب المنتظرين وإدارة المقاعد الشاغرة" />
-        <ErrorState message={error} onRetry={handleRetry} />
+        <ErrorState description={error} onRetry={handleRetry} />
       </div>
     )
   }

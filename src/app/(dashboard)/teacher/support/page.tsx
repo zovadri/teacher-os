@@ -15,7 +15,7 @@ import {
   HiOutlinePaperClip,
   HiOutlineSupport,
 } from "react-icons/hi"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card"
 import Input from "@/components/ui/Input"
 import Textarea from "@/components/ui/Textarea"
@@ -80,7 +80,7 @@ export default function SupportPage() {
   if (submitted) {
     return (
       <div className="p-4 md:p-6 space-y-6">
-        <DashboardHeader title="الدعم الفني" subtitle="تواصل مع فريق الدعم" />
+        <PageHeader title="الدعم الفني" description="تواصل مع فريق الدعم" />
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-16">
             <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
@@ -101,7 +101,7 @@ export default function SupportPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <DashboardHeader title="الدعم الفني" subtitle="تواصل مع فريق الدعم" />
+      <PageHeader title="الدعم الفني" description="تواصل مع فريق الدعم" />
 
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">

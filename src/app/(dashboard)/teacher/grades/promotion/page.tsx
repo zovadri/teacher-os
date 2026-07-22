@@ -10,7 +10,7 @@ import {
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts"
 import toast from "react-hot-toast"
 import { Breadcrumb } from "@/components/ui/Breadcrumb"
-import DashboardHeader from "@/components/layout/DashboardHeader"
+import { PageHeader } from "@/components/ui/PageHeader"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
 import { Badge } from "@/components/ui/Badge"
 import { StatsCard } from "@/components/ui/StatsCard"
@@ -87,7 +87,7 @@ export default function PromotionPage() {
   return (
     <div className="min-h-screen">
       <Breadcrumb items={[{ label: "الطلاب", href: "/teacher/students" }, { label: "الترقية والرسوب" }]} />
-      <DashboardHeader title="النجاح والترقية" subtitle="إدارة نجاح ورسوب وترقية الطلاب" />
+      <PageHeader title="النجاح والترقية" description="إدارة نجاح ورسوب وترقية الطلاب" />
       <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
