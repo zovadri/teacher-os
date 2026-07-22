@@ -335,6 +335,9 @@ export default function DashboardSidebar() {
   const sidebarContent = (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
+        <button type="button" onClick={() => setMobileOpen(false)} className="lg:hidden ml-2 p-1 rounded-lg hover:bg-[#18181B] transition-colors">
+          <HiX className="w-5 h-5 text-text-secondary" />
+        </button>
         <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-sm">T</div>
         {!collapsed && <span className="font-bold text-text text-lg">TeacherOS</span>}
       </div>
@@ -398,18 +401,14 @@ export default function DashboardSidebar() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.aside
-            key="mobile-sidebar"
-            initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="lg:hidden fixed top-0 right-0 z-40 h-screen w-[280px] bg-[#09090B] border-l border-border shadow-2xl"
-          >
-            {sidebarContent}
-          </motion.aside>
-        )}
-      </AnimatePresence>
+      <motion.aside
+        initial={false}
+        animate={{ x: mobileOpen ? 0 : "100%" }}
+        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+        className="lg:hidden fixed top-0 right-0 z-50 h-screen w-[280px] bg-[#09090B] border-l border-border shadow-2xl"
+      >
+        {sidebarContent}
+      </motion.aside>
 
       <aside
         onMouseEnter={() => setCollapsed(false)}
