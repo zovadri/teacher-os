@@ -280,18 +280,15 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
           href={hasChildren ? "#" : item.href}
           onClick={(e) => { if (hasChildren) { e.preventDefault(); toggleMenu(item.label) } }}
           className={cn(
-            "flex items-center justify-center gap-3 rounded-[16px] transition-all duration-250 group",
-            showLabel ? "px-4 py-3 w-full" : "w-12 h-12 mx-auto",
-            active ? "bg-primary/10 text-primary" : "text-text-secondary hover:bg-card hover:text-text",
+            "flex items-center justify-center gap-3 rounded-[12px] transition-all duration-200 group",
+            showLabel ? "px-3 py-2.5 w-full" : "w-10 h-10 mx-auto",
+            active
+              ? "bg-primary-100 text-primary"
+              : "text-text-secondary hover:bg-card hover:text-text",
             depth > 0 && "mr-3"
           )}
         >
-          <motion.div
-            whileHover={{ scale: 1.15 }}
-            transition={{ type: "spring", stiffness: 300, damping: 15 }}
-          >
-            <item.icon className="w-5 h-5 shrink-0" />
-          </motion.div>
+          <item.icon className="w-5 h-5 shrink-0" />
           {showLabel && (
             <>
               <span className="flex-1 truncate text-sm font-medium text-right">{item.label}</span>
@@ -317,9 +314,9 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
                     key={child.href}
                     href={child.href}
                     className={cn(
-                      "flex items-center gap-3 pr-12 px-3 py-2 rounded-[16px] text-sm transition-all duration-200",
+                      "flex items-center gap-3 pr-11 px-3 py-2 rounded-[12px] text-sm transition-all duration-200",
                       pathname === child.href
-                        ? "bg-primary/10 text-primary"
+                        ? "bg-primary-100 text-primary"
                         : "text-text-tertiary hover:bg-card hover:text-text-secondary"
                     )}
                   >
@@ -333,8 +330,8 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
         )}
 
         {!showLabel && (
-          <div className="absolute right-16 top-1/2 -translate-y-1/2 z-50 pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200">
-            <div className="bg-surface/90 backdrop-blur-xl border border-border rounded-[12px] px-3 py-1.5 text-sm font-medium text-text whitespace-nowrap shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+          <div className="absolute right-14 top-1/2 -translate-y-1/2 z-50 pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200">
+            <div className="bg-surface-secondary border border-border rounded-[10px] px-3 py-1.5 text-sm font-medium text-text whitespace-nowrap shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
               {item.label}
             </div>
           </div>
@@ -354,8 +351,8 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
           href={hasChildren ? "#" : item.href}
           onClick={(e) => { if (hasChildren) { e.preventDefault(); toggleMenu(item.label) } else { setMobileOpen(false) } }}
           className={cn(
-            "flex items-center gap-3 px-4 py-3 rounded-[16px] text-sm font-medium transition-all duration-200",
-            active ? "bg-primary/10 text-primary" : "text-text-secondary hover:bg-card hover:text-text",
+            "flex items-center gap-3 px-4 py-3 rounded-[12px] text-sm font-medium transition-all duration-200",
+            active ? "bg-primary-100 text-primary" : "text-text-secondary hover:bg-card hover:text-text",
             depth > 0 && "mr-3"
           )}
         >
@@ -381,9 +378,9 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
                     href={child.href}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
-                      "flex items-center gap-3 pr-12 px-3 py-2 rounded-[16px] text-sm transition-all duration-200",
+                      "flex items-center gap-3 pr-12 px-3 py-2 rounded-[12px] text-sm transition-all duration-200",
                       pathname === child.href
-                        ? "bg-primary/10 text-primary"
+                        ? "bg-primary-100 text-primary"
                         : "text-text-tertiary hover:bg-card hover:text-text-secondary"
                     )}
                   >
@@ -403,7 +400,7 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
     <>
       <button type="button"
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-[16px] bg-surface/60 backdrop-blur-xl border border-border shadow-md"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-[12px] bg-surface-secondary border border-border shadow-md"
       >
         {mobileOpen ? <HiX className="w-5 h-5" /> : <HiMenu className="w-5 h-5" />}
       </button>
@@ -423,21 +420,21 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
         initial={false}
         animate={{ x: mobileOpen ? 0 : "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="lg:hidden fixed top-0 right-0 z-50 h-screen w-[300px] bg-surface/90 backdrop-blur-xl border-l border-border shadow-2xl"
+        className="lg:hidden fixed top-0 right-0 z-50 h-screen w-[300px] bg-surface border-l border-border shadow-2xl"
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center gap-3 px-6 py-5 border-b border-border">
-            <button type="button" onClick={() => setMobileOpen(false)} className="ml-2 p-1 rounded-[16px] hover:bg-card transition-colors">
+            <button type="button" onClick={() => setMobileOpen(false)} className="ml-2 p-1 rounded-[12px] hover:bg-card transition-colors">
               <HiX className="w-5 h-5 text-text-secondary" />
             </button>
-            <div className="w-9 h-9 rounded-[16px] bg-primary flex items-center justify-center text-white font-bold text-sm">T</div>
+            <div className="w-9 h-9 rounded-[12px] bg-primary flex items-center justify-center text-white font-bold text-sm">T</div>
             <span className="font-bold text-text text-lg">TeacherOS</span>
           </div>
           <nav className="flex-1 overflow-y-auto p-4 space-y-0.5">
             {roleNavItems.map((item) => (<MobileNavLink key={item.href} item={item} />))}
           </nav>
           <div className="p-4 border-t border-border">
-            <button type="button" className="flex items-center gap-3 w-full px-4 py-3 rounded-[16px] text-sm font-medium text-text-tertiary hover:bg-card hover:text-error transition-all">
+            <button type="button" className="flex items-center gap-3 w-full px-4 py-3 rounded-[12px] text-sm font-medium text-text-tertiary hover:bg-card hover:text-error transition-all">
               <HiLogout className="w-5 h-5 shrink-0" />
               <span>تسجيل خروج</span>
             </button>
@@ -449,18 +446,18 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => { setHovered(false); setExpandedMenus([]) }}
         className={cn(
-          "hidden lg:flex flex-col fixed right-0 top-0 h-screen z-30 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-surface/60 backdrop-blur-xl border-l border-border",
+          "hidden lg:flex flex-col fixed right-0 top-0 h-screen z-30 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-surface/80 backdrop-blur-xl border-l border-border",
           hovered ? "w-[240px]" : "w-[64px]"
         )}
       >
         <div className={cn(
           "flex items-center border-b border-border transition-all duration-300",
-          hovered ? "px-5 py-5 justify-start gap-3" : "px-0 py-5 justify-center"
+          hovered ? "px-4 py-4 justify-start gap-3" : "px-0 py-4 justify-center"
         )}>
           <motion.div
-            whileHover={{ scale: 1.1, rotate: -5 }}
+            whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            className="w-9 h-9 rounded-[16px] bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-[0_0_20px_rgba(91,124,255,0.2)]"
+            className="w-9 h-9 rounded-[12px] bg-primary flex items-center justify-center text-white font-bold text-sm shrink-0"
           >
             T
           </motion.div>
@@ -480,19 +477,17 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
 
         <nav className={cn(
           "flex-1 overflow-y-auto overflow-x-hidden transition-all duration-300",
-          hovered ? "p-3 space-y-0.5" : "p-3 space-y-1"
+          hovered ? "p-2 space-y-0.5" : "p-2 space-y-1"
         )}>
           {roleNavItems.map((item) => (<DesktopNavLink key={item.href} item={item} />))}
         </nav>
 
-        <div className="border-t border-border p-3">
+        <div className="border-t border-border p-2">
           <button type="button" className={cn(
-            "flex items-center transition-all duration-200 rounded-[16px] text-text-tertiary hover:bg-card hover:text-error group",
-            hovered ? "gap-3 w-full px-4 py-3 text-sm font-medium" : "justify-center w-12 h-12 mx-auto"
+            "flex items-center transition-all duration-200 rounded-[12px] text-text-tertiary hover:bg-card hover:text-error group",
+            hovered ? "gap-3 w-full px-3 py-2.5 text-sm font-medium" : "justify-center w-10 h-10 mx-auto"
           )}>
-            <motion.div whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-              <HiLogout className="w-5 h-5 shrink-0" />
-            </motion.div>
+            <HiLogout className="w-5 h-5 shrink-0" />
             {hovered && <span className="truncate">تسجيل خروج</span>}
           </button>
         </div>
