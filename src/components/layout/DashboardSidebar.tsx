@@ -413,7 +413,7 @@ export default function DashboardSidebar() {
       <aside
         onMouseEnter={() => setCollapsed(false)}
         className={cn(
-          "hidden lg:flex flex-col fixed right-0 top-0 h-screen bg-[#09090B] border-l border-border z-30 transition-all duration-300",
+          "hidden lg:flex flex-col bg-[#09090B] border-l border-border transition-all duration-300 min-h-screen shrink-0",
           collapsed ? "w-[72px]" : "w-[280px]"
         )}
       >

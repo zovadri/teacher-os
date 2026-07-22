@@ -24,10 +24,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen bg-[#09090B]">
-      <DashboardSidebar />
-      <div className="lg:mr-[280px] min-h-screen overflow-y-auto">
-        <DemoBanner />
-        {children}
+      <div className="flex min-h-screen">
+        <DashboardSidebar />
+        <div className="flex-1 min-w-0">
+          <DemoBanner />
+          {children}
+        </div>
       </div>
       <CommandPalette isOpen={commandPaletteOpen} onClose={closeCommandPalette} />
       <GlobalSearch isOpen={searchOpen} onClose={closeSearch} />
