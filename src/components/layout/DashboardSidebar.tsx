@@ -382,7 +382,7 @@ export default function DashboardSidebar() {
     <>
       <button type="button"
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 right-4 z-50 p-2.5 rounded-xl bg-surface border border-border shadow-md"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl bg-surface border border-border shadow-md"
       >
         {mobileOpen ? <HiX className="w-5 h-5" /> : <HiMenu className="w-5 h-5" />}
       </button>
@@ -390,6 +390,7 @@ export default function DashboardSidebar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            key="overlay"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="lg:hidden fixed inset-0 z-40 bg-black/60"
             onClick={() => setMobileOpen(false)}
@@ -397,13 +398,18 @@ export default function DashboardSidebar() {
         )}
       </AnimatePresence>
 
-      <motion.aside
-        initial={{ x: "100%" }} animate={{ x: mobileOpen ? 0 : "100%" }}
-        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="lg:hidden fixed top-0 left-0 z-40 h-screen w-[280px] bg-[#09090B] border-l border-border shadow-2xl"
-      >
-        {sidebarContent}
-      </motion.aside>
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.aside
+            key="mobile-sidebar"
+            initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="lg:hidden fixed top-0 right-0 z-40 h-screen w-[280px] bg-[#09090B] border-l border-border shadow-2xl"
+          >
+            {sidebarContent}
+          </motion.aside>
+        )}
+      </AnimatePresence>
 
       <aside
         onMouseEnter={() => setCollapsed(false)}
