@@ -73,11 +73,11 @@ function LoginForm() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden bg-surface-secondary">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.08),transparent_60%)] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.08),transparent_60%)] animate-pulse" style={{ animationDuration: '8s' }} />
         <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.04),transparent_60%)] animate-pulse" style={{ animationDuration: '12s' }} />
         <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[150px]" />
         <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-info/4 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.02),transparent_70%)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.02),transparent_70%)]" />
       </div>
 
       <div className="w-full max-w-sm relative z-10">
@@ -91,7 +91,7 @@ function LoginForm() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 150, damping: 18, delay: 0.1 }}
-            className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-primary-dark text-white mb-6 shadow-[0_0_40px_rgba(79,70,229,0.15)]"
+            className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-primary-dark text-white mb-6 shadow-[0_0_40px_rgba(217,119,6,0.15)]"
           >
             <HiAcademicCap className="w-10 h-10" />
           </motion.div>
@@ -117,7 +117,7 @@ function LoginForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.5 }}
-          className="bg-card/80 backdrop-blur-xl border border-border rounded-[24px] p-8 shadow-[0_8px_40px_rgba(79,70,229,0.04),inset_0_1px_0_rgba(255,255,255,0.8)]"
+          className="bg-card/80 backdrop-blur-xl border border-border rounded-[24px] p-8 shadow-[0_8px_40px_rgba(217,119,6,0.04),inset_0_1px_0_rgba(255,255,255,0.8)]"
         >
           <form onSubmit={handleSubmit} className="space-y-5">
             {sessionExpired && (

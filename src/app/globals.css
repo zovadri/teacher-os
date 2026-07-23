@@ -1,44 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #4F46E5;
-  --color-primary-dark: #3730A3;
-  --color-primary-light: #818CF8;
-  --color-primary-50: rgba(79, 70, 229, 0.04);
-  --color-primary-100: rgba(79, 70, 229, 0.07);
-  --color-primary-200: rgba(79, 70, 229, 0.12);
-  --color-primary-300: rgba(79, 70, 229, 0.25);
-  --color-primary-400: #6366F1;
-  --color-primary-500: #4F46E5;
-  --color-primary-600: #3730A3;
-  --color-primary-700: #312E81;
-  --color-primary-800: #1E1B4B;
-  --color-primary-900: #0F0D2E;
+  --color-primary: #D97706;
+  --color-primary-dark: #B45309;
+  --color-primary-light: #F59E0B;
+  --color-primary-50: rgba(217, 119, 6, 0.04);
+  --color-primary-100: rgba(217, 119, 6, 0.07);
+  --color-primary-200: rgba(217, 119, 6, 0.12);
+  --color-primary-300: rgba(217, 119, 6, 0.25);
+  --color-primary-400: #F59E0B;
+  --color-primary-500: #D97706;
+  --color-primary-600: #B45309;
+  --color-primary-700: #92400E;
+  --color-primary-800: #78350F;
+  --color-primary-900: #451A03;
   --color-surface: #FFFFFF;
   --color-surface-secondary: #F1F3F9;
   --color-surface-tertiary: #E2E6F0;
   --color-card: #FFFFFF;
-  --color-border: rgba(79, 70, 229, 0.06);
-  --color-border-light: rgba(79, 70, 229, 0.14);
+  --color-border: rgba(217, 119, 6, 0.06);
+  --color-border-light: rgba(217, 119, 6, 0.14);
   --color-text: #0B0D17;
   --color-text-secondary: #52547A;
   --color-text-tertiary: #898CA8;
   --color-success: #059669;
   --color-success-bg: rgba(5, 150, 105, 0.06);
-  --color-warning: #D97706;
-  --color-warning-bg: rgba(217, 112, 6, 0.06);
+  --color-warning: #EA580C;
+  --color-warning-bg: rgba(234, 88, 12, 0.06);
   --color-error: #DC2626;
   --color-error-bg: rgba(220, 38, 38, 0.06);
-  --color-info: #6366F1;
-  --color-info-bg: rgba(99, 102, 241, 0.06);
-  --color-students: #4F46E5;
-  --color-students-bg: rgba(79, 70, 229, 0.05);
+  --color-info: #0EA5E9;
+  --color-info-bg: rgba(14, 165, 233, 0.06);
+  --color-students: #D97706;
+  --color-students-bg: rgba(217, 119, 6, 0.05);
   --color-finance: #059669;
   --color-finance-bg: rgba(5, 150, 105, 0.05);
-  --color-exams: #6366F1;
-  --color-exams-bg: rgba(99, 102, 241, 0.05);
-  --color-attendance: #D97706;
-  --color-attendance-bg: rgba(217, 112, 6, 0.05);
+  --color-exams: #0EA5E9;
+  --color-exams-bg: rgba(14, 165, 233, 0.05);
+  --color-attendance: #EA580C;
+  --color-attendance-bg: rgba(234, 88, 12, 0.05);
   --color-analytics: #8B5CF6;
   --color-analytics-bg: rgba(139, 92, 246, 0.05);
   --font-sans: "Alexandria", "Inter", system-ui, -apple-system, sans-serif;
@@ -63,7 +63,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: #F1F3F9;
+  background: #F8F5F0;
   color: var(--color-text);
   overflow-x: hidden;
   line-height: 1.6;
@@ -75,9 +75,9 @@ body::before {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 60% 50% at 50% -15%, rgba(79, 70, 229, 0.035) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% -15%, rgba(217, 119, 6, 0.035) 0%, transparent 60%),
     radial-gradient(ellipse 35% 35% at 80% 90%, rgba(5, 150, 105, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse 25% 25% at 15% 85%, rgba(99, 102, 241, 0.015) 0%, transparent 45%);
+    radial-gradient(ellipse 25% 25% at 15% 85%, rgba(14, 165, 233, 0.015) 0%, transparent 45%);
   pointer-events: none;
 }
 
@@ -87,14 +87,14 @@ body::after {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(79, 70, 229, 0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79, 70, 229, 0.015) 1px, transparent 1px);
+    linear-gradient(rgba(217, 119, 6, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 119, 6, 0.015) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
 }
 
 ::selection {
-  background: rgba(79, 70, 229, 0.12);
+  background: rgba(217, 119, 6, 0.12);
   color: var(--color-text);
 }
 
@@ -108,12 +108,12 @@ body::after {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(79, 70, 229, 0.08);
+  background: rgba(217, 119, 6, 0.08);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(79, 70, 229, 0.16);
+  background: rgba(217, 119, 6, 0.16);
 }
 
 @keyframes float {

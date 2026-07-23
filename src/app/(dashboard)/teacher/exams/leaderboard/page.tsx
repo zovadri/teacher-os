@@ -247,7 +247,7 @@ export default function LeaderboardPage() {
                     <XAxis dataKey="name" tick={{ fill: "#94A3B8", fontSize: 11 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                     <YAxis tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} domain={[0, 100]} />
                     <Tooltip content={<ChartTooltip />} />
-                    <Bar dataKey="score" fill="#6366F1" radius={[4, 4, 0, 0]} name="الدرجة" />
+                    <Bar dataKey="score" fill="#0EA5E9" radius={[4, 4, 0, 0]} name="الدرجة" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

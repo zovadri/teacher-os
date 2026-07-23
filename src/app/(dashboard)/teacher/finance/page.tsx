@@ -144,7 +144,7 @@ export default function FinanceDashboardPage() {
                       contentStyle={{ background: "#151D2F", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "16px", color: "#FFFFFF", fontSize: "13px", backdropFilter: "blur(12px)" }}
                       formatter={(value: number) => [formatter(value), "صافي الربح"]}
                     />
-                    <Line type="monotone" dataKey="profit" stroke="#4F46E5" strokeWidth={2} dot={{ r: 4, fill: "#4F46E5" }} />
+                    <Line type="monotone" dataKey="profit" stroke="#D97706" strokeWidth={2} dot={{ r: 4, fill: "#D97706" }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

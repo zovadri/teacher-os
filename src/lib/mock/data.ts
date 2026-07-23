@@ -757,7 +757,7 @@ export const mockCmsPages = {
     ],
   },
   theme: {
-    primaryColor: "#6366F1",
+    primaryColor: "#D97706",
     secondaryColor: "#8B5CF6",
     fontFamily: "Cairo",
     borderRadius: "rounded-xl",
@@ -850,7 +850,7 @@ export const mockSettings = {
 }
 
 export const mockCourseCategories = [
-  { id: '1', name: 'الرياضيات', description: 'كورسات الرياضيات لجميع المراحل', icon: '📐', color: '#6366F1', courseCount: 5 },
+  { id: '1', name: 'الرياضيات', description: 'كورسات الرياضيات لجميع المراحل', icon: '📐', color: '#D97706', courseCount: 5 },
   { id: '2', name: 'العلوم', description: 'كورسات العلوم والفيزياء والكيمياء', icon: '🔬', color: '#10B981', courseCount: 4 },
   { id: '3', name: 'اللغات', description: 'كورسات اللغات المختلفة', icon: '🌍', color: '#F59E0B', courseCount: 3 },
   { id: '4', name: 'التاريخ', description: 'كورسات التاريخ والجغرافيا', icon: '📜', color: '#EF4444', courseCount: 2 },

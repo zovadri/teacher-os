@@ -30,7 +30,7 @@ const subjectOptions = [
 ]
 
 const colorOptions = [
-  { value: "#6366F1", label: "بنفسجي" },
+  { value: "#0EA5E9", label: "بنفسجي" },
   { value: "#10B981", label: "أخضر" },
   { value: "#F59E0B", label: "أصفر" },
   { value: "#EF4444", label: "أحمر" },
@@ -41,7 +41,7 @@ const colorOptions = [
 ]
 
 const mockCategories = [
-  { id: "1", name: "الأفعال", subject: "نحو", questionCount: 15, color: "#6366F1" },
+  { id: "1", name: "الأفعال", subject: "نحو", questionCount: 15, color: "#0EA5E9" },
   { id: "2", name: "الأسماء", subject: "نحو", questionCount: 12, color: "#10B981" },
   { id: "3", name: "الميزان الصرفي", subject: "صرف", questionCount: 10, color: "#F59E0B" },
   { id: "4", name: "المشتقات", subject: "صرف", questionCount: 8, color: "#EF4444" },
@@ -49,7 +49,7 @@ const mockCategories = [
   { id: "6", name: "الاستعارة", subject: "بلاغة", questionCount: 11, color: "#EC4899" },
   { id: "7", name: "الشعر الجاهلي", subject: "أدب", questionCount: 18, color: "#3B82F6" },
   { id: "8", name: "الشعر العباسي", subject: "أدب", questionCount: 9, color: "#F97316" },
-  { id: "9", name: "القراءة المتحررة", subject: "نصوص", questionCount: 7, color: "#6366F1" },
+  { id: "9", name: "القراءة المتحررة", subject: "نصوص", questionCount: 7, color: "#0EA5E9" },
   { id: "10", name: "النصوص الشعرية", subject: "نصوص", questionCount: 13, color: "#10B981" },
   { id: "11", name: "الهمزات", subject: "إملاء", questionCount: 6, color: "#F59E0B" },
   { id: "12", name: "علامات الترقيم", subject: "إملاء", questionCount: 5, color: "#EF4444" },
@@ -65,7 +65,7 @@ interface CategoryForm {
   color: string
 }
 
-const emptyForm: CategoryForm = { name: "", subject: "نحو", color: "#6366F1" }
+const emptyForm: CategoryForm = { name: "", subject: "نحو", color: "#0EA5E9" }
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState(mockCategories)

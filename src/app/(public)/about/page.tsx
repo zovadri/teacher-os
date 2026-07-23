@@ -57,7 +57,7 @@ export default function AboutPage() {
                 أول نظام تشغيل متكامل للمدرسين يقدم حلولاً تعليمية مبتكرة تجمع بين أحدث التقنيات وأساليب التدريس العريقة.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/courses" className="px-8 py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(79,70,229,0.15)] hover:shadow-[0_0_30px_rgba(79,70,229,0.3)] hover:brightness-110 transition-all text-[15px]">
+                <Link href="/courses" className="px-8 py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(217,119,6,0.15)] hover:shadow-[0_0_30px_rgba(217,119,6,0.3)] hover:brightness-110 transition-all text-[15px]">
                   تصفح الكورسات
                 </Link>
                 <Link href="/contact" className="px-8 py-3 border border-border text-text-secondary font-medium rounded-[16px] hover:bg-surface-tertiary hover:text-text transition-all text-[15px]">
@@ -151,7 +151,7 @@ export default function AboutPage() {
 
       <section className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-[#3B5FEF] p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(79,70,229,0.2)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(217,119,6,0.2)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-[28px] font-bold mb-4">مستعد لبدء رحلة التعلم؟</h2>

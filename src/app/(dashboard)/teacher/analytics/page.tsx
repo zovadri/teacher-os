@@ -30,11 +30,11 @@ import { mockAnalyticsDetailed } from "@/lib/mock/data"
 import { formatCurrency, cn, det } from "@/lib/utils"
 
 const colors = {
-  primary: "#4F46E5",
+  primary: "#D97706",
   success: "#16C784",
   warning: "#F5B301",
   error: "#FF5C74",
-  info: "#4F46E5",
+  info: "#0EA5E9",
   cyan: "#06B6D4",
   purple: "#8B5CF6",
   pink: "#EC4899",

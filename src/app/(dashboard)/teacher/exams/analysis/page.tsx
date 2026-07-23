@@ -28,7 +28,7 @@ import { cn, det } from "@/lib/utils"
 import type { QuestionAnalysis } from "@/lib/types"
 
 const COLORS = {
-  primary: "#6366F1",
+  primary: "#D97706",
   success: "#10B981",
   warning: "#F59E0B",
   error: "#EF4444",

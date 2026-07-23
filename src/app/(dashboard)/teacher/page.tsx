@@ -22,7 +22,7 @@ const activityIcons: Record<string, React.ElementType> = {
 
 const sparklineData = [30, 45, 38, 52, 48, 62, 55, 68, 72, 65, 78, 82]
 
-function Sparkline({ data, color = "#4F46E5" }: { data: number[]; color?: string }) {
+function Sparkline({ data, color = "#D97706" }: { data: number[]; color?: string }) {
   if (!data || data.length < 2) return null
   const max = Math.max(...data); const min = Math.min(...data); const range = max - min || 1
   const w = 64; const h = 24
@@ -64,7 +64,7 @@ export default function TeacherDashboard() {
       >
         <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}>
           <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-4 bg-card/80 backdrop-blur-xl border border-border rounded-[16px] px-5 py-3 shadow-[0_4px_16px_rgba(79,70,229,0.03)]">
+            <div className="flex items-center gap-4 bg-card/80 backdrop-blur-xl border border-border rounded-[16px] px-5 py-3 shadow-[0_4px_16px_rgba(217,119,6,0.03)]">
               <div className="text-center"><p className="text-2xl font-bold text-primary leading-none">5</p><p className="text-xs text-text-tertiary mt-1">حصص اليوم</p></div>
               <div className="w-px h-8 bg-border" />
               <div className="text-center"><p className="text-2xl font-bold text-success leading-none">3</p><p className="text-xs text-text-tertiary mt-1">امتحانات</p></div>
@@ -102,12 +102,12 @@ export default function TeacherDashboard() {
                 <div dir="ltr" className="h-72">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={mockAnalytics.monthlyRevenue} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
-                      <defs><linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#4F46E5" stopOpacity={0.2} /><stop offset="95%" stopColor="#4F46E5" stopOpacity={0} /></linearGradient></defs>
+                      <defs><linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#D97706" stopOpacity={0.2} /><stop offset="95%" stopColor="#D97706" stopOpacity={0} /></linearGradient></defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.04)" vertical={false} />
                       <XAxis dataKey="month" tick={{ fill: "#9D9DB5", fontSize: 11 }} axisLine={{ stroke: "rgba(0,0,0,0.06)" }} tickLine={false} />
                       <YAxis tick={{ fill: "#9D9DB5", fontSize: 12 }} axisLine={false} tickLine={false} />
-                      <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)", borderRadius: "16px", color: "#1A1A2E", fontSize: "13px", boxShadow: "0 8px 32px rgba(79,70,229,0.06)" }} formatter={(value: number | null) => { if (value == null) return []; return [formatCurrency(Number(value)), "الإيرادات"] }} />
-                      <Area type="monotone" dataKey="revenue" stroke="#4F46E5" strokeWidth={2.5} fill="url(#revGrad)" />
+                      <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)", borderRadius: "16px", color: "#1A1A2E", fontSize: "13px", boxShadow: "0 8px 32px rgba(217,119,6,0.06)" }} formatter={(value: number | null) => { if (value == null) return []; return [formatCurrency(Number(value)), "الإيرادات"] }} />
+                      <Area type="monotone" dataKey="revenue" stroke="#D97706" strokeWidth={2.5} fill="url(#revGrad)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>

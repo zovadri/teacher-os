@@ -409,15 +409,15 @@ export default function SystemLogsPage() {
                                   <AreaChart data={perfData.avgResponseTime} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
                                     <defs>
                                       <linearGradient id="perfGrad" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#6366F1" stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="#0EA5E9" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="#0EA5E9" stopOpacity={0} />
                                       </linearGradient>
                                     </defs>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
                                     <XAxis dataKey="time" tick={{ fill: "#475569", fontSize: 11 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                                     <YAxis tick={{ fill: "#475569", fontSize: 11 }} axisLine={false} tickLine={false} unit="ms" />
                                     <Tooltip contentStyle={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: "8px", fontSize: "13px" }} />
-                                    <Area type="monotone" dataKey="value" stroke="#6366F1" strokeWidth={2.5} fill="url(#perfGrad)" />
+                                    <Area type="monotone" dataKey="value" stroke="#0EA5E9" strokeWidth={2.5} fill="url(#perfGrad)" />
                                   </AreaChart>
                                 </ResponsiveContainer>
                               </div>
@@ -535,7 +535,7 @@ export default function SystemLogsPage() {
                                     <XAxis dataKey="month" tick={{ fill: "#475569", fontSize: 10 }} axisLine={{ stroke: "#E2E8F0" }} tickLine={false} />
                                     <YAxis tick={{ fill: "#475569", fontSize: 11 }} axisLine={false} tickLine={false} />
                                     <Tooltip contentStyle={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: "8px", fontSize: "13px" }} />
-                                    <Bar dataKey="count" fill="#6366F1" radius={[4, 4, 0, 0]} />
+                                    <Bar dataKey="count" fill="#0EA5E9" radius={[4, 4, 0, 0]} />
                                   </BarChart>
                                 </ResponsiveContainer>
                               </div>

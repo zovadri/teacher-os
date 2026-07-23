@@ -39,7 +39,7 @@ function generateQRCodeSvg(data: string, size: number = 200): string {
     svg += `<rect x="${cx * cellSize + 1}" y="${cy * cellSize + 1}" width="${cellSize - 2}" height="${cellSize - 2}" fill="#111827" rx="1"/>`
   }
 
-  svg += `<rect x="${size/2 - cellSize*0.75}" y="${size/2 - cellSize*0.75}" width="${cellSize*1.5}" height="${cellSize*1.5}" fill="#6366F1" rx="2"/>`
+  svg += `<rect x="${size/2 - cellSize*0.75}" y="${size/2 - cellSize*0.75}" width="${cellSize*1.5}" height="${cellSize*1.5}" fill="#D97706" rx="2"/>`
   svg += '</svg>'
   return svg
 }

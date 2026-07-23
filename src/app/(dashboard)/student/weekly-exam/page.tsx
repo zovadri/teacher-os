@@ -136,7 +136,7 @@ export default function WeeklyExamPage() {
                   <XAxis dataKey="week" tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
                   <YAxis domain={[0, 100]} tick={{ fill: "#94A3B8", fontSize: 12 }} axisLine={false} tickLine={false} />
                   <Tooltip />
-                  <Line type="monotone" dataKey="معدل" stroke="#6366F1" strokeWidth={2} dot={{ fill: "#6366F1" }} />
+                  <Line type="monotone" dataKey="معدل" stroke="#0EA5E9" strokeWidth={2} dot={{ fill: "#0EA5E9" }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>

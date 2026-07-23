@@ -82,7 +82,7 @@ const certStatusLabels: Record<string, string> = {
   revoked: "ملغي",
 }
 
-const COLORS = ["#6366F1", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4"]
+const COLORS = ["#0EA5E9", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4"]
 
 function getStudentExtended(studentId: string) {
   const idx = parseInt(studentId.replace("s-", "")) || 0

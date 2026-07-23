@@ -34,7 +34,7 @@ const iconOptions = [
 ]
 
 const colorOptions = [
-  { value: "#6366F1", label: "بنفسجي" },
+  { value: "#D97706", label: "بنفسجي" },
   { value: "#10B981", label: "أخضر" },
   { value: "#F59E0B", label: "أصفر" },
   { value: "#EF4444", label: "أحمر" },
@@ -51,7 +51,7 @@ interface CategoryForm {
   color: string
 }
 
-const emptyForm: CategoryForm = { name: "", description: "", icon: "📐", color: "#6366F1" }
+const emptyForm: CategoryForm = { name: "", description: "", icon: "📐", color: "#D97706" }
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState(mockCourseCategories)
