@@ -13,7 +13,7 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: "bg-card/70 backdrop-blur-2xl border border-border text-text-secondary",
+  default: "bg-card border border-border text-text-secondary",
   neutral: "bg-surface-secondary backdrop-blur-2xl border border-border text-text-secondary",
   primary: "bg-primary-100 backdrop-blur-2xl border border-primary-200 text-primary",
   success: "bg-success/10 backdrop-blur-2xl border border-success/20 text-success",

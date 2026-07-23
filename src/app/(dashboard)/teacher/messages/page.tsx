@@ -87,7 +87,7 @@ export default function MessagesPage() {
       <div className="flex gap-4 flex-1 min-h-0">
         {/* Conversation List */}
         <div className={cn(
-          "w-full md:w-80 lg:w-96 shrink-0 flex flex-col bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden",
+          "w-full md:w-80 lg:w-96 shrink-0 flex flex-col bg-card border border-border rounded-[24px] overflow-hidden",
           !showMobileList && "hidden md:flex",
         )}>
           <div className="p-4 border-b border-border space-y-3">
@@ -149,7 +149,7 @@ export default function MessagesPage() {
 
         {/* Chat Area */}
         <div className={cn(
-          "flex-1 bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden flex flex-col",
+          "flex-1 bg-card border border-border rounded-[24px] overflow-hidden flex flex-col",
           showMobileList && "hidden md:flex",
         )}>
           {activeConversation ? (
@@ -214,7 +214,7 @@ export default function MessagesPage() {
                   <input
                     type="text"
                     placeholder="اكتب رسالتك..."
-                    className="flex-1 bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder:text-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all duration-250"
+                    className="flex-1 bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder:text-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all duration-250"
                   />
                   <button type="button" className="p-2.5 rounded-[12px] text-text-tertiary hover:text-primary hover:bg-card/60 transition-all">
                     <HiOutlinePaperClip className="w-5 h-5" />
@@ -233,7 +233,7 @@ export default function MessagesPage() {
           ) : (
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-20 h-20 rounded-[24px] bg-card/60 backdrop-blur-xl border border-border flex items-center justify-center mx-auto mb-5 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
+                <div className="w-20 h-20 rounded-[24px] bg-card border border-border flex items-center justify-center mx-auto mb-5 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
                   <HiOutlinePaperAirplane className="w-8 h-8 text-text-tertiary" />
                 </div>
                 <h3 className="text-lg font-semibold text-text mb-2">اختر محادثة</h3>
@@ -257,7 +257,7 @@ export default function MessagesPage() {
           <Input label="الموضوع" placeholder="عنوان الرسالة" />
           <Textarea label="نص الرسالة" placeholder="اكتب رسالتك هنا..." rows={5} />
           <div onClick={() => toast.success("قريباً...")}
-            className="flex items-center gap-2 p-3.5 rounded-[16px] bg-card/60 backdrop-blur border border-border cursor-pointer hover:bg-card/80 transition-all"
+            className="flex items-center gap-2 p-3.5 rounded-[16px] bg-card border border-border cursor-pointer hover:bg-card/80 transition-all"
           >
             <HiOutlinePaperClip className="w-4 h-4 text-text-tertiary" />
             <span className="text-sm text-text-tertiary">إرفاق ملف</span>

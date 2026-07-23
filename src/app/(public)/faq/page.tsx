@@ -107,7 +107,7 @@ export default function FAQPage() {
                       <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }}>
                         <button type="button"
                           onClick={() => toggleItem(faq.id)}
-                          className="w-full text-right p-5 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
+                          className="w-full text-right p-5 rounded-[24px] border border-border bg-card  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
                         >
                           <span className="font-medium text-sm">{faq.question}</span>
                           <HiChevronDown size={16} className={`text-text-tertiary transition-transform shrink-0 ${openItems.has(faq.id) ? "rotate-180" : ""}`} />

@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled ? "bg-surface/80 backdrop-blur-2xl shadow-[0_4px_24px_rgba(217,119,6,0.03)] border-b border-border/20" : "bg-transparent"
+      scrolled ? "bg-surface/90 shadow-[0_4px_24px_rgba(217,119,6,0.03)] border-b border-border/20" : "bg-transparent"
     }`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between h-16 md:h-20">
         <Link href="/" className="flex items-center gap-2">
@@ -67,7 +67,7 @@ export default function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden bg-surface/80 backdrop-blur-2xl border-t border-border">
+        <div className="lg:hidden bg-surface/90 border-t border-border">
           <div className="px-4 py-4 space-y-2">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm text-text-secondary hover:text-primary hover:bg-surface-tertiary rounded-lg transition-colors">

@@ -85,7 +85,7 @@ export default function StudentsPage() {
         <StatsCard title="طلاب الجدد" value={stats.new} icon={HiOutlineUserAdd} color="info" trend={22} sparkline={[5, 8, 12, 10, 15, 18, 14, 20, 22, 25, 28, 35]} />
       </motion.div>
 
-      <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-5 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+      <div className="bg-card border border-border rounded-[24px] p-5 ">
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center mb-5">
           <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="بحث بالاسم أو الهاتف..." className="sm:max-w-xs flex-1" />
           <div className="flex flex-wrap items-center gap-2">
@@ -211,7 +211,7 @@ export default function StudentsPage() {
               {paginated.map((s, i) => (
                 <motion.div key={s.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
                   onClick={() => router.push(`/teacher/students/${s.id}`)}
-                  className="bg-card/60 backdrop-blur border border-border rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
+                  className="bg-card border border-border rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <input type="checkbox" checked={selectedIds.has(s.id)} onChange={() => { const n = new Set(selectedIds); n.has(s.id) ? n.delete(s.id) : n.add(s.id); setSelectedIds(n) }}
@@ -259,7 +259,7 @@ export default function StudentsPage() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg bg-card/80 backdrop-blur-xl border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.5)] p-6"
+            className="relative w-full max-w-lg bg-card border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.08)] p-6"
           >
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-semibold text-text">إضافة طالب جديد</h2>
@@ -271,24 +271,24 @@ export default function StudentsPage() {
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-1.5">اسم الطالب</label>
                 <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="أدخل اسم الطالب"
-                  className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
+                  className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">البريد الإلكتروني</label>
                   <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="البريد الإلكتروني"
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">رقم الهاتف</label>
                   <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="رقم الهاتف"
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-1.5">الصف الدراسي</label>
                 <select value={form.grade} onChange={(e) => setForm({ ...form, grade: e.target.value })}
-                  className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all">
+                  className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all">
                   <option value="">اختر الصف</option>
                   {grades.filter((g) => g !== "الكل").map((g) => <option key={g} value={g}>{g}</option>)}
                 </select>
@@ -297,12 +297,12 @@ export default function StudentsPage() {
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">ولي الأمر</label>
                   <input value={form.parentName} onChange={(e) => setForm({ ...form, parentName: e.target.value })} placeholder="اسم ولي الأمر"
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">رقم ولي الأمر</label>
                   <input value={form.parentPhone} onChange={(e) => setForm({ ...form, parentPhone: e.target.value })} placeholder="رقم ولي الأمر"
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
                 </div>
               </div>
               <div className="flex gap-3 pt-2">

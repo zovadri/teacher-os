@@ -89,7 +89,7 @@ export default function ReportsPage() {
                     : "bg-card/40 border border-transparent hover:bg-card/60",
                 )}
               >
-                <div className="w-9 h-9 rounded-[14px] bg-card/60 backdrop-blur border border-border flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-[14px] bg-card border border-border flex items-center justify-center shrink-0">
                   <Icon className="w-4 h-4 text-primary" />
                 </div>
                 <div className="min-w-0">
@@ -120,7 +120,7 @@ export default function ReportsPage() {
                     { label: "الإيرادات", value: formatCurrency(mockStats.monthlyRevenue), icon: HiOutlineCash, color: "text-success" },
                     { label: "الامتحانات", value: mockStats.totalExams, icon: HiOutlineChartSquareBar, color: "text-warning" },
                   ].map((s) => (
-                    <div key={s.label} className="p-4 rounded-[16px] bg-card/60 backdrop-blur border border-border">
+                    <div key={s.label} className="p-4 rounded-[16px] bg-card border border-border">
                       <div className="flex items-center gap-2 mb-2">
                         <s.icon className={`w-4 h-4 ${s.color}`} />
                         <span className="text-xs text-text-secondary">{s.label}</span>

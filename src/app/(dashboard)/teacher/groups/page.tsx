@@ -104,7 +104,7 @@ export default function GroupsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                     {paginatedGroups.map((group, i) => (
                       <motion.div key={group.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-                        <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-5 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 h-full">
+                        <div className="bg-card border border-border rounded-[24px] p-5  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 h-full">
                           <div className="flex items-start justify-between mb-4">
                             <div>
                               <h3 className="font-semibold text-text">{group.name}</h3>
@@ -168,7 +168,7 @@ export default function GroupsPage() {
               ) : mockWaitingStudents.length === 0 ? (
                 <EmptyState icon={HiOutlineClock} title="لا يوجد طلاب في الانتظار" description="قائمة الانتظار فارغة حالياً" />
               ) : (
-                <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                <div className="bg-card border border-border rounded-[24px] overflow-hidden ">
                   <div className="hidden sm:block overflow-x-auto">
                     <table className="w-full border-collapse">
                       <thead><tr className="border-b border-border">
@@ -211,7 +211,7 @@ export default function GroupsPage() {
               ) : mockFreezeRecords.length === 0 ? (
                 <EmptyState icon={HiOutlinePause} title="لا توجد سجلات تجميد" description="لا يوجد اشتراكات مجمدة حالياً" />
               ) : (
-                <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                <div className="bg-card border border-border rounded-[24px] overflow-hidden ">
                   <div className="hidden sm:block overflow-x-auto">
                     <table className="w-full border-collapse">
                       <thead><tr className="border-b border-border">
@@ -246,7 +246,7 @@ export default function GroupsPage() {
               ) : mockMissedLessons.filter(m => !m.recovered).length === 0 ? (
                 <EmptyState icon={HiOutlineExclamation} title="لا توجد دروس مفقودة" description="جميع الدروس تم تعويضها" />
               ) : (
-                <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                <div className="bg-card border border-border rounded-[24px] overflow-hidden ">
                   <div className="hidden sm:block overflow-x-auto">
                     <table className="w-full border-collapse">
                       <thead><tr className="border-b border-border">
@@ -282,7 +282,7 @@ export default function GroupsPage() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg bg-card/80 backdrop-blur-xl border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.5)] p-6"
+            className="relative w-full max-w-lg bg-card border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.08)] p-6"
           >
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-semibold text-text">إضافة مجموعة جديدة</h2>
@@ -294,12 +294,12 @@ export default function GroupsPage() {
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-1.5">اسم المجموعة</label>
                 <input value={addForm.name} onChange={(e) => setAddForm({ ...addForm, name: e.target.value })} placeholder="مثال: مجموعة A"
-                  className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                  className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-1.5">الكورس</label>
                 <select value={addForm.courseId} onChange={(e) => setAddForm({ ...addForm, courseId: e.target.value })}
-                  className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                  className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 ">
                   <option value="">اختر الكورس</option>
                   {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
                 </select>
@@ -308,12 +308,12 @@ export default function GroupsPage() {
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">السعة</label>
                   <input type="number" value={addForm.capacity} onChange={(e) => setAddForm({ ...addForm, capacity: e.target.value })}
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">القاعة</label>
                   <input value={addForm.classroom} onChange={(e) => setAddForm({ ...addForm, classroom: e.target.value })} placeholder="مثال: قاعة الأندلس"
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
                 </div>
               </div>
               <div className="flex gap-3 pt-2">

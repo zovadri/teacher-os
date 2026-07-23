@@ -132,16 +132,16 @@ export default function QuestionsPage() {
         <StatsCard title="نسبة الإجابة الصحيحة" value={`${stats.avgCorrect}%`} icon={HiOutlineClipboardList} color="success" />
       </motion.div>
 
-      <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-5 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+      <div className="bg-card border border-border rounded-[24px] p-5 ">
         <div className="flex flex-col sm:flex-row gap-3 mb-4">
           <SearchInput value={search} onChange={setSearch} placeholder="بحث عن سؤال..." className="flex-1" />
           <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+            className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
             <option value="">كل الأنواع</option>
             {typeOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
           <select value={difficultyFilter} onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+            className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
             <option value="">كل الصعوبات</option>
             {difficultyOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
           </select>
@@ -213,7 +213,7 @@ export default function QuestionsPage() {
             <div className="sm:hidden space-y-3">
               {filtered.map((q, i) => (
                 <div key={q.id} onClick={() => setDetailQ(q)}
-                  className="bg-card/60 backdrop-blur border border-border rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
+                  className="bg-card border border-border rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
                 >
                   <div className="flex items-start gap-3 mb-2">
                     <input type="checkbox" checked={selectedIds.has(q.id)} onChange={() => { const n = new Set(selectedIds); n.has(q.id) ? n.delete(q.id) : n.add(q.id); setSelectedIds(n) }}
@@ -241,7 +241,7 @@ export default function QuestionsPage() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl bg-card/80 backdrop-blur-xl border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.5)] max-h-[85vh] overflow-y-auto"
+            className="relative w-full max-w-2xl bg-card border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.08)] max-h-[85vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between px-6 pt-6 pb-4 sticky top-0 bg-card/80 backdrop-blur z-10">
               <h2 className="text-lg font-semibold text-text">تفاصيل السؤال</h2>
@@ -317,7 +317,7 @@ export default function QuestionsPage() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-2xl bg-card/80 backdrop-blur-xl border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.5)] max-h-[85vh] overflow-y-auto"
+            className="relative w-full max-w-2xl bg-card border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.08)] max-h-[85vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between px-6 pt-6 pb-4 sticky top-0 bg-card/80 backdrop-blur z-10">
               <h2 className="text-lg font-semibold text-text">{editQ ? "تعديل سؤال" : "إضافة سؤال"}</h2>
@@ -329,20 +329,20 @@ export default function QuestionsPage() {
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-1.5">نص السؤال</label>
                 <textarea value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} placeholder="اكتب نص السؤال هنا..."
-                  className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 min-h-[80px] shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
+                  className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 min-h-[80px]  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">نوع السؤال</label>
                   <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value as Question["type"] })}
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 ">
                     {typeOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">مستوى الصعوبة</label>
                   <select value={form.difficulty} onChange={(e) => setForm({ ...form, difficulty: e.target.value as "easy" | "medium" | "hard" })}
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 ">
                     {difficultyOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
                   </select>
                 </div>
@@ -351,12 +351,12 @@ export default function QuestionsPage() {
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">الدرجة</label>
                   <input type="number" value={form.grade} onChange={(e) => setForm({ ...form, grade: e.target.value })}
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">الكورس</label>
                   <select value={form.courseId} onChange={(e) => setForm({ ...form, courseId: e.target.value })}
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none focus:outline-none focus:ring-2 focus:ring-primary/30 ">
                     <option value="">اختر كورساً</option>
                     {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
                   </select>
@@ -365,12 +365,12 @@ export default function QuestionsPage() {
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-1.5">الوسوم (مفصولة بفواصل)</label>
                 <input value={form.tags} onChange={(e) => setForm({ ...form, tags: e.target.value })} placeholder="نحو, صرف, بلاغة"
-                  className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                  className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-1.5">الشرح (اختياري)</label>
                 <input value={form.explanation} onChange={(e) => setForm({ ...form, explanation: e.target.value })} placeholder="شرح الإجابة الصحيحة"
-                  className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                  className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
               </div>
 
               {form.type === "multiple-choice" && (
@@ -380,7 +380,7 @@ export default function QuestionsPage() {
                     <div key={c.id} className="flex items-center gap-3">
                       <input type="radio" name="mcq-correct" checked={c.isCorrect} onChange={() => setForm({ ...form, mcqChoices: form.mcqChoices.map((ch) => ({ ...ch, isCorrect: ch.id === c.id })) })} className="accent-primary w-4 h-4" />
                       <input value={c.text} onChange={(e) => setForm({ ...form, mcqChoices: form.mcqChoices.map((ch) => ch.id === c.id ? { ...ch, text: e.target.value } : ch) })} placeholder={`الخيار ${i + 1}`}
-                        className="flex-1 bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2 text-sm text-text placeholder-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] transition-all" />
+                        className="flex-1 bg-card border border-border rounded-[16px] px-4 py-2 text-sm text-text placeholder-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/30  transition-all" />
                       {c.isCorrect && <Badge variant="success" size="sm">صحيح</Badge>}
                     </div>
                   ))}
@@ -407,7 +407,7 @@ export default function QuestionsPage() {
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">الإجابة الصحيحة</label>
                   <input value={form.correctAnswer} onChange={(e) => setForm({ ...form, correctAnswer: e.target.value })} placeholder="أدخل الإجابة الصحيحة"
-                    className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
+                    className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
                 </div>
               )}
 

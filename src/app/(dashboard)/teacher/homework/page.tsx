@@ -66,17 +66,17 @@ export default function HomeworkPage() {
       <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
         <SearchInput value={search} onChange={setSearch} placeholder="بحث عن واجب..." className="sm:max-w-xs flex-1" />
         <select value={courseFilter} onChange={(e) => setCourseFilter(e.target.value)}
-          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
           <option value="all">جميع الكورسات</option>
           {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
         </select>
         <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}
-          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
           <option value="all">جميع الأنواع</option>
           {Object.entries(typeCfg).map(([v, c]) => <option key={v} value={v}>{c.label}</option>)}
         </select>
         <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
           <option value="all">جميع الحالات</option>
           {Object.entries(statusCfg).map(([v, c]) => <option key={v} value={v}>{c.label}</option>)}
         </select>
@@ -93,7 +93,7 @@ export default function HomeworkPage() {
             const total = submitted + notSubmitted
             return (
               <motion.div key={hw.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-                <div className="group bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-5 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
+                <div className="group bg-card border border-border rounded-[24px] p-5  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
                   onClick={() => router.push(`/teacher/homework/${hw.id}`)}
                 >
                   <div className="flex items-start justify-between mb-4">

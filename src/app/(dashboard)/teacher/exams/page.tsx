@@ -59,7 +59,7 @@ export default function ExamsPage() {
       <div className="flex flex-col sm:flex-row gap-3">
         <SearchInput value={search} onChange={setSearch} placeholder="بحث عن امتحان..." className="sm:max-w-xs flex-1" />
         <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all appearance-none cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all appearance-none cursor-pointer ">
           {statuses.map((s) => (
             <option key={s} value={s}>{s === "الكل" ? "جميع الحالات" : statusCfg[s]?.label}</option>
           ))}
@@ -74,7 +74,7 @@ export default function ExamsPage() {
             const course = mockCourses.find((c) => c.id === exam.courseId)
             return (
               <motion.div key={exam.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-                <div className="group bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-5 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
+                <div className="group bg-card border border-border rounded-[24px] p-5  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
                   onClick={() => router.push(`/teacher/exams/${exam.id}`)}
                 >
                   <div className="flex items-start justify-between mb-4">

@@ -117,7 +117,7 @@ function LoginForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.5 }}
-          className="bg-card/80 backdrop-blur-xl border border-border rounded-[24px] p-8 shadow-[0_8px_40px_rgba(217,119,6,0.04),inset_0_1px_0_rgba(255,255,255,0.8)]"
+          className="bg-card border border-border rounded-[24px] p-8 shadow-[0_8px_40px_rgba(217,119,6,0.04),inset_0_1px_0_rgba(255,255,255,0.8)]"
         >
           <form onSubmit={handleSubmit} className="space-y-5">
             {sessionExpired && (

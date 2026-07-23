@@ -99,7 +99,7 @@ export default function WalletPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        className="relative overflow-hidden bg-card/60 backdrop-blur-xl border border-finance/20 rounded-[24px] p-6 md:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]"
+        className="relative overflow-hidden bg-card border border-finance/20 rounded-[24px] p-6 md:p-8 "
       >
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]">
           <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-finance blur-3xl" />

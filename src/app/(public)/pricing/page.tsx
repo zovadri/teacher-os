@@ -104,7 +104,7 @@ export default function PricingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`relative p-8 rounded-[24px] border-2 transition-all duration-300 flex flex-col ${isPopular ? "border-primary bg-card shadow-[0_8px_32px_rgba(217,119,6,0.15)] scale-105 md:scale-110" : "border-border bg-card hover:border-primary/20 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5"}`}
+                  className={`relative p-8 rounded-[24px] border-2 transition-all duration-300 flex flex-col ${isPopular ? "border-primary bg-card shadow-[0_8px_32px_rgba(217,119,6,0.15)] scale-105 md:scale-110" : "border-border bg-card hover:border-primary/20  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"}`}
                 >
                   {isPopular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-white text-xs font-medium rounded-full">الأكثر شيوعاً</div>}
                   <div className="mb-2">
@@ -195,7 +195,7 @@ export default function PricingPage() {
               <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
                 <button type="button"
                   onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)}
-                  className="w-full text-right p-5 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
+                  className="w-full text-right p-5 rounded-[24px] border border-border bg-card  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
                 >
                   <span className="font-medium text-sm">{faq.question}</span>
                   <HiChevronDown size={16} className={`text-text-tertiary transition-transform shrink-0 ${faqOpen === faq.id ? "rotate-180" : ""}`} />

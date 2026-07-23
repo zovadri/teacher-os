@@ -435,7 +435,7 @@ function CourseSection() {
         </Button>
       </div>
 
-      <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden">
+      <div className="bg-card border border-border rounded-[24px] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border">
@@ -636,7 +636,7 @@ function VideoSection() {
         </Card>
       </div>
 
-      <div className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden">
+      <div className="bg-card border border-border rounded-[24px] overflow-hidden">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border">

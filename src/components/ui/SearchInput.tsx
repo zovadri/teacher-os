@@ -30,7 +30,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
           value={value}
           onChange={e => handleChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-card/70 backdrop-blur-sm border border-border rounded-[14px] pr-10 pl-9 py-2.5 text-sm text-text placeholder-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/30 transition-all duration-200"
+          className="w-full bg-card border border-border rounded-[14px] pr-10 pl-9 py-2.5 text-sm text-text placeholder-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/30 transition-all duration-200"
         />
         {value && (
           <button onClick={() => handleChange("")} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text transition-colors">

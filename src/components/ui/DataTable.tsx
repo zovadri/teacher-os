@@ -52,7 +52,7 @@ export function DataTable<T extends Record<string, any>>({ data, columns, pageSi
           value={search}
           onChange={e => { setSearch(e.target.value); setPage(1) }}
           placeholder="بحث..."
-          className="w-full bg-card/70 backdrop-blur-sm border border-border rounded-[14px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/30"
+          className="w-full bg-card border border-border rounded-[14px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/15 focus:border-primary/30"
         />
       )}
       <div className="w-full overflow-auto rounded-[16px] border border-border">

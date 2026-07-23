@@ -156,7 +156,7 @@ export default function FinanceDashboardPage() {
             <CardContent>
               <div className="space-y-2">
                 {debtsData.map((d, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-[16px] bg-card/40 backdrop-blur border border-border">
+                  <div key={i} className="flex items-center justify-between p-3 rounded-[16px] bg-card border border-border">
                     <div>
                       <span className="text-sm font-medium text-text">{d.name}</span>
                       <span className="text-xs text-text-tertiary mr-2">{d.days} يوم</span>

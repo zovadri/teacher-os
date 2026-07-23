@@ -66,7 +66,7 @@ export default function AboutPage() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative">
-              <div className="relative rounded-[24px] overflow-hidden border border-border shadow-[0_8px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)]">
+              <div className="relative rounded-[24px] overflow-hidden border border-border ">
                 <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=85" alt="TeacherOS" className="w-full h-auto" />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
               </div>
@@ -79,7 +79,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {statsData.map((stat, i) => (
-              <motion.div key={stat.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-6 text-center shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300">
+              <motion.div key={stat.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-6 text-center  hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300">
                 <stat.icon className="text-primary mx-auto mb-2" size={28} />
                 <p className="text-3xl md:text-4xl font-bold text-primary mb-1">{counts[stat.key] || 0}+</p>
                 <p className="text-sm text-text-secondary">{stat.label}</p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeUp}>
-              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=85" alt="رؤيتنا" className="rounded-[24px] w-full border border-border shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]" />
+              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=85" alt="رؤيتنا" className="rounded-[24px] w-full border border-border " />
             </motion.div>
             <motion.div {...fadeUp}>
               <span className="text-primary text-sm font-medium mb-2 block">نبذة عنا</span>
@@ -116,7 +116,7 @@ export default function AboutPage() {
             {mockCmsContent.aboutValues.map((value, i) => {
               const Icon = valuesIcons[i % valuesIcons.length]
               return (
-                <motion.div key={value.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group bg-card border border-border rounded-[24px] p-6 text-center transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
+                <motion.div key={value.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group bg-card border border-border rounded-[24px] p-6 text-center transition-all duration-300  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-primary/20 transition-colors">
                     <Icon className="text-primary" size={28} />
                   </div>
@@ -138,7 +138,7 @@ export default function AboutPage() {
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {mockTeamMembers.map((member, i) => (
-              <motion.div key={member.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-6 text-center transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
+              <motion.div key={member.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-6 text-center transition-all duration-300  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
                 <img src={member.image} alt={member.name} className="w-20 h-20 rounded-full mx-auto mb-4 bg-card object-cover border-2 border-border" />
                 <h3 className="font-semibold mb-1">{member.name}</h3>
                 <p className="text-xs text-primary font-medium mb-3">{member.role}</p>

@@ -27,7 +27,7 @@ export function Toast({ open, onClose, message, type = "info" }: ToastProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           className={cn(
-            "fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-4 py-3 rounded-[14px] border shadow-lg backdrop-blur-xl min-w-[300px]",
+            "fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-4 py-3 rounded-[14px] border shadow-lg  min-w-[300px]",
             styles[type],
           )}
         >

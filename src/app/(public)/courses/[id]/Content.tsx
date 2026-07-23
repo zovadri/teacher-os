@@ -95,7 +95,7 @@ export default function CourseDetailPage() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
-              <div className="relative rounded-[24px] overflow-hidden border border-border shadow-[0_8px_40px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)]">
+              <div className="relative rounded-[24px] overflow-hidden border border-border ">
                 <img src={course.banner || course.image} alt={course.title} className="w-full h-auto" />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
               </div>
@@ -113,7 +113,7 @@ export default function CourseDetailPage() {
                 <p className="text-text-secondary leading-relaxed">{course.description || course.shortDescription}</p>
               </motion.div>
 
-              <motion.div {...fadeUp} className="p-6 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+              <motion.div {...fadeUp} className="p-6 rounded-[24px] border border-border bg-card ">
                 <h2 className="text-xl font-bold mb-4">المدرس</h2>
                 <div className="flex items-center gap-4">
                   <img src={mockTeacher.avatar} alt={mockTeacher.name} className="w-16 h-16 rounded-full bg-surface-tertiary" />
@@ -139,7 +139,7 @@ export default function CourseDetailPage() {
                 {chapters.length > 0 ? (
                   <div className="space-y-3">
                     {chapters.map((chapter) => (
-                      <div key={chapter.id} className="rounded-[24px] border border-border overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                      <div key={chapter.id} className="rounded-[24px] border border-border overflow-hidden ">
                         <Button onClick={() => toggleChapter(chapter.id)} className="w-full flex items-center justify-between p-5 bg-card hover:bg-surface-secondary transition-colors text-right">
                           <div className="flex items-center gap-3">
                             <HiChevronDown size={18} className={`text-text-tertiary transition-transform ${expandedChapters.includes(chapter.id) ? "rotate-180" : ""}`} />
@@ -179,7 +179,7 @@ export default function CourseDetailPage() {
 
             <div className="space-y-6">
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="sticky top-28 space-y-6">
-                <div className="p-6 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                <div className="p-6 rounded-[24px] border border-border bg-card ">
                   <div className="text-center mb-6">
                     {course.discountPrice ? (
                       <>
@@ -194,7 +194,7 @@ export default function CourseDetailPage() {
                   <Button className="w-full py-3 border border-border text-text-secondary font-medium rounded-[16px] hover:bg-surface-tertiary hover:text-text transition-all text-[15px]">تجربة مجانية</Button>
                 </div>
 
-                <div className="p-6 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                <div className="p-6 rounded-[24px] border border-border bg-card ">
                   <h3 className="font-semibold mb-4">معلومات الكورس</h3>
                   <div className="space-y-3">
                     {[
@@ -213,7 +213,7 @@ export default function CourseDetailPage() {
                   </div>
                 </div>
 
-                <div className="p-6 rounded-[24px] border border-border bg-card shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] text-center">
+                <div className="p-6 rounded-[24px] border border-border bg-card  text-center">
                   <HiAcademicCap className="mx-auto text-primary mb-3" size={32} />
                   <h3 className="font-semibold mb-2">شهادة معتمدة</h3>
                   <p className="text-xs text-text-secondary">احصل على شهادة إتمام معتمدة بعد إنهاء الكورس.</p>
@@ -237,7 +237,7 @@ export default function CourseDetailPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {relatedCourses.map((rc, i) => (
                 <motion.div key={rc.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>
-                  <Link href={`/courses/${rc.id}`} className="group block bg-card rounded-[24px] border border-border overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:border-primary/20 transition-all duration-300">
+                  <Link href={`/courses/${rc.id}`} className="group block bg-card rounded-[24px] border border-border overflow-hidden  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20 transition-all duration-300">
                     <div className="relative h-40 overflow-hidden">
                       <img src={rc.image} alt={rc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       <div className="absolute top-3 right-3"><Badge variant="neutral" size="sm">{rc.grade}</Badge></div>

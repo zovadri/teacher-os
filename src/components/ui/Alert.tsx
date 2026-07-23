@@ -27,7 +27,7 @@ export function Alert({ children, variant = "info", className }: AlertProps) {
   const Icon = icons[variant]
   return (
     <div className={cn(
-      "flex items-start gap-3 px-4 py-3 rounded-[14px] border backdrop-blur-xl",
+      "flex items-start gap-3 px-4 py-3 rounded-[14px] border ",
       styles[variant],
       className,
     )}>

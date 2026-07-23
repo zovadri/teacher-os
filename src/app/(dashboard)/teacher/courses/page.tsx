@@ -58,11 +58,11 @@ export default function CoursesPage() {
       <div className="flex flex-col sm:flex-row gap-3">
         <SearchInput value={search} onChange={setSearch} placeholder="بحث عن كورس..." className="sm:max-w-xs flex-1" />
         <select value={gradeFilter} onChange={(e) => setGradeFilter(e.target.value)}
-          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
           {grades.map((g) => <option key={g} value={g}>{g === "الكل" ? "جميع الصفوف" : g}</option>)}
         </select>
         <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2.5 bg-card/60 backdrop-blur border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+          className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
           {statuses.map((s) => <option key={s} value={s}>{s === "الكل" ? "جميع الحالات" : statusCfg[s]?.label}</option>)}
         </select>
       </div>
@@ -73,7 +73,7 @@ export default function CoursesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           {filtered.map((course, i) => (
             <motion.div key={course.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
-              <div className="group bg-card/60 backdrop-blur-xl border border-border rounded-[24px] overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
+              <div className="group bg-card border border-border rounded-[24px] overflow-hidden  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
                 onClick={() => router.push(`/teacher/courses/${course.id}`)}
               >
                 <div className="relative h-44 overflow-hidden">

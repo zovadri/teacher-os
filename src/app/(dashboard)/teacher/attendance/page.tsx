@@ -158,7 +158,7 @@ export default function AttendanceHubPage() {
       </div>
 
       {activeMode === "qr" && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-border rounded-[24px] p-6 ">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-text">مسح QR كود</h3>
             <Badge variant="primary" size="sm">كاميرا</Badge>
@@ -189,13 +189,13 @@ export default function AttendanceHubPage() {
       )}
 
       {activeMode === "code" && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-border rounded-[24px] p-6 ">
           <h3 className="text-lg font-semibold text-text mb-4">بحث بكود الطالب</h3>
           <div className="flex gap-3 mb-4">
             <div className="flex-1 relative">
               <HiOutlineSearch className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary pointer-events-none" />
               <input placeholder="أدخل كود الطالب أو رقم الهاتف" value={codeInput} onChange={(e) => setCodeInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleCodeSearch()}
-                className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] pr-10 pl-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
+                className="w-full bg-card border border-border rounded-[16px] pr-10 pl-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
             </div>
             <Button onClick={handleCodeSearch}>بحث</Button>
           </div>
@@ -222,12 +222,12 @@ export default function AttendanceHubPage() {
       )}
 
       {activeMode === "manual" && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] space-y-4">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-border rounded-[24px] p-6  space-y-4">
           <h3 className="text-lg font-semibold text-text">تسجيل حضور يدوي</h3>
           <div>
             <label className="block text-sm font-medium text-text-secondary mb-1.5">اختر الطالب</label>
             <select value={manualStudent} onChange={(e) => setManualStudent(e.target.value)}
-              className="w-full bg-card/60 backdrop-blur border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all">
+              className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text appearance-none  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all">
               <option value="">اختر طالباً...</option>
               {mockStudents.map((s) => <option key={s.id} value={s.id}>{s.name} - {s.grade}</option>)}
             </select>
@@ -249,7 +249,7 @@ export default function AttendanceHubPage() {
       )}
 
       {activeMode === "employee" && (
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-border rounded-[24px] p-6 ">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-text">حضور الموظفين</h3>
             <Badge variant="info" size="sm">تسجيل دخول/خروج</Badge>

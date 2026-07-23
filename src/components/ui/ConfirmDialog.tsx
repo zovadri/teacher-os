@@ -54,7 +54,7 @@ export function ConfirmDialog({ children }: { children: React.ReactNode }) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative bg-card/90 backdrop-blur-xl border border-border rounded-[20px] shadow-2xl p-6 max-w-sm w-full"
+              className="relative bg-card border border-border rounded-[20px] shadow-[0_24px_80px_rgba(0,0,0,0.08)] p-6 max-w-sm w-full"
             >
               <div className="w-12 h-12 rounded-[14px] bg-error/10 border border-error/20 flex items-center justify-center mb-4">
                 <HiExclamationCircle className="w-6 h-6 text-error" />

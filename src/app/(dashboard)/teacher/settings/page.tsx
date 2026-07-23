@@ -76,7 +76,7 @@ const socialPlatforms = [
 
 function Toggle({ enabled, onChange, label, description }: { enabled: boolean; onChange: (v: boolean) => void; label: string; description?: string }) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-[16px] bg-card/40 backdrop-blur border border-border">
+    <div className="flex items-center justify-between p-4 rounded-[16px] bg-card border border-border">
       <div>
         <p className="text-sm font-medium text-text">{label}</p>
         {description && <p className="text-xs text-text-tertiary mt-0.5">{description}</p>}
@@ -447,7 +447,7 @@ export default function SettingsPage() {
                         const Icon = platform.icon
                         return (
                           <a key={platform.key} href={url} target="_blank" rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-[14px] bg-card/60 backdrop-blur border border-border hover:border-primary/30 hover:bg-primary/5 transition-all"
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-[14px] bg-card border border-border hover:border-primary/30 hover:bg-primary/5 transition-all"
                           >
                             <Icon size={18} className={platform.color} />
                             <span className="text-sm text-text">{platform.label}</span>
