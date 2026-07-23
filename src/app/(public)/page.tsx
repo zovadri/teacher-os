@@ -71,7 +71,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/8 text-primary text-xs font-medium rounded-full mb-6 border border-primary/15 backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/8 text-primary text-xs font-medium rounded-full mb-6 border border-primary/15"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 <span className="tracking-wider">Enterprise Education Platform</span>
@@ -102,7 +102,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/courses"
-                  className="px-7 py-3.5 bg-card/60 backdrop-blur-sm text-text-secondary border border-border font-medium rounded-[16px] hover:bg-card hover:text-text hover:border-primary/20 transition-all duration-300 text-[15px]"
+                  className="px-7 py-3.5 bg-card text-text-secondary border border-border/60 font-medium rounded-[16px] hover:text-text hover:border-primary/20 transition-all duration-300 text-[15px]"
                 >
                   استعرض الكورسات
                 </Link>
@@ -133,14 +133,14 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="relative"
             >
-              <div className="relative rounded-[24px] overflow-hidden border border-border shadow-[0_8px_40px_rgba(217,119,6,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] bg-card/80 backdrop-blur-sm">
+              <div className="relative rounded-[24px] overflow-hidden border border-border/60 bg-card">
                 <img
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=85"
                   alt="TeacherOS"
                   className="w-full h-auto"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 bg-card/40 backdrop-blur-md rounded-[16px] p-3 border border-border/40">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 bg-card/80 rounded-[16px] p-3 border border-border/40">
                   <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center border border-primary/20">
                     <HiPlay className="text-primary ml-0.5" size={18} />
                   </div>
@@ -238,7 +238,7 @@ export default function HomePage() {
                 <div className="relative h-44 overflow-hidden">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/40 to-transparent" />
-                  <div className="absolute top-3 right-3 px-2.5 py-1 bg-surface/70 backdrop-blur-md text-[11px] font-medium rounded-[10px] border border-border/40">{course.grade}</div>
+                  <div className="absolute top-3 right-3 px-2.5 py-1 bg-surface/90 text-[11px] font-medium rounded-[10px] border border-border/40">{course.grade}</div>
                   {course.discountPrice && (
                     <div className="absolute top-3 left-3 px-2.5 py-1 bg-primary text-white text-[11px] font-medium rounded-[10px] shadow-[0_0_16px_rgba(217,119,6,0.2)]">خصم</div>
                   )}

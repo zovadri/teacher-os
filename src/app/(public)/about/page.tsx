@@ -47,7 +47,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-              <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6 backdrop-blur border border-primary/20">
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full mb-6 border border-primary/20">
                 <HiAcademicCap size={14} /> من نحن
               </span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] mb-6">
