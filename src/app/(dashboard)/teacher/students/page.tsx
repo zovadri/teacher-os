@@ -94,7 +94,7 @@ export default function StudentsPage() {
                 className={cn(
                   "px-4 py-1.5 rounded-[12px] text-xs font-medium transition-all border backdrop-blur-xl",
                   activeChip === chip
-                    ? "bg-primary/20 border-primary/30 text-primary shadow-[0_0_16px_rgba(91,124,255,0.15)]"
+                    ? "bg-primary/20 border-primary/30 text-primary shadow-[0_0_16px_rgba(79,70,229,0.15)]"
                     : "bg-card/40 border-border text-text-secondary hover:border-primary/30 hover:text-text"
                 )}
               >{chip}</button>

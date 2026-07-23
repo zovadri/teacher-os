@@ -43,7 +43,7 @@ export default function CourseDetailPage() {
           <HiAcademicCap className="mx-auto text-text-tertiary mb-4" size={64} />
           <h2 className="text-2xl font-bold mb-2">الكورس غير موجود</h2>
           <p className="text-text-secondary mb-6">عذراً، لم نجد الكورس الذي تبحث عنه.</p>
-          <Link href="/courses" className="px-6 py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(91,124,255,0.15)] hover:shadow-[0_0_30px_rgba(91,124,255,0.3)] hover:brightness-110 transition-all text-[15px]">العودة للكورسات</Link>
+          <Link href="/courses" className="px-6 py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(79,70,229,0.15)] hover:shadow-[0_0_30px_rgba(79,70,229,0.3)] hover:brightness-110 transition-all text-[15px]">العودة للكورسات</Link>
         </div>
       </div>
     )
@@ -190,7 +190,7 @@ export default function CourseDetailPage() {
                       <span className="text-3xl font-bold text-primary">{course.isFree ? "مجاني" : formatCurrency(course.price)}</span>
                     )}
                   </div>
-                  <Button className="w-full py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(91,124,255,0.15)] hover:shadow-[0_0_30px_rgba(91,124,255,0.3)] hover:brightness-110 text-[15px] transition-all mb-3">اشترك الآن</Button>
+                  <Button className="w-full py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(79,70,229,0.15)] hover:shadow-[0_0_30px_rgba(79,70,229,0.3)] hover:brightness-110 text-[15px] transition-all mb-3">اشترك الآن</Button>
                   <Button className="w-full py-3 border border-border text-text-secondary font-medium rounded-[16px] hover:bg-surface-tertiary hover:text-text transition-all text-[15px]">تجربة مجانية</Button>
                 </div>
 
@@ -262,7 +262,7 @@ export default function CourseDetailPage() {
 
       <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-[#3B5FEF] p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(91,124,255,0.2)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-[#3B5FEF] p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(79,70,229,0.2)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-[28px] font-bold mb-4">ابدأ رحلة التعلم الآن</h2>

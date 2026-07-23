@@ -56,7 +56,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 py-12">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,92,252,0.06),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(79,70,229,0.06),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(14,165,233,0.03),transparent_50%)]" />
       <div className="absolute top-1/3 -left-32 w-96 h-96 bg-primary/4 rounded-full blur-[120px]" />
       <div className="absolute bottom-1/3 -right-32 w-96 h-96 bg-info/3 rounded-full blur-[120px]" />
@@ -72,7 +72,7 @@ export default function RegisterPage() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white mb-4 shadow-[0_0_30px_rgba(124,92,252,0.15)]"
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white mb-4 shadow-[0_0_30px_rgba(79,70,229,0.15)]"
           >
             <HiUserCircle className="w-8 h-8" />
           </motion.div>

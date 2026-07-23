@@ -39,7 +39,7 @@ const students: StudentGrade[] = [
 
 const gradeDist = [
   { range: "A (90%+)", count: 3, fill: "#16C784" },
-  { range: "B (80-89%)", count: 3, fill: "#5B7CFF" },
+  { range: "B (80-89%)", count: 3, fill: "#4F46E5" },
   { range: "C (70-79%)", count: 2, fill: "#F5B301" },
   { range: "D (60-69%)", count: 1, fill: "#FF5C74" },
   { range: "F (-60%)", count: 1, fill: "#FF5C74" },
@@ -311,7 +311,7 @@ export default function GradebookPage() {
                             <Tooltip
                               contentStyle={{ background: "#151D2F", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "16px", color: "#FFFFFF", fontSize: "13px", backdropFilter: "blur(12px)" }}
                             />
-                            <Line type="monotone" dataKey="score" stroke="#5B7CFF" strokeWidth={2} dot={{ r: 4, fill: "#5B7CFF" }} />
+                            <Line type="monotone" dataKey="score" stroke="#4F46E5" strokeWidth={2} dot={{ r: 4, fill: "#4F46E5" }} />
                           </LineChart>
                         </ResponsiveContainer>
                       </div>

@@ -84,7 +84,7 @@ function Toggle({ enabled, onChange, label, description }: { enabled: boolean; o
       <button type="button" onClick={() => onChange(!enabled)}
         className={cn(
           "relative w-11 h-6 rounded-full transition-all duration-250 shrink-0",
-          enabled ? "bg-primary shadow-[0_0_12px_rgba(91,124,255,0.3)]" : "bg-card border border-border",
+          enabled ? "bg-primary shadow-[0_0_12px_rgba(79,70,229,0.3)]" : "bg-card border border-border",
         )}
       >
         <span className={cn(

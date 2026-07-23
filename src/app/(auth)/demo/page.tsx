@@ -191,7 +191,7 @@ export default function DemoPage() {
                       <button type="button"
                         onClick={() => handleDirectLogin(account.role, account.id)}
                         disabled={loggingIn === account.id}
-                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-[16px] text-sm font-medium hover:brightness-110 hover:shadow-[0_0_30px_rgba(91,124,255,0.3)] transition-all duration-200 active:scale-[0.97] disabled:opacity-70 shadow-[0_0_20px_rgba(91,124,255,0.15)]"
+                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-[16px] text-sm font-medium hover:brightness-110 hover:shadow-[0_0_30px_rgba(79,70,229,0.3)] transition-all duration-200 active:scale-[0.97] disabled:opacity-70 shadow-[0_0_20px_rgba(79,70,229,0.15)]"
                       >
                         {loggingIn === account.id ? (
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

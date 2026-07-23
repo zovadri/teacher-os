@@ -43,7 +43,7 @@ export function Modal({ open, onClose, title, children, className, size = "md" }
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={onClose}
           />
           <motion.div
@@ -52,7 +52,7 @@ export function Modal({ open, onClose, title, children, className, size = "md" }
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className={cn(
-              "relative w-full bg-card/90 backdrop-blur-2xl border border-border rounded-[20px] shadow-[0_24px_80px_rgba(124,92,252,0.08)]",
+              "relative w-full bg-card/90 backdrop-blur-2xl border border-border rounded-[20px] shadow-[0_24px_80px_rgba(79,70,229,0.06)]",
               sizeStyles[size],
               className,
             )}

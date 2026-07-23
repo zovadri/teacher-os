@@ -77,7 +77,7 @@ export default function FAQPage() {
           <div className="flex items-center gap-2 whitespace-nowrap">
             <HiTag className="text-text-tertiary ml-2 shrink-0" size={16} />
             {categories.map((cat) => (
-              <button type="button" key={cat} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-[16px] transition-all ${activeCategory === cat ? "bg-primary text-white shadow-[0_0_12px_rgba(91,124,255,0.3)]" : "bg-card text-text-secondary border border-border hover:border-primary/20"}`}>
+              <button type="button" key={cat} onClick={() => setActiveCategory(cat)} className={`px-4 py-1.5 text-xs font-medium rounded-[16px] transition-all ${activeCategory === cat ? "bg-primary text-white shadow-[0_0_12px_rgba(79,70,229,0.3)]" : "bg-card text-text-secondary border border-border hover:border-primary/20"}`}>
                 {cat}
               </button>
             ))}
@@ -138,7 +138,7 @@ export default function FAQPage() {
               فريق الدعم الفني جاهز لمساعدتك. تواصل معنا وسنرد عليك في أقرب وقت ممكن.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/contact" className="px-6 py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(91,124,255,0.15)] hover:shadow-[0_0_30px_rgba(91,124,255,0.3)] hover:brightness-110 transition-all text-[15px]">
+              <Link href="/contact" className="px-6 py-3 bg-primary text-white font-medium rounded-[16px] shadow-[0_0_20px_rgba(79,70,229,0.15)] hover:shadow-[0_0_30px_rgba(79,70,229,0.3)] hover:brightness-110 transition-all text-[15px]">
                 اتصل بنا
               </Link>
               <a href="tel:+201000000000" className="px-6 py-3 border border-border text-text-secondary font-medium rounded-[16px] hover:bg-surface-tertiary hover:text-text transition-all text-[15px] inline-flex items-center gap-2">

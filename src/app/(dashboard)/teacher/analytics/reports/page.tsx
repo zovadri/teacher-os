@@ -137,8 +137,8 @@ export default function ReportsPage() {
                     <AreaChart data={previewData as Record<string, unknown>[]}>
                       <defs>
                         <linearGradient id="previewGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#5B7CFF" stopOpacity={0.3} />
-                          <stop offset="95%" stopColor="#5B7CFF" stopOpacity={0} />
+                          <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.3} />
+                          <stop offset="95%" stopColor="#4F46E5" stopOpacity={0} />
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" vertical={false} />
@@ -154,7 +154,7 @@ export default function ReportsPage() {
                           backdropFilter: "blur(12px)",
                         }}
                       />
-                      <Area type="monotone" dataKey={selectedReport === "revenue" ? "revenue" : "total"} stroke="#5B7CFF" fill="url(#previewGrad)" strokeWidth={2} />
+                      <Area type="monotone" dataKey={selectedReport === "revenue" ? "revenue" : "total"} stroke="#4F46E5" fill="url(#previewGrad)" strokeWidth={2} />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>

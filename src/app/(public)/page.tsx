@@ -63,7 +63,7 @@ export default function HomePage() {
     <>
       <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
         <FloatingOrbs />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(124,92,252,0.06),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(79,70,229,0.05),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}>
@@ -79,9 +79,9 @@ export default function HomePage() {
                 <span className="text-[10px] opacity-60">v3.0</span>
               </motion.div>
               <h1 className="text-[40px] sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-4 tracking-tight">
-                <span className="bg-gradient-to-r from-text via-text to-primary bg-clip-text text-transparent">نظام تشغيل</span>
+                <span className="bg-gradient-to-l from-text via-text to-primary bg-clip-text text-transparent">نظام تشغيل</span>
                 <br />
-                <span className="bg-gradient-to-r from-primary to-info bg-clip-text text-transparent">المدرس</span>
+                <span className="bg-gradient-to-l from-primary via-primary-light to-info bg-clip-text text-transparent">المدرس</span>
                 <span className="text-primary">.</span>
               </h1>
               <p className="text-lg sm:text-xl text-text-secondary font-normal mb-3 max-w-xl leading-relaxed">
@@ -93,7 +93,7 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/demo"
-                  className="group relative px-7 py-3.5 bg-primary text-white font-medium rounded-[16px] overflow-hidden transition-all duration-300 text-[15px] shadow-[0_4px_24px_rgba(124,92,252,0.25)] hover:shadow-[0_8px_40px_rgba(124,92,252,0.35)] hover:-translate-y-0.5"
+                  className="group relative px-7 py-3.5 bg-primary text-white font-medium rounded-[16px] overflow-hidden transition-all duration-300 text-[15px] shadow-[0_4px_24px_rgba(79,70,229,0.2)] hover:shadow-[0_8px_40px_rgba(79,70,229,0.3)] hover:-translate-y-0.5"
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     جرب المنصة مجاناً
@@ -133,7 +133,7 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               className="relative"
             >
-              <div className="relative rounded-[24px] overflow-hidden border border-border shadow-[0_8px_40px_rgba(124,92,252,0.06),inset_0_1px_0_rgba(255,255,255,0.8)] bg-card/80 backdrop-blur-sm">
+              <div className="relative rounded-[24px] overflow-hidden border border-border shadow-[0_8px_40px_rgba(79,70,229,0.04),0_1px_0_rgba(255,255,255,0.9)_inset] bg-card/80 backdrop-blur-sm">
                 <img
                   src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=85"
                   alt="TeacherOS"
@@ -191,7 +191,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(124,92,252,0.02),transparent_70%)] border-y border-border/20">
+      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.02),transparent_70%)] border-y border-border/20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...stagger} className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {[
@@ -233,14 +233,14 @@ export default function HomePage() {
               <motion.div
                 key={course.id}
                 variants={itemFade}
-                className="group bg-card/70 backdrop-blur-sm rounded-[20px] border border-border overflow-hidden hover:border-primary/20 hover:shadow-[0_8px_40px_rgba(124,92,252,0.06)] hover:-translate-y-1 transition-all duration-500"
+                className="group bg-card/70 backdrop-blur-sm rounded-[20px] border border-border overflow-hidden hover:border-primary/20 hover:shadow-[0_8px_40px_rgba(79,70,229,0.06)] hover:-translate-y-1 transition-all duration-500"
               >
                 <div className="relative h-44 overflow-hidden">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/40 to-transparent" />
                   <div className="absolute top-3 right-3 px-2.5 py-1 bg-surface/70 backdrop-blur-md text-[11px] font-medium rounded-[10px] border border-border/40">{course.grade}</div>
                   {course.discountPrice && (
-                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-primary text-white text-[11px] font-medium rounded-[10px] shadow-[0_0_16px_rgba(124,92,252,0.2)]">خصم</div>
+                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-primary text-white text-[11px] font-medium rounded-[10px] shadow-[0_0_16px_rgba(79,70,229,0.2)]">خصم</div>
                   )}
                 </div>
                 <div className="p-6">
@@ -344,12 +344,12 @@ export default function HomePage() {
                 variants={itemFade}
                 className={`relative bg-card/70 backdrop-blur-sm border rounded-[20px] p-7 transition-all duration-500 ${
                   plan.popular
-                    ? "border-primary/30 shadow-[0_8px_40px_rgba(124,92,252,0.08)] hover:shadow-[0_12px_48px_rgba(124,92,252,0.12)]"
-                    : "border-border hover:border-primary/20 hover:shadow-[0_8px_40px_rgba(124,92,252,0.06)] hover:-translate-y-1"
+                    ? "border-primary/30 shadow-[0_8px_40px_rgba(79,70,229,0.08)] hover:shadow-[0_12px_48px_rgba(79,70,229,0.12)]"
+                    : "border-border hover:border-primary/20 hover:shadow-[0_8px_40px_rgba(79,70,229,0.06)] hover:-translate-y-1"
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-info text-white text-xs font-medium rounded-full shadow-[0_0_16px_rgba(124,92,252,0.3)]">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-info text-white text-xs font-medium rounded-full shadow-[0_0_16px_rgba(79,70,229,0.3)]">
                     الأكثر شيوعاً
                   </div>
                 )}
@@ -371,7 +371,7 @@ export default function HomePage() {
                   href="/register"
                   className={`block w-full text-center py-3 rounded-[16px] font-medium transition-all text-[15px] ${
                     plan.popular
-                      ? "bg-primary text-white shadow-[0_4px_20px_rgba(124,92,252,0.2)] hover:shadow-[0_8px_30px_rgba(124,92,252,0.3)] hover:-translate-y-0.5"
+                      ? "bg-primary text-white shadow-[0_4px_20px_rgba(79,70,229,0.2)] hover:shadow-[0_8px_30px_rgba(79,70,229,0.3)] hover:-translate-y-0.5"
                       : "border border-border text-text-secondary hover:bg-card hover:text-text hover:border-primary/20"
                   }`}
                 >
@@ -383,7 +383,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(124,92,252,0.02),transparent_70%)] border-y border-border/20">
+      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.02),transparent_70%)] border-y border-border/20">
         <div className="max-w-3xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-14">
             <span className="text-primary text-sm font-medium mb-3 block tracking-wider uppercase">FAQ</span>
@@ -429,9 +429,9 @@ export default function HomePage() {
 
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary via-primary-dark to-[#4B3FBF] p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_48px_rgba(124,92,252,0.15)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary via-primary-dark to-primary-700 p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_48px_rgba(79,70,229,0.15)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.1),transparent_60%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(124,92,252,0.15),transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(79,70,229,0.15),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-[32px] sm:text-[40px] font-bold mb-4 leading-[1.1]">مستعد لتطوير مسيرتك التعليمية؟</h2>
               <p className="text-white/70 mb-8 max-w-xl mx-auto text-[15px] leading-relaxed">
