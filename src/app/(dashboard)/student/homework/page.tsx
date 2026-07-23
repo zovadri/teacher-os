@@ -65,11 +65,11 @@ export default function StudentHomeworkPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="الواجبات" subtitle="تابع واجباتك المنزلية وقدمها في الوقت المحدد" />
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6"
         >
           <StatsCard title="إجمالي الواجبات" value={total} icon={HiOutlineClipboardList} color="primary" />
           <StatsCard title="تم التسليم" value={submitted} icon={HiOutlineCheckCircle} color="success" />
@@ -110,7 +110,7 @@ export default function StudentHomeworkPage() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="bg-surface border border-border rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group"
+                    className="bg-surface border border-border/60 rounded-xl p-5 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer group"
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">

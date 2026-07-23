@@ -308,7 +308,7 @@ export default function StudentExamPage() {
       {!isPaused && (
         <div className="flex-1 flex">
           <div className="flex-1 flex flex-col min-w-0">
-            <div className="flex-1 p-4 md:p-6 lg:p-8">
+            <div className="flex-1 p-6 md:p-8 lg:p-10">
               <div className="max-w-3xl mx-auto">
                 <AnimatePresence mode="wait">
                   <QuestionCard
@@ -321,7 +321,7 @@ export default function StudentExamPage() {
               </div>
             </div>
 
-            <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-4">
+            <div className="sticky bottom-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 p-5">
               <div className="max-w-3xl mx-auto flex items-center justify-between">
                 <Button onClick={() => setCurrentQuestion((prev) => Math.max(0, prev - 1))}
                   disabled={currentQuestion === 0}
@@ -389,7 +389,7 @@ export default function StudentExamPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="max-w-sm w-full p-6 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl"
+              className="max-w-sm w-full p-8 rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl"
             >
               <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">تأكيد تسليم الامتحان</h2>
               <p className="text-sm text-gray-500 mb-4">يرجى مراجعة ملخص الإجابات قبل التقديم</p>

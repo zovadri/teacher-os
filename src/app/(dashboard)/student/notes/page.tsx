@@ -82,7 +82,7 @@ export default function NotesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
       <DashboardHeader />
-      <div className="p-4 md:p-6 lg:p-8 max-w-5xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 lg:p-10 max-w-5xl mx-auto space-y-6">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-2xl font-bold text-text">المكتبة</h1>
           <p className="text-sm text-text-secondary mt-1">مذكرات، كتب، فيديوهات، ومراجعات لمساعدتك على التفوق</p>
@@ -110,7 +110,7 @@ export default function NotesPage() {
           </select>
         </div>
 
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filtered.map((material, i) => {
               const Icon = iconMap[material.type]
@@ -118,7 +118,7 @@ export default function NotesPage() {
               return (
                 <motion.div key={material.id} layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ delay: i * 0.02 }}
-                  className="bg-surface rounded-2xl border border-border p-5 hover:border-primary/30 hover:shadow-sm transition-all flex flex-col">
+                  className="bg-surface rounded-2xl border border-border/60 p-6 hover:border-primary/30 hover:shadow-sm transition-all flex flex-col">
                   <div className="flex items-start justify-between mb-3">
                     <div className="w-11 h-11 rounded-xl bg-surface-secondary flex items-center justify-center shrink-0">
                       <Icon className="w-5 h-5 text-primary" />

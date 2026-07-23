@@ -278,12 +278,12 @@ export default function StudentLearningPathPage() {
         subtitle="تابع تقدمك في مسار التعلم الخاص بك"
       />
 
-      <div className="p-4 md:p-6 max-w-7xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-6">
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-surface border border-border rounded-2xl p-4 md:p-6"
+          className="bg-surface border border-border/60 rounded-2xl p-6 md:p-8"
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
             <div>
@@ -334,7 +334,7 @@ export default function StudentLearningPathPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-surface border border-border rounded-2xl p-4 md:p-6 overflow-x-auto"
+          className="bg-surface border border-border/60 rounded-2xl p-6 md:p-8 overflow-x-auto"
         >
           <h3 className="text-lg font-bold text-text mb-4 flex items-center gap-2">
             <HiOutlineAcademicCap size={20} className="text-primary" />
@@ -470,7 +470,7 @@ export default function StudentLearningPathPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-surface border border-border rounded-2xl p-4 md:p-6"
+          className="bg-surface border border-border/60 rounded-2xl p-6 md:p-8"
         >
           <h3 className="text-lg font-bold text-text mb-3 flex items-center gap-2">
             <HiOutlineChartBar size={20} className="text-primary" />

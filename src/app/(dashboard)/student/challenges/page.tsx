@@ -254,9 +254,9 @@ export default function ChallengesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
       <DashboardHeader title="تحديات الطلاب" subtitle="تنافس مع زملائك في مسابقات تعليمية" />
-      <div className="p-4 md:p-6 lg:p-8 max-w-5xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 lg:p-10 max-w-5xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-          <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-5">
             <StatsCard title="إجمالي التحديات" value={challengeStats.totalChallenges} icon={HiOutlineStar} color="primary" />
             <StatsCard title="فوز" value={challengeStats.wins} icon={HiOutlineCheckCircle} color="success" />
             <StatsCard title="خسارة" value={challengeStats.losses} icon={HiOutlineExclamationCircle} color="error" />
@@ -284,7 +284,7 @@ export default function ChallengesPage() {
                 <CardTitle>إنشاء تحدي جديد</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                   <Select
                     label="المادة"
                     value={createForm.subject}
@@ -341,7 +341,7 @@ export default function ChallengesPage() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: i * 0.05 }}
-                          className={`flex items-center gap-4 p-4 rounded-xl border transition-all ${
+                          className={`flex items-center gap-4 p-5 rounded-xl border transition-all ${
                             challenge.status === "active"
                               ? "bg-primary/5 border-primary/30"
                               : challenge.status === "finished"

@@ -78,15 +78,15 @@ export default function DailyPlanPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
       <DashboardHeader />
-      <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 lg:p-10 max-w-4xl mx-auto space-y-6">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
           <h1 className="text-2xl md:text-3xl font-bold text-text">هتذاكر إيه النهاردة؟</h1>
           <p className="text-text-secondary mt-1">{dayName} - {dateStr}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="md:col-span-2 bg-surface rounded-2xl border border-border p-6">
+            className="md:col-span-2 bg-surface rounded-2xl border border-border/60 p-8">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <msg.icon className="w-5 h-5 text-primary" />
@@ -119,7 +119,7 @@ export default function DailyPlanPage() {
             {tasks.map((task, i) => (
               <motion.div key={task.id} layout initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.07 }}
-                className={`group flex items-center gap-4 p-4 rounded-xl border transition-all cursor-pointer
+                className={`group flex items-center gap-4 p-5 rounded-xl border transition-all cursor-pointer
                   ${task.done ? "bg-emerald-50/50 dark:bg-emerald-900/10 border-emerald-200/50 dark:border-emerald-800/50" : "bg-surface border-border hover:border-primary/30 hover:shadow-sm"}`}
                 onClick={() => toggleTask(task.id)}>
                 <div className="shrink-0">
@@ -153,7 +153,7 @@ export default function DailyPlanPage() {
 
         {progress === 100 && (
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-            className="p-6 rounded-2xl bg-gradient-to-l from-emerald-500 to-emerald-600 text-white text-center">
+            className="p-8 rounded-2xl bg-gradient-to-l from-emerald-500 to-emerald-600 text-white text-center">
             <HiCheckCircle className="w-10 h-10 mx-auto mb-2" />
             <h3 className="text-lg font-bold">أحسنت! 🎉</h3>
             <p className="text-emerald-100 text-sm">أنهيت كل مهام اليوم. خذ قسطاً من الراحة واستعد لليوم التالي!</p>

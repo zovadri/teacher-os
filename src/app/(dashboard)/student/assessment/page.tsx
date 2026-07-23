@@ -160,7 +160,7 @@ export default function AssessmentPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="اختبار تحديد المستوى" subtitle="قيّم مستواك في المواد الدراسية" />
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         {!started && !finished && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <Card>
@@ -168,7 +168,7 @@ export default function AssessmentPage() {
                 <CardTitle>اختبار تحديد المستوى</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center gap-4 p-4 rounded-xl bg-primary/5 border border-primary/20">
+                <div className="flex items-center gap-4 p-5 rounded-xl bg-primary/5 border border-primary/20">
                   <HiOutlineLightningBolt className="w-10 h-10 text-primary shrink-0" />
                   <div>
                     <p className="text-sm font-medium text-text">اكتشف مستواك الحقيقي</p>
@@ -290,7 +290,7 @@ export default function AssessmentPage() {
 
         {finished && (
           <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <StatsCard title="النتيجة" value={`${overallPct}%`} icon={HiOutlineChartBar} color="primary" />
               <StatsCard title="الإجابات الصحيحة" value={`${totalCorrect}/${totalQuestions}`} icon={HiOutlineCheckCircle} color="success" />
               <StatsCard title="المستوى" value={levelInfo.label} icon={HiOutlineAcademicCap} color={levelInfo.variant as "primary" | "success" | "warning" | "error"} />

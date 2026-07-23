@@ -60,7 +60,7 @@ export default function StudentExamsPage() {
 
   return (
     <div className="min-h-screen bg-surface-secondary">
-      <div className="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+      <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">الامتحانات</h1>
           <p className="text-text-secondary text-sm">جميع الامتحانات والاختبارات المتاحة لك</p>
@@ -90,7 +90,7 @@ export default function StudentExamsPage() {
             >
               <Link href={exam.status === "completed" ? "#" : `/student/exams/${exam.id}`}>
                 <Card hover className={`h-full ${exam.status === "completed" ? "opacity-80" : ""}`}>
-                  <div className="p-5">
+                  <div className="p-6">
                     <div className="flex items-start justify-between mb-3">
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                         <HiOutlineClipboardCheck className="text-primary" size={20} />

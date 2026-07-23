@@ -44,7 +44,7 @@ export default function StudentCoursesPage() {
 
   return (
     <div className="min-h-screen bg-surface-secondary">
-      <div className="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
+      <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6">
 
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">الكورسات المسجلة</h1>
@@ -61,7 +61,7 @@ export default function StudentCoursesPage() {
             >
               <Link
                 href={`/student/courses/${course.id}`}
-                className="block rounded-xl border border-border bg-surface overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all group"
+                className="block rounded-xl border border-border/60 bg-surface overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all group"
               >
                 <div className="relative h-40 overflow-hidden">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -80,7 +80,7 @@ export default function StudentCoursesPage() {
                   </div>
                 </div>
 
-                <div className="p-5">
+                <div className="p-6">
                   {/* Progress bar */}
                   <div className="flex items-center justify-between text-xs text-text-secondary mb-1.5">
                     <span>التقدم</span>

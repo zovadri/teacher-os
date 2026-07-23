@@ -29,7 +29,7 @@ export default function StudentSubscriptionPage() {
     <div>
       <DashboardHeader title="اشتراكي" subtitle="إدارة اشتراكك وعرض المدفوعات" />
 
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <Card className="relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1.5 bg-success" />

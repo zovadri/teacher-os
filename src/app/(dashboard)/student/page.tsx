@@ -62,7 +62,7 @@ export default function StudentDashboard() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="لوحة الطالب" subtitle="مرحباً بك! تابع تقدمك الدراسي" />
-      <div className="p-4 md:p-6">
+      <div className="p-6 md:p-8">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
           <motion.div variants={itemVariants}>
             <Card className="relative overflow-hidden">
@@ -99,7 +99,7 @@ export default function StudentDashboard() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <StatsCard title="الدروس المكتملة" value={24} icon={HiOutlineBookOpen} color="primary" subtitle="من أصل 36 درساً" />
             <StatsCard title="التسلسل الحالي" value={`${student.streak} يوم`} icon={HiFire} color="warning" />
             <StatsCard title="نقاط الخبرة" value={student.xp} icon={HiStar} color="success" change={{ value: 12, isPositive: true }} />
@@ -150,7 +150,7 @@ export default function StudentDashboard() {
                   <CardTitle>الامتحانات القادمة</CardTitle>
                   <Link href="/student/exams" className="text-sm text-primary hover:underline">عرض الكل</Link>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-4">
                   {examsWithCourse.map((exam) => (
                     <Link key={exam.id} href={`/student/exams/${exam.id}`}>
                       <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-surface-secondary transition-colors group">
@@ -179,7 +179,7 @@ export default function StudentDashboard() {
                 <CardHeader>
                   <CardTitle>النشاطات الأخيرة</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-1">
+                <CardContent className="space-y-2">
                   {recentActivity.map((act, i) => (
                     <motion.div
                       key={act.id}

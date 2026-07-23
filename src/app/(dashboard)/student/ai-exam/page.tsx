@@ -376,11 +376,11 @@ export default function AIExamPage() {
     <div className="min-h-screen">
       <DashboardHeader title="توليد أسئلة بالذكاء الاصطناعي" subtitle="أنشئ اختبارات مخصصة باستخدام الذكاء الاصطناعي" />
 
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6"
         >
           <StatsCard title="أسئلة اليوم" value={stats.todayQuestions} icon={HiOutlineSparkles} color="primary" />
           <StatsCard title="التسلسل" value={`${stats.streak} يوم`} icon={HiFire} color="warning" />
@@ -393,7 +393,7 @@ export default function AIExamPage() {
               <CardTitle>إعدادات التوليد</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-text">المادة</label>
                   <div className="grid grid-cols-5 gap-2">
@@ -493,7 +493,7 @@ export default function AIExamPage() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className="bg-surface border border-border rounded-xl p-5 space-y-4 overflow-hidden"
+                className="bg-surface border border-border/60 rounded-xl p-6 space-y-4 overflow-hidden"
               >
                 <motion.div
                   variants={shimmerVariants}
@@ -680,7 +680,7 @@ export default function AIExamPage() {
                         )}
 
                         {showResult && isEssay && (
-                          <div className="p-3 rounded-xl bg-surface-secondary border border-border">
+                          <div className="p-4 rounded-xl bg-surface-secondary border border-border/60">
                             <p className="text-xs font-medium text-text-tertiary mb-1">الإجابة النموذجية:</p>
                             <p className="text-sm text-text">{q.correctAnswer as string}</p>
                           </div>
@@ -749,7 +749,7 @@ export default function AIExamPage() {
                         <CardTitle>نتيجة الاختبار</CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                           <div className="p-4 rounded-xl bg-success/5 border border-success/20 text-center">
                             <HiOutlineCheckCircle className="w-6 h-6 text-success mx-auto mb-1" />
                             <p className="text-xs text-text-tertiary">الإجابات الصحيحة</p>

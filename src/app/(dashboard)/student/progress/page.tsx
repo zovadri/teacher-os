@@ -72,9 +72,9 @@ export default function ProgressPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="تقدمي الدراسي" subtitle="تحليل شامل لمستواك وأدائك في المواد" />
-      <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-5">
             <StatsCard title="المعدل العام" value={`${avgScore}%`} icon={HiOutlineChartBar} color="primary" />
             <StatsCard title="أيام المذاكرة" value={`${daysStudied}/7`} icon={HiOutlineCalendar} color="success" />
             <StatsCard title="التسلسل" value={`${streak} يوم`} icon={HiOutlineFire} color="warning" />
@@ -95,7 +95,7 @@ export default function ProgressPage() {
             ))}
           </motion.div>
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Card className="lg:col-span-2">
               <CardHeader>
                 <CardTitle>الأداء اليومي حسب المادة</CardTitle>
@@ -174,7 +174,7 @@ export default function ProgressPage() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
                 <CardTitle>ساعات المذاكرة اليومية</CardTitle>
@@ -222,7 +222,7 @@ export default function ProgressPage() {
           <motion.div variants={itemVariants}>
             <Card>
               <CardContent>
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/20">
+                <div className="flex items-start gap-3 p-5 rounded-xl bg-primary/5 border border-primary/20">
                   <HiOutlineLightningBolt className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm font-bold text-text mb-1">توصيات لتحسين مستواك</p>

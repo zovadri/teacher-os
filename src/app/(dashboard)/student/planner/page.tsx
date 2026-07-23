@@ -86,7 +86,7 @@ export default function StudentPlannerPage() {
         title="المخطط الدراسي"
         subtitle={`الأسبوع الحالي: ${new Date(2026, 6, 19).toLocaleDateString("ar-EG", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`}
       />
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -106,7 +106,7 @@ export default function StudentPlannerPage() {
                 {showAddTask && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
-                    className="mb-4 p-4 bg-surface-secondary rounded-xl border border-border space-y-3"
+                    className="mb-4 p-5 bg-surface-secondary rounded-xl border border-border/60 space-y-3"
                   >
                     <Input
                       placeholder="عنوان المهمة"
@@ -154,7 +154,7 @@ export default function StudentPlannerPage() {
                           key={task.id}
                           initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: i * 0.05 }}
-                          className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-200 ${
+                          className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 ${
                             task.completed
                               ? "bg-success/5 border-success/20 opacity-70"
                               : "bg-surface border-border hover:shadow-sm"
@@ -221,7 +221,7 @@ export default function StudentPlannerPage() {
                   <motion.div
                     key={goal.id}
                     initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
-                    className="p-3 bg-surface-secondary rounded-xl border border-border"
+                    className="p-4 bg-surface-secondary rounded-xl border border-border/60"
                   >
                     <p className="text-sm font-medium text-text mb-2">{goal.title}</p>
                     <Progress

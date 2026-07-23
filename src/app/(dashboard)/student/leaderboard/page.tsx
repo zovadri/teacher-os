@@ -81,9 +81,9 @@ export default function LeaderboardPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="لوحة المتصدرين" subtitle="تصنيف الطلاب حسب الأداء والنتائج" />
-      <div className="p-4 md:p-6 max-w-5xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 max-w-5xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-5">
             <StatsCard title="ترتيبي" value={`#${currentRank}`} icon={HiOutlineStar} color="primary" />
             <StatsCard title="نقاطي" value={currentUser.totalScore} icon={HiOutlineChartBar} color="success" />
             <StatsCard title="الامتحانات" value={currentUser.exams} icon={HiOutlineAcademicCap} color="info" />
@@ -121,7 +121,7 @@ export default function LeaderboardPage() {
 
           <motion.div variants={itemVariants}>
             <Card>
-              <CardContent className="p-6">
+                <CardContent className="p-8">
                 <div className="flex items-end justify-center gap-4 mb-8">
                   {top3.map((student, i) => {
                     const podiumColors = ["bg-yellow-400", "bg-gray-300", "bg-amber-600"]
@@ -156,7 +156,7 @@ export default function LeaderboardPage() {
               <CardContent>
                 <div className="space-y-1">
                   {currentRank > 0 && (
-                    <div className="flex items-center gap-3 p-3 rounded-xl bg-primary/10 border border-primary/30 mb-2">
+                    <div className="flex items-center gap-3 p-4 rounded-xl bg-primary/10 border border-primary/30 mb-2">
                       <span className="w-8 text-center text-sm font-bold text-primary">{currentRank}</span>
                       <img src={currentUser.avatar} alt="" className="w-8 h-8 rounded-full bg-surface" />
                       <span className="flex-1 text-sm font-bold text-text">{currentUser.name}</span>
@@ -169,7 +169,7 @@ export default function LeaderboardPage() {
                     const rank = idx + 4
                     const isUser = false
                     return (
-                      <div key={student.id} className={`flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-surface-secondary ${isUser ? "bg-primary/10 border border-primary/30" : ""}`}>
+                      <div key={student.id} className={`flex items-center gap-3 p-4 rounded-xl transition-colors hover:bg-surface-secondary ${isUser ? "bg-primary/10 border border-primary/30" : ""}`}>
                         <span className="w-8 text-center text-sm font-bold text-text-tertiary">{rank}</span>
                         <img src={student.avatar} alt="" className="w-8 h-8 rounded-full bg-surface-secondary" />
                         <span className="flex-1 text-sm font-medium text-text truncate">{student.name}</span>
@@ -193,7 +193,7 @@ export default function LeaderboardPage() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
                 <CardTitle>توزيع النقاط</CardTitle>

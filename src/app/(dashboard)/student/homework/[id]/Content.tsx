@@ -72,7 +72,7 @@ export default function StudentHomeworkDetailPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title={homework.title} subtitle={course?.title || "غير معروف"} />
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -126,7 +126,7 @@ export default function StudentHomeworkDetailPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {homework.submission && (
-                    <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+                    <div className="p-5 rounded-xl bg-surface-secondary border border-border/60">
                       <div className="flex items-center gap-3">
                         <HiOutlineDocumentText className="text-primary" size={20} />
                         <div>
@@ -144,7 +144,7 @@ export default function StudentHomeworkDetailPage() {
                   )}
                   {homework.status === "graded" && (
                     <>
-                      <div className="flex items-center gap-4 p-4 rounded-xl bg-success/5 border border-success/20">
+                      <div className="flex items-center gap-4 p-5 rounded-xl bg-success/5 border border-success/20">
                         <HiOutlineCheckCircle className="text-success" size={24} />
                         <div>
                           <p className="text-lg font-bold text-success">{homework.grade} درجة</p>
@@ -152,7 +152,7 @@ export default function StudentHomeworkDetailPage() {
                         </div>
                       </div>
                       <Progress value={((homework.grade || 0) / (homework.totalGrade || 100)) * 100} size="md" variant="success" showLabel />
-                      <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+                    <div className="p-5 rounded-xl bg-surface-secondary border border-border/60">
                         <div className="flex items-center gap-2 mb-2">
                           <HiOutlineChatAlt2 className="text-primary" size={18} />
                           <p className="text-sm font-medium">تعليق المعلم</p>
@@ -173,7 +173,7 @@ export default function StudentHomeworkDetailPage() {
                 <CardContent className="space-y-4">
                   <div
                     onClick={() => document.getElementById("file-upload")?.click()}
-                    className="border-2 border-dashed border-border rounded-xl p-8 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all"
+                    className="border-2 border-dashed border-border rounded-xl p-10 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all"
                   >
                     <HiOutlineUpload className="mx-auto w-10 h-10 text-text-tertiary mb-2" />
                     <p className="text-sm font-medium text-text">
@@ -224,7 +224,7 @@ export default function StudentHomeworkDetailPage() {
             )}
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>معلومات الواجب</CardTitle>

@@ -76,9 +76,9 @@ export default function TrialsPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="حصص تجريبية مجانية" subtitle="جرب الدروس مجاناً قبل الاشتراك - أول 4 حصص مجاناً" />
-      <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-5">
             <StatsCard title="الحصص المتاحة" value={lessons.length} icon={HiOutlinePlusCircle} color="primary" />
             <StatsCard title="تم المشاهدة" value={lessons.filter((l) => l.watched).length} icon={HiOutlineEye} color="success" />
             <StatsCard title="الحصص المتبقية" value={lessonsLeft} icon={HiOutlineLockOpen} color="warning" />
@@ -105,7 +105,7 @@ export default function TrialsPage() {
             </Badge>
           </motion.div>
 
-          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((lesson) => (
               <motion.div key={lesson.id} variants={itemVariants}>
                 <Card className={`h-full flex flex-col border-2 ${lesson.watched ? "border-success/30" : "border-border"}`}>

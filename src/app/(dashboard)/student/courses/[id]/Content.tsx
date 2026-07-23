@@ -112,7 +112,7 @@ export default function StudentCourseDetailPage() {
 
   return (
     <div className="min-h-screen bg-surface-secondary">
-      <div className="max-w-5xl mx-auto p-4 md:p-6 space-y-6">
+      <div className="max-w-5xl mx-auto p-6 md:p-8 space-y-6">
 
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-text-secondary">
@@ -141,7 +141,7 @@ export default function StudentCourseDetailPage() {
         </div>
 
         {/* Progress */}
-        <div className="p-5 rounded-xl bg-surface border border-border">
+        <div className="p-6 rounded-xl bg-surface border border-border/60">
           <div className="flex items-center justify-between text-sm mb-2">
             <span className="font-medium">تقدمك في الكورس</span>
             <span className="text-text-secondary">{courseData.progress}٪</span>
@@ -154,13 +154,13 @@ export default function StudentCourseDetailPage() {
         <div className="grid lg:grid-cols-3 gap-6">
 
           {/* Chapters & Lessons */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="lg:col-span-2 space-y-4">
             <h2 className="font-semibold">محتوى الكورس</h2>
             {courseData.chapters.map((chapter) => {
               const isExpanded = expandedChapter === chapter.id
               const completedInChapter = chapter.lessons.filter((l) => l.completed).length
               return (
-                <div key={chapter.id} className="rounded-xl border border-border bg-surface overflow-hidden">
+                <div key={chapter.id} className="rounded-xl border border-border/60 bg-surface overflow-hidden">
                   <Button onClick={() => setExpandedChapter(isExpanded ? null : chapter.id)}
                     className="w-full text-right p-4 flex items-center justify-between gap-3 hover:bg-surface-secondary/50 transition-colors"
                   >
@@ -219,8 +219,8 @@ export default function StudentCourseDetailPage() {
           </div>
 
           {/* Files & Downloads */}
-          <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-surface border border-border">
+          <div className="space-y-6">
+            <div className="p-6 rounded-xl bg-surface border border-border/60">
               <h3 className="font-semibold mb-3 flex items-center gap-2">
                 <HiOutlineDownload size={16} className="text-primary" />
                 الملفات المرفقة
@@ -245,7 +245,7 @@ export default function StudentCourseDetailPage() {
               </div>
             </div>
 
-            <div className="p-5 rounded-xl bg-surface border border-border">
+            <div className="p-6 rounded-xl bg-surface border border-border/60">
               <h3 className="font-semibold mb-2">تقدم الكورس</h3>
               <p className="text-3xl font-bold text-primary mb-1">{courseData.progress}٪</p>
               <p className="text-xs text-text-tertiary">{courseData.completedLessons} من {courseData.totalLessons} دروس مكتملة</p>

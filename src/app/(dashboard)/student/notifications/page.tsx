@@ -124,9 +124,9 @@ export default function NotificationsPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="الإشعارات والتنبيهات" subtitle="تحكم في إشعارات واتساب والبريد الإلكتروني" />
-      <div className="p-4 md:p-6 max-w-5xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 max-w-5xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-4 gap-5">
             <StatsCard title="الإشعارات المرسلة" value={totalSent} icon={HiOutlineCheckCircle} color="success" />
             <StatsCard title="الفاشلة" value={totalFailed} icon={HiOutlineXCircle} color="error" />
             <StatsCard title="التنبيهات المفعلة" value={activePrefs} icon={HiOutlineClock} color="primary" />
@@ -168,7 +168,7 @@ export default function NotificationsPage() {
               <CardContent>
                 <div className="space-y-3">
                   {prefs.map((pref) => (
-                    <div key={pref.id} className="p-4 rounded-xl bg-surface-secondary border border-border">
+                    <div key={pref.id} className="p-5 rounded-xl bg-surface-secondary border border-border/60">
                       <div className="flex items-center justify-between mb-2">
                         <div>
                           <p className="text-sm font-medium text-text">{pref.label}</p>
@@ -213,7 +213,7 @@ export default function NotificationsPage() {
                     const Icon = channelIcons[log.channel]
                     const sb = statusBadge[log.status]
                     return (
-                      <div key={log.id} className="flex items-center gap-3 p-3 rounded-xl bg-surface-secondary border border-border">
+                      <div key={log.id} className="flex items-center gap-3 p-4 rounded-xl bg-surface-secondary border border-border/60">
                         <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${log.status === "sent" ? "bg-success/10" : log.status === "failed" ? "bg-error/10" : "bg-warning/10"}`}>
                           <Icon className={`w-4 h-4 ${channelColors[log.channel]}`} />
                         </div>

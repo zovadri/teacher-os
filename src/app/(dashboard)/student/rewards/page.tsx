@@ -73,7 +73,7 @@ export default function RewardsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
       <DashboardHeader />
-      <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 lg:p-10 max-w-4xl mx-auto space-y-6">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
           className="bg-gradient-to-l from-amber-500 to-orange-500 rounded-2xl p-6 text-white text-center shadow-lg">
           <HiStar className="w-10 h-10 mx-auto mb-2" />
@@ -98,7 +98,7 @@ export default function RewardsPage() {
 
         <AnimatePresence mode="wait">
           {activeTab === "store" && (
-            <motion.div key="store" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <motion.div key="store" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {rewards.map((reward, i) => {
                 const Icon = reward.icon
                 const owned = myRewards.includes(reward.id)
@@ -165,7 +165,7 @@ export default function RewardsPage() {
             <motion.div key="history" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-2">
               {history.map((item, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}
-                  className="flex items-center justify-between p-3.5 bg-surface rounded-xl border border-border">
+                  className="flex items-center justify-between p-4 bg-surface rounded-xl border border-border/60">
                   <div className="flex items-center gap-3 min-w-0">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${item.type === "earned" ? "bg-emerald-50 dark:bg-emerald-900/30" : "bg-red-50 dark:bg-red-900/30"}`}>
                       {item.type === "earned" ? <HiOutlineLightningBolt className="w-4 h-4 text-emerald-600" /> : <HiOutlineClock className="w-4 h-4 text-red-600" />}

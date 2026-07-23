@@ -69,13 +69,13 @@ export default function WalletPage() {
   const wallet = mockWallet
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
+    <div className="p-6 md:p-8 space-y-6">
       <DashboardHeader title="المحفظة" subtitle="إدارة الرصيد والمعاملات المالية" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary-dark to-purple-700 p-6 md:p-8"
+        className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-primary-dark to-purple-700 p-8 md:p-10"
       >
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white" />
@@ -109,7 +109,7 @@ variant="secondary"
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
         <StatsCard title="إجمالي الإيداعات" value={formatCurrency(wallet.totalDeposits)} icon={HiOutlineArrowUp} color="success" />
         <StatsCard title="إجمالي السحوبات" value={formatCurrency(wallet.totalWithdrawals)} icon={HiOutlineArrowDown} color="error" />
         <StatsCard title="السحوبات المعلقة" value={formatCurrency(wallet.pendingWithdrawals)} icon={HiOutlineRefresh} color="warning" />

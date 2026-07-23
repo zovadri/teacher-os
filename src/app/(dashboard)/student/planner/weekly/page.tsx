@@ -99,7 +99,7 @@ export default function WeeklySchedulePage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="الخطة الأسبوعية" subtitle={today} />
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         <motion.div
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-2 text-sm"

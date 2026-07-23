@@ -94,7 +94,7 @@ export default function WeeklyExamPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
       <DashboardHeader />
-      <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 lg:p-10 max-w-4xl mx-auto space-y-6">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-text">الامتحانات الأسبوعية</h1>
@@ -114,7 +114,7 @@ export default function WeeklyExamPage() {
             { label: "الأفضل", value: allCompleted.length > 0 ? `${Math.max(...allCompleted.map((e) => e.score || 0))}%` : "-", icon: HiStar, color: "text-purple-600 bg-purple-50 dark:bg-purple-900/30" },
           ].map((stat, i) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className="bg-surface rounded-xl border border-border p-5 text-center">
+              className="bg-surface rounded-xl border border-border p-6 text-center">
               <div className={`w-9 h-9 rounded-xl mx-auto mb-2 flex items-center justify-center ${stat.color}`}>
                 <stat.icon className="w-4 h-4" />
               </div>
@@ -125,7 +125,7 @@ export default function WeeklyExamPage() {
         </div>
 
         {performanceData.length > 0 && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-surface rounded-2xl border border-border p-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-surface rounded-2xl border border-border p-8">
             <h3 className="text-sm font-semibold text-text mb-4 flex items-center gap-2">
               <HiTrendingUp className="w-4 h-4 text-primary" /> أدائك عبر الأسابيع
             </h3>
@@ -149,7 +149,7 @@ export default function WeeklyExamPage() {
             const grade = exam.score ? getGrade(exam.score) : null
             return (
               <motion.div key={exam.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.04 }}
-                className={`bg-surface rounded-xl border p-5 flex items-center gap-4 ${exam.status === "completed" ? "border-border" : exam.status === "upcoming" ? "border-primary/20" : "border-red-200"}`}>
+                className={`bg-surface rounded-xl border p-6 flex items-center gap-4 ${exam.status === "completed" ? "border-border" : exam.status === "upcoming" ? "border-primary/20" : "border-red-200"}`}>
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${exam.color}`}>
                   <Icon className="w-5 h-5" />
                 </div>

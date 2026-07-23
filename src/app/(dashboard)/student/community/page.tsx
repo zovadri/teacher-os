@@ -109,14 +109,14 @@ export default function CommunityPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-surface to-surface-secondary">
       <DashboardHeader />
-      <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto">
+      <div className="p-6 md:p-8 lg:p-10 max-w-4xl mx-auto">
         <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
           className="text-2xl font-bold text-text mb-6 flex items-center gap-2">
           <HiOutlineUserGroup className="w-6 h-6 text-primary" /> مجتمع الطلاب
         </motion.h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-1 space-y-3">
+          <div className="lg:col-span-1 space-y-4">
             <div className="relative">
               <HiSearch className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
               <input value={search} onChange={(e) => setSearch(e.target.value)}
@@ -153,7 +153,7 @@ export default function CommunityPage() {
           <div className="lg:col-span-2">
             {selectedGroup ? (
               <motion.div key={selectedGroup.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-surface rounded-2xl border border-border overflow-hidden flex flex-col h-[600px]">
+                className="bg-surface rounded-2xl border border-border/60 overflow-hidden flex flex-col h-[600px]">
                 <div className="p-4 border-b border-border flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                     <HiOutlineUserGroup className="w-5 h-5 text-primary" />
@@ -199,7 +199,7 @@ export default function CommunityPage() {
                 </div>
               </motion.div>
             ) : (
-              <div className="h-[600px] flex flex-col items-center justify-center text-text-tertiary bg-surface rounded-2xl border border-border">
+              <div className="h-[600px] flex flex-col items-center justify-center text-text-tertiary bg-surface rounded-2xl border border-border/60">
                 <HiOutlineChat className="w-16 h-16 mb-4 opacity-30" />
                 <p className="font-medium">اختر مجموعة للدخول في النقاش</p>
                 <p className="text-xs mt-1">شارك زملاءك الأسئلة والأفكار</p>

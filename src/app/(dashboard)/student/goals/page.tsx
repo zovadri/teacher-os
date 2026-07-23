@@ -93,10 +93,10 @@ export default function StudentGoalsPage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="أهدافي الدراسية" subtitle="حدد أهدافك وتابع تقدمك نحو تحقيقها" />
-      <div className="p-4 md:p-6 space-y-6">
+      <div className="p-6 md:p-8 space-y-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6"
         >
           <StatsCard title="الأهداف النشطة" value={totalActive} icon={HiOutlineTag} color="primary" />
           <StatsCard title="مكتملة" value={totalCompleted} icon={HiOutlineCheckCircle} color="success" />
@@ -109,7 +109,7 @@ export default function StudentGoalsPage() {
         </div>
 
         {goals.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {goals.map((goal, i) => {
               const daysLeft = getCountdown(goal.targetDate)
               const isAtRisk = goal.status === "active" && goal.progress < 50 && daysLeft !== "انتهى" && !daysLeft.includes("شهر")
@@ -241,7 +241,7 @@ export default function StudentGoalsPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-6 p-4 bg-surface-secondary rounded-xl">
+            <div className="flex items-center gap-6 p-5 bg-surface-secondary rounded-xl">
               <div className="relative w-20 h-20 shrink-0">
                 <svg className="w-20 h-20 -rotate-90" viewBox="0 0 36 36">
                   <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="3" className="text-surface-tertiary" />

@@ -119,7 +119,7 @@ export default function BookStorePage() {
   return (
     <div className="min-h-screen">
       <DashboardHeader title="مكتبة الكتب" subtitle="تسوق الكتب والمذكرات والمراجعات" />
-      <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
+      <div className="p-6 md:p-8 max-w-6xl mx-auto space-y-6">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
           <motion.div variants={itemVariants} className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex gap-2 flex-wrap">
@@ -171,7 +171,7 @@ export default function BookStorePage() {
             </div>
           </motion.div>
 
-          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filtered.map((book) => (
               <motion.div key={book.id} variants={itemVariants}>
                 <Card className="overflow-hidden group h-full flex flex-col">
@@ -181,7 +181,7 @@ export default function BookStorePage() {
                       {categories.find((c) => c.id === book.category)?.label}
                     </Badge>
                   </div>
-                  <CardContent className="flex-1 flex flex-col gap-2 p-4">
+                  <CardContent className="flex-1 flex flex-col gap-2 p-5">
                     <h3 className="text-sm font-bold text-text leading-snug">{book.title}</h3>
                     <p className="text-xs text-text-tertiary">{book.author}</p>
                     {stars(book.rating)}
@@ -218,7 +218,7 @@ export default function BookStorePage() {
               <CardContent>
                 <div className="space-y-3">
                   {purchaseHistory.map((p) => (
-                    <div key={p.id} className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary">
+                    <div key={p.id} className="flex items-center justify-between p-4 rounded-xl bg-surface-secondary">
                       <div>
                         <p className="text-sm font-medium text-text">{p.title}</p>
                         <p className="text-xs text-text-tertiary">{p.date}</p>
