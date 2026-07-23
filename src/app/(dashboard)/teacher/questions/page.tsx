@@ -132,8 +132,8 @@ export default function QuestionsPage() {
         <StatsCard title="نسبة الإجابة الصحيحة" value={`${stats.avgCorrect}%`} icon={HiOutlineClipboardList} color="success" />
       </motion.div>
 
-      <div className="bg-card border border-border rounded-[24px] p-5 ">
-        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+      <div className="bg-card border border-border rounded-[24px] p-6 ">
+        <div className="flex flex-col sm:flex-row gap-5 mb-4">
           <SearchInput value={search} onChange={setSearch} placeholder="بحث عن سؤال..." className="flex-1" />
           <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}
             className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
@@ -148,7 +148,7 @@ export default function QuestionsPage() {
         </div>
 
         {selectedIds.size > 0 && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px] mb-4 backdrop-blur">
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px] mb-4 backdrop-blur">
             <span className="text-sm text-primary font-medium">{selectedIds.size} سؤال محدد</span>
             <Button variant="danger" size="sm" leftIcon={<HiOutlineTrash className="w-4 h-4" />} onClick={() => setBulkDelete(true)}>حذف المحدد</Button>
           </motion.div>
@@ -210,19 +210,19 @@ export default function QuestionsPage() {
               </table>
             </div>
 
-            <div className="sm:hidden space-y-3">
+            <div className="sm:hidden space-y-4">
               {filtered.map((q, i) => (
                 <div key={q.id} onClick={() => setDetailQ(q)}
-                  className="bg-card border border-border rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
+                  className="bg-card border border-border rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
                 >
-                  <div className="flex items-start gap-3 mb-2">
+                  <div className="flex items-start gap-4 mb-2">
                     <input type="checkbox" checked={selectedIds.has(q.id)} onChange={() => { const n = new Set(selectedIds); n.has(q.id) ? n.delete(q.id) : n.add(q.id); setSelectedIds(n) }}
                       onClick={(e) => e.stopPropagation()} className="w-4 h-4 rounded border-border text-primary mt-0.5 bg-card shrink-0" />
                     <div className="min-w-0 flex-1">
                       <p className="text-sm text-text font-medium line-clamp-2">{truncate(q.text, 80)}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-text-secondary flex-wrap">
+                  <div className="flex items-center gap-3 text-xs text-text-secondary flex-wrap">
                     <Badge variant={typeVariants[q.type]} size="sm">{typeLabels[q.type]}</Badge>
                     <Badge variant={difficultyVariants[q.difficulty]} size="sm">{difficultyLabels[q.difficulty]}</Badge>
                     <span>{q.grade} درجات</span>
@@ -262,10 +262,10 @@ export default function QuestionsPage() {
               {(detailQ.type === "multiple-choice" || detailQ.type === "true-false") && detailQ.choices && (
                 <div>
                   <p className="text-sm font-medium text-text-secondary mb-2">الخيارات</p>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {detailQ.choices.map((c) => (
-                      <div key={c.id} className={`p-3 rounded-[14px] border ${c.isCorrect ? "border-success/30 bg-success/5" : "border-border bg-card/40"} backdrop-blur`}>
-                        <div className="flex items-center gap-2">
+                      <div key={c.id} className={`p-4 rounded-[14px] border ${c.isCorrect ? "border-success/30 bg-success/5" : "border-border bg-card/40"} backdrop-blur`}>
+                        <div className="flex items-center gap-3">
                           <span className={`w-2 h-2 rounded-full ${c.isCorrect ? "bg-success" : "bg-text-tertiary"}`} />
                           <span className="text-text">{c.text}</span>
                           {c.isCorrect && <Badge variant="success" size="sm">الإجابة الصحيحة</Badge>}
@@ -284,13 +284,13 @@ export default function QuestionsPage() {
               {detailQ.stats && (
                 <div>
                   <p className="text-sm font-medium text-text-secondary mb-2">الإحصائيات</p>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-5">
                     {[
                       { label: "مرات الاستخدام", value: detailQ.stats.timesUsed, color: "text-text" },
                       { label: "إجابات صحيحة", value: `${detailQ.stats.correctRate}%`, color: "text-success" },
                       { label: "إجابات خاطئة", value: `${detailQ.stats.incorrectRate}%`, color: "text-error" },
                     ].map((s) => (
-                      <div key={s.label} className="bg-card/40 border border-border rounded-[16px] p-4 text-center backdrop-blur">
+                      <div key={s.label} className="bg-card/40 border border-border rounded-[16px] p-5 text-center backdrop-blur">
                         <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
                         <p className="text-xs text-text-tertiary">{s.label}</p>
                       </div>
@@ -331,7 +331,7 @@ export default function QuestionsPage() {
                 <textarea value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} placeholder="اكتب نص السؤال هنا..."
                   className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50 min-h-[80px]  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">نوع السؤال</label>
                   <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value as Question["type"] })}
@@ -347,7 +347,7 @@ export default function QuestionsPage() {
                   </select>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">الدرجة</label>
                   <input type="number" value={form.grade} onChange={(e) => setForm({ ...form, grade: e.target.value })}
@@ -374,10 +374,10 @@ export default function QuestionsPage() {
               </div>
 
               {form.type === "multiple-choice" && (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <p className="text-sm font-medium text-text">الخيارات</p>
                   {form.mcqChoices.map((c, i) => (
-                    <div key={c.id} className="flex items-center gap-3">
+                    <div key={c.id} className="flex items-center gap-4">
                       <input type="radio" name="mcq-correct" checked={c.isCorrect} onChange={() => setForm({ ...form, mcqChoices: form.mcqChoices.map((ch) => ({ ...ch, isCorrect: ch.id === c.id })) })} className="accent-primary w-4 h-4" />
                       <input value={c.text} onChange={(e) => setForm({ ...form, mcqChoices: form.mcqChoices.map((ch) => ch.id === c.id ? { ...ch, text: e.target.value } : ch) })} placeholder={`الخيار ${i + 1}`}
                         className="flex-1 bg-card border border-border rounded-[16px] px-4 py-2 text-sm text-text placeholder-text-tertiary/50 focus:outline-none focus:ring-2 focus:ring-primary/30  transition-all" />
@@ -388,7 +388,7 @@ export default function QuestionsPage() {
               )}
 
               {form.type === "true-false" && (
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <p className="text-sm font-medium text-text">الإجابة الصحيحة</p>
                   <div className="flex items-center gap-4">
                     <label className="flex items-center gap-2 cursor-pointer">
@@ -411,7 +411,7 @@ export default function QuestionsPage() {
                 </div>
               )}
 
-              <div className="flex gap-3 pt-4 border-t border-border">
+              <div className="flex gap-4 pt-4 border-t border-border">
                 <Button variant="primary" onClick={handleSave} className="flex-1">{editQ ? "حفظ التغييرات" : "إضافة السؤال"}</Button>
                 <Button variant="secondary" onClick={() => setShowCreate(false)} className="flex-1">إلغاء</Button>
               </div>

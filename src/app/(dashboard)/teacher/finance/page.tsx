@@ -67,7 +67,7 @@ export default function FinanceDashboardPage() {
       >
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
-          className="grid grid-cols-1 sm:grid-cols-5 gap-3"
+          className="grid grid-cols-1 sm:grid-cols-5 gap-5"
         >
           <StatsCard title="إيرادات الشهر" value={`${(currentMonth.revenue / 1000).toFixed(1)} ألف`} icon={HiOutlineTrendingUp} color="success" />
           <StatsCard title="مصروفات الشهر" value={`${(currentMonth.expenses / 1000).toFixed(1)} ألف`} icon={HiOutlineTrendingDown} color="error" />
@@ -154,9 +154,9 @@ export default function FinanceDashboardPage() {
           <Card>
             <CardHeader><CardTitle>الديون والأقساط المتأخرة</CardTitle></CardHeader>
             <CardContent>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {debtsData.map((d, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-[16px] bg-card border border-border">
+                  <div key={i} className="flex items-center justify-between p-4 rounded-[16px] bg-card border border-border">
                     <div>
                       <span className="text-sm font-medium text-text">{d.name}</span>
                       <span className="text-xs text-text-tertiary mr-2">{d.days} يوم</span>

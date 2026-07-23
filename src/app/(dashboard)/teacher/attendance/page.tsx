@@ -169,15 +169,15 @@ export default function AttendanceHubPage() {
             <Button onClick={handleQrDetect} leftIcon={<HiOutlineQrcode className="w-4 h-4" />}>محاكاة مسح QR</Button>
           </div>
           {scannedStudent ? (
-            <div className="p-5 rounded-[20px] bg-card/40 border border-border backdrop-blur">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="p-6 rounded-[20px] bg-card/40 border border-border backdrop-blur">
+              <div className="flex items-center gap-4 mb-4">
                 <img src={scannedStudent.avatar} alt="" className="w-12 h-12 rounded-full bg-card border border-border" />
                 <div>
                   <p className="font-semibold text-text">{scannedStudent.name}</p>
                   <p className="text-sm text-text-secondary">{scannedStudent.grade} - {scannedStudent.group}</p>
                 </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 <Button onClick={handleQrConfirm} variant="success" size="sm" leftIcon={<HiOutlineCheck className="w-4 h-4" />}>تأكيد الحضور</Button>
                 <Button onClick={() => setScannedStudent(null)} variant="secondary" size="sm" leftIcon={<HiOutlineX className="w-4 h-4" />}>إلغاء</Button>
               </div>
@@ -191,7 +191,7 @@ export default function AttendanceHubPage() {
       {activeMode === "code" && (
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card border border-border rounded-[24px] p-6 ">
           <h3 className="text-lg font-semibold text-text mb-4">بحث بكود الطالب</h3>
-          <div className="flex gap-3 mb-4">
+          <div className="flex gap-4 mb-4">
             <div className="flex-1 relative">
               <HiOutlineSearch className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary pointer-events-none" />
               <input placeholder="أدخل كود الطالب أو رقم الهاتف" value={codeInput} onChange={(e) => setCodeInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleCodeSearch()}
@@ -200,8 +200,8 @@ export default function AttendanceHubPage() {
             <Button onClick={handleCodeSearch}>بحث</Button>
           </div>
           {codeResult ? (
-            <div className="p-5 rounded-[20px] bg-card/40 border border-border backdrop-blur">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="p-6 rounded-[20px] bg-card/40 border border-border backdrop-blur">
+              <div className="flex items-center gap-4 mb-4">
                 <img src={codeResult.avatar} alt="" className="w-12 h-12 rounded-full bg-card border border-border" />
                 <div className="flex-1">
                   <p className="font-semibold text-text">{codeResult.name}</p>
@@ -210,7 +210,7 @@ export default function AttendanceHubPage() {
                 </div>
                 <Badge variant="success" size="sm">تم العثور</Badge>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 <Button onClick={handleCodeConfirm} variant="success" size="sm" leftIcon={<HiOutlineCheck className="w-4 h-4" />}>تأكيد الحضور</Button>
                 <Button onClick={() => { setCodeResult(null); setCodeInput("") }} variant="secondary" size="sm" leftIcon={<HiOutlineX className="w-4 h-4" />}>إلغاء</Button>
               </div>
@@ -234,7 +234,7 @@ export default function AttendanceHubPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-text-secondary mb-1.5">حالة الحضور</label>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               {(Object.entries(statusColors) as [AttendanceStatus, typeof statusColors[AttendanceStatus]][]).map(([key, cfg]) => (
                 <button key={key} onClick={() => setManualStatus(key)}
                   className={cn("flex-1 px-3 py-2 rounded-[14px] text-sm font-medium border transition-all backdrop-blur-xl",
@@ -257,14 +257,14 @@ export default function AttendanceHubPage() {
           {mockEmployees.length === 0 ? (
             <EmptyState icon={HiOutlineBriefcase} title="لا يوجد موظفون" description="لم يتم إضافة أي موظفين بعد" />
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {mockEmployees.map((emp) => (
                 <div key={emp.id} className={cn(
-                  "flex items-center justify-between p-4 rounded-[20px] border border-border backdrop-blur transition-all bg-card/40",
+                  "flex items-center justify-between p-5 rounded-[20px] border border-border backdrop-blur transition-all bg-card/40",
                   employeeCheckIn[emp.id] && !employeeCheckOut[emp.id] && "border-success/30 bg-success/5",
                   employeeCheckOut[emp.id] && "opacity-60"
                 )}>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <img src={emp.avatar} alt="" className="w-10 h-10 rounded-full bg-card border border-border" />
                     <div>
                       <p className="font-semibold text-text text-sm">{emp.name}</p>
@@ -273,7 +273,7 @@ export default function AttendanceHubPage() {
                       {employeeCheckOut[emp.id] && <Badge variant="default" size="sm">منصرف</Badge>}
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-3">
                     <Button size="sm" variant={employeeCheckIn[emp.id] ? "secondary" : "success"} onClick={() => handleEmployeeCheckIn(emp.id)} disabled={employeeCheckOut[emp.id]} leftIcon={<HiOutlineLogin className="w-4 h-4" />}>
                       دخول
                     </Button>

@@ -99,7 +99,7 @@ export default function GradebookPage() {
       >
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
-          className="grid grid-cols-1 sm:grid-cols-5 gap-3"
+          className="grid grid-cols-1 sm:grid-cols-5 gap-5"
         >
           <StatsCard title="عدد الطلاب" value={sorted.length} icon={HiOutlineUserGroup} color="primary" />
           <StatsCard title="متوسط الدرجات" value={`${avgTotal}/390`} icon={HiOutlineChartBar} color="success" />
@@ -116,11 +116,11 @@ export default function GradebookPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>توزيع الدرجات</CardTitle>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   {["الكيمياء", "الفيزياء", "الرياضيات"].map((s) => (
                     <button key={s} type="button" onClick={() => setSubject(s)}
                       className={cn(
-                        "px-3 py-1.5 rounded-[10px] text-xs font-medium border transition-all",
+                        "px-4 py-2 rounded-[10px] text-xs font-medium border transition-all",
                         subject === s ? "border-primary/30 bg-primary/10 text-primary" : "border-border text-text-tertiary",
                       )}
                     >
@@ -151,7 +151,7 @@ export default function GradebookPage() {
 
           <Card>
             <CardHeader><CardTitle>إجراءات سريعة</CardTitle></CardHeader>
-            <CardContent className="space-y-2">
+            <CardContent className="space-y-3">
               <Button variant="primary" size="md" className="w-full justify-center" leftIcon={<HiOutlinePlus className="w-4 h-4" />} onClick={() => toast.success("تم إضافة عمود تقييم جديد")}>
                 إضافة عمود تقييم
               </Button>
@@ -283,16 +283,16 @@ export default function GradebookPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <p className="text-sm font-medium text-text mb-3">تفاصيل الدرجات</p>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {[
                           { label: "امتحان أول", score: `${s.exam1.score}/${s.exam1.max}`, pct: (s.exam1.score / s.exam1.max) * 100 },
                           { label: "امتحان ثاني", score: `${s.exam2.score}/${s.exam2.max}`, pct: (s.exam2.score / s.exam2.max) * 100 },
                           { label: "امتحان نهائي", score: `${s.final.score}/${s.final.max}`, pct: (s.final.score / s.final.max) * 100 },
                           { label: "الدرجة الكلية", score: `${s.total}/390`, pct: (s.total / 390) * 100 },
                         ].map((item) => (
-                          <div key={item.label} className="flex items-center justify-between p-3 rounded-[12px] bg-card/40 border border-border">
+                          <div key={item.label} className="flex items-center justify-between p-4 rounded-[12px] bg-card/40 border border-border">
                             <span className="text-xs text-text-tertiary">{item.label}</span>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-4">
                               <Progress value={item.pct} size="sm" variant={item.pct >= 80 ? "success" : "warning"} className="w-20" />
                               <span className="text-xs font-bold text-text">{item.score}</span>
                             </div>

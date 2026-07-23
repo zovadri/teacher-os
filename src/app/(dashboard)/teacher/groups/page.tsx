@@ -104,7 +104,7 @@ export default function GroupsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                     {paginatedGroups.map((group, i) => (
                       <motion.div key={group.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-                        <div className="bg-card border border-border rounded-[24px] p-5  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 h-full">
+                        <div className="bg-card border border-border rounded-[24px] p-6  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 h-full">
                           <div className="flex items-start justify-between mb-4">
                             <div>
                               <h3 className="font-semibold text-text">{group.name}</h3>
@@ -112,7 +112,7 @@ export default function GroupsPage() {
                             </div>
                             <Badge variant={statusVariant[group.status]} size="sm">{group.status === "active" ? "نشط" : group.status === "completed" ? "مكتمل" : "غير نشط"}</Badge>
                           </div>
-                          <div className="space-y-3">
+                          <div className="space-y-4">
                             <div>
                               <div className="flex justify-between text-xs mb-1">
                                 <span className="text-text-secondary">السعة</span>
@@ -120,11 +120,11 @@ export default function GroupsPage() {
                               </div>
                               <Progress value={group.enrolledCount} max={group.capacity} color={group.enrolledCount >= group.capacity ? "warning" : "primary"} size="sm" />
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-text-secondary">
+                            <div className="flex items-center gap-3 text-xs text-text-secondary">
                               <HiOutlineClock className="w-3.5 h-3.5 shrink-0" />
                               <span>{group.schedule.map((s, i) => `${dayMap[s.day]} ${s.startTime}-${s.endTime}${i < group.schedule.length - 1 ? " - " : ""}`)}</span>
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-text-secondary">
+                            <div className="flex items-center gap-3 text-xs text-text-secondary">
                               <HiOutlineAcademicCap className="w-3.5 h-3.5 shrink-0" />
                               <span>{group.classroom}</span>
                             </div>
@@ -135,7 +135,7 @@ export default function GroupsPage() {
                               </div>
                             )}
                           </div>
-                          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-border">
+                          <div className="flex items-center gap-3 mt-5 pt-5 border-t border-border">
                             <Link href={`/teacher/groups/${group.id}`}>
                               <Button variant="primary" size="sm" leftIcon={<HiOutlineEye className="w-4 h-4" />}>عرض المجموعة</Button>
                             </Link>
@@ -149,7 +149,7 @@ export default function GroupsPage() {
                   </div>
                 )}
                 {totalPages > 1 && (
-                  <div className="flex items-center justify-center gap-2 pt-2">
+                  <div className="flex items-center justify-center gap-3 pt-2">
                     <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1} className="p-2 rounded-[12px] hover:bg-card/60 disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary transition-all">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     </button>
@@ -193,11 +193,11 @@ export default function GroupsPage() {
                       </tbody>
                     </table>
                   </div>
-                  <div className="sm:hidden space-y-2 p-4">
+                  <div className="sm:hidden space-y-3 p-5">
                     {mockWaitingStudents.map((w) => (
-                      <div key={w.id} className="bg-card/40 border border-border rounded-[16px] p-4">
+                      <div key={w.id} className="bg-card/40 border border-border rounded-[16px] p-5">
                         <div className="flex items-center justify-between mb-2"><span className="text-sm font-medium text-text">{w.studentName}</span><span className="text-xs text-text-secondary">{w.groupName}</span></div>
-                        <div className="flex items-center gap-2 text-xs text-text-secondary"><span>{w.joinedAt.toLocaleDateString("ar-EG")}</span><Badge variant={w.priority === 1 ? "error" : w.priority === 2 ? "warning" : "info"} size="sm">{w.priority === 1 ? "عالية" : w.priority === 2 ? "متوسطة" : "منخفضة"}</Badge></div>
+                        <div className="flex items-center gap-3 text-xs text-text-secondary"><span>{w.joinedAt.toLocaleDateString("ar-EG")}</span><Badge variant={w.priority === 1 ? "error" : w.priority === 2 ? "warning" : "info"} size="sm">{w.priority === 1 ? "عالية" : w.priority === 2 ? "متوسطة" : "منخفضة"}</Badge></div>
                       </div>
                     ))}
                   </div>
@@ -304,7 +304,7 @@ export default function GroupsPage() {
                   {mockCourses.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
                 </select>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">السعة</label>
                   <input type="number" value={addForm.capacity} onChange={(e) => setAddForm({ ...addForm, capacity: e.target.value })}
@@ -316,7 +316,7 @@ export default function GroupsPage() {
                     className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
                 </div>
               </div>
-              <div className="flex gap-3 pt-2">
+              <div className="flex gap-4 pt-2">
                 <Button variant="primary" className="flex-1" onClick={() => { toast.success(`تم إضافة المجموعة`); setShowAdd(false); setAddForm({ name: "", courseId: "", capacity: "25", classroom: "" }) }}>إضافة</Button>
                 <Button variant="secondary" onClick={() => setShowAdd(false)} className="flex-1">إلغاء</Button>
               </div>

@@ -85,10 +85,10 @@ export default function StudentsPage() {
         <StatsCard title="طلاب الجدد" value={stats.new} icon={HiOutlineUserAdd} color="info" trend={22} sparkline={[5, 8, 12, 10, 15, 18, 14, 20, 22, 25, 28, 35]} />
       </motion.div>
 
-      <div className="bg-card border border-border rounded-[24px] p-5 ">
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center mb-5">
+      <div className="bg-card border border-border rounded-[24px] p-6 ">
+        <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center mb-5">
           <SearchInput value={search} onChange={(v) => { setSearch(v); setPage(1) }} placeholder="بحث بالاسم أو الهاتف..." className="sm:max-w-xs flex-1" />
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-3">
             {filters.map((chip) => (
               <button key={chip} onClick={() => { setActiveChip(chip); setStatusFilter(chip === "الكل" ? "الكل" : chip === "نشط" ? "active" : chip === "منتهي" ? "expired" : chip === "غير نشط" ? "inactive" : "suspended"); setPage(1) }}
                 className={cn(
@@ -112,9 +112,9 @@ export default function StudentsPage() {
         </div>
 
         {selectedIds.size > 0 && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 mb-4 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px] backdrop-blur-xl">
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 mb-4 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px] backdrop-blur-xl">
             <span className="text-sm text-primary font-medium">{selectedIds.size} طالب محدد</span>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               {["نقل لمجموعة", "تغيير الحالة", "إرسال رسالة"].map((a) => (
                 <button key={a} onClick={() => { toast.success(`تم ${a}`); setSelectedIds(new Set()) }}
                   className="px-3 py-1.5 text-xs bg-primary/10 border border-primary/20 text-primary rounded-[10px] hover:bg-primary/20 transition-all">
@@ -207,13 +207,13 @@ export default function StudentsPage() {
               </table>
             </div>
 
-            <div className="sm:hidden space-y-3">
+            <div className="sm:hidden space-y-4">
               {paginated.map((s, i) => (
                 <motion.div key={s.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}
                   onClick={() => router.push(`/teacher/students/${s.id}`)}
-                  className="bg-card border border-border rounded-[20px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
+                  className="bg-card border border-border rounded-[20px] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.03)] hover:-translate-y-0.5 transition-all duration-250 cursor-pointer"
                 >
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center gap-4 mb-3">
                     <input type="checkbox" checked={selectedIds.has(s.id)} onChange={() => { const n = new Set(selectedIds); n.has(s.id) ? n.delete(s.id) : n.add(s.id); setSelectedIds(n) }}
                       onClick={(e) => e.stopPropagation()} className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 bg-card shrink-0" />
                     <div className="w-10 h-10 rounded-full bg-primary/10 border border-border overflow-hidden shrink-0">
@@ -225,7 +225,7 @@ export default function StudentsPage() {
                     </div>
                     <Badge variant={statusCfg[s.status]?.variant || "default"} size="sm">{statusCfg[s.status]?.label || s.status}</Badge>
                   </div>
-                  <div className="flex items-center gap-4 text-xs text-text-secondary">
+                  <div className="flex items-center gap-5 text-xs text-text-secondary">
                     <span>{s.grade}</span>
                     <span className="w-1 h-1 rounded-full bg-border" />
                     <span>{s.group}</span>
@@ -237,7 +237,7 @@ export default function StudentsPage() {
             </div>
 
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 pt-4 border-t border-border mt-4">
+              <div className="flex items-center justify-center gap-3 pt-4 border-t border-border mt-4">
                 <button type="button" onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1}
                   className="p-2 rounded-[12px] hover:bg-card/60 disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary transition-all">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -273,7 +273,7 @@ export default function StudentsPage() {
                 <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="أدخل اسم الطالب"
                   className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all" />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">البريد الإلكتروني</label>
                   <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="البريد الإلكتروني"
@@ -293,7 +293,7 @@ export default function StudentsPage() {
                   {grades.filter((g) => g !== "الكل").map((g) => <option key={g} value={g}>{g}</option>)}
                 </select>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1.5">ولي الأمر</label>
                   <input value={form.parentName} onChange={(e) => setForm({ ...form, parentName: e.target.value })} placeholder="اسم ولي الأمر"
@@ -305,7 +305,7 @@ export default function StudentsPage() {
                     className="w-full bg-card border border-border rounded-[16px] px-4 py-2.5 text-sm text-text placeholder-text-tertiary/50  focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all" />
                 </div>
               </div>
-              <div className="flex gap-3 pt-2">
+              <div className="flex gap-4 pt-2">
                 <Button variant="primary" className="flex-1" onClick={() => {
                   setStudents((prev) => [{ id: generateId(), name: form.name, email: form.email, phone: form.phone, avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${generateId()}`, grade: form.grade, group: "", school: "", governorate: "", city: "", gender: "male" as const, birthDate: new Date(), status: "active" as const, subscription: { status: "active" as const, planName: "", startDate: new Date(), endDate: new Date() }, xp: 0, level: 1, streak: 0 }, ...prev])
                   setShowCreate(false); setForm({ name: "", email: "", phone: "", grade: "", parentName: "", parentPhone: "" }); toast.success("تم إضافة الطالب بنجاح")

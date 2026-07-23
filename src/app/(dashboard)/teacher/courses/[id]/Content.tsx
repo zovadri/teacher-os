@@ -177,7 +177,7 @@ export default function CourseDetailPage() {
           </Card>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-5">
           {[
             { icon: HiOutlineUsers, title: "الطلاب", value: course.studentsCount, color: "primary" as const },
             { icon: HiOutlineBookOpen, title: "الدروس", value: course.lessonsCount, color: "info" as const },
@@ -194,7 +194,7 @@ export default function CourseDetailPage() {
         {(activeTab) => (
           <>
             <TabPanel id="chapters" activeTab={activeTab}>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {course.chapters.length === 0 ? (
                   <div className="text-center py-10 text-text-tertiary">لا توجد فصول دراسية بعد</div>
                 ) : (
@@ -203,7 +203,7 @@ export default function CourseDetailPage() {
                     return (
                       <div key={chapter.id} className="bg-surface border border-border rounded-xl overflow-hidden">
                         <Button onClick={() => toggleChapter(chapter.id)}
-                          className="w-full flex items-center justify-between px-4 py-3 bg-surface-secondary hover:bg-surface-tertiary transition-colors"
+                          className="w-full flex items-center justify-between px-5 py-4 bg-surface-secondary hover:bg-surface-tertiary transition-colors"
                         >
                           <div className="flex items-center gap-3">
                             <HiOutlineChevronDown size={16} className={cn("text-text-tertiary transition-transform shrink-0", isExpanded && "rotate-180")} />
@@ -220,7 +220,7 @@ export default function CourseDetailPage() {
                                 {chapter.lessons.map((lesson) => {
                                   const ls = getLessonStatus(lesson.id)
                                   return (
-                                    <div key={lesson.id} className="flex items-center justify-between px-4 py-2.5 hover:bg-surface-secondary transition-colors gap-3">
+                                    <div key={lesson.id} className="flex items-center justify-between px-5 py-3 hover:bg-surface-secondary transition-colors gap-4">
                                       <div className="flex items-center gap-3 min-w-0 flex-1">
                                         <HiOutlinePlay size={14} className={cn("shrink-0", lesson.isFree ? "text-success" : "text-text-tertiary")} />
                                         <span className="text-sm text-text truncate">{lesson.title}</span>
@@ -361,7 +361,7 @@ export default function CourseDetailPage() {
             onChange={(e) => setDuplicateName(e.target.value)}
             placeholder="أدخل اسم الكورس الجديد"
           />
-          <div className="flex items-center gap-3 pt-2">
+          <div className="flex items-center gap-4 pt-2">
             <Button variant="primary" onClick={handleDuplicate} isLoading={duplicating} leftIcon={<HiOutlineDuplicate size={18} />} className="flex-1">
               {duplicating ? "جاري النسخ..." : "تأكيد النسخ"}
             </Button>

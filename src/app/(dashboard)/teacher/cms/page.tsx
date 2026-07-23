@@ -94,7 +94,7 @@ export default function CmsPage() {
     <div className="p-4 md:p-6 space-y-6">
       <PageHeader title="إدارة المحتوى" description="التحكم في محتوى الموقع والمظهر" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cmsCards.map((item, idx) => {
           const Icon = item.icon
           return (
@@ -140,20 +140,20 @@ export default function CmsPage() {
           </Badge>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center p-4 rounded-xl bg-surface-secondary border border-border">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center p-5 rounded-xl bg-surface-secondary border border-border">
               <p className="text-2xl font-bold text-text">{mockCmsPages.homepage.sections.length}</p>
               <p className="text-xs text-text-tertiary mt-1">أقسام الصفحة الرئيسية</p>
             </div>
-            <div className="text-center p-4 rounded-xl bg-surface-secondary border border-border">
+            <div className="text-center p-5 rounded-xl bg-surface-secondary border border-border">
               <p className="text-2xl font-bold text-text">{mockCmsPages.branding.brandName}</p>
               <p className="text-xs text-text-tertiary mt-1">العلامة التجارية</p>
             </div>
-            <div className="text-center p-4 rounded-xl bg-surface-secondary border border-border">
+            <div className="text-center p-5 rounded-xl bg-surface-secondary border border-border">
               <p className="text-2xl font-bold text-text">{Object.keys(mockCmsPages.branding.socialLinks).length}</p>
               <p className="text-xs text-text-tertiary mt-1">روابط التواصل</p>
             </div>
-            <div className="text-center p-4 rounded-xl bg-surface-secondary border border-border">
+            <div className="text-center p-5 rounded-xl bg-surface-secondary border border-border">
               <p className="text-2xl font-bold text-text">{mockCmsPages.seo.keywords.split(",").length}</p>
               <p className="text-xs text-text-tertiary mt-1">كلمات مفتاحية</p>
             </div>

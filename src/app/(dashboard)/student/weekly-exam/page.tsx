@@ -106,7 +106,7 @@ export default function WeeklyExamPage() {
           </select>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {[
             { label: "المتوسط", value: `${avgScore}%`, icon: HiChartBar, color: "text-primary bg-primary/10" },
             { label: "تم", value: `${allCompleted.length}/${week.exams.length}`, icon: HiCheckCircle, color: "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30" },
@@ -114,7 +114,7 @@ export default function WeeklyExamPage() {
             { label: "الأفضل", value: allCompleted.length > 0 ? `${Math.max(...allCompleted.map((e) => e.score || 0))}%` : "-", icon: HiStar, color: "text-purple-600 bg-purple-50 dark:bg-purple-900/30" },
           ].map((stat, i) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className="bg-surface rounded-xl border border-border p-4 text-center">
+              className="bg-surface rounded-xl border border-border p-5 text-center">
               <div className={`w-9 h-9 rounded-xl mx-auto mb-2 flex items-center justify-center ${stat.color}`}>
                 <stat.icon className="w-4 h-4" />
               </div>
@@ -125,7 +125,7 @@ export default function WeeklyExamPage() {
         </div>
 
         {performanceData.length > 0 && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-surface rounded-2xl border border-border p-5">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-surface rounded-2xl border border-border p-6">
             <h3 className="text-sm font-semibold text-text mb-4 flex items-center gap-2">
               <HiTrendingUp className="w-4 h-4 text-primary" /> أدائك عبر الأسابيع
             </h3>
@@ -143,13 +143,13 @@ export default function WeeklyExamPage() {
           </motion.div>
         )}
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           {week.exams.map((exam, i) => {
             const Icon = exam.icon
             const grade = exam.score ? getGrade(exam.score) : null
             return (
               <motion.div key={exam.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.04 }}
-                className={`bg-surface rounded-xl border p-4 flex items-center gap-4 ${exam.status === "completed" ? "border-border" : exam.status === "upcoming" ? "border-primary/20" : "border-red-200"}`}>
+                className={`bg-surface rounded-xl border p-5 flex items-center gap-4 ${exam.status === "completed" ? "border-border" : exam.status === "upcoming" ? "border-primary/20" : "border-red-200"}`}>
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${exam.color}`}>
                   <Icon className="w-5 h-5" />
                 </div>

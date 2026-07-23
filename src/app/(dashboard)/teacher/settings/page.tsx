@@ -76,7 +76,7 @@ const socialPlatforms = [
 
 function Toggle({ enabled, onChange, label, description }: { enabled: boolean; onChange: (v: boolean) => void; label: string; description?: string }) {
   return (
-    <div className="flex items-center justify-between p-4 rounded-[16px] bg-card border border-border">
+    <div className="flex items-center justify-between p-5 rounded-[16px] bg-card border border-border">
       <div>
         <p className="text-sm font-medium text-text">{label}</p>
         {description && <p className="text-xs text-text-tertiary mt-0.5">{description}</p>}
@@ -200,7 +200,7 @@ export default function SettingsPage() {
                 <CardHeader>
                   <CardTitle>إعدادات الإشعارات</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-4">
                   <Toggle label="إشعارات تسجيل طالب جديد" enabled={notifications.newStudent} onChange={(v) => setNotifications((p) => ({ ...p, newStudent: v }))} />
                   <Toggle label="إشعارات دفع جديد" enabled={notifications.newPayment} onChange={(v) => setNotifications((p) => ({ ...p, newPayment: v }))} />
                   <Toggle label="إشعارات نتائج الامتحانات" enabled={notifications.examResults} onChange={(v) => setNotifications((p) => ({ ...p, examResults: v }))} />
@@ -223,7 +223,7 @@ export default function SettingsPage() {
                   <CardHeader>
                     <CardTitle>بوابات الدفع</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="space-y-4">
                     <Toggle label="تفعيل الدفع عبر فوري" enabled={payment.fawryEnabled} onChange={(v) => setPayment((p) => ({ ...p, fawryEnabled: v }))} />
                     <Toggle label="تفعيل الدفع عبر بطاقة ائتمان" enabled={payment.creditCardEnabled} onChange={(v) => setPayment((p) => ({ ...p, creditCardEnabled: v }))} />
                     <Toggle label="تفعيل المحفظة الإلكترونية" enabled={payment.walletEnabled} onChange={(v) => setPayment((p) => ({ ...p, walletEnabled: v }))} />
@@ -340,7 +340,7 @@ export default function SettingsPage() {
                   <Card className="border-error/30 !bg-error/5">
                     <CardContent>
                       <p className="text-sm text-text mb-4">هل أنت متأكد من إنهاء جميع الجلسات؟ سيتم تسجيل خروجك من جميع الأجهزة الأخرى.</p>
-                      <div className="flex gap-3">
+                      <div className="flex gap-4">
                         <Button variant="danger" onClick={() => { setShowEndSessionConfirm(false); toast.success("تم إنهاء جميع الجلسات الأخرى") }}>
                           تأكيد إنهاء الجلسات
                         </Button>
@@ -375,7 +375,7 @@ export default function SettingsPage() {
                   {totalPages > 1 && (
                     <div className="flex items-center justify-between px-6 py-4 border-t border-border">
                       <span className="text-sm text-text-tertiary">الصفحة {historyPage} من {totalPages}</span>
-                      <div className="flex gap-1">
+                      <div className="flex gap-2">
                         <button type="button" onClick={() => setHistoryPage((p) => Math.max(1, p - 1))} disabled={historyPage === 1}
                           className="p-1.5 rounded-[10px] hover:bg-card/60 disabled:opacity-30 disabled:cursor-not-allowed text-text-secondary transition-all"
                         >
@@ -440,15 +440,15 @@ export default function SettingsPage() {
                     <CardTitle>معاينة الروابط</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex flex-wrap gap-3">
-                      {socialPlatforms.map((platform) => {
-                        const url = (social as Record<string, string>)[platform.key]
-                        if (!url) return null
-                        const Icon = platform.icon
-                        return (
-                          <a key={platform.key} href={url} target="_blank" rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-[14px] bg-card border border-border hover:border-primary/30 hover:bg-primary/5 transition-all"
-                          >
+                  <div className="flex flex-wrap gap-4">
+                    {socialPlatforms.map((platform) => {
+                      const url = (social as Record<string, string>)[platform.key]
+                      if (!url) return null
+                      const Icon = platform.icon
+                      return (
+                        <a key={platform.key} href={url} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-5 py-3 rounded-[14px] bg-card border border-border hover:border-primary/30 hover:bg-primary/5 transition-all"
+                        >
                             <Icon size={18} className={platform.color} />
                             <span className="text-sm text-text">{platform.label}</span>
                           </a>

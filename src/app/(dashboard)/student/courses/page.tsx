@@ -80,7 +80,7 @@ export default function StudentCoursesPage() {
                   </div>
                 </div>
 
-                <div className="p-4">
+                <div className="p-5">
                   {/* Progress bar */}
                   <div className="flex items-center justify-between text-xs text-text-secondary mb-1.5">
                     <span>التقدم</span>

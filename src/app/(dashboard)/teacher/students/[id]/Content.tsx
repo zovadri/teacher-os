@@ -295,7 +295,7 @@ export default function StudentDetailPage() {
           <>
             <TabPanel id="summary" activeTab={activeTab}>
               <div className="space-y-6">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                   <StatsCard title="نسبة الحضور" value={`${extended.attSummary.present > 0 ? Math.round((extended.attSummary.present / extended.attSummary.total) * 100) : 90}%`} icon={HiOutlineCalendar} color="primary" />
                   <StatsCard title="متوسط الامتحانات" value={`${Math.floor(det() * 15) + 75}%`} icon={HiOutlineChartBar} color="success" />
                   <StatsCard title="متوسط الواجبات" value={`${Math.floor(det() * 15) + 80}%`} icon={HiOutlineClipboardCheck} color="warning" />
@@ -320,7 +320,7 @@ export default function StudentDetailPage() {
                           </PieChart>
                         </ResponsiveContainer>
                       </div>
-                      <div className="flex flex-wrap justify-center gap-4 mt-2">
+                      <div className="flex flex-wrap justify-center gap-6 mt-2">
                         {extended.gradeData.map((item, i) => (
                           <div key={item.name} className="flex items-center gap-1.5 text-xs text-text-secondary">
                             <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[i] }} />
@@ -347,7 +347,7 @@ export default function StudentDetailPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {extended.courses.filter(c => c.status === "in_progress").slice(0, 3).map((course) => (
-                      <div key={course.id} className="flex items-center gap-4 p-3 rounded-xl bg-surface-secondary border border-border">
+                      <div key={course.id} className="flex items-center gap-5 p-4 rounded-xl bg-surface-secondary border border-border">
                         <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                           <HiOutlineBookOpen className="text-primary" size={20} />
                         </div>
@@ -443,7 +443,7 @@ export default function StudentDetailPage() {
 
             <TabPanel id="attendance" activeTab={activeTab}>
               <div className="space-y-6">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                   <StatsCard title="إجمالي الحصص" value={extended.attSummary.total} icon={HiOutlineCalendar} color="primary" />
                   <StatsCard title="حاضر" value={extended.attSummary.present} icon={HiOutlineCheck} color="success" />
                   <StatsCard title="غائب" value={extended.attSummary.absent} icon={HiOutlineBan} color="error" />
@@ -485,10 +485,10 @@ export default function StudentDetailPage() {
                   </CardContent>
                 </Card>
               ) : (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {extended.certificates.map((cert) => (
                     <Card key={cert.id} hover>
-                      <CardContent className="space-y-3">
+                      <CardContent className="space-y-4">
                         <div className="flex items-start justify-between">
                           <div className="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center">
                             <HiOutlineAcademicCap className="text-amber-600 dark:text-amber-400" size={22} />

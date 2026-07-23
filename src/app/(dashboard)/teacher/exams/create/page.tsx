@@ -162,7 +162,7 @@ export default function CreateExamPage() {
             <CardContent className="space-y-4">
               <Input label="عنوان الامتحان" value={form.title} onChange={(e) => update("title", e.target.value)} placeholder="مثال: اختبار النحو الشامل" />
               <Textarea label="الوصف" value={form.description} onChange={(e) => update("description", e.target.value)} placeholder="وصف الامتحان..." />
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <Select label="الكورس" value={form.courseId} onChange={(e) => { update("courseId", e.target.value); update("chapterId", "") }} options={mockCourses.map((c) => ({ value: c.id, label: c.title }))} placeholder="اختر كورساً" />
                 <Select label="الفصل (اختياري)" value={form.chapterId} onChange={(e) => update("chapterId", e.target.value)} options={selectedCourse?.chapters.map((ch) => ({ value: ch.id, label: ch.title })) || []} placeholder="اختر فصلاً" />
               </div>
@@ -174,7 +174,7 @@ export default function CreateExamPage() {
               <CardTitle>التوقيت</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-6">
                 <Input label="المدة (بالدقائق)" type="number" value={form.duration} onChange={(e) => update("duration", e.target.value)} />
                 <Input label="تاريخ البداية" type="date" value={form.startDate} onChange={(e) => update("startDate", e.target.value)} />
                 <Input label="تاريخ النهاية" type="date" value={form.endDate} onChange={(e) => update("endDate", e.target.value)} />
@@ -210,7 +210,7 @@ export default function CreateExamPage() {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {[
                   { type: "multiple-choice" as QuestionType, label: "اختيار من متعدد" },
                   { type: "true-false" as QuestionType, label: "صح وخطأ" },
@@ -224,12 +224,12 @@ export default function CreateExamPage() {
 
               {bankQuestions.length > 0 && (
                 <details className="bg-surface-secondary rounded-xl border border-border">
-                  <summary className="px-4 py-3 text-sm font-medium text-text cursor-pointer hover:bg-surface-tertiary rounded-xl transition-colors">
+                  <summary className="px-5 py-4 text-sm font-medium text-text cursor-pointer hover:bg-surface-tertiary rounded-xl transition-colors">
                     الأسئلة الموجودة في بنك الأسئلة ({bankQuestions.length})
                   </summary>
                   <div className="divide-y divide-border max-h-60 overflow-y-auto">
                     {bankQuestions.map((q) => (
-                      <div key={q.id} className="flex items-center justify-between px-4 py-2.5 hover:bg-surface transition-colors">
+                      <div key={q.id} className="flex items-center justify-between px-5 py-3 hover:bg-surface transition-colors">
                         <div className="min-w-0 flex-1">
                           <p className="text-sm text-text truncate">{q.text}</p>
                           <div className="flex items-center gap-2 text-xs text-text-tertiary">
@@ -260,7 +260,7 @@ export default function CreateExamPage() {
 
           <div className="space-y-4">
             {questions.map((q, idx) => (
-              <motion.div key={q.id} layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="p-5 rounded-xl bg-surface border border-border">
+              <motion.div key={q.id} layout initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="p-6 rounded-xl bg-surface border border-border">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <span className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">{idx + 1}</span>
@@ -279,7 +279,7 @@ export default function CreateExamPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex gap-3">
+                  <div className="flex gap-4">
                     <div className="flex-1">
                       <input type="text" value={q.text} onChange={(e) => updateQuestion(q.id, { text: e.target.value })} placeholder="اكتب نص السؤال..." className="w-full px-4 py-2.5 rounded-xl border border-border bg-surface-secondary text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
                     </div>
@@ -290,9 +290,9 @@ export default function CreateExamPage() {
                   </div>
 
                   {q.type === "multiple-choice" && (
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {q.choices?.map((choice, ci) => (
-                        <div key={choice.id} className="flex items-center gap-3 p-3 rounded-xl bg-surface-secondary border border-border">
+                        <div key={choice.id} className="flex items-center gap-4 p-4 rounded-xl bg-surface-secondary border border-border">
                           <input type="radio" name={`correct-${q.id}`} checked={choice.isCorrect} onChange={() => q.choices?.forEach((c) => updateChoice(q.id, c.id, { isCorrect: c.id === choice.id }))} className="w-4 h-4 accent-primary shrink-0" />
                           <input type="text" value={choice.text} onChange={(e) => updateChoice(q.id, choice.id, { text: e.target.value })} placeholder={`اختيار ${ci + 1}`} className="flex-1 bg-transparent text-sm border-none outline-none focus:ring-0" />
                         </div>
@@ -301,7 +301,7 @@ export default function CreateExamPage() {
                   )}
 
                   {q.type === "true-false" && (
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                       {[{ label: "صح", value: true }, { label: "خطأ", value: false }].map((opt) => (
                         <button type="button" key={opt.label} onClick={() => updateQuestion(q.id, { correctAnswer: opt.value })}
                           className={`px-6 py-2.5 rounded-xl text-sm font-medium border transition-all ${q.correctAnswer === opt.value ? "bg-primary/10 border-primary text-primary" : "border-border hover:border-primary/30"}`}>
@@ -312,7 +312,7 @@ export default function CreateExamPage() {
                   )}
 
                   {q.type === "essay" && (
-                    <div className="p-4 rounded-xl bg-surface-secondary border border-border">
+                    <div className="p-5 rounded-xl bg-surface-secondary border border-border">
                       <p className="text-sm text-text-secondary">سيقوم الطالب بكتابة إجابة نصية - يتم التصحيح يدوياً</p>
                     </div>
                   )}
@@ -320,7 +320,7 @@ export default function CreateExamPage() {
                   <AnimatePresence>
                     {previewQuestion === q.id && (
                       <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                        <div className="p-4 rounded-xl bg-surface-tertiary border border-border">
+                          <div className="p-5 rounded-xl bg-surface-tertiary border border-border">
                           <p className="text-xs font-medium text-text-secondary mb-2">معاينة السؤال:</p>
                           <p className="font-medium mb-3">{q.text || "نص السؤال"}</p>
                           {q.type === "multiple-choice" && q.choices?.map((c) => (
@@ -369,13 +369,13 @@ export default function CreateExamPage() {
                 { value: "10", label: "10 محاولات" },
               ]} />
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {[
                   { key: "shuffleQuestions", label: "خلط الأسئلة", desc: "ترتيب عشوائي للأسئلة لكل طالب" },
                   { key: "shuffleChoices", label: "خلط الاختيارات", desc: "ترتيب عشوائي لخيارات الإجابة" },
                   { key: "showResultImmediately", label: "إظهار النتيجة فوراً", desc: "يطلع الطالب على نتيجته بعد الانتهاء مباشرة" },
                 ].map((opt) => (
-                  <div key={opt.key} className="flex items-center justify-between p-4 rounded-xl bg-surface-secondary border border-border">
+                  <div key={opt.key} className="flex items-center justify-between p-5 rounded-xl bg-surface-secondary border border-border">
                     <div>
                       <p className="text-sm font-medium text-text">{opt.label}</p>
                       <p className="text-xs text-text-tertiary">{opt.desc}</p>
@@ -388,16 +388,16 @@ export default function CreateExamPage() {
                 ))}
               </div>
 
-              <div className="p-5 rounded-xl bg-surface-secondary border border-border">
-                <h3 className="font-semibold text-text mb-3">ملخص الامتحان</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="p-6 rounded-xl bg-surface-secondary border border-border">
+                <h3 className="font-semibold text-text mb-4">ملخص الامتحان</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {[
                     { label: "الأسئلة", value: questions.length },
                     { label: "الدرجة", value: `${form.totalGrade} درجة` },
                     { label: "المدة", value: `${form.duration} دقيقة` },
                     { label: "المحاولات", value: form.maxAttempts },
                   ].map((s) => (
-                    <div key={s.label} className="p-3 rounded-lg bg-surface border border-border text-center">
+                    <div key={s.label} className="p-4 rounded-lg bg-surface border border-border text-center">
                       <p className="text-lg font-bold text-text">{s.value}</p>
                       <p className="text-xs text-text-tertiary">{s.label}</p>
                     </div>
@@ -409,7 +409,7 @@ export default function CreateExamPage() {
 
           <div className="flex justify-between">
             <Button variant="secondary" size="lg" onClick={() => setStep(1)}>السابق</Button>
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <Button variant="secondary" size="lg" leftIcon={<HiOutlineEye size={18} />}>
                 معاينة
               </Button>

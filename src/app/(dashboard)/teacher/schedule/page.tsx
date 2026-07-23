@@ -104,7 +104,7 @@ export default function SchedulePage() {
       >
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}
-          className="grid grid-cols-1 sm:grid-cols-4 gap-3"
+          className="grid grid-cols-1 sm:grid-cols-4 gap-5"
         >
           <StatsCard title="إجمالي الحصص" value={slots.length} icon={HiOutlineCalendar} color="primary" />
           <StatsCard title="المدرسين" value={teachers.length} icon={HiOutlineUserGroup} color="success" />
@@ -229,7 +229,7 @@ export default function SchedulePage() {
                 {rooms.map((r) => (
                   <div key={r.id} className="flex items-center justify-between p-3 rounded-[14px] bg-card/40 border border-border">
                     <span className="text-sm font-medium text-text">{r.name}</span>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4">
                       <span className="text-xs text-text-tertiary">{r.capacity} مقعد</span>
                       <Progress value={r.occupancy} size="sm" variant={r.occupancy > 85 ? "error" : "primary"} className="w-16" />
                       <span className="text-xs text-text-tertiary">{r.occupancy}%</span>
@@ -244,7 +244,7 @@ export default function SchedulePage() {
 
       <Modal isOpen={showModal} onClose={() => setShowModal(false)} title="إضافة حصة جديدة" size="md">
         <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             <Select
               label="اليوم"
               options={days.map((d, i) => ({ value: String(i), label: d }))}
@@ -289,10 +289,10 @@ export default function SchedulePage() {
               className="col-span-2"
             />
           </div>
-          <div className="flex items-center gap-2 p-3 rounded-[12px] bg-warning/5 border border-warning/10 text-xs text-warning">
+          <div className="flex items-center gap-3 p-4 rounded-[12px] bg-warning/5 border border-warning/10 text-xs text-warning">
             <HiOutlineExclamationCircle className="w-4 h-4 shrink-0" /> سيتم التحقق من تعارض المواعيد تلقائياً
           </div>
-          <div className="flex gap-3 pt-2">
+          <div className="flex gap-4 pt-2">
             <Button variant="primary" className="flex-1" onClick={addSlot}>إضافة</Button>
             <Button variant="secondary" onClick={() => setShowModal(false)}>إلغاء</Button>
           </div>

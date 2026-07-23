@@ -63,7 +63,7 @@ export default function HomeworkPage() {
         <StatsCard title="تحت الإعداد" value={mockHomework.filter((h) => h.status === "draft").length} icon={HiOutlineClock} color="warning" />
       </motion.div>
 
-      <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
+      <div className="flex flex-col sm:flex-row gap-5 flex-wrap">
         <SearchInput value={search} onChange={setSearch} placeholder="بحث عن واجب..." className="sm:max-w-xs flex-1" />
         <select value={courseFilter} onChange={(e) => setCourseFilter(e.target.value)}
           className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
@@ -93,7 +93,7 @@ export default function HomeworkPage() {
             const total = submitted + notSubmitted
             return (
               <motion.div key={hw.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-                <div className="group bg-card border border-border rounded-[24px] p-5  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
+                <div className="group bg-card border border-border rounded-[24px] p-6  hover:-translate-y-0.5 hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-250 cursor-pointer h-full"
                   onClick={() => router.push(`/teacher/homework/${hw.id}`)}
                 >
                   <div className="flex items-start justify-between mb-4">
@@ -107,19 +107,19 @@ export default function HomeworkPage() {
                   </div>
                   <h3 className="font-semibold text-text mb-0.5 truncate">{hw.title}</h3>
                   <p className="text-xs text-text-tertiary mb-4">{course?.title || "كورس عام"}</p>
-                  <div className="grid grid-cols-3 gap-3 mb-4">
+                  <div className="grid grid-cols-3 gap-4 mb-4">
                     {[
                       { label: "الموعد", value: hw.deadline.toLocaleDateString("ar-EG") },
                       { label: "تم التسليم", value: `${submitted}/${total}` },
                       { label: "متوسط الدرجة", value: hw.analytics.averageGrade },
                     ].map((s) => (
-                      <div key={s.label} className="p-2.5 rounded-[14px] bg-card/40 border border-border text-center backdrop-blur">
+                      <div key={s.label} className="p-3 rounded-[14px] bg-card/40 border border-border text-center backdrop-blur">
                         <p className="font-bold text-text text-sm">{s.value}</p>
                         <p className="text-[10px] text-text-tertiary">{s.label}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center justify-between pt-3 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity duration-250">
+                  <div className="flex items-center justify-between pt-4 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity duration-250">
                     <button type="button" onClick={(e) => { e.stopPropagation(); router.push(`/teacher/homework/${hw.id}`) }}
                       className="p-1.5 rounded-[10px] text-text-tertiary hover:text-primary hover:bg-primary/10 transition-all"><HiOutlineEye className="w-4 h-4" /></button>
                     <Badge variant={hw.allowResubmit ? "info" : "default"} size="sm">

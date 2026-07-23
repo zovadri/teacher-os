@@ -195,7 +195,7 @@ export default function AnalysisPage() {
 
       {!loading && selectedExamId && (
         <>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {statsCards.map((s, i) => (
               <motion.div key={s.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
                 <StatsCard title={s.title} value={s.value} icon={s.icon} color={s.color} subtitle={s.subtitle} />
@@ -203,7 +203,7 @@ export default function AnalysisPage() {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-4">
             <div className="w-44">
               <Select options={[{ value: "الكل", label: "كل الصعوبات" }, { value: "easy", label: "سهل" }, { value: "medium", label: "متوسط" }, { value: "hard", label: "صعب" }]} value={difficultyFilter} onChange={(e) => setDifficultyFilter(e.target.value)} />
             </div>

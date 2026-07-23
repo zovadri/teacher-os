@@ -4,7 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import {
-  HiMail,
   HiLockClosed,
   HiEye,
   HiEyeOff,
@@ -35,7 +34,6 @@ export default function RegisterPage() {
 
   const [form, setForm] = useState({
     fullName: "",
-    email: "",
     phone: "",
     password: "",
     confirmPassword: "",
@@ -93,16 +91,6 @@ export default function RegisterPage() {
                       onChange={(e) => updateField("fullName", e.target.value)}
                       placeholder="أدخل اسمك الكامل"
                       leftIcon={<HiUser className="w-5 h-5" />}
-                      required
-                    />
-
-                    <Input
-                      label="البريد الإلكتروني"
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => updateField("email", e.target.value)}
-                      placeholder="أدخل بريدك الإلكتروني"
-                      leftIcon={<HiMail className="w-5 h-5" />}
                       required
                     />
 

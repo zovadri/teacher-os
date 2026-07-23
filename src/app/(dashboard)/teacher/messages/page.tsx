@@ -84,13 +84,13 @@ export default function MessagesPage() {
         description="التواصل مع الطلاب وأولياء الأمور"
       />
 
-      <div className="flex gap-4 flex-1 min-h-0">
+      <div className="flex gap-6 flex-1 min-h-0">
         {/* Conversation List */}
         <div className={cn(
           "w-full md:w-80 lg:w-96 shrink-0 flex flex-col bg-card border border-border rounded-[24px] overflow-hidden",
           !showMobileList && "hidden md:flex",
         )}>
-          <div className="p-4 border-b border-border space-y-3">
+          <div className="p-5 border-b border-border space-y-4">
             <div className="flex items-center gap-2">
               <div className="flex-1">
                 <SearchInput value={search} onChange={setSearch} placeholder="بحث في المحادثات..." />
@@ -114,12 +114,12 @@ export default function MessagesPage() {
                   key={conv.id}
                   onClick={() => { setSelectedConvId(conv.id); setShowMobileList(false) }}
                   className={cn(
-                    "w-full text-right p-4 transition-all duration-200",
+                    "w-full text-right p-5 transition-all duration-200",
                     "hover:bg-card/40",
                     selectedConvId === conv.id && "bg-primary/5",
                   )}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-4">
                     <div className="relative shrink-0">
                       <div className="w-11 h-11 rounded-full bg-primary/10 border border-primary/20 overflow-hidden">
                         <img src={conv.participantAvatar} alt="" className="w-full h-full object-cover" />
@@ -155,7 +155,7 @@ export default function MessagesPage() {
           {activeConversation ? (
             <>
               <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <button type="button" className="md:hidden p-1 text-text-tertiary hover:text-text transition-colors" onClick={() => setShowMobileList(true)}>
                     <HiOutlineChevronRight className="w-5 h-5" />
                   </button>
@@ -167,7 +167,7 @@ export default function MessagesPage() {
                     <p className="text-xs text-text-tertiary">متصل الآن</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2">
                   <button type="button"
                     onClick={() => toast.success("تم تحديث الحالة")}
                     className="p-2 rounded-[12px] text-text-tertiary hover:text-warning hover:bg-card/60 transition-all"
@@ -187,7 +187,7 @@ export default function MessagesPage() {
                 {activeConversation.messages.map((msg) => (
                   <div key={msg.id} className={cn("flex", msg.senderId === "t-1" ? "justify-start" : "justify-end")}>
                     <div className={cn(
-                      "max-w-[75%] p-3.5 rounded-[20px]",
+                      "max-w-[75%] p-4 rounded-[20px]",
                       msg.senderId === "t-1"
                         ? "bg-primary/20 border border-primary/30 text-text rounded-tr-sm"
                         : "bg-card/80 backdrop-blur border border-border rounded-tl-sm",
@@ -209,8 +209,8 @@ export default function MessagesPage() {
                 ))}
               </div>
 
-              <div className="p-4 border-t border-border">
-                <div className="flex items-center gap-2">
+              <div className="p-5 border-t border-border">
+                <div className="flex items-center gap-3">
                   <input
                     type="text"
                     placeholder="اكتب رسالتك..."
@@ -262,7 +262,7 @@ export default function MessagesPage() {
             <HiOutlinePaperClip className="w-4 h-4 text-text-tertiary" />
             <span className="text-sm text-text-tertiary">إرفاق ملف</span>
           </div>
-          <div className="pt-4 flex gap-3">
+          <div className="pt-4 flex gap-4">
             <Button
               variant="primary"
               size="lg"

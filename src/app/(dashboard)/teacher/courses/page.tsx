@@ -55,7 +55,7 @@ export default function CoursesPage() {
         }
       />
 
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col sm:flex-row gap-5">
         <SearchInput value={search} onChange={setSearch} placeholder="بحث عن كورس..." className="sm:max-w-xs flex-1" />
         <select value={gradeFilter} onChange={(e) => setGradeFilter(e.target.value)}
           className="px-4 py-2.5 bg-card border border-border rounded-[16px] text-sm text-text appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/30 ">
@@ -91,7 +91,7 @@ export default function CoursesPage() {
                     </span>
                   </div>
                 </div>
-                <div className="p-5">
+                <div className="p-6">
                   <h3 className="font-semibold text-text mb-1 truncate">{course.title}</h3>
                   <p className="text-xs text-text-tertiary mb-3 line-clamp-2 leading-relaxed">{course.shortDescription}</p>
                   <div className="flex items-center gap-3 text-xs text-text-secondary">
