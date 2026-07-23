@@ -17,7 +17,7 @@ interface StatsCardProps {
 
 const colorMap = {
   primary: { bg: "bg-primary-100", text: "text-primary", border: "border-primary-200", gradient: ["#7C5CFC", "#5B3DC4"] },
-  success: { bg: "bg-success/10", text: "text-success", border: "border-success/20", gradient: ["#10B981", "#059669"] },
+  success: { bg: "bg-success/10", text: "text-success", border: "border-success/20", gradient: ["#0EA5E9", "#0284C7"] },
   warning: { bg: "bg-warning/10", text: "text-warning", border: "border-warning/20", gradient: ["#F59E0B", "#D97706"] },
   error: { bg: "bg-error/10", text: "text-error", border: "border-error/20", gradient: ["#EF4444", "#DC2626"] },
   info: { bg: "bg-info/10", text: "text-info", border: "border-info/20", gradient: ["#6366F1", "#4F46E5"] },
@@ -39,10 +39,10 @@ export function StatsCard({ title, value, icon: Icon, trend, sparkline, color = 
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 200, damping: 25 }}
       className={cn(
-        "group bg-card/80 backdrop-blur-xl border border-border rounded-[20px] p-5",
-        "shadow-[0_4px_24px_rgba(124,92,252,0.04),inset_0_1px_0_rgba(255,255,255,0.8)]",
-        "transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(124,92,252,0.08)] hover:border-border-light relative",
-        "before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-primary/10 before:to-transparent before:rounded-t-[20px] before:pointer-events-none",
+        "group bg-card/70 backdrop-blur-2xl border border-border rounded-[20px] p-5",
+        "shadow-[0_4px_24px_rgba(124,92,252,0.03),0_1px_0_rgba(255,255,255,0.9)_inset]",
+        "transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_48px_rgba(124,92,252,0.06),0_1px_0_rgba(255,255,255,0.9)_inset] hover:border-border-light relative",
+        "before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-primary/15 before:to-transparent before:rounded-t-[20px] before:pointer-events-none",
         className,
       )}
     >

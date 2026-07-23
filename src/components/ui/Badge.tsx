@@ -13,13 +13,13 @@ interface BadgeProps {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: "bg-card/80 backdrop-blur-xl border border-border text-text-secondary",
-  neutral: "bg-surface-secondary backdrop-blur-xl border border-border text-text-secondary",
-  primary: "bg-primary-100 backdrop-blur-xl border border-primary-200 text-primary",
-  success: "bg-success/10 backdrop-blur-xl border border-success/20 text-success",
-  warning: "bg-warning/10 backdrop-blur-xl border border-warning/20 text-warning",
-  error: "bg-error/10 backdrop-blur-xl border border-error/20 text-error",
-  info: "bg-info/10 backdrop-blur-xl border border-info/20 text-info",
+  default: "bg-card/70 backdrop-blur-2xl border border-border text-text-secondary",
+  neutral: "bg-surface-secondary backdrop-blur-2xl border border-border text-text-secondary",
+  primary: "bg-primary-100 backdrop-blur-2xl border border-primary-200 text-primary",
+  success: "bg-success/10 backdrop-blur-2xl border border-success/20 text-success",
+  warning: "bg-warning/10 backdrop-blur-2xl border border-warning/20 text-warning",
+  error: "bg-error/10 backdrop-blur-2xl border border-error/20 text-error",
+  info: "bg-info/10 backdrop-blur-2xl border border-info/20 text-info",
 }
 
 const sizeStyles: Record<BadgeSize, string> = {
@@ -30,7 +30,7 @@ const sizeStyles: Record<BadgeSize, string> = {
 export function Badge({ children, variant = "default", size = "md", className, dot = false, pulse = false }: BadgeProps) {
   return (
     <span className={cn(
-      "inline-flex items-center gap-1.5 font-medium rounded-[8px]",
+      "inline-flex items-center gap-1.5 font-medium rounded-[8px] tracking-wide",
       variantStyles[variant],
       sizeStyles[size],
       className,

@@ -73,11 +73,11 @@ function LoginForm() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden bg-surface-secondary">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(91,124,255,0.12),transparent_60%)] animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(91,124,255,0.06),transparent_60%)] animate-pulse" style={{ animationDuration: '12s' }} />
-        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(91,124,255,0.03),transparent_70%)]" />
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(124,92,252,0.08),transparent_60%)] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.04),transparent_60%)] animate-pulse" style={{ animationDuration: '12s' }} />
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[150px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-info/4 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(124,92,252,0.02),transparent_70%)]" />
       </div>
 
       <div className="w-full max-w-sm relative z-10">

@@ -31,9 +31,10 @@ const itemFade = {
 function FloatingOrbs() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute top-1/4 -right-20 w-72 h-72 rounded-full bg-primary/3 blur-3xl" />
+      <div className="absolute top-1/4 -right-20 w-72 h-72 rounded-full bg-primary/4 blur-3xl" />
       <div className="absolute -bottom-10 -left-20 w-96 h-96 rounded-full bg-info/3 blur-3xl" />
-      <div className="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-primary/2 blur-2xl" />
+      <div className="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-primary/3 blur-2xl" />
+      <div className="absolute top-2/3 right-1/3 w-32 h-32 rounded-full bg-[#0EA5E9]/2 blur-2xl" />
     </div>
   )
 }
@@ -70,10 +71,12 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/8 text-primary text-xs font-medium rounded-full mb-6 border border-primary/15"
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/8 text-primary text-xs font-medium rounded-full mb-6 border border-primary/15 backdrop-blur-sm"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                Enterprise Education Platform
+                <span className="tracking-wider">Enterprise Education Platform</span>
+                <span className="w-6 h-[1px] bg-primary/30" />
+                <span className="text-[10px] opacity-60">v3.0</span>
               </motion.div>
               <h1 className="text-[40px] sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-4 tracking-tight">
                 <span className="bg-gradient-to-r from-text via-text to-primary bg-clip-text text-transparent">نظام تشغيل</span>
@@ -176,7 +179,7 @@ export default function HomePage() {
             ].map((feat, i) => (
               <motion.div key={feat.title} variants={itemFade}>
                 <Card hover className="p-7 h-full">
-                  <div className="w-12 h-12 rounded-[16px] bg-primary/8 flex items-center justify-center mb-5 border border-primary/10 group-hover:bg-primary/12 transition-colors duration-500">
+                  <div className="w-12 h-12 rounded-[16px] bg-gradient-to-br from-primary/8 to-primary/4 flex items-center justify-center mb-5 border border-primary/10 group-hover:border-primary/20 group-hover:from-primary/12 group-hover:to-primary/6 transition-all duration-500">
                     <feat.icon className="text-primary" size={22} />
                   </div>
                   <h3 className="font-semibold text-[18px] mb-2.5 text-text">{feat.title}</h3>
@@ -188,7 +191,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-surface/40 border-y border-border/30">
+      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(124,92,252,0.02),transparent_70%)] border-y border-border/20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...stagger} className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {[
@@ -200,9 +203,10 @@ export default function HomePage() {
               <motion.div
                 key={stat.label}
                 variants={itemFade}
-                className="bg-card/70 backdrop-blur-sm border border-border rounded-[20px] p-7 text-center hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5"
+                className="bg-card/70 backdrop-blur-2xl border border-border rounded-[20px] p-7 text-center hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5 relative overflow-hidden"
               >
-                <p className="text-[36px] font-bold bg-gradient-to-b from-primary to-info bg-clip-text text-transparent mb-1">{stat.value}</p>
+                <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-transparent pointer-events-none" />
+                <p className="text-[36px] font-bold bg-gradient-to-b from-primary to-info bg-clip-text text-transparent mb-1 font-mono tracking-tight">{stat.value}</p>
                 <p className="text-sm text-text-secondary">{stat.label}</p>
               </motion.div>
             ))}
@@ -265,7 +269,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-surface/40 border-y border-border/30">
+      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.015),transparent_70%)] border-y border-border/20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
             <span className="text-primary text-sm font-medium mb-3 block tracking-wider uppercase">Testimonials</span>
@@ -379,7 +383,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-surface/40 border-y border-border/30">
+      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(124,92,252,0.02),transparent_70%)] border-y border-border/20">
         <div className="max-w-3xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-14">
             <span className="text-primary text-sm font-medium mb-3 block tracking-wider uppercase">FAQ</span>

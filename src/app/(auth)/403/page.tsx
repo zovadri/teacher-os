@@ -7,7 +7,7 @@ import Button from "@/components/ui/Button"
 
 export default function ForbiddenPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-[radial-gradient(ellipse_at_center,rgba(124,92,252,0.03),transparent_70%)]">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

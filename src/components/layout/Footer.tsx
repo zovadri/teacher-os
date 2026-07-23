@@ -23,7 +23,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-surface-secondary border-t border-border">
+    <footer className="bg-[radial-gradient(ellipse_at_top,rgba(124,92,252,0.02),transparent_70%)] bg-surface-secondary border-t border-border">
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-16 pb-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1">
