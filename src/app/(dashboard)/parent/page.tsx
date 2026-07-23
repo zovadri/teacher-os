@@ -8,6 +8,10 @@ import {
   HiOutlineUserGroup, HiOutlineCurrencyDollar, HiOutlineBell,
   HiOutlineChevronLeft, HiOutlineStar, HiOutlineExclamation,
 } from "react-icons/hi"
+import DashboardHeader from "@/components/layout/DashboardHeader"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
+import { StatsCard } from "@/components/ui/StatsCard"
+import { Badge } from "@/components/ui/Badge"
 
 const childrenData = [
   {
@@ -44,162 +48,157 @@ const notifications = [
   { id: "n3", title: "تذكير بالدفع", message: "اشتراك أحمد سينتهي قريباً", type: "warning", time: "منذ يوم" },
 ]
 
-const statusColors: Record<string, string> = {
-  active: "bg-success/10 text-success",
-  pending: "bg-warning/10 text-warning",
-  expired: "bg-error/10 text-error",
-}
-
 export default function ParentDashboard() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-surface-secondary">
-      <div className="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
-
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold">لوحة تحكم ولي الأمر</h1>
-          <p className="text-text-secondary text-sm">متابعة أداء أبنائك وإدارة الاشتراكات</p>
-        </div>
-
-        {/* Children Overview */}
-        <div className="grid md:grid-cols-2 gap-4">
+    <div>
+      <DashboardHeader title="لوحة تحكم ولي الأمر" subtitle="متابعة أداء أبنائك وإدارة الاشتراكات" />
+      <div className="p-4 md:p-6 space-y-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid md:grid-cols-2 gap-4">
           {childrenData.map((child, i) => (
             <motion.div
               key={child.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="p-5 rounded-xl bg-surface border border-border hover:shadow-md transition-shadow"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-lg font-bold">
-                    {child.name[0]}
+              <Card hover>
+                <CardContent className="pt-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-[14px] bg-primary-100 border border-primary-200 flex items-center justify-center text-primary text-lg font-bold">
+                        {child.name[0]}
+                      </div>
+                      <div>
+                        <Link href={`/parent/children/${child.id}`} className="font-semibold text-text hover:text-primary transition-colors">{child.name}</Link>
+                        <p className="text-xs text-text-tertiary">{child.grade} • {child.school}</p>
+                      </div>
+                    </div>
+                    <Badge variant={child.subscriptionStatus === "نشط" ? "success" : "warning"} dot>
+                      {child.subscriptionStatus}
+                    </Badge>
                   </div>
-                  <div>
-                    <Link href={`/parent/children/${child.id}`} className="font-semibold hover:text-primary transition-colors">{child.name}</Link>
-                    <p className="text-xs text-text-tertiary">{child.grade} • {child.school}</p>
-                  </div>
-                </div>
-                <span className={`px-2.5 py-1 rounded-lg text-xs font-medium ${statusColors[child.subscriptionStatus === "نشط" ? "active" : "pending"]}`}>
-                  {child.subscriptionStatus === "نشط" ? "نشط" : "معلق"}
-                </span>
-              </div>
 
-              <div className="grid grid-cols-3 gap-3 mb-4">
-                <div className="text-center p-2 rounded-lg bg-surface-secondary">
-                  <p className="text-lg font-bold text-primary">{child.averageGrade}٪</p>
-                  <p className="text-[10px] text-text-tertiary">المتوسط</p>
-                </div>
-                <div className="text-center p-2 rounded-lg bg-surface-secondary">
-                  <p className="text-lg font-bold">{child.coursesCount}</p>
-                  <p className="text-[10px] text-text-tertiary">كورسات</p>
-                </div>
-                <div className="text-center p-2 rounded-lg bg-surface-secondary">
-                  <p className="text-lg font-bold text-success">{child.examsPassed}</p>
-                  <p className="text-[10px] text-text-tertiary">ناجح</p>
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                {child.recentGrades.slice(0, 3).map((g) => (
-                  <div key={g.subject} className="flex items-center justify-between text-xs">
-                    <span className="text-text-secondary">{g.subject}</span>
-                    <span className="font-medium">{g.grade}٪</span>
+                  <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="text-center p-2 rounded-[12px] bg-card/60 border border-border">
+                      <p className="text-lg font-bold text-primary">{child.averageGrade}%</p>
+                      <p className="text-[10px] text-text-tertiary">المتوسط</p>
+                    </div>
+                    <div className="text-center p-2 rounded-[12px] bg-card/60 border border-border">
+                      <p className="text-lg font-bold">{child.coursesCount}</p>
+                      <p className="text-[10px] text-text-tertiary">كورسات</p>
+                    </div>
+                    <div className="text-center p-2 rounded-[12px] bg-card/60 border border-border">
+                      <p className="text-lg font-bold text-success">{child.examsPassed}</p>
+                      <p className="text-[10px] text-text-tertiary">ناجح</p>
+                    </div>
                   </div>
-                ))}
-              </div>
+
+                  <div className="space-y-1.5">
+                    {child.recentGrades.slice(0, 3).map((g) => (
+                      <div key={g.subject} className="flex items-center justify-between text-xs">
+                        <span className="text-text-secondary">{g.subject}</span>
+                        <span className="font-medium">{g.grade}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-
-          {/* Recent Grades */}
-          <div className="lg:col-span-2 p-6 rounded-xl bg-surface border border-border">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold flex items-center gap-2">
-                <HiOutlineChartBar className="text-primary" size={18} />
-                آخر الدرجات
-              </h2>
-              <Link href="/parent/children" className="text-xs text-primary hover:underline">عرض الكل</Link>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-right p-3 font-medium text-text-secondary">الطالب</th>
-                    <th className="text-right p-3 font-medium text-text-secondary">المادة</th>
-                    <th className="text-center p-3 font-medium text-text-secondary">الدرجة</th>
-                    <th className="text-center p-3 font-medium text-text-secondary">التقييم</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {childrenData.flatMap((child) =>
-                    child.recentGrades.slice(0, 2).map((g, i) => (
-                      <tr key={`${child.id}-${i}`} className="border-b border-border last:border-0 hover:bg-surface-secondary/50 transition-colors">
-                        <td className="p-3 font-medium">{child.name}</td>
-                        <td className="p-3 text-text-secondary">{g.subject}</td>
-                        <td className="p-3 text-center font-medium">{g.grade}٪</td>
-                        <td className="p-3 text-center">
-                          <span className={`px-2 py-0.5 rounded-lg text-xs font-medium ${
-                            g.grade >= 90 ? "bg-success/10 text-success" :
-                            g.grade >= 70 ? "bg-primary/10 text-primary" :
-                            g.grade >= 50 ? "bg-warning/10 text-warning" :
-                            "bg-error/10 text-error"
-                          }`}>
-                            {g.grade >= 90 ? "ممتاز" : g.grade >= 70 ? "جيد جداً" : g.grade >= 50 ? "مقبول" : "ضعيف"}
-                          </span>
-                        </td>
+          <div className="lg:col-span-2">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>
+                    <span className="flex items-center gap-2">
+                      <HiOutlineChartBar className="text-primary" size={18} />
+                      آخر الدرجات
+                    </span>
+                  </CardTitle>
+                  <Link href="/parent/children" className="text-sm text-primary hover:underline">عرض الكل</Link>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-border">
+                        <th className="text-right p-3 font-medium text-text-secondary">الطالب</th>
+                        <th className="text-right p-3 font-medium text-text-secondary">المادة</th>
+                        <th className="text-center p-3 font-medium text-text-secondary">الدرجة</th>
+                        <th className="text-center p-3 font-medium text-text-secondary">التقييم</th>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
+                    </thead>
+                    <tbody>
+                      {childrenData.flatMap((child) =>
+                        child.recentGrades.slice(0, 2).map((g, i) => (
+                          <tr key={`${child.id}-${i}`} className="border-b border-border last:border-0 hover:bg-card/40 transition-colors">
+                            <td className="p-3 font-medium">{child.name}</td>
+                            <td className="p-3 text-text-secondary">{g.subject}</td>
+                            <td className="p-3 text-center font-medium">{g.grade}%</td>
+                            <td className="p-3 text-center">
+                              <Badge variant={g.grade >= 90 ? "success" : g.grade >= 70 ? "primary" : g.grade >= 50 ? "warning" : "error"}>
+                                {g.grade >= 90 ? "ممتاز" : g.grade >= 70 ? "جيد جداً" : g.grade >= 50 ? "مقبول" : "ضعيف"}
+                              </Badge>
+                            </td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Payments & Notifications */}
           <div className="space-y-4">
-            {/* Upcoming Payments */}
-            <div className="p-5 rounded-xl bg-surface border border-border">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold flex items-center gap-2 text-sm">
-                  <HiOutlineCurrencyDollar className="text-warning" size={16} />
-                  المدفوعات القادمة
-                </h3>
-                <Link href="/parent/payments" className="text-xs text-primary hover:underline">عرض الكل</Link>
-              </div>
-              <div className="space-y-2">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>
+                    <span className="flex items-center gap-2 text-sm">
+                      <HiOutlineCurrencyDollar className="text-warning" size={16} />
+                      المدفوعات القادمة
+                    </span>
+                  </CardTitle>
+                  <Link href="/parent/payments" className="text-xs text-primary hover:underline">عرض الكل</Link>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-2">
                 {payments.map((p) => (
-                  <div key={p.id} className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary">
+                  <div key={p.id} className="flex items-center justify-between p-3 rounded-[12px] bg-card/40 border border-border">
                     <div>
                       <p className="text-xs font-medium">{p.child}</p>
                       <p className="text-[10px] text-text-tertiary">استحقاق: {new Date(p.dueDate).toLocaleDateString("ar-EG")}</p>
                     </div>
                     <div className="text-left">
                       <p className="text-sm font-bold">{p.amount} ج.م</p>
-                      <span className={`text-[10px] ${p.status === "paid" ? "text-success" : "text-warning"}`}>
+                      <Badge variant={p.status === "paid" ? "success" : "warning"} size="sm">
                         {p.status === "paid" ? "مدفوع" : "قيد الانتظار"}
-                      </span>
+                      </Badge>
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
-            {/* Notifications */}
-            <div className="p-5 rounded-xl bg-surface border border-border">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold flex items-center gap-2 text-sm">
-                  <HiOutlineBell className="text-primary" size={16} />
-                  الإشعارات
-                </h3>
-              </div>
-              <div className="space-y-3">
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  <span className="flex items-center gap-2 text-sm">
+                    <HiOutlineBell className="text-primary" size={16} />
+                    الإشعارات
+                  </span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
                 {notifications.map((n) => (
                   <div key={n.id} className="flex items-start gap-3">
                     <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
@@ -213,8 +212,8 @@ export default function ParentDashboard() {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

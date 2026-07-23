@@ -71,7 +71,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden bg-[#080B12]">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden bg-surface-secondary">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(91,124,255,0.12),transparent_60%)] animate-pulse" style={{ animationDuration: '8s' }} />
         <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(91,124,255,0.06),transparent_60%)] animate-pulse" style={{ animationDuration: '12s' }} />
@@ -91,7 +91,7 @@ function LoginForm() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 150, damping: 18, delay: 0.1 }}
-            className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-primary-dark text-white mb-6 shadow-[0_0_40px_rgba(91,124,255,0.3)]"
+            className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-primary-dark text-white mb-6 shadow-[0_0_40px_rgba(124,92,252,0.15)]"
           >
             <HiAcademicCap className="w-10 h-10" />
           </motion.div>
@@ -117,16 +117,16 @@ function LoginForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.5 }}
-          className="bg-card/60 backdrop-blur-xl border border-border rounded-[24px] p-8 shadow-[0_8px_40px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]"
+          className="bg-card/80 backdrop-blur-xl border border-border rounded-[24px] p-8 shadow-[0_8px_40px_rgba(124,92,252,0.04),inset_0_1px_0_rgba(255,255,255,0.8)]"
         >
           <form onSubmit={handleSubmit} className="space-y-5">
             {sessionExpired && (
-              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-[24px] bg-amber-500/10 border border-amber-500/20 text-sm text-amber-400 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-[24px] bg-warning/10 border border-warning/20 text-sm text-warning shadow-[0_1px_3px_rgba(245,158,11,0.08)]">
                 انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى.
               </motion.div>
             )}
             {error && (
-              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-[24px] bg-error/10 border border-error/20 text-sm text-error shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-[24px] bg-error/10 border border-error/20 text-sm text-error shadow-[0_1px_3px_rgba(239,68,68,0.08)]">
                 {error}
               </motion.div>
             )}
@@ -194,7 +194,7 @@ function LoginForm() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-all duration-200 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] group">
+            <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-card hover:text-text transition-all duration-200 group">
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" />
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
@@ -203,7 +203,7 @@ function LoginForm() {
               </svg>
               <span>Google</span>
             </button>
-            <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-all duration-200 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] group">
+            <button type="button" className="flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-card hover:text-text transition-all duration-200 group">
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#1877F2">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
@@ -245,7 +245,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-[#080B12]">
+      <div className="min-h-screen flex items-center justify-center bg-surface-secondary">
         <div className="space-y-4 w-full max-w-sm">
           <div className="animate-pulse space-y-6">
             <div className="w-20 h-20 rounded-3xl bg-card mx-auto" />

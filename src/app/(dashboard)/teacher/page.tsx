@@ -103,10 +103,10 @@ export default function TeacherDashboard() {
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={mockAnalytics.monthlyRevenue} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
                       <defs><linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#5B7CFF" stopOpacity={0.2} /><stop offset="95%" stopColor="#5B7CFF" stopOpacity={0} /></linearGradient></defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
-                      <XAxis dataKey="month" tick={{ fill: "#5C6A8A", fontSize: 11 }} axisLine={{ stroke: "rgba(255,255,255,0.06)" }} tickLine={false} />
-                      <YAxis tick={{ fill: "#5C6A8A", fontSize: 12 }} axisLine={false} tickLine={false} />
-                      <Tooltip contentStyle={{ background: "#151D2F", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "16px", color: "#FFFFFF", fontSize: "13px", boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }} formatter={(value: number | null) => { if (value == null) return []; return [formatCurrency(Number(value)), "الإيرادات"] }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.04)" vertical={false} />
+                      <XAxis dataKey="month" tick={{ fill: "#9D9DB5", fontSize: 11 }} axisLine={{ stroke: "rgba(0,0,0,0.06)" }} tickLine={false} />
+                      <YAxis tick={{ fill: "#9D9DB5", fontSize: 12 }} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.06)", borderRadius: "16px", color: "#1A1A2E", fontSize: "13px", boxShadow: "0 8px 32px rgba(124,92,252,0.06)" }} formatter={(value: number | null) => { if (value == null) return []; return [formatCurrency(Number(value)), "الإيرادات"] }} />
                       <Area type="monotone" dataKey="revenue" stroke="#5B7CFF" strokeWidth={2.5} fill="url(#revGrad)" />
                     </AreaChart>
                   </ResponsiveContainer>

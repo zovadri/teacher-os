@@ -72,7 +72,7 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="sticky top-20 z-30 bg-[#080B12]/80 backdrop-blur border-b border-border">
+      <section className="sticky top-20 z-30 bg-surface/80 backdrop-blur border-b border-border">
         <div className="max-w-4xl mx-auto px-4 md:px-6 py-4 overflow-x-auto">
           <div className="flex items-center gap-2 whitespace-nowrap">
             <HiTag className="text-text-tertiary ml-2 shrink-0" size={16} />

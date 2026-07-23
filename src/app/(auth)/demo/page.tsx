@@ -162,11 +162,11 @@ export default function DemoPage() {
                       </div>
                     </div>
                     <CardContent className="p-0 space-y-3 flex-1">
-                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-sm">
                         <span className="text-text-tertiary">البريد الإلكتروني</span>
                         <Badge variant="primary" size="sm" className="font-mono ltr">{account.email}</Badge>
                       </div>
-                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-sm">
                         <span className="text-text-tertiary">كلمة المرور</span>
                         <Badge variant="neutral" size="sm" className="font-mono tracking-wider">{account.password}</Badge>
                       </div>
@@ -174,7 +174,7 @@ export default function DemoPage() {
                     <div className="flex gap-3 mt-4">
                       <button type="button"
                         onClick={() => handleCopy(account.email, account.password, account.id)}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-surface-tertiary hover:text-text transition-all duration-200 shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-card hover:text-text transition-all duration-200 shadow-sm"
                       >
                         {copied === account.id ? (
                           <span className="text-success flex items-center gap-1.5 font-medium">
@@ -213,7 +213,7 @@ export default function DemoPage() {
             transition={{ delay: 0.5 }}
             className="mt-10 text-center space-y-3"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border text-sm shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.03)]">
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border text-sm shadow-sm">
               <HiCheckCircle className="w-5 h-5 text-success" />
               <span className="text-text-secondary">جميع الحسابات التجريبية جاهزة للاستخدام الفوري</span>
             </div>

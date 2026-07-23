@@ -331,7 +331,7 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
 
         {!showLabel && (
           <div className="absolute right-14 top-1/2 -translate-y-1/2 z-50 pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200">
-            <div className="bg-surface-secondary backdrop-blur-xl border border-border rounded-[10px] px-3 py-1.5 text-sm font-medium text-text whitespace-nowrap shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+            <div className="bg-surface backdrop-blur-xl border border-border rounded-[10px] px-3 py-1.5 text-sm font-medium text-text whitespace-nowrap shadow-[0_4px_20px_rgba(124,92,252,0.06)]">
               {item.label}
             </div>
           </div>
@@ -446,7 +446,7 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => { setHovered(false); setExpandedMenus([]) }}
         className={cn(
-          "hidden lg:flex flex-col fixed right-0 top-0 h-screen z-30 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-surface/60 backdrop-blur-2xl border-l border-border shadow-[0_0_30px_rgba(0,0,0,0.5)]",
+          "hidden lg:flex flex-col fixed right-0 top-0 h-screen z-30 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-surface/80 backdrop-blur-2xl border-l border-border shadow-[0_0_30px_rgba(124,92,252,0.06)]",
           hovered ? "w-[240px]" : "w-[64px]"
         )}
       >

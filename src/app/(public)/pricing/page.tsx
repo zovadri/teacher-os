@@ -211,7 +211,7 @@ export default function PricingPage() {
 
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-[#3B5FEF] p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(91,124,255,0.2)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(91,124,255,0.2)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-[28px] font-bold mb-4">مستعد للانضمام إلينا؟</h2>

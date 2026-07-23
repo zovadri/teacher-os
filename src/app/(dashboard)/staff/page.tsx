@@ -8,12 +8,17 @@ import {
   HiOutlineKey, HiOutlineUserAdd, HiOutlineCheckCircle,
   HiOutlineExclamation, HiOutlineChevronLeft,
 } from "react-icons/hi"
+import DashboardHeader from "@/components/layout/DashboardHeader"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card"
+import { StatsCard } from "@/components/ui/StatsCard"
+import { Badge } from "@/components/ui/Badge"
+import Button from "@/components/ui/Button"
 
 const overviewStats = [
-  { icon: HiOutlineUserGroup, label: "إجمالي الطلاب", value: "١٢٥٠", color: "text-primary", bg: "bg-primary/10" },
-  { icon: HiOutlineAcademicCap, label: "المدرسين", value: "٨", color: "text-info", bg: "bg-info/10" },
-  { icon: HiOutlineCurrencyDollar, label:  "المدفوعات (شهري)", value: "١٣٥,٠٠٠ ج.م", color: "text-success", bg: "bg-success/10" },
-  { icon: HiOutlineKey, label: "الأكواد المفعلة", value: "١,٨٥٠", color: "text-warning", bg: "bg-warning/10" },
+  { icon: HiOutlineUserGroup, label: "إجمالي الطلاب", value: "١٢٥٠", color: "primary" as const },
+  { icon: HiOutlineAcademicCap, label: "المدرسين", value: "٨", color: "info" as const },
+  { icon: HiOutlineCurrencyDollar, label: "المدفوعات (شهري)", value: "١٣٥,٠٠٠ ج.م", color: "success" as const },
+  { icon: HiOutlineKey, label: "الأكواد المفعلة", value: "١,٨٥٠", color: "warning" as const },
 ]
 
 const recentRegistrations = Array.from({ length: 5 }, (_, i) => ({
@@ -44,24 +49,18 @@ export default function StaffDashboard() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-surface-secondary">
-      <div className="max-w-7xl mx-auto p-4 md:p-6 space-y-6">
-
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold">لوحة التحكم</h1>
-            <p className="text-text-secondary text-sm">نظرة عامة على النظام</p>
-          </div>
-          <Link
-            href="/staff/manage"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-xl hover:bg-primary-dark transition-all"
-          >
-            <HiOutlineUserAdd size={18} />
-            إدارة الموظفين
+    <div>
+      <DashboardHeader title="لوحة التحكم" subtitle="نظرة عامة على النظام" />
+      <div className="p-4 md:p-6 space-y-6">
+        <div className="flex items-center justify-between">
+          <div />
+          <Link href="/staff/manage">
+            <Button variant="primary" leftIcon={<HiOutlineUserAdd size={18} />}>
+              إدارة الموظفين
+            </Button>
           </Link>
         </div>
 
-        {/* Overview Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {overviewStats.map((stat, i) => (
             <motion.div
@@ -69,30 +68,32 @@ export default function StaffDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="p-5 rounded-xl bg-surface border border-border"
             >
-              <div className={`w-10 h-10 rounded-lg ${stat.bg} flex items-center justify-center mb-3`}>
-                <stat.icon className={stat.color} size={20} />
-              </div>
-              <p className="text-xl font-bold mb-0.5">{stat.value}</p>
-              <p className="text-xs text-text-tertiary">{stat.label}</p>
+              <StatsCard
+                title={stat.label}
+                value={stat.value}
+                icon={stat.icon}
+                color={stat.color}
+              />
             </motion.div>
           ))}
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-
-          {/* Recent Registrations */}
-          <div className="p-6 rounded-xl bg-surface border border-border">
-            <h2 className="font-semibold mb-4 flex items-center gap-2">
-              <HiOutlineUserAdd className="text-primary" size={18} />
-              أحدث التسجيلات
-            </h2>
-            <div className="space-y-3">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                <span className="flex items-center gap-2">
+                  <HiOutlineUserAdd className="text-primary" size={18} />
+                  أحدث التسجيلات
+                </span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
               {recentRegistrations.map((reg) => (
-                <div key={reg.id} className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary">
+                <div key={reg.id} className="flex items-center justify-between p-3 rounded-[12px] bg-card/40 border border-border">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
+                    <div className="w-8 h-8 rounded-full bg-primary-100 border border-primary-200 flex items-center justify-center text-xs font-bold text-primary">
                       {reg.name[0]}
                     </div>
                     <div>
@@ -103,19 +104,22 @@ export default function StaffDashboard() {
                   <span className="text-[10px] text-text-tertiary">{reg.date.toLocaleDateString("ar-EG")}</span>
                 </div>
               ))}
-            </div>
-            <Link href="/staff/students" className="mt-3 text-xs text-primary hover:underline block">عرض الكل</Link>
-          </div>
+              <Link href="/staff/students" className="text-sm text-primary hover:underline block mt-2">عرض الكل</Link>
+            </CardContent>
+          </Card>
 
-          {/* Payment Approvals */}
-          <div className="p-6 rounded-xl bg-surface border border-border">
-            <h2 className="font-semibold mb-4 flex items-center gap-2">
-              <HiOutlineCurrencyDollar className="text-warning" size={18} />
-              موافقات الدفع
-            </h2>
-            <div className="space-y-3">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                <span className="flex items-center gap-2">
+                  <HiOutlineCurrencyDollar className="text-warning" size={18} />
+                  موافقات الدفع
+                </span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
               {paymentApprovals.map((pa) => (
-                <div key={pa.id} className="flex items-center justify-between p-3 rounded-xl bg-surface-secondary">
+                <div key={pa.id} className="flex items-center justify-between p-3 rounded-[12px] bg-card/40 border border-border">
                   <div>
                     <p className="text-sm font-medium">{pa.student}</p>
                     <p className="text-[10px] text-text-tertiary">{pa.method} • {pa.date.toLocaleDateString("ar-EG")}</p>
@@ -123,22 +127,25 @@ export default function StaffDashboard() {
                   <div className="text-left">
                     <p className="text-sm font-bold">{pa.amount} ج.م</p>
                     <div className="flex gap-1 mt-1">
-                      <button type="button" className="px-2 py-0.5 rounded bg-success/10 text-success text-[10px] hover:bg-success/20">قبول</button>
-                      <button type="button" className="px-2 py-0.5 rounded bg-error/10 text-error text-[10px] hover:bg-error/20">رفض</button>
+                      <button type="button" className="px-2 py-0.5 rounded-[8px] bg-success/10 text-success text-[10px] hover:bg-success/20 transition-colors">قبول</button>
+                      <button type="button" className="px-2 py-0.5 rounded-[8px] bg-error/10 text-error text-[10px] hover:bg-error/20 transition-colors">رفض</button>
                     </div>
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
-          {/* System Alerts */}
-          <div className="p-6 rounded-xl bg-surface border border-border">
-            <h2 className="font-semibold mb-4 flex items-center gap-2">
-              <HiOutlineExclamation className="text-warning" size={18} />
-              تنبيهات النظام
-            </h2>
-            <div className="space-y-3">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                <span className="flex items-center gap-2">
+                  <HiOutlineExclamation className="text-warning" size={18} />
+                  تنبيهات النظام
+                </span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
               {systemAlerts.map((alert, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
@@ -151,8 +158,8 @@ export default function StaffDashboard() {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
