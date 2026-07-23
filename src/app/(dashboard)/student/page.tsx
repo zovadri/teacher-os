@@ -63,12 +63,12 @@ export default function StudentDashboard() {
     <div className="min-h-screen">
       <DashboardHeader title="لوحة الطالب" subtitle="مرحباً بك! تابع تقدمك الدراسي" />
       <div className="p-6 md:p-8">
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
+          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-8">
           <motion.div variants={itemVariants}>
             <Card className="relative overflow-hidden">
               <div className="absolute left-0 top-0 w-40 h-40 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="absolute left-10 bottom-0 w-24 h-24 bg-warning/5 rounded-full translate-y-1/3" />
-              <div className="relative flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+              <div className="relative flex flex-col md:flex-row md:items-center gap-4 md:gap-6 p-7">
                 <div className="flex items-center gap-4">
                   <Avatar src={student.avatar} name={student.name} size="xl" />
                   <div>
@@ -99,21 +99,23 @@ export default function StudentDashboard() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <StatsCard title="الدروس المكتملة" value={24} icon={HiOutlineBookOpen} color="primary" subtitle="من أصل 36 درساً" />
             <StatsCard title="التسلسل الحالي" value={`${student.streak} يوم`} icon={HiFire} color="warning" />
             <StatsCard title="نقاط الخبرة" value={student.xp} icon={HiStar} color="success" change={{ value: 12, isPositive: true }} />
             <StatsCard title="الترتيب" value="#15" icon={HiOutlineChartBar} color="info" subtitle="من بين 50 طالباً" />
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <motion.div variants={itemVariants} className="lg:col-span-2">
               <Card>
                 <CardHeader>
-                  <CardTitle>الكورسات الحالية</CardTitle>
-                  <Link href="/student/courses" className="text-sm text-primary hover:underline">عرض الكل</Link>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>الكورسات الحالية</CardTitle>
+                    <Link href="/student/courses" className="text-sm text-primary hover:underline">عرض الكل</Link>
+                  </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-5">
                   {enrolledCourses.map((course, i) => {
                     const progress = [75, 45, 90, 30][i % 4]
                     return (
@@ -147,10 +149,12 @@ export default function StudentDashboard() {
             <motion.div variants={itemVariants}>
               <Card>
                 <CardHeader>
-                  <CardTitle>الامتحانات القادمة</CardTitle>
-                  <Link href="/student/exams" className="text-sm text-primary hover:underline">عرض الكل</Link>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>الامتحانات القادمة</CardTitle>
+                    <Link href="/student/exams" className="text-sm text-primary hover:underline">عرض الكل</Link>
+                  </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-5">
                   {examsWithCourse.map((exam) => (
                     <Link key={exam.id} href={`/student/exams/${exam.id}`}>
                       <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-surface-secondary transition-colors group">
@@ -173,13 +177,13 @@ export default function StudentDashboard() {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <motion.div variants={itemVariants}>
               <Card>
                 <CardHeader>
                   <CardTitle>النشاطات الأخيرة</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="space-y-3">
                   {recentActivity.map((act, i) => (
                     <motion.div
                       key={act.id}
