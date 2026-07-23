@@ -35,36 +35,17 @@ export const useAuthStore = create<AuthStore>()(
       sessionId: null,
       sessionExpiresAt: null,
 
-      login: async (email, password) => {
-        const demoAccounts: Record<string, AuthUser> = {
-          "teacher@teacher-os.com": {
-            id: "t-1", name: "أحمد محمد", email: "teacher@teacher-os.com",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=teacher",
-            role: "teacher",
-            permissions: ["all"],
-          },
-          "student@teacher-os.com": {
-            id: "s-1", name: "طالب 1", email: "student@teacher-os.com",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=student1",
-            role: "student",
-            permissions: [],
-          },
-          "parent@teacher-os.com": {
-            id: "par-1", name: "ولي أمر 1", email: "parent@teacher-os.com",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=parent1",
-            role: "parent",
-            permissions: [],
-          },
-          "staff@teacher-os.com": {
-            id: "stf-1", name: "محمد علي", email: "staff@teacher-os.com",
-            avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=staff1",
-            role: "staff",
-            permissions: ["manage_system", "manage_users", "view_reports"],
-            staffRole: "مدير النظام",
-          },
-        }
+      login: async (emailOrPhone, password) => {
+        const demoAccounts: (AuthUser & { phone: string })[] = [
+          { id: "t-1", name: "أحمد محمد", email: "teacher@teacher-os.com", phone: "01000000001", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=teacher", role: "teacher", permissions: ["all"] },
+          { id: "s-1", name: "طالب 1", email: "student@teacher-os.com", phone: "01000000002", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=student1", role: "student", permissions: [] },
+          { id: "par-1", name: "ولي أمر 1", email: "parent@teacher-os.com", phone: "01000000003", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=parent1", role: "parent", permissions: [] },
+          { id: "stf-1", name: "محمد علي", email: "staff@teacher-os.com", phone: "01000000004", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=staff1", role: "staff", permissions: ["manage_system", "manage_users", "view_reports"], staffRole: "مدير النظام" },
+        ]
 
-        const user = demoAccounts[email]
+        const input = emailOrPhone.trim().toLowerCase()
+        const user = demoAccounts.find((a) => a.email.toLowerCase() === input || a.phone === input)
+
         if (user && password === "123456") {
           set({
             user,

@@ -26,6 +26,7 @@ const demoAccounts = [
     name: "مدرس",
     icon: HiAcademicCap,
     email: "ahmed@teacher-os.com",
+    phone: "01000000001",
     password: "123456",
     role: "teacher" as const,
     description: "صلاحية الوصول الكامل للوحة التحكم وإدارة الكورسات والطلاب والامتحانات.",
@@ -35,6 +36,7 @@ const demoAccounts = [
     name: "طالب",
     icon: HiBookOpen,
     email: "student@teacher-os.com",
+    phone: "01000000002",
     password: "123456",
     role: "student" as const,
     description: "مشاهدة الكورسات المسجلة وأداء الامتحانات والواجبات.",
@@ -44,6 +46,7 @@ const demoAccounts = [
     name: "ولي أمر",
     icon: HiUserGroup,
     email: "parent@teacher-os.com",
+    phone: "01000000003",
     password: "123456",
     role: "parent" as const,
     description: "متابعة أداء الأبناء الدراسي والتقارير.",
@@ -53,6 +56,7 @@ const demoAccounts = [
     name: "موظف",
     icon: HiUserCircle,
     email: "staff@teacher-os.com",
+    phone: "01000000004",
     password: "123456",
     role: "staff" as const,
     description: "صلاحيات إدارة محددة لأعضاء فريق العمل.",
@@ -84,7 +88,8 @@ export default function DemoPage() {
 
   const handleCopy = async (email: string, password: string, id: string) => {
     try {
-      await navigator.clipboard.writeText(`البريد: ${email}\nكلمة المرور: ${password}`)
+      const account = demoAccounts.find((a) => a.email === email)
+      await navigator.clipboard.writeText(`البريد: ${email}\nالهاتف: ${account?.phone || ""}\nكلمة المرور: ${password}`)
       setCopied(id)
       setTimeout(() => setCopied(null), 2500)
     } catch {
@@ -173,6 +178,10 @@ export default function DemoPage() {
                       <div className="flex items-center justify-between text-sm px-5 py-3.5 rounded-[16px] bg-surface-secondary border border-border/40">
                         <span className="text-text-tertiary font-medium">البريد</span>
                         <Badge variant="primary" size="md" className="font-mono ltr tracking-tight">{account.email}</Badge>
+                      </div>
+                      <div className="flex items-center justify-between text-sm px-5 py-3.5 rounded-[16px] bg-surface-secondary border border-border/40">
+                        <span className="text-text-tertiary font-medium">الهاتف</span>
+                        <Badge variant="info" size="md" className="font-mono ltr tracking-tight">{account.phone}</Badge>
                       </div>
                       <div className="flex items-center justify-between text-sm px-5 py-3.5 rounded-[16px] bg-surface-secondary border border-border/40">
                         <span className="text-text-tertiary font-medium">كلمة المرور</span>
