@@ -227,18 +227,7 @@ export default function DemoPage() {
               <span className="text-text-secondary font-medium">جميع الحسابات جاهزة — اختر ما يناسبك وابدأ فوراً</span>
             </div>
 
-            <div className="mt-8">
-              <p className="text-[15px] text-text-secondary">
-                عايز حساب حقيقي؟{" "}
-                <Link href="/register" className="text-primary font-semibold hover:underline transition-all">
-                  سجل الآن
-                </Link>
-                {" "}أو{" "}
-                <Link href="/login" className="text-primary font-semibold hover:underline transition-all">
-                  سجل دخول
-                </Link>
-              </p>
-            </div>
+
 
             <p className="text-xs text-text-tertiary mt-12">
               &copy; {new Date().getFullYear()} TeacherOS
