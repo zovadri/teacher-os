@@ -12,11 +12,10 @@ export function Card({ children, className, hover = false, onClick }: CardProps)
     <div
       onClick={onClick}
       className={cn(
-        "group bg-card/70 backdrop-blur-2xl border border-border rounded-[20px]",
-        "shadow-[0_4px_24px_rgba(217,119,6,0.025),0_1px_0_rgba(255,255,255,0.9)_inset]",
-        "transition-all duration-500 relative",
-        "before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-primary/15 before:to-transparent before:rounded-t-[20px] before:pointer-events-none",
-        hover && "cursor-pointer hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_12px_48px_rgba(217,119,6,0.05),0_1px_0_rgba(255,255,255,0.9)_inset]",
+        "bg-card border border-border/60 rounded-[20px]",
+        "shadow-[0_1px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(0,0,0,0.01)]",
+        "transition-all duration-300",
+        hover && "cursor-pointer hover:-translate-y-0.5 hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03),0_2px_8px_rgba(0,0,0,0.02)]",
         onClick && "cursor-pointer",
         className,
       )}
@@ -27,7 +26,7 @@ export function Card({ children, className, hover = false, onClick }: CardProps)
 }
 
 export function CardHeader({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("px-6 pt-6 pb-3", className)}>{children}</div>
+  return <div className={cn("px-7 pt-7 pb-2", className)}>{children}</div>
 }
 
 export function CardTitle({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -39,9 +38,9 @@ export function CardDescription({ children, className }: { children: React.React
 }
 
 export function CardContent({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("px-6 pb-6", className)}>{children}</div>
+  return <div className={cn("px-7 pb-7", className)}>{children}</div>
 }
 
 export function CardFooter({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("px-6 py-4 border-t border-border", className)}>{children}</div>
+  return <div className={cn("px-7 py-4 border-t border-border/60", className)}>{children}</div>
 }

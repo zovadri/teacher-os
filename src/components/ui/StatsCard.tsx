@@ -16,11 +16,11 @@ interface StatsCardProps {
 }
 
 const colorMap = {
-  primary: { bg: "bg-primary-100", text: "text-primary", border: "border-primary-200",     gradient: ["#EA580C", "#C2410C"] },
+  primary: { bg: "bg-primary-100", text: "text-primary", border: "border-primary-200", gradient: ["#D97706", "#B45309"] },
   success: { bg: "bg-success/10", text: "text-success", border: "border-success/20", gradient: ["#059669", "#047857"] },
-  warning: { bg: "bg-warning/10", text: "text-warning", border: "border-warning/20", gradient: ["#D97706", "#B45309"] },
+  warning: { bg: "bg-warning/10", text: "text-warning", border: "border-warning/20", gradient: ["#EA580C", "#C2410C"] },
   error: { bg: "bg-error/10", text: "text-error", border: "border-error/20", gradient: ["#DC2626", "#B91C1C"] },
-  info: { bg: "bg-info/10", text: "text-info", border: "border-info/20",     gradient: ["#0EA5E9", "#0284C7"] },
+  info: { bg: "bg-info/10", text: "text-info", border: "border-info/20", gradient: ["#0EA5E9", "#0284C7"] },
 }
 
 function resolveTrend(t: number | { value: number; isPositive: boolean } | undefined): { value: number; positive: boolean } | null {
@@ -39,15 +39,14 @@ export function StatsCard({ title, value, icon: Icon, trend, sparkline, color = 
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 200, damping: 25 }}
       className={cn(
-        "group bg-card/70 backdrop-blur-2xl border border-border rounded-[20px] p-5",
-        "shadow-[0_4px_24px_rgba(217,119,6,0.025),0_1px_0_rgba(255,255,255,0.9)_inset]",
-        "transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_48px_rgba(217,119,6,0.05),0_1px_0_rgba(255,255,255,0.9)_inset] hover:border-border-light relative",
-        "before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-primary/15 before:to-transparent before:rounded-t-[20px] before:pointer-events-none",
+        "bg-card border border-border/60 rounded-[20px] p-6",
+        "shadow-[0_1px_3px_rgba(0,0,0,0.02),0_1px_2px_rgba(0,0,0,0.01)]",
+        "transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03),0_2px_8px_rgba(0,0,0,0.02)]",
         className,
       )}
     >
       <div className="flex items-start justify-between mb-4">
-        <div className={cn("w-11 h-11 rounded-[14px] flex items-center justify-center backdrop-blur-xl border", palette.bg, palette.border)}>
+        <div className={cn("w-11 h-11 rounded-[14px] flex items-center justify-center border", palette.bg, palette.border)}>
           {Icon && <Icon className={cn("w-5 h-5", palette.text)} />}
         </div>
         {resolved && (
@@ -55,7 +54,7 @@ export function StatsCard({ title, value, icon: Icon, trend, sparkline, color = 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className={cn(
-              "flex items-center gap-1 px-2 py-1 rounded-[8px] text-[11px] font-medium backdrop-blur-xl border",
+              "flex items-center gap-1 px-2 py-1 rounded-[8px] text-[11px] font-medium border",
               resolved.positive
                 ? "bg-success/10 border-success/20 text-success"
                 : "bg-error/10 border-error/20 text-error",

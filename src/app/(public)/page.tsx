@@ -203,7 +203,7 @@ export default function HomePage() {
               <motion.div
                 key={stat.label}
                 variants={itemFade}
-                className="bg-card/70 backdrop-blur-2xl border border-border rounded-[20px] p-7 text-center hover:border-primary/20 transition-all duration-300 hover:-translate-y-0.5 relative overflow-hidden"
+                className="bg-card border border-border/60 rounded-[20px] p-7 text-center hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-transparent pointer-events-none" />
                 <p className="text-[36px] font-bold bg-gradient-to-b from-primary to-info bg-clip-text text-transparent mb-1 font-mono tracking-tight">{stat.value}</p>
@@ -233,7 +233,7 @@ export default function HomePage() {
               <motion.div
                 key={course.id}
                 variants={itemFade}
-                className="group bg-card/70 backdrop-blur-sm rounded-[20px] border border-border overflow-hidden hover:border-primary/20 hover:shadow-[0_8px_40px_rgba(217,119,6,0.06)] hover:-translate-y-1 transition-all duration-500"
+                className="group bg-card border border-border/60 rounded-[20px] overflow-hidden hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="relative h-44 overflow-hidden">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -269,7 +269,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.015),transparent_70%)] border-y border-border/20">
+      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.015),transparent_70%)] border-y border-border/20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
             <span className="text-primary text-sm font-medium mb-3 block tracking-wider uppercase">Testimonials</span>
@@ -285,7 +285,7 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="bg-card/70 backdrop-blur-sm border border-border rounded-[20px] p-8 md:p-10 text-center"
+                  className="bg-card border border-border/60 rounded-[20px] p-8 md:p-10 text-center shadow-[0_1px_3px_rgba(0,0,0,0.02)]"
                 >
                   <div className="flex items-center justify-center gap-1 mb-6">
                     {Array.from({ length: testimonials[testimonialIndex].rating }).map((_, j) => (
@@ -342,10 +342,10 @@ export default function HomePage() {
               <motion.div
                 key={plan.name}
                 variants={itemFade}
-                className={`relative bg-card/70 backdrop-blur-sm border rounded-[20px] p-7 transition-all duration-500 ${
+                className={`relative bg-card border border-border/60 rounded-[20px] p-7 transition-all duration-300 ${
                   plan.popular
-                    ? "border-primary/30 shadow-[0_8px_40px_rgba(217,119,6,0.08)] hover:shadow-[0_12px_48px_rgba(217,119,6,0.12)]"
-                    : "border-border hover:border-primary/20 hover:shadow-[0_8px_40px_rgba(217,119,6,0.06)] hover:-translate-y-1"
+                    ? "border-primary/30 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.04)]"
+                    : "border-border/60 hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"
                 }`}
               >
                 {plan.popular && (
@@ -401,7 +401,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setFaqOpen(faqOpen === `faq-${i}` ? null : `faq-${i}`)}
-                  className="w-full text-right p-5 rounded-[16px] border border-border bg-card/50 backdrop-blur-sm hover:bg-card/70 hover:border-primary/20 transition-all duration-300 flex items-center justify-between gap-4"
+                  className="w-full text-right p-5 rounded-[16px] border border-border/60 bg-card hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-all duration-300 flex items-center justify-between gap-4"
                 >
                   <span className="font-medium text-sm text-text">{faq.q}</span>
                   <span className={`text-text-tertiary transition-transform duration-300 text-xs ${faqOpen === `faq-${i}` ? "rotate-180" : ""}`}>
