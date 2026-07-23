@@ -28,7 +28,7 @@ const demoAccounts = [
     email: "ahmed@teacher-os.com",
     password: "123456",
     role: "teacher" as const,
-    description: "حساب تجريبي للمدرس مع صلاحية الوصول الكامل للوحة التحكم وإدارة الكورسات والطلاب والامتحانات.",
+    description: "صلاحية الوصول الكامل للوحة التحكم وإدارة الكورسات والطلاب والامتحانات.",
   },
   {
     id: "student",
@@ -37,7 +37,7 @@ const demoAccounts = [
     email: "student@teacher-os.com",
     password: "123456",
     role: "student" as const,
-    description: "حساب تجريبي للطالب لمشاهدة الكورسات المسجلة وأداء الامتحانات والواجبات.",
+    description: "مشاهدة الكورسات المسجلة وأداء الامتحانات والواجبات.",
   },
   {
     id: "parent",
@@ -46,7 +46,7 @@ const demoAccounts = [
     email: "parent@teacher-os.com",
     password: "123456",
     role: "parent" as const,
-    description: "حساب تجريبي لولي الأمر لمتابعة أداء الأبناء الدراسي والتقارير.",
+    description: "متابعة أداء الأبناء الدراسي والتقارير.",
   },
   {
     id: "staff",
@@ -55,18 +55,18 @@ const demoAccounts = [
     email: "staff@teacher-os.com",
     password: "123456",
     role: "staff" as const,
-    description: "حساب تجريبي لأعضاء فريق العمل مع صلاحيات إدارة محددة.",
+    description: "صلاحيات إدارة محددة لأعضاء فريق العمل.",
   },
 ]
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 }
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] } },
 }
 
 const roleRoutes: Record<string, string> = {
@@ -101,80 +101,89 @@ export default function DemoPage() {
   }
 
   return (
-    <div className="min-h-screen px-4 py-12">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex items-center justify-between mb-10">
-          <div className="flex items-center gap-2 text-text-secondary text-sm">
-            <HiAcademicCap className="w-5 h-5 text-primary" />
-            <span className="font-semibold text-text">TeacherOS</span>
+    <div className="min-h-screen px-6 py-16">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center justify-between mb-14">
+          <div className="flex items-center gap-3 text-text-secondary text-sm">
+            <div className="w-9 h-9 rounded-[10px] bg-primary flex items-center justify-center text-white text-xs font-bold shadow-[0_0_16px_rgba(217,119,6,0.2)]">T</div>
+            <span className="font-semibold text-text text-[15px]">TeacherOS</span>
           </div>
-          <Link href="/login" className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-primary transition-colors">
+          <Link href="/login" className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-primary border border-border hover:border-primary/20 rounded-[12px] transition-all duration-200">
             <HiArrowLeft className="w-4 h-4" />
-            العودة لتسجيل الدخول
+            العودة
           </Link>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <div className="text-center mb-10">
+          <div className="text-center mb-14">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary text-white mb-4"
+              transition={{ type: "spring", stiffness: 180, damping: 16, delay: 0.1 }}
+              className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-dark text-white mb-5 shadow-[0_0_30px_rgba(217,119,6,0.15)]"
             >
-              <HiShieldCheck className="w-6 h-6" />
+              <HiShieldCheck className="w-7 h-7" />
             </motion.div>
-            <h1 className="text-[28px] font-semibold text-text mb-2">بيانات التجربة</h1>
-            <p className="text-text-secondary max-w-2xl mx-auto">
-              استخدم حسابات التجربة أدناه لتجربة المنصة بشكل مباشر.
+            <h1 className="text-[32px] md:text-[40px] font-semibold text-text mb-3 leading-tight">بيانات التجربة</h1>
+            <p className="text-text-secondary text-[17px] max-w-xl mx-auto leading-relaxed">
+              اختر الحساب المناسب وجرّب المنصة بشكل مباشر — جميع الحسابات جاهزة للاستخدام الفوري.
             </p>
           </div>
 
-          <Alert variant="info" className="mb-8">
-            <div className="flex items-start gap-3">
-              <HiShieldCheck className="w-5 h-5 shrink-0 mt-0.5" />
+          <Alert variant="info" className="mb-10 px-6 py-5 rounded-[20px]">
+            <div className="flex items-start gap-4">
+              <div className="w-9 h-9 rounded-[10px] bg-info/10 flex items-center justify-center shrink-0">
+                <HiShieldCheck className="w-5 h-5 text-info" />
+              </div>
               <div>
-                <p className="font-medium text-sm">تنبيه مهم</p>
-                <p className="text-sm opacity-90 mt-1">
-                  هذه بيانات تجريبية للعرض فقط. أي تغييرات تقوم بها لن يتم حفظها بشكل دائم.
+                <p className="font-semibold text-text text-[15px] mb-1">بيانات تجريبية للعرض فقط</p>
+                <p className="text-sm text-text-secondary opacity-90 leading-relaxed">
+                  أي تغييرات تقوم بها داخل الحسابات التجريبية لن يتم حفظها بشكل دائم.
                 </p>
               </div>
             </div>
           </Alert>
 
-          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+          >
             {demoAccounts.map((account) => {
               const Icon = account.icon
               return (
                 <motion.div key={account.id} variants={cardVariants}>
-                  <Card className="p-6 h-full flex flex-col">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-primary" />
+                  <Card className="p-8 h-full flex flex-col hover:shadow-[0_12px_48px_rgba(217,119,6,0.04)] transition-shadow duration-300">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center shadow-sm">
+                        <Icon className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="text-[18px] font-semibold text-text">{account.name}</h3>
-                        <p className="text-[15px] text-text-secondary">{account.description}</p>
+                        <h3 className="text-xl font-semibold text-text">{account.name}</h3>
+                        <p className="text-[15px] text-text-secondary leading-relaxed mt-0.5">{account.description}</p>
                       </div>
                     </div>
-                    <CardContent className="p-0 space-y-3 flex-1">
-                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-sm">
-                        <span className="text-text-tertiary">البريد الإلكتروني</span>
-                        <Badge variant="primary" size="sm" className="font-mono ltr">{account.email}</Badge>
+
+                    <CardContent className="p-0 space-y-3 mb-6 flex-1">
+                      <div className="flex items-center justify-between text-sm px-5 py-3.5 rounded-[16px] bg-surface-secondary border border-border/40">
+                        <span className="text-text-tertiary font-medium">البريد</span>
+                        <Badge variant="primary" size="md" className="font-mono ltr tracking-tight">{account.email}</Badge>
                       </div>
-                      <div className="flex items-center justify-between text-sm p-3 rounded-[16px] bg-card border border-border shadow-sm">
-                        <span className="text-text-tertiary">كلمة المرور</span>
-                        <Badge variant="neutral" size="sm" className="font-mono tracking-wider">{account.password}</Badge>
+                      <div className="flex items-center justify-between text-sm px-5 py-3.5 rounded-[16px] bg-surface-secondary border border-border/40">
+                        <span className="text-text-tertiary font-medium">كلمة المرور</span>
+                        <Badge variant="neutral" size="md" className="font-mono tracking-wider">{account.password}</Badge>
                       </div>
                     </CardContent>
-                    <div className="flex gap-3 mt-4">
+
+                    <div className="flex gap-3">
                       <button type="button"
                         onClick={() => handleCopy(account.email, account.password, account.id)}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 border border-border rounded-[16px] text-sm text-text-secondary hover:bg-card hover:text-text transition-all duration-200 shadow-sm"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-[14px] text-sm text-text-secondary hover:bg-card hover:text-text hover:border-primary/20 transition-all duration-200 active:scale-[0.97]"
                       >
                         {copied === account.id ? (
                           <span className="text-success flex items-center gap-1.5 font-medium">
@@ -184,21 +193,21 @@ export default function DemoPage() {
                         ) : (
                           <>
                             <HiClipboardCopy className="w-4 h-4" />
-                            <span>نسخ</span>
+                            <span>نسخ البيانات</span>
                           </>
                         )}
                       </button>
                       <button type="button"
                         onClick={() => handleDirectLogin(account.role, account.id)}
                         disabled={loggingIn === account.id}
-                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white rounded-[16px] text-sm font-medium hover:brightness-110 hover:shadow-[0_0_30px_rgba(217,119,6,0.3)] transition-all duration-200 active:scale-[0.97] disabled:opacity-70 shadow-[0_0_20px_rgba(217,119,6,0.15)]"
+                        className="flex-[2] flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary to-primary-dark text-white rounded-[14px] text-sm font-medium hover:shadow-[0_0_30px_rgba(217,119,6,0.25)] transition-all duration-200 active:scale-[0.97] disabled:opacity-60 shadow-[0_4px_16px_rgba(217,119,6,0.15)]"
                       >
                         {loggingIn === account.id ? (
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         ) : (
                           <HiArrowSmRight className="w-4 h-4" />
                         )}
-                        <span>{loggingIn === account.id ? "جاري..." : `الدخول كـ ${account.name}`}</span>
+                        <span>{loggingIn === account.id ? "جاري..." : `دخول كـ ${account.name}`}</span>
                       </button>
                     </div>
                   </Card>
@@ -208,30 +217,30 @@ export default function DemoPage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-10 text-center space-y-3"
+            transition={{ delay: 0.6, duration: 0.4 }}
+            className="mt-16 text-center"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border border-border text-sm shadow-sm">
+            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-card border border-border/60 text-sm shadow-sm">
               <HiCheckCircle className="w-5 h-5 text-success" />
-              <span className="text-text-secondary">جميع الحسابات التجريبية جاهزة للاستخدام الفوري</span>
+              <span className="text-text-secondary font-medium">جميع الحسابات جاهزة — اختر ما يناسبك وابدأ فوراً</span>
             </div>
 
-            <div className="mt-4">
-              <p className="text-sm text-text-secondary">
-                هل تريد إنشاء حساب حقيقي؟{" "}
-                <Link href="/register" className="text-primary hover:text-primary-light font-semibold transition-colors">
+            <div className="mt-8">
+              <p className="text-[15px] text-text-secondary">
+                عايز حساب حقيقي؟{" "}
+                <Link href="/register" className="text-primary font-semibold hover:underline transition-all">
                   سجل الآن
                 </Link>
                 {" "}أو{" "}
-                <Link href="/login" className="text-primary hover:text-primary-light font-semibold transition-colors">
+                <Link href="/login" className="text-primary font-semibold hover:underline transition-all">
                   سجل دخول
                 </Link>
               </p>
             </div>
 
-            <p className="text-xs text-text-tertiary mt-6">
+            <p className="text-xs text-text-tertiary mt-12">
               &copy; {new Date().getFullYear()} TeacherOS
             </p>
           </motion.div>
