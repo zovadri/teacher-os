@@ -75,11 +75,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {statsData.map((stat, i) => (
-              <motion.div key={stat.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-6 text-center  hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300">
+              <motion.div key={stat.key} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-7 text-center  hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300">
                 <stat.icon className="text-primary mx-auto mb-2" size={28} />
                 <p className="text-3xl md:text-4xl font-bold text-primary mb-1">{counts[stat.key] || 0}+</p>
                 <p className="text-sm text-text-secondary">{stat.label}</p>
@@ -89,7 +89,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
+      <section className="py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeUp}>
@@ -105,18 +105,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
             <span className="text-primary text-sm font-medium mb-2 block">قيمنا</span>
             <h2 className="text-[28px] font-bold mb-4">المبادئ التي نقوم عليها</h2>
             <p className="text-text-secondary max-w-2xl mx-auto text-[15px]">قيم راسخة توجه مسيرتنا نحو التميز والابتكار في التعليم.</p>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {mockCmsContent.aboutValues.map((value, i) => {
               const Icon = valuesIcons[i % valuesIcons.length]
               return (
-                <motion.div key={value.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group bg-card border border-border rounded-[24px] p-6 text-center transition-all duration-300  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
+                <motion.div key={value.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="group bg-card border border-border rounded-[24px] p-7 text-center transition-all duration-300  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 group-hover:bg-primary/20 transition-colors">
                     <Icon className="text-primary" size={28} />
                   </div>
@@ -129,16 +129,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
+      <section className="py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
             <span className="text-primary text-sm font-medium mb-2 block">فريق العمل</span>
             <h2 className="text-[28px] font-bold mb-4">تعرف على فريقنا</h2>
             <p className="text-text-secondary max-w-xl mx-auto">نخبة من المحترفين يعملون معاً لتقديم أفضل تجربة تعليمية.</p>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {mockTeamMembers.map((member, i) => (
-              <motion.div key={member.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-6 text-center transition-all duration-300  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
+              <motion.div key={member.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-7 text-center transition-all duration-300  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20">
                 <img src={member.image} alt={member.name} className="w-20 h-20 rounded-full mx-auto mb-4 bg-card object-cover border-2 border-border" />
                 <h3 className="font-semibold mb-1">{member.name}</h3>
                 <p className="text-xs text-primary font-medium mb-3">{member.role}</p>
@@ -149,9 +149,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
+      <section className="py-28">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(217,119,6,0.2)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-10 md:p-20 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(217,119,6,0.2)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-[28px] font-bold mb-4">مستعد لبدء رحلة التعلم؟</h2>

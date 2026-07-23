@@ -77,7 +77,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="flex items-center justify-center gap-4 mb-12">
             <span className={`text-sm font-medium transition-colors ${!isYearly ? "text-text" : "text-text-tertiary"}`}>شهري</span>
@@ -104,7 +104,7 @@ export default function PricingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`relative p-8 rounded-[24px] border-2 transition-all duration-300 flex flex-col ${isPopular ? "border-primary bg-card shadow-[0_8px_32px_rgba(217,119,6,0.15)] scale-105 md:scale-110" : "border-border bg-card hover:border-primary/20  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"}`}
+                  className={`relative p-10 rounded-[24px] border-2 transition-all duration-300 flex flex-col ${isPopular ? "border-primary bg-card shadow-[0_8px_32px_rgba(217,119,6,0.15)] scale-105 md:scale-110" : "border-border bg-card hover:border-primary/20  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"}`}
                 >
                   {isPopular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-white text-xs font-medium rounded-full">الأكثر شيوعاً</div>}
                   <div className="mb-2">
@@ -143,7 +143,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 block">مقارنة الباقات</span>
@@ -183,7 +183,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <motion.div {...fadeUp} className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-2 block">الأسئلة الشائعة</span>
@@ -209,9 +209,9 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(217,119,6,0.2)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-10 md:p-20 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(217,119,6,0.2)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-[28px] font-bold mb-4">مستعد للانضمام إلينا؟</h2>

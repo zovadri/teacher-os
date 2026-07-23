@@ -64,9 +64,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactInfo.map((info, i) => (
               <motion.div key={info.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }} className="bg-card border border-border rounded-[24px] p-8 text-center transition-all duration-300 hover:shadow-[0_12px_48px_rgba(217,119,6,0.04)] hover:-translate-y-1 hover:border-primary/20">
                 <div className="w-14 h-14 rounded-[16px] bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mx-auto mb-5 shadow-sm">
@@ -80,7 +80,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-12 md:pb-24">
+      <section className="py-16 md:pb-28">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             <motion.div {...fadeUp}>
@@ -94,12 +94,12 @@ export default function ContactPage() {
                   <p className="text-[15px] text-text-secondary">سنقوم بالرد عليك في أقرب وقت ممكن. شكراً لتواصلك معنا.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  <div className="grid sm:grid-cols-2 gap-8">
                     <Input label="الاسم" placeholder="أدخل اسمك" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} required />
                     <Input label="البريد الإلكتروني" type="email" placeholder="أدخل بريدك الإلكتروني" value={formData.email} onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))} required />
                   </div>
-                  <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-8">
                     <Input label="رقم الهاتف" type="tel" placeholder="أدخل رقم هاتفك" value={formData.phone} onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} />
                     <Input label="الموضوع" placeholder="موضوع الرسالة" value={formData.subject} onChange={(e) => setFormData((p) => ({ ...p, subject: e.target.value }))} />
                   </div>
@@ -131,7 +131,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
             <span className="text-primary text-sm font-medium mb-3 block">تابعنا</span>
@@ -149,20 +149,20 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-16 pb-24">
+      <section className="py-20 pb-28">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <motion.div {...fadeUp} className="text-center mb-12">
             <h2 className="text-[28px] font-bold mb-4">الأسئلة الشائعة</h2>
             <p className="text-text-secondary text-[15px]">إجابات سريعة لأكثر الأسئلة شيوعاً.</p>
           </motion.div>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {contactFaq.map((faq, i) => (
               <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
-                <button type="button" onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)} className="w-full text-right p-6 rounded-[20px] border border-border bg-card hover:border-primary/20 hover:shadow-[0_8px_32px_rgba(217,119,6,0.03)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4">
+                <button type="button" onClick={() => setFaqOpen(faqOpen === faq.id ? null : faq.id)} className="w-full text-right p-7 rounded-[20px] border border-border bg-card hover:border-primary/20 hover:shadow-[0_8px_32px_rgba(217,119,6,0.03)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4">
                   <span className="font-medium text-[15px]">{faq.question}</span>
                   <HiChevronDown size={18} className={`text-text-tertiary transition-transform shrink-0 ${faqOpen === faq.id ? "rotate-180" : ""}`} />
                 </button>
-                {faqOpen === faq.id && <div className="px-6 pb-5 pt-3 text-[15px] text-text-secondary leading-relaxed">{faq.answer}</div>}
+                {faqOpen === faq.id && <div className="px-7 pb-6 pt-4 text-[15px] text-text-secondary leading-relaxed">{faq.answer}</div>}
               </motion.div>
             ))}
           </div>

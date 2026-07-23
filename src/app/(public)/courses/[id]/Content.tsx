@@ -104,16 +104,16 @@ export default function CourseDetailPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-10">
               <motion.div {...fadeUp}>
                 <h2 className="text-2xl font-bold mb-4">عن الكورس</h2>
                 <p className="text-text-secondary leading-relaxed">{course.description || course.shortDescription}</p>
               </motion.div>
 
-              <motion.div {...fadeUp} className="p-6 rounded-[24px] border border-border bg-card ">
+              <motion.div {...fadeUp} className="p-7 rounded-[24px] border border-border bg-card ">
                 <h2 className="text-xl font-bold mb-4">المدرس</h2>
                 <div className="flex items-center gap-4">
                   <img src={mockTeacher.avatar} alt={mockTeacher.name} className="w-16 h-16 rounded-full bg-surface-tertiary" />
@@ -137,7 +137,7 @@ export default function CourseDetailPage() {
                   <span className="flex items-center gap-1"><HiBookOpen size={16} /> {totalLessons} درس</span>
                 </div>
                 {chapters.length > 0 ? (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {chapters.map((chapter) => (
                       <div key={chapter.id} className="rounded-[24px] border border-border overflow-hidden ">
                         <Button onClick={() => toggleChapter(chapter.id)} className="w-full flex items-center justify-between p-5 bg-card hover:bg-surface-secondary transition-colors text-right">
@@ -177,9 +177,9 @@ export default function CourseDetailPage() {
               </motion.div>
             </div>
 
-            <div className="space-y-6">
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="sticky top-28 space-y-6">
-                <div className="p-6 rounded-[24px] border border-border bg-card ">
+            <div className="space-y-8">
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="sticky top-28 space-y-8">
+                <div className="p-7 rounded-[24px] border border-border bg-card ">
                   <div className="text-center mb-6">
                     {course.discountPrice ? (
                       <>
@@ -194,7 +194,7 @@ export default function CourseDetailPage() {
                   <Button className="w-full py-3 border border-border text-text-secondary font-medium rounded-[16px] hover:bg-surface-tertiary hover:text-text transition-all text-[15px]">تجربة مجانية</Button>
                 </div>
 
-                <div className="p-6 rounded-[24px] border border-border bg-card ">
+                <div className="p-7 rounded-[24px] border border-border bg-card ">
                   <h3 className="font-semibold mb-4">معلومات الكورس</h3>
                   <div className="space-y-3">
                     {[
@@ -213,7 +213,7 @@ export default function CourseDetailPage() {
                   </div>
                 </div>
 
-                <div className="p-6 rounded-[24px] border border-border bg-card  text-center">
+                <div className="p-7 rounded-[24px] border border-border bg-card  text-center">
                   <HiAcademicCap className="mx-auto text-primary mb-3" size={32} />
                   <h3 className="font-semibold mb-2">شهادة معتمدة</h3>
                   <p className="text-xs text-text-secondary">احصل على شهادة إتمام معتمدة بعد إنهاء الكورس.</p>
@@ -234,7 +234,7 @@ export default function CourseDetailPage() {
               </div>
               <Link href="/courses" className="text-primary text-sm font-medium hover:underline shrink-0">عرض الكل ←</Link>
             </motion.div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedCourses.map((rc, i) => (
                 <motion.div key={rc.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}>
                   <Link href={`/courses/${rc.id}`} className="group block bg-card rounded-[24px] border border-border overflow-hidden  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 hover:border-primary/20 transition-all duration-300">
@@ -242,7 +242,7 @@ export default function CourseDetailPage() {
                       <img src={rc.image} alt={rc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       <div className="absolute top-3 right-3"><Badge variant="neutral" size="sm">{rc.grade}</Badge></div>
                     </div>
-                    <div className="p-5">
+                    <div className="p-6">
                       <h3 className="font-semibold mb-1.5 group-hover:text-primary transition-colors">{rc.title}</h3>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1 text-yellow-500">
@@ -260,9 +260,9 @@ export default function CourseDetailPage() {
         </section>
       )}
 
-      <section className="py-16 md:py-20">
+      <section className="py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(217,119,6,0.2)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary to-primary-dark p-10 md:p-20 text-center text-white overflow-hidden shadow-[0_8px_40px_rgba(217,119,6,0.2)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_50%)]" />
             <div className="relative z-10">
               <h2 className="text-[28px] font-bold mb-4">ابدأ رحلة التعلم الآن</h2>

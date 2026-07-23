@@ -85,7 +85,7 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
           {filteredFAQs.length === 0 ? (
             <div className="text-center py-20">
@@ -102,18 +102,18 @@ export default function FAQPage() {
                     {category}
                     <span className="text-sm text-text-tertiary font-normal">({items.length})</span>
                   </h2>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {items.map((faq, i) => (
                       <motion.div key={faq.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.03 }}>
                         <button type="button"
                           onClick={() => toggleItem(faq.id)}
-                          className="w-full text-right p-5 rounded-[24px] border border-border bg-card  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
+                          className="w-full text-right p-6 rounded-[24px] border border-border bg-card  hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-between gap-4"
                         >
                           <span className="font-medium text-sm">{faq.question}</span>
                           <HiChevronDown size={16} className={`text-text-tertiary transition-transform shrink-0 ${openItems.has(faq.id) ? "rotate-180" : ""}`} />
                         </button>
                         {openItems.has(faq.id) && (
-                          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="px-4 pb-4 pt-2 text-sm text-text-secondary leading-relaxed">
+                          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="px-6 pb-5 pt-3 text-sm text-text-secondary leading-relaxed">
                             {faq.answer}
                           </motion.div>
                         )}
@@ -127,7 +127,7 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
           <motion.div {...fadeUp}>
             <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">

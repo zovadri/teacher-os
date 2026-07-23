@@ -101,7 +101,7 @@ export default function DemoPage() {
   }
 
   return (
-    <div className="min-h-screen px-6 py-16">
+    <div className="min-h-screen px-6 py-20">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-14">
           <div className="flex items-center gap-3 text-text-secondary text-sm">
@@ -169,7 +169,7 @@ export default function DemoPage() {
                       </div>
                     </div>
 
-                    <CardContent className="p-0 space-y-3 mb-6 flex-1">
+                      <CardContent className="p-0 space-y-4 mb-6 flex-1">
                       <div className="flex items-center justify-between text-sm px-5 py-3.5 rounded-[16px] bg-surface-secondary border border-border/40">
                         <span className="text-text-tertiary font-medium">البريد</span>
                         <Badge variant="primary" size="md" className="font-mono ltr tracking-tight">{account.email}</Badge>

@@ -64,7 +64,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
         <FloatingOrbs />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(217,119,6,0.05),transparent_60%)]" />
-        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-28 relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}>
               <motion.div
@@ -78,7 +78,7 @@ export default function HomePage() {
                 <span className="w-6 h-[1px] bg-primary/30" />
                 <span className="text-[10px] opacity-60">v3.0</span>
               </motion.div>
-              <h1 className="text-[40px] sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-4 tracking-tight">
+              <h1 className="text-[40px] sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-6 tracking-tight">
                 <span className="bg-gradient-to-l from-text via-text to-primary bg-clip-text text-transparent">نظام تشغيل</span>
                 <br />
                 <span className="bg-gradient-to-l from-primary via-primary-light to-info bg-clip-text text-transparent">المدرس</span>
@@ -87,7 +87,7 @@ export default function HomePage() {
               <p className="text-lg sm:text-xl text-text-secondary font-normal mb-3 max-w-xl leading-relaxed">
                 أول منصة متكاملة لإدارة عملك التعليمي بالكامل
               </p>
-              <p className="text-[15px] text-text-tertiary leading-relaxed mb-10 max-w-lg">
+              <p className="text-[15px] text-text-tertiary leading-relaxed mb-12 max-w-lg">
                 من إدارة الكورسات والطلاب إلى الامتحانات والاشتراكات والتقارير — كل ما تحتاجه في مكان واحد.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -157,7 +157,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 relative">
+      <section className="py-28 relative">
         <FloatingOrbs />
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -168,7 +168,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <motion.div {...stagger} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <motion.div {...stagger} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: HiBookOpen, title: "إدارة الكورسات", desc: "إنشاء وتنظيم الكورسات مع وحدات ودروس وفيديوهات وملفات." },
               { icon: HiClipboardCheck, title: "الامتحانات والواجبات", desc: "بنك أسئلة متكامل مع تصحيح تلقائي وتحليل النتائج." },
@@ -178,7 +178,7 @@ export default function HomePage() {
               { icon: HiShieldCheck, title: "الصلاحيات والأمان", desc: "نظام صلاحيات متكامل لكل موظف مع سجل التدقيق." },
             ].map((feat, i) => (
               <motion.div key={feat.title} variants={itemFade}>
-                <Card hover className="p-7 h-full">
+                <Card hover className="p-8 h-full">
                   <div className="w-12 h-12 rounded-[16px] bg-gradient-to-br from-primary/8 to-primary/4 flex items-center justify-center mb-5 border border-primary/10 group-hover:border-primary/20 group-hover:from-primary/12 group-hover:to-primary/6 transition-all duration-500">
                     <feat.icon className="text-primary" size={22} />
                   </div>
@@ -191,9 +191,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.02),transparent_70%)] border-y border-border/20">
+      <section className="py-28 bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.02),transparent_70%)] border-y border-border/20">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div {...stagger} className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <motion.div {...stagger} className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { value: "١٢٥٠+", label: "طالب مسجل" },
               { value: "٨", label: "كورسات" },
@@ -203,7 +203,7 @@ export default function HomePage() {
               <motion.div
                 key={stat.label}
                 variants={itemFade}
-                className="bg-card border border-border/60 rounded-[20px] p-7 text-center hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden"
+                className="bg-card border border-border/60 rounded-[20px] p-8 text-center hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] to-transparent pointer-events-none" />
                 <p className="text-[36px] font-bold bg-gradient-to-b from-primary to-info bg-clip-text text-transparent mb-1 font-mono tracking-tight">{stat.value}</p>
@@ -214,7 +214,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 relative">
+      <section className="py-28 relative">
         <FloatingOrbs />
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp} className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
@@ -228,7 +228,7 @@ export default function HomePage() {
             </Link>
           </motion.div>
 
-          <motion.div {...stagger} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <motion.div {...stagger} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {mockCourses.filter(c => c.status === "published").slice(0, 4).map((course, i) => (
               <motion.div
                 key={course.id}
@@ -243,7 +243,7 @@ export default function HomePage() {
                     <div className="absolute top-3 left-3 px-2.5 py-1 bg-primary text-white text-[11px] font-medium rounded-[10px] shadow-[0_0_16px_rgba(217,119,6,0.2)]">خصم</div>
                   )}
                 </div>
-                <div className="p-6">
+                <div className="p-7">
                   <h3 className="font-semibold text-[18px] mb-1.5 text-text group-hover:text-primary transition-colors">{course.title}</h3>
                   <p className="text-[13px] text-text-tertiary mb-4 leading-relaxed line-clamp-2">{course.shortDescription}</p>
                   <div className="flex items-center justify-between pt-3 border-t border-border/30">
@@ -269,7 +269,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.015),transparent_70%)] border-y border-border/20">
+      <section className="py-28 bg-[radial-gradient(ellipse_at_center,rgba(14,165,233,0.015),transparent_70%)] border-y border-border/20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
             <span className="text-primary text-sm font-medium mb-3 block tracking-wider uppercase">Testimonials</span>
@@ -324,7 +324,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 relative">
+      <section className="py-28 relative">
         <FloatingOrbs />
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -333,7 +333,7 @@ export default function HomePage() {
             <p className="text-text-secondary max-w-2xl mx-auto text-[15px]">اشتراكات مرنة تناسب احتياجاتك. ابدأ رحلتك التعليمية اليوم.</p>
           </motion.div>
 
-          <motion.div {...stagger} className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+          <motion.div {...stagger} className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               { name: "شهر", price: "٣٠٠", period: "شهرياً", desc: "مناسب للتجربة", popular: false, features: ["جميع الكورسات", "امتحانات غير محدودة", "دعم فني"] },
               { name: "٣ شهور", price: "٧٥٠", period: "ربع سنوي", desc: "الأكثر اختياراً", popular: true, features: ["جميع الكورسات", "امتحانات غير محدودة", "دعم فني", "توفير ١٥٠ ج.م"] },
@@ -342,7 +342,7 @@ export default function HomePage() {
               <motion.div
                 key={plan.name}
                 variants={itemFade}
-                className={`relative bg-card border border-border/60 rounded-[20px] p-7 transition-all duration-300 ${
+                className={`relative bg-card border border-border/60 rounded-[20px] p-8 transition-all duration-300 ${
                   plan.popular
                     ? "border-primary/30 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.04)]"
                     : "border-border/60 hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"
@@ -383,13 +383,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.02),transparent_70%)] border-y border-border/20">
+      <section className="py-28 bg-[radial-gradient(ellipse_at_center,rgba(217,119,6,0.02),transparent_70%)] border-y border-border/20">
         <div className="max-w-3xl mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-14">
             <span className="text-primary text-sm font-medium mb-3 block tracking-wider uppercase">FAQ</span>
             <h2 className="text-[32px] sm:text-[40px] font-bold text-text leading-[1.1]">إجابات لاستفساراتك</h2>
           </motion.div>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {[
               { q: "كيف يمكنني الاشتراك في المنصة؟", a: "يمكنك اختيار الباقة المناسبة من صفحة الباقات ثم إنشاء حساب واختيار طريقة الدفع. بعد تأكيد الدفع، سيتم تفعيل اشتراكك فوراً." },
               { q: "هل يمكنني تجربة المنصة قبل الاشتراك؟", a: "نعم! يمكنك زيارة صفحة النسخة التجريبية وتجربة جميع ميزات المنصة بالكامل لمدة يوم واحد بدون أي دفع." },
@@ -401,7 +401,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setFaqOpen(faqOpen === `faq-${i}` ? null : `faq-${i}`)}
-                  className="w-full text-right p-5 rounded-[16px] border border-border/60 bg-card hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-all duration-300 flex items-center justify-between gap-4"
+                  className="w-full text-right p-6 rounded-[16px] border border-border/60 bg-card hover:border-primary/15 hover:shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-all duration-300 flex items-center justify-between gap-4"
                 >
                   <span className="font-medium text-sm text-text">{faq.q}</span>
                   <span className={`text-text-tertiary transition-transform duration-300 text-xs ${faqOpen === `faq-${i}` ? "rotate-180" : ""}`}>
@@ -417,7 +417,7 @@ export default function HomePage() {
                       transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-5 pb-4 pt-3 text-sm text-text-secondary leading-relaxed">{faq.a}</div>
+                      <div className="px-6 pb-5 pt-4 text-sm text-text-secondary leading-relaxed">{faq.a}</div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -427,9 +427,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-28">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary via-primary-dark to-primary-700 p-8 md:p-16 text-center text-white overflow-hidden shadow-[0_8px_48px_rgba(217,119,6,0.15)]">
+          <motion.div {...fadeUp} className="relative rounded-[24px] bg-gradient-to-br from-primary via-primary-dark to-primary-700 p-10 md:p-20 text-center text-white overflow-hidden shadow-[0_8px_48px_rgba(217,119,6,0.15)]">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.1),transparent_60%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(217,119,6,0.15),transparent_50%)]" />
             <div className="relative z-10">

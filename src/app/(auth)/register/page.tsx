@@ -80,12 +80,12 @@ export default function RegisterPage() {
           <p className="text-text-secondary mt-2 text-sm">اختر نوع الحساب وأكمل البيانات</p>
         </div>
 
-        <Card className="p-8">
+        <Card className="p-10">
           <CardContent className="p-0">
             <Tabs tabs={roles} defaultTab="teacher" onChange={setActiveRole}>
               {(activeTab) => (
                 <TabPanel id={activeTab} activeTab={activeTab}>
-                  <form onSubmit={handleSubmit} className="space-y-5 mt-2">
+                  <form onSubmit={handleSubmit} className="space-y-6 mt-2">
                     <Input
                       label="الاسم الكامل"
                       type="text"
@@ -230,7 +230,7 @@ export default function RegisterPage() {
               )}
             </Tabs>
 
-            <div className="mt-6 text-center">
+            <div className="mt-8 text-center">
               <p className="text-sm text-text-secondary">
                 لديك حساب بالفعل؟{" "}
                 <Link href="/login" className="text-primary hover:text-primary-dark font-medium transition-colors">
