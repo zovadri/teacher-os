@@ -83,10 +83,10 @@ export default function CoursesPage() {
                     <Badge variant={statusCfg[course.status]?.variant || "default"} size="sm">{statusCfg[course.status]?.label}</Badge>
                   </div>
                   <div className="absolute bottom-3 right-3 flex items-center gap-2">
-                    <span className="flex items-center gap-1 text-xs text-white bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-[10px] border border-white/10">
+                    <span className="flex items-center gap-1 text-xs text-white bg-black/30 px-2.5 py-1 rounded-[10px] border border-white/10">
                       <HiOutlineUsers className="w-3 h-3" />{course.studentsCount}
                     </span>
-                    <span className="flex items-center gap-1 text-xs text-white bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-[10px] border border-white/10">
+                    <span className="flex items-center gap-1 text-xs text-white bg-black/30 px-2.5 py-1 rounded-[10px] border border-white/10">
                       <HiOutlineStar className="w-3 h-3 text-warning" />{course.rating}
                     </span>
                   </div>

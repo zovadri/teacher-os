@@ -148,7 +148,7 @@ export default function QuestionsPage() {
         </div>
 
         {selectedIds.size > 0 && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px] mb-4 backdrop-blur">
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px] mb-4">
             <span className="text-sm text-primary font-medium">{selectedIds.size} سؤال محدد</span>
             <Button variant="danger" size="sm" leftIcon={<HiOutlineTrash className="w-4 h-4" />} onClick={() => setBulkDelete(true)}>حذف المحدد</Button>
           </motion.div>
@@ -243,7 +243,7 @@ export default function QuestionsPage() {
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-2xl bg-card border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.08)] max-h-[85vh] overflow-y-auto"
           >
-            <div className="flex items-center justify-between px-6 pt-6 pb-4 sticky top-0 bg-card/80 backdrop-blur z-10">
+            <div className="flex items-center justify-between px-6 pt-6 pb-4 sticky top-0 bg-card z-10">
               <h2 className="text-lg font-semibold text-text">تفاصيل السؤال</h2>
               <button onClick={() => setDetailQ(null)} className="p-1.5 rounded-[12px] text-text-tertiary hover:text-text hover:bg-card transition-all">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -264,7 +264,7 @@ export default function QuestionsPage() {
                   <p className="text-sm font-medium text-text-secondary mb-2">الخيارات</p>
                   <div className="space-y-3">
                     {detailQ.choices.map((c) => (
-                      <div key={c.id} className={`p-4 rounded-[14px] border ${c.isCorrect ? "border-success/30 bg-success/5" : "border-border bg-card/40"} backdrop-blur`}>
+                      <div key={c.id} className={`p-4 rounded-[14px] border ${c.isCorrect ? "border-success/30 bg-success/5" : "border-border bg-card"}`}>
                         <div className="flex items-center gap-3">
                           <span className={`w-2 h-2 rounded-full ${c.isCorrect ? "bg-success" : "bg-text-tertiary"}`} />
                           <span className="text-text">{c.text}</span>
@@ -290,7 +290,7 @@ export default function QuestionsPage() {
                       { label: "إجابات صحيحة", value: `${detailQ.stats.correctRate}%`, color: "text-success" },
                       { label: "إجابات خاطئة", value: `${detailQ.stats.incorrectRate}%`, color: "text-error" },
                     ].map((s) => (
-                      <div key={s.label} className="bg-card/40 border border-border rounded-[16px] p-5 text-center backdrop-blur">
+                      <div key={s.label} className="bg-card border border-border rounded-[16px] p-5 text-center">
                         <p className={`text-2xl font-bold ${s.color}`}>{s.value}</p>
                         <p className="text-xs text-text-tertiary">{s.label}</p>
                       </div>
@@ -319,7 +319,7 @@ export default function QuestionsPage() {
             onClick={(e) => e.stopPropagation()}
             className="relative w-full max-w-2xl bg-card border border-border rounded-[24px] shadow-[0_24px_80px_rgba(0,0,0,0.08)] max-h-[85vh] overflow-y-auto"
           >
-            <div className="flex items-center justify-between px-6 pt-6 pb-4 sticky top-0 bg-card/80 backdrop-blur z-10">
+            <div className="flex items-center justify-between px-6 pt-6 pb-4 sticky top-0 bg-card z-10">
               <h2 className="text-lg font-semibold text-text">{editQ ? "تعديل سؤال" : "إضافة سؤال"}</h2>
               <button onClick={() => setShowCreate(false)} className="p-1.5 rounded-[12px] text-text-tertiary hover:text-text hover:bg-card transition-all">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>

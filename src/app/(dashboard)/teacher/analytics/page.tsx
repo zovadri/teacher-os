@@ -88,7 +88,7 @@ function ActivityIcon({ type }: { type: string }) {
   const Icon = activityIcons[type] || HiOutlineExclamationCircle
   const colors = activityColors[type] || "text-text-secondary bg-card border-border"
   return (
-    <div className={cn("w-9 h-9 rounded-[14px] flex items-center justify-center shrink-0 backdrop-blur border", colors)}>
+    <div className={cn("w-9 h-9 rounded-[14px] flex items-center justify-center shrink-0 border", colors)}>
       <Icon className="w-4 h-4" />
     </div>
   )
@@ -101,7 +101,7 @@ function ChartContainer({ children }: { children: React.ReactNode }) {
 function RevenueTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string }>; label?: string }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="bg-card/90 backdrop-blur-xl border border-border rounded-[16px] p-3 shadow-lg text-sm space-y-1">
+    <div className="bg-card border border-border rounded-[16px] p-3 shadow-lg text-sm space-y-1">
       <p className="font-medium text-text mb-1">{label}</p>
       {payload.map((entry, idx) => (
         <p key={idx} className="text-text-secondary flex items-center gap-2">
@@ -116,7 +116,7 @@ function RevenueTooltip({ active, payload, label }: { active?: boolean; payload?
 function DefaultTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="bg-card/90 backdrop-blur-xl border border-border rounded-[16px] p-3 shadow-lg text-sm space-y-1">
+    <div className="bg-card border border-border rounded-[16px] p-3 shadow-lg text-sm space-y-1">
       <p className="font-medium text-text mb-1">{label}</p>
       {payload.map((entry, idx) => (
         <p key={idx} className="text-text-secondary flex items-center gap-2">

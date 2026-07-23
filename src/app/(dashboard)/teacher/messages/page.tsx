@@ -190,7 +190,7 @@ export default function MessagesPage() {
                       "max-w-[75%] p-4 rounded-[20px]",
                       msg.senderId === "t-1"
                         ? "bg-primary/20 border border-primary/30 text-text rounded-tr-sm"
-                        : "bg-card/80 backdrop-blur border border-border rounded-tl-sm",
+                        : "bg-card border border-border rounded-tl-sm",
                     )}>
                       <p className="text-sm">{msg.content}</p>
                       <div className={cn(

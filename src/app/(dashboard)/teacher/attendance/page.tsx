@@ -169,7 +169,7 @@ export default function AttendanceHubPage() {
             <Button onClick={handleQrDetect} leftIcon={<HiOutlineQrcode className="w-4 h-4" />}>محاكاة مسح QR</Button>
           </div>
           {scannedStudent ? (
-            <div className="p-6 rounded-[20px] bg-card/40 border border-border backdrop-blur">
+            <div className="p-6 rounded-[20px] bg-card border border-border">
               <div className="flex items-center gap-4 mb-4">
                 <img src={scannedStudent.avatar} alt="" className="w-12 h-12 rounded-full bg-card border border-border" />
                 <div>
@@ -200,7 +200,7 @@ export default function AttendanceHubPage() {
             <Button onClick={handleCodeSearch}>بحث</Button>
           </div>
           {codeResult ? (
-            <div className="p-6 rounded-[20px] bg-card/40 border border-border backdrop-blur">
+            <div className="p-6 rounded-[20px] bg-card border border-border">
               <div className="flex items-center gap-4 mb-4">
                 <img src={codeResult.avatar} alt="" className="w-12 h-12 rounded-full bg-card border border-border" />
                 <div className="flex-1">
@@ -237,7 +237,7 @@ export default function AttendanceHubPage() {
             <div className="flex gap-3">
               {(Object.entries(statusColors) as [AttendanceStatus, typeof statusColors[AttendanceStatus]][]).map(([key, cfg]) => (
                 <button key={key} onClick={() => setManualStatus(key)}
-                  className={cn("flex-1 px-3 py-2 rounded-[14px] text-sm font-medium border transition-all backdrop-blur-xl",
+                  className={cn("flex-1 px-3 py-2 rounded-[14px] text-sm font-medium border transition-all",
                     manualStatus === key ? cfg.color : "border-border text-text-tertiary hover:bg-card"
                   )}
                 >{cfg.label}</button>
@@ -260,7 +260,7 @@ export default function AttendanceHubPage() {
             <div className="space-y-4">
               {mockEmployees.map((emp) => (
                 <div key={emp.id} className={cn(
-                  "flex items-center justify-between p-5 rounded-[20px] border border-border backdrop-blur transition-all bg-card/40",
+                  "flex items-center justify-between p-5 rounded-[20px] border border-border transition-all bg-card",
                   employeeCheckIn[emp.id] && !employeeCheckOut[emp.id] && "border-success/30 bg-success/5",
                   employeeCheckOut[emp.id] && "opacity-60"
                 )}>

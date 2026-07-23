@@ -149,7 +149,7 @@ export default function ReportsPage() {
               <motion.div key={rt.type} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
                 <Card hover className="h-full" onClick={() => setDetailType(rt.type)}>
                   <CardContent className="space-y-4">
-                    <div className={cn("w-12 h-12 rounded-[16px] flex items-center justify-center backdrop-blur border", colorMap[rt.color])}>
+                    <div className={cn("w-12 h-12 rounded-[16px] flex items-center justify-center border", colorMap[rt.color])}>
                       <rt.icon size={24} />
                     </div>
                     <div>

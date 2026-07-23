@@ -113,7 +113,7 @@ export default function HomeworkPage() {
                       { label: "تم التسليم", value: `${submitted}/${total}` },
                       { label: "متوسط الدرجة", value: hw.analytics.averageGrade },
                     ].map((s) => (
-                      <div key={s.label} className="p-3 rounded-[14px] bg-card/40 border border-border text-center backdrop-blur">
+                      <div key={s.label} className="p-3 rounded-[14px] bg-card border border-border text-center">
                         <p className="font-bold text-text text-sm">{s.value}</p>
                         <p className="text-[10px] text-text-tertiary">{s.label}</p>
                       </div>

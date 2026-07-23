@@ -12,7 +12,7 @@ export default function DashboardHeader({ title, subtitle }: { title?: string; s
   const toggleSearch = useSearchStore((s) => s.toggleSearch)
 
   return (
-    <header className="sticky top-0 z-20 bg-surface/60 backdrop-blur-2xl border-b border-border">
+    <header className="sticky top-0 z-20 bg-surface/60 border-b border-border">
       <div className="flex items-center justify-between px-6 py-4">
         <div>
           {title && <h1 className="text-xl font-semibold text-text">{title}</h1>}

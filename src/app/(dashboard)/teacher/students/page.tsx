@@ -92,7 +92,7 @@ export default function StudentsPage() {
             {filters.map((chip) => (
               <button key={chip} onClick={() => { setActiveChip(chip); setStatusFilter(chip === "الكل" ? "الكل" : chip === "نشط" ? "active" : chip === "منتهي" ? "expired" : chip === "غير نشط" ? "inactive" : "suspended"); setPage(1) }}
                 className={cn(
-                  "px-4 py-1.5 rounded-[12px] text-xs font-medium transition-all border backdrop-blur-xl",
+                  "px-4 py-1.5 rounded-[12px] text-xs font-medium transition-all border",
                   activeChip === chip
                     ? "bg-primary/20 border-primary/30 text-primary shadow-[0_0_16px_rgba(217,119,6,0.15)]"
                     : "bg-card/40 border-border text-text-secondary hover:border-primary/30 hover:text-text"
@@ -101,18 +101,18 @@ export default function StudentsPage() {
             ))}
             <div className="w-px h-6 bg-border mx-1" />
             <select value={gradeFilter} onChange={(e) => { setGradeFilter(e.target.value); setPage(1) }}
-              className="px-3 py-1.5 bg-card/40 border border-border rounded-[12px] text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30 backdrop-blur-xl appearance-none">
+              className="px-3 py-1.5 bg-card border border-border rounded-[12px] text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30 appearance-none">
               {grades.map((g) => <option key={g} value={g}>{g === "الكل" ? "جميع الصفوف" : g}</option>)}
             </select>
             <select value={groupFilter} onChange={(e) => { setGroupFilter(e.target.value); setPage(1) }}
-              className="px-3 py-1.5 bg-card/40 border border-border rounded-[12px] text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30 backdrop-blur-xl appearance-none">
+              className="px-3 py-1.5 bg-card border border-border rounded-[12px] text-xs text-text-secondary focus:outline-none cursor-pointer hover:border-primary/30 appearance-none">
               {groups.map((g) => <option key={g} value={g}>{g === "الكل" ? "جميع المجموعات" : g}</option>)}
             </select>
           </div>
         </div>
 
         {selectedIds.size > 0 && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 mb-4 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px] backdrop-blur-xl">
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-4 mb-4 px-4 py-3 bg-primary/5 border border-primary/20 rounded-[16px]">
             <span className="text-sm text-primary font-medium">{selectedIds.size} طالب محدد</span>
             <div className="flex gap-3">
               {["نقل لمجموعة", "تغيير الحالة", "إرسال رسالة"].map((a) => (

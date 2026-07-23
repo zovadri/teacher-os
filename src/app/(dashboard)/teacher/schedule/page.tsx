@@ -177,7 +177,7 @@ export default function SchedulePage() {
                             return (
                               <td key={`${di}-${hi}`} className="p-1 border border-border align-top min-h-[60px]">
                                 {cellSlots.map((s, si) => (
-                                  <div key={si} className={cn("relative rounded-[12px] p-2 mb-1 text-[10px] leading-tight border group backdrop-blur", s.color)}>
+                                  <div key={si} className={cn("relative rounded-[12px] p-2 mb-1 text-[10px] leading-tight border group", s.color)}>
                                     <p className="font-semibold">{s.subject}</p>
                                     <p className="opacity-80">{s.teacher}</p>
                                     <p className="opacity-70">{s.room} • {s.group}</p>

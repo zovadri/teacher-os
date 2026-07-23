@@ -14,12 +14,12 @@ interface BadgeProps {
 
 const variantStyles: Record<BadgeVariant, string> = {
   default: "bg-card border border-border text-text-secondary",
-  neutral: "bg-surface-secondary backdrop-blur-2xl border border-border text-text-secondary",
-  primary: "bg-primary-100 backdrop-blur-2xl border border-primary-200 text-primary",
-  success: "bg-success/10 backdrop-blur-2xl border border-success/20 text-success",
-  warning: "bg-warning/10 backdrop-blur-2xl border border-warning/20 text-warning",
-  error: "bg-error/10 backdrop-blur-2xl border border-error/20 text-error",
-  info: "bg-info/10 backdrop-blur-2xl border border-info/20 text-info",
+  neutral: "bg-surface-secondary border border-border text-text-secondary",
+  primary: "bg-primary-100 border border-primary-200 text-primary",
+  success: "bg-success/10 border border-success/20 text-success",
+  warning: "bg-warning/10 border border-warning/20 text-warning",
+  error: "bg-error/10 border border-error/20 text-error",
+  info: "bg-info/10 border border-info/20 text-info",
 }
 
 const sizeStyles: Record<BadgeSize, string> = {
