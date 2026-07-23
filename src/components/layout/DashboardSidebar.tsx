@@ -283,8 +283,8 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
             "flex items-center justify-center gap-3 rounded-[12px] transition-all duration-200 group",
             showLabel ? "px-3 py-2.5 w-full" : "w-10 h-10 mx-auto",
             active
-              ? "bg-primary-100 text-primary"
-              : "text-text-secondary hover:bg-card hover:text-text",
+              ? "bg-primary-100 text-primary shadow-[0_0_12px_rgba(124,92,252,0.06)]"
+              : "text-text-secondary hover:bg-card/60 hover:text-primary hover:border-primary/10",
             depth > 0 && "mr-3"
           )}
         >
@@ -331,7 +331,7 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
 
         {!showLabel && (
           <div className="absolute right-14 top-1/2 -translate-y-1/2 z-50 pointer-events-none opacity-0 group-hover/nav:opacity-100 transition-opacity duration-200">
-            <div className="bg-surface-secondary border border-border rounded-[10px] px-3 py-1.5 text-sm font-medium text-text whitespace-nowrap shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
+            <div className="bg-surface-secondary backdrop-blur-xl border border-border rounded-[10px] px-3 py-1.5 text-sm font-medium text-text whitespace-nowrap shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
               {item.label}
             </div>
           </div>
@@ -427,7 +427,7 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
             <button type="button" onClick={() => setMobileOpen(false)} className="ml-2 p-1 rounded-[12px] hover:bg-card transition-colors">
               <HiX className="w-5 h-5 text-text-secondary" />
             </button>
-            <div className="w-9 h-9 rounded-[12px] bg-primary flex items-center justify-center text-white font-bold text-sm">T</div>
+            <div className="w-9 h-9 rounded-[12px] bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-sm shadow-[0_0_12px_rgba(124,92,252,0.15)]">T</div>
             <span className="font-bold text-text text-lg">TeacherOS</span>
           </div>
           <nav className="flex-1 overflow-y-auto p-4 space-y-0.5">
@@ -446,7 +446,7 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => { setHovered(false); setExpandedMenus([]) }}
         className={cn(
-          "hidden lg:flex flex-col fixed right-0 top-0 h-screen z-30 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-surface/80 backdrop-blur-xl border-l border-border",
+          "hidden lg:flex flex-col fixed right-0 top-0 h-screen z-30 transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-surface/60 backdrop-blur-2xl border-l border-border shadow-[0_0_30px_rgba(0,0,0,0.5)]",
           hovered ? "w-[240px]" : "w-[64px]"
         )}
       >
@@ -457,7 +457,7 @@ export default function DashboardSidebar({ onHoverChange }: { onHoverChange?: (h
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            className="w-9 h-9 rounded-[12px] bg-primary flex items-center justify-center text-white font-bold text-sm shrink-0"
+            className="w-9 h-9 rounded-[12px] bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-[0_0_12px_rgba(124,92,252,0.15)]"
           >
             T
           </motion.div>

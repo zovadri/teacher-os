@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7C5CFC;
+  --color-primary-dark: #5B3DC4;
+  --color-primary-light: #9D7FFF;
+  --color-primary-50: rgba(124, 92, 252, 0.05);
+  --color-primary-100: rgba(124, 92, 252, 0.08);
+  --color-primary-200: rgba(124, 92, 252, 0.15);
+  --color-primary-300: rgba(124, 92, 252, 0.3);
+  --color-primary-400: #8D6FFF;
+  --color-primary-500: #7C5CFC;
+  --color-primary-600: #5B3DC4;
+  --color-primary-700: #442E96;
+  --color-primary-800: #2E1F68;
+  --color-primary-900: #180F34;
+  --color-surface: #0A0A1A;
+  --color-surface-secondary: #0E0E24;
+  --color-surface-tertiary: #141430;
+  --color-card: #101028;
+  --color-border: rgba(255, 255, 255, 0.03);
+  --color-border-light: rgba(255, 255, 255, 0.07);
+  --color-text: #EEEFF5;
+  --color-text-secondary: #8888BB;
+  --color-text-tertiary: #555588;
+  --color-success: #34D399;
+  --color-success-bg: rgba(52, 211, 153, 0.08);
+  --color-warning: #FBBF24;
+  --color-warning-bg: rgba(251, 191, 36, 0.08);
+  --color-error: #F87171;
+  --color-error-bg: rgba(248, 113, 113, 0.08);
+  --color-info: #818CF8;
+  --color-info-bg: rgba(129, 140, 248, 0.08);
+  --color-students: #7C5CFC;
+  --color-students-bg: rgba(124, 92, 252, 0.08);
+  --color-finance: #34D399;
+  --color-finance-bg: rgba(52, 211, 153, 0.08);
+  --color-exams: #818CF8;
+  --color-exams-bg: rgba(129, 140, 248, 0.08);
+  --color-attendance: #FBBF24;
+  --color-attendance-bg: rgba(251, 191, 36, 0.08);
+  --color-analytics: #C084FC;
+  --color-analytics-bg: rgba(192, 132, 252, 0.08);
+  --font-sans: "Alexandria", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Sans Arabic", monospace;
+  --width-sidebar: 17.5rem;
+  --text-hero: 3.5rem;
+  --text-hero-lineheight: 1.05;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #050510;
+  color: var(--color-text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% -20%, rgba(124, 92, 252, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(129, 140, 248, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+::selection {
+  background: rgba(124, 92, 252, 0.2);
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
