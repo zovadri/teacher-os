@@ -33,6 +33,7 @@ function LoginForm() {
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [remember, setRemember] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const [sessionExpired, setSessionExpired] = useState(false)
@@ -119,6 +120,23 @@ function LoginForm() {
           className="bg-card border border-border rounded-[24px] p-10"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer select-none group">
+                <input
+                  type="checkbox"
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
+                  className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer bg-card"
+                />
+                <span className="text-sm text-text-secondary group-hover:text-text transition-colors">تذكرني</span>
+              </label>
+              <Link
+                href="/forgot-password"
+                className="text-sm text-primary hover:text-primary-light transition-colors font-medium"
+              >
+                نسيت كلمة المرور؟
+              </Link>
+            </div>
             {sessionExpired && (
               <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-[24px] bg-warning/10 border border-warning/20 text-sm text-warning">
                 انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى.
