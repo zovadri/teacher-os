@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { HiStar, HiAcademicCap, HiUserGroup, HiBookOpen, HiClipboardCheck, HiCurrencyDollar, HiShieldCheck, HiChartBar, HiPlay, HiChevronLeft, HiCheck, HiArrowLeft } from "react-icons/hi"
+import { Card } from "@/components/ui/Card"
 import { mockCourses } from "@/lib/mock/data"
 
 const fadeUp = {
@@ -173,16 +174,14 @@ export default function HomePage() {
               { icon: HiChartBar, title: "التقارير والإحصائيات", desc: "لوحة تحليلية متكاملة مع رسوم بيانية وتقارير." },
               { icon: HiShieldCheck, title: "الصلاحيات والأمان", desc: "نظام صلاحيات متكامل لكل موظف مع سجل التدقيق." },
             ].map((feat, i) => (
-              <motion.div
-                key={feat.title}
-                variants={itemFade}
-                className="group relative bg-card/70 backdrop-blur-sm border border-border rounded-[20px] p-7 transition-all duration-500 hover:-translate-y-1 hover:border-primary/20 hover:shadow-[0_8px_40px_rgba(124,92,252,0.06)]"
-              >
-                <div className="w-12 h-12 rounded-[16px] bg-primary/8 flex items-center justify-center mb-5 border border-primary/10 group-hover:bg-primary/12 transition-colors duration-500">
-                  <feat.icon className="text-primary" size={22} />
-                </div>
-                <h3 className="font-semibold text-[18px] mb-2.5 text-text">{feat.title}</h3>
-                <p className="text-[15px] text-text-secondary leading-relaxed">{feat.desc}</p>
+              <motion.div key={feat.title} variants={itemFade}>
+                <Card hover className="p-7 h-full">
+                  <div className="w-12 h-12 rounded-[16px] bg-primary/8 flex items-center justify-center mb-5 border border-primary/10 group-hover:bg-primary/12 transition-colors duration-500">
+                    <feat.icon className="text-primary" size={22} />
+                  </div>
+                  <h3 className="font-semibold text-[18px] mb-2.5 text-text">{feat.title}</h3>
+                  <p className="text-[15px] text-text-secondary leading-relaxed">{feat.desc}</p>
+                </Card>
               </motion.div>
             ))}
           </motion.div>

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 
-type BadgeVariant = "default" | "primary" | "success" | "warning" | "error" | "info"
+type BadgeVariant = "default" | "primary" | "success" | "warning" | "error" | "info" | "neutral"
 type BadgeSize = "sm" | "md"
 
 interface BadgeProps {
@@ -9,11 +9,13 @@ interface BadgeProps {
   size?: BadgeSize
   className?: string
   dot?: boolean
+  pulse?: boolean
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
   default: "bg-card/80 backdrop-blur-xl border border-border text-text-secondary",
-  primary: "bg-primary-100 backdrop-blur-xl border border-primary-200 text-primary shadow-[0_0_12px_rgba(124,92,252,0.06)]",
+  neutral: "bg-surface-secondary backdrop-blur-xl border border-border text-text-secondary",
+  primary: "bg-primary-100 backdrop-blur-xl border border-primary-200 text-primary",
   success: "bg-success/10 backdrop-blur-xl border border-success/20 text-success",
   warning: "bg-warning/10 backdrop-blur-xl border border-warning/20 text-warning",
   error: "bg-error/10 backdrop-blur-xl border border-error/20 text-error",
@@ -25,7 +27,7 @@ const sizeStyles: Record<BadgeSize, string> = {
   md: "px-2.5 py-1 text-xs",
 }
 
-export function Badge({ children, variant = "default", size = "md", className, dot = false }: BadgeProps) {
+export function Badge({ children, variant = "default", size = "md", className, dot = false, pulse = false }: BadgeProps) {
   return (
     <span className={cn(
       "inline-flex items-center gap-1.5 font-medium rounded-[8px]",
@@ -33,7 +35,12 @@ export function Badge({ children, variant = "default", size = "md", className, d
       sizeStyles[size],
       className,
     )}>
-      {dot && <span className="w-1.5 h-1.5 rounded-full bg-current shrink-0" />}
+      {dot && (
+        <span className={cn(
+          "w-1.5 h-1.5 rounded-full bg-current shrink-0",
+          pulse && "animate-pulse",
+        )} />
+      )}
       {children}
     </span>
   )

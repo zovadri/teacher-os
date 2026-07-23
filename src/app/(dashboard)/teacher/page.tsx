@@ -64,7 +64,7 @@ export default function TeacherDashboard() {
       >
         <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.35 } } }}>
           <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-4 bg-card/60 backdrop-blur-xl border border-border rounded-[16px] px-5 py-3">
+            <div className="flex items-center gap-4 bg-card/80 backdrop-blur-xl border border-border rounded-[16px] px-5 py-3 shadow-[0_4px_16px_rgba(124,92,252,0.03)]">
               <div className="text-center"><p className="text-2xl font-bold text-primary leading-none">5</p><p className="text-xs text-text-tertiary mt-1">حصص اليوم</p></div>
               <div className="w-px h-8 bg-border" />
               <div className="text-center"><p className="text-2xl font-bold text-success leading-none">3</p><p className="text-xs text-text-tertiary mt-1">امتحانات</p></div>
